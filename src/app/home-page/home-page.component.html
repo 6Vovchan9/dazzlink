@@ -1,1 +1,7 @@
 <p>home-page works!</p>
+
+<div class="myInput">
+    <label [ngStyle]="{marginBottom: labelMargin + 'px'}" class="myInput__label" for="myInput">Имя:</label>
+    <input class="myInput__input" id="myInput" type="text" [(ngModel)]="inutVal">
+    <div class="myInput__val">Нашего клиента зовут: {{inutVal}}</div>
+</div>
