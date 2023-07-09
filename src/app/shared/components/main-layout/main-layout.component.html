@@ -1,2 +1,12 @@
 <p>main-layout works!</p>
+<nav class="menu">
+    <ul class="menu__list">
+        <li class="menu__item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="menu__item--active">
+            <a routerLink="/">Главная</a>
+        </li>
+        <li class="menu__item" routerLinkActive="menu__item--active">
+            <a routerLink="/agreements">Согласия</a>
+        </li>
+    </ul>
+</nav>
 <router-outlet></router-outlet>
