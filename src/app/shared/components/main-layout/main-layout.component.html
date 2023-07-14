@@ -4,8 +4,8 @@
         <li class="menu__item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="menu__item--active">
             <a routerLink="/">Главная</a>
         </li>
-        <li class="menu__item" routerLinkActive="menu__item--active">
-            <a routerLink="/agreements">Согласия</a>
+        <li class="menu__item">
+            <a (click)="clickByNav()">Согласия</a>
         </li>
     </ul>
 </nav>
