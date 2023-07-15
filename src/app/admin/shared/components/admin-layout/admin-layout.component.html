@@ -1,2 +1,18 @@
 <p>admin-layout works!</p>
+<nav class="menu">
+    <ul class="menu__list">
+        <li class="menu__item">
+            <a routerLink="/">UI</a>
+        </li>
+        <li class="menu__item" routerLinkActive="menu__item--active">
+            <a (click)="goToAnotherPage(['/admin', 'dashboard'])" [routerLink]="['/admin', 'dashboard']">Главная</a>
+        </li>
+        <li class="menu__item" routerLinkActive="menu__item--active">
+            <a (click)="goToAnotherPage(['/admin', 'create'])" [routerLink]="['/admin', 'create']">Создать</a>
+        </li>
+        <li class="menu__item">
+            <a href="#" (click)="logout($event)">Выйти</a>
+        </li>
+    </ul>
+</nav>
 <router-outlet></router-outlet>

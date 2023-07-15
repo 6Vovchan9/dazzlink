@@ -4,8 +4,11 @@
         <li class="menu__item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="menu__item--active">
             <a routerLink="/">Главная</a>
         </li>
+        <li class="menu__item" routerLinkActive="menu__item--active">
+            <a (click)="goToAnotherPage(['/agreements'])" routerLink="/agreements">Согласия</a>
+        </li>
         <li class="menu__item">
-            <a (click)="clickByNav()">Согласия</a>
+            <a [routerLink]="['/admin']">Админка</a>
         </li>
     </ul>
 </nav>

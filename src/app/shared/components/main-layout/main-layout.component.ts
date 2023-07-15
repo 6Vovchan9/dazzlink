@@ -12,11 +12,11 @@ export class MainLayoutComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  clickByNav(): void {
+  goToAnotherPage(commands: Array<string>): void {
     this.router.navigate(
-      ['/agreements'],
-      {skipLocationChange: true}
-    )
+      commands,
+      // {skipLocationChange: true}
+    );
   }
 
 }
