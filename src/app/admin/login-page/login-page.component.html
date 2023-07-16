@@ -1,10 +1,16 @@
 <form class="loginForm" [formGroup]="loginForm" (ngSubmit)="submit()">
+
     <div class="loginForm__header">
         Войти в панель администратора
     </div>
-    <div *ngIf="auth.error$ | async as errorMessage" class="loginForm__authError">
+
+    <div *ngIf="auth.error$ | async as errorMessage" class="loginForm__message loginForm__message--error">
         {{errorMessage}}
     </div>
+    <div *ngIf="messageFromQueryParams" class="loginForm__message">
+        {{messageFromQueryParams}}
+    </div>
+
     <div class="loginForm__form">
 
         <div class="loginForm__control">
