@@ -1,1 +1,39 @@
-<p>login-page works!</p>
+<form class="loginForm" [formGroup]="loginForm" (ngSubmit)="submit()">
+    <div class="loginForm__header">
+        Войти в панель администратора
+    </div>
+    <div *ngIf="auth.error$ | async as errorMessage" class="loginForm__authError">
+        {{errorMessage}}
+    </div>
+    <div class="loginForm__form">
+
+        <div class="loginForm__control">
+            <div class="inputControl" [ngClass]="{'inputControl--invalid': loginForm.get('email')?.touched && loginForm.get('email')?.invalid}">
+                <label for="adminEmail" class="inputControl__label">Email:</label>
+                <input id="adminEmail" placeholder="Введите email" class="inputControl__input" formControlName="email" type="text">
+                <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="controlError">
+                    <div *ngIf="loginForm.get('email')?.errors?.required" class="controlError__item">Введите email</div>
+                    <div *ngIf="loginForm.get('email')?.errors?.email" class="controlError__item">Введите корректный email</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="loginForm__control">
+            <div class="inputControl" [ngClass]="{'inputControl--invalid': loginForm.get('password')?.touched && loginForm.get('password')?.invalid}">
+                <label for="adminPassword" class="inputControl__label">Password:</label>
+                <input id="adminPassword" placeholder="Введите пароль" class="inputControl__input" formControlName="password" type="password">
+                <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="controlError">
+                    <div *ngIf="loginForm.get('password')?.errors?.required" class="controlError__item">Введите пароль</div>
+                    <div *ngIf="loginForm.get('password')?.errors?.minlength" class="controlError__item">
+                        Пароль должен содержать не менее {{loginForm.get('password')?.errors?.minlength.requiredLength}} символов
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div class="loginForm__btns">
+            <button type="submit" class="btn" [disabled]="loginForm?.invalid || submitted">Войти</button>
+         </div>
+
+    </div>
+</form>

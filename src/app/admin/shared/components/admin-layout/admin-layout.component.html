@@ -1,5 +1,5 @@
 <p>admin-layout works!</p>
-<nav class="menu">
+<nav *ngIf="auth.isAuthenticated()" class="menu">
     <ul class="menu__list">
         <li class="menu__item">
             <a routerLink="/">UI</a>
