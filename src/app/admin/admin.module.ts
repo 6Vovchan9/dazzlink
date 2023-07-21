@@ -11,6 +11,8 @@ import { EditPageComponent } from './edit-page/edit-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthGuard } from './shared/services/auth.guard';
 import { PostResolver } from '../shared/services/post.resolver';
+import { AlertComponent } from './shared/components/alert/alert.component';
+import { AlertService } from './shared/services/alert.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { PostResolver } from '../shared/services/post.resolver';
     LoginPageComponent,
     CreatePageComponent,
     DashboardPageComponent,
-    EditPageComponent
+    EditPageComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +44,8 @@ import { PostResolver } from '../shared/services/post.resolver';
     RouterModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    AlertService
   ]
 })
 export class AdminModule { }

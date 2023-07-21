@@ -8,7 +8,10 @@ import { AuthService } from "../admin/shared/services/auth.service";
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(
+        private authService: AuthService,
+        private router: Router
+    ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (this.authService.isAuthenticated()) {
@@ -20,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         return next.handle(req)
             .pipe(
-                tap(() => console.log('AuthInterceptor')),
+                // tap(() => console.log('AuthInterceptor')),
                 catchError((err: HttpErrorResponse) => {
                     if (err.status === 401) {
                         this.authService.logout();

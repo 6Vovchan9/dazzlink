@@ -1,0 +1,11 @@
+<div *ngIf="alertData" class="alert">
+    <div [ngClass]="{
+            'alert__wrap--success': alertData?.type === 'success',
+            'alert__wrap--warning': alertData?.type === 'warning',
+            'alert__wrap--danger': alertData?.type === 'danger'
+        }"
+        class="alert__wrap"
+    >
+        {{alertData?.text}}
+    </div>
+</div>

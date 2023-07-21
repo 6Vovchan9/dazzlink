@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Post } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/services/posts.service';
+import { AlertService } from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-create-page',
@@ -10,7 +11,10 @@ import { PostsService } from 'src/app/shared/services/posts.service';
 })
 export class CreatePageComponent implements OnInit {
 
-  constructor(public postsService: PostsService) { }
+  constructor(
+    public postsService: PostsService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit(): void { }
 
@@ -34,6 +38,7 @@ export class CreatePageComponent implements OnInit {
     this.postsService.create(post).subscribe(
       () => {
         console.log('Создали пост');
+        this.alertService.success('Пост был успешно создан');
       }
     )
   }

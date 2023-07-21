@@ -1,0 +1,29 @@
+.alert {
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+
+    .alert__wrap {
+        background: gray;
+        color: white;
+        padding: 20px;
+        border-radius: 6px;
+        max-width: 300px;
+
+        &--success {
+            background-color: green;
+        }
+
+        &--danger {
+            background-color: orange;
+        }
+
+        &--warning {
+            background-color: red;
+        }
+    }
+}
