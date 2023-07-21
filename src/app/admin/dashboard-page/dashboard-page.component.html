@@ -22,7 +22,7 @@
                     <td>{{ post.title }}</td>
                     <td>{{ post.date | date:'medium':'':'ru' }}</td>
                     <td>
-                        <button class="btn" (click)="loading = true" [routerLink]="['/admin', 'post', post.id, 'edit']">
+                        <button class="btn" (click)="goToEditPage(post.id)">
                             Открыть
                         </button>
                         <a (click)="remove(post.id)">Удалить</a>

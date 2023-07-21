@@ -14,7 +14,7 @@ export class PostResolver implements Resolve<Post> {
             .pipe(
                 catchError(() => {
                     console.log('catchError in PostResolver');
-                    this.router.navigate(['/admin', 'dashboard'])
+                    this.router.navigate(['/admin', 'dashboard']);
                     return EMPTY;
                 })
             )

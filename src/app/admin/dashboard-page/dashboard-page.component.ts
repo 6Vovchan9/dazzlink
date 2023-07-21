@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Post } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/services/posts.service';
@@ -18,7 +19,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private postsService: PostsService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +43,18 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         }
       );
     }
+  }
+
+  goToEditPage(id: any) {
+    this.loading = true;
+    this.router.navigate(['/admin', 'post', id, 'edit']).then(
+      (success: boolean) => {
+        if (!success) {
+          this.loading = false;
+          this.alertService.warning('Упс, что-то пошло не так(')
+        }
+      }
+    )
   }
 
   ngOnDestroy(): void {
