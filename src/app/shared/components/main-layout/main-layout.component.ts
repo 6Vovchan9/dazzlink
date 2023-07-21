@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { VisitsService } from '../../services/visits.service';
+
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
@@ -8,7 +10,10 @@ import { Router } from '@angular/router';
 })
 export class MainLayoutComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private visitsService: VisitsService
+  ) { }
 
   ngOnInit(): void { }
 
@@ -17,6 +22,14 @@ export class MainLayoutComponent implements OnInit {
       commands,
       // {skipLocationChange: true}
     );
+  }
+
+  getAmountOfUserVisits() {
+    this.visitsService.getAmountOfVisits().subscribe(
+      amount => {
+        console.log(amount)
+      }
+    )
   }
 
 }

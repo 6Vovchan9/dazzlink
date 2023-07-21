@@ -1,1 +1,7 @@
-<p>edit-page works!</p>
+<div *ngIf="post; else loading">
+    <p>edit-page works!</p>
+    <div>Пост {{post.id}} загружен</div>
+</div>
+<ng-template #loading>
+    Идет загрузка...
+</ng-template>

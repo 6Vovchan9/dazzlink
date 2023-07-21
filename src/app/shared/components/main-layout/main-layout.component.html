@@ -8,7 +8,12 @@
             <a (click)="goToAnotherPage(['/agreements'])" routerLink="/agreements">Согласия</a>
         </li>
         <li class="menu__item">
-            <a [routerLink]="['/admin']">Админка</a>
+            <a [routerLink]="['/admin', 'dashboard']">Админка</a>
+        </li>
+        <li class="menu__item">
+            <button (click)="getAmountOfUserVisits()">
+                Кол-во визитов
+            </button>
         </li>
     </ul>
 </nav>

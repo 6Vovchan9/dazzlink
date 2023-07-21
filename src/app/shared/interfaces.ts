@@ -17,6 +17,10 @@ export interface Post {
     date: Date;
 }
 
+export interface VisitsAmount {
+    amount: number
+}
+
 export interface FbCreateResponse {
     name: string;
 }
