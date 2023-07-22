@@ -16,6 +16,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   private pSub: Subscription;
   private dSub: Subscription
   public loading = true;
+  public searchStr = '';
 
   constructor(
     private postsService: PostsService,

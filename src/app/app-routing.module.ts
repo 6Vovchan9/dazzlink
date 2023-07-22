@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+
 import { AgreementsPageComponent } from './agreements-page/agreements-page.component';
+import { ArticlesPageComponent } from './articles-page/articles-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 
@@ -10,6 +12,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: '', component: HomePageComponent },
       { path: 'agreements', component: AgreementsPageComponent },
+      { path: 'articles', component: ArticlesPageComponent }
       // { path: '**', redirectTo: '/' }
     ]
   },

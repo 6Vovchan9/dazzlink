@@ -14,6 +14,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { ArticlesPageComponent } from './articles-page/articles-page.component';
+import { PostComponent } from './shared/components/post/post.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -21,10 +23,14 @@ registerLocaleData(localeRu, 'ru');
   declarations: [
     AppComponent,
     MainLayoutComponent,
+
     HomePageComponent,
     AgreementsPageComponent,
+    ArticlesPageComponent,
+
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

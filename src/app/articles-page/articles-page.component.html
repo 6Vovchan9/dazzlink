@@ -1,0 +1,20 @@
+<ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
+    <ng-container *ngIf="postList.length; else empty">
+        <div class="posts">
+            <div class="posts__filter">
+                <input type="text" placeholder="Фильтр постов..." [(ngModel)]="searchStr">
+            </div>
+            <div *ngFor="let post of postList | search:searchStr; let idx = index" class="posts__item">
+                №{{idx + 1}}
+                <app-post [postData]="post"></app-post>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+
+<ng-template #empty>
+    <p>Список пуст</p>
+</ng-template>
+<ng-template #loadingTemplate>
+    <p>Идет загрузка...</p>
+</ng-template>
