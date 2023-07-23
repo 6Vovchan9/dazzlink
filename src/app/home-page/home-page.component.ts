@@ -7,12 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  public inutVal: string = 'Иван';
+  public inutVal: string = 'Иван Андреевич';
   public labelMargin: number = 10;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }
