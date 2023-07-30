@@ -1,13 +1,82 @@
+@import "variables";
+
 .myInput {
+
+    margin-top: 30px;
     border: 1px solid black;
     padding: 10px;
-    .myInput__input {
-        
-    }
+
     .myInput__label {
         display: block;
     }
+
     .myInput__val {
         margin-top: 10px;
+    }
+}
+
+.page {
+
+    margin-top: 20px;
+
+    @media #{$notMobile} {
+        margin-top: 34px;
+    }
+}
+
+.aboutApp {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .aboutApp__title {
+        font-size: 36px;
+    }
+
+    .aboutApp__slogan {
+        margin-top: 16px;
+        max-width: 310px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .aboutApp__links {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 16px;
+        row-gap: 16px;
+        margin-top: 16px;
+    }
+
+    .aboutApp__mockup {
+        margin-top: 64px;
+        img {
+            max-width: 100%;
+            // display: block;
+        }
+    }
+
+    @media #{$notMobile} {
+        .aboutApp__title {
+            font-size: 64px;
+        }
+        .aboutApp__slogan {
+            max-width: 580px;
+            font-size: 18px;
+        }
+    }
+}
+
+.linkToApp {
+    display: block;
+    cursor: pointer;
+    .linkToApp__img {
+        // display: block;
+        max-height: 44px;
+
+        @media #{$notMobile} {
+            max-height: 48px;
+        }
     }
 }

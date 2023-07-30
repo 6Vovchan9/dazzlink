@@ -1,8 +1,10 @@
+@import "variables";
 
 .header {
     .header__container {
         padding: 30px 20px;
         display: flex;
+        column-gap: 20px;
 
         .header__col {
             display: flex;
@@ -18,10 +20,9 @@
 
 
 .logo {
-    width: 200px;
-    height: 38px;
-    // background-color: brown;
-    display: block;
+    width: 126px;
+    // height: 38px;
+    // display: block;
     overflow: hidden;
 
     // background-repeat: no-repeat;
@@ -30,8 +31,13 @@
     // background-image: url('src/assets/icons/rosbankLogo.svg');
 
     .logo__image {
+        display: block;
         max-width: 100%;
         max-height: 100%;
+    }
+
+    @media #{$notMobile} {
+        width: 200px;
     }
 }
 
@@ -45,7 +51,64 @@
     background-color: var(--color-blue);
 }
 
+.hamburger {
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    // background-color: var(--color-pink);
+    margin-left: 20px;
+    background-color: var(--color-white);
+    position: relative;
+
+    &:before {
+        content: "";
+        display: block;
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .hamburger__line {
+        margin: 11px 0;
+        width: 24px;
+        background-color: var(--color-blue);
+        height: 3px;
+        border-radius: 2px;
+        position: relative;
+
+        &:before {
+            content: '';
+            width: 24px;
+            background-color: var(--color-blue);
+            height: 3px;
+            border-radius: 2px;
+            display: block;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        &:after {
+            content: '';
+            width: 24px;
+            background-color: var(--color-blue);
+            height: 3px;
+            border-radius: 2px;
+            display: block;
+            position: absolute;
+            top: 10px;
+        }
+    }
+
+    @media #{$notMobile} {
+        display: none;
+    }
+}
+
 .menu {
+    display: none;
     font-size: 18px;
     line-height: 22px;
     .menu__list {
@@ -66,5 +129,9 @@
                 }
             }
         }
+    }
+
+    @media #{$notMobile} {
+        display: block;
     }
 }
