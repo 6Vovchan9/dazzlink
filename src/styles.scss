@@ -1,28 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import "variables";
+
+html, body {
+    height: 100%;
+    font-family: "Ubuntu", Helvetica, sans-serif;
+    // -webkit-font-smoothing: antialiased;
+    // -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 ul {
     margin: 0;
     padding: 0;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
     list-style: none;
 }
 
-.menu {
-    .menu__list {
-        display: flex;
-        .menu__item {
-            margin-left: 10px;
-            a {
-                text-decoration: underline;
-                cursor: pointer;
-                color: black;
-            }
-            &--active {
-                a {
-                    color: red;
-                }
-            }
-            &:first-child {
-                margin: 0;
-            }
-        }
-    }
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: normal;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 0 20px;
 }

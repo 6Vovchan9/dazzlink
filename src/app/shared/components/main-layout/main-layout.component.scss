@@ -1,26 +1,69 @@
-ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+
+.header {
+    .header__container {
+        padding: 30px 20px;
+        display: flex;
+
+        .header__col {
+            display: flex;
+            align-items: center;
+            flex: 1;
+
+            &--alignRight {
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+
+
+.logo {
+    width: 200px;
+    height: 38px;
+    // background-color: brown;
+    display: block;
+    overflow: hidden;
+
+    // background-repeat: no-repeat;
+    // background-size: contain;
+    // background-position: left center;
+    // background-image: url('src/assets/icons/rosbankLogo.svg');
+
+    .logo__image {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+.language {
+    margin-left: 32px;
+}
+
+.dropdown {
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-blue);
 }
 
 .menu {
+    font-size: 18px;
+    line-height: 22px;
     .menu__list {
         display: flex;
         .menu__item {
-            margin-left: 10px;
+            cursor: pointer;
+            padding: 8px 16px;
+            background-color: var(--color-white);
+            border-radius: 19px;
             a {
-                text-decoration: underline;
-                cursor: pointer;
-                color: black;
+                text-decoration: none;
+                color: var(--color-black);
             }
             &--active {
+                background-color: var(--color-blue);
                 a {
-                    color: red;
+                    color: var(--color-white);
                 }
-            }
-            &:first-child {
-                margin: 0;
             }
         }
     }

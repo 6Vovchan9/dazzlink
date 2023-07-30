@@ -1,0 +1,21 @@
+.menu {
+    .menu__list {
+        display: flex;
+        .menu__item {
+            margin-left: 10px;
+            a {
+                text-decoration: underline;
+                cursor: pointer;
+                color: black;
+            }
+            &--active {
+                a {
+                    color: red;
+                }
+            }
+            &:first-child {
+                margin: 0;
+            }
+        }
+    }
+}
