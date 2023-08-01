@@ -115,18 +115,25 @@
         display: flex;
         .menu__item {
             cursor: pointer;
-            padding: 8px 16px;
+            padding: 6px 14px;
             background-color: var(--color-white);
             border-radius: 19px;
+            border: 2px solid var(--color-white);
             a {
                 text-decoration: none;
                 color: var(--color-black);
             }
             &--active {
+                cursor: default;
                 background-color: var(--color-blue);
+                border-color: var(--color-blue);
                 a {
+                    cursor: default;
                     color: var(--color-white);
                 }
+            }
+            &:hover {
+                border-color: var(--color-blue);
             }
         }
     }
