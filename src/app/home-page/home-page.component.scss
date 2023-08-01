@@ -18,9 +18,11 @@
 .page {
 
     margin-top: 20px;
+    margin-bottom: 32px;
 
     @media #{$notMobile} {
         margin-top: 34px;
+        margin-bottom: 100px;
     }
 }
 
@@ -42,10 +44,6 @@
     }
 
     .aboutApp__links {
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 16px;
-        row-gap: 16px;
         margin-top: 16px;
     }
 
@@ -64,19 +62,6 @@
         .aboutApp__slogan {
             max-width: 580px;
             font-size: 18px;
-        }
-    }
-}
-
-.linkToApp {
-    display: block;
-    cursor: pointer;
-    .linkToApp__img {
-        // display: block;
-        max-height: 44px;
-
-        @media #{$notMobile} {
-            max-height: 48px;
         }
     }
 }

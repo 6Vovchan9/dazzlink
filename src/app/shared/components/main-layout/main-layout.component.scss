@@ -135,3 +135,64 @@
         display: block;
     }
 }
+
+.footer {
+    color: var(--color-white);
+    background-color: var(--color-black);
+    padding: 60px 0;
+    .footer__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 16px;
+        row-gap: 16px;
+
+        .footer__col {
+            display: flex;
+            flex: 1;
+
+            &--central {
+                flex: 2;
+                justify-content: center;
+            }
+
+            &--justifyContent--end {
+                justify-content: flex-end;
+            }
+        }
+    }
+    @media #{$mobile} {
+        padding: 40px 0;
+
+        .footer__container {
+            flex-direction: column-reverse;
+        }
+    }
+
+    // .footer__container {
+    //     display: flex;
+    //     flex-direction: column-reverse;
+    //     justify-content: space-between;
+    //     align-items: center;
+    // }
+
+    // @media #{$notMobile} {
+    //     padding: 60px 0;
+
+    //     .footer__container {
+    //         flex-direction: row;
+    //     }
+    // }
+}
+
+.socialNetworks {
+    .socialNetworks__list {
+        display: flex;
+        column-gap: 16px;
+        .socialNetworks__item {
+            .socialNetworks__link {
+                color: var(--color-white);
+            }
+        }
+    }
+}

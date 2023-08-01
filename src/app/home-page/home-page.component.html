@@ -6,21 +6,25 @@
                 Если ты ищешь новые знакомства, то в Dazzlink ты найдешь все функции, призванные сделать невозможное возможным. 
             </div>
             <div class="aboutApp__links">
-                <a class="linkToApp">
-                    <img src="assets/images/linkIOS.png" class="linkToApp__img" alt="linkIOS">
-                </a>
-                <a class="linkToApp">
-                    <img src="assets/images/linkAndroid.png" class="linkToApp__img" alt="linkAndroid">
-                </a>
+                <div class="linkToApp">
+                    <a class="linkToApp__item">
+                        <img src="assets/images/linkIOS.png" class="linkToApp__img" alt="linkIOS">
+                    </a>
+                    <a class="linkToApp__item">
+                        <img src="assets/images/linkAndroid.png" class="linkToApp__img" alt="linkAndroid">
+                    </a>
+                </div>
             </div>
             <picture class="aboutApp__mockup">
                 <img src="assets/images/mockup.png" alt="mockup">
             </picture>
+
             <div class="myInput">
                 <label [ngStyle]="{marginBottom: labelMargin + 'px'}" class="myInput__label" for="myInput">Имя клиента:</label>
                 <input class="myInput__input" id="myInput" type="text" [(ngModel)]="inutVal">
                 <div class="myInput__val">Нашего клиента зовут: {{inutVal}}</div>
             </div>
+            
         </section>
     </div>
 </main>
