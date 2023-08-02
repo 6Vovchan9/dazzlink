@@ -16,6 +16,7 @@ import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ArticlesPageComponent } from './articles-page/articles-page.component';
 import { PostComponent } from './shared/components/post/post.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -30,7 +31,8 @@ registerLocaleData(localeRu, 'ru');
 
     HeaderComponent,
     FooterComponent,
-    PostComponent
+    PostComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

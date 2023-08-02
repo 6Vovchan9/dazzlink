@@ -19,6 +19,8 @@
                 <img src="assets/images/mockup.png" alt="mockup">
             </picture>
 
+            <button (click)="myBtn()">myBtn</button>
+
             <div class="myInput">
                 <label [ngStyle]="{marginBottom: labelMargin + 'px'}" class="myInput__label" for="myInput">Имя клиента:</label>
                 <input class="myInput__input" id="myInput" type="text" [(ngModel)]="inutVal">

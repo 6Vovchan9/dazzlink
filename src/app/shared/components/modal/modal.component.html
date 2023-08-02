@@ -1,0 +1,69 @@
+<div class="background" (click)="clickByBackground()"></div>
+<div class="modal" [ngClass]="{'modal--size--small': data.smallSize}">
+    <div *ngIf="data.headerText" class="modal__header">{{data.headerText}}</div>
+    <div *ngIf="data.titleText" class="modal__title">{{data.titleText}}</div>
+    <!-- [ngClass]="{'modal__contentWrap--withShadow': contWithShadow}" -->
+    <div *ngIf="data.mainText?.length" [ngClass]="{'modal__contentWrap--withShadow': data.withShadow}" class="modal__contentWrap">
+        <div id="modal__content" class="modal__content">
+            <div *ngFor="let block of data.mainText" [class.modal__contentItem--hidden]="block.type !== 'accordion' && block.link?.close" class="modal__contentItem">
+                <!-- text -->
+                <div *ngIf="block.type === 'text'" [innerHTML]="block.text" class="modal__text"></div>
+                <!-- accordion -->
+                <div *ngIf="block.type === 'accordion'" (click)="toggleAccoStatus(block.link)" class="modal__accordion">
+                    <div class="accordion" [class.accordion--open]="!block.link?.close">
+                        <div class="accordion__title" [innerHTML]="block.text"></div>
+                        <div class="accordion__icon"></div>
+                    </div>
+                </div>
+                <!-- ngContent -->
+                <div *ngIf="block.type === 'ngContent'" class="modal__ngContent">
+                    <ng-container *ngTemplateOutlet="contentTpl"></ng-container> 
+                </div>
+                <!-- list -->
+                <ul *ngIf="block.type === 'list' && block.items.length" class="modal__list">
+                    <li *ngFor="let li of block.items" [innerHTML]="li" class="modal__listItem"></li>
+                </ul>
+                <!-- disclaimer -->
+                <div *ngIf="block.type === 'disclaimer'" [innerHTML]="block.text" class="modal__disclaimer"></div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="data.additContent?.length" class="modal__additContent">
+        <div *ngFor="let block of data.additContent"  class="modal__additItem">
+            <ng-container *ngIf="block.type === 'ngContent'; else otherType">
+                <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+            </ng-container>
+            <ng-template #otherType>
+                <!-- <div *ngIf="block.type === 'text'" [innerHTML]="block.text" class="modal__additText"></div> -->
+            </ng-template>
+        </div>
+    </div>
+    <!-- Кнопки -->
+    <div *ngIf="data.buttons?.items?.length" class="modal__btns" [ngClass]="data.buttons.classes">
+        <div *ngFor="let btn of data.buttons.items" class="modal__btnsItem">
+            <button
+                class="btnInModal"
+                [ngClass]="btn.classes"
+                [disabled]="btn.disabled"
+                (click)="btnClick(btn.emitterMethodName, data.component)">
+                {{btn.name}}
+            </button>
+        </div>
+    </div>
+    <!-- Крестик -->
+    <div *ngIf="data.closeButton" class="modal__close" (click)="clickByCloseModal(data.modalName)">
+        <div class="modal__closeButton"></div>
+    </div>
+</div>
+
+<!-- Строка ниже и 2 шт "<ng-container *ngTemplateOutlet="contentTpl"></ng-container> " выше, нужны для того чтобы расположить в разных местах ng-content, т.к. однажды он встречается в "mainText.type = ngContent", а иногда в "additContent" (если мы хотим поделить контент передаваемый от родителя, расположить его в нескольких местах то можем это сделать с исп <ng-content select=".myClass1">, в другом месте <ng-content select=".myClass2"> и тд) -->
+<!-- В нашем же случае это работает так что если в mainText встретится объект с type = ngContent то даже если в additContent также есть type = ngContent то он будет проигнорирован, буден показан ng-content только в первом месте -->
+<ng-template #contentTpl><ng-content></ng-content></ng-template>
+
+<!-- Как работают эти модалки: данные берутря из GlobalModalService из свойства modalData$ типа BehaviorSubject.
+Чтоб открыть модалку на какой ниб странице, добавляем в шаблон тег app-modal с условие - отображаем тут модалку только, если в данных которые мы закинули в BehaviorSubject (таким образом modalService.open(failSendLink2)), присутствуем свойство со значением соотв-ем названию текущей страницы.
+Чтоб закрыть модалку можно в любом месте очистить BehaviorSubject (modalData$.next(null)).
+Чтоб отреагировать на нажатии кнопки в модалке нужно в компоненте где исп модалку слушать событие "buttonClick", где $event это объект с названием метода и названием страницы/компонента, (я обрабатываю событие в методе "buttonInModalClick") который в свою очередь должен вызвать метод с названием из $event (указанный в modalData$.buttons.items[].emitterMethodName).
+Чтоб послушать событие закрытия модалки через крестик или клик по background, надо слушать событие "closeModal" где в $event содержится название модалки.
+Есть модалки которые одинаковые на нескольких шагах поэтому я их вынес в app.component, но когда мы ее открываем например с калькулятора и чтоб например запустили loader (придется его запустить в калькуляторе)
+    надо передать сигнал из app.component в калькуляятор, чтоб это сделать мы должны положить сообщение (содержит в себе назв компонента куда передаем, название метода в калькуляторе, аргументы) в GlobalModalService в свойство messToAnotherComp типа Subject и установить прослушку этого сообщения в калькуляторе -->

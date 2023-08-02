@@ -23,3 +23,15 @@
 </style> -->
 
 <router-outlet></router-outlet>
+
+<!-- <ng-container *ngIf="modalService" Проверка изза того что в некоторых компонентах (как например в appList) мы при открытии страницы (в методе "ngOnInit") сразу пытаемся
+    вызвать модалку пробросив ее значение в сервис "modalService" который еще типо не успел появиться>  -->
+    <ng-container *ngIf="modalService?.modalData$ | async as modalData">
+      <app-modal *ngIf="modalData.component === 'appComponent'" (buttonClick)="buttonInModalClick($event)">
+          <!-- {{modalData}} -->
+          <ng-container *ngIf="modalData.modalName === 'requirementForCarModal'">
+            <div style="margin-top: 30px;" class="additContentForPopup">additional content</div>
+          </ng-container>
+      </app-modal>
+  </ng-container>
+<!-- </ng-container> -->
