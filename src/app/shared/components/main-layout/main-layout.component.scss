@@ -18,11 +18,10 @@
     }
 }
 
-
 .logo {
     width: 126px;
     // height: 38px;
-    // display: block;
+    display: block;
     overflow: hidden;
 
     // background-repeat: no-repeat;
@@ -201,5 +200,110 @@
                 color: var(--color-white);
             }
         }
+    }
+}
+
+.navigationModal {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    background-color: cadetblue;
+    z-index: 110;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 80px;
+    width: 100%;
+    min-width: 300px;
+    max-width: 800px;
+    max-height: 90%;
+    // min-height: 542px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-size: 14px;
+    opacity: .8;
+
+    .navigationModal__header {
+
+        background-color: aquamarine;
+        margin-bottom: 30px;
+
+        .headerInModal {
+            display: flex;
+            column-gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+
+            .headerInModal__closeButton {
+                cursor: pointer;
+                position: relative;
+
+                &:before {
+                    content: "";
+                    width: 50px;
+                    height: 50px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                &:hover {
+                    .iconForCloseInModal {
+                        transform: scale(1.4) rotate(180deg);
+                    }
+                }
+            }
+        }
+    }
+
+    .iconForCloseInModal {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        transition: .7s;
+
+        &:before {
+            content: "";
+            width: 2px;
+            height: 20px;
+            border-radius: 1px;
+            background-color: var(--color-blue);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            transform-origin: center center;
+        }
+
+        &:after {
+            content: "";
+            width: 2px;
+            height: 20px;
+            border-radius: 1px;
+            background-color: var(--color-blue);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            transform-origin: center center;
+        }
+    }
+
+    .navigationModal__contentWrap {
+        background-color: burlywood;
+        flex: 1;
+    }
+
+    .navigationModal__footer {
+        background-color: coral;
+    }
+
+    @media #{$mobile} {
+        padding: 30px 20px;
+        height: 100%;
+        max-height: unset;
+        border-radius: 0px;
+        justify-content: center;
     }
 }

@@ -32,7 +32,7 @@
                     
                 </div>
             </div>
-            <button class="hamburger">
+            <button (click)="showNavModal = true" class="hamburger">
                 <div class="hamburger__line"></div>
             </button>
         </div>
@@ -73,3 +73,29 @@
         </div>
     </div>
 </footer>
+
+<!-- Модалка с навигацией для мобилы -->
+<div *ngIf="showNavModal" class="navigationModal">
+    <div class="navigationModal__header">
+        <div class="headerInModal">
+            <div class="headerInModal__col">
+                <a routerLink="/" class="logo">
+                    <img src="assets/images/logo.svg" class="logo__image" alt="logotip">
+                </a>
+            </div>
+            <div class="headerInModal__col">
+                <div (click)="showNavModal = false" class="headerInModal__closeButton">
+                    <div class="iconForCloseInModal"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navigationModal__contentWrap">
+        <div class="navigationModal__content">
+            Навигационное окно
+        </div>
+    </div>
+    <div class="navigationModal__footer">
+        footer
+    </div>
+</div>

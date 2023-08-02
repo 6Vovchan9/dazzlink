@@ -10,6 +10,8 @@ import { VisitsService } from '../../services/visits.service';
 })
 export class MainLayoutComponent implements OnInit {
 
+  public showNavModal = false;
+
   constructor(
     private router: Router,
     private visitsService: VisitsService
