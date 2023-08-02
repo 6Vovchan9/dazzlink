@@ -10,7 +10,7 @@ export class AgreementsPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('AgreementsPageComponent init')
+    console.log('AgreementsPageComponent init');
   }
 
 }

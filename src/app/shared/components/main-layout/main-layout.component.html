@@ -10,16 +10,16 @@
                 <nav class="menu">
                     <ul class="menu__list">
                         <li class="menu__item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="menu__item--active">
-                            <a routerLink="/">Главная</a>
+                            <a class="menu__link" routerLink="/">Главная</a>
                         </li>
                         <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a routerLink="/articles">Статьи</a>
+                            <a class="menu__link" routerLink="/articles">Статьи</a>
                         </li>
                         <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a (click)="goToAnotherPage(['/agreements'])" routerLink="/agreements">Согласия</a>
+                            <a class="menu__link" routerLink="/agreements">Согласия</a>
                         </li>
                         <li class="menu__item">
-                            <a [routerLink]="['/admin', 'dashboard']">Админка</a>
+                            <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
                         </li>
                         <!-- <li class="menu__item">
                             <button (click)="getAmountOfUserVisits()">
@@ -97,16 +97,16 @@
             <nav class="menu menu--fd--column">
                 <ul class="menu__list">
                     <li class="menu__item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="menu__item--active">
-                        <a routerLink="/">Главная</a>
+                        <a class="menu__link" (click)="goToAnotherPage('/')" routerLink="/">Главная</a>
                     </li>
                     <li class="menu__item" routerLinkActive="menu__item--active">
-                        <a routerLink="/articles">Статьи</a>
+                        <a class="menu__link" (click)="goToAnotherPage('/articles')" routerLink="/articles">Статьи</a>
                     </li>
                     <li class="menu__item" routerLinkActive="menu__item--active">
-                        <a (click)="goToAnotherPage(['/agreements'])" routerLink="/agreements">Согласия</a>
+                        <a class="menu__link" (click)="goToAnotherPage('/agreements')" routerLink="/agreements">Согласия</a>
                     </li>
                     <li class="menu__item">
-                        <a [routerLink]="['/admin', 'dashboard']">Админка</a>
+                        <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
                     </li>
                 </ul>
             </nav>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { VisitsService } from '../../services/visits.service';
 
@@ -13,17 +12,16 @@ export class MainLayoutComponent implements OnInit {
   public showNavModal = false;
 
   constructor(
-    private router: Router,
     private visitsService: VisitsService
   ) { }
 
   ngOnInit(): void { }
 
-  goToAnotherPage(commands: Array<string>): void {
-    this.router.navigate(
-      commands,
-      // {skipLocationChange: true}
-    );
+  goToAnotherPage(futurePath:string): void {
+    // const pathnameBeforeNav = location.pathname;
+    // if (pathnameBeforeNav !== futurePath) {
+      this.showNavModal = false;
+    // }
   }
 
   getAmountOfUserVisits() {
