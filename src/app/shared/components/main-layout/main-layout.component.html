@@ -6,27 +6,29 @@
             </a>
         </div>
         <div class="header__col header__col--alignRight">
-            <nav class="menu">
-                <ul class="menu__list">
-                    <li class="menu__item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="menu__item--active">
-                        <a routerLink="/">Главная</a>
-                    </li>
-                    <li class="menu__item" routerLinkActive="menu__item--active">
-                        <a routerLink="/articles">Статьи</a>
-                    </li>
-                    <li class="menu__item" routerLinkActive="menu__item--active">
-                        <a (click)="goToAnotherPage(['/agreements'])" routerLink="/agreements">Согласия</a>
-                    </li>
-                    <li class="menu__item">
-                        <a [routerLink]="['/admin', 'dashboard']">Админка</a>
-                    </li>
-                    <!-- <li class="menu__item">
-                        <button (click)="getAmountOfUserVisits()">
-                            Кол-во визитов
-                        </button>
-                    </li> -->
-                </ul>
-            </nav>
+            <div class="header__menu">
+                <nav class="menu">
+                    <ul class="menu__list">
+                        <li class="menu__item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="menu__item--active">
+                            <a routerLink="/">Главная</a>
+                        </li>
+                        <li class="menu__item" routerLinkActive="menu__item--active">
+                            <a routerLink="/articles">Статьи</a>
+                        </li>
+                        <li class="menu__item" routerLinkActive="menu__item--active">
+                            <a (click)="goToAnotherPage(['/agreements'])" routerLink="/agreements">Согласия</a>
+                        </li>
+                        <li class="menu__item">
+                            <a [routerLink]="['/admin', 'dashboard']">Админка</a>
+                        </li>
+                        <!-- <li class="menu__item">
+                            <button (click)="getAmountOfUserVisits()">
+                                Кол-во визитов
+                            </button>
+                        </li> -->
+                    </ul>
+                </nav>
+            </div>
             <div class="language">
                 <div class="dropdown">
                     
@@ -92,10 +94,46 @@
     </div>
     <div class="navigationModal__contentWrap">
         <div class="navigationModal__content">
-            Навигационное окно
+            <nav class="menu menu--fd--column">
+                <ul class="menu__list">
+                    <li class="menu__item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="menu__item--active">
+                        <a routerLink="/">Главная</a>
+                    </li>
+                    <li class="menu__item" routerLinkActive="menu__item--active">
+                        <a routerLink="/articles">Статьи</a>
+                    </li>
+                    <li class="menu__item" routerLinkActive="menu__item--active">
+                        <a (click)="goToAnotherPage(['/agreements'])" routerLink="/agreements">Согласия</a>
+                    </li>
+                    <li class="menu__item">
+                        <a [routerLink]="['/admin', 'dashboard']">Админка</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
     <div class="navigationModal__footer">
-        footer
+        <div class="footerInModal">
+            <div class="footerInModal__col">
+                <div class="socialNetworks socialNetworks--textColor--black">
+                    <ul class="socialNetworks__list">
+                        <li class="socialNetworks__item">
+                            <a href="https://www.instagram.com" target="_blank" class="socialNetworks__link">Instagram</a>
+                        </li>
+                        <li class="socialNetworks__item">
+                            <a href="#" target="_blank" class="socialNetworks__link">Facebook</a>
+                        </li>
+                        <li class="socialNetworks__item">
+                            <a href="#" target="_blank" class="socialNetworks__link">Twitter</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footerInModal__col">
+                <div class="dropdown">
+                    
+                </div>
+            </div>
+        </div>
     </div>
 </div>

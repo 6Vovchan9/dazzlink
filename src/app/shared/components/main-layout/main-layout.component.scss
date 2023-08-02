@@ -14,6 +14,13 @@
             &--alignRight {
                 justify-content: flex-end;
             }
+
+            .header__menu {
+                display: none;
+                @media #{$notMobile} {
+                    display: block;
+                }
+            }
         }
     }
 }
@@ -56,7 +63,7 @@
     border: none;
     // background-color: var(--color-pink);
     margin-left: 20px;
-    background-color: var(--color-white);
+    background-color: transparent;
     position: relative;
 
     &:before {
@@ -107,7 +114,6 @@
 }
 
 .menu {
-    display: none;
     font-size: 18px;
     line-height: 22px;
     .menu__list {
@@ -115,9 +121,9 @@
         .menu__item {
             cursor: pointer;
             padding: 6px 14px;
-            background-color: var(--color-white);
+            background-color: transparent;
             border-radius: 19px;
-            border: 2px solid var(--color-white);
+            border: 2px solid transparent;
             a {
                 text-decoration: none;
                 color: var(--color-black);
@@ -137,8 +143,11 @@
         }
     }
 
-    @media #{$notMobile} {
-        display: block;
+    &--fd--column {
+        .menu__list {
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 }
 
@@ -201,13 +210,23 @@
             }
         }
     }
+
+    &--textColor--black {
+        .socialNetworks__list {
+            .socialNetworks__item {
+                .socialNetworks__link {
+                    color: var(--color-black);
+                }
+            }
+        }
+    }
 }
 
 .navigationModal {
     display: flex;
     flex-direction: column;
     position: fixed;
-    background-color: cadetblue;
+    background-color: var(--color-white);
     z-index: 110;
     top: 50%;
     left: 50%;
@@ -221,11 +240,11 @@
     box-sizing: border-box;
     border-radius: 10px;
     font-size: 14px;
-    opacity: .8;
+    // opacity: .8;
 
     .navigationModal__header {
 
-        background-color: aquamarine;
+        // background-color: aquamarine;
         margin-bottom: 30px;
 
         .headerInModal {
@@ -296,7 +315,15 @@
     }
 
     .navigationModal__footer {
-        background-color: coral;
+        // background-color: coral;
+        margin-top: 30px;
+
+        .footerInModal {
+            display: flex;
+            column-gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
     }
 
     @media #{$mobile} {

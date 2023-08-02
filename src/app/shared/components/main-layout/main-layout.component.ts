@@ -34,4 +34,12 @@ export class MainLayoutComponent implements OnInit {
     )
   }
 
+  openNavPopup() {
+    
+  }
+
+  closeNavPopup() {
+    
+  }
+
 }
