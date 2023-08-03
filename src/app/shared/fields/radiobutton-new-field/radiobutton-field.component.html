@@ -1,0 +1,25 @@
+<div class="radioButtonControl">
+    <div class="radioButtonControl__value">
+        <div *ngIf="buttonStyle; else checkboxes" class="radioButton" [ngClass]="{'radioButton--disabled': disabledControl}">
+            <div *ngFor="let item of options.items" (click)="selectValue(item)" [ngClass]="{'radioButton__item--selected': item.selected}" class="radioButton__item">
+                {{item.caption}}
+            </div>
+        </div>
+        <ng-template #checkboxes>
+            <div class="checkboxes" [ngClass]="{'checkboxes--disabled': disabledControl}">
+                <div *ngFor="let item of options.items" (click)="selectValue(item)" class="checkboxes__item">
+                    <div class="checkbox" [ngClass]="{'checkbox--selected': item.selected}">
+                        <div class="checkbox__label">
+                            <div *ngIf="item.iconSrc" class="checkbox__icon" [ngStyle]="{backgroundImage: generateIconPath(item.iconSrc)}"></div>
+                            <div class="checkbox__caption" [innerHTML]="item.caption"></div>
+                            <div *ngIf="item.showItemDesc && item.id" class="checkbox__desc">
+                                <div (click)="clickByCheckboxDesc($event, item.id)" class="descriptionBtn">?</div>
+                            </div>
+                        </div>
+                        <div class="checkbox__box"></div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
@@ -17,6 +17,7 @@ import { AuthInterceptor } from './shared/auth.interceptor';
 import { ArticlesPageComponent } from './articles-page/articles-page.component';
 import { PostComponent } from './shared/components/post/post.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
+import { RadiobuttonFieldModule } from './shared/fields/radiobutton-new-field/radiobutton-field.module';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -37,8 +38,10 @@ registerLocaleData(localeRu, 'ru');
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    SharedModule
+    FormsModule, // для [(ngModel)]
+    ReactiveFormsModule, // для [formControl]
+    SharedModule,
+    RadiobuttonFieldModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

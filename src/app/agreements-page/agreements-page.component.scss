@@ -1,0 +1,24 @@
+.wrapper {
+    display: block;
+    max-width: 500px;
+    margin-left: 20px;
+}
+
+.block {
+    margin-bottom: 30px;
+}
+
+.myInput {
+
+    margin-top: 30px;
+    border: 1px solid black;
+    padding: 10px;
+
+    .myInput__label {
+        display: block;
+    }
+
+    .myInput__val {
+        margin-top: 10px;
+    }
+}

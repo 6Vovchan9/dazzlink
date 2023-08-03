@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { requirementForCarModal, tooltipForMainVector } from '@app/shared/constants/modal/appComponent.constants';
-import { GlobalModalService } from '@app/shared/services/global-modal.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,19 +7,8 @@ import { GlobalModalService } from '@app/shared/services/global-modal.service';
 })
 export class HomePageComponent implements OnInit {
 
-  public inutVal: string = 'Иван Андреевич';
-  public labelMargin: number = 10;
-
-  constructor(
-    public modalService: GlobalModalService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void { }
-
-  myBtn() {
-    // console.log('click by myBtn');
-    // this.modalService.open(tooltipForMainVector);
-    this.modalService.open(requirementForCarModal());
-  }
 
 }

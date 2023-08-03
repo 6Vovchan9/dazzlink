@@ -1,1 +1,31 @@
-<p>agreements-page works!</p>
+<div class="wrapper">
+    <div class="block">
+        <app-radiobutton-field
+            [formControl]="myForm.get('vectors')"
+            [options]="vectorFieldOptions"
+            (clickByItemDesc)="showVectorDesc($event)"
+            optionLabel="value">
+        </app-radiobutton-field>
+    </div>
+
+    <div class="block">
+        <app-radiobutton-field
+            [formControl]="myForm.get('gender')"
+            [options]="genderFieldOptions"
+            [buttonStyle]="true"
+            optionLabel="value">
+        </app-radiobutton-field>
+    </div>
+
+    <div class="block">
+        <div class="myInput">
+            <label [ngStyle]="{marginBottom: labelMargin + 'px'}" class="myInput__label" for="myInput">Имя клиента:</label>
+            <input class="myInput__input" id="myInput" type="text" [(ngModel)]="inutVal">
+            <div class="myInput__val">Нашего клиента зовут: {{inutVal}}</div>
+        </div>
+    </div>
+
+    <div class="block">
+        <button (click)="myBtn()">openModal</button>
+    </div>
+</div>

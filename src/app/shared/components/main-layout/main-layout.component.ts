@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { VisitsService } from '../../services/visits.service';
+import { VisitsService } from '@app/shared/services/visits.service';
 
 @Component({
   selector: 'app-main-layout',
