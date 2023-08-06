@@ -1,0 +1,24 @@
+<!-- <div class="radioButtonControl">
+    {{selectedItems}}
+    <div class="radioButtonControl__value">
+        <div class="radioButton" [ngClass]="{'radioButton--disabled': disabledControl}">
+            <div *ngFor="let item of options.items" (click)="selectValue(item)" [ngClass]="{'radioButton__item--selected': item.selected}" class="radioButton__item">
+                {{item.caption}}
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="dropdownControl">
+    <div (click)="toggleState()" class="dropdownControl__head">
+        <div class="dropdownControl__values">
+            {{selectedItems}}
+        </div>
+    </div>
+    <div class="dropdownControl__list" [ngClass]="{'dropdownControl__list--hidden': closedState}">
+        <div *ngFor="let item of options.items" [ngClass]="{'dropdownControl__item--selected': item.selected}" (click)="selectValue(item)" class="dropdownControl__item">
+            {{item.caption}}
+        </div>
+        <div class="blockForClickOutside"></div>
+    </div>
+</div>

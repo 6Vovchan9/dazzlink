@@ -1,50 +1,49 @@
-import { Component, EventEmitter, forwardRef, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type FieldOptions = {
   id: string;
-  items: Array<RadioButtonItem>;
-  value?: RadioButtonItem | Array<RadioButtonItem> | Array<string> | string;
+  items: Array<DropdownItem>;
+  value?: DropdownItem | Array<DropdownItem> | Array<string> | string;
   disabled?: boolean;
   required?: boolean;
 };
 
-export type RadioButtonItem = {
-  id?: string; // Нужен для clickByItemDesc.emit(id) для того чтоб понять на какой именно question-circle нажали, описание какого именно элемента radiobutton хотим получить
+export type DropdownItem = {
   caption: string;
   value: string;
-  showItemDesc?: boolean; // Чтоб появился question-circle около элемента radiobutton, но также важно чтоб был заполнен id
-  iconSrc?: string;
-  selected?: boolean
+  selected?: boolean;
 };
 
 @Component({
-  selector: 'app-radiobutton-field',
-  templateUrl: './radiobutton-field.component.html',
-  styleUrls: ['./radiobutton-field.component.scss'],
+  selector: 'app-dropdown-field',
+  templateUrl: './dropdown-field.component.html',
+  styleUrls: ['./dropdown-field.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => RadiobuttonFieldComponent),
+      useExisting: forwardRef(() => DropdownFieldComponent),
       multi: true,
     }
   ],
   // encapsulation: ViewEncapsulation.None,
 })
-export class RadiobuttonFieldComponent implements ControlValueAccessor {
-  
+export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
+
   @Input()
   public options: FieldOptions;
   @Input()
   public multiple = false;
-  @Input()
-  public buttonStyle = false;
   @Input()
   public optionLabel: string;
   @Output()
   public clickByItemDesc = new EventEmitter<string>();
 
   public disabledControl = false;
+  public selectedItems: any;
+  public closedState = true;
+
+  ngOnInit(): void { }
 
   public writeValue(value: any): void {
     if (value) {
@@ -78,21 +77,15 @@ export class RadiobuttonFieldComponent implements ControlValueAccessor {
         return item;
       });
     }
-  }
 
-  public registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  public registerOnTouched(fn: any): void {
-    this.onTouch = fn;
+    this.selectedItems = this.createSelectedItemsForScreen(this.options.items.filter(item => item.selected));
   }
 
   public setDisabledState?(isDisabled: boolean): void {
     this.disabledControl = isDisabled;
   }
 
-  public selectValue(radioItem: RadioButtonItem): void {
+  public selectValue(radioItem: DropdownItem): void {
     if (!this.disabledControl) {
       if (!radioItem.selected) { // Если item еще не выбран
         if (!this.multiple) { // Если не возможен множественный выбор тогда сначала отключим все варианты
@@ -104,6 +97,9 @@ export class RadiobuttonFieldComponent implements ControlValueAccessor {
           if (this.optionLabel) {
             res = radioItem[this.optionLabel] || radioItem;
           }
+          // console.log('1', res);
+          this.selectedItems = this.createSelectedItemsForScreen(res);
+          this.closedState = true; // закрываем выпадающий список
           this.onChange(res);
         }
         radioItem.selected = true;
@@ -112,6 +108,8 @@ export class RadiobuttonFieldComponent implements ControlValueAccessor {
           if (this.optionLabel && radioItem[this.optionLabel]) {
             res = res.map(el => el[this.optionLabel]);
           }
+          // console.log('2', res)
+          this.selectedItems = this.createSelectedItemsForScreen(res);
           this.onChange(res);
         }
       } else if (this.multiple && radioItem.selected) {
@@ -120,19 +118,32 @@ export class RadiobuttonFieldComponent implements ControlValueAccessor {
         if (this.optionLabel && radioItem[this.optionLabel] && res.length) {
           res = res.map(el => el[this.optionLabel]);
         }
+        // console.log('3', res)
+        this.selectedItems = this.createSelectedItemsForScreen(res);
         this.onChange(res.length ? res : null);
       }
       this.onTouch();
     }
   }
 
-  public clickByCheckboxDesc(event: MouseEvent, id: string): void {
-    event.stopPropagation();
-    this.clickByItemDesc.emit(id);
+  createSelectedItemsForScreen(res) {
+    if (Array.isArray(res)) {
+      return res.map(item => item[this.optionLabel] || item['value'] || item).join(', ');
+    } else {
+      return res[this.optionLabel] || res['value'] || res;
+    }
   }
 
-  public generateIconPath(IconHref: string): string {
-    return `url(${IconHref})`;
+  public toggleState(): void {
+    this.closedState = !this.closedState;
+  }
+
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: any): void {
+    this.onTouch = fn;
   }
 
   private onChange = (value: any) => { }; // Когда будем вызывать этот метод "onChange" angular будет самостоятельно output-ить изм наверх

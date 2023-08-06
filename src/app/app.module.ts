@@ -18,6 +18,7 @@ import { ArticlesPageComponent } from './articles-page/articles-page.component';
 import { PostComponent } from './shared/components/post/post.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { RadiobuttonFieldModule } from './shared/fields/radiobutton-new-field/radiobutton-field.module';
+import { DropdownFieldModule } from './shared/fields/dropdown-field/dropdown-field.module';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -40,8 +41,11 @@ registerLocaleData(localeRu, 'ru');
     AppRoutingModule,
     FormsModule, // для [(ngModel)]
     ReactiveFormsModule, // для [formControl]
+
     SharedModule,
-    RadiobuttonFieldModule
+
+    RadiobuttonFieldModule,
+    DropdownFieldModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

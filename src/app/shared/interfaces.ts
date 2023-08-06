@@ -18,7 +18,7 @@ export interface Post {
 }
 
 export interface VisitsAmount {
-    amount: number
+    amount: number;
 }
 
 export interface FbCreateResponse {

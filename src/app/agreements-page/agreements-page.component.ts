@@ -38,9 +38,19 @@ export class AgreementsPageComponent implements OnInit {
     disabled: false,
     id: "gender",
     required: true,
-    items: [{value: 'MALE', caption: 'М'}, {value: 'FEMALE', caption: 'Ж'}],
+    items: [{ value: 'MALE', caption: 'М' }, { value: 'FEMALE', caption: 'Ж' }],
     // value: {value: 'MALE', caption: 'Мужчина'}
-};
+  };
+
+  public langFieldOptions: FieldOptions = {
+    disabled: false,
+    id: "language",
+    required: true,
+    items: [{ value: 'RU', caption: 'RU' }, { value: 'UZ', caption: 'UZ' }, { value: 'EN', caption: 'EN' }, { value: 'KZ', caption: 'KZ' }],
+    // value: ['RU', 'UZ']
+    // value: 'UZ'
+    value: 'RU'
+  };
 
   constructor(
     public modalService: GlobalModalService
@@ -53,7 +63,8 @@ export class AgreementsPageComponent implements OnInit {
   private createForm(): void {
     this.myForm = new FormGroup({
       vectors: new FormControl(this.vectorFieldOptions.value, this.vectorFieldOptions.required ? [Validators.required] : []),
-      gender: new FormControl(this.genderFieldOptions.value, this.genderFieldOptions.required ? [Validators.required] : [])
+      gender: new FormControl(this.genderFieldOptions.value, this.genderFieldOptions.required ? [Validators.required] : []),
+      language: new FormControl(this.langFieldOptions.value, this.langFieldOptions.required ? [Validators.required] : []),
     });
   }
 

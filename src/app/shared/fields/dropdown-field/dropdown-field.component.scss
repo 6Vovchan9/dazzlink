@@ -1,0 +1,142 @@
+$color-main-red: #e60028;
+$color-main-black: #282423;
+$color-main-gray: #c4c4c4;
+$color-main-white: #fff;
+
+$color-main-blue: #5532EB;
+
+:host(.ng-invalid.ng-touched) {
+    color: $color-main-red;
+    .radioButton {
+        border-color: $color-main-red;
+    }
+}
+
+.radioButtonControl {
+    max-width: 728px;
+    user-select: none;
+    // &--disabled {
+    //     pointer-events: none;
+    // }
+}
+
+.radioButton {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 12px;
+    row-gap: 12px;
+    padding: 10px 0;
+    border-bottom: 2px solid $color-main-black;
+    overflow: scroll;
+    .radioButton__item {
+        cursor: pointer;
+        color: $color-main-gray;
+        border: 2px solid;
+        border-color: $color-main-gray;
+        border-radius: 20px;
+        line-height: 30px;
+        padding: 0px 8px;
+        transition: .2s ease-in-out;
+        &--selected {
+            background-color: $color-main-red;
+            border-color: $color-main-red;
+            color: white;
+        }
+        // &:hover {
+        //     box-shadow: 0 0 10px rgba(230, 00, 40, 0.5);
+        // }
+    }
+    &--disabled {
+        .radioButton__item {
+            cursor: not-allowed;
+            &:hover {
+                box-shadow: none;
+            }
+        }
+    }
+}
+
+.dropdownControl {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    position: relative;
+    user-select: none;
+    .dropdownControl__head {
+        cursor: pointer;
+        min-height: 22px;
+        background-color: $color-main-blue;
+        color: $color-main-white;
+        padding: 8px 16px;
+        border-radius: 19px;
+        min-height: 38px;
+    }
+    .dropdownControl__list {
+        position: absolute;
+        transform: translateY(8px);
+        background-color: aqua;
+        border-radius: 19px;
+        overflow-x: hidden;
+        width: 100%;
+        .dropdownControl__item {
+            cursor: pointer;
+            padding: 8px 16px;
+            background-color: antiquewhite;
+
+            &--selected {
+                color: $color-main-blue;
+            }
+
+            &:hover {
+                color: $color-main-blue;
+            }
+        }
+
+        &--hidden {
+            height: 0;
+            display: none;
+        }
+    }
+}
+
+.blockForClickOutside {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    padding-top: 46px;
+    box-sizing: content-box;
+}
+
+.descriptionBtn {
+    display: inline-block;
+    border-radius: 20px;
+    user-select: none;
+    background-color: $color-main-gray;
+    color: white;
+    min-width: 20px;
+    min-height: 20px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    position: relative;
+    letter-spacing: 0;
+    cursor: pointer;
+    transition: .2s;
+
+    &:before {
+        content: "";
+        width: 50px;
+        height: 46px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        opacity: 0.3;
+    }
+
+    &:hover {
+        transform: scale(1.3);
+        color: $color-main-black;
+    }
+}

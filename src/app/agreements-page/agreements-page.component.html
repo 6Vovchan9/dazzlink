@@ -17,6 +17,15 @@
         </app-radiobutton-field>
     </div>
 
+    <div style="max-width: 300px;" class="block">
+        <app-dropdown-field
+            [formControl]="myForm.get('language')"
+            [options]="langFieldOptions"
+            [multiple]="false"
+            optionLabel="value">
+        </app-dropdown-field>
+    </div>
+
     <div class="block">
         <div class="myInput">
             <label [ngStyle]="{marginBottom: labelMargin + 'px'}" class="myInput__label" for="myInput">Имя клиента:</label>
