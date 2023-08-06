@@ -8,53 +8,6 @@ $color-main-blue: #5532EB;
 
 :host(.ng-invalid.ng-touched) {
     color: $color-main-red;
-    .radioButton {
-        border-color: $color-main-red;
-    }
-}
-
-.radioButtonControl {
-    max-width: 728px;
-    user-select: none;
-    // &--disabled {
-    //     pointer-events: none;
-    // }
-}
-
-.radioButton {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 12px;
-    row-gap: 12px;
-    padding: 10px 0;
-    border-bottom: 2px solid $color-main-black;
-    overflow: scroll;
-    .radioButton__item {
-        cursor: pointer;
-        color: $color-main-gray;
-        border: 2px solid;
-        border-color: $color-main-gray;
-        border-radius: 20px;
-        line-height: 30px;
-        padding: 0px 8px;
-        transition: .2s ease-in-out;
-        &--selected {
-            background-color: $color-main-red;
-            border-color: $color-main-red;
-            color: white;
-        }
-        // &:hover {
-        //     box-shadow: 0 0 10px rgba(230, 00, 40, 0.5);
-        // }
-    }
-    &--disabled {
-        .radioButton__item {
-            cursor: not-allowed;
-            &:hover {
-                box-shadow: none;
-            }
-        }
-    }
 }
 
 .dropdownControl {

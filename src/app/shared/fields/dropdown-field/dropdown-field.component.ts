@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export type FieldOptions = {
+export type DropdownOptions = {
   id: string;
   items: Array<DropdownItem>;
   value?: DropdownItem | Array<DropdownItem> | Array<string> | string;
@@ -31,7 +31,7 @@ export type DropdownItem = {
 export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
 
   @Input()
-  public options: FieldOptions;
+  public options: DropdownOptions;
   @Input()
   public multiple = false;
   @Input()

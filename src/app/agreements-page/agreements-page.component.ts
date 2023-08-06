@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { requirementForCarModal, tooltipForMainVector } from '@app/shared/constants/modal/appComponent.constants';
+import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { FieldOptions } from '@app/shared/fields/radiobutton-new-field/radiobutton-field.component';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 
@@ -42,13 +43,14 @@ export class AgreementsPageComponent implements OnInit {
     // value: {value: 'MALE', caption: 'Мужчина'}
   };
 
-  public langFieldOptions: FieldOptions = {
+  public langFieldOptions: DropdownOptions = {
     disabled: false,
     id: "language",
     required: true,
     items: [{ value: 'RU', caption: 'RU' }, { value: 'UZ', caption: 'UZ' }, { value: 'EN', caption: 'EN' }, { value: 'KZ', caption: 'KZ' }],
     // value: ['RU', 'UZ']
     // value: 'UZ'
+    // value: [{ value: 'UZ', caption: 'UZ' }]
     value: 'RU'
   };
 
