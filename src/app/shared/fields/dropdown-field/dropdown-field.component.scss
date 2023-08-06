@@ -2,6 +2,7 @@ $color-main-red: #e60028;
 $color-main-black: #282423;
 $color-main-gray: #c4c4c4;
 $color-main-white: #fff;
+$color-main-white1: #f4f4f4;
 
 $color-main-blue: #5532EB;
 
@@ -68,8 +69,7 @@ $color-main-blue: #5532EB;
         align-items: center;
         cursor: pointer;
         min-height: 22px;
-        background-color: $color-main-blue;
-        color: $color-main-white;
+        background-color: $color-main-white;
         padding: 8px 16px;
         border-radius: 19px;
         min-height: 38px;
@@ -96,26 +96,18 @@ $color-main-blue: #5532EB;
                 left: 4px;
                 transform: rotate(45deg);
             }
-
-            &--open {
-                transform: rotate(180deg);
-                &:before {
-                    border-color: var(--color-white);
-                }
-            }
         }
     }
     .dropdownControl__list {
         position: absolute;
         transform: translateY(8px);
-        background-color: aqua;
         border-radius: 19px;
         overflow-x: hidden;
         width: 100%;
         .dropdownControl__item {
             cursor: pointer;
             padding: 8px 16px;
-            background-color: antiquewhite;
+            background-color: $color-main-white;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -139,6 +131,19 @@ $color-main-blue: #5532EB;
         opacity: 0.3;
         .dropdownControl__head {
             cursor: not-allowed;
+        }
+    }
+
+    &--open {
+        .dropdownControl__head {
+            background-color: $color-main-blue;
+            color: $color-main-white;
+            .dropdownControl__icon {
+                transform: rotate(180deg);
+                &:before {
+                    border-color: $color-main-white;
+                }
+            }
         }
     }
 }

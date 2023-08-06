@@ -162,7 +162,7 @@
         justify-content: space-between;
         align-items: center;
         column-gap: 16px;
-        row-gap: 16px;
+        // row-gap: 16px;
 
         .footer__col {
             display: flex;
@@ -183,6 +183,14 @@
 
         .footer__container {
             flex-direction: column-reverse;
+
+            .footer__col {
+                margin-bottom: 16px;
+
+                &:first-child {
+                    margin-bottom: 0px;
+                }
+            }
         }
     }
 
