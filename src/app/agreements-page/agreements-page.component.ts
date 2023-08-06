@@ -62,9 +62,9 @@ export class AgreementsPageComponent implements OnInit {
 
   private createForm(): void {
     this.myForm = new FormGroup({
-      vectors: new FormControl(this.vectorFieldOptions.value, this.vectorFieldOptions.required ? [Validators.required] : []),
-      gender: new FormControl(this.genderFieldOptions.value, this.genderFieldOptions.required ? [Validators.required] : []),
-      language: new FormControl(this.langFieldOptions.value, this.langFieldOptions.required ? [Validators.required] : []),
+      vectors: new FormControl({value: this.vectorFieldOptions.value, disabled: this.vectorFieldOptions.disabled}, this.vectorFieldOptions.required ? [Validators.required] : []),
+      gender: new FormControl({value: this.genderFieldOptions.value, disabled: this.genderFieldOptions.disabled}, this.genderFieldOptions.required ? [Validators.required] : []),
+      language: new FormControl({value: this.langFieldOptions.value, disabled: this.langFieldOptions.disabled}, this.langFieldOptions.required ? [Validators.required] : []),
     });
   }
 

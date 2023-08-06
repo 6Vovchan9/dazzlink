@@ -134,8 +134,15 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  public toggleState(): void {
-    this.closedState = !this.closedState;
+  clickOutside() {
+    this.closedState = true;
+  }
+
+  public toggleState(e): void {
+    e.stopPropagation();
+    if (!this.disabledControl) {
+      this.closedState = !this.closedState;
+    }
   }
 
   public registerOnChange(fn: any): void {
