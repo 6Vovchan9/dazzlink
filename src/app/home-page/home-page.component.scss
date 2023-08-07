@@ -7,7 +7,7 @@
 
     @media #{$notMobile} {
         margin-top: 34px;
-        margin-bottom: 100px;
+        margin-bottom: 140px;
     }
 }
 
@@ -19,6 +19,7 @@
 
     .aboutApp__title {
         font-size: 36px;
+        font-weight: 700;
     }
 
     .aboutApp__slogan {
@@ -47,6 +48,76 @@
         .aboutApp__slogan {
             max-width: 580px;
             font-size: 18px;
+        }
+    }
+}
+
+.appOpportunity {
+    .appOpportunity__head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .appOpportunity__title {
+            font-size: 48px;
+            font-weight: 700;
+        }
+        .appOpportunity__desc {
+            max-width: 586px;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 16px;
+        }
+        .appOpportunity__join {
+            width: 100%;
+            max-width: 328px;
+            margin-top: 16px;
+        }
+    }
+}
+
+.appAdv {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    column-gap: 11.7%;
+    .appAdv__image {
+        flex: 1;
+        max-width: 500px;
+
+        img {
+            max-width: 100%;
+        }
+    }
+    .appAdv__content {
+        margin-bottom: 16px;
+        flex: 1;
+        .appAdv__title {
+            font-size: 32px;
+            font-weight: 700;
+        }
+        .appAdv__text {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    }
+
+    @media #{$notMobile} {
+        margin-top: 140px;
+        flex-direction: row;
+        .appAdv__content {
+            // margin-left: 11.7%;
+            margin-bottom: 0;
+            .appAdv__title {
+                font-size: 48px;
+            }
+            .appAdv__text {
+                font-size: 18px;
+            }
+        }
+
+        &:nth-child(even) {
+            flex-direction: row-reverse;
         }
     }
 }
