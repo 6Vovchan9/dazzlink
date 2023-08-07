@@ -28,7 +28,18 @@ $color-main-blue: #5532EB;
         min-height: 38px;
 
         .dropdownControl__values {
+            text-overflow: ellipsis;
+            overflow: hidden;
             flex: 1;
+        }
+
+        .dropdownControl__customIcon {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            margin-left: 4px;
         }
 
         .dropdownControl__icon {
@@ -97,6 +108,13 @@ $color-main-blue: #5532EB;
                     border-color: $color-main-white;
                 }
             }
+        }
+    }
+
+    &--listOnTop {
+        .dropdownControl__list {
+            bottom: 100%;
+            transform: translateY(-8px);
         }
     }
 }

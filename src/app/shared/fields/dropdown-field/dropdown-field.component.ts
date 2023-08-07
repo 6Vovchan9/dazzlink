@@ -36,6 +36,10 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   public multiple = false;
   @Input()
   public optionLabel: string;
+  @Input()
+  public arrowIcon: string;
+  @Input()
+  public listOnTop = false;
   @Output()
   public clickByItemDesc = new EventEmitter<string>();
 
@@ -143,6 +147,10 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
     if (!this.disabledControl) {
       this.closedState = !this.closedState;
     }
+  }
+
+  public generateIconPath(IconHref: string): string {
+    return `url(${IconHref})`;
   }
 
   public registerOnChange(fn: any): void {

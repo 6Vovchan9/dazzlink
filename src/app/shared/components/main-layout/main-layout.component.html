@@ -29,10 +29,13 @@
                     </ul>
                 </nav>
             </div>
-            <div class="language">
-                <div class="dropdown">
-                    
-                </div>
+            <div class="languageInHeader">
+                <app-dropdown-field
+                    [formControl]="myForm.get('language')"
+                    [options]="langFieldOptions"
+                    [multiple]="false"
+                    optionLabel="value">
+                </app-dropdown-field>
             </div>
             <button (click)="showNavModal = true" class="hamburger">
                 <div class="hamburger__line"></div>
@@ -130,9 +133,14 @@
                 </div>
             </div>
             <div class="footerInModal__col">
-                <div class="dropdown">
-                    
-                </div>
+                <app-dropdown-field
+                    [formControl]="myForm.get('language')"
+                    [options]="langFieldOptions"
+                    [multiple]="false"
+                    [listOnTop]="true"
+                    optionLabel="value"
+                    arrowIcon="assets/icons/planetForLang.svg">
+                </app-dropdown-field>
             </div>
         </div>
     </div>
