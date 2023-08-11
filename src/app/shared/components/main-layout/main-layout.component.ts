@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
+import { PagesService } from '@app/shared/services/pages.service';
 import { VisitsService } from '@app/shared/services/visits.service';
 
 @Component({
@@ -18,21 +19,35 @@ export class MainLayoutComponent implements OnInit {
     id: "language",
     required: true,
     items: [{ value: 'RU', caption: 'RU' }, { value: 'UZ', caption: 'UZ' }, { value: 'EN', caption: 'EN' }, { value: 'KZ', caption: 'KZ' }],
-    value: 'RU'
+    // value: 'RU'
   };
 
   constructor(
-    private visitsService: VisitsService
+    private visitsService: VisitsService,
+    private pagesService: PagesService
   ) { }
 
   ngOnInit(): void {
     this.createForm();
   }
 
+  public get curYear() {
+    return new Date().getFullYear();
+  }
+
   private createForm(): void {
+
+    const langFromService = this.pagesService.currentLanguage.getValue();
+    console.log(langFromService);
+
     this.myForm = new FormGroup({
-      language: new FormControl({value: this.langFieldOptions.value, disabled: this.langFieldOptions.disabled}, this.langFieldOptions.required ? [Validators.required] : []),
+      language: new FormControl({value: langFromService, disabled: this.langFieldOptions.disabled}, this.langFieldOptions.required ? [Validators.required] : []),
     });
+  }
+
+  onChangeLang(lang) {
+    // console.log(lang)
+    this.pagesService.currentLanguage.next(lang);
   }
 
   goToAnotherPage(futurePath:string): void {
