@@ -17,16 +17,10 @@
     flex-direction: column;
     align-items: center;
 
-    .aboutApp__title {
-        font-size: 36px;
-        font-weight: 700;
-    }
-
     .aboutApp__slogan {
         margin-top: 16px;
         max-width: 310px;
         text-align: center;
-        font-size: 14px;
     }
 
     .aboutApp__links {
@@ -42,9 +36,6 @@
     }
 
     @media #{$notMobile} {
-        .aboutApp__title {
-            font-size: 64px;
-        }
         .aboutApp__slogan {
             max-width: 580px;
             font-size: 18px;
@@ -57,20 +48,23 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        .appOpportunity__title {
-            font-size: 48px;
-            font-weight: 700;
-        }
         .appOpportunity__desc {
             max-width: 586px;
             text-align: center;
-            font-size: 18px;
             margin-top: 16px;
         }
         .appOpportunity__join {
             width: 100%;
             max-width: 328px;
             margin-top: 16px;
+        }
+    }
+
+    @media #{$notMobile} {
+        .appOpportunity__head {
+            .appOpportunity__desc {
+                font-size: 18px;
+            }
         }
     }
 }
@@ -92,12 +86,7 @@
     .appAdv__content {
         margin-bottom: 16px;
         flex: 1;
-        .appAdv__title {
-            font-size: 32px;
-            font-weight: 700;
-        }
         .appAdv__text {
-            font-size: 14px;
             margin-top: 10px;
         }
     }
@@ -107,9 +96,6 @@
         flex-direction: row;
         .appAdv__content {
             margin-bottom: 0;
-            .appAdv__title {
-                font-size: 48px;
-            }
             .appAdv__text {
                 font-size: 18px;
             }

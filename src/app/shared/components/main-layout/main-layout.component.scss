@@ -210,6 +210,12 @@
     // }
 }
 
+.company {
+    @media #{$notMobile} {
+        font-size: 18px;
+    }
+}
+
 .socialNetworks {
     .socialNetworks__list {
         display: flex;
@@ -229,6 +235,10 @@
                 }
             }
         }
+    }
+
+    @media #{$notMobile} {
+        font-size: 18px;
     }
 }
 
@@ -250,7 +260,6 @@
     // min-height: 542px;
     box-sizing: border-box;
     border-radius: 10px;
-    font-size: 14px;
     // opacity: .8;
 
     .navigationModal__header {

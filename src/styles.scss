@@ -9,7 +9,7 @@ html, body {
 }
 
 html {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.42;
 }
 
@@ -82,7 +82,8 @@ img {
     border: unset;
     color: var(--color-white);
     border-radius: 16px;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 600;
     line-height: 24px;
 
     &--size--long {
@@ -92,5 +93,26 @@ img {
     &--disabled {
         cursor: not-allowed;
         opacity: .3;
+    }
+
+    @media #{$notMobile} {
+        font-size: 18px;
+    }
+}
+
+.moduleTitle {
+    font-weight: 700;
+    font-size: 32px;
+
+    &--main {
+        font-size: 36px;
+    }
+
+    @media #{$notMobile} {
+        font-size: 48px;
+
+        &--main {
+            font-size: 64px;
+        }
     }
 }
