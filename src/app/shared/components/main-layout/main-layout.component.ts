@@ -38,7 +38,6 @@ export class MainLayoutComponent implements OnInit {
   private createForm(): void {
 
     const langFromService = this.pagesService.currentLanguage.getValue();
-    console.log(langFromService);
 
     this.myForm = new FormGroup({
       language: new FormControl({value: langFromService, disabled: this.langFieldOptions.disabled}, this.langFieldOptions.required ? [Validators.required] : []),
