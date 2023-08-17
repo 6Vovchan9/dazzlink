@@ -17,6 +17,10 @@ body {
     margin: 0;
     color: #000;
     background-color: $color-background;
+
+    &.no-scroll {
+        overflow: hidden;
+    }
 }
 
 * {
@@ -49,6 +53,19 @@ h1, h2, h3, h4, h5, h6 {
 
 img {
     display: block;
+}
+
+// Этим отключаем scrollBar во всем приложении:
+::-webkit-scrollbar { 
+    display: block;
+}
+
+::-webkit-scrollbar:vertical {
+    width: 0px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 0px;
 }
 
 .container {

@@ -52,24 +52,34 @@ export class MainLayoutComponent implements OnInit {
   goToAnotherPage(futurePath:string): void {
     // const pathnameBeforeNav = location.pathname;
     // if (pathnameBeforeNav !== futurePath) {
-      this.showNavModal = false;
+      this.closeNavPopup();
     // }
   }
 
   getAmountOfUserVisits() {
     this.visitsService.getAmountOfVisits().subscribe(
       amount => {
-        console.log(amount)
+        console.log(amount);
       }
     )
   }
 
-  openNavPopup() {
-    
+  public openNavPopup(): void {
+    this.showNavModal = true;
+    this.hideScroll();
   }
 
-  closeNavPopup() {
-    
+  public closeNavPopup(): void {
+    this.showNavModal = false;
+    this.showScroll();
+  }
+
+  private hideScroll(): void {
+    document.body.classList.add('no-scroll');
+  }
+
+  private showScroll(): void {
+    document.body.classList.remove('no-scroll');
   }
 
 }

@@ -58,13 +58,11 @@ export class GlobalModalService {
 
   open(modalData: ModalData) {
     this.modalData$.next(modalData);
-
     this.hideScroll();
   }
 
   close() {
     this.modalData$.next(null);
-
     this.showScroll();
   }
 
