@@ -62,6 +62,13 @@
 
     .appOpportunity__menu {
         margin-top: 64px;
+
+        .appOpportunity__item {
+            margin-bottom: 24px;
+            &:last-child {
+                margin: 0;
+            }
+        }
     }
 
     @media #{$notMobile} {
@@ -77,7 +84,24 @@
 }
 
 .menuAcco {
+    .menuAcco__content {
+        margin: 64px 0px;
+        &--hidden {
+            display: none;
+        }
+    }
 
+    &:last-child {
+        .menuAcco__content {
+            margin-bottom: 0px;
+        }
+    }
+
+    @media #{$notMobile} {
+        .menuAcco__content {
+            margin: 120px 0px;
+        }
+    }
 }
 
 .appAdv {
@@ -105,8 +129,12 @@
         }
     }
 
+    &:first-child {
+        margin-top: 0;
+    }
+
     @media #{$notMobile} {
-        margin-top: 140px;
+        margin-top: 120px;
         flex-direction: row;
         .appAdv__content {
             margin-bottom: 0;

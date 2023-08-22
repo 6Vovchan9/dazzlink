@@ -1,8 +1,14 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { langArr } from '@app/shared/constants/languages.constants';
 import { PagesService } from '@app/shared/services/pages.service';
-import { Subscription } from 'rxjs';
+
+type IOpportunityMenu = {
+  active?: boolean,
+  type: 'link' | 'button',
+  caption: string
+}
 
 @Component({
   selector: 'app-home-page',
@@ -14,7 +20,22 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   private curLang: string;
   private lSub: Subscription;
-  public active = false;
+  public appOpportunityMenu: {[key: string]: IOpportunityMenu} = {
+    media: {
+      type: 'link',
+      caption: 'Медиа про психологию отношений'
+    },
+    locations: {
+      active: false,
+      type: 'button',
+      caption: 'Локации для романтических свиданий'
+    },
+    company: {
+      active: false,
+      type: 'button',
+      caption: 'Блог о компании и правовая информация'
+    }
+  };
 
   constructor(
     private pagesService: PagesService,
