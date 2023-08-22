@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -15,7 +15,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class AccoTriggerComponent implements ControlValueAccessor {
 
-  public active: boolean;
+  @Input() options: {[key: string]: string};
+  @Input() type: 'button' | 'link' = 'button';
+
+  public active = false;
 
   private onChange = (value: any) => { }; // Когда будем вызывать этот метод "onChange" angular будет самостоятельно output-ить изм наверх
   private onTouch = () => { };
@@ -25,8 +28,10 @@ export class AccoTriggerComponent implements ControlValueAccessor {
   }
 
   public onClick(): void {
-    this.active = !this.active;
-    this.onChange(this.active);
+    if (this.type === 'button') {
+      this.active = !this.active;
+      this.onChange(this.active);
+    }
   }
 
   public registerOnChange(fn: any): void {

@@ -33,9 +33,15 @@
                 <div class="menuAcco">
                     <div class="menuAcco__trigger">
                         <app-acco-trigger
+                            [options]="{ caption: 'Локации для романтических свиданий' }"
                             [(ngModel)]="active"
                         >
                         </app-acco-trigger>
+                        <!-- <app-acco-trigger
+                            [options]="{caption: 'Моя'}"
+                            type="link"
+                        >
+                        </app-acco-trigger> -->
                     </div>
                 </div>
             </div>

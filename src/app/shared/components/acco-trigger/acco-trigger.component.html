@@ -1,6 +1,6 @@
 <button (click)="onClick()" class="accoTrigger" [class.accoTrigger--active]="active">
     <div class="accoTrigger__caption">
-        Медиа про психологию отношений
+        {{options?.caption || 'Заголовок'}}
     </div>
     <div class="accoTrigger__icon">
         <div class="arrowInBtn">
