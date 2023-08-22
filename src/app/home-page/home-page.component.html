@@ -16,7 +16,7 @@
                 </div>
             </div>
             <picture class="aboutApp__mockup">
-                <img src="assets/images/mockup.png" alt="mockup">
+                <img src="assets/images/mockupSmall.png" alt="mockup">
             </picture>
         </section>
         <section class="appOpportunity">
@@ -27,6 +27,16 @@
                 </div>
                 <div class="appOpportunity__join">
                     <button class="btn btn--size--long">{{getContent('home-appOpportunity-join')}}</button>
+                </div>
+            </div>
+            <div class="appOpportunity__menu">
+                <div class="menuAcco">
+                    <div class="menuAcco__trigger">
+                        <app-acco-trigger
+                            [(ngModel)]="active"
+                        >
+                        </app-acco-trigger>
+                    </div>
                 </div>
             </div>
             <div class="appOpportunity__advantages">
@@ -55,6 +65,48 @@
                         <div class="appAdv__text">
                             Если ты стремишься встретить новых людей, то Dazzlink поможет организовать тебе свидание.
                             Предложит места для встречи, забронирует столик и оформит скидку.
+                        </div>
+                    </div>
+                </div>
+                <div class="appAdv">
+                    <div class="appAdv__image">
+                        <img src="assets/images/appAdv1.png" alt="appAdvantage">
+                    </div>
+                    <div class="appAdv__content">
+                        <div class="moduleTitle">
+                            Общайся с умом
+                        </div>
+                        <div class="appAdv__text">
+                            Если ты стремишься встретить новых людей,
+                            в Dazzlink ты найдешь помощь в определении психологической совместимости и осознанном выборе партнера.
+                        </div>
+                    </div>
+                </div>
+                <div class="appAdv">
+                    <div class="appAdv__image">
+                        <img src="assets/images/appAdv3.png" alt="appAdvantage">
+                    </div>
+                    <div class="appAdv__content">
+                        <div class="moduleTitle">
+                            Скачайте приложение
+                        </div>
+                        <div class="appAdv__text">
+                            Тысячи людей уже доверили нам свою судьбу,
+                            присоединяйтесь и найдите любовь на всю жизнь
+                        </div>
+                        <div class="linkToApp appAdv__links">
+                            <a href="https://apps.apple.com/ru" target="_blank" class="linkToApp__item">
+                                <img src="assets/images/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
+                            </a>
+                            <a class="linkToApp__item">
+                                <img src="assets/images/linkAndroidShort.svg" class="linkToApp__img" alt="linkAndroid">
+                            </a>
+                            <a class="linkToApp__item">
+                                <img src="assets/images/linkGalaxyStore.svg" class="linkToApp__img" alt="linkGalaxyStore">
+                            </a>
+                            <a class="linkToApp__item">
+                                <img src="assets/images/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
+                            </a>
                         </div>
                     </div>
                 </div>

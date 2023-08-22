@@ -55,6 +55,10 @@ img {
     display: block;
 }
 
+button {
+    border: none;
+}
+
 // Этим отключаем scrollBar во всем приложении:
 ::-webkit-scrollbar { 
     display: block;
@@ -96,7 +100,7 @@ img {
     cursor: pointer;
     padding: 12px 24px;
     background-color: $color-main;
-    border: unset;
+    border: none;
     color: var(--color-white);
     border-radius: 16px;
     font-size: 16px;

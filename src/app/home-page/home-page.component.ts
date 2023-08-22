@@ -8,23 +8,24 @@ import { Subscription } from 'rxjs';
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent implements OnInit, OnDestroy {
 
   private curLang: string;
   private lSub: Subscription;
+  public active = false;
 
   constructor(
     private pagesService: PagesService,
-    private cd: ChangeDetectorRef
+    // private cd: ChangeDetectorRef
   ) { }
 
   public ngOnInit(): void {
-    this.pagesService.currentLanguage.subscribe(
+    this.lSub = this.pagesService.currentLanguage.subscribe(
       lang => {
         this.curLang = lang;
-        this.cd.detectChanges();
+        // this.cd.detectChanges();
       }
     )
   }

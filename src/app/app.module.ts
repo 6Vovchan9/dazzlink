@@ -19,6 +19,7 @@ import { PostComponent } from './shared/components/post/post.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { RadiobuttonFieldModule } from './shared/fields/radiobutton-new-field/radiobutton-field.module';
 import { DropdownFieldModule } from './shared/fields/dropdown-field/dropdown-field.module';
+import { AccoTriggerComponent } from './shared/components/acco-trigger/acco-trigger.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -34,7 +35,8 @@ registerLocaleData(localeRu, 'ru');
     HeaderComponent,
     FooterComponent,
     PostComponent,
-    ModalComponent
+    ModalComponent,
+    AccoTriggerComponent
   ],
   imports: [
     BrowserModule,
