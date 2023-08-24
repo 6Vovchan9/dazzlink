@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { langArr } from '@app/shared/constants/languages.constants';
 import { PagesService } from '@app/shared/services/pages.service';
+import { Router } from '@angular/router';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -39,6 +40,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   constructor(
     private pagesService: PagesService,
+    private router: Router
     // private cd: ChangeDetectorRef
   ) { }
 
@@ -49,6 +51,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
         // this.cd.detectChanges();
       }
     )
+  }
+
+  public onAccoTriggerClick(path: Array<string>): void {
+    this.router.navigate(
+      path,
+      // {skipLocationChange: true}
+    );
   }
 
   public getContent(key: string): string {

@@ -13,14 +13,18 @@ export class ArticlesPageComponent implements OnInit {
 
   public posts$: Observable<Post[]>;
   public searchStr = '';
+  public isLoading = true;
 
-  constructor(private postsService: PostsService) { }
+  constructor(
+    private postsService: PostsService
+  ) { }
 
   ngOnInit(): void {
     this.posts$ = this.postsService.getAll()
       .pipe(
         tap(val => {
-          console.log(val)
+          // console.log(val);
+          this.isLoading = false;
         })
       )
   }

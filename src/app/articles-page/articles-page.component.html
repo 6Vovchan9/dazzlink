@@ -12,6 +12,8 @@
     </ng-container>
 </ng-container>
 
+<app-loader *ngIf="isLoading"></app-loader>
+
 <ng-template #empty>
     <p>Список пуст</p>
 </ng-template>

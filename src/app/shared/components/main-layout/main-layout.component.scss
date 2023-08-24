@@ -185,7 +185,7 @@
         }
     }
     @media #{$mobile} {
-        padding: 40px 0;
+        padding: 24px 0;
 
         .footer__container {
             flex-direction: column-reverse;
@@ -229,6 +229,7 @@
         .socialNetworks__item {
             .socialNetworks__link {
                 color: var(--color-white);
+                display: block;
             }
         }
     }

@@ -44,7 +44,7 @@ export class PostsService {
     getAll(): Observable<Post[]> {
         return this.http.get(`${environment.fbDbUrl}/posts.json`)
             .pipe(
-                delay(1000),
+                delay(2000),
                 map((resp: { [key: string]: any }) => {
                     if (resp) {
                         return Object.keys(resp)
