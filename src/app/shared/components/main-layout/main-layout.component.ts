@@ -44,12 +44,13 @@ export class MainLayoutComponent implements OnInit {
     });
   }
 
-  onChangeLang(lang) {
+  public onChangeLang(lang, fromModal?: boolean): void {
     // console.log(lang)
     this.pagesService.currentLanguage.next(lang);
+    if (fromModal) this.closeNavPopup();
   }
 
-  goToAnotherPage(futurePath:string): void {
+  goToAnotherPage(futurePath?: string): void {
     // const pathnameBeforeNav = location.pathname;
     // if (pathnameBeforeNav !== futurePath) {
       this.closeNavPopup();

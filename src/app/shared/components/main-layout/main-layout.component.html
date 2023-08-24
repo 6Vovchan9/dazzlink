@@ -87,7 +87,7 @@
     <div class="navigationModal__header">
         <div class="headerInModal">
             <div class="headerInModal__col">
-                <a routerLink="/" class="logo">
+                <a routerLink="/" (click)="goToAnotherPage()" class="logo">
                     <img src="assets/images/logo.svg" class="logo__image" alt="logotip">
                 </a>
             </div>
@@ -139,6 +139,7 @@
                 <app-dropdown-field
                     [formControl]="myForm.get('language')"
                     [options]="langFieldOptions"
+                    (ngModelChange)="onChangeLang($event, true)"
                     [multiple]="false"
                     [listOnTop]="true"
                     optionLabel="value"
