@@ -1,4 +1,4 @@
-<ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
+<!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
     <ng-container *ngIf="postList.length; else empty">
         <div class="posts">
             <div class="posts__filter">
@@ -10,7 +10,39 @@
             </div>
         </div>
     </ng-container>
-</ng-container>
+</ng-container> -->
+
+<main class="page">
+    <div class="container page__container">
+        <aside class="sidebar">
+            <div class="aboutPage">
+                <div class="moduleTitle">Медиа</div>
+                <div class="aboutPage__text">
+                    Статьи про любовь, психологию отношений, знакомства, свидания, семейную жизнь.
+                    Расскажем, как сохранить счастье на долгие годы и справляться со сложными ситуациями в семье.
+                </div>
+                <button class="btn aboutPage__btn">
+                    Скачать приложение
+                </button>
+            </div>
+        </aside>
+        <main class="pageContent">
+            <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
+                <ng-container *ngIf="postList.length; else empty">
+                    <div class="posts">
+                        <div class="posts__filter">
+                            <input type="text" placeholder="Фильтр постов..." [(ngModel)]="searchStr">
+                        </div>
+                        <div *ngFor="let post of postList | search:searchStr; let idx = index" class="posts__item">
+                            №{{idx + 1}}
+                            <app-post [postData]="post"></app-post>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </main>
+    </div>
+</main>
 
 <app-loader *ngIf="isLoading"></app-loader>
 
