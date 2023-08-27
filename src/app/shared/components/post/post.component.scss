@@ -19,6 +19,7 @@
     .post__details {
         margin-bottom: 4px;
         display: flex;
+        flex-wrap: wrap;
         color: var(--color-text-gray);
         .post__info {
             margin-left: 10px;

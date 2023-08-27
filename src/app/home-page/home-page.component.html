@@ -125,13 +125,37 @@
                     <div class="menuAcco__trigger">
                         <app-acco-trigger
                             [options]="{ caption: appOpportunityMenu.company.caption }"
-                            [(ngModel)]="appOpportunityMenu.company.active"
+                            type="link"
+                            (click)="onAccoTriggerClick(['/agreements'])"
                         >
                         </app-acco-trigger>
                     </div>
-                    <div class="menuAcco__content" [class.menuAcco__content--hidden]="!appOpportunityMenu.company.active">
+                </li>
+                <li class="menuAcco appOpportunity__item">
+                    <div class="menuAcco__trigger">
+                        <app-acco-trigger
+                            [options]="{ caption: appOpportunityMenu.conditions.caption }"
+                            [(ngModel)]="appOpportunityMenu.conditions.active"
+                        >
+                        </app-acco-trigger>
+                    </div>
+                    <div class="menuAcco__content" [class.menuAcco__content--hidden]="!appOpportunityMenu.conditions.active">
                         <div class="aboutCompany">
-                            Блог о компании и правовая информация
+                            Тарифы и условия
+                        </div>
+                    </div>
+                </li>
+                <li class="menuAcco appOpportunity__item">
+                    <div class="menuAcco__trigger">
+                        <app-acco-trigger
+                            [options]="{ caption: appOpportunityMenu.questions.caption }"
+                            [(ngModel)]="appOpportunityMenu.questions.active"
+                        >
+                        </app-acco-trigger>
+                    </div>
+                    <div class="menuAcco__content" [class.menuAcco__content--hidden]="!appOpportunityMenu.questions.active">
+                        <div class="aboutCompany">
+                            Помощь и частые вопросы
                         </div>
                     </div>
                 </li>

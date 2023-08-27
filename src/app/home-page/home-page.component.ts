@@ -29,12 +29,21 @@ export class HomePageComponent implements OnInit, OnDestroy {
     locations: {
       active: false,
       type: 'button',
-      caption: 'Локации для романтических свиданий'
+      caption: 'Подборка локаций для свиданий'
     },
     company: {
+      type: 'link',
+      caption: 'Блог о компании и правовая информация'
+    },
+    conditions: {
       active: false,
       type: 'button',
-      caption: 'Блог о компании и правовая информация'
+      caption: 'Тарифы и условия'
+    },
+    questions: {
+      active: false,
+      type: 'button',
+      caption: 'Помощь и частые вопросы'
     }
   };
 
