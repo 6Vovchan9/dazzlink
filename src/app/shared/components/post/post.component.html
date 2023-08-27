@@ -1,1 +1,21 @@
-<p>Статья "{{postData.id}}" на тему "{{postData.title}}"" works!</p>
+<!-- <p>Статья "{{postData.id}}" на тему "{{postData.title}}"" works!</p>
+<img [src]="postData.imgSrc" alt=""> -->
+
+<div class="post">
+    <div class="post__img">
+        <ng-container *ngIf="postData.imgSrc; else defaultPostImg">
+            <img [src]="postData.imgSrc" alt="Картинка статьи">
+        </ng-container>
+    </div>
+    <div class="post__details">
+        <div class="post__info">Сегодня</div>
+        <div *ngIf="postData.views" class="post__info">{{postData.views}} прочитали</div>
+    </div>
+    <div class="post__title">
+        {{postData.title}}
+    </div>
+</div>
+
+<ng-template #defaultPostImg>
+    <img src="assets/images/postImg.png" alt="Картинка статьи">
+</ng-template>

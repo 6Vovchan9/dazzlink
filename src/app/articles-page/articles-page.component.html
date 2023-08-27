@@ -28,6 +28,14 @@
         </aside>
         <main class="pageContent">
             <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
+                <ul class="pageContent__articles">
+                    <li *ngFor="let post of postList" class="pageContent__itemOfArticle">
+                        <app-post [postData]="post"></app-post>
+                    </li>
+                </ul>
+            </ng-container>
+
+            <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
                 <ng-container *ngIf="postList.length; else empty">
                     <div class="posts">
                         <div class="posts__filter">
@@ -39,7 +47,7 @@
                         </div>
                     </div>
                 </ng-container>
-            </ng-container>
+            </ng-container> -->
         </main>
     </div>
 </main>
@@ -50,5 +58,5 @@
     <p>Список пуст</p>
 </ng-template>
 <ng-template #loadingTemplate>
-    <p>Идет загрузка...</p>
+    <p>Идет загрузка статей...</p>
 </ng-template>

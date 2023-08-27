@@ -49,4 +49,32 @@
 
 .pageContent {
     flex: 2;
+
+    .pageContent__articles {
+        display: flex;
+        flex-direction: column;
+        row-gap: 48px;
+        // .pageContent__itemOfArticle {
+        //     flex-basis: calc(50% - 12px);
+
+        //     &:nth-child(odd) {
+        //         margin-right: 24px;
+        //     }
+        // }
+    }
+
+    @media #{$notMobile} {
+        .pageContent__articles {
+            flex-wrap: wrap;
+            flex-direction: row;
+
+            .pageContent__itemOfArticle {
+                flex-basis: calc(50% - 12px);
+
+                &:nth-child(odd) {
+                    margin-right: 24px;
+                }
+            }
+        }
+    }
 }

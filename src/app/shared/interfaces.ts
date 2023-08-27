@@ -15,6 +15,10 @@ export interface Post {
     text: string;
     author: string;
     date: Date;
+    views?: number;
+    likes?: number;
+    dislikes?: number;
+    imgSrc?: string;
 }
 
 export interface VisitsAmount {
