@@ -1,0 +1,98 @@
+@import "variables";
+
+:host {
+    flex: 1;
+} // Это все для того чтобы когда контента мало footer все равно был прижат к низу
+
+.page {
+
+    margin-top: 20px;
+    margin-bottom: 50px;
+
+    .page__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media #{$notMobile} {
+        margin-top: 34px;
+        margin-bottom: 140px;
+
+        .page__container {
+            flex-direction: row;
+        }
+    }
+}
+
+.sidebar {
+    // margin-right: 8%;
+    flex: 1;
+    // max-width: 360px;
+    margin-bottom: 72px;
+
+    @media #{$notMobile} {
+        margin-right: 0px;
+        max-width: 360px;
+        margin-right: 8%;
+        margin-bottom: 0px;
+    }
+}
+
+.goBackBtn {
+    margin-bottom: 24px;
+    display: flex;
+}
+
+.postTitle {
+    .postTitle__img {
+        background-color: var(--color-text-gray);
+        min-height: 200px;
+        border-radius: 32px;
+        overflow: hidden;
+        max-width: 360px;
+        margin-top: 48px;
+
+        img {
+            max-width: 100%;
+        }
+    }
+}
+
+.pageContent {
+    flex: 2;
+
+    .postContent__details {
+        margin-bottom: 24px;
+    }
+}
+
+.postDetails {
+    margin-bottom: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    color: var(--color-text-gray);
+    .postDetails__info {
+        margin-left: 10px;
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--color-text-gray);
+            top: 50%;
+            left: 0;
+            transform: translate(-6px, -50%);
+        }
+
+        &:first-child {
+            margin: 0;
+            &:before {
+                display: none;
+            }
+        }
+    }
+}

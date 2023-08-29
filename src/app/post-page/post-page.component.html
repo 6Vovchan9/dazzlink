@@ -1,0 +1,34 @@
+<main *ngIf="!isLoading" class="page">
+    <div class="container page__container">
+        <aside class="sidebar">
+            <div class="goBackBtn">
+                <app-go-back-btn (click)="goToAllArticles()" text="Все статьи"></app-go-back-btn>
+            </div>
+            <div class="postTitle">
+                <div class="moduleTitle">{{postData.title}}</div>
+                <div class="postTitle__img">
+                    <ng-container *ngIf="postData.imgSrc; else defaultPostImg">
+                        <img [src]="postData.imgSrc" alt="Картинка статьи">
+                    </ng-container>
+                </div>
+            </div>
+        </aside>
+        <main class="pageContent">
+            <div class="postContent">
+                <div class="postContent__details postDetails">
+                    <div class="postDetails__info">{{postData.date | date:'dd MMMM yyyy':'':'ru'}}</div>
+                    <div *ngIf="postData.views" class="postDetails__info">{{postData.views}} прочитали</div>
+                </div>
+                <div class="postContent__text">
+                    {{postData.text}}
+                </div>
+            </div>
+        </main>
+    </div>
+</main>
+
+<ng-template #defaultPostImg>
+    <img src="assets/images/postImg.png" alt="Картинка статьи">
+</ng-template>
+
+<app-loader *ngIf="isLoading"></app-loader>

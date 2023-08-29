@@ -20,6 +20,8 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { RadiobuttonFieldModule } from './shared/fields/radiobutton-new-field/radiobutton-field.module';
 import { DropdownFieldModule } from './shared/fields/dropdown-field/dropdown-field.module';
 import { AccoTriggerComponent } from './shared/components/acco-trigger/acco-trigger.component';
+import { PostPageComponent } from './post-page/post-page.component';
+import { GoBackBtnComponent } from './shared/components/go-back-btn/go-back-btn.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -31,12 +33,14 @@ registerLocaleData(localeRu, 'ru');
     HomePageComponent,
     AgreementsPageComponent,
     ArticlesPageComponent,
+    PostPageComponent,
 
     HeaderComponent,
     FooterComponent,
     PostComponent,
     ModalComponent,
-    AccoTriggerComponent
+    AccoTriggerComponent,
+    GoBackBtnComponent
   ],
   imports: [
     BrowserModule,

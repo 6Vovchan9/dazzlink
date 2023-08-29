@@ -5,6 +5,7 @@ import { AgreementsPageComponent } from './agreements-page/agreements-page.compo
 import { ArticlesPageComponent } from './articles-page/articles-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
+import { PostPageComponent } from './post-page/post-page.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
       { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: '', component: HomePageComponent },
       { path: 'agreements', component: AgreementsPageComponent },
-      { path: 'articles', component: ArticlesPageComponent }
+      { path: 'articles', component: ArticlesPageComponent },
+      { path: 'post/:id', component: PostPageComponent },
       // { path: '**', redirectTo: '/' }
     ]
   },

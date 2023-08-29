@@ -1,0 +1,58 @@
+.appGoBackPage {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: .2s;
+
+    .appGoBackPage__arrow {
+        margin-right: 10px;
+    }
+
+    &:hover {
+        .arrowInBtn {
+            // width: 38px;
+
+            .arrowInBtn__stick {
+                width: 32px;
+            }
+
+            .arrowInBtn__triangle {
+                right: 38px;
+            }
+        }
+    }
+}
+
+.arrowInBtn {
+    position: relative;
+    width: 28px;
+    height: 24px;
+    transition: .2s;
+
+    .arrowInBtn__triangle {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border-width: 2px 2px 0 0;
+        border-style: solid;
+        border-radius: 0 2px 0 0;
+        box-sizing: border-box;
+        top: 50%;
+        right: 28px;
+        transform: rotate(-135deg);
+        transform-origin: right top;
+        transition: .2s;
+    }
+
+    .arrowInBtn__stick {
+        width: 22px;
+        height: 2px;
+        border-radius: 2px;
+        background-color: #000;
+        position: absolute;
+        top: 50%;
+        right: 4px;
+        transform: translate(0, -50%);
+        transition: .2s;
+    }
+}
