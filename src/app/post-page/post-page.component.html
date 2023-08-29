@@ -5,6 +5,10 @@
                 <app-go-back-btn (click)="goToAllArticles()" text="Все статьи"></app-go-back-btn>
             </div>
             <div class="postTitle">
+                <div class="postTitle__details postDetails">
+                    <div class="postDetails__info">{{postData.date | date:'dd MMMM yyyy':'':'ru'}}</div>
+                    <div *ngIf="postData.views" class="postDetails__info">{{postData.views}} прочитали</div>
+                </div>
                 <div class="moduleTitle">{{postData.title}}</div>
                 <div class="postTitle__img">
                     <ng-container *ngIf="postData.imgSrc; else defaultPostImg">
@@ -19,9 +23,7 @@
                     <div class="postDetails__info">{{postData.date | date:'dd MMMM yyyy':'':'ru'}}</div>
                     <div *ngIf="postData.views" class="postDetails__info">{{postData.views}} прочитали</div>
                 </div>
-                <div class="postContent__text">
-                    {{postData.text}}
-                </div>
+                <div class="postContent__text" [innerHTML]="postData.text"></div>
             </div>
         </main>
     </div>

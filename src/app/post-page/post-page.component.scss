@@ -56,13 +56,33 @@
             max-width: 100%;
         }
     }
+
+    @media #{$notMobile} {
+        .postTitle__details {
+            display: none;
+        }
+    }
 }
 
 .pageContent {
     flex: 2;
 
-    .postContent__details {
-        margin-bottom: 24px;
+    .postContent {
+        .postContent__details {
+            display: none;
+            margin-bottom: 24px;
+        }
+        .postContent__text {
+            line-height: 24px;
+        }
+    }
+
+    @media #{$notMobile} {
+        .postContent {
+            .postContent__details {
+                display: flex;
+            }
+        }
     }
 }
 
@@ -94,5 +114,25 @@
                 display: none;
             }
         }
+    }
+}
+
+::ng-deep {
+    .articleParagraph {
+        margin-bottom: 24px;
+        &:last-child {
+            margin-bottom: 0px;
+        }
+    }
+    .articleHeader {
+        display: inline-block;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+    .articleList {
+        padding-left: 24px;
+    }
+    .articleListItem {
+        list-style: decimal;
     }
 }
