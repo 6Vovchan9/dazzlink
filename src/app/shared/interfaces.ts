@@ -14,11 +14,11 @@ export interface Post {
     title: string;
     text: string;
     author: string;
-    date: Date;
-    views?: number;
-    likes?: number;
-    dislikes?: number;
-    imgSrc?: string;
+    published: Date;
+    viewCount?: number;
+    likeCount?: number;
+    dislikeCount?: number;
+    imageUrl?: string;
 }
 
 export interface VisitsAmount {

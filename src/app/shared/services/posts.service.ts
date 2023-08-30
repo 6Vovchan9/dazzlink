@@ -25,7 +25,7 @@ export class PostsService {
                         return {
                             ...post,
                             id,
-                            date: new Date(post?.date)
+                            published: new Date(post?.published)
                         } as Post;
                     } else {
                         throw new Error('Post not found');
@@ -52,7 +52,7 @@ export class PostsService {
                                 return {
                                     ...resp[key],
                                     id: key,
-                                    date: new Date(resp[key].date)
+                                    published: new Date(resp[key].published)
                                 }
                             });
                     } else {

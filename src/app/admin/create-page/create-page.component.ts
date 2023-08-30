@@ -52,10 +52,10 @@ export class CreatePageComponent implements OnInit {
         </div>
       `,
       author: 'Семен Андреевич',
-      date: new Date(),
-      views: 147,
-      likes: 20,
-      dislikes: 11,
+      published: new Date(),
+      viewCount: 147,
+      likeCount: 20,
+      dislikeCount: 11,
     };
 
     this.postsService.create(post).subscribe(

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GlobalModalService, ModalData } from '@app/shared/services/global-modal.service';
 
 @Component({
@@ -6,12 +6,16 @@ import { GlobalModalService, ModalData } from '@app/shared/services/global-modal
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'myProject';
 
   constructor(
     public modalService: GlobalModalService
   ) { }
+
+  ngOnInit(): void {
+    console.log(navigator.userAgent);
+  }
 
   buttonInModalClick(modalDesc) {
     if (!this[modalDesc.methodName]) {
