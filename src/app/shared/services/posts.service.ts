@@ -12,7 +12,7 @@ export class PostsService {
     public articlesRating = new BehaviorSubject<Array<{ articleId: string, choice: 'like' | 'dislike' }>>(null);
 
     constructor(private http: HttpClient) {
-        const articlesRatingFromSStorage = localStorage.getItem('articlesRating');
+        const articlesRatingFromSStorage = sessionStorage.getItem('articlesRating');
 
         if (articlesRatingFromSStorage) {
             this.articlesRating.next(JSON.parse(articlesRatingFromSStorage));
@@ -20,7 +20,7 @@ export class PostsService {
 
         this.articlesRating.subscribe(value => {
             if (value) {
-                localStorage.setItem('articlesRating', JSON.stringify(value));
+                sessionStorage.setItem('articlesRating', JSON.stringify(value));
             }
         });
     }
