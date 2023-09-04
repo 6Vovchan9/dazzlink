@@ -14,6 +14,8 @@ export class PostPageComponent implements OnInit {
 
   public isLoading = true;
   public postData: Post;
+  public articleEvaluation: string;
+  private articleId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,20 +28,50 @@ export class PostPageComponent implements OnInit {
       .pipe(
         switchMap(
           (params: Params) => {
+            this.articleId = params['id'];
             return this.postsService.getById(params['id']);
           }
         )
       )
       .subscribe(
         (post: Post) => {
+          this.getEvaluation();
           this.postData = post;
           this.isLoading = false;
         }
-      ); 
+      );
+  }
+
+  private getEvaluation() {
+    const articlesRating = this.postsService.articlesRating.getValue();
+    if (articlesRating?.length) {
+      const aboutThisArticle = articlesRating.find(about => about.articleId === this.articleId);
+      if (aboutThisArticle) {
+        this.articleEvaluation = aboutThisArticle.choice;
+      }
+    }
   }
 
   public goToAllArticles(): void {
-    this.router.navigate([ '/articles' ])
+    this.router.navigate(['/articles']);
+  }
+
+  public onVoting(val: 'like'| 'dislike'): void {
+    console.log('onVoting');
+    // if (this.articleEvaluation) {
+    //   return;
+    // }
+
+    if (!this.articleEvaluation) {
+      this.articleEvaluation = val;
+      this.setArticleEvaluationToSS(val);
+    }
+  }
+
+  private setArticleEvaluationToSS(choice: 'like'| 'dislike'): void {
+    const curVal = this.postsService.articlesRating.getValue() || [];
+    curVal.push({articleId: this.articleId, choice: choice});
+    this.postsService.articlesRating.next(curVal);
   }
 
 }

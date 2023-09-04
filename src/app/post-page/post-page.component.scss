@@ -95,7 +95,7 @@
     flex-wrap: wrap;
     color: var(--color-text-gray);
     .postDetails__info {
-        margin-left: 10px;
+        margin-left: 11px;
         position: relative;
 
         &:before {
@@ -108,7 +108,7 @@
             background-color: var(--color-text-gray);
             top: 50%;
             left: 0;
-            transform: translate(-6px, -50%);
+            transform: translate(-7px, -50%);
         }
 
         &:first-child {

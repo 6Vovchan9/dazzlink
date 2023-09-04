@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, throwError } from "rxjs";
+import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { delay, map } from "rxjs/operators";
 
 import { environment } from "src/environments/environment";
@@ -9,7 +9,21 @@ import { Post } from "../interfaces";
 @Injectable({providedIn: 'root'})
 export class PostsService {
 
-    constructor(private http: HttpClient) { }
+    public articlesRating = new BehaviorSubject<Array<{ articleId: string, choice: 'like' | 'dislike' }>>(null);
+
+    constructor(private http: HttpClient) {
+        const articlesRatingFromSStorage = localStorage.getItem('articlesRating');
+
+        if (articlesRatingFromSStorage) {
+            this.articlesRating.next(JSON.parse(articlesRatingFromSStorage));
+        }
+
+        this.articlesRating.subscribe(value => {
+            if (value) {
+                localStorage.setItem('articlesRating', JSON.stringify(value));
+            }
+        });
+    }
 
     create(post: Post): Observable<Post> {
         return this.http.post<Post>(`${environment.fbDbUrl}/posts.json`, post);

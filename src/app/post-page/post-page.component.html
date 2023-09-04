@@ -27,14 +27,20 @@
                 <div class="postContent__feedback feedback">
                     <div class="feedback__text">Как вам статья?</div>
                     <div class="feedback__values">
-                        <div class="feedbackVal feedbackVal--leftItem feedbackVal--like">
+                        <div (click)="onVoting('like')"
+                            class="feedbackVal feedbackVal--leftItem feedbackVal--like"
+                            [class.feedbackVal--active]="articleEvaluation === 'like'"
+                        >
                             <div class="feedbackVal__icon">
                                 <!-- <img src="assets/icons/likeIcon.svg" alt="Y"> -->
                                 <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
                             </div>
                             <div class="feedbackVal__amount">{{postData.likeCount}}</div>
                         </div>
-                        <div class="feedbackVal feedbackVal--active">
+                        <div (click)="onVoting('dislike')"
+                            class="feedbackVal feedbackVal--active"
+                            [class.feedbackVal--active]="articleEvaluation === 'dislike'"
+                        >
                             <div class="feedbackVal__icon">
                                 <!-- <img src="assets/icons/dislikeIcon.svg" alt="N"> -->
                                 <ng-container *ngTemplateOutlet="dislikeFeedbackIcon"></ng-container>
