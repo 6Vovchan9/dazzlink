@@ -14,6 +14,9 @@ export class AuthInterceptor implements HttpInterceptor {
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+        const articlesEvaluationFromLS = localStorage.getItem('articlesEvaluation');
+
         if (this.authService.isAuthenticated()) {
             req = req.clone({
                 setParams: {
@@ -23,7 +26,13 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         return next.handle(req)
             .pipe(
-                // tap(() => console.log('AuthInterceptor')),
+                tap(resp => {
+                    if (resp.type) {
+                        if (!localStorage.getItem('articlesEvaluation') && articlesEvaluationFromLS) {
+                            localStorage.setItem('articlesEvaluation', articlesEvaluationFromLS);
+                        }
+                    }
+                }),
                 catchError((err: HttpErrorResponse) => {
                     if (err.status === 401) {
                         this.authService.logout();

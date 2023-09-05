@@ -43,7 +43,7 @@ export class PostPageComponent implements OnInit {
   }
 
   private getEvaluation() {
-    const articlesRating = this.postsService.articlesRating.getValue();
+    const articlesRating = JSON.parse(localStorage.getItem('articlesEvaluation'));
     if (articlesRating?.length) {
       const aboutThisArticle = articlesRating.find(about => about.articleId === this.articleId);
       if (aboutThisArticle) {
@@ -69,9 +69,9 @@ export class PostPageComponent implements OnInit {
   }
 
   private setArticleEvaluationToSS(choice: 'like'| 'dislike'): void {
-    const curVal = this.postsService.articlesRating.getValue() || [];
+    const curVal = JSON.parse(localStorage.getItem('articlesEvaluation')) || [];
     curVal.push({articleId: this.articleId, choice: choice});
-    this.postsService.articlesRating.next(curVal);
+    localStorage.setItem('articlesEvaluation', JSON.stringify(curVal));
   }
 
 }
