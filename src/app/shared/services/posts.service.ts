@@ -1,15 +1,19 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { delay, map } from "rxjs/operators";
 
 import { environment } from "src/environments/environment";
 import { Post } from "../interfaces";
+import { PagesService } from "@app/shared/services/pages.service";
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private pagesService: PagesService
+    ) { }
 
     create(post: Post): Observable<Post> {
         return this.http.post<Post>(`${environment.fbDbUrl}/posts.json`, post);
@@ -42,7 +46,12 @@ export class PostsService {
     }
 
     getAll(): Observable<Post[]> {
-        return this.http.get(`${environment.fbDbUrl}/posts.json`)
+
+        const options = {
+            headers: new HttpHeaders({ 'x-accept-language': this.pagesService.currentLanguage.getValue() || 'RU' })
+        };
+        
+        return this.http.get(`${environment.fbDbUrl}/posts.json`, { headers: { 'x-accept-language': this.pagesService.currentLanguage.getValue() } })
             .pipe(
                 delay(2000),
                 map((resp: { [key: string]: any }) => {
