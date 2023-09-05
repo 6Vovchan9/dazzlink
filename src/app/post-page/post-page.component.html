@@ -26,7 +26,7 @@
                 <div class="postContent__text" [innerHTML]="postData.text"></div>
                 <div class="postContent__feedback feedback">
                     <div class="feedback__text">Как вам статья?</div>
-                    <div class="feedback__values">
+                    <div class="feedback__values" [class.feedback__values--disabled]="articleEvaluation">
                         <div (click)="onVoting('like')"
                             class="feedbackVal feedbackVal--leftItem feedbackVal--like"
                             [class.feedbackVal--active]="articleEvaluation === 'like'"

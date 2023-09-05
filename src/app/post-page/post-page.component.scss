@@ -135,6 +135,12 @@
     .feedback__values {
         display: flex;
         column-gap: 24px;
+
+        &--disabled {
+            .feedbackVal {
+                cursor: default;
+            }
+        }
     }
 
     @media #{$notMobile} {

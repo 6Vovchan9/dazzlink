@@ -9,21 +9,7 @@ import { Post } from "../interfaces";
 @Injectable({providedIn: 'root'})
 export class PostsService {
 
-    public articlesRating = new BehaviorSubject<Array<{ articleId: string, choice: 'like' | 'dislike' }>>(null);
-
-    constructor(private http: HttpClient) {
-        const articlesRatingFromSStorage = sessionStorage.getItem('articlesRating');
-
-        if (articlesRatingFromSStorage) {
-            this.articlesRating.next(JSON.parse(articlesRatingFromSStorage));
-        }
-
-        this.articlesRating.subscribe(value => {
-            if (value) {
-                sessionStorage.setItem('articlesRating', JSON.stringify(value));
-            }
-        });
-    }
+    constructor(private http: HttpClient) { }
 
     create(post: Post): Observable<Post> {
         return this.http.post<Post>(`${environment.fbDbUrl}/posts.json`, post);
