@@ -20,7 +20,7 @@ export class PostsService {
     }
 
     getById(id: string): Observable<Post> {
-        return this.http.get<Post>(`${environment.fbDbUrl}/posts/${id}.json`)
+        return this.http.get<Post>(`${environment.fbDbUrl}/posts/${id}.json`, { headers: { 'x-accept-language': this.pagesService.currentLanguage.getValue() } })
             .pipe(
                 delay(2000),
                 map((post: Post) => {
