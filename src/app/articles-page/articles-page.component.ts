@@ -56,6 +56,15 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
     )
   }
 
+  public checkViewedOrNot(id: string): boolean {
+    const articlesFromLS = JSON.parse(localStorage.getItem('articlesEvaluation'));
+    if (articlesFromLS?.length) {
+      return articlesFromLS.find(about => about.articleId === id);
+    } else {
+      return false;
+    }
+  }
+
   public ngOnDestroy(): void {
     this.lSub?.unsubscribe();
   }

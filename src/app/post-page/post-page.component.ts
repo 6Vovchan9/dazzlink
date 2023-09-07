@@ -64,12 +64,20 @@ export class PostPageComponent implements OnInit, OnDestroy {
   }
 
   private getEvaluation() {
-    const articlesRating = JSON.parse(localStorage.getItem('articlesEvaluation'));
-    if (articlesRating?.length) {
+    const articlesRating = JSON.parse(localStorage.getItem('articlesEvaluation')) || [];
+    // if (articlesRating?.length) {
       const aboutThisArticle = articlesRating.find(about => about.articleId === this.articleId);
       if (aboutThisArticle) {
+        console.log(`Статья "${this.articleId}" уже была просмотрена Вами ранее!`);
         this.articleEvaluation = aboutThisArticle.choice;
-      }
+      } else {
+        console.log(`Фиксируем просмотр статьи "${this.articleId}"!`);
+        setTimeout(() => {
+          // Записываем id статьи в LS только после того как сервер ответил "ОК"
+          this.setArticleEvaluationToSS();
+          console.log(`Зафиксировали просмотр статьи "${this.articleId}"!`);
+        }, 3000)
+      // }
     }
   }
 
@@ -78,20 +86,39 @@ export class PostPageComponent implements OnInit, OnDestroy {
   }
 
   public onVoting(val: 'like'| 'dislike'): void {
-    console.log('onVoting');
+    // console.log('onVoting');
     // if (this.articleEvaluation) {
     //   return;
     // }
 
     if (!this.articleEvaluation) {
       this.articleEvaluation = val;
-      this.setArticleEvaluationToSS(val);
+      this.setArticleEvaluationToSSWithChoice(val);
     }
   }
 
-  private setArticleEvaluationToSS(choice: 'like'| 'dislike'): void {
+  private setArticleEvaluationToSSWithChoice(choice?: 'like'| 'dislike'): void {
     const curVal = JSON.parse(localStorage.getItem('articlesEvaluation')) || [];
-    curVal.push({articleId: this.articleId, choice: choice});
+
+    const aboutThisArticle = curVal.find(about => about.articleId === this.articleId);
+    // Возможно id-шник статьи уже есть в LS потому что она была ранее просмотрена, теперь для этой записи надо установить признак like/dislike
+    if (aboutThisArticle) {
+      aboutThisArticle.choice = choice;
+      localStorage.setItem('articlesEvaluation', JSON.stringify(curVal));
+    } else {
+      const val: { articleId: string, choice?: string } = { articleId: this.articleId };
+      if (choice) {
+        val.choice = choice;
+      }
+      curVal.push(val);
+      localStorage.setItem('articlesEvaluation', JSON.stringify(curVal));
+    }
+  }
+
+  private setArticleEvaluationToSS(): void {
+    const curVal = JSON.parse(localStorage.getItem('articlesEvaluation')) || [];
+    const val: { articleId: string } = { articleId: this.articleId };
+    curVal.push(val);
     localStorage.setItem('articlesEvaluation', JSON.stringify(curVal));
   }
 

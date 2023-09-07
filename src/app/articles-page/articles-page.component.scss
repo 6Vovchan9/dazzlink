@@ -54,6 +54,13 @@
         display: flex;
         flex-direction: column;
         row-gap: 48px;
+
+        .pageContent__itemOfArticle {
+            &--viewed {
+                opacity: .3;
+            }
+        }
+
         // .pageContent__itemOfArticle {
         //     flex-basis: calc(50% - 12px);
 
