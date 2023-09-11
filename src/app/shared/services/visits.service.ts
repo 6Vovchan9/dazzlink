@@ -6,7 +6,7 @@ import { delay, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { VisitsAmount } from "../interfaces";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class VisitsService {
 
     constructor(private http: HttpClient) { }

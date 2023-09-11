@@ -77,4 +77,23 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.lSub?.unsubscribe();
   }
 
+  public mobileStoreSrc(): string {
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.includes('ios') || userAgent.includes('iphone')) {
+      return 'assets/images/linkIOSShort.svg';
+    } else if (userAgent.includes('android')) {
+      return 'assets/images/linkAndroidShort.svg';
+    } else return 'assets/images/linkAppGallery.svg'
+  }
+
+  public goToStore(): void {
+    const userAgent = navigator.userAgent.toLowerCase();
+    console.log('Идем в store');
+    if (userAgent.includes('ios') || userAgent.includes('iphone')) {
+      window.location.href = 'https://apps.apple.com/ru';
+    } else if (userAgent.includes('android')) {
+      window.location.href = 'https://apps.apple.com/ru';
+    } else window.location.href = 'https://apps.apple.com/ru';
+  }
+
 }

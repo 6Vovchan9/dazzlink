@@ -7,7 +7,7 @@ import { environment } from "src/environments/environment";
 import { Post } from "../interfaces";
 import { PagesService } from "@app/shared/services/pages.service";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PostsService {
 
     constructor(

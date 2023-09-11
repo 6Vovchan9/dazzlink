@@ -108,7 +108,6 @@
     margin-top: 64px;
     display: flex;
     flex-direction: column-reverse;
-    align-items: center;
     column-gap: 11.7%;
     .appAdv__image {
         flex: 1;
@@ -133,9 +132,14 @@
         margin-top: 0;
     }
 
+    &--forDesktop {
+        display: none;
+    }
+
     @media #{$notMobile} {
         margin-top: 120px;
         flex-direction: row;
+        align-items: center;
         .appAdv__content {
             margin-bottom: 0;
             .appAdv__text {
@@ -145,6 +149,35 @@
 
         &:nth-child(even) {
             flex-direction: row-reverse;
+        }
+
+        &--forDesktop {
+            display: flex;
+        }
+
+        &--forMobile {
+            display: none;
+        }
+    }
+}
+
+.downloadApp {
+    padding: 24px 32px;
+    background-color: var(--color-white);
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .downloadApp__title {
+        line-height: 24px;
+    }
+
+    .downloadApp__icon {
+        margin-left: 20px;
+
+        img {
+            max-width: 100%;
         }
     }
 }

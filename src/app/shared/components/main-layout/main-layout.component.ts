@@ -35,6 +35,11 @@ export class MainLayoutComponent implements OnInit {
     return new Date().getFullYear();
   }
 
+  public get webview(): boolean {
+    const result = navigator.userAgent.includes('Dazzlink');
+    return navigator.userAgent.includes('Dazzlink');
+  }
+
   private createForm(): void {
 
     const langFromService = this.pagesService.currentLanguage.getValue();
