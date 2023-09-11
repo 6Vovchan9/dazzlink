@@ -44,7 +44,23 @@ export class HomePageComponent implements OnInit, OnDestroy {
       active: false,
       type: 'button',
       caption: 'Помощь и частые вопросы'
-    }
+    },
+    tariff: {
+      type: 'link',
+      caption: 'Тарифы'
+    },
+    linkToQuestions: {
+      type: 'link',
+      caption: 'Помощь и частые вопросы'
+    },
+    legalInf: {
+      type: 'link',
+      caption: 'Правовая информация'
+    },
+    linkToCompany: {
+      type: 'link',
+      caption: 'О компании'
+    },
   };
 
   constructor(

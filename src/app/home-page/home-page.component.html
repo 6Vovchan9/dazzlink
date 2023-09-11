@@ -46,7 +46,7 @@
                         <img src="assets/images/linkToPsychology.png" alt="linkToArticles">
                     </div>
                     <div class="squareNavBtn__title">
-                        Психологические тесты
+                        Психоло&shy;гические тесты
                     </div>
                 </div>
             </div>
@@ -200,6 +200,44 @@
                     </div>
                 </li>
             </ul>
+        </section>
+        <section class="navTetris">
+            <div class="navTetris__row">
+                <div class="navTetris__block">
+                    <app-acco-trigger
+                        [options]="{ caption: appOpportunityMenu.tariff.caption }"
+                        type="link"
+                        (click)="onAccoTriggerClick(['/agreements'])"
+                    >
+                    </app-acco-trigger>
+                </div>
+                <div class="navTetris__block navTetris__block--size--wide">
+                    <app-acco-trigger
+                        [options]="{ caption: appOpportunityMenu.linkToQuestions.caption }"
+                        type="link"
+                        (click)="onAccoTriggerClick(['/agreements'])"
+                    >
+                    </app-acco-trigger>
+                </div>
+            </div>
+            <div class="navTetris__row">
+                <div class="navTetris__block navTetris__block--size--wide">
+                    <app-acco-trigger
+                        [options]="{ caption: appOpportunityMenu.legalInf.caption }"
+                        type="link"
+                        (click)="onAccoTriggerClick(['/agreements'])"
+                    >
+                    </app-acco-trigger>
+                </div>
+                <div class="navTetris__block">
+                    <app-acco-trigger
+                        [options]="{ caption: appOpportunityMenu.linkToCompany.caption }"
+                        type="link"
+                        (click)="onAccoTriggerClick(['/agreements'])"
+                    >
+                    </app-acco-trigger>
+                </div>
+            </div>
         </section>
     </div>
 </main>
