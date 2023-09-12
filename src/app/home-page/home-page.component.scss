@@ -234,12 +234,12 @@
 .navTetris {
     display: flex;
     flex-direction: column;
-    row-gap: 48px;
+    row-gap: 24px;
     margin: 120px 0;
 
     .navTetris__row {
         display: flex;
-        column-gap: 48px;
+        column-gap: 24px;
         
         .navTetris__block {
             flex: 1;

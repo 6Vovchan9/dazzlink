@@ -1,4 +1,4 @@
-<header class="header">
+<header *ngIf="!webview" class="header">
     <div class="container header__container">
         <div class="header__col">
             <a routerLink="/" class="logo">
@@ -47,7 +47,7 @@
 
 <router-outlet></router-outlet>
 
-<footer class="footer">
+<footer *ngIf="!webview" class="footer">
     <div class="container footer__container">
         <div class="footer__col">
             <div class="company">ООО&nbsp;«Даззл»&nbsp;{{curYear}}</div>

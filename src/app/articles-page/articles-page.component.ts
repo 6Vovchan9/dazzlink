@@ -37,6 +37,11 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
     this.getAllArticles();
   }
 
+  public get webview(): boolean {
+    const result = navigator.userAgent.includes('Dazzlink');
+    return navigator.userAgent.includes('Dazzlink');
+  }
+
   private getAllArticles(): void {
     this.isLoading = true;
     this.posts$ = this.postsService.getAll()
