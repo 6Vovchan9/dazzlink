@@ -18,7 +18,12 @@ export class MainLayoutComponent implements OnInit {
     disabled: false,
     id: "language",
     required: true,
-    items: [{ value: 'RU', caption: 'RU' }, { value: 'UZ', caption: 'UZ' }, { value: 'EN', caption: 'EN' }, { value: 'KZ', caption: 'KZ' }],
+    items: [
+      { value: 'RU', caption: 'RU', details: 'Русский' },
+      { value: 'UZ', caption: 'UZ', details: "O'zbek" },
+      { value: 'EN', caption: 'EN', details: 'English' },
+      { value: 'KZ', caption: 'KZ', details: 'Қазақша' }
+    ],
     // value: 'RU'
   };
 

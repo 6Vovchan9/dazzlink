@@ -13,6 +13,7 @@ export type DropdownItem = {
   caption: string;
   value: string;
   selected?: boolean;
+  details?: string;
 };
 
 @Component({
@@ -138,8 +139,10 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  clickOutside() {
-    this.closedState = true;
+  clickOutside(clickByBackground = false) {
+    if (document.documentElement.clientWidth >= 768 || clickByBackground ) {
+      this.closedState = true;
+    }
   }
 
   public toggleState(e): void {

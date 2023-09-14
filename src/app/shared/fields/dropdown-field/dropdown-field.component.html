@@ -24,4 +24,19 @@
             {{item.caption}}
         </div>
     </div>
+
+    <div class="dropdownMobileList" [ngClass]="{'dropdownMobileList--hidden': closedState}">
+        <div (click)="clickOutside(true)" class="dropdownMobileList__background"></div>
+        <div class="dropdownMobileList__listWrap">
+            <div class="dropdownMobileList__list">
+                <div *ngFor="let item of options.items" [ngClass]="{'dropdownMobileList__item--selected': item.selected}" (click)="selectValue(item)" class="dropdownMobileList__item">
+                    <div class="dropdownMobileList__itemVal">
+                        <span class="dropdownMobileList__itemCaption">{{item.caption}}</span>
+                        <span class="dropdownMobileList__itemAddInfo">{{item.details}}</span>
+                    </div>
+                    <div class="dropdownMobileList__itemSelected">&#10003;</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

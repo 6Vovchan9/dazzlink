@@ -14,11 +14,13 @@ export class MobileDetectService {
 
     private operateUserAgent(): void {
         const mdClass = window['MobileDetect']; // Этот класс берется из скрипта в index.html
-        const mbInstance = new mdClass(window.navigator.userAgent);
-        console.log("Mobile: " + mbInstance.mobile() + "; Phone: " + mbInstance.phone() + "; Tablet: " + mbInstance.tablet() + "; OS: " + mbInstance.os() + "; userAgent: " + mbInstance.userAgent());
-        
-        this.mobileOrTabletDevice = Boolean(mbInstance.mobile());
-        this.osDevice = mbInstance.os();
+        if (mdClass) {
+            const mbInstance = new mdClass(window.navigator.userAgent);
+            console.log("Mobile: " + mbInstance.mobile() + "; Phone: " + mbInstance.phone() + "; Tablet: " + mbInstance.tablet() + "; OS: " + mbInstance.os() + "; userAgent: " + mbInstance.userAgent());
+            
+            this.mobileOrTabletDevice = Boolean(mbInstance.mobile());
+            this.osDevice = mbInstance.os();
+        }
     }
 
     public goToDeviceStore(): void {
