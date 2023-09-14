@@ -183,6 +183,44 @@
     }
 }
 
+.aboutAppInfo {
+    display: flex;
+    flex-direction: column;
+    margin: 28px 0 64px;
+
+    .aboutAppInfo__text {
+        max-width: 586px;
+        // flex: 1;
+
+        .aboutAppInfo__cont {
+            margin-top: 16px;
+        }
+    }
+
+    .aboutAppInfo__infoLinks {
+        margin-top: 16px;
+    }
+
+    @media #{$notMobile} {
+        flex-direction: row;
+        justify-content: space-between;
+        column-gap: 40px;
+        margin: 64px 0 120px;
+
+        .aboutAppInfo__moduleTitle {
+            line-height: 60px;
+        }
+
+        .aboutAppInfo__cont {
+            font-size: 18px;
+        }
+
+        .aboutAppInfo__infoLinks {
+            margin-top: 14px;
+        }
+    }
+}
+
 .navigationMenu {
     display: flex;
     flex-direction: column;
@@ -190,7 +228,7 @@
     flex-wrap: wrap;
     column-gap: 48px;
     row-gap: 48px;
-    margin: 50px 0 64px;
+    margin-bottom: 64px;
     justify-content: center;
 
     .navigationMenu__item {
@@ -201,7 +239,7 @@
     @media #{$notMobile} {
         align-items: flex-start;
         flex-direction: row;
-        margin: 80px 0 120px;
+        margin-bottom: 120px;
     }
 }
 
