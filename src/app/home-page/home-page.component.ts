@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { PagesService } from '@app/shared/services/pages.service';
 import { Router } from '@angular/router';
+import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -65,11 +66,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   constructor(
     private pagesService: PagesService,
+    public mobileDetectService: MobileDetectService,
     private router: Router
     // private cd: ChangeDetectorRef
   ) { }
 
   public ngOnInit(): void {
+    // console.log('---HomePageComponent init---');
     this.lSub = this.pagesService.currentLanguage.subscribe(
       lang => {
         this.curLang = lang;
@@ -89,27 +92,36 @@ export class HomePageComponent implements OnInit, OnDestroy {
     return langArr[key][this.curLang];
   }
 
-  public ngOnDestroy(): void {
-    this.lSub?.unsubscribe();
-  }
-
   public mobileStoreSrc(): string {
-    const userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent.includes('ios') || userAgent.includes('iphone')) {
+    const osDevice = this.mobileDetectService.osDevice;
+
+    if (osDevice?.toLowerCase() === 'ios') {
       return 'assets/images/linkIOSShort.svg';
-    } else if (userAgent.includes('android')) {
+    } else if (osDevice?.toLowerCase() === 'androidos') {
       return 'assets/images/linkAndroidShort.svg';
-    } else return 'assets/images/linkAppGallery.svg'
+    } else {
+      return 'assets/images/linkAppGallery.svg';
+    }
   }
 
   public goToStore(): void {
-    const userAgent = navigator.userAgent.toLowerCase();
+    const osDevice = this.mobileDetectService.osDevice;
     console.log('Идем в store');
-    if (userAgent.includes('ios') || userAgent.includes('iphone')) {
+    if (osDevice?.toLowerCase() === 'ios') {
+      // window.location.href = 'https://www.apple.com/app-store';
       window.location.href = 'https://apps.apple.com/ru';
-    } else if (userAgent.includes('android')) {
-      window.location.href = 'https://apps.apple.com/ru';
-    } else window.location.href = 'https://apps.apple.com/ru';
+    } else if (osDevice?.toLowerCase() === 'androidos') {
+      // window.open('https://play.google.com', '_blank');
+      // window.location.href = 'https://play.google.com';
+      window.open('https://play.google.com');
+    } else {
+      // window.location.href = 'https://appgallery.huawei.com';
+      window.open('https://appgallery.huawei.com');
+    }
+  }
+
+  public ngOnDestroy(): void {
+    this.lSub?.unsubscribe();
   }
 
 }

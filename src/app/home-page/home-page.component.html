@@ -10,7 +10,7 @@
                     <a href="https://apps.apple.com/ru" target="_blank" class="linkToApp__item">
                         <img src="assets/images/linkIOS.png" class="linkToApp__img" alt="linkIOS">
                     </a>
-                    <a class="linkToApp__item">
+                    <a href="https://play.google.com" target="_blank" class="linkToApp__item">
                         <img src="assets/images/linkAndroid.png" class="linkToApp__img" alt="linkAndroid">
                     </a>
                 </div>
@@ -58,7 +58,7 @@
                     {{getContent('home-appOpportunity-desc')}}
                 </div>
                 <div class="appOpportunity__join">
-                    <button class="btn btn--size--long">{{getContent('home-appOpportunity-join')}}</button>
+                    <button (click)="mobileDetectService.goToDeviceStore()" class="btn btn--size--long">{{getContent('home-appOpportunity-join')}}</button>
                 </div>
             </div>
             <ul class="appOpportunity__menu">
@@ -136,16 +136,16 @@
                                     присоединяйтесь и найдите любовь на всю жизнь
                                 </div>
                                 <div class="linkToApp appAdv__links">
-                                    <a href="https://apps.apple.com/ru" target="_blank" class="linkToApp__item">
+                                    <a href="https://www.apple.com/app-store" target="_blank" class="linkToApp__item">
                                         <img src="assets/images/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
                                     </a>
-                                    <a class="linkToApp__item">
+                                    <a href="https://play.google.com" target="_blank" class="linkToApp__item">
                                         <img src="assets/images/linkAndroidShort.svg" class="linkToApp__img" alt="linkAndroid">
                                     </a>
                                     <!-- <a class="linkToApp__item">
                                         <img src="assets/images/linkGalaxyStore.svg" class="linkToApp__img" alt="linkGalaxyStore">
                                     </a> -->
-                                    <a class="linkToApp__item">
+                                    <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
                                         <img src="assets/images/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
                                     </a>
                                 </div>

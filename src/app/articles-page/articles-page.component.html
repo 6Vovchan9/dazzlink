@@ -21,7 +21,7 @@
                     Статьи про любовь, психологию отношений, знакомства, свидания, семейную жизнь.
                     Расскажем, как сохранить счастье на долгие годы и справляться со сложными ситуациями в семье.
                 </div>
-                <button *ngIf="!webview" class="btn aboutPage__btn">
+                <button (click)="mobileDetectService.goToDeviceStore()" *ngIf="!webview" class="btn aboutPage__btn">
                     Скачать приложение
                 </button>
             </div>

@@ -5,6 +5,7 @@ import { Post } from '@app/shared/interfaces';
 import { PostsService } from '@app/shared/services/posts.service';
 import { Router } from '@angular/router';
 import { PagesService } from '@app/shared/services/pages.service';
+import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 
 @Component({
   selector: 'app-articles-page',
@@ -21,11 +22,12 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
   constructor(
     private postsService: PostsService,
     private pagesService: PagesService,
+    public mobileDetectService: MobileDetectService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-
+    // console.log('---ArticlesPageComponent init---');
     this.lSub = this.pagesService.currentLanguage.subscribe(
       () => {
         if (!this.isLoading) {
