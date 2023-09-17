@@ -25,6 +25,12 @@
         font-weight: 500;
     }
 
+    &:hover {
+        .post__title {
+            color: var(--color-blue1);
+        }
+    }
+
     @media #{$notMobile} {
         .post__img {
             margin-bottom: 24px;

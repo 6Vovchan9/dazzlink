@@ -25,6 +25,19 @@
         }
     }
 
+    &:hover {
+        color: var(--color-blue1);
+
+        .arrowInBtn {
+            .arrowInBtn__triangle {
+                border-color: var(--color-blue1);
+            }
+            .arrowInBtn__stick {
+                background-color: var(--color-blue1);
+            }
+        }
+    }
+
     @media #{$notMobile} {
         padding: 48px;
     }

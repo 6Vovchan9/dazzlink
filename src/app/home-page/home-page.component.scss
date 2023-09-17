@@ -161,28 +161,6 @@
     }
 }
 
-.downloadApp {
-    cursor: pointer;
-    padding: 24px 32px;
-    background-color: var(--color-white);
-    border-radius: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .downloadApp__title {
-        line-height: 24px;
-    }
-
-    .downloadApp__icon {
-        margin-left: 20px;
-
-        img {
-            max-width: 100%;
-        }
-    }
-}
-
 .aboutAppInfo {
     display: flex;
     flex-direction: column;
@@ -199,6 +177,14 @@
 
     .aboutAppInfo__infoLinks {
         margin-top: 16px;
+
+        &--forDesktop {
+            display: none;
+        }
+
+        &--forMobile {
+            display: block;
+        }
     }
 
     @media #{$notMobile} {
@@ -217,6 +203,12 @@
 
         .aboutAppInfo__infoLinks {
             margin-top: 14px;
+            &--forDesktop {
+                display: block;
+            }
+            &--forMobile {
+                display: none;
+            }
         }
     }
 }
@@ -248,14 +240,14 @@
     flex-direction: column;
     align-items: center;
     background-color: var(--color-white);
-    border-radius: 48px;
+    border-radius: 32px;
     overflow: hidden;
     cursor: pointer;
 
     .squareNavBtn__image {
         min-height: 180px;
         max-width: 368px;
-        border-radius: 48px;
+        border-radius: 32px;
         overflow: hidden;
         img {
             max-width: 100%;
@@ -267,6 +259,19 @@
         line-height: 32px;
         padding: 12px 24px 24px;
         text-align: center;
+    }
+
+    @media #{$notMobile} {
+        .squareNavBtn__image {
+            border-radius: 48px;
+        }
+        border-radius: 48px;
+    }
+
+    &:hover {
+        .squareNavBtn__title {
+            color: var(--color-blue1);
+        }
     }
 }
 

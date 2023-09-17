@@ -42,8 +42,28 @@
     .aboutPage__text {
         margin-top: 12px;
     }
+    .aboutPage__links {
+        margin-top: 24px;
+        &--forDesktop {
+            display: none;
+        }
+        &--forMobile {
+            display: block;
+        }
+    }
     .aboutPage__btn {
         margin-top: 24px;
+    }
+
+    @media #{$notMobile} {
+        .aboutPage__links {
+            &--forDesktop {
+                display: block;
+            }
+            &--forMobile {
+                display: none;
+            }
+        }
     }
 }
 

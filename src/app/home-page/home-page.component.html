@@ -26,7 +26,7 @@
                     Dazzlink — это знакомства для тех, кто ищет серьезных отношений на всю жизнь, а не мимолетных встреч на одну ночь.
                 </div>
             </div>
-            <div class="aboutAppInfo__infoLinks">
+            <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--forDesktop">
                 <div class="linkToApp">
                     <a href="https://www.apple.com/app-store" target="_blank" class="linkToApp__item">
                         <img src="assets/images/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
@@ -37,6 +37,14 @@
                     <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
                         <img src="assets/images/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
                     </a>
+                </div>
+            </div>
+            <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--forMobile">
+                <div (click)="goToStore()" class="downloadApp">
+                    <div class="downloadApp__title">Скачайте<br>приложение</div>
+                    <div class="downloadApp__icon">
+                        <img [src]="mobileStoreSrc()" alt="storeIcon">
+                    </div>
                 </div>
             </div>
         </div>

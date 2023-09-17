@@ -135,6 +135,28 @@ img {
     }
 }
 
+.downloadApp {
+    cursor: pointer;
+    padding: 24px 32px;
+    background-color: var(--color-white);
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .downloadApp__title {
+        line-height: 24px;
+    }
+
+    .downloadApp__icon {
+        margin-left: 20px;
+
+        img {
+            max-width: 100%;
+        }
+    }
+}
+
 // .loaderBlock {
 //     position: relative;
 //     width: 200px;
