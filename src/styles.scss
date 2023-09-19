@@ -16,7 +16,7 @@ html {
 
 body {
     margin: 0;
-    color: #000;
+    color: var(--color-black1);
     background-color: $color-background;
 
     &.no-scroll {
@@ -123,16 +123,16 @@ img {
     font-size: 32px;
 
     &--main {
-        font-size: 36px;
+        font-size: 40px;
     }
 
-    @media #{$notMobile} {
-        font-size: 48px;
+    // @media #{$notMobile} {
+    //     font-size: 48px;
 
-        &--main {
-            font-size: 64px;
-        }
-    }
+    //     &--main {
+    //         font-size: 64px;
+    //     }
+    // }
 }
 
 .downloadApp {
@@ -143,6 +143,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 16px;
 
     .downloadApp__title {
         line-height: 24px;

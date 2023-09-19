@@ -105,9 +105,10 @@
 }
 
 .appAdv {
-    margin-top: 64px;
+    font-size: 24px;
+    margin-top: 72px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     column-gap: 11.7%;
     .appAdv__image {
         flex: 1;
@@ -118,10 +119,10 @@
         }
     }
     .appAdv__content {
-        margin-bottom: 16px;
+        margin-top: 24px;
         flex: 1;
         .appAdv__text {
-            margin-top: 10px;
+            margin-top: 12px;
         }
         .appAdv__links {
             margin-top: 24px;
@@ -137,14 +138,14 @@
     }
 
     @media #{$notMobile} {
-        margin-top: 120px;
+        margin-top: 160px;
         flex-direction: row;
         align-items: center;
         .appAdv__content {
-            margin-bottom: 0;
-            .appAdv__text {
-                font-size: 18px;
-            }
+            margin-top: 0;
+            // .appAdv__text {
+            //     font-size: 18px;
+            // }
         }
 
         &:nth-child(even) {
@@ -165,6 +166,7 @@
     display: flex;
     flex-direction: column;
     margin: 28px 0 64px;
+    font-size: 24px;
 
     .aboutAppInfo__text {
         max-width: 586px;
@@ -193,13 +195,13 @@
         column-gap: 40px;
         margin: 64px 0 120px;
 
-        .aboutAppInfo__moduleTitle {
-            line-height: 60px;
-        }
+        // .aboutAppInfo__moduleTitle {
+        //     line-height: 60px;
+        // }
 
-        .aboutAppInfo__cont {
-            font-size: 18px;
-        }
+        // .aboutAppInfo__cont {
+        //     font-size: 18px;
+        // }
 
         .aboutAppInfo__infoLinks {
             margin-top: 14px;
