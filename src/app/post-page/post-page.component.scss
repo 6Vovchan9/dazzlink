@@ -205,15 +205,16 @@
 
 ::ng-deep {
     .articleParagraph {
-        margin-bottom: 24px;
+        margin-bottom: 16px;
         &:last-child {
             margin-bottom: 0px;
         }
     }
     .articleHeader {
-        display: inline-block;
+        display: block;
         font-weight: 700;
-        margin-bottom: 12px;
+        margin-bottom: 16px;
+        margin-top: 32px;
     }
     .articleList {
         padding-left: 24px;

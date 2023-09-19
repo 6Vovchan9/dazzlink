@@ -217,7 +217,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     column-gap: 48px;
     row-gap: 48px;
     margin-bottom: 64px;
@@ -246,7 +246,7 @@
 
     .squareNavBtn__image {
         min-height: 180px;
-        max-width: 368px;
+        // max-width: 368px;
         border-radius: 32px;
         overflow: hidden;
         img {
