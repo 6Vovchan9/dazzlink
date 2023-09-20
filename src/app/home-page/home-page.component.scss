@@ -61,7 +61,7 @@
     }
 
     .appOpportunity__menu {
-        margin-top: 64px;
+        // margin-top: 72px;
 
         .appOpportunity__item {
             margin-bottom: 24px;
@@ -77,9 +77,9 @@
                 font-size: 18px;
             }
         }
-        .appOpportunity__menu {
-            margin-top: 120px;
-        }
+        // .appOpportunity__menu {
+        //     margin-top: 120px;
+        // }
     }
 }
 
@@ -162,10 +162,25 @@
     }
 }
 
+.mainPicture {
+    .mainPicture__block {
+        overflow: hidden;
+        border-radius: 32px;
+        .mainPicture__image {
+            max-width: 100%;
+        }
+    }
+    @media #{$notMobile} {
+        .mainPicture__block {
+            border-radius: 48px;
+        }
+    }
+}
+
 .aboutAppInfo {
     display: flex;
     flex-direction: column;
-    margin: 28px 0 64px;
+    margin: 24px 0 72px;
     font-size: 24px;
 
     .aboutAppInfo__text {
@@ -173,12 +188,12 @@
         // flex: 1;
 
         .aboutAppInfo__cont {
-            margin-top: 16px;
+            margin-top: 12px;
         }
     }
 
     .aboutAppInfo__infoLinks {
-        margin-top: 16px;
+        margin-top: 24px;
 
         &--forDesktop {
             display: none;
@@ -193,7 +208,7 @@
         flex-direction: row;
         justify-content: space-between;
         column-gap: 40px;
-        margin: 64px 0 120px;
+        margin: 48px 0 120px;
 
         // .aboutAppInfo__moduleTitle {
         //     line-height: 60px;
@@ -222,7 +237,7 @@
     // flex-wrap: wrap;
     column-gap: 48px;
     row-gap: 48px;
-    margin-bottom: 64px;
+    margin-bottom: 72px;
     justify-content: center;
 
     .navigationMenu__item {
@@ -281,11 +296,12 @@
     display: flex;
     flex-direction: column;
     row-gap: 24px;
-    margin: 120px 0;
+    margin-top: 120px;
 
     .navTetris__row {
         display: flex;
         column-gap: 24px;
+        row-gap: 24px;
         
         .navTetris__block {
             flex: 1;
@@ -294,15 +310,24 @@
                 flex: 2;
             }
         }
+
+        &--wrap {
+            flex-wrap: wrap;
+        }
+
+        &--nowrap {
+            .navTetris__block {
+                overflow: hidden;
+            }
+        }
     }
 
     @media #{$mobile} {
-        margin: 64px 0;
+        margin-top: 72px;
         row-gap: 24px;
 
         .navTetris__row {
             flex-direction: column;
-            row-gap: 24px;
         }
     }
 }

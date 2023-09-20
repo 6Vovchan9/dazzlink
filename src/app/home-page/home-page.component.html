@@ -1,6 +1,6 @@
 <main class="page">
     <div class="container page__container">
-        <section class="aboutApp">
+        <!-- <section class="aboutApp">
             <div class="moduleTitle moduleTitle--main">Dazzlink App</div>
             <div class="aboutApp__slogan">
                 {{getContent('home-aboutApp-slogan')}}
@@ -18,7 +18,12 @@
             <picture class="aboutApp__mockup">
                 <img src="assets/images/mockupSmall.png" alt="mockup">
             </picture>
-        </section>
+        </section> -->
+        <picture class="mainPicture">
+            <div class="mainPicture__block">
+                <img class="mainPicture__image" src="assets/images/mainPic.png" alt="mainPicture">
+            </div>
+        </picture>
         <div class="aboutAppInfo">
             <div class="aboutAppInfo__text">
                 <div class="moduleTitle aboutAppInfo__moduleTitle">Семья начинается с&nbsp;нас</div>
@@ -81,7 +86,7 @@
             </div>
         </nav>
         <section class="appOpportunity">
-            <div class="appOpportunity__head">
+            <!-- <div class="appOpportunity__head">
                 <div class="moduleTitle">Dazzlink – это</div>
                 <div class="appOpportunity__desc">
                     {{getContent('home-appOpportunity-desc')}}
@@ -89,7 +94,7 @@
                 <div class="appOpportunity__join">
                     <button (click)="mobileDetectService.goToDeviceStore()" class="btn btn--size--long">{{getContent('home-appOpportunity-join')}}</button>
                 </div>
-            </div>
+            </div> -->
             <ul class="appOpportunity__menu">
                 <li class="menuAcco appOpportunity__item">
                     <div class="menuAcco__trigger">
@@ -231,7 +236,7 @@
             </ul>
         </section>
         <section class="navTetris">
-            <div class="navTetris__row">
+            <div class="navTetris__row navTetris__row--wrap">
                 <div class="navTetris__block">
                     <app-acco-trigger
                         [options]="{ caption: appOpportunityMenu.tariff.caption }"
@@ -249,7 +254,7 @@
                     </app-acco-trigger>
                 </div>
             </div>
-            <div class="navTetris__row">
+            <div class="navTetris__row navTetris__row--nowrap">
                 <div class="navTetris__block navTetris__block--size--wide">
                     <app-acco-trigger
                         [options]="{ caption: appOpportunityMenu.legalInf.caption }"
