@@ -139,6 +139,7 @@ img {
     cursor: pointer;
     padding: 24px 32px;
     background-color: var(--color-white);
+    color: var(--color-black1);
     border-radius: 32px;
     display: flex;
     align-items: center;
@@ -154,6 +155,12 @@ img {
 
         img {
             max-width: 100%;
+        }
+    }
+
+    @media #{$notMobile} {
+        .downloadApp__icon {
+            display: none;
         }
     }
 }

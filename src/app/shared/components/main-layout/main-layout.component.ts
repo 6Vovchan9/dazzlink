@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
+import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { PagesService } from '@app/shared/services/pages.service';
 import { VisitsService } from '@app/shared/services/visits.service';
 
@@ -29,7 +30,8 @@ export class MainLayoutComponent implements OnInit {
 
   constructor(
     private visitsService: VisitsService,
-    private pagesService: PagesService
+    private pagesService: PagesService,
+    public mobileDetectService: MobileDetectService,
   ) { }
 
   ngOnInit(): void {
@@ -91,6 +93,34 @@ export class MainLayoutComponent implements OnInit {
 
   private showScroll(): void {
     document.body.classList.remove('no-scroll');
+  }
+
+  public mobileStoreSrc(): string {
+    const osDevice = this.mobileDetectService.osDevice;
+
+    if (osDevice?.toLowerCase() === 'ios') {
+      return 'assets/images/linkIOSShort.svg';
+    } else if (osDevice?.toLowerCase() === 'androidos') {
+      return 'assets/images/linkAndroidShort.svg';
+    } else {
+      return 'assets/images/linkAppGallery.svg';
+    }
+  }
+
+  public goToStore(): void {
+    const osDevice = this.mobileDetectService.osDevice;
+    console.log('Идем в store');
+    if (osDevice?.toLowerCase() === 'ios') {
+      // window.location.href = 'https://www.apple.com/app-store';
+      window.location.href = 'https://apps.apple.com/ru';
+    } else if (osDevice?.toLowerCase() === 'androidos') {
+      // window.open('https://play.google.com', '_blank');
+      // window.location.href = 'https://play.google.com';
+      window.open('https://play.google.com');
+    } else {
+      // window.location.href = 'https://appgallery.huawei.com';
+      window.open('https://appgallery.huawei.com');
+    }
   }
 
 }

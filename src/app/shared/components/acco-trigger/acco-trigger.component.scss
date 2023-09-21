@@ -15,12 +15,6 @@
     align-items: center;
     cursor: pointer;
 
-    .accoTrigger__caption {
-        text-overflow: ellipsis;
-        text-wrap: nowrap;
-        overflow: hidden;
-    }
-
     .accoTrigger__icon {
         margin-left: 10px;
     }
@@ -46,6 +40,12 @@
 
     @media #{$notMobile} {
         padding: 48px;
+
+        .accoTrigger__caption {
+            text-overflow: ellipsis;
+            text-wrap: nowrap;
+            overflow: hidden;
+        }
     }
 }
 
