@@ -1,12 +1,24 @@
 @import "variables";
 
 :host {
+    // display: flex;
+    // flex-direction: column;
+    // height: 100%;
+} // Это все для того чтобы когда контента мало footer все равно был прижат к низу
+
+.pageWrap {
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: scroll;
 } // Это все для того чтобы когда контента мало footer все равно был прижат к низу
 
-.header {
+.header, .headerNew {
+    position: fixed;
+    width: 100%;
+    background-color: $color-background;
+    top: 0;
+    transition: .7s;
     .header__container {
         padding: 30px 20px;
         display: flex;
@@ -31,6 +43,39 @@
             }
         }
     }
+
+    &--hidden {
+        overflow: hidden;
+        transition: 1s;
+        top: -100%;
+    }
+}
+
+.headerNew {
+    background-color: red;
+    // opacity: .5;
+    position: fixed;
+    width: 100%;
+    height: 98px;
+    overflow: hidden;
+    transition: .5s;
+    &--hidden {
+        overflow: hidden;
+        height: 0;
+        transition: 0s;
+    }
+}
+
+.block1 {
+    width: 200px;
+    height: 38px;
+    background-color: aquamarine;
+}
+
+.block2 {
+    width: 200px;
+    height: 38px;
+    background-color: brown;
 }
 
 .logo {

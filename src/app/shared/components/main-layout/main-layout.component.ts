@@ -14,6 +14,8 @@ import { VisitsService } from '@app/shared/services/visits.service';
 export class MainLayoutComponent implements OnInit {
 
   public showNavModal = false;
+  public scrollDown = false;
+  private prewScrollTop = 0;
   public myForm: FormGroup;
   public langFieldOptions: DropdownOptions = {
     disabled: false,
@@ -38,13 +40,30 @@ export class MainLayoutComponent implements OnInit {
     this.createForm();
   }
 
+  onScrollPage(e) {
+    // console.log(e.target.scrollTop);
+    const curScrollTop = e.target.scrollTop;
+    if (curScrollTop > this.prewScrollTop) {
+      // console.log('Листаем вниз');
+      if (curScrollTop < 98) {
+        this.scrollDown = false;
+      } else {
+        this.scrollDown = true;
+      }
+    } else {
+      // console.log('Листаем вверх');
+      this.scrollDown = false;
+    }
+    this.prewScrollTop = curScrollTop;
+  }
+
   public get curYear() {
     return new Date().getFullYear();
   }
 
   public get webview(): boolean {
     const result = navigator.userAgent.includes('Dazzlink');
-    return navigator.userAgent.includes('Dazzlink');
+    return result;
   }
 
   private createForm(): void {

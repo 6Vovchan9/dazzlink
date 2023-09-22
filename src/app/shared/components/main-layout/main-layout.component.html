@@ -1,48 +1,18 @@
-<header *ngIf="!webview" class="header">
-    <div class="container header__container">
-        <div class="header__col">
-            <a routerLink="/" class="logo">
-                <img src="assets/images/logo.svg" class="logo__image" alt="logotip">
-            </a>
+<div (scroll)="onScrollPage($event)" class="pageWrap">
+<header [class.header--hidden]="scrollDown" *ngIf="!webview" class="header">
+    <ng-container *ngTemplateOutlet="headerContent"></ng-container>
+</header>
+
+<header *ngIf="false" [class.headerNew--hidden]="scrollDown" class="headerNew">
+    <!-- <div class="container headerNew__container">
+        <div class="headerNew__col">
+            <div class="block1"></div>
         </div>
-        <div class="header__col header__col--alignRight">
-            <div class="header__menu">
-                <nav class="menu">
-                    <ul class="menu__list">
-                        <li class="menu__item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/">Приложение</a>
-                        </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/articles">Медиа</a>
-                        </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/agreements">Компания</a>
-                        </li>
-                        <li class="menu__item">
-                            <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
-                        </li>
-                        <!-- <li class="menu__item">
-                            <button (click)="getAmountOfUserVisits()">
-                                Кол-во визитов
-                            </button>
-                        </li> -->
-                    </ul>
-                </nav>
-            </div>
-            <div class="languageInHeader">
-                <app-dropdown-field
-                    [formControl]="myForm.get('language')"
-                    (ngModelChange)="onChangeLang($event)"
-                    [options]="langFieldOptions"
-                    [multiple]="false"
-                    optionLabel="value">
-                </app-dropdown-field>
-            </div>
-            <button (click)="openNavPopup()" class="hamburger">
-                <div class="hamburger__line"></div>
-            </button>
+        <div class="headerNew__col headerNew__col--alignRight">
+            <div class="block2"></div>
         </div>
-    </div>
+    </div> -->
+    <ng-container *ngTemplateOutlet="headerContent"></ng-container>
 </header>
 
 <router-outlet></router-outlet>
@@ -111,6 +81,7 @@
         </div>
     </div>
 </footer>
+</div>
 
 <!-- <app-loader></app-loader> -->
 
@@ -181,3 +152,50 @@
         </div>
     </div>
 </div>
+
+<ng-template #headerContent>
+    <div class="container header__container">
+        <div class="header__col">
+            <a routerLink="/" class="logo">
+                <img src="assets/images/logo.svg" class="logo__image" alt="logotip">
+            </a>
+        </div>
+        <div class="header__col header__col--alignRight">
+            <div class="header__menu">
+                <nav class="menu">
+                    <ul class="menu__list">
+                        <li class="menu__item" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="menu__item--active">
+                            <a class="menu__link" routerLink="/">Приложение</a>
+                        </li>
+                        <li class="menu__item" routerLinkActive="menu__item--active">
+                            <a class="menu__link" routerLink="/articles">Медиа</a>
+                        </li>
+                        <li class="menu__item" routerLinkActive="menu__item--active">
+                            <a class="menu__link" routerLink="/agreements">Компания</a>
+                        </li>
+                        <li class="menu__item">
+                            <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
+                        </li>
+                        <!-- <li class="menu__item">
+                            <button (click)="getAmountOfUserVisits()">
+                                Кол-во визитов
+                            </button>
+                        </li> -->
+                    </ul>
+                </nav>
+            </div>
+            <div class="languageInHeader">
+                <app-dropdown-field
+                    [formControl]="myForm.get('language')"
+                    (ngModelChange)="onChangeLang($event)"
+                    [options]="langFieldOptions"
+                    [multiple]="false"
+                    optionLabel="value">
+                </app-dropdown-field>
+            </div>
+            <button (click)="openNavPopup()" class="hamburger">
+                <div class="hamburger__line"></div>
+            </button>
+        </div>
+    </div>
+</ng-template>

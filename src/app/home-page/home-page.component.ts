@@ -92,6 +92,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
     return langArr[key][this.curLang];
   }
 
+  public get webview(): boolean {
+    const result = navigator.userAgent.includes('Dazzlink');
+    return result;
+  }
+
   public mobileStoreSrc(): string {
     const osDevice = this.mobileDetectService.osDevice;
 
