@@ -1,23 +1,13 @@
 @import "variables";
 
-// $headerHeight: 98px;
-
 .page {
 
-    margin-top: calc(20px + 84px); // 84px - высота header
+    margin-top: calc(20px);
     margin-bottom: 50px;
 
-    &--webview {
-        margin-top: 20px;
-    }
-
     @media #{$notMobile} {
-        margin-top: calc(34px + 98px);
+        margin-top: calc(34px);
         margin-bottom: 140px;
-
-        &--webview {
-            margin-top: 34px;
-        }
     }
 }
 

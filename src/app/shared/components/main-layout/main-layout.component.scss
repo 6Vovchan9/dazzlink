@@ -1,5 +1,7 @@
 @import "variables";
 
+$headerHeight: 98px;
+
 :host {
     // display: flex;
     // flex-direction: column;
@@ -210,6 +212,15 @@
             flex-direction: column;
             align-items: flex-start;
         }
+    }
+}
+
+.contentWrapper {
+    flex: 1;
+    margin-top: 84px; // 84px - высота header
+
+    @media #{$notMobile} {
+        margin-top: $headerHeight;
     }
 }
 

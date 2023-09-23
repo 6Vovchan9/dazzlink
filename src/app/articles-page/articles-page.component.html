@@ -52,11 +52,13 @@
         </aside>
         <main class="pageContent">
             <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
-                <ul class="pageContent__articles">
-                    <li *ngFor="let post of postList" class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
-                        <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post>
-                    </li>
-                </ul>
+                <ng-container *ngIf="postList.length; else empty">
+                    <ul class="pageContent__articles">
+                        <li *ngFor="let post of postList" class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
+                            <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post>
+                        </li>
+                    </ul>
+                </ng-container>
             </ng-container>
 
             <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">

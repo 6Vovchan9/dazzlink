@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { EMPTY, Observable, Subscription, of } from 'rxjs';
+import { catchError, delay, tap } from 'rxjs/operators';
 import { Post } from '@app/shared/interfaces';
 import { PostsService } from '@app/shared/services/posts.service';
 import { Router } from '@angular/router';
@@ -51,6 +51,21 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
         tap(val => {
           // console.log(val);
           this.isLoading = false;
+        }),
+        catchError(err => {
+          this.isLoading = false;
+          return of([
+            // {
+            //   id: 'ferb54grv',
+            //   title: 'title',
+            //   text: 'text',
+            //   author: 'author',
+            //   published: new Date(),
+            //   viewCount: 3,
+            //   likeCount: 53,
+            //   dislikeCount: 5,
+            // }
+          ]);
         })
       )
   }
