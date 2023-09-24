@@ -1,5 +1,5 @@
-<main *ngIf="!isLoading" class="page">
-    <div class="container page__container">
+<main *ngIf="!isLoading" class="postPage">
+    <div class="container postPage__container">
         <ng-container *ngIf="postData; else errorTemplate">
             <aside class="sidebar">
                 <div class="goBackBtn">
@@ -17,9 +17,23 @@
                         </ng-container>
                     </div>
                 </div>
-                <!-- <div class="authorCard">
-                    {{postData.author}}
-                </div> -->
+                <!-- {{postData.author.linkTo + 'ger'}} -->
+                <a *ngIf="postData.author" [href]="postData.author.linkTo || 'https://vk.com/'" target="_blank" class="postPage__author authorCard">
+                    <div class="authorCard__cont">
+                        <div class="authorCard__photo">
+                            <img class="authorCard__img" [src]="postData.author.photo || 'assets/images/postImg.png'" alt="authorPhoto">
+                        </div>
+                        <div class="authorCard__about">
+                            <div class="authorCard__name">
+                                {{postData.author.name || 'Анна Петровна'}}
+                            </div>
+                            <div class="authorCard__profi">
+                                {{postData.author.profession || 'Психолог-консультант'}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="authorCard__arrow"></div>
+                </a>
             </aside>
             <main class="pageContent">
                 <div class="postContent">

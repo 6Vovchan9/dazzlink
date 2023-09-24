@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, delay, switchMap } from 'rxjs/operators';
 
 import { PostsService } from '@app/shared/services/posts.service';
 import { Post } from '@app/shared/interfaces';
@@ -61,7 +61,14 @@ export class PostPageComponent implements OnInit, OnDestroy {
             //   id: 'ferb54grv',
             //   title: 'title',
             //   text: 'Уext мпаиваи впаиви впивапип ип иевапи нипвиеивап п твапмвеи паиваеивмв, text мпаиваи впаиви впивапип ип иевапи нипвиеивап п твапмвеи паиваеивмв. Ммеки text мпаиваи впаиви впивапип ип иевапи нипвиеивап п твапмвеи паиваеивмв',
-            //   author: 'author',
+            //   // author: 'author3',
+            //   author: {
+            //     // linkTo: 'grg/gvsv/bsdfv/bdfv3'
+            //     // linkTo: null
+            //     name: 'Игорь',
+            //     photo: 'assets/images/linkToArticlesX2.png',
+            //     profession: 'Водитель'
+            //   },
             //   published: new Date(),
             //   viewCount: 3,
             //   likeCount: 53,

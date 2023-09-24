@@ -13,7 +13,7 @@ export type AuthorData = {
     name?: string,
     photo?: string,
     profession?: string,
-    link?: string,
+    linkTo?: string,
 }
 
 export interface Post {

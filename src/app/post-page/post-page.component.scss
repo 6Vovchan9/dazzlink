@@ -4,29 +4,64 @@
     flex: 1;
 } // Это все для того чтобы когда контента мало footer все равно был прижат к низу
 
-.page {
+.postPage {
 
     margin-top: 20px;
     margin-bottom: 50px;
 
-    .page__container {
+    .postPage__container {
         display: flex;
         flex-direction: column;
+
+        .postPage__author {
+            margin-top: 24px;
+        }
     }
 
     @media #{$notMobile} {
         margin-top: 34px;
         margin-bottom: 140px;
 
-        .page__container {
+        .postPage__container {
             flex-direction: row;
         }
     }
 }
 
 .authorCard {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    justify-content: space-between;
     background-color: var(--color-gray1);
-    padding: 12px;
+    padding: 12px 26px 12px 12px;
+    border-radius: 20px;
+    .authorCard__cont {
+        display: flex;
+        .authorCard__photo {
+            width: 48px;
+            height: 48px;
+            overflow: hidden;
+            border-radius: 12px;
+            .authorCard__img {
+                max-width: 100%;
+            }
+        }
+        .authorCard__about {
+            margin-left: 12px;
+            .authorCard__name {
+                font-weight: 700;
+            }
+        }
+    }
+    .authorCard__arrow {
+        width: 12px;
+        height: 12px;
+        // background-repeat: no-repeat;
+        // background-size: contain;
+        // background-position: left center;
+        background-image: url('../../assets/icons/arrowForAuthor.svg');
+    }
 }
 
 .sidebar {
@@ -131,7 +166,7 @@
     column-gap: 24px;
     row-gap: 14px;
     align-items: center;
-    background-color: var(--color-white);
+    background-color: var(--color-gray1);
     padding: 24px 28px;
     border-radius: 20px;
     line-height: 24px;
