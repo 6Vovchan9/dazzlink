@@ -12,10 +12,6 @@
     .postPage__container {
         display: flex;
         flex-direction: column;
-
-        .postPage__author {
-            margin-top: 24px;
-        }
     }
 
     @media #{$notMobile} {
@@ -38,6 +34,8 @@
     border-radius: 20px;
     .authorCard__cont {
         display: flex;
+        flex: 1;
+        align-items: center;
         .authorCard__photo {
             width: 48px;
             height: 48px;
@@ -48,9 +46,13 @@
             }
         }
         .authorCard__about {
+            flex: 1;
             margin-left: 12px;
             .authorCard__name {
                 font-weight: 700;
+            }
+            .authorCard__profi {
+                font-size: 12px;
             }
         }
     }
@@ -70,11 +72,20 @@
     // max-width: 360px;
     margin-bottom: 72px;
 
+    .sidebar__author {
+        display: none;
+        margin-top: 24px;
+    }
+
     @media #{$notMobile} {
         margin-right: 0px;
         max-width: 360px;
         margin-right: 8%;
         margin-bottom: 0px;
+
+        .sidebar__author {
+            display: flex;
+        }
     }
 }
 
@@ -118,12 +129,19 @@
         .postContent__feedback {
             margin-top: 24px;
         }
+
+        .postContent__author {
+            margin-top: 16px;
+        }
     }
 
     @media #{$notMobile} {
         .postContent {
             .postContent__details {
                 display: flex;
+            }
+            .postContent__author {
+                display: none;
             }
         }
     }

@@ -17,8 +17,12 @@
                         </ng-container>
                     </div>
                 </div>
-                <!-- {{postData.author.linkTo + 'ger'}} -->
-                <a *ngIf="postData.author" [href]="postData.author.linkTo || 'https://vk.com/'" target="_blank" class="postPage__author authorCard">
+                <!-- Автор статьи для компа -->
+                <a *ngIf="postData.author"
+                    [href]="postData.author.linkTo || 'https://vk.com/'"
+                    target="_blank"
+                    class="sidebar__author authorCard"
+                >
                     <div class="authorCard__cont">
                         <div class="authorCard__photo">
                             <img class="authorCard__img" [src]="postData.author.photo || 'assets/images/postImg.png'" alt="authorPhoto">
@@ -42,6 +46,7 @@
                         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} просмотров</div>
                     </div>
                     <div class="postContent__text" [innerHTML]="postData.text"></div>
+                    <!-- Как вам статья -->
                     <div class="postContent__feedback feedback">
                         <div class="feedback__text">Как вам статья?</div>
                         <div class="feedback__values" [class.feedback__values--disabled]="articleEvaluation">
@@ -67,6 +72,27 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Автор статьи для мобилы -->
+                    <a *ngIf="postData.author"
+                        [href]="postData.author.linkTo || 'https://vk.com/'"
+                        target="_blank"
+                        class="postContent__author authorCard"
+                    >
+                        <div class="authorCard__cont">
+                            <div class="authorCard__photo">
+                                <img class="authorCard__img" [src]="postData.author.photo || 'assets/images/postImg.png'" alt="authorPhoto">
+                            </div>
+                            <div class="authorCard__about">
+                                <div class="authorCard__name">
+                                    {{postData.author.name || 'Анна Петровна'}}
+                                </div>
+                                <div class="authorCard__profi">
+                                    {{postData.author.profession || 'Психолог-консультант'}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="authorCard__arrow"></div>
+                    </a>
                 </div>
             </main>
         </ng-container>
