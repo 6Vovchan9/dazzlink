@@ -9,11 +9,18 @@ export interface FbAuthResponse {
     expiresIn: string;
 }
 
+export type AuthorData = {
+    name?: string,
+    photo?: string,
+    profession?: string,
+    link?: string,
+}
+
 export interface Post {
     id?: string;
     title: string;
     text: string;
-    author: string;
+    author: AuthorData | string;
     published: Date;
     viewCount?: number;
     likeCount?: number;

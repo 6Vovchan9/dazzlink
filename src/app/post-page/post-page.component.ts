@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 
 import { PostsService } from '@app/shared/services/posts.service';
 import { Post } from '@app/shared/interfaces';
 import { PagesService } from '@app/shared/services/pages.service';
-import { Subscription } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 
 @Component({
   selector: 'app-post-page',
@@ -52,12 +52,31 @@ export class PostPageComponent implements OnInit, OnDestroy {
             this.articleId = params['id'];
             return this.postsService.getById(params['id']);
           }
-        )
+        ),
+        catchError(err => {
+          this.isLoading = false;
+          return of(
+            null
+            // {
+            //   id: 'ferb54grv',
+            //   title: 'title',
+            //   text: 'Уext мпаиваи впаиви впивапип ип иевапи нипвиеивап п твапмвеи паиваеивмв, text мпаиваи впаиви впивапип ип иевапи нипвиеивап п твапмвеи паиваеивмв. Ммеки text мпаиваи впаиви впивапип ип иевапи нипвиеивап п твапмвеи паиваеивмв',
+            //   author: 'author',
+            //   published: new Date(),
+            //   viewCount: 3,
+            //   likeCount: 53,
+            //   dislikeCount: 5,
+            // }
+          );
+        })
       )
       .subscribe(
         (post: Post) => {
-          this.getEvaluation();
+          if (post) this.getEvaluation();
           this.postData = post;
+          this.isLoading = false;
+        },
+        err => {
           this.isLoading = false;
         }
       );
