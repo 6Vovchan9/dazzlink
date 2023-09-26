@@ -9,7 +9,7 @@
     </div>
     <div class="post__details postDetails">
         <div class="postDetails__info">{{postData.published | date:'dd MMMM yyyy':'':'ru'}}</div>
-        <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} просмотров</div>
+        <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} {{buildViewCount(postData.viewCount)}}</div>
     </div>
     <div class="post__title">
         {{postData.title}}

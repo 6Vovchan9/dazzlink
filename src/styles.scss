@@ -137,7 +137,7 @@ img {
 
 .downloadApp {
     cursor: pointer;
-    padding: 24px 32px;
+    padding: 24px;
     background-color: var(--color-gray1);
     color: var(--color-black1);
     border-radius: 32px;
@@ -159,6 +159,7 @@ img {
     }
 
     @media #{$notMobile} {
+        padding: 24px 32px;
         .downloadApp__icon {
             display: none;
         }

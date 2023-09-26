@@ -61,7 +61,7 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
             //   text: 'text',
             //   author: 'author',
             //   published: new Date(),
-            //   viewCount: 3,
+            //   viewCount: 22,
             //   likeCount: 53,
             //   dislikeCount: 5,
             // }
