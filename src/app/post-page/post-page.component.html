@@ -45,7 +45,7 @@
                         <div class="postDetails__info">{{postData.published | date:'dd MMMM yyyy':'':'ru'}}</div>
                         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} просмотров</div>
                     </div>
-                    <div class="postContent__text" [innerHTML]="postData.text"></div>
+                    <div class="postContent__text" [innerHTML]="postData.html"></div>
                     <!-- Как вам статья -->
                     <div class="postContent__feedback feedback">
                         <div class="feedback__text">Как вам статья?</div>

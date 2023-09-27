@@ -19,8 +19,8 @@ export type AuthorData = {
 export interface Post {
     id?: string;
     title: string;
-    text: string;
-    author: AuthorData | string;
+    html?: string;
+    author?: AuthorData | string;
     published: Date;
     viewCount?: number;
     likeCount?: number;

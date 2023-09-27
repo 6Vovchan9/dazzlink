@@ -58,12 +58,9 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
             // {
             //   id: 'ferb54grv',
             //   title: 'title',
-            //   text: 'text',
-            //   author: 'author',
-            //   published: new Date(),
+            //   // imageUrl: null,
             //   viewCount: 22,
-            //   likeCount: 53,
-            //   dislikeCount: 5,
+            //   published: new Date(),
             // }
           ]);
         })
