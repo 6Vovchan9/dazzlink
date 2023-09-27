@@ -19,9 +19,36 @@
             <div class="dropdownControl__icon"></div>
         </ng-template>
     </div>
-    <div class="dropdownControl__list" appClickOutside (clickOutside)="clickOutside()" [ngClass]="{'dropdownControl__list--hidden': closedState}">
-        <div *ngFor="let item of options.items" [ngClass]="{'dropdownControl__item--selected': item.selected}" (click)="selectValue(item)" class="dropdownControl__item">
+
+    <!-- <div class="dropdownControl__list"
+        appClickOutside
+        (clickOutside)="clickOutside()"
+        [ngClass]="{'dropdownControl__list--hidden': closedState}"
+    >
+        <div *ngFor="let item of options.items"
+            [ngClass]="{'dropdownControl__item--selected': item.selected}"
+            (click)="selectValue(item)"
+            class="dropdownControl__item"
+        >
             {{item.caption}}
+        </div>
+    </div> -->
+
+    <div class="dropdownControl__newList"
+        appClickOutside
+        (clickOutside)="clickOutside()"
+        [ngClass]="{'dropdownControl__newList--hidden': closedState}"
+    >
+        <div *ngFor="let item of options.items"
+            [ngClass]="{'dropdownControl__item--selected': item.selected}"
+            (click)="selectValue(item)"
+            class="dropdownControl__item"
+        >
+            <div class="dropdownMobileList__itemVal">
+                <span class="dropdownMobileList__itemCaption">{{item.caption}}</span>
+                <span class="dropdownMobileList__itemAddInfo">{{item.details}}</span>
+            </div>
+            <div class="dropdownMobileList__itemSelected">&#10003;</div>
         </div>
     </div>
 

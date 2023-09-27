@@ -12,8 +12,8 @@ $color-main-blue: #5532EB;
 }
 
 .dropdownControl {
-    font-size: 18px;
-    font-weight: 600;
+    // font-size: 18px;
+    // font-weight: 600;
     line-height: 22px;
     position: relative;
     user-select: none;
@@ -25,7 +25,7 @@ $color-main-blue: #5532EB;
         min-height: 22px;
         background-color: transparent;
         padding: 8px 16px;
-        border-radius: 19px;
+        border-radius: 12px;
         min-height: 38px;
 
         .dropdownControl__values {
@@ -63,6 +63,7 @@ $color-main-blue: #5532EB;
             }
         }
     }
+
     .dropdownControl__list {
         display: none;
         position: absolute;
@@ -73,7 +74,7 @@ $color-main-blue: #5532EB;
         .dropdownControl__item {
             cursor: pointer;
             padding: 8px 16px;
-            background-color: $color-main-white;
+            background-color: $color-main-white1;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -89,7 +90,66 @@ $color-main-blue: #5532EB;
 
         &--hidden {
             height: 0;
-            display: none;
+            // display: none;
+        }
+    }
+
+    .dropdownControl__newList {
+        display: none;
+        position: absolute;
+        right: 0;
+        transform: translateY(8px);
+        overflow: hidden;
+        padding: 12px;
+        border-radius: 16px;
+        background-color: var(--color-gray1);
+
+        .dropdownControl__item {
+            padding: 12px;
+            background-color: var(--color-white);
+            border-radius: 12px;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+
+            &:hover:not(.dropdownControl__item--selected) {
+                cursor: pointer;
+                color: $color-main-blue;
+                .dropdownMobileList__itemVal {
+                    .dropdownMobileList__itemCaption {
+                        color: $color-main-blue;
+                    }
+                }
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .dropdownMobileList__itemVal {
+                display: flex;
+                column-gap: 12px;
+                .dropdownMobileList__itemCaption {
+                    color: var(--color-text-gray);
+                }
+            }
+
+            .dropdownMobileList__itemSelected {
+                margin-left: 12px;
+                display: none;
+            }
+
+            &--selected {
+                .dropdownMobileList__itemSelected {
+                    display: block;
+                }
+            }
+        }
+
+        &--hidden {
+            height: 0;
+            padding: 0;
+            // display: none;
         }
     }
 
@@ -102,7 +162,7 @@ $color-main-blue: #5532EB;
 
     &--open {
         .dropdownControl__head {
-            background-color: $color-main-blue;
+            background-color: var(--color-black1);
             color: $color-main-white;
             .dropdownControl__icon {
                 transform: rotate(180deg);
@@ -121,7 +181,7 @@ $color-main-blue: #5532EB;
     }
 
     @media (min-width: 768px) {
-        .dropdownControl__list {
+        .dropdownControl__list, .dropdownControl__newList {
             display: block;
         }
     }
