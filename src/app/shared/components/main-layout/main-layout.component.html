@@ -1,88 +1,89 @@
 <div (scroll)="onScrollPage($event)" class="pageWrap">
-<header [class.header--hidden]="scrollDown" *ngIf="!webview" class="header">
-    <ng-container *ngTemplateOutlet="headerContent"></ng-container>
-</header>
+    <header [class.header--hidden]="scrollDown" *ngIf="!webview" class="header">
+        <ng-container *ngTemplateOutlet="headerContent"></ng-container>
+        <div class="shadow"></div>
+    </header>
 
-<header *ngIf="false" [class.headerNew--hidden]="scrollDown" class="headerNew">
-    <!-- <div class="container headerNew__container">
-        <div class="headerNew__col">
-            <div class="block1"></div>
-        </div>
-        <div class="headerNew__col headerNew__col--alignRight">
-            <div class="block2"></div>
-        </div>
-    </div> -->
-    <ng-container *ngTemplateOutlet="headerContent"></ng-container>
-</header>
+    <header *ngIf="false" [class.headerNew--hidden]="scrollDown" class="headerNew">
+        <!-- <div class="container headerNew__container">
+            <div class="headerNew__col">
+                <div class="block1"></div>
+            </div>
+            <div class="headerNew__col headerNew__col--alignRight">
+                <div class="block2"></div>
+            </div>
+        </div> -->
+        <ng-container *ngTemplateOutlet="headerContent"></ng-container>
+    </header>
 
-<div class="contentWrapper">
-    <router-outlet></router-outlet>
-</div>
+    <div class="contentWrapper">
+        <router-outlet></router-outlet>
+    </div>
 
-<div class="footerNew">
-    <div class="container footerNew__container">
-        <div class="footerNew__content">
-            <div class="footerNew__col">
-                <div (click)="goToStore()" class="downloadApp footerNew__download">
-                    <div class="downloadApp__title">Скачать приложение</div>
-                    <div class="downloadApp__icon">
-                        <img [src]="mobileStoreSrc()" alt="storeIcon">
+    <div class="footerNew">
+        <div class="container footerNew__container">
+            <div class="footerNew__content">
+                <div class="footerNew__col">
+                    <div (click)="goToStore()" class="downloadApp footerNew__download">
+                        <div class="downloadApp__title">Скачать приложение</div>
+                        <div class="downloadApp__icon">
+                            <img [src]="mobileStoreSrc()" alt="storeIcon">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="footerNew__col">
-                <div class="footerNew__socialNetworksBlock">
-                    <div class="socialNetworks">
-                        <ul class="socialNetworks__list">
-                            <li class="socialNetworks__item">
-                                <a href="https://instagram.com" target="_blank" class="socialNetworks__link">Instagram</a>
-                            </li>
-                            <li class="socialNetworks__item">
-                                <a href="https://facebook.com" target="_blank" class="socialNetworks__link">Facebook</a>
-                            </li>
-                            <li class="socialNetworks__item">
-                                <a href="https://linkedin.com" target="_blank" class="socialNetworks__link">LinkedIn</a>
-                            </li>
-                        </ul>
+                <div class="footerNew__col">
+                    <div class="footerNew__socialNetworksBlock">
+                        <div class="socialNetworks">
+                            <ul class="socialNetworks__list">
+                                <li class="socialNetworks__item">
+                                    <a href="https://instagram.com" target="_blank" class="socialNetworks__link">Instagram</a>
+                                </li>
+                                <li class="socialNetworks__item">
+                                    <a href="https://facebook.com" target="_blank" class="socialNetworks__link">Facebook</a>
+                                </li>
+                                <li class="socialNetworks__item">
+                                    <a href="https://linkedin.com" target="_blank" class="socialNetworks__link">LinkedIn</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="company">ООО&nbsp;«Даззл»&nbsp;{{curYear}}</div>
                     </div>
-                    <div class="company">ООО&nbsp;«Даззл»&nbsp;{{curYear}}</div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<footer *ngIf="!webview && false" class="footer">
-    <div class="container footer__container">
-        <div class="footer__col">
-            <div class="company">ООО&nbsp;«Даззл»&nbsp;{{curYear}}</div>
-        </div>
-        <div class="footer__col footer__col--central">
-            <div class="linkToApp">
-                <a href="https://apps.apple.com/ru" target="_blank" class="linkToApp__item">
-                    <img src="assets/images/linkIOS.png" class="linkToApp__img" alt="linkIOS">
-                </a>
-                <a href="https://play.google.com" target="_blank" class="linkToApp__item">
-                    <img src="assets/images/linkAndroid.png" class="linkToApp__img" alt="linkAndroid">
-                </a>
+    <footer *ngIf="!webview && false" class="footer">
+        <div class="container footer__container">
+            <div class="footer__col">
+                <div class="company">ООО&nbsp;«Даззл»&nbsp;{{curYear}}</div>
+            </div>
+            <div class="footer__col footer__col--central">
+                <div class="linkToApp">
+                    <a href="https://apps.apple.com/ru" target="_blank" class="linkToApp__item">
+                        <img src="assets/images/linkIOS.png" class="linkToApp__img" alt="linkIOS">
+                    </a>
+                    <a href="https://play.google.com" target="_blank" class="linkToApp__item">
+                        <img src="assets/images/linkAndroid.png" class="linkToApp__img" alt="linkAndroid">
+                    </a>
+                </div>
+            </div>
+            <div class="footer__col footer__col--justifyContent--end">
+                <div class="socialNetworks">
+                    <ul class="socialNetworks__list">
+                        <li class="socialNetworks__item">
+                            <a href="https://instagram.com" target="_blank" class="socialNetworks__link">Instagram</a>
+                        </li>
+                        <li class="socialNetworks__item">
+                            <a href="https://facebook.com" target="_blank" class="socialNetworks__link">Facebook</a>
+                        </li>
+                        <li class="socialNetworks__item">
+                            <a href="https://linkedin.com" target="_blank" class="socialNetworks__link">LinkedIn</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="footer__col footer__col--justifyContent--end">
-            <div class="socialNetworks">
-                <ul class="socialNetworks__list">
-                    <li class="socialNetworks__item">
-                        <a href="https://instagram.com" target="_blank" class="socialNetworks__link">Instagram</a>
-                    </li>
-                    <li class="socialNetworks__item">
-                        <a href="https://facebook.com" target="_blank" class="socialNetworks__link">Facebook</a>
-                    </li>
-                    <li class="socialNetworks__item">
-                        <a href="https://linkedin.com" target="_blank" class="socialNetworks__link">LinkedIn</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 </div>
 
 <!-- <app-loader></app-loader> -->

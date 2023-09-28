@@ -47,6 +47,17 @@ $headerHeight: 98px;
         }
     }
 
+    .shadow {
+        position: absolute;
+        height: 20px;
+        width: 100%;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.01), rgb(255, 255, 255));
+
+        @media #{$notMobile} {
+            height: 34px;
+        }
+    }
+
     &--hidden {
         overflow: hidden;
         transition: 1s;
