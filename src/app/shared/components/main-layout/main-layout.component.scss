@@ -446,6 +446,10 @@ $headerHeight: 98px;
             align-items: center;
             justify-content: space-between;
         }
+
+        .footerInModal__lang {
+            margin-left: -16px;
+        }
     }
 
     @media #{$mobile} {

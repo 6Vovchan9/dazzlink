@@ -97,6 +97,7 @@ $color-main-blue: #5532EB;
     .dropdownControl__newList {
         display: none;
         position: absolute;
+        z-index: 1;
         right: 0;
         transform: translateY(8px);
         overflow: hidden;

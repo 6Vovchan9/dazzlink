@@ -126,7 +126,7 @@
     </div>
     <div class="navigationModal__footer">
         <div class="footerInModal">
-            <div class="footerInModal__col">
+            <!-- <div class="footerInModal__col">
                 <div class="socialNetworks socialNetworks--textColor--black">
                     <ul class="socialNetworks__list">
                         <li class="socialNetworks__item">
@@ -140,17 +140,19 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
             <div class="footerInModal__col">
-                <app-dropdown-field
-                    [formControl]="myForm.get('language')"
-                    [options]="langFieldOptions"
-                    (ngModelChange)="onChangeLang($event, true)"
-                    [multiple]="false"
-                    [listOnTop]="true"
-                    optionLabel="value"
-                    arrowIcon="assets/icons/planetForLang.svg">
-                </app-dropdown-field>
+                <div class="footerInModal__lang">
+                    <app-dropdown-field
+                        [formControl]="myForm.get('language')"
+                        [options]="langFieldOptions"
+                        (ngModelChange)="onChangeLang($event, true)"
+                        [multiple]="false"
+                        [listOnTop]="true"
+                        optionLabel="value"
+                        arrowIcon="assets/icons/planetForLang.svg">
+                    </app-dropdown-field>
+                </div>
             </div>
         </div>
     </div>
