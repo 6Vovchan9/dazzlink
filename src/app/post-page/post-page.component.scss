@@ -72,9 +72,16 @@
     // max-width: 360px;
     margin-bottom: 72px;
 
-    .sidebar__author {
+    .sidebar__authorList {
         display: none;
         margin-top: 24px;
+
+        .sidebar__author {
+            margin-top: 16px;
+            &:first-child {
+                margin-top: 0;
+            }
+        }
     }
 
     @media #{$notMobile} {
@@ -83,8 +90,8 @@
         margin-right: 8%;
         margin-bottom: 0px;
 
-        .sidebar__author {
-            display: flex;
+        .sidebar__authorList {
+            display: block;
         }
     }
 }
@@ -130,8 +137,14 @@
             margin-top: 24px;
         }
 
-        .postContent__author {
+        .postContent__authorList {
             margin-top: 16px;
+            .postContent__author {
+                margin-top: 16px;
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
         }
     }
 
@@ -140,7 +153,7 @@
             .postContent__details {
                 display: flex;
             }
-            .postContent__author {
+            .postContent__authorList {
                 display: none;
             }
         }

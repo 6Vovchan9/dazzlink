@@ -18,26 +18,28 @@
                     </div>
                 </div>
                 <!-- Автор статьи для компа -->
-                <a *ngIf="postData.author"
-                    [href]="postData.author.linkTo || 'https://vk.com/'"
-                    target="_blank"
-                    class="sidebar__author authorCard"
-                >
-                    <div class="authorCard__cont">
-                        <div class="authorCard__photo">
-                            <img class="authorCard__img" [src]="postData.author.photo || 'assets/images/mockAuthorPhoto.jpeg'" alt="authorPhoto">
-                        </div>
-                        <div class="authorCard__about">
-                            <div class="authorCard__name">
-                                {{postData.author.name || 'Анна Петровна'}}
+                <ul *ngIf="postData.authorList?.length" class="sidebar__authorList">
+                    <a *ngFor="let author of postData.authorList"
+                        [href]="author.link || 'https://vk.com/'"
+                        target="_blank"
+                        class="sidebar__author authorCard"
+                    >
+                        <div class="authorCard__cont">
+                            <div class="authorCard__photo">
+                                <img class="authorCard__img" [src]="author.imageUrl || 'assets/images/mockAuthorPhoto.jpeg'" alt="authorPhoto">
                             </div>
-                            <div class="authorCard__profi">
-                                {{postData.author.profession || 'Психолог-консультант'}}
+                            <div class="authorCard__about">
+                                <div class="authorCard__name">
+                                    {{author.name || 'Анна Петровна'}}
+                                </div>
+                                <div class="authorCard__profi">
+                                    {{author.occupation || 'Психолог-консультант'}}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="authorCard__arrow"></div>
-                </a>
+                        <div class="authorCard__arrow"></div>
+                    </a>
+                </ul>
             </aside>
             <main class="pageContent">
                 <div class="postContent">
@@ -73,26 +75,28 @@
                         </div>
                     </div>
                     <!-- Автор статьи для мобилы -->
-                    <a *ngIf="postData.author"
-                        [href]="postData.author.linkTo || 'https://vk.com/'"
-                        target="_blank"
-                        class="postContent__author authorCard"
-                    >
-                        <div class="authorCard__cont">
-                            <div class="authorCard__photo">
-                                <img class="authorCard__img" [src]="postData.author.photo || 'assets/images/mockAuthorPhoto.jpeg'" alt="authorPhoto">
-                            </div>
-                            <div class="authorCard__about">
-                                <div class="authorCard__name">
-                                    {{postData.author.name || 'Анна Петровна'}}
+                    <ul *ngIf="postData.authorList?.length" class="postContent__authorList">
+                        <a *ngFor="let author of postData.authorList"
+                            [href]="author.link || 'https://vk.com/'"
+                            target="_blank"
+                            class="postContent__author authorCard"
+                        >
+                            <div class="authorCard__cont">
+                                <div class="authorCard__photo">
+                                    <img class="authorCard__img" [src]="author.imageUrl || 'assets/images/mockAuthorPhoto.jpeg'" alt="authorPhoto">
                                 </div>
-                                <div class="authorCard__profi">
-                                    {{postData.author.profession || 'Психолог-консультант'}}
+                                <div class="authorCard__about">
+                                    <div class="authorCard__name">
+                                        {{author.name || 'Анна Петровна'}}
+                                    </div>
+                                    <div class="authorCard__profi">
+                                        {{author.occupation || 'Психолог-консультант'}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="authorCard__arrow"></div>
-                    </a>
+                            <div class="authorCard__arrow"></div>
+                        </a>
+                    </ul>
                 </div>
             </main>
         </ng-container>

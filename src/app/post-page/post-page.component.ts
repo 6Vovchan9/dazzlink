@@ -61,14 +61,22 @@ export class PostPageComponent implements OnInit, OnDestroy {
             //   id: 'ferb54grv',
             //   title: 'title',
             //   html: 'Уext мпаиваи впаиви впивапип ип иевапи нипвиеивап п твапмвеи паиваеивмв, text мпаиваи впаиви впивапип ип иевапи нипвиеивап п твапмвеи паиваеивмв. Ммеки text мпаиваи впаиви впивапип ип иевапи нипвиеивап п твапмвеи паиваеивмв',
-            //   // author: 'author3',
-            //   author: {
-            //     // linkTo: 'grg/gvsv/bsdfv/bdfv3'
-            //     // linkTo: null
-            //     name: 'Игорь',
-            //     photo: 'assets/images/linkToArticlesX2.png',
-            //     profession: 'Водитель'
-            //   },
+            //   authorList: [
+            //     {
+            //       link: 'grg/gvsv/bsdfv/bdfv3',
+            //       // link: null,
+            //       name: 'Игорь',
+            //       occupation: 'Водитель',
+            //       imageUrl: 'assets/images/linkToArticlesX2.png'
+            //     },
+            //     {
+            //       // link: 'grg/gvsv/bsdfv/bdfv3',
+            //       // link: null,
+            //       name: 'Диана Семеновна',
+            //       occupation: 'Бухгалтер',
+            //       // imageUrl: 'assets/images/linkToArticlesX2.png'
+            //     }
+            //   ],
             //   published: new Date(),
             //   viewCount: 3,
             //   likeCount: 53,

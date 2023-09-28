@@ -11,16 +11,16 @@ export interface FbAuthResponse {
 
 export type AuthorData = {
     name?: string,
-    photo?: string,
-    profession?: string,
-    linkTo?: string,
+    imageUrl?: string,
+    occupation?: string,
+    link?: string,
 }
 
 export interface Post {
     id?: string;
     title: string;
     html?: string;
-    author?: AuthorData | string;
+    authorList?: Array<AuthorData>;
     published: Date;
     viewCount?: number;
     likeCount?: number;

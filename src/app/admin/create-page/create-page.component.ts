@@ -51,7 +51,15 @@ export class CreatePageComponent implements OnInit {
           Стоит ли прибегать к заигрываниям – личный выбор человека. Они способны вызвать неприятности, но иногда флирт помогает устроить личную жизнь.
         </div>
       `,
-      author: 'Семен Андреевич',
+      authorList: [
+        {
+          link: 'grg/gvsv/bsdfv/bdfv3',
+          // link: null,
+          name: 'Игорь',
+          occupation: 'Водитель',
+          imageUrl: 'assets/images/linkToArticlesX2.png'
+        }
+      ],
       published: new Date(),
       viewCount: 147,
       likeCount: 20,
