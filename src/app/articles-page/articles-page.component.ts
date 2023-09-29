@@ -6,6 +6,7 @@ import { PostsService } from '@app/shared/services/posts.service';
 import { Router } from '@angular/router';
 import { PagesService } from '@app/shared/services/pages.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
+import { langArr } from '@app/shared/constants/languages.constants';
 
 @Component({
   selector: 'app-articles-page',
@@ -18,6 +19,7 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
   public searchStr = '';
   public isLoading = true;
   private lSub: Subscription;
+  private curLang: string;
 
   constructor(
     private postsService: PostsService,
@@ -29,7 +31,8 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // console.log('---ArticlesPageComponent init---');
     this.lSub = this.pagesService.currentLanguage.subscribe(
-      () => {
+      lang => {
+        this.curLang = lang;
         if (!this.isLoading) {
           this.getAllArticles();
         }
@@ -110,6 +113,10 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
       // window.location.href = 'https://appgallery.huawei.com';
       window.open('https://appgallery.huawei.com');
     }
+  }
+
+  public getContent(key: string): string {
+    return langArr[key][this.curLang];
   }
 
   public ngOnDestroy(): void {
