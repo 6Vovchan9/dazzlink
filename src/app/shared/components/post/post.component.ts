@@ -14,7 +14,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  buildViewCount(val?) {
+  public buildViewCount(val?: number): string {
     const name =
       `${val}`.endsWith('1') && +val !== 11 ? ' просмотр' :
       `${val}`.endsWith('2') && +val !== 12 ||
