@@ -6,8 +6,9 @@
                     <app-go-back-btn (click)="goToAllArticles()" text="Все статьи"></app-go-back-btn>
                 </div>
                 <div class="postTitle">
+                    <!-- Мобила -->
                     <div class="postTitle__details postDetails">
-                        <div class="postDetails__info">{{postData.published | date:'dd MMMM yyyy':'':'ru'}}</div>
+                        <div class="postDetails__info">{{postData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}</div>
                         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} просмотров</div>
                     </div>
                     <div class="moduleTitle">{{postData.title}}</div>
@@ -43,6 +44,7 @@
             </aside>
             <main class="pageContent">
                 <div class="postContent">
+                    <!-- Комп -->
                     <div class="postContent__details postDetails">
                         <div class="postDetails__info">{{postData.published | date:'dd MMMM yyyy':'':'ru'}}</div>
                         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} просмотров</div>
