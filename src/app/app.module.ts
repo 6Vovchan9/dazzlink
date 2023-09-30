@@ -22,6 +22,7 @@ import { DropdownFieldModule } from './shared/fields/dropdown-field/dropdown-fie
 import { AccoTriggerComponent } from './shared/components/acco-trigger/acco-trigger.component';
 import { PostPageComponent } from './post-page/post-page.component';
 import { GoBackBtnComponent } from './shared/components/go-back-btn/go-back-btn.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -47,6 +48,7 @@ registerLocaleData(localeRu, 'ru');
     AppRoutingModule,
     FormsModule, // для [(ngModel)]
     ReactiveFormsModule, // для [formControl]
+    YouTubePlayerModule,
 
     SharedModule,
 

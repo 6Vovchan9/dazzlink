@@ -7,14 +7,13 @@ import { GlobalModalService, ModalData } from '@app/shared/services/global-modal
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'myProject';
 
   constructor(
     public modalService: GlobalModalService
   ) { }
 
   ngOnInit(): void {
-    console.log(navigator.userAgent);
+    // console.log(navigator.userAgent);
   }
 
   buttonInModalClick(modalDesc) {
