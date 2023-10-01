@@ -1,0 +1,8 @@
+{
+    "/dating": {
+        "target": "https://rovragge.ru/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

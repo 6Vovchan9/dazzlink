@@ -4,6 +4,15 @@ export interface AdminData {
     returnSecureToken?: boolean;
 }
 
+export interface RovraggeRespWrapper {
+    result: {
+        code: string,
+        messages: Array<any>,
+        timestamp: Date
+    },
+    data: any
+}
+
 export interface FbAuthResponse {
     idToken: string;
     expiresIn: string;

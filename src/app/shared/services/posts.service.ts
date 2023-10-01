@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
-import { delay, map } from "rxjs/operators";
+import { delay, map, tap } from "rxjs/operators";
 
 import { environment } from "src/environments/environment";
-import { Post } from "../interfaces";
+import { Post, RovraggeRespWrapper } from "../interfaces";
 import { PagesService } from "@app/shared/services/pages.service";
 
 @Injectable({ providedIn: 'root' })
@@ -20,7 +20,7 @@ export class PostsService {
     }
 
     getById(id: string): Observable<Post> {
-        return this.http.get<Post>(`${environment.fbDbUrl}/posts/${id}.json`, { headers: { 'x-accept-language': this.pagesService.currentLanguage.getValue() } })
+        return this.http.get<Post>(`${environment.fbDbUrl}/posts/${id}.json`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue() } })
             .pipe(
                 delay(2000),
                 map((post: Post) => {
@@ -38,6 +38,17 @@ export class PostsService {
             )
     }
 
+    public getByIdRovragge(id: string): Observable<Post> {
+        return this.http.get<Post>(`${environment.rovraggeUrl}/publication/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
+            .pipe(
+                map((resp: { [key: string]: any }) => resp.data)
+            )
+    }
+
+    public setArticleEvaluation(id: string): Observable<RovraggeRespWrapper> {
+        return this.http.patch<RovraggeRespWrapper>(`${environment.rovraggeUrl}/publication/${id}/read`, null);
+    }
+
     remove(id: string): Observable<void> {
         return this.http.delete<void>(`${environment.fbDbUrl}/posts/${id}.json`)
             .pipe(
@@ -50,7 +61,7 @@ export class PostsService {
         const options = {
             headers: new HttpHeaders({ 'x-accept-language': this.pagesService.currentLanguage.getValue() || 'RU' })
         };
-        
+
         return this.http.get(`${environment.fbDbUrl}/posts.json`, { headers: { 'x-accept-language': this.pagesService.currentLanguage.getValue() } })
             .pipe(
                 delay(2000),
@@ -67,6 +78,15 @@ export class PostsService {
                     } else {
                         return [];
                     }
+                })
+            )
+    }
+
+    public getAllRovragge(): Observable<Post[]> {
+        return this.http.get(`${environment.rovraggeUrl}/publication`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
+            .pipe(
+                map((resp: RovraggeRespWrapper) => {
+                    return resp.data;
                 })
             )
     }

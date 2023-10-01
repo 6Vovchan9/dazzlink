@@ -16,7 +16,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   public isLoading = true;
   public postData: Post;
-  public articleEvaluation: string;
+  public articleEvaluation: 'like' | 'dislike';
   private articleId: string;
   private lSub: Subscription;
 
@@ -50,7 +50,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
         switchMap(
           (params: Params) => {
             this.articleId = params['id'];
-            return this.postsService.getById(params['id']);
+            return this.postsService.getByIdRovragge(params['id']);
           }
         ),
         catchError(err => {
@@ -106,11 +106,18 @@ export class PostPageComponent implements OnInit, OnDestroy {
         this.articleEvaluation = aboutThisArticle.choice;
       } else {
         console.log(`Фиксируем просмотр статьи "${this.articleId}"!`);
-        setTimeout(() => {
-          // Записываем id статьи в LS только после того как сервер ответил "ОК"
-          this.setArticleEvaluationToSS();
-          console.log(`Зафиксировали просмотр статьи "${this.articleId}"!`);
-        }, 3000)
+        this.postsService.setArticleEvaluation(this.articleId)
+          .subscribe(
+            () => {
+              this.setArticleEvaluationToSS();
+              console.log(`Зафиксировали просмотр статьи "${this.articleId}"!`);
+            }
+          );
+        // setTimeout(() => {
+        //   // Записываем id статьи в LS только после того как сервер ответил "ОК"
+        //   this.setArticleEvaluationToSS();
+        //   console.log(`Зафиксировали просмотр статьи "${this.articleId}"!`);
+        // }, 3000)
       // }
     }
   }
@@ -119,7 +126,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
     this.router.navigate(['/articles']);
   }
 
-  public onVoting(val: 'like'| 'dislike'): void {
+  public onVoting(val: 'like' | 'dislike'): void {
     // console.log('onVoting');
     // if (this.articleEvaluation) {
     //   return;
@@ -131,7 +138,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  private setArticleEvaluationToSSWithChoice(choice?: 'like'| 'dislike'): void {
+  private setArticleEvaluationToSSWithChoice(choice?: 'like' | 'dislike'): void {
     const curVal = JSON.parse(localStorage.getItem('articlesEvaluation')) || [];
 
     const aboutThisArticle = curVal.find(about => about.articleId === this.articleId);
