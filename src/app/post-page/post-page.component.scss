@@ -212,6 +212,12 @@
                 cursor: default;
             }
         }
+
+        &--loading {
+            .feedbackVal {
+                cursor: wait;
+            }
+        }
     }
 
     @media #{$notMobile} {

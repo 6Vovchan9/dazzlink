@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { catchError, delay, switchMap } from 'rxjs/operators';
 
@@ -19,6 +19,9 @@ export class PostPageComponent implements OnInit, OnDestroy {
   public articleEvaluation: 'like' | 'dislike';
   private articleId: string;
   private lSub: Subscription;
+  private eSub: Subscription;
+  private vSub: Subscription;
+  public votingIsLoading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -106,7 +109,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
         this.articleEvaluation = aboutThisArticle.choice;
       } else {
         console.log(`Фиксируем просмотр статьи "${this.articleId}"!`);
-        this.postsService.setArticleEvaluation(this.articleId)
+        this.eSub = this.postsService.setArticleEvaluation(this.articleId)
           .subscribe(
             () => {
               this.setArticleEvaluationToSS();
@@ -132,9 +135,29 @@ export class PostPageComponent implements OnInit, OnDestroy {
     //   return;
     // }
 
-    if (!this.articleEvaluation) {
-      this.articleEvaluation = val;
-      this.setArticleEvaluationToSSWithChoice(val);
+    if (!this.articleEvaluation && !this.votingIsLoading) {
+      console.log(`Фиксируем ваш ${val}`);
+      this.votingIsLoading = true;
+      this.vSub = this.postsService.setArticleVoting(this.articleId, val)
+        .pipe(
+        // delay(5000)
+      )
+        .subscribe(
+          resp => {
+            this.postData['likeCount'] = resp['likeCount'];
+            this.postData['dislikeCount'] = resp['dislikeCount'];
+            this.votingIsLoading = false;
+            this.articleEvaluation = val;
+            this.setArticleEvaluationToSSWithChoice(val);
+            console.log(`Зафиксировали ваш выбор!`, this.articleEvaluation);
+          }
+        );
+      // Тут есть момент как можно обойти LS и наделать много лайков (нужно лайкнуть и быстро обновить страницу, нужно успеть перед тем как сервер ответит),
+      // решить это можно если вынести setArticleEvaluationToSSWithChoice из subscribe и в случае если фиксация реакиции
+      // завершится с ошибкой тогда нкжно будет удалить реакцию из LS
+
+      // this.articleEvaluation = val;
+      // this.setArticleEvaluationToSSWithChoice(val);
     }
   }
 
@@ -175,6 +198,8 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.lSub?.unsubscribe();
+    this.eSub?.unsubscribe();
+    // this.vSub?.unsubscribe();
   }
 
 }

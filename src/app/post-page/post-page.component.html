@@ -53,7 +53,13 @@
                     <!-- Как вам статья -->
                     <div class="postContent__feedback feedback">
                         <div class="feedback__text">Как вам статья?</div>
-                        <div class="feedback__values" [class.feedback__values--disabled]="articleEvaluation">
+                        <div class="feedback__values"
+                            [ngClass]="{
+                                'feedback__values--disabled': articleEvaluation,
+                                'feedback__values--loading': votingIsLoading
+                            }"
+                        >
+
                             <div (click)="onVoting('like')"
                                 class="feedbackVal feedbackVal--leftItem feedbackVal--like"
                                 [class.feedbackVal--active]="articleEvaluation === 'like'"
@@ -64,6 +70,7 @@
                                 </div>
                                 <div class="feedbackVal__amount">{{postData.likeCount}}</div>
                             </div>
+
                             <div (click)="onVoting('dislike')"
                                 class="feedbackVal feedbackVal--active"
                                 [class.feedbackVal--active]="articleEvaluation === 'dislike'"
@@ -74,6 +81,7 @@
                                 </div>
                                 <div class="feedbackVal__amount">{{postData.dislikeCount}}</div>
                             </div>
+
                         </div>
                     </div>
                     <!-- Автор статьи для мобилы -->

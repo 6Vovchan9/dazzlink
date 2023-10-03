@@ -49,6 +49,13 @@ export class PostsService {
         return this.http.patch<RovraggeRespWrapper>(`${environment.rovraggeUrl}/publication/${id}/read`, null);
     }
 
+    public setArticleVoting(id: string, choice: 'like' | 'dislike'): Observable<RovraggeRespWrapper> {
+        return this.http.patch<RovraggeRespWrapper>(`${environment.rovraggeUrl}/publication/${id}/${choice}`, null)
+            .pipe(
+                map((resp: { [key: string]: any }) => resp.data)
+            )
+    }
+
     remove(id: string): Observable<void> {
         return this.http.delete<void>(`${environment.fbDbUrl}/posts/${id}.json`)
             .pipe(
