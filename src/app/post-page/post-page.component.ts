@@ -150,6 +150,9 @@ export class PostPageComponent implements OnInit, OnDestroy {
             this.articleEvaluation = val;
             this.setArticleEvaluationToSSWithChoice(val);
             console.log(`Зафиксировали ваш выбор!`, this.articleEvaluation);
+          },
+          () => {
+            this.votingIsLoading = false;
           }
         );
       // Тут есть момент как можно обойти LS и наделать много лайков (нужно лайкнуть и быстро обновить страницу, нужно успеть перед тем как сервер ответит),
