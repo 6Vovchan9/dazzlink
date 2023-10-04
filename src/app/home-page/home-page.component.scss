@@ -170,6 +170,15 @@
             max-width: 100%;
         }
     }
+    &--preview {
+        .mainPicture__block {
+            .mainPicture__image {
+                width: 100%;
+                filter: blur(3px);
+                cursor: wait;
+            }
+        }
+    }
     @media #{$notMobile} {
         .mainPicture__block {
             border-radius: 48px;
