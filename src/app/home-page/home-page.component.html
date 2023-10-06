@@ -21,7 +21,9 @@
         </section> -->
         <picture class="mainPicture">
             <div class="mainPicture__block">
-                <img class="mainPicture__image" src="assets/images/mainPic.png" alt="mainPicture">
+
+                <!-- <img class="mainPicture__image" src="assets/images/mainPic.png" alt="mainPicture"> -->
+
                 <!-- <youtube-player
                     videoId="zmg_jOwa9Fc"
                     [width]="660"
@@ -34,13 +36,24 @@
                         autoplay: 1
                     }"
                 ></youtube-player> -->
+
+                <a href="assets/images/mainPic.png" class="progressive replace">
+                    <img src="assets/images/smallMainPic.jpeg" class="preview" alt="image" />
+                </a>
+
             </div>
         </picture>
+
         <picture *ngIf="false" class="mainPicture mainPicture--preview">
             <div class="mainPicture__block">
                 <img class="mainPicture__image" src="assets/images/smallMainPic.jpeg" alt="smallMainPicture">
             </div>
         </picture>
+
+        <!-- <a href="assets/images/mainPic.png" class="progressive replace">
+            <img src="assets/images/smallMainPic.jpeg" class="preview" alt="image" />
+        </a> -->
+
         <div class="aboutAppInfo">
             <div class="aboutAppInfo__text">
                 <div class="moduleTitle aboutAppInfo__moduleTitle">{{getContent('home-aboutAppInfo-title')}}</div>

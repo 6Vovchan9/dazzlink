@@ -1,4 +1,4 @@
-<div (scroll)="onScrollPage($event)" class="pageWrap">
+<div id="pageWrap" (scroll)="onScrollPage($event)" class="pageWrap">
     <header [class.header--hidden]="scrollDown" *ngIf="!webview" class="header">
         <ng-container *ngTemplateOutlet="headerContent"></ng-container>
         <div class="shadow"></div>
