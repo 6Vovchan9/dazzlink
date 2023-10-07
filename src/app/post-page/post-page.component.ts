@@ -53,6 +53,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
         switchMap(
           (params: Params) => {
             this.articleId = params['id'];
+            // return this.postsService.getById(params['id']);
             return this.postsService.getByIdRovragge(params['id']);
           }
         ),

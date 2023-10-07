@@ -234,6 +234,10 @@ $headerHeight: 98px;
     @media #{$notMobile} {
         margin-top: $headerHeight;
     }
+
+    &--noMargin {
+        margin: 0;
+    }
 }
 
 .footer {

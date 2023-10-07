@@ -38,6 +38,12 @@
     }
 }
 
+.hiddenInMobile {
+    @media #{$mobile} {
+        display: none;
+    }
+}
+
 .aboutPage {
     .aboutPage__text {
         margin-top: 12px;

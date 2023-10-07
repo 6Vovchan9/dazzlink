@@ -63,6 +63,7 @@ export class MainLayoutComponent implements OnInit {
 
   public get webview(): boolean {
     const result = navigator.userAgent.includes('Dazzlink');
+    // return true;
     return result;
   }
 

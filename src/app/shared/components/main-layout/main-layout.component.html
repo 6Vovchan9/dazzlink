@@ -16,11 +16,11 @@
         <ng-container *ngTemplateOutlet="headerContent"></ng-container>
     </header>
 
-    <div class="contentWrapper">
+    <div class="contentWrapper" [class.contentWrapper--noMargin]="webview">
         <router-outlet></router-outlet>
     </div>
 
-    <div class="footerNew">
+    <div *ngIf="!webview" class="footerNew">
         <div class="container footerNew__container">
             <div class="footerNew__content">
                 <div class="footerNew__col">
