@@ -199,13 +199,13 @@ a.progressive:not(.replace) {
     cursor: default;
 }
 
-a.progressive img {
-    display: block;
-    width: 100%;
-    max-width: none;
-    height: auto;
-    border: 0 none;
-}
+// a.progressive img {
+//     display: block;
+//     width: 100%;
+//     max-width: none;
+//     height: auto;
+//     border: 0 none;
+// }
 
 a.progressive img.preview {
     filter: blur(2vw);
@@ -213,6 +213,13 @@ a.progressive img.preview {
 }
 
 ::ng-deep {
+    a.progressive img {
+        display: block;
+        width: 100%;
+        max-width: none;
+        height: auto;
+        border: 0 none;
+    }
     a.progressive img.reveal {
         position: absolute;
         left: 0;

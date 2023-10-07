@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { langArr } from '@app/shared/constants/languages.constants';
@@ -96,7 +96,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   private aboutProgressiveImage(): void {
     if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) {
 
-      window.addEventListener('load', function () {
+      // window.addEventListener('load', function () {
 
         let pItem = document.getElementsByClassName('progressive replace'), timer;
         const pageWrapEl = document.getElementById('pageWrap');
@@ -106,7 +106,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         window.addEventListener('resize', scroller, false);
 
         // setTimeout(() => {
-          inView();
+        inView();
         // }, 500);
 
         function scroller(e) {
@@ -140,7 +140,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
           if (!item || !item.href) return;
 
           // load image
-          var img = new Image();
+          let img = new Image();
           if (item.dataset) {
             img.srcset = item.dataset.srcset || '';
             img.sizes = item.dataset.sizes || '';
@@ -160,7 +160,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
             item.appendChild(img).addEventListener('animationend', function (e) {
 
               // remove preview image
-              var pImg = item.querySelector && item.querySelector('img.preview');
+              let pImg = item.querySelector && item.querySelector('img.preview');
               if (pImg) {
                 e.target.alt = pImg.alt || '';
                 item.removeChild(pImg);
@@ -173,7 +173,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
         }
 
-      }, false)
+      // }, false)
     }
   }
 

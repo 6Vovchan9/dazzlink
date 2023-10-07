@@ -23,6 +23,7 @@ import { AccoTriggerComponent } from './shared/components/acco-trigger/acco-trig
 import { PostPageComponent } from './post-page/post-page.component';
 import { GoBackBtnComponent } from './shared/components/go-back-btn/go-back-btn.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { ProgressiveImageComponent } from './shared/components/progressive-image/progressive-image.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -41,7 +42,8 @@ registerLocaleData(localeRu, 'ru');
     PostComponent,
     ModalComponent,
     AccoTriggerComponent,
-    GoBackBtnComponent
+    GoBackBtnComponent,
+    ProgressiveImageComponent
   ],
   imports: [
     BrowserModule,
