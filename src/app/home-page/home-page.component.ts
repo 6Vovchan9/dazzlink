@@ -96,7 +96,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   private aboutProgressiveImage(): void {
     if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) {
 
-      // window.addEventListener('load', function () {
+      window.addEventListener('load', function () {
 
         let pItem = document.getElementsByClassName('progressive replace'), timer;
         const pageWrapEl = document.getElementById('pageWrap');
@@ -118,14 +118,16 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
         function inView() {
 
-          let wT = window.pageYOffset, wB = wT + window.innerHeight, cRect, pT, pB, p = 0;
+          let wT = pageWrapEl.scrollTop, wB = wT + window.innerHeight, cRect, pT, pB, p = 0;
           while (p < pItem.length) {
       
             cRect = pItem[p].getBoundingClientRect();
-            pT = wT + cRect.top;
-            pB = pT + cRect.height;
+            pT = wT + cRect.top; // расстояние с верха окна до картинки
+            pB = pT + cRect.height; // pT + высота картинки
       
+            // console.log(wT, pB, wB, pT);
             if (wT < pB && wB > pT) {
+              // console.log('Загружаем осн картинку');
               loadFullImage(pItem[p]);
               pItem[p].classList.remove('replace');
             }
@@ -173,7 +175,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
         }
 
-      // }, false)
+      }, false)
     }
   }
 
