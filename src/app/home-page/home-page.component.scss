@@ -166,6 +166,8 @@
     .mainPicture__block {
         overflow: hidden;
         border-radius: 32px;
+        position: relative;
+        z-index: 10;
         .mainPicture__image {
             max-width: 100%;
         }
