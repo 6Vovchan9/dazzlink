@@ -57,7 +57,7 @@ export class CreatePageComponent implements OnInit {
           // link: null,
           name: 'Игорь',
           occupation: 'Водитель',
-          imageUrl: 'assets/images/linkToArticlesX2.png'
+          imageUrl: 'assets/images/linkToArticlesX2.jpg'
         }
       ],
       published: new Date(),
