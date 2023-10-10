@@ -333,6 +333,8 @@ a.progressive img.preview {
         // max-width: 368px;
         border-radius: 32px;
         overflow: hidden;
+        position: relative;
+        z-index: 10;
         img {
             max-width: 100%;
         }
