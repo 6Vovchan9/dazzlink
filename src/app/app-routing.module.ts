@@ -6,6 +6,7 @@ import { ArticlesPageComponent } from './articles-page/articles-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { PostPageComponent } from './post-page/post-page.component';
+import { LocationsPageComponent } from './locations-page/locations-page.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: '', component: HomePageComponent },
       { path: 'agreements', component: AgreementsPageComponent },
       { path: 'articles', component: ArticlesPageComponent },
+      { path: 'locations', component: LocationsPageComponent },
       { path: 'post/:id', component: PostPageComponent },
       // { path: '**', redirectTo: '/' }
     ]

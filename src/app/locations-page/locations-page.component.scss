@@ -1,0 +1,80 @@
+@import "variables";
+
+:host {
+    // flex: 1;
+} // Это все для того чтобы когда контента мало footer все равно был прижат к низу. UPD: теперь эту роль выполняет contentWrapper
+
+.page {
+
+    margin-top: 20px;
+    margin-bottom: 50px;
+
+    .page__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media #{$notMobile} {
+        margin-top: 34px;
+        margin-bottom: 140px;
+
+        .page__container {
+            flex-direction: row;
+        }
+    }
+}
+
+.sidebar {
+    flex: 1;
+    margin-bottom: 72px;
+
+    @media #{$notMobile} {
+        margin-right: 0px;
+        max-width: 360px;
+        margin-right: 8%;
+        margin-bottom: 0px;
+    }
+}
+
+.hiddenInMobile {
+    @media #{$mobile} {
+        display: none;
+    }
+}
+
+.aboutPage {
+    .aboutPage__text {
+        margin-top: 12px;
+    }
+    .aboutPage__links {
+        margin-top: 24px;
+        &--forDesktop {
+            display: none;
+        }
+        &--forMobile {
+            display: block;
+        }
+    }
+    .aboutPage__btn {
+        margin-top: 24px;
+    }
+
+    @media #{$notMobile} {
+        .aboutPage__links {
+            &--forDesktop {
+                display: block;
+            }
+            &--forMobile {
+                display: none;
+            }
+        }
+    }
+}
+
+.pageContent {
+    flex: 2;
+
+    @media #{$notMobile} {
+
+    }
+}

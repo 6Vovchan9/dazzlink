@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Post } from 'src/app/shared/interfaces';
+import { Place, Post } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/services/posts.service';
 import { AlertService } from '../shared/services/alert.service';
+import { LocationsService } from '@app/shared/services/locations.service';
 
 @Component({
   selector: 'app-create-page',
@@ -13,7 +14,8 @@ export class CreatePageComponent implements OnInit {
 
   constructor(
     public postsService: PostsService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private locationsService: LocationsService
   ) { }
 
   ngOnInit(): void { }
@@ -70,6 +72,26 @@ export class CreatePageComponent implements OnInit {
       () => {
         console.log('Создали пост');
         this.alertService.success('Пост был успешно создан');
+      }
+    )
+  }
+
+  createLocation() {
+    const place: Place = {
+      country: 'Узбекистан',
+      city: 'Ташкент',
+      address: 'ул. Ислама Каримова, 17',
+      category: 'Ресторан',
+      subcategory: 'Бар',
+      kitchen: 'Узбекская',
+      title: 'Чайхана',
+      price_range: 2,
+      rating_yandex: 4.8
+    };
+
+    this.locationsService.create(place).subscribe(
+      () => {
+        this.alertService.success('Локация была успешно создана');
       }
     )
   }

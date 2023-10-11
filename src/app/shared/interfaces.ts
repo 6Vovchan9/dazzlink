@@ -37,6 +37,21 @@ export interface Post {
     imageUrl?: string;
 }
 
+export type Place = {
+    country: string, // Узбекистан
+    city: string, // Ташкент
+    address: string, // ул. Ислама Каримова, 17
+    category: string, // Ресторан
+    subcategory: string, // Бар
+    kitchen: string, // Узбекская
+    title: string,// Чайхана
+    price_range?: number, // Средний чек: $, $$ или $$$
+    rating_2gis?: number,
+    rating_yandex?: number,
+    rating_google?: number,
+    rating_tripadvisor?: number
+}
+
 export interface VisitsAmount {
     amount: number;
 }
