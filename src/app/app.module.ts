@@ -25,6 +25,7 @@ import { GoBackBtnComponent } from './shared/components/go-back-btn/go-back-btn.
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { ProgressiveImageComponent } from './shared/components/progressive-image/progressive-image.component';
 import { LocationsPageComponent } from './locations-page/locations-page.component';
+import { LocationItemComponent } from './shared/components/location-item/location-item.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -42,6 +43,7 @@ registerLocaleData(localeRu, 'ru');
     HeaderComponent,
     FooterComponent,
     PostComponent,
+    LocationItemComponent,
     ModalComponent,
     AccoTriggerComponent,
     GoBackBtnComponent,

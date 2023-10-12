@@ -38,13 +38,14 @@ export interface Post {
 }
 
 export type Place = {
-    country: string, // Узбекистан
+    country?: string, // Узбекистан
     city: string, // Ташкент
-    address: string, // ул. Ислама Каримова, 17
+    address?: string, // ул. Ислама Каримова, 17
     category: string, // Ресторан
-    subcategory: string, // Бар
-    kitchen: string, // Узбекская
-    title: string,// Чайхана
+    subcategory?: string, // Бар
+    kitchen?: string, // Узбекская
+    title?: string,// Чайхана
+    imageUrl?: string
     price_range?: number, // Средний чек: $, $$ или $$$
     rating_2gis?: number,
     rating_yandex?: number,

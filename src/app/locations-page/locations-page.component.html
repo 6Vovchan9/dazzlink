@@ -34,7 +34,7 @@
                 <ng-container *ngIf="locationsList.length; else empty">
                     <ul class="pageContent__locations">
                         <li *ngFor="let location of locationsList" class="pageContent__itemOfLocation">
-                            {{location.title}}
+                            <app-location-item [placeData]="location"></app-location-item>
                         </li>
                     </ul>
                 </ng-container>

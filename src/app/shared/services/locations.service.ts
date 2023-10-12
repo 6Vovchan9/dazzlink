@@ -23,7 +23,7 @@ export class LocationsService {
 
         return this.http.get<Place[]>(`${environment.fbDbUrl}/locations.json`, { headers: { 'x-accept-language': this.pagesService.currentLanguage.getValue() } })
             .pipe(
-                delay(2000),
+                delay(1000),
                 map((resp: { [key: string]: any }) => {
                     if (resp) {
                         return Object.keys(resp)
@@ -37,6 +37,23 @@ export class LocationsService {
                         return [];
                     }
                 })
+                // map(() => {
+                //         return [
+                //             {
+                //                 country: 'Узбекистан',
+                //                 city: 'Ташкент',
+                //                 address: 'ул. Ислама Каримова, 17',
+                //                 category: 'Ресторан',
+                //                 subcategory: 'Бар',
+                //                 kitchen: 'Узбекская',
+                //                 title: 'Чайхана',
+                //                 price_range: 2,
+                //                 rating_yandex: 4.8,
+                //                 imageUrl: 'assets/images/linkToArticlesX2.jpg'
+                //             }
+                //         ]
+                //     }
+                // )
             )
     }
 

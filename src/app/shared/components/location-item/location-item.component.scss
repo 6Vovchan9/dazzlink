@@ -1,0 +1,68 @@
+.locationItem {
+    cursor: pointer;
+    .locationItem__img {
+        margin-bottom: 12px;
+        background-color: var(--color-text-gray);
+        min-height: 180px;
+        border-radius: 24px;
+        overflow: hidden;
+        img {
+            max-width: 100%;
+        }
+    }
+    &:hover .placeDetails .placeDetails__main .placeDetails__title {
+        color: var(--color-blue1);;
+    }
+}
+
+.placeDetails {
+    .placeDetails__main {
+        display: flex;
+        column-gap: 10px;
+        .placeDetails__title {
+            line-height: 24px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            flex: 1;
+        }
+    }
+    .placeDetails__addit {
+        color: var(--color-text-gray);
+        line-height: 24px;
+        .placeDetails__another {
+            display: flex;
+            .placeDetails__anotherItem {
+                position: relative;
+                margin-right: 10px;
+                &--kitchen {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+                &:after {
+                    content: '';
+                    position: absolute;
+                    display: block;
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background-color: var(--color-text-gray);
+                    top: 50%;
+                    left: 100%;
+                    transform: translate(3px, -50%);
+                }
+                &:last-child {
+                    margin-right: 0px;
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .placeDetails__address {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    }
+}
