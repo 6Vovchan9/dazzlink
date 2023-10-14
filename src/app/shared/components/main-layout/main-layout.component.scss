@@ -1,7 +1,5 @@
 @import "variables";
 
-$headerHeight: 98px;
-
 :host {
     // display: flex;
     // flex-direction: column;
@@ -13,15 +11,68 @@ $headerHeight: 98px;
     flex-direction: column;
     height: 100%;
     overflow: scroll;
+
+    &--headerFixed {
+        .header {
+            display: none;
+
+            &--position--fixed {
+                display: block;
+            }
+
+            &--position--fixed--withAnim {
+                display: none;
+            }
+        }
+        .contentWrapper {
+            margin-top: $headerHeightInMobile;
+
+            @media #{$notMobile} {
+                margin-top: $headerHeightInDesktop;
+            }
+
+            &--noMargin {
+                margin: 0;
+            }
+        }
+    }
+
+    &--headerFixedWithAnim {
+        .header {
+            display: none;
+
+            &--position--fixed--withAnim {
+                display: block;
+            }
+        }
+        .contentWrapper {
+            margin-top: $headerHeightInMobile;
+
+            @media #{$notMobile} {
+                margin-top: $headerHeightInDesktop;
+            }
+
+            &--noMargin {
+                margin: 0;
+            }
+        }
+    }
+
+    &--headerAndFooterFixed {
+        .contentWrapper {
+            overflow: hidden;
+        }
+        ::ng-deep {
+            .page {
+                max-height: 100%;
+                overflow: scroll;
+            }
+        }
+    }
 } // Это все для того чтобы когда контента мало footer все равно был прижат к низу
 
-.header, .headerNew {
-    position: fixed;
-    z-index: 20;
-    width: 100%;
-    background-color: var(--color-white);
-    top: 0;
-    transition: .7s;
+.header {
+
     .header__container {
         padding: 30px 20px;
         display: flex;
@@ -58,38 +109,21 @@ $headerHeight: 98px;
         }
     }
 
+    &--position--fixed {
+        display: none;
+        position: fixed;
+        z-index: 20;
+        width: 100%;
+        background-color: var(--color-white);
+        top: 0;
+        transition: .7s;
+    }
+
     &--hidden {
         overflow: hidden;
         transition: 1s;
         top: -100%;
     }
-}
-
-.headerNew {
-    background-color: red;
-    // opacity: .5;
-    position: fixed;
-    width: 100%;
-    height: 98px;
-    overflow: hidden;
-    transition: .5s;
-    &--hidden {
-        overflow: hidden;
-        height: 0;
-        transition: 0s;
-    }
-}
-
-.block1 {
-    width: 200px;
-    height: 38px;
-    background-color: aquamarine;
-}
-
-.block2 {
-    width: 200px;
-    height: 38px;
-    background-color: brown;
 }
 
 .logo {
@@ -229,15 +263,6 @@ $headerHeight: 98px;
 
 .contentWrapper {
     flex: 1;
-    margin-top: 84px; // 84px - высота header
-
-    @media #{$notMobile} {
-        margin-top: $headerHeight;
-    }
-
-    &--noMargin {
-        margin: 0;
-    }
 }
 
 .footer {

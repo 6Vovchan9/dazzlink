@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
+import { MainLayoutOptions } from '@app/shared/interfaces';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { PagesService } from '@app/shared/services/pages.service';
 import { VisitsService } from '@app/shared/services/visits.service';
@@ -17,6 +19,13 @@ export class MainLayoutComponent implements OnInit {
   public scrollDown = false;
   private prewScrollTop = 0;
   public myForm: FormGroup;
+  public mainLayoutOpt: MainLayoutOptions = {
+    header: {
+      fixed: true,
+      withAnimation: true
+    },
+    footerFixed: false
+  };
   public langFieldOptions: DropdownOptions = {
     disabled: false,
     id: "language",
@@ -40,12 +49,16 @@ export class MainLayoutComponent implements OnInit {
     this.createForm();
   }
 
+  public checkLocationsPageOrNot(): boolean {
+    return window.location.pathname.includes('locations');
+  }
+
   onScrollPage(e) {
     // console.log(e.target.scrollTop);
     const curScrollTop = e.target.scrollTop;
     if (curScrollTop > this.prewScrollTop) {
       // console.log('Листаем вниз');
-      if (curScrollTop < 98) {
+      if (curScrollTop < headerHeightInDesktop) {
         this.scrollDown = false;
       } else {
         this.scrollDown = true;

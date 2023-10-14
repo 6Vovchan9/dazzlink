@@ -6,23 +6,31 @@
 
 .page {
 
-    margin-top: 20px;
-    margin-bottom: 50px;
-
     .page__container {
         display: flex;
         flex-direction: column;
+
+        margin-top: 20px;
+        margin-bottom: 50px;
     }
 
     @media #{$notMobile} {
-        margin-top: 34px;
-        margin-bottom: 140px;
 
         .page__container {
             flex-direction: row;
+
+            margin-top: 34px;
+            margin-bottom: 140px;
         }
     }
 }
+
+// :host-context(.pageWrap--headerAndFooterFixed) {
+//     .page {
+//         max-height: 100%;
+//         overflow: scroll;
+//     }
+// }
 
 .sidebar {
     flex: 1;

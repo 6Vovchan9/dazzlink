@@ -2,12 +2,16 @@
 
 .page {
 
-    margin-top: calc(20px);
-    margin-bottom: 50px;
+    .page__container {
+        margin-top: 20px;
+        margin-bottom: 50px;
+    }
 
     @media #{$notMobile} {
-        margin-top: calc(34px);
-        margin-bottom: 140px;
+        .page__container {
+            margin-top: 34px;
+            margin-bottom: 140px;
+        }
     }
 }
 

@@ -4,6 +4,14 @@ export interface AdminData {
     returnSecureToken?: boolean;
 }
 
+export interface MainLayoutOptions {
+    header: {
+        withAnimation: boolean,
+        fixed: boolean
+    },
+    footerFixed: boolean
+}
+
 export interface RovraggeRespWrapper {
     result: {
         code: string,
