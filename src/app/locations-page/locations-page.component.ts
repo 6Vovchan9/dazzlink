@@ -36,7 +36,18 @@ export class LocationsPageComponent implements OnInit {
       }
     );
 
+    this.createForm();
+
     this.getAllLocations();
+  }
+
+  private createForm(): void {
+
+    const langFromService = this.pagesService.currentLanguage.getValue();
+
+    // this.filterForm = new FormGroup({
+    //   language: new FormControl({value: langFromService, disabled: this.langFieldOptions.disabled}, this.langFieldOptions.required ? [Validators.required] : []),
+    // });
   }
 
   public get webview(): boolean {

@@ -32,6 +32,22 @@
         <main class="pageContent">
             <ng-container *ngIf="locations$ | async as locationsList; else loadingTemplate">
                 <ng-container *ngIf="locationsList.length; else empty">
+                    <div *ngIf="false" class="pageContent__filterBar">
+                        <div class="filterBar">
+                            <div class="filterBar__length">
+                                Доступно 16 мест
+                            </div>
+                            <div class="filterBar__controls">
+                                <!-- <app-dropdown-field
+                                    [formControl]="myForm.get('language')"
+                                    (ngModelChange)="onChangeLang($event)"
+                                    [options]="langFieldOptions"
+                                    [multiple]="false"
+                                    optionLabel="value">
+                                </app-dropdown-field> -->
+                            </div>
+                        </div>
+                    </div>
                     <ul class="pageContent__locations">
                         <li *ngFor="let location of locationsList" class="pageContent__itemOfLocation">
                             <app-location-item [placeData]="location"></app-location-item>
