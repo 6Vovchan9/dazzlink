@@ -100,7 +100,7 @@
 
     .shadow {
         position: absolute;
-        height: 20px;
+        height: 20px; // если это поменяешь то меняй и transform: translateY(...) у header--hidden
         width: 100%;
         background: linear-gradient(0deg, rgba(255, 255, 255, 0.01), rgb(255, 255, 255));
 
@@ -121,8 +121,9 @@
 
     &--hidden {
         // overflow: hidden;
-        transition: 1s;
-        top: -100%;
+        transition: .7s;
+        // top: -100%;
+        transform: translateY(calc(-100% - 20px)); // 20px - высота у shadow
     }
 }
 
