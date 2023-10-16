@@ -78,15 +78,15 @@ export class CreatePageComponent implements OnInit {
 
   createLocation() {
     const place: Place = {
-      country: 'Узбекистан',
-      city: 'Ташкент',
+      // country: 'Узбекистан',
+      // city: 'Ташкент',
       address: 'ул. Ислама Каримова, 17',
-      category: 'Ресторан',
+      categoryCode: 'Ресторан',
       subcategory: 'Бар',
-      kitchen: 'Узбекская',
+      subtitle: 'Узбекская',
       title: 'Чайхана',
-      price_range: 2,
-      rating_yandex: 4.8
+      priceRange: 2,
+      rating: 4.8
     };
 
     this.locationsService.create(place).subscribe(

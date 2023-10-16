@@ -3,4 +3,5 @@ export interface Environment {
     production: boolean;
     fbDbUrl: string;
     rovraggeUrl?: string;
+    rovraggePlacesUrl?: string;
 }

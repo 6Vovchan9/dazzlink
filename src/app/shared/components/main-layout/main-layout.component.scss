@@ -116,12 +116,12 @@
         width: 100%;
         background-color: var(--color-white);
         top: 0;
-        transition: .7s;
+        transition: .6s;
     }
 
     &--hidden {
         // overflow: hidden;
-        transition: .7s;
+        transition: .6s;
         // top: -100%;
         transform: translateY(calc(-100% - 20px)); // 20px - высота у shadow
     }

@@ -21,6 +21,15 @@ export interface RovraggeRespWrapper {
     data: any
 }
 
+export interface RovraggeRespLocationsData {
+    placeCount: number;
+    cityPlaceList: {
+        cityCode: string,
+        cityName: string,
+        placeList: Array<Place>
+    }
+}
+
 export interface FbAuthResponse {
     idToken: string;
     expiresIn: string;
@@ -46,19 +55,18 @@ export interface Post {
 }
 
 export type Place = {
-    country?: string, // Узбекистан
-    city: string, // Ташкент
+    id?: string,
     address?: string, // ул. Ислама Каримова, 17
-    category: string, // Ресторан
+    categoryCode: string, // RESTAURANTS
     subcategory?: string, // Бар
-    kitchen?: string, // Узбекская
     title?: string,// Чайхана
-    imageUrl?: string
-    price_range?: number, // Средний чек: $, $$ или $$$
-    rating_2gis?: number,
-    rating_yandex?: number,
-    rating_google?: number,
-    rating_tripadvisor?: number
+    subtitle?: string, // Узбекская кухня
+    priceRange?: number, // Средний чек: $, $$ или $$$
+    rating: number,
+    imageList?: Array<{
+        type?: string,
+        href: string
+    }>
 }
 
 export interface VisitsAmount {

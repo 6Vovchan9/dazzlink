@@ -30,8 +30,9 @@
             </div>
         </aside>
         <main class="pageContent">
-            <ng-container *ngIf="locations$ | async as locationsList; else loadingTemplate">
-                <ng-container *ngIf="locationsList.length; else empty">
+            <ng-container *ngIf="!isLoading; else loadingTemplate">
+                <ng-container *ngIf="locationsNew?.placeCount; else empty">
+
                     <div *ngIf="false" class="pageContent__filterBar">
                         <div class="filterBar">
                             <div class="filterBar__length">
@@ -48,11 +49,19 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="pageContent__locations">
-                        <li *ngFor="let location of locationsList" class="pageContent__itemOfLocation">
-                            <app-location-item [placeData]="location"></app-location-item>
-                        </li>
-                    </ul>
+
+                    <ng-container *ngFor="let block of locationsNew.cityPlaceList">
+                        <ng-container *ngIf="block.placeList?.length">
+                            <div class="pageContent__locationsBlock">
+                                <div class="pageContent__locationsCity">{{block.cityName}}</div>
+                                <ul class="pageContent__locationsList">
+                                    <li *ngFor="let location of block.placeList" class="pageContent__locationsItem">
+                                        <app-location-item [placeData]="location"></app-location-item>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ng-container>
+                    </ng-container>
                 </ng-container>
             </ng-container>
         </main>

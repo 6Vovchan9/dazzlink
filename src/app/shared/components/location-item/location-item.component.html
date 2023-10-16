@@ -1,7 +1,7 @@
 <div class="locationItem">
     <div class="locationItem__img">
-        <ng-container *ngIf="placeData?.imageUrl; else defaultPlaceImg">
-            <img [src]="placeData.imageUrl" alt="Фото локации">
+        <ng-container *ngIf="placeData?.imageList?.length; else defaultPlaceImg">
+            <img [src]="placeData.imageList[0].href" alt="Фото локации">
         </ng-container>
     </div>
     <!-- <div class="locationItem__details placeDetails">
@@ -15,15 +15,21 @@
         <div class="placeDetails">
             <div class="placeDetails__main">
                 <div class="placeDetails__title">{{placeData?.title || 'Название заведения'}}</div>
-                <div class="placeDetails__rating">{{(placeData?.rating_yandex || 5) | number: '.1-2'}}</div>
+                <div class="placeDetails__rating"
+                    [ngStyle]="{
+                        color: placeData?.rating < 4 ? '#D70015' : placeData?.rating <= 4.5 ? '#D78E00' : '#248A3D'
+                    }"
+                >
+                    {{(placeData?.rating || 5) | number: '.1-2'}}
+                </div>
             </div>
             <div class="placeDetails__addit">
                 <div class="placeDetails__another">
                     <div class="placeDetails__anotherItem">
-                        <span *ngFor="let item of operatePriceRange(placeData?.price_range)">$</span>
+                        <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
                     </div>
                     <span class="placeDetails__anotherItem">{{placeData?.subcategory || 'Кафе'}}</span>
-                    <span *ngIf="placeData?.kitchen" class="placeDetails__anotherItem placeDetails__anotherItem--kitchen">{{placeData.kitchen}}</span>
+                    <span *ngIf="placeData?.subtitle" class="placeDetails__anotherItem placeDetails__anotherItem--kitchen">{{placeData.subtitle.split(' ')[0]}}</span>
                 </div>
                 <div class="placeDetails__address">{{placeData?.address}}</div>
             </div>

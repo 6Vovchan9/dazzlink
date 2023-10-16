@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable, Observer, Subscription, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
@@ -16,8 +16,10 @@ import { Place } from '@app/shared/interfaces';
 export class LocationsPageComponent implements OnInit {
 
   public locations$: Observable<Place[]>;
+  public locationsNew: any;
   public isLoading = true;
   private lSub: Subscription;
+  private locationsSub: Subscription;
   private curLang: string;
 
   constructor(
@@ -57,16 +59,116 @@ export class LocationsPageComponent implements OnInit {
 
   private getAllLocations(): void {
     this.isLoading = true;
-    this.locations$ = this.locationsService.getAllLocations()
-      .pipe(
-        tap(() => {
-          this.isLoading = false;
-        }),
-        catchError(err => {
-          this.isLoading = false;
-          return of([]);
-        })
-      )
+    if (true) {
+      const stream$ = new Observable((observer: Observer<any>) => {
+        console.warn('getAllLocations пошел');
+        setTimeout(() => {
+          console.warn('getAllLocations ок!');
+          // observer.next({})
+          // observer.next(null)
+          observer.next(
+            {
+              "placeCount": 5,
+              "cityPlaceList": [
+                {
+                  "cityCode": "Tashkent",
+                  "cityName": "Ташкент",
+                  "placeList": [
+                    {
+                      "id": "-NgTNTZzxh9cram2eEd2",
+                      "categoryCode": "RESTAURANTS",
+                      "title": "Чайхана Navat и еще очень много всего инетересного",
+                      "subtitle": "Узбекская кухня",
+                      "subcategory": "Бар",
+                      "priceRange": 3,
+                      "rating": 4.5,
+                      "address": "ул. Ислама Каримова, 17",
+                      "imageList": [
+                        {
+                          "type": null,
+                          "href": 'assets/images/linkToArticlesX2.jpg'
+                        }
+                      ]
+                    },
+                    {
+                      "id": "-NgVSDcz4AMZ_2JA8yMZ",
+                      "title": "Кафе у Лидии",
+                      "subtitle": "Русская кухня",
+                      "subcategory": "Бистро",
+                      "priceRange": 1,
+                      "rating": 5,
+                      "address": "ул. Гагарина, 37",
+                    },
+                    {
+                      "id": "-NgYZORk7JcAD5y9fYvM",
+                      "title": "Angry Birds",
+                      // "subtitle": "Кавказская кухня",
+                      "subcategory": "Кафе",
+                      "priceRange": 1,
+                      "rating": 3.98,
+                      "address": "ул. Флерова, 4а",
+                    },
+                    {
+                      "id": "-NgYZORk7JcAD5y9ffSl",
+                      "title": "Люксор",
+                      "subtitle": "Боевик",
+                      "subcategory": "Кинотеатр",
+                      "priceRange": 1,
+                      "rating": 4,
+                      "address": "ул. Трубеукая, 106",
+                    },
+                  ]
+                },
+                {
+                  "cityCode": null,
+                  "cityName": "Алматы",
+                  "placeList": [
+                    {
+                      "id": "-NgVRC20Iit-rnFDKsza",
+                      "categoryCode": "RESTAURANTS",
+                      "title": "Старый город",
+                      "subtitle": "Европейская",
+                      "subcategory": "Ресторан",
+                      "priceRange": 2,
+                      "rating": 4.2,
+                      "address": "проспект Ленина, 17",
+                      "imageList": null
+                    }
+                  ]
+                },
+                {
+                  "cityName": "Москва",
+                  "placeList": []
+                },
+                {
+                  "cityName": "Ереван",
+                }
+              ]
+            }
+          )
+          // observer.error('Error')
+        }, 1000)
+      })
+
+      stream$
+        .subscribe(
+          value => {
+            this.locationsNew = value;
+            this.isLoading = false;
+          },
+          () => this.isLoading = false
+        );
+
+    } else {
+      this.locationsSub = this.locationsService.getAllLocations()
+        .subscribe(
+          value => {
+            this.locationsNew = value;
+            this.isLoading = false;
+          },
+          () => this.isLoading = false
+        );
+    }
   }
 
   public mobileStoreSrc(): string {
@@ -103,6 +205,7 @@ export class LocationsPageComponent implements OnInit {
 
   public ngOnDestroy(): void {
     this.lSub?.unsubscribe();
+    this.locationsSub?.unsubscribe();
   }
 
 }
