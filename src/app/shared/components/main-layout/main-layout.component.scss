@@ -124,6 +124,10 @@
         transition: .6s;
         // top: -100%;
         transform: translateY(calc(-100% - 20px)); // 20px - высота у shadow
+
+        @media #{$notMobile} {
+            transform: translateY(calc(-100% - 34px)); // 34px - высота у shadow
+        }
     }
 }
 

@@ -25,7 +25,7 @@ export class LocationsService {
             `${environment.rovraggePlacesUrl}/place`,
             {
                 headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() },
-                params: { categoryCode: 'RESTAURANTS' }
+                params: { categoryCode: 'REST' }
             }
         )
             .pipe(
