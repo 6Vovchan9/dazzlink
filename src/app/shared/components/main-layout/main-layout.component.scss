@@ -74,6 +74,7 @@
 .header {
 
     .header__container {
+        height: $headerHeightInMobile;
         padding: 30px 20px;
         display: flex;
         column-gap: 20px;
@@ -95,6 +96,10 @@
                     display: block;
                 }
             }
+        }
+
+        @media #{$notMobile} {
+            height: $headerHeightInDesktop;
         }
     }
 
@@ -134,7 +139,8 @@
 .logo {
     width: 126px;
     // height: 38px;
-    display: block;
+    display: flex;
+    max-height: 100%;
     overflow: hidden;
 
     // background-repeat: no-repeat;

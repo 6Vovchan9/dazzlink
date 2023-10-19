@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 
 import { langArr } from '@app/shared/constants/languages.constants';
 import { PagesService } from '@app/shared/services/pages.service';
@@ -22,6 +22,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   private curLang: string;
   private lSub: Subscription;
+  private pageWrapScrollSub: Subscription;
   public appOpportunityMenu: {[key: string]: IOpportunityMenu} = {
     media: {
       type: 'link',
@@ -93,7 +94,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       if (document.readyState === 'complete') {
         this.onWindowLoaded();
       } else {
-        window.addEventListener('load', this.onWindowLoaded, false);
+        window.addEventListener('load', this.onWindowLoaded.bind(this), false);
       }
     }
   }
@@ -102,9 +103,14 @@ export class HomePageComponent implements OnInit, OnDestroy {
     let pItem = document.getElementsByClassName('progressive replace'), timer;
     const pageWrapEl = document.getElementById('pageWrap');
 
-    // window.addEventListener('scroll', scroller, false);
-    pageWrapEl.addEventListener('scroll', scroller, false);
+    // pageWrapEl.addEventListener('scroll', scroller, false);
     window.addEventListener('resize', scroller, false);
+
+    this.pageWrapScrollSub = fromEvent(pageWrapEl, 'scroll').subscribe(
+      (el) => {
+        scroller(el);
+      }
+    );
 
     // setTimeout(() => {
     inView();
@@ -218,6 +224,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.pageWrapScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
   }
 

@@ -83,7 +83,7 @@
     flex: 2;
 
     .pageContent__locationsBlock {
-        margin-top: 48px;
+        margin-bottom: 48px;
         .pageContent__locationsCity {
             font-size: 32px;
             font-weight: 700;
@@ -96,8 +96,8 @@
             row-gap: 32px;
         }
 
-        &:first-child {
-            margin-top: unset;
+        &:last-child {
+            margin-bottom: unset;
         }
     }
 
@@ -124,6 +124,26 @@
                     //     padding-right: unset;
                     // }
                 }
+            }
+        }
+    }
+}
+
+.filterBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    background-color: aquamarine;
+    .filterBar__length {
+        color: var(--color-text-gray);
+        font-weight: 700;
+    }
+    .filterBar__controls {
+        display: flex;
+        .filterBar__item {
+            margin-right: 20px;
+            &:last-child {
+                margin-right: unset;
             }
         }
     }

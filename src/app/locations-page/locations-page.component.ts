@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Observer, Subscription, of } from 'rxjs';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Observable, Observer, Subscription, fromEvent, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
@@ -21,7 +21,10 @@ export class LocationsPageComponent implements OnInit {
   private lSub: Subscription;
   private locationsSub: Subscription;
   private curLang: string;
+  private pageWrapScrollSub: Subscription;
 
+  @ViewChild('filterBarEl') filterBarEl: ElementRef;
+  
   constructor(
     private pagesService: PagesService,
     public mobileDetectService: MobileDetectService,
@@ -41,6 +44,37 @@ export class LocationsPageComponent implements OnInit {
     this.createForm();
 
     this.getAllLocations();
+
+    // setInterval(() => {
+    //   console.dir(this.filterBarEl.nativeElement);
+    // }, 2000);
+
+    this.aboutProgressiveImage();
+  }
+
+  private aboutProgressiveImage(): void {
+    if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) {
+      if (document.readyState === 'complete') {
+        this.onWindowLoaded();
+      } else {
+        window.addEventListener('load', this.onWindowLoaded.bind(this), false);
+      }
+    }
+  }
+
+  private onWindowLoaded(): void {
+    const pageWrap = document.getElementById('pageWrap');
+    // pageWrap.addEventListener('scroll', scroller, false);
+
+    this.pageWrapScrollSub = fromEvent(pageWrap, 'scroll').subscribe(
+      (el) => {
+        console.log(el.target['scrollTop']);
+      }
+    );
+
+    function scroller(e) {
+      console.log(pageWrap.scrollTop)
+    }
   }
 
   private createForm(): void {
@@ -204,6 +238,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   public ngOnDestroy(): void {
+    this.pageWrapScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
     this.locationsSub?.unsubscribe();
   }
