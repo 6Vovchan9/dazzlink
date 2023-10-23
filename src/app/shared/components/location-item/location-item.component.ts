@@ -11,7 +11,7 @@ export class LocationItemComponent {
   @Input() placeData: Place;
 
   public operatePriceRange(num = 1): Array<any> {
-    return new Array(num);
+    return new Array(+num > 3 ? 3 : +num || 3);
   }
 
 }
