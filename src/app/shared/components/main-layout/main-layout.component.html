@@ -8,18 +8,9 @@
     }"
 >
 
-    <header *ngIf="!webview" class="header header--position--fixed">
+    <header *ngIf="!webview" class="header" [class.header--hidden]="scrollDown">
         <ng-container *ngTemplateOutlet="headerContent"></ng-container>
         <div class="shadow"></div>
-    </header>
-
-    <header [class.header--hidden]="scrollDown" *ngIf="!webview" class="header header--position--fixed header--position--fixed--withAnim">
-        <ng-container *ngTemplateOutlet="headerContent"></ng-container>
-        <div class="shadow"></div>
-    </header>
-
-    <header *ngIf="!webview" class="header">
-        <ng-container *ngTemplateOutlet="headerContent"></ng-container>
     </header>
 
     <div class="contentWrapper" [class.contentWrapper--noMargin]="webview">
@@ -216,8 +207,9 @@
     </div>
 </ng-template>
 
-<!-- пока есть 2 варианта поведения у header:
-
+<!-- пока есть 4 варианта поведения у header:
+    
 1) если pageWrap--headerFixed тогда у header position = fixed, он всегда расположен сверху окна
 2) если pageWrap--headerFixedWithAnim тогда у header position = fixed, он всегда расположен сверху окна и + скрывается при скролле страницы вниз
-3) если pageWrap без модификаторов тогда у header обычное поведение он скроллится вместе со всей страницей -->
+3) pageWrap--headerAndFooterFixed тогда header и footer стоят на месте а осн контент скроллится
+4) если pageWrap без модификаторов тогда у header обычное поведение он скроллится вместе со всей страницей -->

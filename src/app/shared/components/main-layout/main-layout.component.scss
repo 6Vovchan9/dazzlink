@@ -13,17 +13,21 @@
     overflow: scroll;
 
     &--headerFixed {
-        .header {
-            display: none;
 
-            &--position--fixed {
+        .header {
+
+            position: fixed;
+            z-index: 20;
+            width: 100%;
+            background-color: var(--color-white);
+            top: 0;
+            transition: .6s;
+
+            .shadow {
                 display: block;
             }
-
-            &--position--fixed--withAnim {
-                display: none;
-            }
         }
+
         .contentWrapper {
             margin-top: $headerHeightInMobile;
 
@@ -38,13 +42,32 @@
     }
 
     &--headerFixedWithAnim {
-        .header {
-            display: none;
 
-            &--position--fixed--withAnim {
+        .header {
+
+            position: fixed;
+            z-index: 20;
+            width: 100%;
+            background-color: var(--color-white);
+            top: 0;
+            transition: .6s;
+
+            .shadow {
                 display: block;
             }
+
+            &--hidden {
+                // overflow: hidden;
+                transition: .6s;
+                // top: -100%;
+                transform: translateY(calc(-100% - 20px)); // 20px - высота у shadow
+        
+                @media #{$notMobile} {
+                    transform: translateY(calc(-100% - 34px)); // 34px - высота у shadow
+                }
+            }
         }
+
         .contentWrapper {
             margin-top: $headerHeightInMobile;
 
@@ -59,9 +82,11 @@
     }
 
     &--headerAndFooterFixed {
+
         .contentWrapper {
             overflow: hidden;
         }
+
         ::ng-deep {
             .page {
                 max-height: 100%;
@@ -104,6 +129,7 @@
     }
 
     .shadow {
+        display: none;
         position: absolute;
         height: 20px; // если это поменяешь то меняй и transform: translateY(...) у header--hidden
         width: 100%;
@@ -111,27 +137,6 @@
 
         @media #{$notMobile} {
             height: 34px;
-        }
-    }
-
-    &--position--fixed {
-        display: none;
-        position: fixed;
-        z-index: 20;
-        width: 100%;
-        background-color: var(--color-white);
-        top: 0;
-        transition: .6s;
-    }
-
-    &--hidden {
-        // overflow: hidden;
-        transition: .6s;
-        // top: -100%;
-        transform: translateY(calc(-100% - 20px)); // 20px - высота у shadow
-
-        @media #{$notMobile} {
-            transform: translateY(calc(-100% - 34px)); // 34px - высота у shadow
         }
     }
 }

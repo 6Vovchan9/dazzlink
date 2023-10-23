@@ -22,8 +22,9 @@ export class LocationsPageComponent implements OnInit {
   private locationsSub: Subscription;
   private curLang: string;
   private pageWrapScrollSub: Subscription;
+  public filterBarFixed = false;
 
-  @ViewChild('filterBarEl') filterBarEl: ElementRef;
+  @ViewChild('locationsWrapper') locationsWrapper: ElementRef;
   
   constructor(
     private pagesService: PagesService,
@@ -45,10 +46,6 @@ export class LocationsPageComponent implements OnInit {
 
     this.getAllLocations();
 
-    // setInterval(() => {
-    //   console.dir(this.filterBarEl.nativeElement);
-    // }, 2000);
-
     this.aboutProgressiveImage();
   }
 
@@ -68,7 +65,13 @@ export class LocationsPageComponent implements OnInit {
 
     this.pageWrapScrollSub = fromEvent(pageWrap, 'scroll').subscribe(
       (el) => {
-        console.log(el.target['scrollTop']);
+        const pageWrapScrollTop = el.target['scrollTop'];
+        const locationsWrapperOffsetTop = this.locationsWrapper?.nativeElement.offsetTop;
+        if (pageWrapScrollTop >= locationsWrapperOffsetTop) {
+          this.filterBarFixed = true;
+        } else {
+          this.filterBarFixed = false;
+        }
       }
     );
 
@@ -149,7 +152,7 @@ export class LocationsPageComponent implements OnInit {
                       "subcategory": "Кинотеатр",
                       "priceRange": 1,
                       "rating": 4,
-                      "address": "ул. Трубеукая, 106",
+                      "address": "ул. Трубецкая, 106",
                     },
                   ]
                 },

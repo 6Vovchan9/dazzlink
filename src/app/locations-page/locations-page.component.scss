@@ -82,6 +82,49 @@
 .pageContent {
     flex: 2;
 
+    .pageContent__allAboutLocations {
+        position: relative;
+        padding-top: 76px;
+    }
+
+    .pageContent__filterBar {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+    }
+
+    .filterBarWrapper {
+        &--position--fixed {
+            position: fixed;
+            left: 0;
+
+            .filterBarWrapper__container {
+                margin: 0 auto;
+                max-width: 1240px;
+                padding: 0 20px;
+                display: flex;
+
+                .filterBar {
+                    flex: 1;
+                }
+            }
+
+            @media #{$notMobile} {
+                .filterBarWrapper__container {
+                    .filterBarWrapper__fakeSidebar {
+                        flex: 1;
+                        max-width: 360px;
+                        margin-right: 8%;
+                    }
+                    .filterBar {
+                        flex: 2;
+                    }
+                }
+            }
+        }
+    }
+
     .pageContent__locationsBlock {
         margin-bottom: 48px;
         .pageContent__locationsCity {
@@ -133,7 +176,9 @@
     display: flex;
     justify-content: space-between;
     padding: 16px 0;
-    background-color: aquamarine;
+    background-color: var(--color-white);
+    height: 56px;
+    line-height: 24px;
     .filterBar__length {
         color: var(--color-text-gray);
         font-weight: 700;

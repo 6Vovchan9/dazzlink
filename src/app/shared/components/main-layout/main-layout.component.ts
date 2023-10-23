@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
@@ -13,7 +13,7 @@ import { VisitsService } from '@app/shared/services/visits.service';
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss']
 })
-export class MainLayoutComponent implements OnInit {
+export class MainLayoutComponent implements OnInit, DoCheck {
 
   public showNavModal = false;
   public scrollDown = false;
@@ -44,6 +44,14 @@ export class MainLayoutComponent implements OnInit {
     private pagesService: PagesService,
     public mobileDetectService: MobileDetectService,
   ) { }
+
+  ngDoCheck(): void {
+    if (this.checkLocationsPageOrNot()) {
+      this.mainLayoutOpt.header.fixed = false;
+    } else {
+      this.mainLayoutOpt.header.fixed = true;
+    }
+  }
 
   ngOnInit(): void {
     this.createForm();
