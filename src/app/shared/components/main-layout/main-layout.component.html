@@ -13,10 +13,12 @@
         <div class="shadow"></div>
     </header>
 
+    <!-- Осн контент -->
     <div class="contentWrapper" [class.contentWrapper--noMargin]="webview">
         <router-outlet></router-outlet>
     </div>
 
+    <!-- Новый footer -->
     <div *ngIf="!webview" class="footerNew">
         <div class="container footerNew__container">
             <div class="footerNew__content">
@@ -50,6 +52,7 @@
         </div>
     </div>
 
+    <!-- Старый footer -->
     <footer *ngIf="!webview && false" class="footer">
         <div class="container footer__container">
             <div class="footer__col">

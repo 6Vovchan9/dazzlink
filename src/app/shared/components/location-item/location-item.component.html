@@ -17,7 +17,9 @@
                 <div class="placeDetails__title">{{placeData?.title || 'Название заведения'}}</div>
                 <div class="placeDetails__rating"
                     [ngStyle]="{
-                        color: placeData?.rating < 4 ? '#D70015' : placeData?.rating <= 4.5 ? '#D78E00' : '#248A3D'
+                        color: placeData?.rating < 4 ? '#D70015'
+                        : placeData?.rating <= 4.5 ? '#D78E00'
+                        : '#248A3D'
                     }"
                 >
                     {{(placeData?.rating || 5) | number: '.1-2'}}

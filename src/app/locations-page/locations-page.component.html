@@ -44,16 +44,17 @@
                                     <div class="filterBar__controls">
                                         <div class="filterBar__item">
                                             Фильтрация
-                                            <!-- <app-dropdown-field
-                                                [formControl]="myForm.get('language')"
-                                                (ngModelChange)="onChangeLang($event)"
-                                                [options]="langFieldOptions"
-                                                [multiple]="false"
-                                                optionLabel="value">
-                                            </app-dropdown-field> -->
                                         </div>
                                         <div class="filterBar__item">
-                                            Сортировка
+                                            <app-dropdown-field
+                                                [formControl]="filterBarGroup.get('sort')"
+                                                (ngModelChange)="onChangeSort($event)"
+                                                [options]="sortFieldOptions"
+                                                [showArrowIcon]="false"
+                                                [highlightHead]="false"
+                                                [dropdownHead]="dropdownHeadForSort"
+                                                optionLabel="value">
+                                            </app-dropdown-field>
                                         </div>
                                     </div>
                                 </div>

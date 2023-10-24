@@ -10,7 +10,7 @@ export type DropdownOptions = {
 };
 
 export type DropdownItem = {
-  caption: string;
+  caption?: string;
   value: string;
   selected?: boolean;
   details?: string;
@@ -38,9 +38,15 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   @Input()
   public optionLabel: string;
   @Input()
+  public showArrowIcon = true;
+  @Input()
   public arrowIcon: string;
   @Input()
+  public highlightHead = true;
+  @Input()
   public listOnTop = false;
+  @Input()
+  public dropdownHead: string;
   @Output()
   public clickByItemDesc = new EventEmitter<string>();
 

@@ -7,6 +7,8 @@ import { PagesService } from '@app/shared/services/pages.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { Place } from '@app/shared/interfaces';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 
 @Component({
   selector: 'app-locations-page',
@@ -23,6 +25,18 @@ export class LocationsPageComponent implements OnInit {
   private curLang: string;
   private pageWrapScrollSub: Subscription;
   public filterBarFixed = false;
+  public filterBarGroup: FormGroup = new FormGroup({});
+  public dropdownHeadForSort = '<div class="sortIcon"></div>Сортировка';
+  public sortFieldOptions: DropdownOptions = {
+    disabled: false,
+    id: "sort",
+    required: false,
+    items: [
+      { value: 'priceFromLeast', details: 'По цене $ → $$$' },
+      { value: 'priceFromMost', details: 'По цене $$$ → $' },
+      { value: 'rating', details: 'По рейтингу' },
+    ],
+  };
 
   @ViewChild('locationsWrapper') locationsWrapper: ElementRef;
   
@@ -43,9 +57,7 @@ export class LocationsPageComponent implements OnInit {
     );
 
     this.createForm();
-
     this.getAllLocations();
-
     this.aboutProgressiveImage();
   }
 
@@ -82,11 +94,22 @@ export class LocationsPageComponent implements OnInit {
 
   private createForm(): void {
 
-    const langFromService = this.pagesService.currentLanguage.getValue();
-
-    // this.filterForm = new FormGroup({
-    //   language: new FormControl({value: langFromService, disabled: this.langFieldOptions.disabled}, this.langFieldOptions.required ? [Validators.required] : []),
+    // this.filterBarGroup = new FormGroup({
+    //   sort: new FormControl({ value: 'rating', disabled: false }),
     // });
+
+    this.filterBarGroup.valueChanges.subscribe(
+      val => {
+        if (val['sort']) {
+          this.dropdownHeadForSort = '<div class="sortIcon sortIcon--selected"></div>Сортировка';
+        } else {
+          this.dropdownHeadForSort = '<div class="sortIcon"></div>Сортировка';
+        }
+      }
+    )
+
+    this.filterBarGroup.addControl('sort', new FormControl({ value: null, disabled: false }));
+
   }
 
   public get webview(): boolean {
@@ -96,7 +119,7 @@ export class LocationsPageComponent implements OnInit {
 
   private getAllLocations(): void {
     this.isLoading = true;
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('getAllLocations пошел');
         setTimeout(() => {
@@ -238,6 +261,10 @@ export class LocationsPageComponent implements OnInit {
 
   public getContent(key: string): string {
     return langArr[key][this.curLang];
+  }
+
+  public onChangeSort(sortValue: string): void {
+    // console.log(sortValue);
   }
 
   public ngOnDestroy(): void {

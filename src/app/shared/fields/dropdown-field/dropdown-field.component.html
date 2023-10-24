@@ -9,15 +9,27 @@
     </div>
 </div> -->
 
-<div class="dropdownControl" [class.dropdownControl--listOnTop]="listOnTop" [class.dropdownControl--open]="!closedState" [class.dropdownControl--disabled]="disabledControl">
+<div class="dropdownControl"
+    [ngClass]="{
+        'dropdownControl--listOnTop': listOnTop,
+        'dropdownControl--open': !closedState && highlightHead,
+        'dropdownControl--disabled': disabledControl
+    }"
+>
     <div (click)="toggleState($event)" class="dropdownControl__head">
-        <div class="dropdownControl__values">
-            {{selectedItems}}
-        </div>
-        <div *ngIf="arrowIcon; else defaultIcon" [ngStyle]="{backgroundImage: generateIconPath(arrowIcon)}" class="dropdownControl__customIcon"></div>
-        <ng-template #defaultIcon>
-            <div class="dropdownControl__icon"></div>
-        </ng-template>
+
+        <div class="dropdownControl__values" [innerHTML]="dropdownHead || selectedItems || 'Не выбрано'"></div>
+
+        <ng-container *ngIf="showArrowIcon">
+            <div class="dropdownControl__customIcon"
+                *ngIf="arrowIcon; else defaultIcon"
+                [ngStyle]="{ backgroundImage: generateIconPath(arrowIcon) }">
+            </div>
+            <ng-template #defaultIcon>
+                <div class="dropdownControl__icon"></div>
+            </ng-template>
+        </ng-container>
+
     </div>
 
     <!-- <div class="dropdownControl__list"
@@ -45,7 +57,7 @@
             class="dropdownControl__item"
         >
             <div class="dropdownMobileList__itemVal">
-                <span class="dropdownMobileList__itemCaption">{{item.caption}}</span>
+                <span *ngIf="item.caption" class="dropdownMobileList__itemCaption">{{item.caption}}</span>
                 <span class="dropdownMobileList__itemAddInfo">{{item.details}}</span>
             </div>
             <div class="dropdownMobileList__itemSelected">&#10003;</div>
@@ -56,9 +68,13 @@
         <div (click)="clickOutside(true)" class="dropdownMobileList__background"></div>
         <div class="dropdownMobileList__listWrap">
             <div class="dropdownMobileList__list">
-                <div *ngFor="let item of options.items" [ngClass]="{'dropdownMobileList__item--selected': item.selected}" (click)="selectValue(item)" class="dropdownMobileList__item">
+                <div class="dropdownMobileList__item"
+                    *ngFor="let item of options.items"
+                    [ngClass]="{'dropdownMobileList__item--selected': item.selected}"
+                    (click)="selectValue(item)"
+                >
                     <div class="dropdownMobileList__itemVal">
-                        <span class="dropdownMobileList__itemCaption">{{item.caption}}</span>
+                        <span *ngIf="item.caption" class="dropdownMobileList__itemCaption">{{item.caption}}</span>
                         <span class="dropdownMobileList__itemAddInfo">{{item.details}}</span>
                     </div>
                     <div class="dropdownMobileList__itemSelected">&#10003;</div>
