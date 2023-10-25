@@ -42,10 +42,10 @@
                                         Доступно {{locationsNew.placeCount}} мест
                                     </div>
                                     <div class="filterBar__controls">
-                                        <div class="filterBar__item">
+                                        <!-- <div class="filterBar__item">
                                             Фильтрация
-                                        </div>
-                                        <div class="filterBar__item">
+                                        </div> -->
+                                        <div *ngIf="filterBarGroup" class="filterBar__item">
                                             <app-dropdown-field
                                                 [formControl]="filterBarGroup.get('sort')"
                                                 (ngModelChange)="onChangeSort($event)"

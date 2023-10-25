@@ -25,7 +25,7 @@ export class LocationsPageComponent implements OnInit {
   private curLang: string;
   private pageWrapScrollSub: Subscription;
   public filterBarFixed = false;
-  public filterBarGroup: FormGroup = new FormGroup({});
+  public filterBarGroup: FormGroup;
   public dropdownHeadForSort = '<div class="sortIcon"></div>Сортировка';
   public sortFieldOptions: DropdownOptions = {
     disabled: false,
@@ -51,12 +51,12 @@ export class LocationsPageComponent implements OnInit {
       lang => {
         this.curLang = lang;
         if (!this.isLoading) {
-          this.getAllLocations();
+          this.getAllLocations(true);
         }
       }
     );
 
-    this.createForm();
+    // this.createForm();
     this.getAllLocations();
     this.aboutProgressiveImage();
   }
@@ -97,14 +97,11 @@ export class LocationsPageComponent implements OnInit {
     // this.filterBarGroup = new FormGroup({
     //   sort: new FormControl({ value: 'rating', disabled: false }),
     // });
+    this.filterBarGroup = new FormGroup({});
 
     this.filterBarGroup.valueChanges.subscribe(
       val => {
-        if (val['sort']) {
-          this.dropdownHeadForSort = '<div class="sortIcon sortIcon--selected"></div>Сортировка';
-        } else {
-          this.dropdownHeadForSort = '<div class="sortIcon"></div>Сортировка';
-        }
+        this.onSortControlChange(val);
       }
     )
 
@@ -112,12 +109,55 @@ export class LocationsPageComponent implements OnInit {
 
   }
 
+  private onSortControlChange(val: string): void {
+    if (val['sort']) {
+      this.dropdownHeadForSort = '<div class="sortIcon sortIcon--selected"></div>Сортировка';
+    } else {
+      this.dropdownHeadForSort = '<div class="sortIcon"></div>Сортировка';
+    }
+    this.sortLocationsList();
+  }
+
   public get webview(): boolean {
     const result = navigator.userAgent.includes('Dazzlink');
     return result;
   }
 
-  private getAllLocations(): void {
+  private sortLocationsList(): void {
+
+    const sortControlVal = this.filterBarGroup?.get('sort')?.value;
+
+    if (sortControlVal === 'priceFromLeast') {
+      console.log('Сортируем от меньшего к большему');
+      this.locationsNew.cityPlaceList.forEach(el => {
+        if (el.placeList?.length) {
+          el.placeList.sort((a, b) => {
+            return a.priceRange - b.priceRange;
+          })
+        }
+      });
+    } else if (sortControlVal === 'priceFromMost') {
+      console.log('Сортируем от большего к меньшему');
+      this.locationsNew.cityPlaceList.forEach(el => {
+        if (el.placeList?.length) {
+          el.placeList.sort((a, b) => {
+            return b.priceRange - a.priceRange;
+          })
+        }
+      });
+    } else if (sortControlVal === 'rating') {
+      console.log('Сортируем по рейтингу');
+      this.locationsNew.cityPlaceList.forEach(el => {
+        if (el.placeList?.length) {
+          el.placeList.sort((a, b) => {
+            return b.rating - a.rating;
+          })
+        }
+      });
+    }
+  }
+
+  private getAllLocations(afterChangeLang = false): void {
     this.isLoading = true;
     if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
@@ -173,7 +213,7 @@ export class LocationsPageComponent implements OnInit {
                       "title": "Люксор",
                       "subtitle": "Боевик",
                       "subcategory": "Кинотеатр",
-                      "priceRange": '3f',
+                      "priceRange": '1',
                       "rating": 4,
                       "address": "ул. Трубецкая, 106",
                     },
@@ -214,9 +254,17 @@ export class LocationsPageComponent implements OnInit {
         .subscribe(
           value => {
             this.locationsNew = value;
+            if (afterChangeLang) {
+              this.sortLocationsList();
+            } else {
+              this.createForm();
+            }
             this.isLoading = false;
           },
-          () => this.isLoading = false
+          () => {
+            this.locationsNew = null;
+            this.isLoading = false;
+          }
         );
 
     } else {
@@ -224,9 +272,18 @@ export class LocationsPageComponent implements OnInit {
         .subscribe(
           value => {
             this.locationsNew = value;
+            // console.log('Тут:', this.filterBarGroup)
+            if (afterChangeLang && this.filterBarGroup) {
+              this.sortLocationsList();
+            } else {
+              this.createForm();
+            }
             this.isLoading = false;
           },
-          () => this.isLoading = false
+          () => {
+            this.locationsNew = null;
+            this.isLoading = false;
+          }
         );
     }
   }
