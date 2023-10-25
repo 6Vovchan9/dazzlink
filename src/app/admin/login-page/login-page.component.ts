@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AdminData } from 'src/app/shared/interfaces';
 import { AuthService } from '../shared/services/auth.service';
@@ -11,7 +11,7 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  public loginForm!: FormGroup;
+  public loginForm!: UntypedFormGroup;
   public submitted = false;
   public messageFromQueryParams!: string;
 
@@ -33,9 +33,9 @@ export class LoginPageComponent implements OnInit {
       }
     )
 
-    this.loginForm  = new FormGroup({
-      email: new FormControl(null, [Validators.email, Validators.required]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6)])
+    this.loginForm  = new UntypedFormGroup({
+      email: new UntypedFormControl(null, [Validators.email, Validators.required]),
+      password: new UntypedFormControl(null, [Validators.required, Validators.minLength(6)])
     });
   }
 

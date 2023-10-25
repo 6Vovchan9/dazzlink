@@ -7,7 +7,7 @@ import { PagesService } from '@app/shared/services/pages.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { Place } from '@app/shared/interfaces';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 
 @Component({
@@ -25,7 +25,7 @@ export class LocationsPageComponent implements OnInit {
   private curLang: string;
   private pageWrapScrollSub: Subscription;
   public filterBarFixed = false;
-  public filterBarGroup: FormGroup;
+  public filterBarGroup: UntypedFormGroup;
   public dropdownHeadForSort = `
     <div class="headInSortDropdown">
       <div class="headInSortDropdown__icon"></div>
@@ -102,7 +102,7 @@ export class LocationsPageComponent implements OnInit {
     // this.filterBarGroup = new FormGroup({
     //   sort: new FormControl({ value: 'rating', disabled: false }),
     // });
-    this.filterBarGroup = new FormGroup({});
+    this.filterBarGroup = new UntypedFormGroup({});
 
     this.filterBarGroup.valueChanges.subscribe(
       val => {
@@ -110,7 +110,7 @@ export class LocationsPageComponent implements OnInit {
       }
     )
 
-    this.filterBarGroup.addControl('sort', new FormControl({ value: null, disabled: false }));
+    this.filterBarGroup.addControl('sort', new UntypedFormControl({ value: null, disabled: false }));
 
   }
 
