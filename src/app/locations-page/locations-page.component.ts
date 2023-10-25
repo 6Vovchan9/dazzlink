@@ -26,7 +26,12 @@ export class LocationsPageComponent implements OnInit {
   private pageWrapScrollSub: Subscription;
   public filterBarFixed = false;
   public filterBarGroup: FormGroup;
-  public dropdownHeadForSort = '<div class="sortIcon"></div>Сортировка';
+  public dropdownHeadForSort = `
+    <div class="headInSortDropdown">
+      <div class="headInSortDropdown__icon"></div>
+      <div class="headInSortDropdown__text">Сортировка</div>
+    </div>
+  `;
   public sortFieldOptions: DropdownOptions = {
     disabled: false,
     id: "sort",
@@ -111,9 +116,19 @@ export class LocationsPageComponent implements OnInit {
 
   private onSortControlChange(val: string): void {
     if (val['sort']) {
-      this.dropdownHeadForSort = '<div class="sortIcon sortIcon--selected"></div>Сортировка';
+      this.dropdownHeadForSort = `
+        <div class="headInSortDropdown">
+          <div class="headInSortDropdown__icon headInSortDropdown__icon--selected"></div>
+          <div class="headInSortDropdown__text">Сортировка</div>
+        </div>
+      `;
     } else {
-      this.dropdownHeadForSort = '<div class="sortIcon"></div>Сортировка';
+      this.dropdownHeadForSort = `
+        <div class="headInSortDropdown">
+          <div class="headInSortDropdown__icon"></div>
+          <div class="headInSortDropdown__text">Сортировка</div>
+        </div>
+      `;
     }
     this.sortLocationsList();
   }

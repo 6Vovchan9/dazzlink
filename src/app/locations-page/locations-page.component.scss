@@ -197,17 +197,31 @@
 }
 
 ::ng-deep {
-    .sortIcon {
-        width: 24px;
-        height: 24px;
-        margin-right: 5px;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-        background-image: url('/assets/icons/sortIconActive.svg');
+    .headInSortDropdown {
+        display: flex;
+        align-items: center;
+        .headInSortDropdown__icon {
+            width: 24px;
+            height: 24px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            background-image: url('/assets/icons/sortIconActive.svg');
 
-        &--selected {
-            background-image: url('/assets/icons/sortIconSelected.svg');
+            &--selected {
+                background-image: url('/assets/icons/sortIconSelected.svg');
+            }
+        }
+
+        .headInSortDropdown__text {
+            display: none;
+            margin-left: 5px;
+        }
+
+        @media #{$notMobile} {
+            .headInSortDropdown__text {
+                display: block;
+            }
         }
     }
 }
