@@ -1,10 +1,12 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, fromEvent } from 'rxjs';
+import { Observable, Subscription, fromEvent, of } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 import { langArr } from '@app/shared/constants/languages.constants';
 import { PagesService } from '@app/shared/services/pages.service';
 import { Router } from '@angular/router';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
+import { GoogleTranslationService } from '@app/shared/services/google-translation.service';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -68,7 +70,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   constructor(
     private pagesService: PagesService,
     public mobileDetectService: MobileDetectService,
-    private router: Router
+    private router: Router,
+    private translateService: GoogleTranslationService
     // private cd: ChangeDetectorRef
   ) { }
 
@@ -78,10 +81,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
   // }
 
   public ngOnInit(): void {
-    // console.log('---HomePageComponent init---');
-    this.lSub = this.pagesService.currentLanguage.subscribe(
-      lang => {
-        this.curLang = lang;
+
+    this.lSub = this.pagesService.currentLanguage.pipe(
+      tap(lang => this.curLang = lang),
+      // switchMap(lang => this.translateService.translate(lang, ['Семья начинается с нас']))
+    ).subscribe(
+      resp => {
+        // console.log(resp);
         // this.cd.detectChanges();
       }
     )
