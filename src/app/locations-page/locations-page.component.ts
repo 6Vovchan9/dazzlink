@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable, Observer, Subscription, fromEvent, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, delay, tap } from 'rxjs/operators';
 
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { PagesService } from '@app/shared/services/pages.service';
@@ -20,6 +20,7 @@ export class LocationsPageComponent implements OnInit {
   public locations$: Observable<Place[]>;
   public locationsNew: any;
   public isLoading = true;
+  public isSorting = false;
   private lSub: Subscription;
   private locationsSub: Subscription;
   private curLang: string;
@@ -174,7 +175,7 @@ export class LocationsPageComponent implements OnInit {
 
   private getAllLocations(afterChangeLang = false): void {
     this.isLoading = true;
-    if (false) {
+    if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('getAllLocations пошел');
         setTimeout(() => {
@@ -213,6 +214,12 @@ export class LocationsPageComponent implements OnInit {
                       "priceRange": 1,
                       "rating": 5,
                       "address": "ул. Гагарина, 37",
+                      "imageList": [
+                        {
+                          "type": null,
+                          "href": 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
+                        }
+                      ]
                     },
                     {
                       "id": "-NgYZORk7JcAD5y9fYvM",
@@ -266,6 +273,9 @@ export class LocationsPageComponent implements OnInit {
       })
 
       stream$
+        // .pipe(
+        //   delay(1000)
+        // )
         .subscribe(
           value => {
             this.locationsNew = value;
@@ -336,6 +346,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   public onChangeSort(sortValue: string): void {
+    // this.isSorting = true;
     // console.log(sortValue);
   }
 

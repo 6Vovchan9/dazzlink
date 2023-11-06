@@ -225,3 +225,14 @@
         }
     }
 }
+
+.skeletonExample {
+    margin-top: 40px;
+    display: flex;
+    .someFakeImg {
+        width: 400px;
+        height: 200px;
+        background-color: aqua;
+        position: relative;
+    }
+}

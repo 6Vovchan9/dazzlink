@@ -27,6 +27,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- <button (click)="isSorting = !isSorting" style="margin-top: 30px;" class="btn">toggle</button> -->
             </div>
         </aside>
         <main class="pageContent">
@@ -39,7 +40,8 @@
                                 <div class="filterBarWrapper__fakeSidebar"></div>
                                 <div class="filterBar">
                                     <div class="filterBar__length">
-                                        Доступно {{locationsNew.placeCount}} мест
+                                        <!-- Доступно {{locationsNew.placeCount}} мест -->
+                                        Показаны все города
                                     </div>
                                     <div class="filterBar__controls">
                                         <!-- <div class="filterBar__item">
@@ -67,12 +69,25 @@
                                     <div class="pageContent__locationsCity">{{block.cityName}}</div>
                                     <ul class="pageContent__locationsList">
                                         <li *ngFor="let location of block.placeList" class="pageContent__locationsItem">
-                                            <app-location-item [placeData]="location"></app-location-item>
+                                            <app-location-item [isLoading]="isSorting" [placeData]="location"></app-location-item>
                                         </li>
                                     </ul>
                                 </div>
                             </ng-container>
                         </ng-container>
+
+                        <!-- <div class="pageContent__locationsBlock" [class.withSkeletonLoader]="isSorting">
+                            <div class="skeletonExample">
+                                <div class="someFakeImg">
+                                    <div class="skeletonLoader"></div>
+                                </div>
+                            </div>
+                            <div class="skeletonExample">
+                                <div class="someFakeImg">
+                                    <div class="skeletonLoader"></div>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                 </ng-container>
             </ng-container>

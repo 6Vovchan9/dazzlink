@@ -1,8 +1,10 @@
-<div class="locationItem">
+<div class="locationItem" [class.withSkeletonLoader]="isLoading">
     <div class="locationItem__img">
         <ng-container *ngIf="placeData?.imageList?.length; else defaultPlaceImg">
             <img [src]="placeData.imageList[0].href" alt="Фото локации">
         </ng-container>
+
+        <div class="skeletonLoader"></div>
     </div>
     <!-- <div class="locationItem__details placeDetails">
         <div class="placeDetails__info">{{placeData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}</div>
@@ -31,10 +33,16 @@
                         <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
                     </div>
                     <span class="placeDetails__anotherItem">{{placeData?.subcategory || 'Кафе'}}</span>
-                    <span *ngIf="placeData?.subtitle" class="placeDetails__anotherItem placeDetails__anotherItem--kitchen">{{placeData.subtitle.split(' ')[0]}}</span>
+                    <span *ngIf="placeData?.subtitle"
+                        class="placeDetails__anotherItem placeDetails__anotherItem--kitchen"
+                    >
+                        {{placeData.subtitle.split(' ')[0]}}
+                    </span>
                 </div>
                 <div class="placeDetails__address">{{placeData?.address}}</div>
             </div>
+
+            <div class="skeletonLoader"></div>
         </div>
     </div>
 </div>

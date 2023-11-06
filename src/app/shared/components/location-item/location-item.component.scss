@@ -1,8 +1,10 @@
 .locationItem {
     cursor: pointer;
+    overflow: hidden;
     .locationItem__img {
+        position: relative;
         margin-bottom: 12px;
-        background-color: var(--color-text-gray);
+        background-color: var(--color-light-gray);
         min-height: 180px;
         border-radius: 24px;
         overflow: hidden;
@@ -17,6 +19,7 @@
 }
 
 .placeDetails {
+    position: relative;
     .placeDetails__main {
         display: flex;
         column-gap: 10px;
