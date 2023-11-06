@@ -38,9 +38,9 @@ export class LocationsPageComponent implements OnInit {
     id: "sort",
     required: false,
     items: [
-      { value: 'priceFromLeast', details: 'По цене $ → $$$' },
-      { value: 'priceFromMost', details: 'По цене $$$ → $' },
-      { value: 'rating', details: 'По рейтингу' },
+      { value: '+price', details: 'По цене $ → $$$' },
+      { value: '-price', details: 'По цене $$$ → $' },
+      { value: '-rating', details: 'По рейтингу' },
     ],
   };
 
@@ -57,7 +57,8 @@ export class LocationsPageComponent implements OnInit {
       lang => {
         this.curLang = lang;
         if (!this.isLoading) {
-          this.getAllLocations(true);
+          const sortControlVal = this.filterBarGroup?.get('sort')?.value;
+          this.getAllLocations(true, sortControlVal);
         }
       }
     );
@@ -101,15 +102,15 @@ export class LocationsPageComponent implements OnInit {
   private createForm(): void {
 
     // this.filterBarGroup = new FormGroup({
-    //   sort: new FormControl({ value: 'rating', disabled: false }),
+    //   sort: new FormControl({ value: '-rating', disabled: false }),
     // });
     this.filterBarGroup = new UntypedFormGroup({});
 
-    this.filterBarGroup.valueChanges.subscribe(
-      val => {
-        this.onSortControlChange(val);
-      }
-    )
+    // this.filterBarGroup.valueChanges.subscribe(
+    //   val => {
+    //     this.onSortControlChange(val);
+    //   }
+    // )
 
     this.filterBarGroup.addControl('sort', new UntypedFormControl({ value: null, disabled: false }));
 
@@ -139,11 +140,17 @@ export class LocationsPageComponent implements OnInit {
     return result;
   }
 
+  private sortLocationsOnBackend() {
+    const sortControlVal = this.filterBarGroup?.get('sort')?.value;
+
+    this.getAllLocationsAfterSort(sortControlVal);
+  }
+
   private sortLocationsList(): void {
 
     const sortControlVal = this.filterBarGroup?.get('sort')?.value;
 
-    if (sortControlVal === 'priceFromLeast') {
+    if (sortControlVal === '+price') {
       console.log('Сортируем от меньшего к большему');
       this.locationsNew.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
@@ -152,7 +159,7 @@ export class LocationsPageComponent implements OnInit {
           })
         }
       });
-    } else if (sortControlVal === 'priceFromMost') {
+    } else if (sortControlVal === '-price') {
       console.log('Сортируем от большего к меньшему');
       this.locationsNew.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
@@ -161,7 +168,7 @@ export class LocationsPageComponent implements OnInit {
           })
         }
       });
-    } else if (sortControlVal === 'rating') {
+    } else if (sortControlVal === '-rating') {
       console.log('Сортируем по рейтингу');
       this.locationsNew.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
@@ -173,7 +180,7 @@ export class LocationsPageComponent implements OnInit {
     }
   }
 
-  private getAllLocations(afterChangeLang = false): void {
+  private getAllLocations(afterChangeLang = false, sortVal?: string): void {
     this.isLoading = true;
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
@@ -269,7 +276,7 @@ export class LocationsPageComponent implements OnInit {
             }
           )
           // observer.error('Error')
-        }, 1000)
+        }, 2000)
       })
 
       stream$
@@ -279,8 +286,8 @@ export class LocationsPageComponent implements OnInit {
         .subscribe(
           value => {
             this.locationsNew = value;
-            if (afterChangeLang) {
-              this.sortLocationsList();
+            if (afterChangeLang && this.filterBarGroup) {
+              // this.sortLocationsList();
             } else {
               this.createForm();
             }
@@ -293,13 +300,15 @@ export class LocationsPageComponent implements OnInit {
         );
 
     } else {
-      this.locationsSub = this.locationsService.getAllLocations()
+      this.locationsSub = this.locationsService.getAllLocations(sortVal)
+        .pipe(
+          delay(2000)
+        )
         .subscribe(
           value => {
             this.locationsNew = value;
-            // console.log('Тут:', this.filterBarGroup)
             if (afterChangeLang && this.filterBarGroup) {
-              this.sortLocationsList();
+              // this.sortLocationsList();
             } else {
               this.createForm();
             }
@@ -308,6 +317,143 @@ export class LocationsPageComponent implements OnInit {
           () => {
             this.locationsNew = null;
             this.isLoading = false;
+          }
+        );
+    }
+  }
+
+  private getAllLocationsAfterSort(sortVal?: string): void {
+    if (true) {
+      const stream$ = new Observable((observer: Observer<any>) => {
+        console.warn('getAllLocationsAfter пошел');
+        setTimeout(() => {
+          console.warn('getAllLocationsAfter ок!');
+          // observer.next({})
+          // observer.next(null)
+          observer.next(
+            {
+              "placeCount": 5,
+              "cityPlaceList": [
+                {
+                  "cityCode": "Tashkent",
+                  "cityName": "Ташкент",
+                  "placeList": [
+                    {
+                      "id": "-NgTNTZzxh9cram2eEd2",
+                      "categoryCode": "RESTAURANTS",
+                      "title": "Чайхана Navat и еще очень много всего инетересного",
+                      "subtitle": "Узбекская кухня",
+                      "subcategory": "Бар",
+                      "priceRange": 23,
+                      "rating": 4.5,
+                      "address": "ул. Ислама Каримова, 15",
+                      "imageList": [
+                        {
+                          "type": null,
+                          "href": 'assets/images/linkToArticlesX2.jpg'
+                        }
+                      ]
+                    },
+                    {
+                      "id": "-NgVSDcz4AMZ_2JA8yMZ",
+                      "title": "Кафе у Лидии",
+                      "subtitle": "Русская кухня",
+                      "subcategory": "Бистро",
+                      "priceRange": 1,
+                      "rating": 5,
+                      "address": "ул. Гагарина, 37",
+                      "imageList": [
+                        {
+                          "type": null,
+                          "href": 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
+                        }
+                      ]
+                    },
+                    {
+                      "id": "-NgYZORk7JcAD5y9fYvM",
+                      "title": "Angry Birds",
+                      // "subtitle": "Кавказская кухня",
+                      "subcategory": "Кафе",
+                      "priceRange": '2',
+                      "rating": 3.98,
+                      "address": "ул. Флерова, 4а",
+                    },
+                    {
+                      "id": "-NgYZORk7JcAD5y9ffSl",
+                      "title": "Люксор",
+                      "subtitle": "Боевик",
+                      "subcategory": "Кинотеатр",
+                      "priceRange": '1',
+                      "rating": 4,
+                      "address": "ул. Трубецкая, 106",
+                    },
+                  ]
+                },
+                {
+                  "cityCode": null,
+                  "cityName": "Алматы",
+                  "placeList": [
+                    {
+                      "id": "-NgVRC20Iit-rnFDKsza",
+                      "categoryCode": "RESTAURANTS",
+                      "title": "Старый город",
+                      "subtitle": "Европейская",
+                      "subcategory": "Ресторан",
+                      "priceRange": 2,
+                      "rating": 4.2,
+                      "address": "проспект Ленина, 17",
+                      "imageList": null
+                    }
+                  ]
+                },
+                {
+                  "cityName": "Москва",
+                  "placeList": []
+                },
+                {
+                  "cityName": "Ереван",
+                }
+              ]
+            }
+          )
+          // observer.error('Error')
+        }, 3000)
+      })
+
+      stream$
+        // .pipe(
+        //   delay(1000)
+        // )
+        .subscribe(
+          value => {
+            this.locationsNew = value;
+            this.filterBarGroup.get('sort').enable();
+            this.setIconForSortDropdown(sortVal);
+            this.isSorting = false;
+          },
+          () => {
+            this.filterBarGroup.get('sort').enable();
+            this.isSorting = false;
+            // Нужно будет как ниб показать сообщ о том что не удалось отсортировать локации
+          }
+        );
+
+    } else {
+      this.locationsSub = this.locationsService.getAllLocations(sortVal)
+        .pipe(
+          delay(3000)
+        )
+        .subscribe(
+          value => {
+            this.locationsNew = value;
+            this.filterBarGroup.get('sort').enable();
+            this.setIconForSortDropdown(sortVal);
+            this.isSorting = false;
+          },
+          () => {
+            this.filterBarGroup.get('sort').enable();
+            this.isSorting = false;
+            // Нужно будет как ниб показать сообщ о том что не удалось отсортировать локации
           }
         );
     }
@@ -346,8 +492,27 @@ export class LocationsPageComponent implements OnInit {
   }
 
   public onChangeSort(sortValue: string): void {
-    // this.isSorting = true;
-    // console.log(sortValue);
+    this.isSorting = true;
+    this.filterBarGroup.get('sort').disable();
+    this.sortLocationsOnBackend();
+  }
+
+  private setIconForSortDropdown(sortValue: string): void {
+    if (sortValue) {
+      this.dropdownHeadForSort = `
+        <div class="headInSortDropdown">
+          <div class="headInSortDropdown__icon headInSortDropdown__icon--selected"></div>
+          <div class="headInSortDropdown__text">Сортировка</div>
+        </div>
+      `;
+    } else {
+      this.dropdownHeadForSort = `
+        <div class="headInSortDropdown">
+          <div class="headInSortDropdown__icon"></div>
+          <div class="headInSortDropdown__text">Сортировка</div>
+        </div>
+      `;
+    }
   }
 
   public ngOnDestroy(): void {

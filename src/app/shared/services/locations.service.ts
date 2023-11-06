@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { delay, map, tap } from "rxjs/operators";
@@ -15,17 +15,28 @@ export class LocationsService {
         private pagesService: PagesService
     ) { }
 
-    getAllLocations(): Observable<RovraggeRespLocationsData> {
+    getAllLocations(sortVal?: string): Observable<RovraggeRespLocationsData> {
 
         const options = {
-            headers: new HttpHeaders({ 'x-accept-language': this.pagesService.currentLanguage.getValue() || 'RU' })
+            headers: new HttpHeaders({ 'x-accept-language': this.pagesService.currentLanguage.getValue() || 'ru' })
         };
+
+        // let queryParams = new HttpParams().appendAll({ categoryCode: 'REST', sort: sortVal });
+        const customQueryParams = { categoryCode: 'REST' };
+
+        if (sortVal) {
+            customQueryParams['sort'] = sortVal;
+        }
 
         return this.http.get(
             `${environment.rovraggePlacesUrl}/place`,
             {
-                headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() },
-                params: { categoryCode: 'REST' }
+                headers: {
+                    'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
+                    'x-source-channel': 'duzzlink-web'
+                },
+                // params: queryParams
+                params: customQueryParams
             }
         )
             .pipe(
