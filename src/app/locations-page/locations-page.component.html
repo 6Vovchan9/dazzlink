@@ -30,23 +30,25 @@
                 <!-- <button (click)="isSorting = !isSorting" style="margin-top: 30px;" class="btn">toggle</button> -->
             </div>
             <div class="filterOptionsBlock">
-                <div class="filterOptionsBlock__title">Фильтр города</div>
-                <ul class="filterOptionsBlock__allCountries">
-                    <li *ngFor="let country of filterFieldOptions" class="filterOptionsBlock__country">
-                        <div class="filterOptionsBlock__countryName" [class.filterOptionsBlock__countryName--selected]="country['selectedСities']">{{country.title + (country['selectedСities'] ? ': ' + country['selectedСities'] : '')}}</div>
-                        <ul class="filterOptionsBlock__allCities">
-                            <li *ngFor="let city of country.valueList" (click)="onSelectCity(country, city)" class="filterOptionsBlock__city">
-                                <div class="cityForFilter">
-                                    <div class="cityForFilter__checkbox">
-                                        <div class="cityForFilter__box" [class.cityForFilter__box--selected]="city.selected"></div>
-                                        <div class="cityForFilter__name">{{city.name}}</div>
+                <div class="filterOptionsBlock__content">
+                    <div class="filterOptionsBlock__title">Фильтр города</div>
+                    <ul class="filterOptionsBlock__allCountries">
+                        <li *ngFor="let country of filterFieldOptions" class="filterOptionsBlock__country">
+                            <div class="filterOptionsBlock__countryName" [class.filterOptionsBlock__countryName--selected]="country['selectedСities']">{{country.title + (country['selectedСities'] ? ': ' + country['selectedСities'] : '')}}</div>
+                            <ul class="filterOptionsBlock__allCities">
+                                <li *ngFor="let city of country.valueList" (click)="onSelectCity(country, city)" class="filterOptionsBlock__city">
+                                    <div class="cityForFilter">
+                                        <div class="cityForFilter__checkbox">
+                                            <div class="cityForFilter__box" [class.cityForFilter__box--selected]="city.selected"></div>
+                                            <div class="cityForFilter__name">{{city.name}}</div>
+                                        </div>
+                                        <div class="cityForFilter__amountPlace">{{city.count}}</div>
                                     </div>
-                                    <div class="cityForFilter__amountPlace">{{city.count}}</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </aside>
         <main class="pageContent">
@@ -60,7 +62,7 @@
                                 <div class="filterBar">
                                     <div class="filterBar__length">
                                         <!-- Доступно {{locationsNew.placeCount}} мест -->
-                                        Показаны все города
+                                        {{getAmountOfAllSelectedCities()}}
                                     </div>
                                     <div class="filterBar__controls">
                                         <!-- <div class="filterBar__item">

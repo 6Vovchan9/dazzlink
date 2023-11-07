@@ -27,6 +27,7 @@ export class LocationsPageComponent implements OnInit {
   private pageWrapScrollSub: Subscription;
   public filterBarFixed = false;
   public filterBarGroup: UntypedFormGroup;
+  public allSelectedСities = 0;
   public dropdownHeadForSort = `
     <div class="headInSortDropdown">
       <div class="headInSortDropdown__icon"></div>
@@ -46,7 +47,6 @@ export class LocationsPageComponent implements OnInit {
   public filterFieldOptions = [
     {
       title: 'Узбекистан',
-      selectedСities: 1,
       valueList: [
         {
           name: 'Ташкент',
@@ -55,7 +55,6 @@ export class LocationsPageComponent implements OnInit {
         },
         {
           name: 'Наманган',
-          selected: true,
           value: 'Namangan',
           count: 2,
         },
@@ -631,11 +630,18 @@ export class LocationsPageComponent implements OnInit {
       console.log('Отжали какойто город');
       linkToCity.selected = false;
       linkToCountry.selectedСities -= 1;
+      this.allSelectedСities -= 1;
     } else {
       console.log('Выбрали еще какойто город');
       linkToCity.selected = true;
+      if (!linkToCountry.selectedСities) {linkToCountry.selectedСities = 0};
       linkToCountry.selectedСities += 1;
+      this.allSelectedСities += 1;
     }
+  }
+
+  private getAmountOfAllSelectedCities(): string {
+    return this.allSelectedСities ? `Показан ${this.allSelectedСities} из 20 городов` : 'Показаны все города'
   }
 
 }
