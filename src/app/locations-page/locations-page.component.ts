@@ -43,6 +43,110 @@ export class LocationsPageComponent implements OnInit {
       { value: '-rating', details: 'По рейтингу' },
     ],
   };
+  public filterFieldOptions = [
+    {
+      title: 'Узбекистан',
+      selectedСities: 1,
+      valueList: [
+        {
+          name: 'Ташкент',
+          value: 'Tashkent',
+          count: 42
+        },
+        {
+          name: 'Наманган',
+          selected: true,
+          value: 'Namangan',
+          count: 2,
+        },
+        {
+          name: 'Самарканд',
+          value: 'Samarkand',
+          count: 32
+        },
+        {
+          name: 'Андижан',
+          value: 'Andizhan',
+          count: 62
+        },
+        {
+          name: 'Нукус',
+          value: 'Nukus',
+          count: 47
+        },
+        {
+          name: 'Коканд',
+          value: 'Kokand',
+          count: 1
+        },
+        {
+          name: 'Бухара',
+          value: 'Buhara',
+          count: 46
+        },
+        {
+          name: 'Карши',
+          value: 'Karshi',
+          count: 49
+        },
+        {
+          name: 'Фергана',
+          value: 'Fergana',
+          count: 40
+        },
+        {
+          name: 'Маргилан',
+          value: 'Margilan',
+          count: 81
+        }
+      ]
+    },
+    {
+      title: 'Казахстан',
+      valueList: [
+        {
+          name: 'Алматы',
+          value: 'Almati',
+          count: 62
+        },
+        {
+          name: 'Астана',
+          value: 'Astana',
+          count: 4
+        },
+        {
+          name: 'Шымкент',
+          value: 'Shimkent',
+          count: 83
+        },
+        {
+          name: 'Актобе',
+          value: 'Aktobe',
+          count: 44
+        },
+        {
+          name: 'Караганда',
+          value: 'Karaganda',
+          count: 49
+        },
+        {
+          name: 'Тараз',
+          value: 'Taraz',
+          count: 24
+        },
+        {
+          name: 'Усть-Каменогорск',
+          value: 'Kamen',
+          count: 70
+        },
+        {
+          name: 'Павлодар',
+          value: 'Pavlodar',
+          count: 89
+        }
+      ]
+    }
+  ]
 
   @ViewChild('locationsWrapper') locationsWrapper: ElementRef;
   
@@ -519,6 +623,19 @@ export class LocationsPageComponent implements OnInit {
     this.pageWrapScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
     this.locationsSub?.unsubscribe();
+  }
+
+  private onSelectCity(linkToCountry: any, linkToCity: any): void {
+    const curVal = linkToCity.selected;
+    if (curVal) {
+      console.log('Отжали какойто город');
+      linkToCity.selected = false;
+      linkToCountry.selectedСities -= 1;
+    } else {
+      console.log('Выбрали еще какойто город');
+      linkToCity.selected = true;
+      linkToCountry.selectedСities += 1;
+    }
   }
 
 }
