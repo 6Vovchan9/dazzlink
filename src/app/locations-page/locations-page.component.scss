@@ -188,12 +188,27 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     .filterBar__controls {
         display: flex;
         align-items: center;
-        .filterBar__item {
-            margin-right: 20px;
-            &:last-child {
-                margin-right: unset;
-            }
-        }
+        // .filterBar__item {
+        //     margin-right: 20px;
+        //     &:last-child {
+        //         margin-right: unset;
+        //     }
+        // }
+    }
+}
+
+.filterButton {
+    font-size: 16px;
+    padding: 8px 16px;
+    display: block;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+
+    &[disabled] {
+        cursor: not-allowed;
+        color: inherit;
+        opacity: .6;
     }
 }
 
@@ -207,10 +222,22 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center center;
-            background-image: url('/assets/icons/sortIconActive.svg');
+            // background-image: url('/assets/icons/sortIconActive.svg');
 
-            &--selected {
-                background-image: url('/assets/icons/sortIconSelected.svg');
+            &.filterIcon {
+                background-image: url('/assets/icons/filterIconActive.svg');
+
+                &--selected {
+                    background-image: url('/assets/icons/filterIconSelected.svg');
+                }
+            }
+
+            &.sortIcon {
+                background-image: url('/assets/icons/sortIconActive.svg');
+
+                &--selected {
+                    background-image: url('/assets/icons/sortIconSelected.svg');
+                }
             }
         }
 
@@ -244,7 +271,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     border-radius: 20px;
     display: none;
     // max-height: 600px;
-    margin-top: 30px;
 
     .filterOptionsBlock__content {
         flex: 1;

@@ -6,7 +6,7 @@ import { MobileDetectService } from '@app/shared/services/mobile-detect.service'
 import { PagesService } from '@app/shared/services/pages.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { LocationsService } from '@app/shared/services/locations.service';
-import { Place } from '@app/shared/interfaces';
+import { CountryFilterItem, Place } from '@app/shared/interfaces';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 
@@ -23,14 +23,16 @@ export class LocationsPageComponent implements OnInit {
   public isSorting = false;
   private lSub: Subscription;
   private locationsSub: Subscription;
+  private FSub: Subscription;
   private curLang: string;
   private pageWrapScrollSub: Subscription;
   public filterBarFixed = false;
   public filterBarGroup: UntypedFormGroup;
-  public allSelectedСities = 0;
+  public amountAllSelectedCities = 0;
+  public showFilterControls = false;
   public dropdownHeadForSort = `
     <div class="headInSortDropdown">
-      <div class="headInSortDropdown__icon"></div>
+      <div class="headInSortDropdown__icon sortIcon"></div>
       <div class="headInSortDropdown__text">Сортировка</div>
     </div>
   `;
@@ -44,108 +46,7 @@ export class LocationsPageComponent implements OnInit {
       { value: '-rating', details: 'По рейтингу' },
     ],
   };
-  public filterFieldOptions = [
-    {
-      title: 'Узбекистан',
-      valueList: [
-        {
-          name: 'Ташкент',
-          value: 'Tashkent',
-          count: 42
-        },
-        {
-          name: 'Наманган',
-          value: 'Namangan',
-          count: 2,
-        },
-        {
-          name: 'Самарканд',
-          value: 'Samarkand',
-          count: 32
-        },
-        {
-          name: 'Андижан',
-          value: 'Andizhan',
-          count: 62
-        },
-        {
-          name: 'Нукус',
-          value: 'Nukus',
-          count: 47
-        },
-        {
-          name: 'Коканд',
-          value: 'Kokand',
-          count: 1
-        },
-        {
-          name: 'Бухара',
-          value: 'Buhara',
-          count: 46
-        },
-        {
-          name: 'Карши',
-          value: 'Karshi',
-          count: 49
-        },
-        {
-          name: 'Фергана',
-          value: 'Fergana',
-          count: 40
-        },
-        {
-          name: 'Маргилан',
-          value: 'Margilan',
-          count: 81
-        }
-      ]
-    },
-    {
-      title: 'Казахстан',
-      valueList: [
-        {
-          name: 'Алматы',
-          value: 'Almati',
-          count: 62
-        },
-        {
-          name: 'Астана',
-          value: 'Astana',
-          count: 4
-        },
-        {
-          name: 'Шымкент',
-          value: 'Shimkent',
-          count: 83
-        },
-        {
-          name: 'Актобе',
-          value: 'Aktobe',
-          count: 44
-        },
-        {
-          name: 'Караганда',
-          value: 'Karaganda',
-          count: 49
-        },
-        {
-          name: 'Тараз',
-          value: 'Taraz',
-          count: 24
-        },
-        {
-          name: 'Усть-Каменогорск',
-          value: 'Kamen',
-          count: 70
-        },
-        {
-          name: 'Павлодар',
-          value: 'Pavlodar',
-          count: 89
-        }
-      ]
-    }
-  ]
+  public filterFieldOptions: Array<CountryFilterItem>;
 
   @ViewChild('locationsWrapper') locationsWrapper: ElementRef;
   
@@ -167,6 +68,7 @@ export class LocationsPageComponent implements OnInit {
     );
 
     // this.createForm();
+    this.getFilters();
     this.getAllLocations();
     this.aboutProgressiveImage();
   }
@@ -223,14 +125,14 @@ export class LocationsPageComponent implements OnInit {
     if (val['sort']) {
       this.dropdownHeadForSort = `
         <div class="headInSortDropdown">
-          <div class="headInSortDropdown__icon headInSortDropdown__icon--selected"></div>
+          <div class="headInSortDropdown__icon sortIcon sortIcon--selected"></div>
           <div class="headInSortDropdown__text">Сортировка</div>
         </div>
       `;
     } else {
       this.dropdownHeadForSort = `
         <div class="headInSortDropdown">
-          <div class="headInSortDropdown__icon"></div>
+          <div class="headInSortDropdown__icon sortIcon"></div>
           <div class="headInSortDropdown__text">Сортировка</div>
         </div>
       `;
@@ -283,9 +185,172 @@ export class LocationsPageComponent implements OnInit {
     }
   }
 
+  private getFilters(): void {
+    if (true) {
+      const stream$ = new Observable((observer: Observer<any>) => {
+        console.warn('getFilters пошел');
+        setTimeout(() => {
+          console.warn('getFilters ок!');
+          // observer.next({})
+          // observer.next(null)
+          observer.next(
+            {
+              sort: [],
+              filter: [
+                {
+                  code: 'city',
+                  group: [
+                    {
+                      title: 'Узбекистан',
+                      valueList: [
+                        {
+                          name: 'Ташкент',
+                          value: 'Tashkent',
+                          count: 42
+                        },
+                        {
+                          name: 'Наманган',
+                          value: 'Namangan',
+                          count: 2,
+                        },
+                        {
+                          name: 'Самарканд',
+                          value: 'Samarkand',
+                          count: 32
+                        },
+                        {
+                          name: 'Андижан',
+                          value: 'Andizhan',
+                          count: 62
+                        },
+                        {
+                          name: 'Нукус',
+                          value: 'Nukus',
+                          count: 47
+                        },
+                        {
+                          name: 'Коканд',
+                          value: 'Kokand',
+                          count: 1
+                        },
+                        {
+                          name: 'Бухара',
+                          value: 'Buhara',
+                          count: 46
+                        },
+                        {
+                          name: 'Карши',
+                          value: 'Karshi',
+                          count: 49
+                        },
+                        {
+                          name: 'Фергана',
+                          value: 'Fergana',
+                          count: 40
+                        },
+                        {
+                          name: 'Маргилан',
+                          value: 'Margilan',
+                          count: 81
+                        }
+                      ]
+                    },
+                    {
+                      title: 'Казахстан',
+                      valueList: [
+                        {
+                          name: 'Алматы',
+                          value: 'Almati',
+                          count: 62
+                        },
+                        {
+                          name: 'Астана',
+                          value: 'Astana',
+                          count: 4
+                        },
+                        {
+                          name: 'Шымкент',
+                          value: 'Shimkent',
+                          count: 83
+                        },
+                        {
+                          name: 'Актобе',
+                          value: 'Aktobe',
+                          count: 44
+                        },
+                        {
+                          name: 'Караганда',
+                          value: 'Karaganda',
+                          count: 49
+                        },
+                        {
+                          name: 'Тараз',
+                          value: 'Taraz',
+                          count: 24
+                        },
+                        {
+                          name: 'Усть-Каменогорск',
+                          value: 'Kamen',
+                          count: 70
+                        },
+                        {
+                          name: 'Павлодар',
+                          value: 'Pavlodar',
+                          count: 89
+                        }
+                      ]
+                    },
+                    {
+                      title: 'Армения',
+                      valueList: []
+                    }
+                  ]
+                },
+                {
+                  code: 'kitchen',
+                  group: []
+                }
+              ]
+            }
+          )
+          // observer.error('Error')
+        }, 4000)
+      })
+
+      stream$
+        .subscribe(
+          value => {
+            const group = value?.filter.find(el => el.code === 'city')?.group;
+            const notEmptyGroup = group?.filter(el => el.valueList.length);
+            this.filterFieldOptions = notEmptyGroup;
+          },
+          () => {
+
+          }
+        );
+    } else {
+      this.FSub = this.locationsService.getLocationFilters()
+        .subscribe(
+          (val: any) => {
+            console.log(val);
+          },
+          () => {
+
+          }
+        )
+    }
+  }
+
+  private operateFilterFieldOptions(): void { // Тут мы будем анализировать список стран, считать кол-во выбранных городов и записывать их в отдельный список
+    
+    const arrOfSelectedCities = [];
+    // this.filterFieldOptions.forEach(country => contr)
+
+  }
+
   private getAllLocations(afterChangeLang = false, sortVal?: string): void {
     this.isLoading = true;
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('getAllLocations пошел');
         setTimeout(() => {
@@ -604,14 +669,14 @@ export class LocationsPageComponent implements OnInit {
     if (sortValue) {
       this.dropdownHeadForSort = `
         <div class="headInSortDropdown">
-          <div class="headInSortDropdown__icon headInSortDropdown__icon--selected"></div>
+          <div class="headInSortDropdown__icon sortIcon sortIcon--selected"></div>
           <div class="headInSortDropdown__text">Сортировка</div>
         </div>
       `;
     } else {
       this.dropdownHeadForSort = `
         <div class="headInSortDropdown">
-          <div class="headInSortDropdown__icon"></div>
+          <div class="headInSortDropdown__icon sortIcon"></div>
           <div class="headInSortDropdown__text">Сортировка</div>
         </div>
       `;
@@ -622,6 +687,7 @@ export class LocationsPageComponent implements OnInit {
     this.pageWrapScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
     this.locationsSub?.unsubscribe();
+    this.FSub?.unsubscribe();
   }
 
   private onSelectCity(linkToCountry: any, linkToCity: any): void {
@@ -629,19 +695,19 @@ export class LocationsPageComponent implements OnInit {
     if (curVal) {
       console.log('Отжали какойто город');
       linkToCity.selected = false;
-      linkToCountry.selectedСities -= 1;
-      this.allSelectedСities -= 1;
+      linkToCountry.selectedСities = linkToCountry.selectedСities.filter(el => el !== linkToCity.value);
+      this.amountAllSelectedCities -= 1;
     } else {
       console.log('Выбрали еще какойто город');
       linkToCity.selected = true;
-      if (!linkToCountry.selectedСities) {linkToCountry.selectedСities = 0};
-      linkToCountry.selectedСities += 1;
-      this.allSelectedСities += 1;
+      if (!linkToCountry.selectedСities?.length) { linkToCountry.selectedСities = [] };
+      linkToCountry.selectedСities.push(linkToCity.value);
+      this.amountAllSelectedCities += 1;
     }
   }
 
   private getAmountOfAllSelectedCities(): string {
-    return this.allSelectedСities ? `Показан ${this.allSelectedСities} из 20 городов` : 'Показаны все города'
+    return this.amountAllSelectedCities ? `Показан ${this.amountAllSelectedCities} из 20 городов` : 'Показаны все города'
   }
 
 }

@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { delay, map, tap } from "rxjs/operators";
 
 import { environment } from "src/environments/environment";
-import { Place, Post, RovraggeRespLocationsData, RovraggeRespWrapper } from "../interfaces";
+import { Place, Post, RovraggeRespLocationsData, RovraggeRespWrapper, RovraggeRespFiltersData } from "../interfaces";
 import { PagesService } from "@app/shared/services/pages.service";
 
 @Injectable({ providedIn: 'root' })
@@ -38,12 +38,25 @@ export class LocationsService {
                 // params: queryParams
                 params: customQueryParams
             }
+        ).pipe(
+            map((resp: RovraggeRespWrapper) => {
+                return resp.data;
+            })
         )
-            .pipe(
-                map((resp: RovraggeRespWrapper) => {
-                    return resp.data;
-                })
-            )
+    }
+
+    public getLocationFilters(): Observable<RovraggeRespFiltersData> {
+        return this.http.get(
+            `${environment.rovraggePlacesUrl}/place/filter`,
+            {
+                headers: {
+                    'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
+                },
+                params: { categoryCode: 'REST' }
+            }
+        ).pipe(
+            map((resp: RovraggeRespWrapper) => resp.data)
+        )
     }
 
     create(location: Place): Observable<Place> {

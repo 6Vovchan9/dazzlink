@@ -1,7 +1,7 @@
 <main class="page">
     <div class="container page__container">
         <aside class="sidebar" [class.hiddenInMobile]="webview">
-            <div class="aboutPage">
+            <div *ngIf="!showFilterControls; else filterOptionsBlock" class="aboutPage">
                 <div class="moduleTitle moduleTitle--main">Локации</div>
                 <div class="aboutPage__text">
                     Подборка мест для романтических свиданий и ещё какие-то слова чтобы добить до трех строк и было красиво
@@ -29,27 +29,31 @@
                 </div>
                 <!-- <button (click)="isSorting = !isSorting" style="margin-top: 30px;" class="btn">toggle</button> -->
             </div>
-            <div class="filterOptionsBlock">
-                <div class="filterOptionsBlock__content">
-                    <div class="filterOptionsBlock__title">Фильтр города</div>
-                    <ul class="filterOptionsBlock__allCountries">
-                        <li *ngFor="let country of filterFieldOptions" class="filterOptionsBlock__country">
-                            <div class="filterOptionsBlock__countryName" [class.filterOptionsBlock__countryName--selected]="country['selectedСities']">{{country.title + (country['selectedСities'] ? ': ' + country['selectedСities'] : '')}}</div>
-                            <ul class="filterOptionsBlock__allCities">
-                                <li *ngFor="let city of country.valueList" (click)="onSelectCity(country, city)" class="filterOptionsBlock__city">
-                                    <div class="cityForFilter">
-                                        <div class="cityForFilter__checkbox">
-                                            <div class="cityForFilter__box" [class.cityForFilter__box--selected]="city.selected"></div>
-                                            <div class="cityForFilter__name">{{city.name}}</div>
-                                        </div>
-                                        <div class="cityForFilter__amountPlace">{{city.count}}</div>
-                                    </div>
+            <ng-template #filterOptionsBlock>
+                <ng-container *ngIf="filterFieldOptions?.length">
+                    <div class="filterOptionsBlock">
+                        <div class="filterOptionsBlock__content">
+                            <div class="filterOptionsBlock__title">Фильтр города</div>
+                            <ul class="filterOptionsBlock__allCountries">
+                                <li *ngFor="let country of filterFieldOptions" class="filterOptionsBlock__country">
+                                    <div class="filterOptionsBlock__countryName" [class.filterOptionsBlock__countryName--selected]="country['selectedСities']?.length">{{country.title + (country['selectedСities']?.length ? ': ' + country['selectedСities']?.length : '')}}</div>
+                                    <ul class="filterOptionsBlock__allCities">
+                                        <li *ngFor="let city of country.valueList" (click)="onSelectCity(country, city)" class="filterOptionsBlock__city">
+                                            <div class="cityForFilter">
+                                                <div class="cityForFilter__checkbox">
+                                                    <div class="cityForFilter__box" [class.cityForFilter__box--selected]="city.selected"></div>
+                                                    <div class="cityForFilter__name">{{city.name}}</div>
+                                                </div>
+                                                <div class="cityForFilter__amountPlace">{{city.count}}</div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-template>
         </aside>
         <main class="pageContent">
             <ng-container *ngIf="!isLoading; else loadingTemplate">
@@ -65,9 +69,15 @@
                                         {{getAmountOfAllSelectedCities()}}
                                     </div>
                                     <div class="filterBar__controls">
-                                        <!-- <div class="filterBar__item">
-                                            Фильтрация
-                                        </div> -->
+                                        <div class="filterBar__item">
+                                            <!-- Фильтрация -->
+                                            <button [disabled]="!filterFieldOptions?.length" (click)="showFilterControls = !showFilterControls" class="filterButton">
+                                                <div class="headInSortDropdown">
+                                                    <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities"></div>
+                                                    <div class="headInSortDropdown__text">Фильтр</div>
+                                                  </div>
+                                            </button>
+                                        </div>
                                         <div *ngIf="filterBarGroup" class="filterBar__item">
                                             <app-dropdown-field
                                                 [formControl]="filterBarGroup.get('sort')"

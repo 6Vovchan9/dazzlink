@@ -30,6 +30,26 @@ export interface RovraggeRespLocationsData {
     }
 }
 
+export interface RovraggeRespFiltersData {
+    sort: Array<{
+        name: string,
+        value: string
+    }>,
+    filter: Array<{
+        code: string,
+        group: Array<CountryFilterItem>
+    }>
+}
+
+export interface CountryFilterItem {
+    title: string,
+    valueList: Array<{
+        name: string,
+        value: string,
+        count: number
+    }>
+}
+
 export interface FbAuthResponse {
     idToken: string;
     expiresIn: string;
