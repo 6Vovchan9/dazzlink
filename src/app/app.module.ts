@@ -26,6 +26,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 import { ProgressiveImageComponent } from './shared/components/progressive-image/progressive-image.component';
 import { LocationsPageComponent } from './locations-page/locations-page.component';
 import { LocationItemComponent } from './shared/components/location-item/location-item.component';
+import { CheckboxNewFieldComponent } from './shared/fields/checkbox-new-field/checkbox-new-field.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -47,7 +48,8 @@ registerLocaleData(localeRu, 'ru');
     ModalComponent,
     AccoTriggerComponent,
     GoBackBtnComponent,
-    ProgressiveImageComponent
+    ProgressiveImageComponent,
+    CheckboxNewFieldComponent
   ],
   imports: [
     BrowserModule,

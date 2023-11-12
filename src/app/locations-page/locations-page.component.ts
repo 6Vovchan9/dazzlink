@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable, Observer, Subscription, fromEvent, of } from 'rxjs';
-import { catchError, delay, tap } from 'rxjs/operators';
+import { catchError, delay, map, tap } from 'rxjs/operators';
 
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { PagesService } from '@app/shared/services/pages.service';
@@ -30,6 +30,8 @@ export class LocationsPageComponent implements OnInit {
   public filterBarGroup: UntypedFormGroup;
   public amountAllSelectedCities = 0;
   public showFilterControls = false;
+  public errorAfterSort = false;
+  private lastSuccessSortVal: string = null;
   public dropdownHeadForSort = `
     <div class="headInSortDropdown">
       <div class="headInSortDropdown__icon sortIcon"></div>
@@ -41,9 +43,9 @@ export class LocationsPageComponent implements OnInit {
     id: "sort",
     required: false,
     items: [
-      { value: '+price', details: 'По цене $ → $$$' },
-      { value: '-price', details: 'По цене $$$ → $' },
-      { value: '-rating', details: 'По рейтингу' },
+      // { value: '+price', details: 'По цене $ → $$$' },
+      // { value: '-price', details: 'По цене $$$ → $' },
+      // { value: '-rating', details: 'По рейтингу' },
     ],
   };
   public filterFieldOptions: Array<CountryFilterItem>;
@@ -56,18 +58,36 @@ export class LocationsPageComponent implements OnInit {
     private locationsService: LocationsService
   ) { }
 
+  clickByMybtn1() {
+    console.log(this.filterBarGroup);
+  }
+
+  clickByMybtn2() {
+    this.filterBarGroup.get('sort').reset(null, {emitEvent: false});
+  }
+
+  clickByMybtn3() {
+    this.filterBarGroup.get('sort').enable();
+  }
+
   ngOnInit(): void {
     this.lSub = this.pagesService.currentLanguage.subscribe(
       lang => {
         this.curLang = lang;
         if (!this.isLoading) {
-          const sortControlVal = this.filterBarGroup?.get('sort')?.value;
-          this.getAllLocations(true, sortControlVal);
+
+          // Ниже 3 строки это для сброса всего связанного с FormControl-ом сортировки
+          this.filterBarGroup.get('sort').setValue(null, { emitEvent: false });
+          this.setIconForSortDropdown(null);
+          this.sortFieldOptions.items = null;
+
+          this.getFilters();
+          this.getAllLocations();
         }
       }
     );
 
-    // this.createForm();
+    this.createForm();
     this.getFilters();
     this.getAllLocations();
     this.aboutProgressiveImage();
@@ -117,7 +137,13 @@ export class LocationsPageComponent implements OnInit {
     //   }
     // )
 
-    this.filterBarGroup.addControl('sort', new UntypedFormControl({ value: null, disabled: false }));
+    this.filterBarGroup.addControl('sort', new UntypedFormControl({ value: null, disabled: true }));
+
+    this.filterBarGroup.get('sort').valueChanges.subscribe(
+      val => {
+        this.onChangeSort(val);
+      }
+    )
 
   }
 
@@ -193,149 +219,195 @@ export class LocationsPageComponent implements OnInit {
           console.warn('getFilters ок!');
           // observer.next({})
           // observer.next(null)
-          observer.next(
-            {
-              sort: [],
-              filter: [
-                {
-                  code: 'city',
-                  group: [
-                    {
-                      title: 'Узбекистан',
-                      valueList: [
-                        {
-                          name: 'Ташкент',
-                          value: 'Tashkent',
-                          count: 42
-                        },
-                        {
-                          name: 'Наманган',
-                          value: 'Namangan',
-                          count: 2,
-                        },
-                        {
-                          name: 'Самарканд',
-                          value: 'Samarkand',
-                          count: 32
-                        },
-                        {
-                          name: 'Андижан',
-                          value: 'Andizhan',
-                          count: 62
-                        },
-                        {
-                          name: 'Нукус',
-                          value: 'Nukus',
-                          count: 47
-                        },
-                        {
-                          name: 'Коканд',
-                          value: 'Kokand',
-                          count: 1
-                        },
-                        {
-                          name: 'Бухара',
-                          value: 'Buhara',
-                          count: 46
-                        },
-                        {
-                          name: 'Карши',
-                          value: 'Karshi',
-                          count: 49
-                        },
-                        {
-                          name: 'Фергана',
-                          value: 'Fergana',
-                          count: 40
-                        },
-                        {
-                          name: 'Маргилан',
-                          value: 'Margilan',
-                          count: 81
-                        }
-                      ]
-                    },
-                    {
-                      title: 'Казахстан',
-                      valueList: [
-                        {
-                          name: 'Алматы',
-                          value: 'Almati',
-                          count: 62
-                        },
-                        {
-                          name: 'Астана',
-                          value: 'Astana',
-                          count: 4
-                        },
-                        {
-                          name: 'Шымкент',
-                          value: 'Shimkent',
-                          count: 83
-                        },
-                        {
-                          name: 'Актобе',
-                          value: 'Aktobe',
-                          count: 44
-                        },
-                        {
-                          name: 'Караганда',
-                          value: 'Karaganda',
-                          count: 49
-                        },
-                        {
-                          name: 'Тараз',
-                          value: 'Taraz',
-                          count: 24
-                        },
-                        {
-                          name: 'Усть-Каменогорск',
-                          value: 'Kamen',
-                          count: 70
-                        },
-                        {
-                          name: 'Павлодар',
-                          value: 'Pavlodar',
-                          count: 89
-                        }
-                      ]
-                    },
-                    {
-                      title: 'Армения',
-                      valueList: []
-                    }
-                  ]
-                },
-                {
-                  code: 'kitchen',
-                  group: []
-                }
-              ]
-            }
-          )
+          if (this.curLang === 'UZ') {
+            observer.error('Error');
+          } else {
+            observer.next(
+              {
+                sort: [
+                  { value: '+price', name: 'По цене $ → $$$' },
+                  { value: '-price', name: 'По цене $$$ → $' },
+                  { value: '-rating', name: 'По рейтингу' },
+                ],
+                filter: [
+                  {
+                    code: 'city',
+                    group: [
+                      {
+                        title: 'Узбекистан',
+                        valueList: [
+                          {
+                            name: 'Ташкент',
+                            value: 'Tashkent',
+                            count: 42
+                          },
+                          {
+                            name: 'Наманган',
+                            value: 'Namangan',
+                            count: 2,
+                          },
+                          {
+                            name: 'Самарканд',
+                            value: 'Samarkand',
+                            count: 32
+                          },
+                          {
+                            name: 'Андижан',
+                            value: 'Andizhan',
+                            count: 62
+                          },
+                          {
+                            name: 'Нукус',
+                            value: 'Nukus',
+                            count: 47
+                          },
+                          {
+                            name: 'Коканд',
+                            value: 'Kokand',
+                            count: 1
+                          },
+                          {
+                            name: 'Бухара',
+                            value: 'Buhara',
+                            count: 46
+                          },
+                          {
+                            name: 'Карши',
+                            value: 'Karshi',
+                            count: 49
+                          },
+                          {
+                            name: 'Фергана',
+                            value: 'Fergana',
+                            count: 40
+                          },
+                          {
+                            name: 'Маргилан',
+                            value: 'Margilan',
+                            count: 81
+                          }
+                        ]
+                      },
+                      {
+                        title: 'Казахстан',
+                        valueList: [
+                          {
+                            name: 'Алматы',
+                            value: 'Almati',
+                            count: 62
+                          },
+                          {
+                            name: 'Астана',
+                            value: 'Astana',
+                            count: 4
+                          },
+                          {
+                            name: 'Шымкент',
+                            value: 'Shimkent',
+                            count: 83
+                          },
+                          {
+                            name: 'Актобе',
+                            value: 'Aktobe',
+                            count: 44
+                          },
+                          {
+                            name: 'Караганда',
+                            value: 'Karaganda',
+                            count: 49
+                          },
+                          {
+                            name: 'Тараз',
+                            value: 'Taraz',
+                            count: 24
+                          },
+                          {
+                            name: 'Усть-Каменогорск',
+                            value: 'Kamen',
+                            count: 70
+                          },
+                          {
+                            name: 'Павлодар',
+                            value: 'Pavlodar',
+                            count: 89
+                          }
+                        ]
+                      },
+                      {
+                        title: 'Армения',
+                        valueList: []
+                      }
+                    ]
+                  },
+                  {
+                    code: 'kitchen',
+                    group: []
+                  }
+                ]
+              }
+            );
+          }
           // observer.error('Error')
         }, 4000)
       })
 
       stream$
+        .pipe(
+          map(resp => {
+            if (resp.sort?.length) {
+              resp.sort.map(el => {
+                el.details = el.name;
+                return el;
+              })
+            }
+            return resp;
+          })
+        )
         .subscribe(
           value => {
-            const group = value?.filter.find(el => el.code === 'city')?.group;
+            const group = value?.filter?.find(el => el.code === 'city')?.group;
             const notEmptyGroup = group?.filter(el => el.valueList.length);
             this.filterFieldOptions = notEmptyGroup;
+            
+            if (value.sort?.length) {
+              this.filterBarGroup.get('sort').enable({ emitEvent: false });
+              this.sortFieldOptions.items = value.sort;
+            } else {
+              console.log('Список сортировки пришел пустой');
+            }
           },
           () => {
-
+            console.log('Ошибка при получении фильтрации/сортировки');
           }
         );
     } else {
       this.FSub = this.locationsService.getLocationFilters()
+        .pipe(
+          map(resp => {
+            if (resp.sort?.length) {
+              resp.sort.map(el => {
+                el['details'] = el.name;
+                return el;
+              })
+            }
+            return resp;
+          })
+        )
         .subscribe(
-          (val: any) => {
-            console.log(val);
+          (value: any) => {
+            const group = value?.filter?.find(el => el.code === 'city')?.group;
+            const notEmptyGroup = group?.filter(el => el.valueList.length);
+            this.filterFieldOptions = notEmptyGroup;
+            
+            if (value.sort?.length) {
+              this.filterBarGroup.get('sort').enable({ emitEvent: false });
+              this.sortFieldOptions.items = value.sort;
+            } else {
+              console.log('Список сортировки пришел пустой');
+            }
           },
           () => {
-
+            console.log('Ошибка при получении фильтрации/сортировки');
           }
         )
     }
@@ -348,7 +420,7 @@ export class LocationsPageComponent implements OnInit {
 
   }
 
-  private getAllLocations(afterChangeLang = false, sortVal?: string): void {
+  private getAllLocations(sortVal?: string): void {
     this.isLoading = true;
     if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
@@ -454,11 +526,6 @@ export class LocationsPageComponent implements OnInit {
         .subscribe(
           value => {
             this.locationsNew = value;
-            if (afterChangeLang && this.filterBarGroup) {
-              // this.sortLocationsList();
-            } else {
-              this.createForm();
-            }
             this.isLoading = false;
           },
           () => {
@@ -475,11 +542,6 @@ export class LocationsPageComponent implements OnInit {
         .subscribe(
           value => {
             this.locationsNew = value;
-            if (afterChangeLang && this.filterBarGroup) {
-              // this.sortLocationsList();
-            } else {
-              this.createForm();
-            }
             this.isLoading = false;
           },
           () => {
@@ -496,111 +558,117 @@ export class LocationsPageComponent implements OnInit {
         console.warn('getAllLocationsAfter пошел');
         setTimeout(() => {
           console.warn('getAllLocationsAfter ок!');
-          // observer.next({})
-          // observer.next(null)
-          observer.next(
-            {
-              "placeCount": 5,
-              "cityPlaceList": [
-                {
-                  "cityCode": "Tashkent",
-                  "cityName": "Ташкент",
-                  "placeList": [
-                    {
-                      "id": "-NgTNTZzxh9cram2eEd2",
-                      "categoryCode": "RESTAURANTS",
-                      "title": "Чайхана Navat и еще очень много всего инетересного",
-                      "subtitle": "Узбекская кухня",
-                      "subcategory": "Бар",
-                      "priceRange": 23,
-                      "rating": 4.5,
-                      "address": "ул. Ислама Каримова, 15",
-                      "imageList": [
-                        {
-                          "type": null,
-                          "href": 'assets/images/linkToArticlesX2.jpg'
-                        }
-                      ]
-                    },
-                    {
-                      "id": "-NgVSDcz4AMZ_2JA8yMZ",
-                      "title": "Кафе у Лидии",
-                      "subtitle": "Русская кухня",
-                      "subcategory": "Бистро",
-                      "priceRange": 1,
-                      "rating": 5,
-                      "address": "ул. Гагарина, 37",
-                      "imageList": [
-                        {
-                          "type": null,
-                          "href": 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
-                        }
-                      ]
-                    },
-                    {
-                      "id": "-NgYZORk7JcAD5y9fYvM",
-                      "title": "Angry Birds",
-                      // "subtitle": "Кавказская кухня",
-                      "subcategory": "Кафе",
-                      "priceRange": '2',
-                      "rating": 3.98,
-                      "address": "ул. Флерова, 4а",
-                    },
-                    {
-                      "id": "-NgYZORk7JcAD5y9ffSl",
-                      "title": "Люксор",
-                      "subtitle": "Боевик",
-                      "subcategory": "Кинотеатр",
-                      "priceRange": '1',
-                      "rating": 4,
-                      "address": "ул. Трубецкая, 106",
-                    },
-                  ]
-                },
-                {
-                  "cityCode": null,
-                  "cityName": "Алматы",
-                  "placeList": [
-                    {
-                      "id": "-NgVRC20Iit-rnFDKsza",
-                      "categoryCode": "RESTAURANTS",
-                      "title": "Старый город",
-                      "subtitle": "Европейская",
-                      "subcategory": "Ресторан",
-                      "priceRange": 2,
-                      "rating": 4.2,
-                      "address": "проспект Ленина, 17",
-                      "imageList": null
-                    }
-                  ]
-                },
-                {
-                  "cityName": "Москва",
-                  "placeList": []
-                },
-                {
-                  "cityName": "Ереван",
-                }
-              ]
-            }
-          )
-          // observer.error('Error')
+          if (this.errorAfterSort) {
+            observer.error('Error');
+          } else {
+            // observer.next({});
+            // observer.next(null);
+            observer.next(
+              {
+                "placeCount": 5,
+                "cityPlaceList": [
+                  {
+                    "cityCode": "Tashkent",
+                    "cityName": "Ташкент",
+                    "placeList": [
+                      {
+                        "id": "-NgTNTZzxh9cram2eEd2",
+                        "categoryCode": "RESTAURANTS",
+                        "title": "Чайхана Navat и еще очень много всего инетересного",
+                        "subtitle": "Узбекская кухня",
+                        "subcategory": "Бар",
+                        "priceRange": 23,
+                        "rating": 4.5,
+                        "address": "ул. Ислама Каримова, 15",
+                        "imageList": [
+                          {
+                            "type": null,
+                            "href": 'assets/images/linkToArticlesX2.jpg'
+                          }
+                        ]
+                      },
+                      {
+                        "id": "-NgVSDcz4AMZ_2JA8yMZ",
+                        "title": "Кафе у Лидии",
+                        "subtitle": "Русская кухня",
+                        "subcategory": "Бистро",
+                        "priceRange": 1,
+                        "rating": 5,
+                        "address": "ул. Гагарина, 37",
+                        "imageList": [
+                          {
+                            "type": null,
+                            "href": 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
+                          }
+                        ]
+                      },
+                      {
+                        "id": "-NgYZORk7JcAD5y9fYvM",
+                        "title": "Angry Birds",
+                        // "subtitle": "Кавказская кухня",
+                        "subcategory": "Кафе",
+                        "priceRange": '2',
+                        "rating": 3.98,
+                        "address": "ул. Флерова, 4а",
+                      },
+                      {
+                        "id": "-NgYZORk7JcAD5y9ffSl",
+                        "title": "Люксор",
+                        "subtitle": "Боевик",
+                        "subcategory": "Кинотеатр",
+                        "priceRange": '1',
+                        "rating": 4,
+                        "address": "ул. Трубецкая, 106",
+                      },
+                    ]
+                  },
+                  {
+                    "cityCode": null,
+                    "cityName": "Алматы",
+                    "placeList": [
+                      {
+                        "id": "-NgVRC20Iit-rnFDKsza",
+                        "categoryCode": "RESTAURANTS",
+                        "title": "Старый город",
+                        "subtitle": "Европейская",
+                        "subcategory": "Ресторан",
+                        "priceRange": 2,
+                        "rating": 4.2,
+                        "address": "проспект Ленина, 17",
+                        "imageList": null
+                      }
+                    ]
+                  },
+                  {
+                    "cityName": "Москва",
+                    "placeList": []
+                  },
+                  {
+                    "cityName": "Ереван",
+                  }
+                ]
+              }
+            );
+          }
         }, 3000)
       })
 
       stream$
-        // .pipe(
-        //   delay(1000)
-        // )
         .subscribe(
           value => {
+            console.log(`Успешно отсортировали (${sortVal})!`);
             this.locationsNew = value;
-            this.filterBarGroup.get('sort').enable();
+            this.lastSuccessSortVal = sortVal;
+            this.filterBarGroup.get('sort').enable({ emitEvent: false });
             this.setIconForSortDropdown(sortVal);
             this.isSorting = false;
           },
           () => {
-            this.filterBarGroup.get('sort').enable();
+            console.error('Ошибка при получении отсортированных локаций! Поэтому не обновляем порядок локаций и берем предыдущее успешное значение сортировки');
+            this.filterBarGroup.get('sort').enable({ emitEvent: false });
+            this.filterBarGroup.get('sort').setValue(this.lastSuccessSortVal, { emitEvent: false });
+            // this.filterBarGroup.get('sort').reset(null, { emitEvent: false }); // или тут можно будет установить последнее успешное значение сортировки
+            this.setIconForSortDropdown(this.lastSuccessSortVal);
             this.isSorting = false;
             // Нужно будет как ниб показать сообщ о том что не удалось отсортировать локации
           }
@@ -613,13 +681,19 @@ export class LocationsPageComponent implements OnInit {
         )
         .subscribe(
           value => {
+            console.log(`Успешно отсортировали (${sortVal})!`);
             this.locationsNew = value;
-            this.filterBarGroup.get('sort').enable();
+            this.lastSuccessSortVal = sortVal;
+            this.filterBarGroup.get('sort').enable({ emitEvent: false });
             this.setIconForSortDropdown(sortVal);
             this.isSorting = false;
           },
           () => {
-            this.filterBarGroup.get('sort').enable();
+            console.error('Ошибка при получении отсортированных локаций! Поэтому не обновляем порядок локаций и берем предыдущее успешное значение сортировки');
+            this.filterBarGroup.get('sort').enable({ emitEvent: false });
+            this.filterBarGroup.get('sort').setValue(this.lastSuccessSortVal, { emitEvent: false });
+            // this.filterBarGroup.get('sort').reset(null, { emitEvent: false }); // или тут можно будет установить последнее успешное значение сортировки
+            this.setIconForSortDropdown(this.lastSuccessSortVal);
             this.isSorting = false;
             // Нужно будет как ниб показать сообщ о том что не удалось отсортировать локации
           }
@@ -661,7 +735,7 @@ export class LocationsPageComponent implements OnInit {
 
   public onChangeSort(sortValue: string): void {
     this.isSorting = true;
-    this.filterBarGroup.get('sort').disable();
+    this.filterBarGroup.get('sort').disable({ emitEvent: false });
     this.sortLocationsOnBackend();
   }
 

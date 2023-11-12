@@ -1,6 +1,12 @@
 <main class="page">
     <div class="container page__container">
         <aside class="sidebar" [class.hiddenInMobile]="webview">
+            <!-- <button class="btn" (click)="clickByMybtn1()">myBtn1</button>
+            <br> -->
+            <!-- <button class="btn" (click)="clickByMybtn2()">myBtn2</button>
+            <button class="btn" (click)="clickByMybtn3()">myBtn3</button> -->
+            <!-- <button class="btn" (click)="errorAfterSort = !errorAfterSort">Ошибка при получ отсорт локаций</button>
+            {{errorAfterSort}} -->
             <div *ngIf="!showFilterControls; else filterOptionsBlock" class="aboutPage">
                 <div class="moduleTitle moduleTitle--main">Локации</div>
                 <div class="aboutPage__text">
@@ -78,10 +84,10 @@
                                                   </div>
                                             </button>
                                         </div>
-                                        <div *ngIf="filterBarGroup" class="filterBar__item">
+                                        <div *ngIf="filterBarGroup && sortFieldOptions.items?.length" class="filterBar__item">
+                                            <!-- (ngModelChange)="onChangeSort($event)" -->
                                             <app-dropdown-field
                                                 [formControl]="filterBarGroup.get('sort')"
-                                                (ngModelChange)="onChangeSort($event)"
                                                 [options]="sortFieldOptions"
                                                 [showArrowIcon]="false"
                                                 [highlightHead]="false"

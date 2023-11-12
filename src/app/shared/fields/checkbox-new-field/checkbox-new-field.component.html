@@ -1,0 +1,21 @@
+<div class="checkboxControl"
+    [ngClass]="{'checkboxControl--disabled': disabledControl}"
+    (click)="onSelectValue()"
+>
+    <ng-content *ngIf="onlyNgContent; else originCheckbox"></ng-content>
+    <ng-template #originCheckbox>
+        <div class="checkboxControl__innerWrap" [ngClass]="{'checkboxControl__innerWrap--rowReverse': rowReverse}">
+            <div
+                class="checkboxControl__caption"
+                [class.checkboxControl__caption--clickable]="captionClickable"
+                [innerHTML]=" options?.caption || 'Заголовок' "
+                (click)="onCaptionClick($event)"
+            >
+                <!-- {{options?.caption || 'Заголовок'}} -->
+            </div>
+            <div class="checkboxControl__value">
+                <div class="checkboxControl__box" [ngClass]="{'checkboxControl__box--selected': selected}"></div>
+            </div>
+        </div>
+    </ng-template>
+</div>

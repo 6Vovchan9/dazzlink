@@ -1,0 +1,61 @@
+:host {
+    display: flex;
+    &.ng-invalid.ng-touched {
+        color: red;
+        .checkboxControl .checkboxControl__innerWrap .checkboxControl__value .checkboxControl__box {
+            border-color: red;
+        }
+    }
+}
+
+.checkboxControl {
+    cursor: pointer;
+    .checkboxControl__innerWrap {
+        display: flex;
+        column-gap: 20px;
+        .checkboxControl__caption {
+            display: flex;
+            flex-direction: column;
+            font-size: 18px;
+            line-height: 26px;
+
+            &--clickable {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+        .checkboxControl__value {
+            .checkboxControl__box {
+                width: 24px;
+                height: 24px;
+                border: 1px solid gray;
+                border-radius: 4px;
+                position: relative;
+
+                &--selected {
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        width: 8px;
+                        height: 14px;
+                        border-bottom: 3px solid red;
+                        border-right: 3px solid red;
+                        border-radius: 0 0 2px 0;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-46%, -64%) rotate(45deg);
+                    }
+                }
+            }
+        }
+
+        &--rowReverse {
+            flex-direction: row-reverse;
+        }
+    }
+    &--disabled {
+        cursor: not-allowed;
+        opacity: .3;
+        user-select: none;
+    }
+}
