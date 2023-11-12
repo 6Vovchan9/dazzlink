@@ -422,7 +422,7 @@ export class LocationsPageComponent implements OnInit {
 
   private getAllLocations(sortVal?: string): void {
     this.isLoading = true;
-    if (false) {
+    if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('getAllLocations пошел');
         setTimeout(() => {
