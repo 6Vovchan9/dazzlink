@@ -42,8 +42,8 @@ export interface RovraggeRespFiltersData {
 }
 
 export interface CountryFilterItem {
-    title: string,
-    valueList: Array<{
+    countryName: string,
+    cityList: Array<{
         name: string,
         value: string,
         count: number

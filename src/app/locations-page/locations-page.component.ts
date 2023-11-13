@@ -82,6 +82,7 @@ export class LocationsPageComponent implements OnInit {
           this.sortFieldOptions.items = [];
           this.filterBarGroup.get('sort').disable({ emitEvent: false });
 
+          this.getSortOptions();
           this.getFilters();
           this.getAllLocations();
         }
@@ -89,6 +90,7 @@ export class LocationsPageComponent implements OnInit {
     );
 
     this.createForm();
+    this.getSortOptions();
     this.getFilters();
     this.getAllLocations();
     this.aboutProgressiveImage();
@@ -212,151 +214,33 @@ export class LocationsPageComponent implements OnInit {
     }
   }
 
-  private getFilters(): void {
+  private getSortOptions(): void {
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
-        console.warn('getFilters пошел');
+        console.warn('getSort пошел');
         setTimeout(() => {
-          console.warn('getFilters ок!');
+          console.warn('getSort ок!');
           // observer.next({})
           // observer.next(null)
           if (this.curLang === 'UZ') {
             observer.error('Error');
           } else {
             observer.next(
-              {
-                sort: [
-                  { code: '+price', name: 'По цене $ → $$$' },
-                  { code: '-price', name: 'По цене $$$ → $' },
-                  { code: '-rating', name: 'По рейтингу' },
-                ],
-                filter: [
-                  {
-                    code: 'city',
-                    group: [
-                      {
-                        title: 'Узбекистан',
-                        valueList: [
-                          {
-                            name: 'Ташкент',
-                            value: 'Tashkent',
-                            count: 42
-                          },
-                          {
-                            name: 'Наманган',
-                            value: 'Namangan',
-                            count: 2,
-                          },
-                          {
-                            name: 'Самарканд',
-                            value: 'Samarkand',
-                            count: 32
-                          },
-                          {
-                            name: 'Андижан',
-                            value: 'Andizhan',
-                            count: 62
-                          },
-                          {
-                            name: 'Нукус',
-                            value: 'Nukus',
-                            count: 47
-                          },
-                          {
-                            name: 'Коканд',
-                            value: 'Kokand',
-                            count: 1
-                          },
-                          {
-                            name: 'Бухара',
-                            value: 'Buhara',
-                            count: 46
-                          },
-                          {
-                            name: 'Карши',
-                            value: 'Karshi',
-                            count: 49
-                          },
-                          {
-                            name: 'Фергана',
-                            value: 'Fergana',
-                            count: 40
-                          },
-                          {
-                            name: 'Маргилан',
-                            value: 'Margilan',
-                            count: 81
-                          }
-                        ]
-                      },
-                      {
-                        title: 'Казахстан',
-                        valueList: [
-                          {
-                            name: 'Алматы',
-                            value: 'Almati',
-                            count: 62
-                          },
-                          {
-                            name: 'Астана',
-                            value: 'Astana',
-                            count: 4
-                          },
-                          {
-                            name: 'Шымкент',
-                            value: 'Shimkent',
-                            count: 83
-                          },
-                          {
-                            name: 'Актобе',
-                            value: 'Aktobe',
-                            count: 44
-                          },
-                          {
-                            name: 'Караганда',
-                            value: 'Karaganda',
-                            count: 49
-                          },
-                          {
-                            name: 'Тараз',
-                            value: 'Taraz',
-                            count: 24
-                          },
-                          {
-                            name: 'Усть-Каменогорск',
-                            value: 'Kamen',
-                            count: 70
-                          },
-                          {
-                            name: 'Павлодар',
-                            value: 'Pavlodar',
-                            count: 89
-                          }
-                        ]
-                      },
-                      {
-                        title: 'Армения',
-                        valueList: []
-                      }
-                    ]
-                  },
-                  {
-                    code: 'kitchen',
-                    group: []
-                  }
-                ]
-              }
-            );
+              [
+                { code: '+price', name: 'По цене $ → $$$' },
+                { code: '-price', name: 'По цене $$$ → $' },
+                { code: '-rating', name: 'По рейтингу' }
+              ]
+            )
           }
-          // observer.error('Error')
-        }, 4000)
+        }, 2000)
       })
 
       stream$
         .pipe(
           map(resp => {
-            if (resp.sort?.length) {
-              resp.sort = resp.sort.map(el => {
+            if (resp.length) {
+              resp = resp.map(el => {
                 const res = {
                   details: el.name,
                   value: el.code
@@ -369,27 +253,23 @@ export class LocationsPageComponent implements OnInit {
         )
         .subscribe(
           value => {
-            const group = value?.filter?.find(el => el.code === 'city')?.group;
-            const notEmptyGroup = group?.filter(el => el.valueList.length);
-            this.filterFieldOptions = notEmptyGroup;
-            
-            if (value.sort?.length) {
+            if (value.length) {
               this.filterBarGroup.get('sort').enable({ emitEvent: false });
-              this.sortFieldOptions.items = value.sort;
+              this.sortFieldOptions.items = value;
             } else {
               console.log('Список сортировки пришел пустой');
             }
           },
           () => {
-            console.log('Ошибка при получении фильтрации/сортировки');
+            console.error('Ошибка при получении сортировки');
           }
         );
     } else {
-      this.FSub = this.locationsService.getLocationFilters()
+      this.FSub = this.locationsService.getSortOptions()
         .pipe(
-          map((resp: any) => {
-            if (resp.sort?.length) {
-              resp.sort = resp.sort.map(el => {
+          map((resp: Array<{ name?: string, code?: string, details?: string, value?: string }>) => {
+            if (resp.length) {
+              resp = resp.map(el => {
                 const res = {
                   details: el.name,
                   value: el.code
@@ -401,20 +281,162 @@ export class LocationsPageComponent implements OnInit {
           })
         )
         .subscribe(
-          (value: any) => {
-            const group = value?.filter?.find(el => el.code === 'city')?.group;
-            const notEmptyGroup = group?.filter(el => el.valueList.length);
-            this.filterFieldOptions = notEmptyGroup;
-            
-            if (value.sort?.length) {
+          (value: Array<{ details: string, value: string }>) => {
+            if (value.length) {
               this.filterBarGroup.get('sort').enable({ emitEvent: false });
-              this.sortFieldOptions.items = value.sort;
+              this.sortFieldOptions.items = value;
             } else {
               console.log('Список сортировки пришел пустой');
             }
           },
           () => {
-            console.log('Ошибка при получении фильтрации/сортировки');
+            console.error('Ошибка при получении сортировки');
+          }
+        );
+    }
+  }
+
+  private getFilters(): void {
+    if (true) {
+      const stream$ = new Observable((observer: Observer<Array<CountryFilterItem>>) => {
+        console.warn('getFilter пошел');
+        setTimeout(() => {
+          console.warn('getFilter ок!');
+          // observer.next({})
+          // observer.next(null)
+          if (this.curLang === 'KZ') {
+            observer.error('Error');
+          } else {
+            observer.next([
+              {
+                countryName: 'Узбекистан',
+                cityList: [
+                  {
+                    name: 'Ташкент',
+                    value: 'Tashkent',
+                    count: 42
+                  },
+                  {
+                    name: 'Наманган',
+                    value: 'Namangan',
+                    count: 2,
+                  },
+                  {
+                    name: 'Самарканд',
+                    value: 'Samarkand',
+                    count: 32
+                  },
+                  {
+                    name: 'Андижан',
+                    value: 'Andizhan',
+                    count: 62
+                  },
+                  {
+                    name: 'Нукус',
+                    value: 'Nukus',
+                    count: 47
+                  },
+                  {
+                    name: 'Коканд',
+                    value: 'Kokand',
+                    count: 1
+                  },
+                  {
+                    name: 'Бухара',
+                    value: 'Buhara',
+                    count: 46
+                  },
+                  {
+                    name: 'Карши',
+                    value: 'Karshi',
+                    count: 49
+                  },
+                  {
+                    name: 'Фергана',
+                    value: 'Fergana',
+                    count: 40
+                  },
+                  {
+                    name: 'Маргилан',
+                    value: 'Margilan',
+                    count: 81
+                  }
+                ]
+              },
+              {
+                countryName: 'Казахстан',
+                cityList: [
+                  {
+                    name: 'Алматы',
+                    value: 'Almati',
+                    count: 62
+                  },
+                  {
+                    name: 'Астана',
+                    value: 'Astana',
+                    count: 4
+                  },
+                  {
+                    name: 'Шымкент',
+                    value: 'Shimkent',
+                    count: 83
+                  },
+                  {
+                    name: 'Актобе',
+                    value: 'Aktobe',
+                    count: 44
+                  },
+                  {
+                    name: 'Караганда',
+                    value: 'Karaganda',
+                    count: 49
+                  },
+                  {
+                    name: 'Тараз',
+                    value: 'Taraz',
+                    count: 24
+                  },
+                  {
+                    name: 'Усть-Каменогорск',
+                    value: 'Kamen',
+                    count: 70
+                  },
+                  {
+                    name: 'Павлодар',
+                    value: 'Pavlodar',
+                    count: 89
+                  }
+                ]
+              },
+              {
+                countryName: 'Армения',
+                cityList: []
+              }
+            ]);
+          }
+          // observer.error('Error')
+        }, 3000)
+      })
+
+      stream$
+        .subscribe(
+          (value: Array<CountryFilterItem>) => {
+            const notEmptyGroup = value?.filter(el => el.cityList.length);
+            this.filterFieldOptions = notEmptyGroup;
+          },
+          () => {
+            console.error('Ошибка при получении фильтрации');
+          }
+        );
+    } else {
+      this.FSub = this.locationsService.getFilterOptions()
+        .subscribe(
+          (value: Array<CountryFilterItem>) => {
+            const notEmptyGroup = value?.filter(el => el.cityList.length);
+            this.filterFieldOptions = notEmptyGroup;
+          },
+          () => {
+            console.error('Ошибка при получении фильтрации');
           }
         )
     }
@@ -427,13 +449,13 @@ export class LocationsPageComponent implements OnInit {
 
   }
 
-  private getAllLocations(sortVal?: string): void {
+  private getAllLocations(): void {
     this.isLoading = true;
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
-        console.warn('getAllLocations пошел');
+        console.warn('getLocations пошел');
         setTimeout(() => {
-          console.warn('getAllLocations ок!');
+          console.warn('getLocations ок!');
           // observer.next({})
           // observer.next(null)
           observer.next(
@@ -542,7 +564,7 @@ export class LocationsPageComponent implements OnInit {
         );
 
     } else {
-      this.locationsSub = this.locationsService.getAllLocations(sortVal)
+      this.locationsSub = this.locationsService.getAllLocations()
         .pipe(
           delay(2000)
         )
@@ -562,9 +584,9 @@ export class LocationsPageComponent implements OnInit {
   private getAllLocationsAfterSort(sortVal?: string): void {
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
-        console.warn('getAllLocationsAfter пошел');
+        console.warn('getLocationsAfter пошел');
         setTimeout(() => {
-          console.warn('getAllLocationsAfter ок!');
+          console.warn('getLocationsAfter ок!');
           if (this.errorAfterSort) {
             observer.error('Error');
           } else {
@@ -764,13 +786,6 @@ export class LocationsPageComponent implements OnInit {
     }
   }
 
-  public ngOnDestroy(): void {
-    this.pageWrapScrollSub?.unsubscribe();
-    this.lSub?.unsubscribe();
-    this.locationsSub?.unsubscribe();
-    this.FSub?.unsubscribe();
-  }
-
   private onSelectCity(linkToCountry: any, linkToCity: any): void {
     const curVal = linkToCity.selected;
     if (curVal) {
@@ -789,6 +804,13 @@ export class LocationsPageComponent implements OnInit {
 
   private getAmountOfAllSelectedCities(): string {
     return this.amountAllSelectedCities ? `Показан ${this.amountAllSelectedCities} из 20 городов` : 'Показаны все города'
+  }
+
+  public ngOnDestroy(): void {
+    this.pageWrapScrollSub?.unsubscribe();
+    this.lSub?.unsubscribe();
+    this.locationsSub?.unsubscribe();
+    this.FSub?.unsubscribe();
   }
 
 }
