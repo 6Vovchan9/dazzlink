@@ -76,10 +76,11 @@ export class LocationsPageComponent implements OnInit {
         this.curLang = lang;
         if (!this.isLoading) {
 
-          // Ниже 3 строки это для сброса всего связанного с FormControl-ом сортировки
+          // Ниже 4 строки это для сброса всего связанного с FormControl-ом сортировки
           this.filterBarGroup.get('sort').setValue(null, { emitEvent: false });
           this.setIconForSortDropdown(null);
-          this.sortFieldOptions.items = null;
+          this.sortFieldOptions.items = [];
+          this.filterBarGroup.get('sort').disable({ emitEvent: false });
 
           this.getFilters();
           this.getAllLocations();
@@ -225,9 +226,9 @@ export class LocationsPageComponent implements OnInit {
             observer.next(
               {
                 sort: [
-                  { value: '+price', name: 'По цене $ → $$$' },
-                  { value: '-price', name: 'По цене $$$ → $' },
-                  { value: '-rating', name: 'По рейтингу' },
+                  { code: '+price', name: 'По цене $ → $$$' },
+                  { code: '-price', name: 'По цене $$$ → $' },
+                  { code: '-rating', name: 'По рейтингу' },
                 ],
                 filter: [
                   {
@@ -355,9 +356,12 @@ export class LocationsPageComponent implements OnInit {
         .pipe(
           map(resp => {
             if (resp.sort?.length) {
-              resp.sort.map(el => {
-                el.details = el.name;
-                return el;
+              resp.sort = resp.sort.map(el => {
+                const res = {
+                  details: el.name,
+                  value: el.code
+                }
+                return res;
               })
             }
             return resp;
@@ -383,11 +387,14 @@ export class LocationsPageComponent implements OnInit {
     } else {
       this.FSub = this.locationsService.getLocationFilters()
         .pipe(
-          map(resp => {
+          map((resp: any) => {
             if (resp.sort?.length) {
-              resp.sort.map(el => {
-                el['details'] = el.name;
-                return el;
+              resp.sort = resp.sort.map(el => {
+                const res = {
+                  details: el.name,
+                  value: el.code
+                }
+                return res;
               })
             }
             return resp;
