@@ -15,7 +15,7 @@ export class LocationsService {
         private pagesService: PagesService
     ) { }
 
-    getAllLocations(sortVal?: string): Observable<RovraggeRespLocationsData> {
+    getAllLocations(sortVal?: string, filterVal?: string): Observable<RovraggeRespLocationsData> {
 
         const options = {
             headers: new HttpHeaders({ 'x-accept-language': this.pagesService.currentLanguage.getValue() || 'ru' })
@@ -26,6 +26,10 @@ export class LocationsService {
 
         if (sortVal) {
             customQueryParams['sort'] = sortVal;
+        }
+
+        if (filterVal) {
+            customQueryParams['cityCode'] = filterVal;
         }
 
         return this.http.get(

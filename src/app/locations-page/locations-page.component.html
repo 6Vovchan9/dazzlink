@@ -6,7 +6,7 @@
             <button class="btn" (click)="clickByMybtn2()">myBtn2</button>
             <br><br>
             <button class="btn" (click)="clickByMybtn3()">myBtn3</button> -->
-            <!-- <button class="btn" (click)="errorAfterSort = !errorAfterSort">Ошибка при получ отсорт локаций</button> -->
+            <!-- <button class="btn" (click)="errorAfterSort = !errorAfterSort">Ошибка при получ локаций "After"</button> -->
             <!-- {{errorAfterSort}} -->
             <div *ngIf="!showFilterControls || !filterFieldOptions?.length; else filterOptionsBlock" class="aboutPage">
                 <div class="moduleTitle moduleTitle--main">Локации</div>
@@ -80,7 +80,7 @@
                                             <!-- Фильтрация -->
                                             <button [disabled]="!filterFieldOptions?.length" (click)="showFilterControls = !showFilterControls" class="filterButton">
                                                 <div class="headInSortDropdown">
-                                                    <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities"></div>
+                                                    <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities.length"></div>
                                                     <div class="headInSortDropdown__text">Фильтр</div>
                                                   </div>
                                             </button>

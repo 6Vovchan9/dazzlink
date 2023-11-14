@@ -28,7 +28,8 @@ export class LocationsPageComponent implements OnInit {
   private pageWrapScrollSub: Subscription;
   public filterBarFixed = false;
   public filterBarGroup: UntypedFormGroup;
-  public amountAllSelectedCities = 0;
+  public amountAllSelectedCities: Array<string> = [];
+  private timerForFilter: any;
   public showFilterControls = false;
   public errorAfterSort = false;
   private lastSuccessSortVal: string = null;
@@ -69,7 +70,7 @@ export class LocationsPageComponent implements OnInit {
     //   country.cityList.forEach(city => delete city.selected);
     //   delete country.selectedСities;
     // });
-    this.amountAllSelectedCities = 0;
+    this.amountAllSelectedCities = [];
     this.filterFieldOptions = null;
     this.showFilterControls = false;
 
@@ -92,7 +93,7 @@ export class LocationsPageComponent implements OnInit {
           //   delete country.selectedСities;
           // });
           this.filterFieldOptions = null;
-          this.amountAllSelectedCities = 0;
+          this.amountAllSelectedCities = [];
           this.showFilterControls = false;
 
           // Ниже 4 строки это для сброса всего связанного с FormControl-ом сортировки
@@ -209,8 +210,16 @@ export class LocationsPageComponent implements OnInit {
 
   private sortLocationsOnBackend() {
     const sortControlVal = this.filterBarGroup?.get('sort')?.value;
+    const filterString = this.amountAllSelectedCities.join(',').toLowerCase();
 
-    this.getAllLocationsAfterSort(sortControlVal);
+    this.getAllLocationsAfterSort(sortControlVal, filterString);
+  }
+
+  private filterLocationsOnBackend() {
+    const sortControlVal = this.filterBarGroup?.get('sort')?.value;
+    const filterString = this.amountAllSelectedCities.join(',').toLowerCase();
+
+    this.getAllLocationsAfterFilter(sortControlVal, filterString);
   }
 
   private sortLocationsList(): void {
@@ -580,9 +589,6 @@ export class LocationsPageComponent implements OnInit {
       })
 
       stream$
-        // .pipe(
-        //   delay(1000)
-        // )
         .subscribe(
           value => {
             this.locationsNew = value;
@@ -612,7 +618,7 @@ export class LocationsPageComponent implements OnInit {
     }
   }
 
-  private getAllLocationsAfterSort(sortVal?: string): void {
+  private getAllLocationsAfterSort(sortVal?: string, filterVal?: string): void {
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('getLocationsAfter пошел');
@@ -735,7 +741,7 @@ export class LocationsPageComponent implements OnInit {
         );
 
     } else {
-      this.locationsSub = this.locationsService.getAllLocations(sortVal)
+      this.locationsSub = this.locationsService.getAllLocations(sortVal, filterVal)
         .pipe(
           delay(3000)
         )
@@ -759,6 +765,164 @@ export class LocationsPageComponent implements OnInit {
           }
         );
     }
+  }
+
+  private getAllLocationsAfterFilter(sortVal?: string, filterVal?: string): void {
+    if (true) {
+      const stream$ = new Observable((observer: Observer<any>) => {
+        console.warn('getLocationsAfterFilter пошел');
+        setTimeout(() => {
+          if (this.errorAfterSort) {
+            console.warn('getLocationsAfterFilter error!');
+            observer.error('Error');
+          } else {
+            console.warn('getLocationsAfterFilter ок!');
+            // observer.next({});
+            // observer.next(null);
+            observer.next(
+              {
+                "placeCount": 5,
+                "cityPlaceList": [
+                  {
+                    "cityCode": "Tashkent",
+                    "cityName": "Ташкент",
+                    "placeList": [
+                      {
+                        "id": "-NgTNTZzxh9cram2eEd2",
+                        "categoryCode": "RESTAURANTS",
+                        "title": "Чайхана Navat и еще очень много всего инетересного",
+                        "subtitle": "Узбекская кухня",
+                        "subcategory": "Бар",
+                        "priceRange": 23,
+                        "rating": 4.5,
+                        "address": "ул. Ислама Каримова, 15",
+                        "imageList": [
+                          {
+                            "type": null,
+                            "href": 'assets/images/linkToArticlesX2.jpg'
+                          }
+                        ]
+                      },
+                      {
+                        "id": "-NgVSDcz4AMZ_2JA8yMZ",
+                        "title": "Кафе у Лидии",
+                        "subtitle": "Русская кухня",
+                        "subcategory": "Бистро",
+                        "priceRange": 1,
+                        "rating": 5,
+                        "address": "ул. Гагарина, 37",
+                        "imageList": [
+                          {
+                            "type": null,
+                            "href": 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
+                          }
+                        ]
+                      },
+                      {
+                        "id": "-NgYZORk7JcAD5y9fYvM",
+                        "title": "Angry Birds",
+                        // "subtitle": "Кавказская кухня",
+                        "subcategory": "Кафе",
+                        "priceRange": '2',
+                        "rating": 3.98,
+                        "address": "ул. Флерова, 4а",
+                      },
+                      {
+                        "id": "-NgYZORk7JcAD5y9ffSl",
+                        "title": "Люксор",
+                        "subtitle": "Боевик",
+                        "subcategory": "Кинотеатр",
+                        "priceRange": '1',
+                        "rating": 4,
+                        "address": "ул. Трубецкая, 106",
+                      },
+                    ]
+                  },
+                  {
+                    "cityCode": null,
+                    "cityName": "Алматы",
+                    "placeList": [
+                      {
+                        "id": "-NgVRC20Iit-rnFDKsza",
+                        "categoryCode": "RESTAURANTS",
+                        "title": "Старый город",
+                        "subtitle": "Европейская",
+                        "subcategory": "Ресторан",
+                        "priceRange": 2,
+                        "rating": 4.2,
+                        "address": "проспект Ленина, 17",
+                        "imageList": null
+                      }
+                    ]
+                  },
+                  {
+                    "cityName": "Москва",
+                    "placeList": []
+                  },
+                  {
+                    "cityName": "Ереван",
+                  }
+                ]
+              }
+            );
+          }
+        }, 3000)
+      })
+
+      stream$
+        .subscribe(
+          value => {
+            console.log(`Успешно отфильтровали!`);
+            this.locationsNew = value;
+            this.isSorting = false;
+          },
+          () => {
+            console.error('Ошибка при фильтрации, сбрасываем фильтрацию/сортировку и запрашиваем чистый список локаций')
+            // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации
+            this.isSorting = false;
+            this.afterFilterAndSortError();
+          }
+        );
+
+    } else {
+      this.locationsSub = this.locationsService.getAllLocations(sortVal, filterVal)
+        .pipe(
+          delay(3000)
+        )
+        .subscribe(
+          value => {
+            console.log(`Успешно отфильтровали!`);
+            this.locationsNew = value;
+            this.isSorting = false;
+          },
+          () => {
+            console.error('Ошибка при фильтрации, сбрасываем фильтрацию/сортировку и запрашиваем чистый список локаций')
+            // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации
+            this.isSorting = false;
+            this.afterFilterAndSortError();
+          }
+        );
+    }
+  }
+
+  private afterFilterAndSortError(): void {
+
+    // Пока что проще всего при такой ошибке сбросить все и запросить чистый список локаций а не возвращать к последней успешной фильтрации и как это делается в случае ошибки сортировки
+
+    // сбрасываем фильтрацию:
+    this.filterFieldOptions.forEach(country => {
+      country.cityList.forEach(city => delete city.selected);
+      delete country.selectedСities;
+    });
+    this.amountAllSelectedCities = [];
+    this.showFilterControls = false;
+
+    // сбрасываем сортировку:
+    this.filterBarGroup.get('sort').setValue(null, { emitEvent: false });
+    this.setIconForSortDropdown(null);
+
+    // запрашиваем новый список локаций:
+    this.getAllLocations();
   }
 
   public mobileStoreSrc(): string {
@@ -823,18 +987,31 @@ export class LocationsPageComponent implements OnInit {
       console.log('Отжали какой-то город');
       linkToCity.selected = false;
       linkToCountry.selectedСities = linkToCountry.selectedСities.filter(el => el !== linkToCity.value);
-      this.amountAllSelectedCities -= 1;
+      // this.amountAllSelectedCities -= 1;
+      this.amountAllSelectedCities = this.amountAllSelectedCities.filter(el => el !== linkToCity.value);
     } else {
       console.log('Выбрали еще какой-то город');
       linkToCity.selected = true;
       if (!linkToCountry.selectedСities?.length) { linkToCountry.selectedСities = [] };
       linkToCountry.selectedСities.push(linkToCity.value);
-      this.amountAllSelectedCities += 1;
+      // this.amountAllSelectedCities += 1;
+      this.amountAllSelectedCities.push(linkToCity.value);
     }
+
+    if (this.timerForFilter) {
+      clearTimeout(this.timerForFilter);
+    }
+
+    this.timerForFilter = setTimeout(() => {
+      this.timerForFilter = null;
+      console.log('Делаем фильтрацию...');
+      this.isSorting = true;
+      this.filterLocationsOnBackend();
+    }, 2000);
   }
 
   private getAmountOfAllSelectedCities(): string {
-    return this.amountAllSelectedCities ? `Показан ${this.amountAllSelectedCities} из 20 городов` : 'Показаны все города'
+    return this.amountAllSelectedCities.length ? `Показан ${this.amountAllSelectedCities.length} из 20 городов` : 'Показаны все города'
   }
 
   public ngOnDestroy(): void {
