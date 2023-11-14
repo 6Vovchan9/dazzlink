@@ -23,6 +23,8 @@ export class LocationsPageComponent implements OnInit {
   public isSorting = false;
   private lSub: Subscription;
   private locationsSub: Subscription;
+  private locationsAfterFilterSub: Subscription;
+  private locationsAfterSortSub: Subscription;
   private FSub: Subscription;
   private curLang: string;
   private pageWrapScrollSub: Subscription;
@@ -33,6 +35,7 @@ export class LocationsPageComponent implements OnInit {
   public showFilterControls = false;
   public errorAfterSort = false;
   private lastSuccessSortVal: string = null;
+  private locationsUpdating = false;
   public dropdownHeadForSort = `
     <div class="headInSortDropdown">
       <div class="headInSortDropdown__icon sortIcon"></div>
@@ -210,14 +213,14 @@ export class LocationsPageComponent implements OnInit {
 
   private sortLocationsOnBackend() {
     const sortControlVal = this.filterBarGroup?.get('sort')?.value;
-    const filterString = this.amountAllSelectedCities.join(',').toLowerCase();
+    const filterString = this.amountAllSelectedCities.join(',');
 
     this.getAllLocationsAfterSort(sortControlVal, filterString);
   }
 
   private filterLocationsOnBackend() {
     const sortControlVal = this.filterBarGroup?.get('sort')?.value;
-    const filterString = this.amountAllSelectedCities.join(',').toLowerCase();
+    const filterString = this.amountAllSelectedCities.join(',');
 
     this.getAllLocationsAfterFilter(sortControlVal, filterString);
   }
@@ -588,17 +591,16 @@ export class LocationsPageComponent implements OnInit {
         }, 2000)
       })
 
-      stream$
-        .subscribe(
-          value => {
-            this.locationsNew = value;
-            this.isLoading = false;
-          },
-          () => {
-            this.locationsNew = null;
-            this.isLoading = false;
-          }
-        );
+      this.locationsSub = stream$.subscribe(
+        value => {
+          this.locationsNew = value;
+          this.isLoading = false;
+        },
+        () => {
+          this.locationsNew = null;
+          this.isLoading = false;
+        }
+      );
 
     } else {
       this.locationsSub = this.locationsService.getAllLocations()
@@ -619,6 +621,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   private getAllLocationsAfterSort(sortVal?: string, filterVal?: string): void {
+    this.locationsUpdating = true;
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('getLocationsAfter пошел');
@@ -716,37 +719,39 @@ export class LocationsPageComponent implements OnInit {
               }
             );
           }
-        }, 3000)
+        }, 8000)
       })
 
-      stream$
-        .subscribe(
-          value => {
-            console.log(`Успешно отсортировали (${sortVal})!`);
-            this.locationsNew = value;
-            this.lastSuccessSortVal = sortVal;
-            this.filterBarGroup.get('sort').enable({ emitEvent: false });
-            this.setIconForSortDropdown(sortVal);
-            this.isSorting = false;
-          },
-          () => {
-            console.error('Ошибка при получении отсортированных локаций! Поэтому не обновляем порядок локаций и берем предыдущее успешное значение сортировки');
-            this.filterBarGroup.get('sort').enable({ emitEvent: false });
-            this.filterBarGroup.get('sort').setValue(this.lastSuccessSortVal, { emitEvent: false });
-            // this.filterBarGroup.get('sort').reset(null, { emitEvent: false }); // или тут можно будет установить последнее успешное значение сортировки
-            this.setIconForSortDropdown(this.lastSuccessSortVal);
-            this.isSorting = false;
-            // Нужно будет как ниб показать сообщ о том что не удалось отсортировать локации
-          }
-        );
+      this.locationsAfterSortSub = stream$.subscribe(
+        value => {
+          this.locationsUpdating = false;
+          console.log(`Успешно отсортировали (${sortVal})!`);
+          this.locationsNew = value;
+          this.lastSuccessSortVal = sortVal;
+          this.filterBarGroup.get('sort').enable({ emitEvent: false });
+          this.setIconForSortDropdown(sortVal);
+          this.isSorting = false;
+        },
+        () => {
+          this.locationsUpdating = false;
+          console.error('Ошибка при получении отсортированных локаций! Поэтому не обновляем порядок локаций и берем предыдущее успешное значение сортировки');
+          this.filterBarGroup.get('sort').enable({ emitEvent: false });
+          this.filterBarGroup.get('sort').setValue(this.lastSuccessSortVal, { emitEvent: false });
+          // this.filterBarGroup.get('sort').reset(null, { emitEvent: false }); // или тут можно будет установить последнее успешное значение сортировки
+          this.setIconForSortDropdown(this.lastSuccessSortVal);
+          this.isSorting = false;
+          // Нужно будет как ниб показать сообщ о том что не удалось отсортировать локации
+        }
+      );
 
     } else {
-      this.locationsSub = this.locationsService.getAllLocations(sortVal, filterVal)
+      this.locationsAfterSortSub = this.locationsService.getAllLocations(sortVal, filterVal)
         .pipe(
           delay(3000)
         )
         .subscribe(
           value => {
+            this.locationsUpdating = false;
             console.log(`Успешно отсортировали (${sortVal})!`);
             this.locationsNew = value;
             this.lastSuccessSortVal = sortVal;
@@ -755,6 +760,7 @@ export class LocationsPageComponent implements OnInit {
             this.isSorting = false;
           },
           () => {
+            this.locationsUpdating = false;
             console.error('Ошибка при получении отсортированных локаций! Поэтому не обновляем порядок локаций и берем предыдущее успешное значение сортировки');
             this.filterBarGroup.get('sort').enable({ emitEvent: false });
             this.filterBarGroup.get('sort').setValue(this.lastSuccessSortVal, { emitEvent: false });
@@ -768,6 +774,11 @@ export class LocationsPageComponent implements OnInit {
   }
 
   private getAllLocationsAfterFilter(sortVal?: string, filterVal?: string): void {
+    if (this.locationsUpdating) { // Если запрос локаций в данный момент идет тогда отписываемся от него и запускаем новый
+      this.locationsAfterFilterSub?.unsubscribe();
+      this.locationsAfterSortSub?.unsubscribe();
+    }
+    this.locationsUpdating = true;
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('getLocationsAfterFilter пошел');
@@ -869,37 +880,40 @@ export class LocationsPageComponent implements OnInit {
         }, 3000)
       })
 
-      stream$
-        .subscribe(
-          value => {
-            console.log(`Успешно отфильтровали!`);
-            this.locationsNew = value;
-            this.isSorting = false;
-          },
-          () => {
-            console.error('Ошибка при фильтрации, сбрасываем фильтрацию/сортировку и запрашиваем чистый список локаций')
-            // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации
-            this.isSorting = false;
-            this.afterFilterAndSortError();
-          }
-        );
+      this.locationsAfterFilterSub = stream$.subscribe(
+        value => {
+          this.locationsUpdating = false;
+          console.log(`Успешно отфильтровали!`);
+          this.locationsNew = value;
+          this.isSorting = false;
+        },
+        () => {
+          this.locationsUpdating = false;
+          console.error('Ошибка при фильтрации, сбрасываем фильтрацию/сортировку и запрашиваем чистый список локаций');
+          this.isSorting = false;
+          this.afterFilterAndSortError();
+          // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации
+        }
+      );
 
     } else {
-      this.locationsSub = this.locationsService.getAllLocations(sortVal, filterVal)
+      this.locationsAfterFilterSub = this.locationsService.getAllLocations(sortVal, filterVal)
         .pipe(
           delay(3000)
         )
         .subscribe(
           value => {
+            this.locationsUpdating = false;
             console.log(`Успешно отфильтровали!`);
             this.locationsNew = value;
             this.isSorting = false;
           },
           () => {
-            console.error('Ошибка при фильтрации, сбрасываем фильтрацию/сортировку и запрашиваем чистый список локаций')
-            // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации
+            this.locationsUpdating = false;
+            console.error('Ошибка при фильтрации, сбрасываем фильтрацию/сортировку и запрашиваем чистый список локаций');
             this.isSorting = false;
             this.afterFilterAndSortError();
+            // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации
           }
         );
     }
@@ -1018,6 +1032,8 @@ export class LocationsPageComponent implements OnInit {
     this.pageWrapScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
     this.locationsSub?.unsubscribe();
+    this.locationsAfterFilterSub?.unsubscribe();
+    this.locationsAfterSortSub?.unsubscribe();
     this.FSub?.unsubscribe();
   }
 
