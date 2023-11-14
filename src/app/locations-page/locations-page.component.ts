@@ -7,7 +7,7 @@ import { PagesService } from '@app/shared/services/pages.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { CountryFilterItem, Place } from '@app/shared/interfaces';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 
 @Component({
@@ -60,10 +60,20 @@ export class LocationsPageComponent implements OnInit {
 
   clickByMybtn1() {
     console.log(this.filterBarGroup);
+    console.log(this.filterFieldOptions);
   }
 
   clickByMybtn2() {
-    this.filterBarGroup.get('sort').reset(null, {emitEvent: false});
+
+    // this.filterFieldOptions.forEach(country => {
+    //   country.cityList.forEach(city => delete city.selected);
+    //   delete country.selectedСities;
+    // });
+    this.amountAllSelectedCities = 0;
+    this.filterFieldOptions = null;
+    this.showFilterControls = false;
+
+    // this.filterBarGroup.get('sort').reset(null, { emitEvent: false });
   }
 
   clickByMybtn3() {
@@ -76,13 +86,22 @@ export class LocationsPageComponent implements OnInit {
         this.curLang = lang;
         if (!this.isLoading) {
 
+          // Строки ниже это для сброса всего связанного с фильтрацией
+          // this.filterFieldOptions.forEach(country => {
+          //   country.cityList.forEach(city => delete city.selected);
+          //   delete country.selectedСities;
+          // });
+          this.filterFieldOptions = null;
+          this.amountAllSelectedCities = 0;
+          this.showFilterControls = false;
+
           // Ниже 4 строки это для сброса всего связанного с FormControl-ом сортировки
           this.filterBarGroup.get('sort').setValue(null, { emitEvent: false });
           this.setIconForSortDropdown(null);
           this.sortFieldOptions.items = [];
           this.filterBarGroup.get('sort').disable({ emitEvent: false });
 
-          this.getSortOptions();
+          this.getSort();
           this.getFilters();
           this.getAllLocations();
         }
@@ -90,7 +109,7 @@ export class LocationsPageComponent implements OnInit {
     );
 
     this.createForm();
-    this.getSortOptions();
+    this.getSort();
     this.getFilters();
     this.getAllLocations();
     this.aboutProgressiveImage();
@@ -132,7 +151,21 @@ export class LocationsPageComponent implements OnInit {
     // this.filterBarGroup = new FormGroup({
     //   sort: new FormControl({ value: '-rating', disabled: false }),
     // });
-    this.filterBarGroup = new UntypedFormGroup({});
+    this.filterBarGroup = new UntypedFormGroup({
+      // filter: new FormGroup({
+      //   Узбекистан: new FormGroup({
+      //     Tashkent: new FormControl(true, Validators.requiredTrue),
+      //     Namangan: new FormControl(false, Validators.requiredTrue),
+      //     Samarkand: new FormControl(true, Validators.requiredTrue)
+      //   }),
+      //   Казахстан: new FormGroup({
+      //     Almati: new FormControl(true, Validators.requiredTrue),
+      //     Astana: new FormControl(true, Validators.requiredTrue),
+      //     Shimkent: new FormControl(true, Validators.requiredTrue),
+      //     Pavlodar: new FormControl(false, Validators.requiredTrue),
+      //   })
+      // })
+    });
 
     // this.filterBarGroup.valueChanges.subscribe(
     //   val => {
@@ -146,7 +179,7 @@ export class LocationsPageComponent implements OnInit {
       val => {
         this.onChangeSort(val);
       }
-    )
+    );
 
   }
 
@@ -214,7 +247,7 @@ export class LocationsPageComponent implements OnInit {
     }
   }
 
-  private getSortOptions(): void {
+  private getSort(): void {
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('getSort пошел');
@@ -421,8 +454,7 @@ export class LocationsPageComponent implements OnInit {
       stream$
         .subscribe(
           (value: Array<CountryFilterItem>) => {
-            const notEmptyGroup = value?.filter(el => el.cityList.length);
-            this.filterFieldOptions = notEmptyGroup;
+            this.filterFieldOptions = value?.filter(el => el.cityList?.length);
           },
           () => {
             console.error('Ошибка при получении фильтрации');
@@ -432,8 +464,7 @@ export class LocationsPageComponent implements OnInit {
       this.FSub = this.locationsService.getFilterOptions()
         .subscribe(
           (value: Array<CountryFilterItem>) => {
-            const notEmptyGroup = value?.filter(el => el.cityList.length);
-            this.filterFieldOptions = notEmptyGroup;
+            this.filterFieldOptions = value?.filter(el => el.cityList?.length);
           },
           () => {
             console.error('Ошибка при получении фильтрации');
@@ -789,12 +820,12 @@ export class LocationsPageComponent implements OnInit {
   private onSelectCity(linkToCountry: any, linkToCity: any): void {
     const curVal = linkToCity.selected;
     if (curVal) {
-      console.log('Отжали какойто город');
+      console.log('Отжали какой-то город');
       linkToCity.selected = false;
       linkToCountry.selectedСities = linkToCountry.selectedСities.filter(el => el !== linkToCity.value);
       this.amountAllSelectedCities -= 1;
     } else {
-      console.log('Выбрали еще какойто город');
+      console.log('Выбрали еще какой-то город');
       linkToCity.selected = true;
       if (!linkToCountry.selectedСities?.length) { linkToCountry.selectedСities = [] };
       linkToCountry.selectedСities.push(linkToCity.value);

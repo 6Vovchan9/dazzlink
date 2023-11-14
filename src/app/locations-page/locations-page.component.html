@@ -1,13 +1,14 @@
 <main class="page">
     <div class="container page__container">
         <aside class="sidebar" [class.hiddenInMobile]="webview">
-            <!-- <button class="btn" (click)="clickByMybtn1()">myBtn1</button> -->
-            <!-- <br> -->
-            <!-- <button class="btn" (click)="clickByMybtn2()">myBtn2</button>
+            <!-- <button class="btn" (click)="clickByMybtn1()">myBtn1</button>
+            <br><br>
+            <button class="btn" (click)="clickByMybtn2()">myBtn2</button>
+            <br><br>
             <button class="btn" (click)="clickByMybtn3()">myBtn3</button> -->
             <!-- <button class="btn" (click)="errorAfterSort = !errorAfterSort">Ошибка при получ отсорт локаций</button> -->
             <!-- {{errorAfterSort}} -->
-            <div *ngIf="!showFilterControls; else filterOptionsBlock" class="aboutPage">
+            <div *ngIf="!showFilterControls || !filterFieldOptions?.length; else filterOptionsBlock" class="aboutPage">
                 <div class="moduleTitle moduleTitle--main">Локации</div>
                 <div class="aboutPage__text">
                     Подборка мест для романтических свиданий и ещё какие-то слова чтобы добить до трех строк и было красиво

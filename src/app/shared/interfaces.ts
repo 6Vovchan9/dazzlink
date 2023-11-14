@@ -44,10 +44,12 @@ export interface RovraggeRespFiltersData {
 export interface CountryFilterItem {
     countryName: string,
     cityList: Array<{
+        selected?: boolean,
         name: string,
         value: string,
         count: number
     }>
+    selectedСities?: Array<string>
 }
 
 export interface FbAuthResponse {
