@@ -9,6 +9,7 @@ import { LocationsService } from '@app/shared/services/locations.service';
 import { CountryFilterItem, Place } from '@app/shared/interfaces';
 import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-locations-page',
@@ -61,7 +62,8 @@ export class LocationsPageComponent implements OnInit {
   constructor(
     private pagesService: PagesService,
     public mobileDetectService: MobileDetectService,
-    private locationsService: LocationsService
+    private locationsService: LocationsService,
+    private router: Router
   ) { }
 
   clickByMybtn1() {
@@ -1044,11 +1046,23 @@ export class LocationsPageComponent implements OnInit {
     return this.amountAllSelectedCities.length ? `Показан ${this.amountAllSelectedCities.length} из 20 городов` : 'Показаны все города'
   }
 
+  public goToLocationDesc(id: string): void {
+    if (this.isSorting) return;
+
+    console.log('Идем к подробностям выбранной локации')
+    // this.router.navigate([ '/post', id ]).then(
+    //   (success: boolean) => {
+    //     // console.log(success)
+    //   }
+    // )
+  }
+
   private subscriptionList(): void {
     this.locationsAfterFilterSub?.unsubscribe();
     this.locationsAfterSortSub?.unsubscribe();
     this.fSub?.unsubscribe();
     this.sSub?.unsubscribe();
+    clearTimeout(this.timerForFilter);
   }
 
   public ngOnDestroy(): void {

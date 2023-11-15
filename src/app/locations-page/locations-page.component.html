@@ -107,7 +107,7 @@
                                     <div class="pageContent__locationsCity">{{block.cityName}}</div>
                                     <ul class="pageContent__locationsList">
                                         <li *ngFor="let location of block.placeList" class="pageContent__locationsItem">
-                                            <app-location-item [isLoading]="isSorting" [placeData]="location"></app-location-item>
+                                            <app-location-item [isLoading]="isSorting" (click)="goToLocationDesc(location.id)" [placeData]="location"></app-location-item>
                                         </li>
                                     </ul>
                                 </div>
