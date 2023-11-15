@@ -21,11 +21,12 @@ export class LocationsPageComponent implements OnInit {
   public locationsNew: any;
   public isLoading = true;
   public isSorting = false;
-  private lSub: Subscription;
+  private langSub: Subscription;
   private locationsSub: Subscription;
   private locationsAfterFilterSub: Subscription;
   private locationsAfterSortSub: Subscription;
-  private FSub: Subscription;
+  private fSub: Subscription;
+  private sSub: Subscription;
   private curLang: string;
   private pageWrapScrollSub: Subscription;
   public filterBarFixed = false;
@@ -36,6 +37,7 @@ export class LocationsPageComponent implements OnInit {
   public errorAfterSort = false;
   private lastSuccessSortVal: string = null;
   private locationsUpdating = false;
+  public filterOptionsDisabled = false;
   public dropdownHeadForSort = `
     <div class="headInSortDropdown">
       <div class="headInSortDropdown__icon sortIcon"></div>
@@ -85,7 +87,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.lSub = this.pagesService.currentLanguage.subscribe(
+    this.langSub = this.pagesService.currentLanguage.subscribe(
       lang => {
         this.curLang = lang;
         if (!this.isLoading) {
@@ -104,6 +106,8 @@ export class LocationsPageComponent implements OnInit {
           this.setIconForSortDropdown(null);
           this.sortFieldOptions.items = [];
           this.filterBarGroup.get('sort').disable({ emitEvent: false });
+
+          this.subscriptionList(); // Отписываемся от всех запросов
 
           this.getSort();
           this.getFilters();
@@ -262,14 +266,15 @@ export class LocationsPageComponent implements OnInit {
   private getSort(): void {
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
-        console.warn('getSort пошел');
+        console.warn('sortGet пошел');
         setTimeout(() => {
-          console.warn('getSort ок!');
           // observer.next({})
           // observer.next(null)
           if (this.curLang === 'UZ') {
+            console.warn('sortGet error!');
             observer.error('Error');
           } else {
+            console.warn('sortGet ок!');
             observer.next(
               [
                 { code: '+price', name: 'По цене $ → $$$' },
@@ -281,7 +286,7 @@ export class LocationsPageComponent implements OnInit {
         }, 2000)
       })
 
-      stream$
+      this.sSub = stream$
         .pipe(
           map(resp => {
             if (resp.length) {
@@ -310,7 +315,7 @@ export class LocationsPageComponent implements OnInit {
           }
         );
     } else {
-      this.FSub = this.locationsService.getSortOptions()
+      this.sSub = this.locationsService.getSortOptions()
         .pipe(
           map((resp: Array<{ name?: string, code?: string, details?: string, value?: string }>) => {
             if (resp.length) {
@@ -344,14 +349,15 @@ export class LocationsPageComponent implements OnInit {
   private getFilters(): void {
     if (true) {
       const stream$ = new Observable((observer: Observer<Array<CountryFilterItem>>) => {
-        console.warn('getFilter пошел');
+        console.warn('filterGet пошел');
         setTimeout(() => {
-          console.warn('getFilter ок!');
           // observer.next({})
           // observer.next(null)
           if (this.curLang === 'KZ') {
+            console.warn('filterGet error!');
             observer.error('Error');
           } else {
+            console.warn('filterGet ок!');
             observer.next([
               {
                 countryName: 'Узбекистан',
@@ -463,7 +469,7 @@ export class LocationsPageComponent implements OnInit {
         }, 3000)
       })
 
-      stream$
+      this.fSub = stream$
         .subscribe(
           (value: Array<CountryFilterItem>) => {
             this.filterFieldOptions = value?.filter(el => el.cityList?.length);
@@ -473,7 +479,7 @@ export class LocationsPageComponent implements OnInit {
           }
         );
     } else {
-      this.FSub = this.locationsService.getFilterOptions()
+      this.fSub = this.locationsService.getFilterOptions()
         .subscribe(
           (value: Array<CountryFilterItem>) => {
             this.filterFieldOptions = value?.filter(el => el.cityList?.length);
@@ -496,9 +502,9 @@ export class LocationsPageComponent implements OnInit {
     this.isLoading = true;
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
-        console.warn('getLocations пошел');
+        console.warn('locationsGet пошел');
         setTimeout(() => {
-          console.warn('getLocations ок!');
+          console.warn('locationsGet ок!');
           // observer.next({})
           // observer.next(null)
           observer.next(
@@ -624,12 +630,13 @@ export class LocationsPageComponent implements OnInit {
     this.locationsUpdating = true;
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
-        console.warn('getLocationsAfter пошел');
+        console.warn('afterSortGetLocations пошел');
         setTimeout(() => {
-          console.warn('getLocationsAfter ок!');
           if (this.errorAfterSort) {
+            console.warn('afterSortGetLocations error!');
             observer.error('Error');
           } else {
+            console.warn('afterSortGetLocations ок!');
             // observer.next({});
             // observer.next(null);
             observer.next(
@@ -781,13 +788,13 @@ export class LocationsPageComponent implements OnInit {
     this.locationsUpdating = true;
     if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
-        console.warn('getLocationsAfterFilter пошел');
+        console.warn('afterFilterGetLocations пошел');
         setTimeout(() => {
           if (this.errorAfterSort) {
-            console.warn('getLocationsAfterFilter error!');
+            console.warn('afterFilterGetLocations error!');
             observer.error('Error');
           } else {
-            console.warn('getLocationsAfterFilter ок!');
+            console.warn('afterFilterGetLocations ок!');
             // observer.next({});
             // observer.next(null);
             observer.next(
@@ -886,6 +893,7 @@ export class LocationsPageComponent implements OnInit {
           console.log(`Успешно отфильтровали!`);
           this.locationsNew = value;
           this.isSorting = false;
+          if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false });
         },
         () => {
           this.locationsUpdating = false;
@@ -932,6 +940,7 @@ export class LocationsPageComponent implements OnInit {
     this.showFilterControls = false;
 
     // сбрасываем сортировку:
+    if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false });
     this.filterBarGroup.get('sort').setValue(null, { emitEvent: false });
     this.setIconForSortDropdown(null);
 
@@ -996,6 +1005,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   private onSelectCity(linkToCountry: any, linkToCity: any): void {
+    this.filterBarGroup.get('sort').disable({ emitEvent: false });
     const curVal = linkToCity.selected;
     if (curVal) {
       console.log('Отжали какой-то город');
@@ -1012,29 +1022,40 @@ export class LocationsPageComponent implements OnInit {
       this.amountAllSelectedCities.push(linkToCity.value);
     }
 
-    if (this.timerForFilter) {
-      clearTimeout(this.timerForFilter);
-    }
-
-    this.timerForFilter = setTimeout(() => {
-      this.timerForFilter = null;
+    if (this.locationsUpdating) { // Если фильтрация в данный момент идет тогда запускаем новую без задержки
       console.log('Делаем фильтрацию...');
       this.isSorting = true;
       this.filterLocationsOnBackend();
-    }, 2000);
+    } else {
+      if (this.timerForFilter) { // Это задержка, чтоб не отправлять запрос при каждом клике по фильтрации
+        clearTimeout(this.timerForFilter);
+      }
+
+      this.timerForFilter = setTimeout(() => {
+        this.timerForFilter = null;
+        console.log('Делаем фильтрацию...');
+        this.isSorting = true;
+        this.filterLocationsOnBackend();
+      }, 2000);
+    }
   }
 
   private getAmountOfAllSelectedCities(): string {
     return this.amountAllSelectedCities.length ? `Показан ${this.amountAllSelectedCities.length} из 20 городов` : 'Показаны все города'
   }
 
-  public ngOnDestroy(): void {
-    this.pageWrapScrollSub?.unsubscribe();
-    this.lSub?.unsubscribe();
-    this.locationsSub?.unsubscribe();
+  private subscriptionList(): void {
     this.locationsAfterFilterSub?.unsubscribe();
     this.locationsAfterSortSub?.unsubscribe();
-    this.FSub?.unsubscribe();
+    this.fSub?.unsubscribe();
+    this.sSub?.unsubscribe();
+  }
+
+  public ngOnDestroy(): void {
+    this.pageWrapScrollSub?.unsubscribe();
+    this.langSub?.unsubscribe();
+    this.locationsSub?.unsubscribe();
+    this.subscriptionList();
   }
 
 }
