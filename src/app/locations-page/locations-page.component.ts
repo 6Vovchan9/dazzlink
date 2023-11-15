@@ -38,7 +38,6 @@ export class LocationsPageComponent implements OnInit {
   public errorAfterSort = false;
   private lastSuccessSortVal: string = null;
   private locationsUpdating = false;
-  public filterOptionsDisabled = false;
   public dropdownHeadForSort = `
     <div class="headInSortDropdown">
       <div class="headInSortDropdown__icon sortIcon"></div>
@@ -895,7 +894,8 @@ export class LocationsPageComponent implements OnInit {
           console.log(`Успешно отфильтровали!`);
           this.locationsNew = value;
           this.isSorting = false;
-          if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false });
+          if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false }); // Эти 2 подстраховки на случай когда начали соритровать и сразу принялись фильтровать
+          if (this.filterBarGroup.get('sort').value) this.setIconForSortDropdown(this.filterBarGroup.get('sort').value);
         },
         () => {
           this.locationsUpdating = false;
@@ -917,6 +917,8 @@ export class LocationsPageComponent implements OnInit {
             console.log(`Успешно отфильтровали!`);
             this.locationsNew = value;
             this.isSorting = false;
+            if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false }); // Эти 2 подстраховки на случай когда начали соритровать и сразу принялись фильтровать
+            if (this.filterBarGroup.get('sort').value) this.setIconForSortDropdown(this.filterBarGroup.get('sort').value);
           },
           () => {
             this.locationsUpdating = false;
