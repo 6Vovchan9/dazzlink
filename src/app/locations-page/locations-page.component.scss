@@ -34,14 +34,24 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 // }
 
 .sidebar {
+    display: none;
     flex: 1;
     margin-bottom: 72px;
 
+    &--forMobile {
+        display: block;
+    }
+
     @media #{$notMobile} {
+        display: block;
         margin-right: 0px;
         max-width: 360px;
         margin-right: 8%;
         margin-bottom: 0px;
+
+        &--forMobile {
+            display: none;
+        }
     }
 }
 
