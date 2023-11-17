@@ -990,6 +990,21 @@ export class LocationsPageComponent implements OnInit {
     this.sortLocationsOnBackend();
   }
 
+  public onCloseFilterOptionsInMobile(): void {
+    if (true) {
+      this.onFilterFromMobile();
+    } else {
+      if (this.amountAllSelectedCities.length) {
+        this.filterFieldOptions.forEach(country => {
+          country.cityList.forEach(city => delete city.selected);
+          delete country.selectedСities;
+        });
+        this.amountAllSelectedCities = [];
+      }
+      this.showFilterControls = false;
+    }
+  }
+
   private setIconForSortDropdown(sortValue: string): void {
     if (sortValue) {
       this.dropdownHeadForSort = `
@@ -1014,6 +1029,9 @@ export class LocationsPageComponent implements OnInit {
 
   public onFilterFromMobile(): void {
     this.showFilterControls = false;
+    console.log('Делаем фильтрацию...');
+    this.isSorting = true;
+    this.filterLocationsOnBackend();
   }
 
   private onSelectCity(linkToCountry: any, linkToCity: any): void {
@@ -1034,21 +1052,25 @@ export class LocationsPageComponent implements OnInit {
       this.amountAllSelectedCities.push(linkToCity.value);
     }
 
-    if (this.locationsUpdating) { // Если фильтрация в данный момент идет тогда запускаем новую без задержки
-      console.log('Делаем фильтрацию...');
-      this.isSorting = true;
-      this.filterLocationsOnBackend();
-    } else {
-      if (this.timerForFilter) { // Это задержка, чтоб не отправлять запрос при каждом клике по фильтрации
-        clearTimeout(this.timerForFilter);
-      }
+    const mobileWidth = document.documentElement.clientWidth < 768;
 
-      this.timerForFilter = setTimeout(() => {
-        this.timerForFilter = null;
+    if (!mobileWidth) { 
+      if (this.locationsUpdating) { // Если фильтрация в данный момент идет тогда запускаем новую без задержки
         console.log('Делаем фильтрацию...');
         this.isSorting = true;
         this.filterLocationsOnBackend();
-      }, 2000);
+      } else {
+        if (this.timerForFilter) { // Это задержка, чтоб не отправлять запрос при каждом клике по фильтрации
+          clearTimeout(this.timerForFilter);
+        }
+
+        this.timerForFilter = setTimeout(() => {
+          this.timerForFilter = null;
+          console.log('Делаем фильтрацию...');
+          this.isSorting = true;
+          this.filterLocationsOnBackend();
+        }, 2000);
+      }
     }
   }
 

@@ -92,7 +92,7 @@
 </main>
 
 <div *ngIf="showFilterControls && filterFieldOptions?.length" class="filterOptionsForMobile">
-    <div class="filterOptionsForMobile__content" (click)="showFilterControls = false">
+    <div class="filterOptionsForMobile__content" (click)="onCloseFilterOptionsInMobile()">
         <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
     </div>
 </div>
@@ -139,7 +139,7 @@
         <div class="filterOptionsBlock__content">
             <div class="filterOptionsBlock__header">
                 <div class="filterOptionsBlock__title">Фильтр города</div>
-                <div (click)="showFilterControls = false" class="closeButtonInWindow closeButtonInWindow--color--black">
+                <div (click)="onCloseFilterOptionsInMobile()" class="closeButtonInWindow closeButtonInWindow--color--black">
                     <div class="iconForCloseInModal"></div>
                 </div>
             </div>
