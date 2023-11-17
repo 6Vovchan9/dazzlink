@@ -16,27 +16,7 @@
             </ng-container>
             <ng-template #filterOptionsBlock>
                 <ng-container *ngIf="filterFieldOptions?.length">
-                    <div class="filterOptionsBlock">
-                        <div class="filterOptionsBlock__content">
-                            <div class="filterOptionsBlock__title">Фильтр города</div>
-                            <ul class="filterOptionsBlock__allCountries">
-                                <li *ngFor="let country of filterFieldOptions" class="filterOptionsBlock__country">
-                                    <div class="filterOptionsBlock__countryName" [class.filterOptionsBlock__countryName--selected]="country['selectedСities']?.length">{{country.countryName + (country['selectedСities']?.length ? ': ' + country['selectedСities']?.length : '')}}</div>
-                                    <ul class="filterOptionsBlock__allCities">
-                                        <li *ngFor="let city of country.cityList" (click)="onSelectCity(country, city)" class="filterOptionsBlock__city">
-                                            <div class="cityForFilter">
-                                                <div class="cityForFilter__checkbox">
-                                                    <div class="cityForFilter__box" [class.cityForFilter__box--selected]="city.selected"></div>
-                                                    <div class="cityForFilter__name">{{city.name}}</div>
-                                                </div>
-                                                <div class="cityForFilter__amountPlace">{{city.count}}</div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
                 </ng-container>
             </ng-template>
         </aside>
@@ -111,6 +91,12 @@
     </div>
 </main>
 
+<div *ngIf="showFilterControls && filterFieldOptions?.length" class="filterOptionsForMobile">
+    <div class="filterOptionsForMobile__content" (click)="showFilterControls = false">
+        <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
+    </div>
+</div>
+
 <app-loader *ngIf="isLoading"></app-loader>
 
 <ng-template #empty>
@@ -144,6 +130,37 @@
                 <div class="downloadApp__icon">
                     <img [src]="mobileStoreSrc()" alt="storeIcon">
                 </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #filterOptionsBlockTemplate>
+    <div (click)="clickByFilterOptions($event)" class="filterOptionsBlock">
+        <div class="filterOptionsBlock__content">
+            <div class="filterOptionsBlock__header">
+                <div class="filterOptionsBlock__title">Фильтр города</div>
+                <div (click)="showFilterControls = false" class="closeButtonInWindow closeButtonInWindow--color--black">
+                    <div class="iconForCloseInModal"></div>
+                </div>
+            </div>
+            <ul class="filterOptionsBlock__allCountries">
+                <li *ngFor="let country of filterFieldOptions" class="filterOptionsBlock__country">
+                    <div class="filterOptionsBlock__countryName" [class.filterOptionsBlock__countryName--selected]="country['selectedСities']?.length">{{country.countryName + (country['selectedСities']?.length ? ': ' + country['selectedСities']?.length : '')}}</div>
+                    <ul class="filterOptionsBlock__allCities">
+                        <li *ngFor="let city of country.cityList" (click)="onSelectCity(country, city)" class="filterOptionsBlock__city">
+                            <div class="cityForFilter">
+                                <div class="cityForFilter__checkbox">
+                                    <div class="cityForFilter__box" [class.cityForFilter__box--selected]="city.selected"></div>
+                                    <div class="cityForFilter__name">{{city.name}}</div>
+                                </div>
+                                <div class="cityForFilter__amountPlace">{{city.count}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="filterOptionsBlock__btn">
+                <button (click)="onFilterFromMobile()" class="btn">Показать локации</button>
             </div>
         </div>
     </div>

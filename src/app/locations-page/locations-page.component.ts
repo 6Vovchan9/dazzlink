@@ -1008,6 +1008,14 @@ export class LocationsPageComponent implements OnInit {
     }
   }
 
+  public clickByFilterOptions(e): void {
+    e.stopPropagation();
+  }
+
+  public onFilterFromMobile(): void {
+    this.showFilterControls = false;
+  }
+
   private onSelectCity(linkToCountry: any, linkToCity: any): void {
     this.filterBarGroup.get('sort').disable({ emitEvent: false });
     const curVal = linkToCity.selected;
