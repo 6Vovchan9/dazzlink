@@ -46,7 +46,7 @@ export class PostsService {
     }
 
     public getByIdProd(id: string): Observable<Post> {
-        return this.http.get<Post>(`/article-content/publication/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
+        return this.http.get<Post>(`${environment.prodArticleUrl}/publication/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
             .pipe(
                 map((resp: { [key: string]: any }) => resp.data)
             )
@@ -57,7 +57,7 @@ export class PostsService {
     }
 
     public setArticleEvaluationProd(id: string): Observable<RovraggeRespWrapper> {
-        return this.http.patch<RovraggeRespWrapper>(`/article-content/publication/${id}/read`, null);
+        return this.http.patch<RovraggeRespWrapper>(`${environment.prodArticleUrl}/publication/${id}/read`, null);
     }
 
     public setArticleVoting(id: string, choice: 'like' | 'dislike'): Observable<RovraggeRespWrapper> {
@@ -68,7 +68,7 @@ export class PostsService {
     }
 
     public setArticleVotingProd(id: string, choice: 'like' | 'dislike'): Observable<RovraggeRespWrapper> {
-        return this.http.patch<RovraggeRespWrapper>(`/article-content/publication/${id}/${choice}`, null)
+        return this.http.patch<RovraggeRespWrapper>(`${environment.prodArticleUrl}/publication/${id}/${choice}`, null)
             .pipe(
                 map((resp: { [key: string]: any }) => resp.data)
             )
@@ -117,7 +117,7 @@ export class PostsService {
     }
 
     public getAllProd(): Observable<Post[]> {
-        return this.http.get('/article-content/publication', { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
+        return this.http.get(`${environment.prodArticleUrl}/publication`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
             .pipe(
                 map((resp: RovraggeRespWrapper) => {
                     return resp.data;

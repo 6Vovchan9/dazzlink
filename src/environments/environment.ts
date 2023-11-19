@@ -10,6 +10,7 @@ export const environment: Environment = {
   fbDbUrl: 'https://dazzlink-e643b-default-rtdb.firebaseio.com',
   // rovraggeUrl: 'https://rovragge.ru/dating/api/article-content'
   rovraggeUrl: '/dating/api/article-content',
+  prodArticleUrl: '/article-content',
   rovraggePlacesUrl: '/dating/api/meeting-places'
 };
 
