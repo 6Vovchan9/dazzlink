@@ -4,5 +4,11 @@
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
+    },
+    "/article-content": {
+        "target": "https://api.dazzlink.asia/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
     }
 }

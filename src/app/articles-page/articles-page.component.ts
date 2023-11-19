@@ -51,7 +51,8 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
   private getAllArticles(): void {
     this.isLoading = true;
     // this.posts$ = this.postsService.getAll()
-    this.posts$ = this.postsService.getAllRovragge()
+    // this.posts$ = this.postsService.getAllRovragge()
+    this.posts$ = this.postsService.getAllProd()
       .pipe(
         tap(val => {
           // console.log(val);
