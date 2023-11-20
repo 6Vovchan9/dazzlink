@@ -980,6 +980,17 @@ export class LocationsPageComponent implements OnInit {
     }
   }
 
+  public get getStorePath(): string {
+    const osDevice = this.mobileDetectService.osDevice;
+    if (osDevice?.toLowerCase() === 'ios') {
+      return 'https://apps.apple.com/ru';
+    } else if (osDevice?.toLowerCase() === 'androidos') {
+      return 'https://play.google.com';
+    } else {
+      return 'https://appgallery.huawei.com';
+    }
+  }
+
   public getContent(key: string): string {
     return langArr[key][this.curLang];
   }

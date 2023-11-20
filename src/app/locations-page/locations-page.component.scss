@@ -149,10 +149,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             flex-direction: column;
             row-gap: 32px;
         }
-
-        &:last-child {
-            margin-bottom: unset;
-        }
     }
 
     @media #{$notMobile} {
@@ -431,5 +427,29 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
     .cityForFilter__amountPlace {
         color: var(--color-text-gray);
+    }
+}
+
+.goToAnotherLocations {
+    display: flex;
+    column-gap: 20px;
+    justify-content: space-between;
+    background-color: var(--color-gray1);
+    padding: 24px 28px;
+    border-radius: 20px;
+    cursor: pointer;
+    .goToAnotherLocations__text {
+        flex: 1;
+        font-weight: 700;
+        line-height: 24px;
+    }
+    .goToAnotherLocations__icon {
+        margin: 6px 2px 0 0;
+        width: 12px;
+        height: 12px;
+        // background-repeat: no-repeat;
+        // background-size: contain;
+        // background-position: left center;
+        background-image: url('../../assets/icons/arrowForAuthor.svg');
     }
 }
