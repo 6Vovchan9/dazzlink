@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(navigator.userAgent);
-    console.log('Dazzlink: v.2.2.26');
+    console.log('Dazzlink: v.2.2.27');
   }
 
   buttonInModalClick(modalDesc) {

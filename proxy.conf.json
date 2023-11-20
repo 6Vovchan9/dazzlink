@@ -6,7 +6,7 @@
         "changeOrigin": true
     },
     "/article-content": {
-        "target": "https://api.dazzlink.asia/",
+        "target": "https://stage-api.dazzlink.asia/",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
