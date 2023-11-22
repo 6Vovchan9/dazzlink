@@ -27,6 +27,7 @@ import { ProgressiveImageComponent } from './shared/components/progressive-image
 import { LocationsPageComponent } from './locations-page/locations-page.component';
 import { LocationItemComponent } from './shared/components/location-item/location-item.component';
 import { CheckboxNewFieldComponent } from './shared/fields/checkbox-new-field/checkbox-new-field.component';
+import { PlacePageComponent } from './place-page/place-page.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -39,6 +40,7 @@ registerLocaleData(localeRu, 'ru');
     AgreementsPageComponent,
     ArticlesPageComponent,
     PostPageComponent,
+    PlacePageComponent,
     LocationsPageComponent,
 
     HeaderComponent,

@@ -49,6 +49,13 @@ export class LocationsService {
         )
     }
 
+    public getById(id: string): Observable<any> {
+        return this.http.get<Post>(`${environment.rovraggePlacesUrl}/place/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
+            .pipe(
+                map((resp: { [key: string]: any }) => resp.data)
+            )
+    }
+
     public getFilterOptions(): Observable<Array<CountryFilterItem>> {
         return this.http.get(
             `${environment.rovraggePlacesUrl}/place/filter/city`,

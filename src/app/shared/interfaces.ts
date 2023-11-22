@@ -91,6 +91,42 @@ export type Place = {
     }>
 }
 
+export type PlaceDetails = {
+    id?: string,
+    address?: string, // ул. Ислама Каримова, 17
+    categoryCode: string, // RESTAURANTS
+    cityName: string, // Ташкент
+    subcategory?: string, // Бар
+    title?: string,// Чайхана
+    subtitle?: string, // Узбекская кухня
+    priceRange?: number, // Средний чек: $, $$ или $$$
+    rating2GIS: number,
+    ratingYandex: number,
+    ratingGoogle: number,
+    ratingTripadvisor: number,
+    likeCount: number,
+    dislikeCount: number,
+    imageList?: Array<{
+        type?: string,
+        href: string
+    }>,
+    attributeList: Array<{
+        group: number,
+        type: TypeOfPlaceDetails, // DESCRIPTION | WORKING_HOURS | CUISINE | MAP | SITE | PHONE
+        value: string,
+        href: {
+            coordinates: {
+                lat: number,
+                lon: number
+            }
+        }
+    }>
+}
+
+export enum TypeOfPlaceDetails {
+    DESCRIPTION, WORKING_HOURS, CUISINE, MAP, SITE, PHONE
+}
+
 export interface VisitsAmount {
     amount: number;
 }

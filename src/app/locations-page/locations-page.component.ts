@@ -1093,11 +1093,11 @@ export class LocationsPageComponent implements OnInit {
     if (this.isSorting) return;
 
     console.log('Идем к подробностям выбранной локации')
-    // this.router.navigate([ '/post', id ]).then(
-    //   (success: boolean) => {
-    //     // console.log(success)
-    //   }
-    // )
+    this.router.navigate(['/place', id]).then(
+      (success: boolean) => {
+        // console.log(success)
+      }
+    )
   }
 
   private subscriptionList(): void {

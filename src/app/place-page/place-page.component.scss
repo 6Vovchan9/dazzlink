@@ -1,0 +1,51 @@
+@import "variables";
+
+:host {
+    // flex: 1;
+} // Это все для того чтобы когда контента мало footer все равно был прижат к низу
+
+.placePage {
+
+    margin-top: 20px;
+    margin-bottom: 50px;
+
+    .placePage__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media #{$notMobile} {
+        margin-top: 34px;
+        margin-bottom: 140px;
+
+        .placePage__container {
+            flex-direction: row;
+        }
+    }
+}
+
+.pageContent {
+    flex: 2;
+
+    .postContent {
+        .postContent__feedback {
+            margin-top: 24px;
+        }
+    }
+
+    @media #{$notMobile} {
+
+    }
+}
+
+.sidebar {
+    flex: 1;
+    margin-bottom: 72px;
+
+    @media #{$notMobile} {
+        margin-right: 0px;
+        max-width: 360px;
+        margin-right: 8%;
+        margin-bottom: 0px;
+    }
+}
