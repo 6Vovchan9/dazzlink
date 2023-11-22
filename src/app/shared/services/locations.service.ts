@@ -22,7 +22,7 @@ export class LocationsService {
         };
 
         // let queryParams = new HttpParams().appendAll({ categoryCode: 'REST', sort: sortVal });
-        const customQueryParams = { categoryCode: 'REST' };
+        const customQueryParams = { categoryCode: 'RESTAURANTS' };
 
         if (sortVal) {
             customQueryParams['sort'] = sortVal;
@@ -37,7 +37,7 @@ export class LocationsService {
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
-                    'x-source-channel': 'duzzlink-web'
+                    'x-source-channel': 'dazzlink-web'
                 },
                 // params: queryParams
                 params: customQueryParams

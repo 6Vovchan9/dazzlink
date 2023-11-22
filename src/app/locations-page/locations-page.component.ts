@@ -49,9 +49,9 @@ export class LocationsPageComponent implements OnInit {
     id: "sort",
     required: false,
     items: [
-      // { value: '+price', details: 'По цене $ → $$$' },
-      // { value: '-price', details: 'По цене $$$ → $' },
-      // { value: '-rating', details: 'По рейтингу' },
+      // { value: 'price_asc', details: 'По цене $ → $$$' },
+      // { value: 'price_desc', details: 'По цене $$$ → $' },
+      // { value: 'rating_desc', details: 'По рейтингу' },
     ],
   };
   public filterFieldOptions: Array<CountryFilterItem>;
@@ -158,7 +158,7 @@ export class LocationsPageComponent implements OnInit {
   private createForm(): void {
 
     // this.filterBarGroup = new FormGroup({
-    //   sort: new FormControl({ value: '-rating', disabled: false }),
+    //   sort: new FormControl({ value: 'rating_desc', disabled: false }),
     // });
     this.filterBarGroup = new UntypedFormGroup({
       // filter: new FormGroup({
@@ -234,7 +234,7 @@ export class LocationsPageComponent implements OnInit {
 
     const sortControlVal = this.filterBarGroup?.get('sort')?.value;
 
-    if (sortControlVal === '+price') {
+    if (sortControlVal === 'price_asc') {
       console.log('Сортируем от меньшего к большему');
       this.locationsNew.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
@@ -243,7 +243,7 @@ export class LocationsPageComponent implements OnInit {
           })
         }
       });
-    } else if (sortControlVal === '-price') {
+    } else if (sortControlVal === 'price_desc') {
       console.log('Сортируем от большего к меньшему');
       this.locationsNew.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
@@ -252,7 +252,7 @@ export class LocationsPageComponent implements OnInit {
           })
         }
       });
-    } else if (sortControlVal === '-rating') {
+    } else if (sortControlVal === 'rating_desc') {
       console.log('Сортируем по рейтингу');
       this.locationsNew.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
@@ -265,7 +265,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   private getSort(): void {
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('sortGet пошел');
         setTimeout(() => {
@@ -278,9 +278,9 @@ export class LocationsPageComponent implements OnInit {
             console.warn('sortGet ок!');
             observer.next(
               [
-                { code: '+price', name: 'По цене $ → $$$' },
-                { code: '-price', name: 'По цене $$$ → $' },
-                { code: '-rating', name: 'По рейтингу' }
+                { code: 'price_asc', name: 'По цене $ → $$$' },
+                { code: 'price_desc', name: 'По цене $$$ → $' },
+                { code: 'rating_desc', name: 'По рейтингу' }
               ]
             )
           }
@@ -293,7 +293,7 @@ export class LocationsPageComponent implements OnInit {
             if (resp.length) {
               resp = resp.map(el => {
                 const res = {
-                  details: el.name,
+                  details: el.name || el.code,
                   value: el.code
                 }
                 return res;
@@ -322,7 +322,7 @@ export class LocationsPageComponent implements OnInit {
             if (resp.length) {
               resp = resp.map(el => {
                 const res = {
-                  details: el.name,
+                  details: el.name || el.code,
                   value: el.code
                 }
                 return res;
@@ -348,7 +348,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   private getFilters(): void {
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<Array<CountryFilterItem>>) => {
         console.warn('filterGet пошел');
         setTimeout(() => {
@@ -365,52 +365,52 @@ export class LocationsPageComponent implements OnInit {
                 cityList: [
                   {
                     name: 'Ташкент',
-                    value: 'Tashkent',
+                    code: 'Tashkent',
                     count: 42
                   },
                   {
                     name: 'Наманган',
-                    value: 'Namangan',
+                    code: 'Namangan',
                     count: 2,
                   },
                   {
                     name: 'Самарканд',
-                    value: 'Samarkand',
+                    code: 'Samarkand',
                     count: 32
                   },
                   {
                     name: 'Андижан',
-                    value: 'Andizhan',
+                    code: 'Andizhan',
                     count: 62
                   },
                   {
                     name: 'Нукус',
-                    value: 'Nukus',
+                    code: 'Nukus',
                     count: 47
                   },
                   {
                     name: 'Коканд',
-                    value: 'Kokand',
+                    code: 'Kokand',
                     count: 1
                   },
                   {
                     name: 'Бухара',
-                    value: 'Buhara',
+                    code: 'Buhara',
                     count: 46
                   },
                   {
                     name: 'Карши',
-                    value: 'Karshi',
+                    code: 'Karshi',
                     count: 49
                   },
                   {
                     name: 'Фергана',
-                    value: 'Fergana',
+                    code: 'Fergana',
                     count: 40
                   },
                   {
                     name: 'Маргилан',
-                    value: 'Margilan',
+                    code: 'Margilan',
                     count: 81
                   }
                 ]
@@ -420,42 +420,42 @@ export class LocationsPageComponent implements OnInit {
                 cityList: [
                   {
                     name: 'Алматы',
-                    value: 'Almati',
+                    code: 'Almati',
                     count: 62
                   },
                   {
                     name: 'Астана',
-                    value: 'Astana',
+                    code: 'Astana',
                     count: 4
                   },
                   {
                     name: 'Шымкент',
-                    value: 'Shimkent',
+                    code: 'Shimkent',
                     count: 83
                   },
                   {
                     name: 'Актобе',
-                    value: 'Aktobe',
+                    code: 'Aktobe',
                     count: 44
                   },
                   {
                     name: 'Караганда',
-                    value: 'Karaganda',
+                    code: 'Karaganda',
                     count: 49
                   },
                   {
                     name: 'Тараз',
-                    value: 'Taraz',
+                    code: 'Taraz',
                     count: 24
                   },
                   {
                     name: 'Усть-Каменогорск',
-                    value: 'Kamen',
+                    code: 'Kamen',
                     count: 70
                   },
                   {
                     name: 'Павлодар',
-                    value: 'Pavlodar',
+                    code: 'Pavlodar',
                     count: 89
                   }
                 ]
@@ -501,7 +501,7 @@ export class LocationsPageComponent implements OnInit {
 
   private getAllLocations(): void {
     this.isLoading = true;
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {
@@ -629,7 +629,7 @@ export class LocationsPageComponent implements OnInit {
 
   private getAllLocationsAfterSort(sortVal?: string, filterVal?: string): void {
     this.locationsUpdating = true;
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('afterSortGetLocations пошел');
         setTimeout(() => {
@@ -787,7 +787,7 @@ export class LocationsPageComponent implements OnInit {
       this.locationsAfterSortSub?.unsubscribe();
     }
     this.locationsUpdating = true;
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('afterFilterGetLocations пошел');
         setTimeout(() => {
@@ -1051,16 +1051,16 @@ export class LocationsPageComponent implements OnInit {
     if (curVal) {
       console.log('Отжали какой-то город');
       linkToCity.selected = false;
-      linkToCountry.selectedСities = linkToCountry.selectedСities.filter(el => el !== linkToCity.value);
+      linkToCountry.selectedСities = linkToCountry.selectedСities.filter(el => el !== linkToCity.code);
       // this.amountAllSelectedCities -= 1;
-      this.amountAllSelectedCities = this.amountAllSelectedCities.filter(el => el !== linkToCity.value);
+      this.amountAllSelectedCities = this.amountAllSelectedCities.filter(el => el !== linkToCity.code);
     } else {
       console.log('Выбрали еще какой-то город');
       linkToCity.selected = true;
       if (!linkToCountry.selectedСities?.length) { linkToCountry.selectedСities = [] };
-      linkToCountry.selectedСities.push(linkToCity.value);
+      linkToCountry.selectedСities.push(linkToCity.code);
       // this.amountAllSelectedCities += 1;
-      this.amountAllSelectedCities.push(linkToCity.value);
+      this.amountAllSelectedCities.push(linkToCity.code);
     }
 
     const mobileWidth = document.documentElement.clientWidth < 768;
@@ -1080,7 +1080,7 @@ export class LocationsPageComponent implements OnInit {
           console.log('Делаем фильтрацию...');
           this.isSorting = true;
           this.filterLocationsOnBackend();
-        }, 2000);
+        }, 1500);
       }
     }
   }

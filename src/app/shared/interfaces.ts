@@ -46,7 +46,7 @@ export interface CountryFilterItem {
     cityList: Array<{
         selected?: boolean,
         name: string,
-        value: string,
+        code: string,
         count: number
     }>
     selectedСities?: Array<string>

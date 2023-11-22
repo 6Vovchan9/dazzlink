@@ -194,6 +194,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     .filterBar__controls {
         display: flex;
         align-items: center;
+        margin-right: -16px;
         // .filterBar__item {
         //     margin-right: 20px;
         //     &:last-child {
