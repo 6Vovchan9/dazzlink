@@ -49,3 +49,40 @@
         margin-bottom: 0px;
     }
 }
+
+.placeMainInfo {
+    margin-top: 24px;
+    .placeMainInfo__another {
+        margin-top: 4px;
+        display: flex;
+        flex-wrap: wrap;
+        color: var(--color-text-gray);
+        line-height: 24px;
+        cursor: default;
+        .placeMainInfo__anotherItem {
+            position: relative;
+            padding-left: 10px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            &:before {
+                content: '';
+                position: absolute;
+                display: block;
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background-color: var(--color-text-gray);
+                top: 50%;
+                left: 0;
+                transform: translate(3px, -50%);
+            }
+            &:first-child {
+                padding-left: 0px;
+                &:before {
+                    display: none;
+                }
+            }
+        }
+    }
+}

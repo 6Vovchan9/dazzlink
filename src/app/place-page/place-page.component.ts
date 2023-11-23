@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PlaceDetails } from '@app/shared/interfaces';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
@@ -22,7 +22,8 @@ export class PlacePageComponent {
   constructor(
     private route: ActivatedRoute,
     private pagesService: PagesService,
-    private locationsService: LocationsService
+    private locationsService: LocationsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -65,6 +66,18 @@ export class PlacePageComponent {
           this.isLoading = false;
         }
       );
+  }
+
+  public goToAllPlaces(): void {
+    this.router.navigate(['/locations']);
+  }
+
+  public onVoting(val: 'like' | 'dislike'): void {
+
+  }
+
+  public operatePriceRange(num = 1): Array<any> {
+    return new Array(+num > 3 ? 3 : +num || 3);
   }
 
   public ngOnDestroy(): void {

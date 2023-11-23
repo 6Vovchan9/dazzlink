@@ -32,9 +32,9 @@
                     <div class="placeDetails__anotherItem">
                         <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
                     </div>
-                    <span class="placeDetails__anotherItem">{{placeData?.subcategory || 'Кафе'}}</span>
+                    <span class="placeDetails__anotherItem placeDetails__anotherItem--withEllipsis">{{placeData?.subcategory || 'Кафе'}}</span>
                     <span *ngIf="placeData?.subtitle"
-                        class="placeDetails__anotherItem placeDetails__anotherItem--kitchen"
+                        class="placeDetails__anotherItem placeDetails__anotherItem--withEllipsis"
                     >
                         {{placeData.subtitle.split(' ')[0]}}
                     </span>

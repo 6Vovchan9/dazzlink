@@ -4,6 +4,22 @@
             <aside class="sidebar">
                 <div class="goBackBtn">
                     <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
+                    <div class="placeMainInfo">
+                        <div class="moduleTitle">{{placeData.title || 'Название заведения'}}</div>
+                        <div class="placeMainInfo__another">
+                            <div class="placeMainInfo__anotherItem">
+                                <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
+                            </div>
+                            <span class="placeMainInfo__anotherItem">{{placeData?.subcategory || 'Кафе'}}</span>
+                            <span *ngIf="placeData?.subtitle"
+                                [title]="placeData.subtitle"
+                                class="placeMainInfo__anotherItem"
+                            >
+                                {{placeData.subtitle}}
+                                <!-- Узбекская, Европейская кухни потому что так нужно -->
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </aside>
             <main class="pageContent">

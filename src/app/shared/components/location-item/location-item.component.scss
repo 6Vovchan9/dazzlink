@@ -41,12 +41,13 @@
             display: flex;
             .placeDetails__anotherItem {
                 position: relative;
-                margin-right: 10px;
-                &--kitchen {
+                padding-left: 10px;
+                white-space: nowrap;
+                &--withEllipsis {
                     text-overflow: ellipsis;
                     overflow: hidden;
                 }
-                &:after {
+                &:before {
                     content: '';
                     position: absolute;
                     display: block;
@@ -55,12 +56,12 @@
                     border-radius: 50%;
                     background-color: var(--color-text-gray);
                     top: 50%;
-                    left: 100%;
+                    left: 0;
                     transform: translate(3px, -50%);
                 }
-                &:last-child {
-                    margin-right: 0px;
-                    &:after {
+                &:first-child {
+                    padding-left: 0px;
+                    &:before {
                         display: none;
                     }
                 }
