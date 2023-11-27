@@ -25,7 +25,7 @@ export interface RovraggeRespLocationsData {
     placeCount: number;
     cityPlaceList: {
         cityCode: string,
-        cityName: string,
+        cityTitle: string,
         placeList: Array<Place>
     }
 }
@@ -42,10 +42,10 @@ export interface RovraggeRespFiltersData {
 }
 
 export interface CountryFilterItem {
-    countryName: string,
+    countryTitle: string,
     cityList: Array<{
         selected?: boolean,
-        name: string,
+        title: string,
         code: string,
         count: number
     }>

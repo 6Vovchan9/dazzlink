@@ -69,7 +69,7 @@ export class LocationsService {
         )
     }
 
-    public getSortOptions(): Observable<Array<{ name: string, code: string }>> {
+    public getSortOptions(): Observable<Array<{ title: string, code: string }>> {
         return this.http.get(
             `${environment.rovraggePlacesUrl}/place/sort`,
             {

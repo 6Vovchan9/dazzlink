@@ -278,9 +278,9 @@ export class LocationsPageComponent implements OnInit {
             console.warn('sortGet ок!');
             observer.next(
               [
-                { code: 'price_asc', name: 'По цене $ → $$$' },
-                { code: 'price_desc', name: 'По цене $$$ → $' },
-                { code: 'rating_desc', name: 'По рейтингу' }
+                { code: 'price_asc', title: 'По цене $ → $$$' },
+                { code: 'price_desc', title: 'По цене $$$ → $' },
+                { code: 'rating_desc', title: 'По рейтингу' }
               ]
             )
           }
@@ -293,7 +293,7 @@ export class LocationsPageComponent implements OnInit {
             if (resp.length) {
               resp = resp.map(el => {
                 const res = {
-                  details: el.name || el.code,
+                  details: el.title || el.code,
                   value: el.code
                 }
                 return res;
@@ -318,11 +318,11 @@ export class LocationsPageComponent implements OnInit {
     } else {
       this.sSub = this.locationsService.getSortOptions()
         .pipe(
-          map((resp: Array<{ name?: string, code?: string, details?: string, value?: string }>) => {
+          map((resp: Array<{ title?: string, code?: string, details?: string, value?: string }>) => {
             if (resp.length) {
               resp = resp.map(el => {
                 const res = {
-                  details: el.name || el.code,
+                  details: el.title || el.code,
                   value: el.code
                 }
                 return res;
@@ -361,107 +361,107 @@ export class LocationsPageComponent implements OnInit {
             console.warn('filterGet ок!');
             observer.next([
               {
-                countryName: 'Узбекистан',
+                countryTitle: 'Узбекистан',
                 cityList: [
                   {
-                    name: 'Ташкент',
+                    title: 'Ташкент',
                     code: 'Tashkent',
                     count: 42
                   },
                   {
-                    name: 'Наманган',
+                    title: 'Наманган',
                     code: 'Namangan',
                     count: 2,
                   },
                   {
-                    name: 'Самарканд',
+                    title: 'Самарканд',
                     code: 'Samarkand',
                     count: 32
                   },
                   {
-                    name: 'Андижан',
+                    title: 'Андижан',
                     code: 'Andizhan',
                     count: 62
                   },
                   {
-                    name: 'Нукус',
+                    title: 'Нукус',
                     code: 'Nukus',
                     count: 47
                   },
                   {
-                    name: 'Коканд',
+                    title: 'Коканд',
                     code: 'Kokand',
                     count: 1
                   },
                   {
-                    name: 'Бухара',
+                    title: 'Бухара',
                     code: 'Buhara',
                     count: 46
                   },
                   {
-                    name: 'Карши',
+                    title: 'Карши',
                     code: 'Karshi',
                     count: 49
                   },
                   {
-                    name: 'Фергана',
+                    title: 'Фергана',
                     code: 'Fergana',
                     count: 40
                   },
                   {
-                    name: 'Маргилан',
+                    title: 'Маргилан',
                     code: 'Margilan',
                     count: 81
                   }
                 ]
               },
               {
-                countryName: 'Казахстан',
+                countryTitle: 'Казахстан',
                 cityList: [
                   {
-                    name: 'Алматы',
+                    title: 'Алматы',
                     code: 'Almati',
                     count: 62
                   },
                   {
-                    name: 'Астана',
+                    title: 'Астана',
                     code: 'Astana',
                     count: 4
                   },
                   {
-                    name: 'Шымкент',
+                    title: 'Шымкент',
                     code: 'Shimkent',
                     count: 83
                   },
                   {
-                    name: 'Актобе',
+                    title: 'Актобе',
                     code: 'Aktobe',
                     count: 44
                   },
                   {
-                    name: 'Караганда',
+                    title: 'Караганда',
                     code: 'Karaganda',
                     count: 49
                   },
                   {
-                    name: 'Тараз',
+                    title: 'Тараз',
                     code: 'Taraz',
                     count: 24
                   },
                   {
-                    name: 'Усть-Каменогорск',
+                    title: 'Усть-Каменогорск',
                     code: 'Kamen',
                     count: 70
                   },
                   {
-                    name: 'Павлодар',
+                    title: 'Павлодар',
                     code: 'Pavlodar',
                     count: 89
                   }
                 ]
               },
               {
-                countryName: 'Армения',
+                countryTitle: 'Армения',
                 cityList: []
               }
             ]);
@@ -514,7 +514,7 @@ export class LocationsPageComponent implements OnInit {
               "cityPlaceList": [
                 {
                   "cityCode": "Tashkent",
-                  "cityName": "Ташкент",
+                  "cityTitle": "Ташкент",
                   "placeList": [
                     {
                       "id": "-NgTNTZzxh9cram2eEd2",
@@ -569,7 +569,7 @@ export class LocationsPageComponent implements OnInit {
                 },
                 {
                   "cityCode": null,
-                  "cityName": "Алматы",
+                  "cityTitle": "Алматы",
                   "placeList": [
                     {
                       "id": "-NgVRC20Iit-rnFDKsza",
@@ -585,11 +585,11 @@ export class LocationsPageComponent implements OnInit {
                   ]
                 },
                 {
-                  "cityName": "Москва",
+                  "cityTitle": "Москва",
                   "placeList": []
                 },
                 {
-                  "cityName": "Ереван",
+                  "cityTitle": "Ереван",
                 }
               ]
             }
@@ -646,7 +646,7 @@ export class LocationsPageComponent implements OnInit {
                 "cityPlaceList": [
                   {
                     "cityCode": "Tashkent",
-                    "cityName": "Ташкент",
+                    "cityTitle": "Ташкент",
                     "placeList": [
                       {
                         "id": "-NgTNTZzxh9cram2eEd2",
@@ -701,7 +701,7 @@ export class LocationsPageComponent implements OnInit {
                   },
                   {
                     "cityCode": null,
-                    "cityName": "Алматы",
+                    "cityTitle": "Алматы",
                     "placeList": [
                       {
                         "id": "-NgVRC20Iit-rnFDKsza",
@@ -717,11 +717,11 @@ export class LocationsPageComponent implements OnInit {
                     ]
                   },
                   {
-                    "cityName": "Москва",
+                    "cityTitle": "Москва",
                     "placeList": []
                   },
                   {
-                    "cityName": "Ереван",
+                    "cityTitle": "Ереван",
                   }
                 ]
               }
@@ -804,7 +804,7 @@ export class LocationsPageComponent implements OnInit {
                 "cityPlaceList": [
                   {
                     "cityCode": "Tashkent",
-                    "cityName": "Ташкент",
+                    "cityTitle": "Ташкент",
                     "placeList": [
                       {
                         "id": "-NgTNTZzxh9cram2eEd2",
@@ -859,7 +859,7 @@ export class LocationsPageComponent implements OnInit {
                   },
                   {
                     "cityCode": null,
-                    "cityName": "Алматы",
+                    "cityTitle": "Алматы",
                     "placeList": [
                       {
                         "id": "-NgVRC20Iit-rnFDKsza",
@@ -875,11 +875,11 @@ export class LocationsPageComponent implements OnInit {
                     ]
                   },
                   {
-                    "cityName": "Москва",
+                    "cityTitle": "Москва",
                     "placeList": []
                   },
                   {
-                    "cityName": "Ереван",
+                    "cityTitle": "Ереван",
                   }
                 ]
               }
