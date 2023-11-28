@@ -110,21 +110,28 @@ export type PlaceDetails = {
         type?: string,
         href: string
     }>,
-    attributeList: Array<{
-        group: number,
-        type: TypeOfPlaceDetails, // DESCRIPTION | WORKING_HOURS | CUISINE | MAP | SITE | PHONE
-        value: string,
-        href: {
-            coordinates: {
-                lat: number,
-                lon: number
-            }
+    attributeList: Array<PlaceAttributeList>
+}
+
+export type PlaceAttributeList = {
+    group: number,
+    type: TypeOfPlaceDetails, // DESCRIPTION | WORKING_HOURS | CUISINE | MAP | SITE | PHONE
+    value: string,
+    href: {
+        coordinates: {
+            lat: number,
+            lon: number
         }
-    }>
+    }
 }
 
 export enum TypeOfPlaceDetails {
-    DESCRIPTION, WORKING_HOURS, CUISINE, MAP, SITE, PHONE
+    description = 'DESCRIPTION',
+    hours = 'WORKING_HOURS',
+    cuisine = 'CUISINE',
+    map = 'MAP',
+    site = 'SITE',
+    phone = 'PHONE'
 }
 
 export interface VisitsAmount {

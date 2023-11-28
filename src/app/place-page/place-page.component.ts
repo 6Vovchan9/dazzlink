@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { PlaceDetails } from '@app/shared/interfaces';
+import { PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
 import { Subscription, of } from 'rxjs';
@@ -18,6 +18,8 @@ export class PlacePageComponent {
   private placeId: string;
   public placeData: PlaceDetails;
   public placeEvaluation: 'like' | 'dislike';
+  public additPlaceInfoItems: Array<PlaceAttributeList>;
+  public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];
 
   constructor(
     private route: ActivatedRoute,
@@ -60,6 +62,8 @@ export class PlacePageComponent {
       .subscribe(
         (place: PlaceDetails) => {
           this.placeData = place;
+          this.additPlaceInfoItems = this.additPlaceInfoTypes.map(el => place.attributeList?.find(item => item.type === el)).filter(empty => empty);
+          // console.log(this.additPlaceInfoItems);
           this.isLoading = false;
         },
         err => {

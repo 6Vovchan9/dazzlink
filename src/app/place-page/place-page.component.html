@@ -20,6 +20,33 @@
                             </span>
                         </div>
                     </div>
+                    <div *ngIf="additPlaceInfoItems?.length" class="additPlaceInfo">
+                        <ng-container *ngFor="let placeInfo of additPlaceInfoItems">
+                            <div class="additPlaceInfo__item">
+                                <div class="additPlaceInfo__title">
+                                    <div class="additPlaceInfo__titleLogo"></div>
+                                    <div class="additPlaceInfo__titleText">
+                                        {{placeInfo.type}}
+                                    </div>
+                                </div>
+                                <div class="additPlaceInfo__value">
+                                    {{placeInfo.value}}
+                                </div>
+                            </div>
+                        </ng-container>
+                        <!-- <div class="additPlaceInfo__item additPlaceInfo__item--address">
+                            <div class="additPlaceInfo__title">
+                                <div class="additPlaceInfo__titleLogo"></div>
+                                <div class="additPlaceInfo__titleText">
+                                    Адрес
+                                </div>
+                            </div>
+                            <div class="additPlaceInfo__value">
+                                Узбекистан, Ташкент, 
+                                ул. Абдуллы Каххара, 22
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
             </aside>
             <main class="pageContent">

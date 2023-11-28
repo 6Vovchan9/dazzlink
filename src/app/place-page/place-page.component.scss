@@ -86,3 +86,43 @@
         }
     }
 }
+
+.additPlaceInfo {
+    .additPlaceInfo__item {
+        margin-top: 32px;
+        line-height: 24px;
+        .additPlaceInfo__title {
+            display: flex;
+            color: var(--color-text-gray);
+            .additPlaceInfo__titleLogo {
+                margin-right: 16px;
+                width: 24px;
+                height: 24px;
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center center;
+                background-image: url('/assets/icons/workingHours.svg');
+            }
+        }
+        .additPlaceInfo__value {
+            margin-left: 40px;
+            margin-top: 4px;
+        }
+
+        &--address {
+            .additPlaceInfo__title .additPlaceInfo__titleLogo {
+                background-image: url('/assets/icons/locationAddress.svg');
+            }
+        }
+        &--contacts {
+            .additPlaceInfo__title .additPlaceInfo__titleLogo {
+                background-image: url('/assets/icons/locationContacts.svg');
+            }
+        }
+    }
+    @media #{$mobile} {
+        padding: 24px 20px;
+        background-color: var(--color-gray1);
+        border-radius: 20px;
+    }
+}
