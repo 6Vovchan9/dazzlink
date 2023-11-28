@@ -7,5 +7,5 @@ export const environment: Environment = {
   rovraggeUrl: 'https://rovragge.ru/dating/api/article-content',
   prodArticleUrl: 'https://stage-api.dazzlink.asia/article-content',
   rovraggePlacesUrl: 'https://rovragge.ru/dating/api/meeting-places',
-  prodPlacesUrl: 'https://stage-api.dazzlink.asia/dating/api/meeting-places'
+  prodPlacesUrl: 'https://stage-api.dazzlink.asia/meeting-places'
 };
