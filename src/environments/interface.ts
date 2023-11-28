@@ -5,4 +5,5 @@ export interface Environment {
     rovraggeUrl?: string;
     prodArticleUrl?: string;
     rovraggePlacesUrl?: string;
+    prodPlacesUrl?: string;
 }

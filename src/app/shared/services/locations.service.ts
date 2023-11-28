@@ -33,7 +33,7 @@ export class LocationsService {
         }
 
         return this.http.get(
-            `${environment.rovraggePlacesUrl}/place`,
+            `${environment.prodPlacesUrl}/place`,
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
@@ -50,7 +50,7 @@ export class LocationsService {
     }
 
     public getById(id: string): Observable<any> {
-        return this.http.get<Post>(`${environment.rovraggePlacesUrl}/place/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
+        return this.http.get<Post>(`${environment.prodPlacesUrl}/place/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
             .pipe(
                 map((resp: { [key: string]: any }) => resp.data)
             )
@@ -58,7 +58,7 @@ export class LocationsService {
 
     public getFilterOptions(): Observable<Array<CountryFilterItem>> {
         return this.http.get(
-            `${environment.rovraggePlacesUrl}/place/filter/city`,
+            `${environment.prodPlacesUrl}/place/filter/city`,
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
@@ -71,7 +71,7 @@ export class LocationsService {
 
     public getSortOptions(): Observable<Array<{ title: string, code: string }>> {
         return this.http.get(
-            `${environment.rovraggePlacesUrl}/place/sort`,
+            `${environment.prodPlacesUrl}/place/sort`,
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),

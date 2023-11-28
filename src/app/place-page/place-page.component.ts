@@ -62,6 +62,8 @@ export class PlacePageComponent {
       .subscribe(
         (place: PlaceDetails) => {
           this.placeData = place;
+          // let a = place.attributeList?.find(item => item.type === 'MAP')
+          // a.value = 'Балашиха\nФлервоа 4а'
           this.additPlaceInfoItems = this.additPlaceInfoTypes.map(el => place.attributeList?.find(item => item.type === el)).filter(empty => empty);
           // console.log(this.additPlaceInfoItems);
           this.isLoading = false;
