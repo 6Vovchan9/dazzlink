@@ -5,7 +5,9 @@
                 <div class="goBackBtn">
                     <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
                     <div class="placeMainInfo">
+                        <!-- Название -->
                         <div class="moduleTitle">{{placeData.title || 'Название заведения'}}</div>
+                        <!-- $$ · Ресторан · Узбекская, Европейская -->
                         <div class="placeMainInfo__another">
                             <div class="placeMainInfo__anotherItem">
                                 <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
@@ -16,11 +18,11 @@
                                 class="placeMainInfo__anotherItem"
                             >
                                 {{placeData.subtitle}}
-                                <!-- Узбекская, Европейская кухни потому что так нужно -->
                             </span>
                         </div>
                     </div>
 
+                    <!-- Время работы, адрес, контакты -->
                     <div *ngIf="getAdditInfoKeys?.length" class="additPlaceInfo">
                         <ng-container *ngFor="let key of additPlaceInfoTypes">
                             <ng-container *ngIf="additPlaceInfoData[key]">
@@ -46,7 +48,21 @@
             </aside>
             <main class="pageContent">
                 <div class="postContent">
-                    pageContent
+                    <!-- Фотки -->
+                    <div class="locationPhotos"></div>
+                    <!-- Описание, награды, источники -->
+                    <div *ngIf="getAdditInfoKeys?.length" class="descPlaceInfo">
+                        <ng-container *ngFor="let key of descPlaceInfoTypes">
+                            <ng-container *ngIf="additPlaceInfoData[key]">
+                                <div class="descPlaceInfo__item">
+                                    <div class="descPlaceInfo__title">
+                                        {{locationInfoName[additPlaceInfoData[key].type]}}
+                                    </div>
+                                    <div class="descPlaceInfo__value" [innerHTML]="additPlaceInfoData[key].value"></div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
                     <!-- Как вам статья -->
                     <div class="postContent__feedback feedback">
                         <div class="feedback__text">Как вам локация?</div>

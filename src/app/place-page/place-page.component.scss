@@ -25,11 +25,12 @@
 }
 
 .pageContent {
+    overflow: hidden;
     flex: 2;
 
     .postContent {
         .postContent__feedback {
-            margin-top: 24px;
+            margin-top: 32px;
         }
     }
 
@@ -40,7 +41,7 @@
 
 .sidebar {
     flex: 1;
-    margin-bottom: 72px;
+    margin-bottom: 32px;
 
     @media #{$notMobile} {
         margin-right: 0px;
@@ -88,6 +89,7 @@
 }
 
 .additPlaceInfo {
+    margin-top: 32px;
     .additPlaceInfo__item {
         margin-top: 32px;
         line-height: 24px;
@@ -120,10 +122,47 @@
                 background-image: url('/assets/icons/locationContacts.svg');
             }
         }
+        &:first-child {
+            margin-top: 0px;
+        }
     }
     @media #{$mobile} {
         padding: 24px 20px;
         background-color: var(--color-gray1);
         border-radius: 20px;
+    }
+}
+
+.descPlaceInfo {
+    .descPlaceInfo__item {
+        display: flex;
+        flex-direction: column;
+        margin-top: 32px;
+        .descPlaceInfo__title {
+            color: var(--color-text-gray);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 4px;
+        }
+        .descPlaceInfo__value {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &:first-child {
+            margin-top: 0px;
+        }
+    }
+    @media #{$notMobile} {
+        .descPlaceInfo__item {
+            flex-direction: row;
+            .descPlaceInfo__title {
+                width: 120px;
+                margin-right: 12px;
+                margin-bottom: 0px;
+            }
+            .descPlaceInfo__value {
+                flex: 1;
+            }
+        }
     }
 }

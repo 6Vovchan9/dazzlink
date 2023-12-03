@@ -23,6 +23,7 @@ export class PlacePageComponent {
   public additPlaceInfoItems: Array<PlaceAttributeList> = [];
   public additPlaceInfoData: {[key: string]: PlaceAttributeList} = {};
   public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];
+  public descPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.description, TypeOfPlaceDetails.awards, TypeOfPlaceDetails.infoSource];
 
   constructor(
     private route: ActivatedRoute,
@@ -174,11 +175,11 @@ export class PlacePageComponent {
           innerData.value = (innerData.value ? innerData.value + '\n' : '') + infoItem.value;
         }
       } else {
-        if (this.additPlaceInfoTypes.includes(infoItem.type) || infoItem.type === TypeOfPlaceDetails.site) {
+        // if (this.additPlaceInfoTypes.includes(infoItem.type) || infoItem.type === TypeOfPlaceDetails.site) {
           if (infoItem.value) {
             this.additPlaceInfoData[infoItem.type] = infoItem;
           }
-        }
+        // }
       }
     }
 
@@ -195,7 +196,7 @@ export class PlacePageComponent {
 
       phoneData.value = (phoneData.value ? phoneData.value + '\n' : '') + site.value;
 
-      delete this.additPlaceInfoData[TypeOfPlaceDetails.site];
+      // delete this.additPlaceInfoData[TypeOfPlaceDetails.site];
     }
     console.log(this.additPlaceInfoData)
   }
