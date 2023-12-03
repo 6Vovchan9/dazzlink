@@ -166,3 +166,49 @@
         }
     }
 }
+
+.locationPhotos {
+    margin-bottom: 32px;
+
+    &--fivePhoto {
+        display: flex;
+        .locationPhotos__wrap {
+            display: flex;
+            flex-direction: column;
+            .locationPhotos__major {
+                overflow: hidden;
+                border-radius: 20px;
+                // max-height: 420px;
+                aspect-ratio: 1/0.57; // Из расчета размеров фотки из дизайна 560х320
+                .locationPhotos__majorImg {
+                    /* object-fit: contain; */
+                    object-fit: cover;
+                    height: 100%;
+                    width: 100%;
+                    // object-position: right bottom;
+                    // object-position: right top;
+                    // object-position: 50% 50%;
+                    object-position: center center; // default
+                }
+            }
+            .locationPhotos__minor {
+                margin-top: 4px;
+                display: flex;
+                align-items: flex-start;
+                column-gap: 4px;
+                .locationPhotos__minorItem {
+                    background-color: var(--color-light-gray);
+                    flex: 1;
+                    overflow: hidden;
+                    border-radius: 20px;
+                    aspect-ratio: 1/0.55;
+                    .locationPhotos__minorImg {
+                        object-fit: cover;
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

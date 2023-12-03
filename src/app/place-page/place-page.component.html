@@ -48,8 +48,43 @@
             </aside>
             <main class="pageContent">
                 <div class="postContent">
-                    <!-- Фотки -->
-                    <div class="locationPhotos"></div>
+                    <!-- Фотки на desktop -->
+                    <div class="locationPhotos"
+                        [ngClass]="{
+                            'locationPhotos--fivePhoto':  +placeData.imageList?.length === 5,
+                            'locationPhotos--fourPhoto':  +placeData.imageList?.length === 4,
+                            'locationPhotos--threePhoto': +placeData.imageList?.length === 3,
+                            'locationPhotos--twoPhoto':   +placeData.imageList?.length === 2,
+                            'locationPhotos--onePhoto':   +placeData.imageList?.length === 1,
+                        }"
+                        [ngSwitch]="+placeData.imageList?.length"
+                    >
+                        <ng-template ngSwitchCase="0">Нет фотографий места</ng-template>
+                        <ng-template ngSwitchCase="1">1 фотка</ng-template>
+                        <ng-template ngSwitchCase="2">2 фотки</ng-template>
+                        <ng-template ngSwitchCase="3">3 фотки</ng-template>
+                        <ng-template ngSwitchCase="4">4 фотки</ng-template>
+                        <ng-template ngSwitchCase="5">
+                            <!-- 5 фоток -->
+                            <div class="locationPhotos__wrap">
+                                <!-- Главная фотка -->
+                                <div class="locationPhotos__major">
+                                    <img class="locationPhotos__majorImg" [src]="placeData.imageList[0].href" alt="Главное фото">
+                                </div>
+                                <div class="locationPhotos__minor">
+                                    <!-- Второстепенные фото -->
+                                    <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
+                                        <ng-container *ngIf="!isFirstPhoto">
+                                            <div class="locationPhotos__minorItem">
+                                                <img class="locationPhotos__minorImg" [src]="placeData.imageList[photoIndex].href" [alt]="photoIndex + ' фото'">
+                                            </div>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template ngSwitchDefault>5 фоток</ng-template>
+                    </div>
                     <!-- Описание, награды, источники -->
                     <div *ngIf="getAdditInfoKeys?.length" class="descPlaceInfo">
                         <ng-container *ngFor="let key of descPlaceInfoTypes">

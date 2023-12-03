@@ -69,6 +69,9 @@ export class PlacePageComponent {
       )
       .subscribe(
         (place: PlaceDetails) => {
+          // delete place.imageList;
+          // place.imageList = null;
+          // place.imageList = [];
           this.placeData = place;
           if (false) {
             place.attributeList = [
