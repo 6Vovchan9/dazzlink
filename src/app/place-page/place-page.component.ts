@@ -173,7 +173,9 @@ export class PlacePageComponent {
         }
       } else {
         if (this.additPlaceInfoTypes.includes(infoItem.type) || infoItem.type === TypeOfPlaceDetails.site) {
-          this.additPlaceInfoData[infoItem.type] = infoItem;
+          if (infoItem.value) {
+            this.additPlaceInfoData[infoItem.type] = infoItem;
+          }
         }
       }
     }
@@ -192,8 +194,8 @@ export class PlacePageComponent {
       phoneData.value = (phoneData.value ? phoneData.value + '\n' : '') + site.value;
 
       delete this.additPlaceInfoData[TypeOfPlaceDetails.site];
-      console.log(this.additPlaceInfoData)
     }
+    console.log(this.additPlaceInfoData)
   }
 
   public goToAllPlaces(): void {
