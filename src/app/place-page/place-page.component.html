@@ -20,18 +20,19 @@
                             </span>
                         </div>
                     </div>
-                    <div *ngIf="additPlaceInfoItems?.length" class="additPlaceInfo">
-                        <ng-container *ngFor="let placeInfo of additPlaceInfoItems">
-                            <div class="additPlaceInfo__item">
+                    <div *ngIf="getAdditInfoKeys?.length" class="additPlaceInfo">
+                        <ng-container *ngFor="let key of getAdditInfoKeys">
+                            <div class="additPlaceInfo__item" [ngClass]="{
+                                'additPlaceInfo__item--address': key === 'MAP',
+                                'additPlaceInfo__item--contacts': key === 'PHONE'
+                            }">
                                 <div class="additPlaceInfo__title">
                                     <div class="additPlaceInfo__titleLogo"></div>
                                     <div class="additPlaceInfo__titleText">
-                                        {{placeInfo.type}}
+                                        {{locationInfoName[additPlaceInfoData[key].type]}}
                                     </div>
                                 </div>
-                                <div class="additPlaceInfo__value">
-                                    {{placeInfo.value}}
-                                </div>
+                                <div class="additPlaceInfo__value" [innerHTML]="additPlaceInfoData[key].value"></div>
                             </div>
                         </ng-container>
                         <!-- <div class="additPlaceInfo__item additPlaceInfo__item--address">

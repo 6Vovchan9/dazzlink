@@ -114,10 +114,10 @@ export type PlaceDetails = {
 }
 
 export type PlaceAttributeList = {
-    group: number,
+    group?: number,
     type: TypeOfPlaceDetails, // DESCRIPTION | WORKING_HOURS | CUISINE | MAP | SITE | PHONE
     value: string,
-    href: {
+    href?: {
         coordinates: {
             lat: number,
             lon: number
@@ -131,7 +131,9 @@ export enum TypeOfPlaceDetails {
     cuisine = 'CUISINE',
     map = 'MAP',
     site = 'SITE',
-    phone = 'PHONE'
+    phone = 'PHONE',
+    infoSource = 'INFO_SOURCE',
+    awards = 'AWARDS'
 }
 
 export interface VisitsAmount {
