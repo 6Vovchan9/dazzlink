@@ -69,85 +69,87 @@ export class PlacePageComponent {
       .subscribe(
         (place: PlaceDetails) => {
           this.placeData = place;
-          place.attributeList = [
-            {
-              "group": 20,
-              "type": TypeOfPlaceDetails.phone,
-              "value": null,
-              "href": null
-            },
-            {
-              "group": 20,
-              "type": TypeOfPlaceDetails.phone,
-              "value": "8 963 752 34 89",
-              "href": null
-            },
-            {
-              "group": 10,
-              "type": TypeOfPlaceDetails.cuisine,
-              "value": "Грузинская",
-              "href": null
-            },
-            {
-              "group": 10,
-              "type": TypeOfPlaceDetails.hours,
-              "value": "Пн – пт: с 08:00 до 23:00\nСб, вс: с 09:00 до 23:00",
-              "href": null
-            },
-            {
-              "group": 10,
-              "type": TypeOfPlaceDetails.description,
-              "value": "Пельменная нового формата. Заведение излучает ауру доброты и уюта. Даже городские кошки нас любят, и гуляют у нас во дворе. А кошки плохого не посоветуют.",
-              "href": null
-            },
-            {
-              "group": 20,
-              "type": TypeOfPlaceDetails.map,
-              "value": "Узбекистан, Ташкент, ул. Шота Руставели, 18",
-              "href": {
-                "coordinates": {
-                  "lat": 41.293721,
-                  "lon": 69.264205
+          if (false) {
+            place.attributeList = [
+              {
+                "group": 20,
+                "type": TypeOfPlaceDetails.phone,
+                "value": null,
+                "href": null
+              },
+              {
+                "group": 20,
+                "type": TypeOfPlaceDetails.phone,
+                "value": "8 963 752 34 89",
+                "href": null
+              },
+              {
+                "group": 10,
+                "type": TypeOfPlaceDetails.cuisine,
+                "value": "Грузинская",
+                "href": null
+              },
+              {
+                "group": 10,
+                "type": TypeOfPlaceDetails.hours,
+                "value": "Пн – пт: с 08:00 до 23:00\nСб, вс: с 09:00 до 23:00",
+                "href": null
+              },
+              {
+                "group": 10,
+                "type": TypeOfPlaceDetails.description,
+                "value": "Пельменная нового формата. Заведение излучает ауру доброты и уюта. Даже городские кошки нас любят, и гуляют у нас во дворе. А кошки плохого не посоветуют.",
+                "href": null
+              },
+              {
+                "group": 20,
+                "type": TypeOfPlaceDetails.map,
+                "value": "Узбекистан, Ташкент, ул. Шота Руставели, 18",
+                "href": {
+                  "coordinates": {
+                    "lat": 41.293721,
+                    "lon": 69.264205
+                  }
                 }
+              },
+              {
+                "group": 20,
+                "type": TypeOfPlaceDetails.site,
+                "value": "https://testo.uz ",
+                "href": null
+              },
+              {
+                "group": 20,
+                "type": TypeOfPlaceDetails.phone,
+                "value": null,
+                "href": null
+              },
+              {
+                "group": 20,
+                "type": TypeOfPlaceDetails.phone,
+                "value": "8 968 001 66 22",
+                "href": null
+              },
+              {
+                "group": 20,
+                "type": TypeOfPlaceDetails.site,
+                "value": "https://ya.ru ",
+                "href": null
+              },
+              {
+                "group": 30,
+                "type": TypeOfPlaceDetails.awards,
+                "value": "–",
+                "href": null
+              },
+              {
+                "group": 30,
+                "type": TypeOfPlaceDetails.infoSource,
+                "value": "https://testo.uz;https://www.tripadvisor.com;https://www.google.ru/maps;https://yandex.kz/maps;https://2gis.uz",
+                "href": null
               }
-            },
-            {
-              "group": 20,
-              "type": TypeOfPlaceDetails.site,
-              "value": "https://testo.uz ",
-              "href": null
-            },
-            {
-              "group": 20,
-              "type": TypeOfPlaceDetails.phone,
-              "value": null,
-              "href": null
-            },
-            {
-              "group": 20,
-              "type": TypeOfPlaceDetails.phone,
-              "value": "8 968 001 66 22",
-              "href": null
-            },
-            {
-              "group": 20,
-              "type": TypeOfPlaceDetails.site,
-              "value": "https://ya.ru ",
-              "href": null
-            },
-            {
-              "group": 30,
-              "type": TypeOfPlaceDetails.awards,
-              "value": "–",
-              "href": null
-            },
-            {
-              "group": 30,
-              "type": TypeOfPlaceDetails.infoSource,
-              "value": "https://testo.uz;https://www.tripadvisor.com;https://www.google.ru/maps;https://yandex.kz/maps;https://2gis.uz",
-              "href": null
-            }
-          ];
+            ];
+          }
           this.prepareAdditPlaceData(place.attributeList);
           this.isLoading = false;
         },
