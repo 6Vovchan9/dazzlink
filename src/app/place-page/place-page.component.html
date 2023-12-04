@@ -68,14 +68,14 @@
                             <!-- 5 фоток -->
                             <div class="locationPhotos__wrap">
                                 <!-- Главная фотка -->
-                                <div class="locationPhotos__major">
+                                <div (click)="openPhotoGalleria(0)" class="locationPhotos__major">
                                     <img class="locationPhotos__majorImg" [src]="placeData.imageList[0].href" alt="Главное фото">
                                 </div>
                                 <div class="locationPhotos__minor">
                                     <!-- Второстепенные фото -->
                                     <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
                                         <ng-container *ngIf="!isFirstPhoto">
-                                            <div class="locationPhotos__minorItem">
+                                            <div (click)="openPhotoGalleria(photoIndex)" class="locationPhotos__minorItem">
                                                 <img class="locationPhotos__minorImg" [src]="placeData.imageList[photoIndex].href" [alt]="photoIndex + ' фото'">
                                             </div>
                                         </ng-container>
@@ -137,6 +137,34 @@
         </ng-container>
     </div>
 </main>
+
+<div *ngIf="showPhotoGalleria" (click)="closePhotoGalleria()" class="photoGalleria">
+    <div class="photoGalleria__photoWrap" (click)="forStopPropagation($event)">
+        <img class="photoGalleria__photoImg" [src]="placeData.imageList[curPhotoInGalleria].href" [alt]="photoIndex + ' фото'">
+    </div>
+    <div class="photoGalleria__btnBar">
+        <div class="photoGalleria__btnBlock photoGalleriaBtns">
+            <div class="photoGalleriaBtns__col photoGalleriaBtns__col--left">
+                <div class="photoGalleriaBtns__leftRight">
+                    <button type="button" (click)="switchPhotoInGalleria('prev', $event)" class="btnInGalleria">
+                        <div class="iconForBtn iconForBtn--prev"></div>
+                    </button>
+                    <button type="button" (click)="switchPhotoInGalleria('next', $event)" class="btnInGalleria">
+                        <div class="iconForBtn iconForBtn--next"></div>
+                    </button>
+                </div>
+                <div class="photoGalleriaBtns__pageNum">
+                    {{curPhotoInGalleria + 1}} из 5
+                </div>
+            </div>
+            <div class="photoGalleriaBtns__col">
+                <button type="button" (click)="closePhotoGalleria()" class="btnInGalleria">
+                    <div class="iconForBtn iconForBtn--close"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <ng-template #likeFeedbackIcon>
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">

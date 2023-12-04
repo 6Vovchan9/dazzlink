@@ -25,6 +25,9 @@ export class PlacePageComponent {
   public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];
   public descPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.description, TypeOfPlaceDetails.awards, TypeOfPlaceDetails.infoSource];
 
+  public curPhotoInGalleria: number;
+  public showPhotoGalleria = false;
+
   constructor(
     private route: ActivatedRoute,
     private pagesService: PagesService,
@@ -161,6 +164,46 @@ export class PlacePageComponent {
           this.isLoading = false;
         }
       );
+  }
+
+  public openPhotoGalleria(imgNum: number): void {
+    this.curPhotoInGalleria = imgNum;
+    this.showPhotoGalleria = true;
+    this.hideScroll();
+  }
+
+  public closePhotoGalleria(): void {
+    this.showPhotoGalleria = false;
+    this.showScroll();
+  }
+
+  public forStopPropagation(e): void {
+    e.stopPropagation();
+  }
+
+  public switchPhotoInGalleria(direction: 'next' | 'prev', e?) {
+    if (direction === 'next') {
+      if (this.curPhotoInGalleria === this.placeData.imageList.length - 1) {
+        this.curPhotoInGalleria = 0;
+      } else {
+        this.curPhotoInGalleria += 1;
+      }
+    } else {
+      if (this.curPhotoInGalleria === 0) {
+        this.curPhotoInGalleria = this.placeData.imageList.length - 1;
+      } else {
+        this.curPhotoInGalleria -= 1;
+      }
+    }
+    e.stopPropagation();
+  }
+
+  hideScroll() {
+    document.body.classList.add('no-scroll');
+  }
+
+  showScroll() {
+    document.body.classList.remove('no-scroll');
   }
 
   private prepareAdditPlaceData(data: Array<PlaceAttributeList>): void {
