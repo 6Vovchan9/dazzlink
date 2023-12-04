@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { locationInfoMapping } from '@app/shared/constants/all.constants';
 import { PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
@@ -13,6 +13,8 @@ import { catchError, delay, switchMap } from 'rxjs/operators';
   styleUrls: ['./place-page.component.scss']
 })
 export class PlacePageComponent {
+
+  @ViewChild('inputInGalleria') inputInGalleria: ElementRef;
 
   private lSub: Subscription;
   public locationInfoName = locationInfoMapping;
@@ -170,6 +172,7 @@ export class PlacePageComponent {
     this.curPhotoInGalleria = imgNum;
     this.showPhotoGalleria = true;
     this.hideScroll();
+    setTimeout(() => this.inputInGalleria.nativeElement.focus());
   }
 
   public closePhotoGalleria(): void {
@@ -177,11 +180,19 @@ export class PlacePageComponent {
     this.showScroll();
   }
 
+  public keydownPhotoGalleria(e): void {
+    if (e.code === 'ArrowRight') {
+      this.switchPhotoInGalleria('next');
+    } else if (e.code === 'ArrowLeft') {
+      this.switchPhotoInGalleria('prev');
+    }
+  }
+
   public forStopPropagation(e): void {
     e.stopPropagation();
   }
 
-  public switchPhotoInGalleria(direction: 'next' | 'prev', e?) {
+  public switchPhotoInGalleria(direction: 'next' | 'prev') {
     if (direction === 'next') {
       if (this.curPhotoInGalleria === this.placeData.imageList.length - 1) {
         this.curPhotoInGalleria = 0;
@@ -195,7 +206,6 @@ export class PlacePageComponent {
         this.curPhotoInGalleria -= 1;
       }
     }
-    e.stopPropagation();
   }
 
   hideScroll() {

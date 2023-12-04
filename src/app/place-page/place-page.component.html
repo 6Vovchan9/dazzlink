@@ -139,17 +139,27 @@
 </main>
 
 <div *ngIf="showPhotoGalleria" (click)="closePhotoGalleria()" class="photoGalleria">
-    <div class="photoGalleria__photoWrap" (click)="forStopPropagation($event)">
-        <img class="photoGalleria__photoImg" [src]="placeData.imageList[curPhotoInGalleria].href" [alt]="photoIndex + ' фото'">
+    <div class="photoGalleria__photoWrap" (click)="switchPhotoInGalleria('next'); $event.stopPropagation(); inputInGalleria.focus()">
+        <img class="photoGalleria__photoImg"
+            [src]="placeData.imageList[curPhotoInGalleria].href"
+            [alt]="curPhotoInGalleria + ' фото'"
+        >
     </div>
+    <input type="checkbox"
+        autofocus
+        #inputInGalleria
+        tabindex="-1"
+        class="inputInPhotoGalleria"
+        (keydown)="keydownPhotoGalleria($event)"
+    >
     <div class="photoGalleria__btnBar">
-        <div class="photoGalleria__btnBlock photoGalleriaBtns">
+        <div class="photoGalleria__btnBlock photoGalleriaBtns" (click)="$event.stopPropagation(); inputInGalleria.focus()">
             <div class="photoGalleriaBtns__col photoGalleriaBtns__col--left">
                 <div class="photoGalleriaBtns__leftRight">
-                    <button type="button" (click)="switchPhotoInGalleria('prev', $event)" class="btnInGalleria">
+                    <button type="button" (click)="switchPhotoInGalleria('prev')" class="btnInGalleria">
                         <div class="iconForBtn iconForBtn--prev"></div>
                     </button>
-                    <button type="button" (click)="switchPhotoInGalleria('next', $event)" class="btnInGalleria">
+                    <button type="button" (click)="switchPhotoInGalleria('next')" class="btnInGalleria">
                         <div class="iconForBtn iconForBtn--next"></div>
                     </button>
                 </div>

@@ -199,6 +199,12 @@
             max-width: 320px;
         }
     }
+    .inputInPhotoGalleria {
+        width: 0;
+        height: 0;
+        padding: 0;
+        border: 0;
+    }
 }
 
 .photoGalleriaBtns {
@@ -224,12 +230,6 @@
     border-radius: 50%;
     background-color: var(--color-gray1);
     cursor: pointer;
-
-    &:hover {
-        .iconForBtn--close:before, .iconForBtn--close:after {
-            background-color: var(--color-blue);
-        }
-    }
 }
 
 .iconForBtn {
