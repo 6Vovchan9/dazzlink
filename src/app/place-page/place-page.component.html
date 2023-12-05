@@ -139,12 +139,14 @@
 </main>
 
 <div *ngIf="showPhotoGalleria" (click)="closePhotoGalleria()" class="photoGalleria">
+    <!-- Фотки в галаерее -->
     <div class="photoGalleria__photoWrap" (click)="switchPhotoInGalleria('next'); $event.stopPropagation(); inputInGalleria.focus()">
         <img class="photoGalleria__photoImg"
             [src]="placeData.imageList[curPhotoInGalleria].href"
             [alt]="curPhotoInGalleria + ' фото'"
         >
     </div>
+    <!-- input для того чтобы можно было переключать фотки стрелками на клаве -->
     <input type="checkbox"
         autofocus
         #inputInGalleria
@@ -152,6 +154,7 @@
         class="inputInPhotoGalleria"
         (keydown)="keydownPhotoGalleria($event)"
     >
+    <!-- Кнопки в фотогалерее -->
     <div class="photoGalleria__btnBar">
         <div class="photoGalleria__btnBlock photoGalleriaBtns" (click)="$event.stopPropagation(); inputInGalleria.focus()">
             <div class="photoGalleriaBtns__col photoGalleriaBtns__col--left">
