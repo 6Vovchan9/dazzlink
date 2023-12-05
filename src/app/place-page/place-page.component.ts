@@ -30,7 +30,7 @@ export class PlacePageComponent {
   public showSpinnerUnderPhoto = true;
   public amountLoadedPhotos = 0;
 
-  public curPhotoInGalleria: number;
+  public curPhotoInGalleria = 0;
   public showPhotoGalleria = false;
 
   constructor(
