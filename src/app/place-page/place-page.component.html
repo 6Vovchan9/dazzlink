@@ -68,15 +68,15 @@
                             <!-- 5 фоток -->
                             <div class="locationPhotos__wrap">
                                 <!-- Главная фотка -->
-                                <div (click)="openPhotoGalleria(0)" class="locationPhotos__major">
-                                    <img class="locationPhotos__majorImg" [src]="placeData.imageList[0].href" alt="Главное фото">
+                                <div (click)="openPhotoGalleria(0)" class="locationPhotos__major" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
+                                    <img class="locationPhotos__majorImg" (load)="isLoadPlaceRhoto()" [src]="placeData.imageList[0].href" alt="Главное фото">
                                 </div>
                                 <div class="locationPhotos__minor">
                                     <!-- Второстепенные фото -->
                                     <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
                                         <ng-container *ngIf="!isFirstPhoto">
-                                            <div (click)="openPhotoGalleria(photoIndex)" class="locationPhotos__minorItem">
-                                                <img class="locationPhotos__minorImg" [src]="placeData.imageList[photoIndex].href" [alt]="photoIndex + ' фото'">
+                                            <div (click)="openPhotoGalleria(photoIndex)" class="locationPhotos__minorItem" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
+                                                <img class="locationPhotos__minorImg" (load)="isLoadPlaceRhoto()" [src]="placeData.imageList[photoIndex].href" [alt]="photoIndex + ' фото'">
                                             </div>
                                         </ng-container>
                                     </ng-container>
@@ -84,6 +84,9 @@
                             </div>
                         </ng-template>
                         <ng-template ngSwitchDefault>5 фоток</ng-template>
+                    </div>
+                    <div *ngIf="false" class="exampleForSpinnet">
+                        <img class="exampleForSpinnet__img" src="assets/icons/dotsBounceSpinner.svg" alt="spinner">
                     </div>
                     <!-- Описание, награды, источники -->
                     <div *ngIf="getAdditInfoKeys?.length" class="descPlaceInfo">
@@ -140,8 +143,9 @@
 
 <div *ngIf="showPhotoGalleria" (click)="closePhotoGalleria()" class="photoGalleria">
     <!-- Фотки в галаерее -->
-    <div class="photoGalleria__photoWrap" (click)="switchPhotoInGalleria('next'); $event.stopPropagation(); inputInGalleria.focus()">
+    <div class="photoGalleria__photoWrap">
         <img class="photoGalleria__photoImg"
+            (click)="switchPhotoInGalleria('next'); $event.stopPropagation(); inputInGalleria.focus()"
             [src]="placeData.imageList[curPhotoInGalleria].href"
             [alt]="curPhotoInGalleria + ' фото'"
         >

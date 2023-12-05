@@ -26,6 +26,9 @@ export class PlacePageComponent {
   public additPlaceInfoData: {[key: string]: PlaceAttributeList} = {};
   public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];
   public descPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.description, TypeOfPlaceDetails.awards, TypeOfPlaceDetails.infoSource];
+  
+  public showSpinnerUnderPhoto = true;
+  public amountLoadedPhotos = 0;
 
   public curPhotoInGalleria: number;
   public showPhotoGalleria = false;
@@ -77,6 +80,7 @@ export class PlacePageComponent {
           // delete place.imageList;
           // place.imageList = null;
           // place.imageList = [];
+          // place.imageList[0].href = null;
           this.placeData = place;
           if (false) {
             place.attributeList = [
@@ -168,6 +172,14 @@ export class PlacePageComponent {
       );
   }
 
+  public isLoadPlaceRhoto(): void {
+    this.amountLoadedPhotos += 1;
+    let amountAllPlacePhoto = +this.placeData.imageList.length;
+    if (this.amountLoadedPhotos === amountAllPlacePhoto) {
+      this.showSpinnerUnderPhoto = false;
+    }
+  }
+
   public openPhotoGalleria(imgNum: number): void {
     this.curPhotoInGalleria = imgNum;
     this.showPhotoGalleria = true;
@@ -185,6 +197,8 @@ export class PlacePageComponent {
       this.switchPhotoInGalleria('next');
     } else if (e.code === 'ArrowLeft') {
       this.switchPhotoInGalleria('prev');
+    } else if (e.code === 'Escape') {
+      this.closePhotoGalleria();
     }
   }
 
