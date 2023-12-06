@@ -33,6 +33,8 @@ export class PlacePageComponent {
   public curPhotoInGalleria = 0;
   public showPhotoGalleria = false;
 
+  private initialPointForSwipe: Touch;
+
   constructor(
     private route: ActivatedRoute,
     private pagesService: PagesService,
@@ -172,6 +174,38 @@ export class PlacePageComponent {
       );
   }
 
+  public onTouchmove(touchmoveEvent): void {
+    // console.log('onTouchmove', touchmoveEvent);
+    // touchmoveEvent.preventDefault();
+  }
+
+  public onTouchstart(e): void {
+    this.initialPointForSwipe = e.changedTouches[0];
+  }
+
+  public onTouchend(e): void {
+
+    const finalPoint: Touch = e.changedTouches[0];
+    const xAbs: number = Math.abs(this.initialPointForSwipe.pageX - finalPoint.pageX);
+    const yAbs: number = Math.abs(this.initialPointForSwipe.pageY - finalPoint.pageY);
+
+    if (xAbs > 20 || yAbs > 20) {
+      if (xAbs > yAbs) {
+        // e.preventDefault();
+        if (finalPoint.pageX < this.initialPointForSwipe.pageX) {
+          /*СВАЙП ВЛЕВО*/
+          console.log('свайп влево');
+          this.switchPhotoInGalleria('next');
+        } else {
+          /*СВАЙП ВПРАВО*/
+          console.log('свайп вправо');
+          this.switchPhotoInGalleria('prev');
+        }
+        e.preventDefault();
+      }
+    }
+  }
+
   public isLoadPlaceRhoto(): void {
     this.amountLoadedPhotos += 1;
     let amountAllPlacePhoto = +this.placeData.imageList.length;
@@ -268,7 +302,6 @@ export class PlacePageComponent {
 
       // delete this.additPlaceInfoData[TypeOfPlaceDetails.site];
     }
-    console.log(this.additPlaceInfoData)
   }
 
   public goToAllPlaces(): void {

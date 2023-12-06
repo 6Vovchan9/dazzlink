@@ -6,14 +6,19 @@
                     <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
 
                     <!-- Фотки на мобиле -->
-                    <div (click)="switchPhotoInGalleria('next')" class="locationPhotosInMobile">
+                    <div class="locationPhotosInMobile"
+                        (click)="openPhotoGalleria(curPhotoInGalleria)"
+                        (touchstart)="onTouchstart($event)"
+                        (touchend)="onTouchend($event)"
+                        (touchmove)="onTouchmove($event)"
+                    >
                         <img class="locationPhotosInMobile__img"
                             [src]="placeData.imageList[curPhotoInGalleria]?.href"
                             alt="Фото"
                         >
 
                         <!-- Кнопка чтоб открыть фотогалерею -->
-                        <button class="showGalleryBtn" (click)="openPhotoGalleria(curPhotoInGalleria); $event.stopPropagation()">
+                        <button class="showGalleryBtn">
                             <div class="showGalleryBtn__icon"></div>
                         </button>
 
