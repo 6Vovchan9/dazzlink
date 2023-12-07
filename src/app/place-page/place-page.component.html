@@ -4,10 +4,8 @@
             <aside class="sidebar">
                 <div class="goBackBtn">
                     <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
-                    <!-- {{curPageScale}} -->
                     <!-- Фотки на мобиле -->
                     <div class="locationPhotosInMobile"
-                        (click)="openPhotoGalleria(curPhotoInGalleria)"
                         (touchstart)="onTouchstart($event)"
                         (touchend)="onTouchend($event)"
                         (touchmove)="onTouchmove($event)"
@@ -18,7 +16,7 @@
                         >
 
                         <!-- Кнопка чтоб открыть фотогалерею -->
-                        <button class="showGalleryBtn">
+                        <button class="showGalleryBtn" (click)="openPhotoGalleria(curPhotoInGalleria)">
                             <div class="showGalleryBtn__icon"></div>
                         </button>
 

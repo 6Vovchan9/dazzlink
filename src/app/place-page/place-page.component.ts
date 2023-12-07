@@ -47,7 +47,7 @@ export class PlacePageComponent {
   }
 
   get curPageScale(): number {
-    return window.visualViewport.scale;
+    return window.visualViewport.scale; // масштаб страницы
   }
 
   ngOnInit(): void {
@@ -186,7 +186,9 @@ export class PlacePageComponent {
   public onTouchstart(e): void {
     this.initSwipePoint = e.changedTouches[0]; // Запоминаем коррдинаты пальца user-а в начале свайпа чтоб понимать куда он потом поведет свой палец
 
-    if (e.touches.length > 1) { // Touches это список точек (координат точек куда клиент приложил пальцы) на экране, эта проверка нужна для того чтобы избежать переключения картинок когда user попытается приблизить фотку путем раздвижения 2-х пальцев на экране
+    // 1) Touches это список точек (координат точек куда клиент приложил пальцы) на экране, эта проверка нужна для того чтобы избежать переключения картинок когда user попытается приблизить фотку путем раздвижения 2-х пальцев на экране
+    // 2) curPageScale - это масштаб страницы. Если масштаб страницы увеличен то мы не должны позволять переключать фотки свайпом
+    if (e.touches.length > 1 || this.curPageScale !== 1) {
       this.initSwipePoint = null;
     }
   }
@@ -201,7 +203,7 @@ export class PlacePageComponent {
       const xAbs: number = Math.abs(this.initSwipePoint.pageX - finalPoint.pageX);
       const yAbs: number = Math.abs(this.initSwipePoint.pageY - finalPoint.pageY);
 
-      if (xAbs > 15 || yAbs > 20) {
+      if (xAbs > 15 || yAbs > 220) {
         if (xAbs > yAbs) {
           if (finalPoint.pageX < this.initSwipePoint.pageX) {
             /*СВАЙП ВЛЕВО*/
@@ -211,6 +213,13 @@ export class PlacePageComponent {
             /*СВАЙП ВПРАВО*/
             console.log('свайп вправо');
             this.switchPhotoInGalleria('prev');
+          }
+        } else {
+          if (finalPoint.pageY < this.initSwipePoint.pageY) {
+            console.log('свайп вверх');
+          } else {
+            console.log('свайп вниз');
+            this.closePhotoGalleria()
           }
         }
       }
