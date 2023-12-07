@@ -4,7 +4,7 @@
             <aside class="sidebar">
                 <div class="goBackBtn">
                     <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
-
+                    <!-- {{curPageScale}} -->
                     <!-- Фотки на мобиле -->
                     <div class="locationPhotosInMobile"
                         (click)="openPhotoGalleria(curPhotoInGalleria)"
@@ -179,12 +179,18 @@
     </div>
 </main>
 
-<div *ngIf="showPhotoGalleria" (click)="closePhotoGalleria()" class="photoGalleria">
+<div class="photoGalleria"
+    *ngIf="showPhotoGalleria"
+    (dblclick)="ondDblclick($event)"
+    (click)="closePhotoGalleria()"
+    (touchstart)="onTouchstart($event)"
+    (touchend)="onTouchend($event)"
+>
 
     <!-- Фотки в галаерее -->
     <div class="photoGalleria__photoWrap">
         <img class="photoGalleria__photoImg"
-            (click)="switchPhotoInGalleria('next'); $event.stopPropagation(); inputInGalleria.focus()"
+            (click)="clickByPhotoInGallery(); $event.stopPropagation(); inputInGalleria.focus()"
             [src]="placeData.imageList[curPhotoInGalleria].href"
             [alt]="curPhotoInGalleria + ' фото'"
         >

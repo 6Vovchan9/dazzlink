@@ -46,6 +46,10 @@ export class PlacePageComponent {
     return Object.keys(this.additPlaceInfoData);
   }
 
+  get curPageScale(): number {
+    return window.visualViewport.scale;
+  }
+
   ngOnInit(): void {
 
     this.lSub = this.pagesService.currentLanguage.subscribe(
@@ -180,30 +184,47 @@ export class PlacePageComponent {
   }
 
   public onTouchstart(e): void {
-    this.initSwipePoint = e.changedTouches[0];
+    this.initSwipePoint = e.changedTouches[0]; // Запоминаем коррдинаты пальца user-а в начале свайпа чтоб понимать куда он потом поведет свой палец
+
+    if (e.touches.length > 1) { // Touches это список точек (координат точек куда клиент приложил пальцы) на экране, эта проверка нужна для того чтобы избежать переключения картинок когда user попытается приблизить фотку путем раздвижения 2-х пальцев на экране
+      this.initSwipePoint = null;
+    }
   }
 
   public onTouchend(touchendEvent): void {
 
-    const finalPoint: Touch = touchendEvent.changedTouches[0];
-    // console.log('х до:', +this.initSwipePoint.pageX.toFixed(), ' ,после:', +finalPoint.pageX.toFixed())
-    // console.log('y до:', +this.initSwipePoint.pageY.toFixed(), ' ,после:', +finalPoint.pageY.toFixed())
-    const xAbs: number = Math.abs(this.initSwipePoint.pageX - finalPoint.pageX);
-    const yAbs: number = Math.abs(this.initSwipePoint.pageY - finalPoint.pageY);
+    if (this.initSwipePoint) {
 
-    if (xAbs > 15 || yAbs > 20) {
-      if (xAbs > yAbs) {
-        if (finalPoint.pageX < this.initSwipePoint.pageX) {
-          /*СВАЙП ВЛЕВО*/
-          console.log('свайп влево');
-          this.switchPhotoInGalleria('next');
-        } else {
-          /*СВАЙП ВПРАВО*/
-          console.log('свайп вправо');
-          this.switchPhotoInGalleria('prev');
+      const finalPoint: Touch = touchendEvent.changedTouches[0];
+      // console.log('х до:', +this.initSwipePoint.pageX.toFixed(), ' ,после:', +finalPoint.pageX.toFixed())
+      // console.log('y до:', +this.initSwipePoint.pageY.toFixed(), ' ,после:', +finalPoint.pageY.toFixed())
+      const xAbs: number = Math.abs(this.initSwipePoint.pageX - finalPoint.pageX);
+      const yAbs: number = Math.abs(this.initSwipePoint.pageY - finalPoint.pageY);
+
+      if (xAbs > 15 || yAbs > 20) {
+        if (xAbs > yAbs) {
+          if (finalPoint.pageX < this.initSwipePoint.pageX) {
+            /*СВАЙП ВЛЕВО*/
+            console.log('свайп влево');
+            this.switchPhotoInGalleria('next');
+          } else {
+            /*СВАЙП ВПРАВО*/
+            console.log('свайп вправо');
+            this.switchPhotoInGalleria('prev');
+          }
         }
       }
     }
+  }
+
+  public ondDblclick(e) {
+    // e.preventDefault();
+    // console.log('dblclick');
+  }
+
+  public clickByPhotoInGallery(): void {
+    const mobileWidth = document.documentElement.clientWidth < 768;
+    if (!mobileWidth) this.switchPhotoInGalleria('next');
   }
 
   public isLoadPlaceRhoto(): void {
