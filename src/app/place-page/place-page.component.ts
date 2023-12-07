@@ -33,7 +33,7 @@ export class PlacePageComponent {
   public curPhotoInGalleria = 0;
   public showPhotoGalleria = false;
 
-  private initialPointForSwipe: Touch;
+  private initSwipePoint: Touch;
 
   constructor(
     private route: ActivatedRoute,
@@ -165,7 +165,7 @@ export class PlacePageComponent {
               }
             ];
           }
-          this.prepareAdditPlaceData(place.attributeList);
+          this.prepareAdditPlaceData(place?.attributeList);
           this.isLoading = false;
         },
         err => {
@@ -180,19 +180,20 @@ export class PlacePageComponent {
   }
 
   public onTouchstart(e): void {
-    this.initialPointForSwipe = e.changedTouches[0];
+    this.initSwipePoint = e.changedTouches[0];
   }
 
-  public onTouchend(e): void {
+  public onTouchend(touchendEvent): void {
 
-    const finalPoint: Touch = e.changedTouches[0];
-    const xAbs: number = Math.abs(this.initialPointForSwipe.pageX - finalPoint.pageX);
-    const yAbs: number = Math.abs(this.initialPointForSwipe.pageY - finalPoint.pageY);
+    const finalPoint: Touch = touchendEvent.changedTouches[0];
+    // console.log('х до:', +this.initSwipePoint.pageX.toFixed(), ' ,после:', +finalPoint.pageX.toFixed())
+    // console.log('y до:', +this.initSwipePoint.pageY.toFixed(), ' ,после:', +finalPoint.pageY.toFixed())
+    const xAbs: number = Math.abs(this.initSwipePoint.pageX - finalPoint.pageX);
+    const yAbs: number = Math.abs(this.initSwipePoint.pageY - finalPoint.pageY);
 
-    if (xAbs > 20 || yAbs > 20) {
+    if (xAbs > 15 || yAbs > 20) {
       if (xAbs > yAbs) {
-        // e.preventDefault();
-        if (finalPoint.pageX < this.initialPointForSwipe.pageX) {
+        if (finalPoint.pageX < this.initSwipePoint.pageX) {
           /*СВАЙП ВЛЕВО*/
           console.log('свайп влево');
           this.switchPhotoInGalleria('next');
@@ -201,7 +202,6 @@ export class PlacePageComponent {
           console.log('свайп вправо');
           this.switchPhotoInGalleria('prev');
         }
-        e.preventDefault();
       }
     }
   }
@@ -264,7 +264,7 @@ export class PlacePageComponent {
     document.body.classList.remove('no-scroll');
   }
 
-  private prepareAdditPlaceData(data: Array<PlaceAttributeList>): void {
+  private prepareAdditPlaceData(data: Array<PlaceAttributeList> = []): void {
     // let a = data?.find(item => item.type === 'MAP');
     // a.value = 'Балашиха\nФлервоа 4а';
     // this.additPlaceInfoItems = this.additPlaceInfoTypes.map(el => data?.find(item => item.type === el)).filter(empty => empty);
