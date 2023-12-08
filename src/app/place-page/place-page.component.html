@@ -4,6 +4,7 @@
             <aside class="sidebar">
                 <div class="goBackBtn">
                     <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
+
                     <!-- Фотки на мобиле -->
                     <div class="locationPhotosInMobile"
                         (touchstart)="onTouchstart($event)"
@@ -87,14 +88,28 @@
                         <ng-template ngSwitchCase="1">1 фотка</ng-template>
                         <ng-template ngSwitchCase="2">2 фотки</ng-template>
                         <ng-template ngSwitchCase="3">3 фотки</ng-template>
-                        <ng-template ngSwitchCase="4">4 фотки</ng-template>
+                        <ng-template ngSwitchCase="4">
+                            <ul class="locationPhotos__list">
+                                <li *ngFor="let imgData of placeData.imageList; index as photoIndex"
+                                    class="locationPhotos__item"
+                                    (click)="openPhotoGalleria(photoIndex)"
+                                >
+                                    <img class="locationPhotos__image"
+                                        (load)="isLoadPlacePhoto()"
+                                        [class.withBlocksSpinner]="showSpinnerUnderPhoto"
+                                        [src]="imgData.href"
+                                        [alt]=" photoIndex + 1 + ' фото' "
+                                    >
+                                </li>
+                            </ul>
+                        </ng-template>
                         <ng-template ngSwitchCase="5">
                             <!-- 5 фоток -->
                             <div class="locationPhotos__wrap">
                                 <!-- Главная фотка -->
                                 <div (click)="openPhotoGalleria(0)" class="locationPhotos__major" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
                                     <img class="locationPhotos__majorImg"
-                                        (load)="isLoadPlaceRhoto()"
+                                        (load)="isLoadPlacePhoto()"
                                         [src]="placeData.imageList[0].href"
                                         alt="Главное фото"
                                     >
@@ -105,7 +120,7 @@
                                         <ng-container *ngIf="!isFirstPhoto">
                                             <div (click)="openPhotoGalleria(photoIndex)" class="locationPhotos__minorItem" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
                                                 <img class="locationPhotos__minorImg"
-                                                    (load)="isLoadPlaceRhoto()"
+                                                    (load)="isLoadPlacePhoto()"
                                                     [src]="placeData.imageList[photoIndex].href"
                                                     [alt]="photoIndex + ' фото'"
                                                 >

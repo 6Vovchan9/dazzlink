@@ -203,7 +203,7 @@ export class PlacePageComponent {
       const xAbs: number = Math.abs(this.initSwipePoint.pageX - finalPoint.pageX);
       const yAbs: number = Math.abs(this.initSwipePoint.pageY - finalPoint.pageY);
 
-      if (xAbs > 15 || yAbs > 220) {
+      if (xAbs > 15 || yAbs > 120) {
         if (xAbs > yAbs) {
           if (finalPoint.pageX < this.initSwipePoint.pageX) {
             /*СВАЙП ВЛЕВО*/
@@ -236,9 +236,9 @@ export class PlacePageComponent {
     if (!mobileWidth) this.switchPhotoInGalleria('next');
   }
 
-  public isLoadPlaceRhoto(): void {
+  public isLoadPlacePhoto(): void {
     this.amountLoadedPhotos += 1;
-    let amountAllPlacePhoto = +this.placeData.imageList.length;
+    const amountAllPlacePhoto = +this.placeData.imageList.length;
     if (this.amountLoadedPhotos === amountAllPlacePhoto) {
       this.showSpinnerUnderPhoto = false;
     }
