@@ -87,7 +87,36 @@
                         <ng-template ngSwitchCase="0">Нет фотографий места</ng-template>
                         <ng-template ngSwitchCase="1">1 фотка</ng-template>
                         <ng-template ngSwitchCase="2">2 фотки</ng-template>
-                        <ng-template ngSwitchCase="3">3 фотки</ng-template>
+                        <ng-template ngSwitchCase="3">
+                            <div class="locationPhotos__wrap">
+                                <div class="locationPhotos__major"
+                                    [class.withBlocksSpinner]="showSpinnerUnderPhoto"
+                                    (click)="openPhotoGalleria(0)"
+                                >
+                                    <img class="locationPhotos__majorImg"
+                                        (load)="isLoadPlacePhoto()"
+                                        [src]="placeData.imageList[0].href"
+                                        alt="Главное фото"
+                                    >
+                                </div>
+                                <ul class="locationPhotos__minor">
+                                    <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
+                                        <ng-container *ngIf="!isFirstPhoto">
+                                            <li class="locationPhotos__minorItem"
+                                                (click)="openPhotoGalleria(photoIndex)"
+                                                [class.withBlocksSpinner]="showSpinnerUnderPhoto"
+                                            >
+                                                <img class="locationPhotos__minorImg"
+                                                    (load)="isLoadPlacePhoto()"
+                                                    [src]="placeData.imageList[photoIndex].href"
+                                                    [alt]="photoIndex + 1 + ' фото'"
+                                                >
+                                            </li>
+                                        </ng-container>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </ng-template>
                         <ng-template ngSwitchCase="4">
                             <ul class="locationPhotos__list">
                                 <li *ngFor="let imgData of placeData.imageList; index as photoIndex"

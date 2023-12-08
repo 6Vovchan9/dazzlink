@@ -401,6 +401,45 @@
         }
     }
 
+    &--threePhoto {
+        .locationPhotos__wrap {
+            display: flex;
+            column-gap: 4px;
+            // height: 400px;
+            aspect-ratio: 1/0.57;
+            .locationPhotos__major {
+                flex: 1;
+                border-radius: 20px;
+                overflow: hidden;
+                background-color: var(--color-light-gray);
+                cursor: pointer;
+                .locationPhotos__majorImg {
+                    width: 100%;
+                    object-fit: cover;
+                    height: 100%;
+                }
+            }
+            .locationPhotos__minor {
+                flex: 1;
+                display: flex;
+                row-gap: 4px;
+                flex-direction: column;
+                .locationPhotos__minorItem {
+                    cursor: pointer;
+                    flex: 1;
+                    overflow: hidden;
+                    border-radius: 20px;
+                    background-color: var(--color-light-gray);
+                    .locationPhotos__minorImg {
+                        width: 100%;
+                        object-fit: cover;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+
     @media #{$mobile} {
         display: none;
     }
