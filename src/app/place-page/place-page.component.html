@@ -85,8 +85,12 @@
                         [ngSwitch]="+placeData.imageList?.length"
                     >
                         <ng-template ngSwitchCase="0">Нет фотографий места</ng-template>
-                        <ng-template ngSwitchCase="1">1 фотка</ng-template>
-                        <ng-template ngSwitchCase="2">2 фотки</ng-template>
+                        <ng-template ngSwitchCase="1">
+                            <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
+                        </ng-template>
+                        <ng-template ngSwitchCase="2">
+                            <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
+                        </ng-template>
                         <ng-template ngSwitchCase="3">
                             <div class="locationPhotos__wrap">
                                 <div class="locationPhotos__major"
@@ -118,19 +122,7 @@
                             </div>
                         </ng-template>
                         <ng-template ngSwitchCase="4">
-                            <ul class="locationPhotos__list">
-                                <li *ngFor="let imgData of placeData.imageList; index as photoIndex"
-                                    class="locationPhotos__item"
-                                    (click)="openPhotoGalleria(photoIndex)"
-                                >
-                                    <img class="locationPhotos__image"
-                                        (load)="isLoadPlacePhoto()"
-                                        [class.withBlocksSpinner]="showSpinnerUnderPhoto"
-                                        [src]="imgData.href"
-                                        [alt]=" photoIndex + 1 + ' фото' "
-                                    >
-                                </li>
-                            </ul>
+                            <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
                         </ng-template>
                         <ng-template ngSwitchCase="5">
                             <!-- 5 фоток -->
@@ -143,20 +135,20 @@
                                         alt="Главное фото"
                                     >
                                 </div>
-                                <div class="locationPhotos__minor">
+                                <ul class="locationPhotos__minor">
                                     <!-- Второстепенные фото -->
                                     <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
                                         <ng-container *ngIf="!isFirstPhoto">
-                                            <div (click)="openPhotoGalleria(photoIndex)" class="locationPhotos__minorItem" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
+                                            <li (click)="openPhotoGalleria(photoIndex)" class="locationPhotos__minorItem" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
                                                 <img class="locationPhotos__minorImg"
                                                     (load)="isLoadPlacePhoto()"
                                                     [src]="placeData.imageList[photoIndex].href"
                                                     [alt]="photoIndex + ' фото'"
                                                 >
-                                            </div>
+                                            </li>
                                         </ng-container>
                                     </ng-container>
-                                </div>
+                                </ul>
                             </div>
                         </ng-template>
                         <ng-template ngSwitchDefault>5 фоток</ng-template>
@@ -260,7 +252,7 @@
                     </button>
                 </div>
                 <div class="photoGalleriaBtns__pageNum">
-                    {{curPhotoInGalleria + 1}} из 5
+                    {{curPhotoInGalleria + 1}} из {{placeData.imageList.length}}
                 </div>
             </div>
             <div class="photoGalleriaBtns__col">
@@ -286,6 +278,22 @@
 
 <ng-template #errorTemplate>
     <p>Что-то пошло не так!<br>Уже исправляем</p>
+</ng-template>
+
+<ng-template #locationPhotosListTemplate>
+    <ul class="locationPhotos__list">
+        <li *ngFor="let imgData of placeData.imageList; index as photoIndex"
+            class="locationPhotos__item"
+            (click)="openPhotoGalleria(photoIndex)"
+        >
+            <img class="locationPhotos__image"
+                (load)="isLoadPlacePhoto()"
+                [class.withBlocksSpinner]="showSpinnerUnderPhoto"
+                [src]="imgData.href"
+                [alt]=" photoIndex + 1 + ' фото' "
+            >
+        </li>
+    </ul>
 </ng-template>
 
 <app-loader *ngIf="isLoading"></app-loader>

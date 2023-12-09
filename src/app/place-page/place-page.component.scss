@@ -208,7 +208,8 @@
         border: 0;
     }
     @media #{$mobile} {
-        padding: 0 0 20px 0;
+        padding: 0px;
+        padding-bottom: 20px;
         .photoGalleria__photoWrap .photoGalleria__photoImg {
             border-radius: unset;
         }
@@ -435,6 +436,26 @@
                         object-fit: cover;
                         height: 100%;
                     }
+                }
+            }
+        }
+    }
+
+    &--twoPhoto, &--onePhoto {
+        .locationPhotos__list {
+            display: flex;
+            column-gap: 4px;
+            aspect-ratio: 1/0.57;
+            .locationPhotos__item {
+                cursor: pointer;
+                flex: 1;
+                background-color: var(--color-light-gray);
+                border-radius: 20px;
+                overflow: hidden;
+                .locationPhotos__image {
+                    width: 100%;
+                    object-fit: cover;
+                    height: 100%;
                 }
             }
         }

@@ -86,7 +86,7 @@ export class PlacePageComponent {
           // delete place.imageList;
           // place.imageList = null;
           // place.imageList = [];
-          // place.imageList[1].href = null;
+          // place.imageList[0].href = null;
           // place.imageList.splice(3);
           this.placeData = place;
           if (false) {
