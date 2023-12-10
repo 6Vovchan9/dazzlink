@@ -477,13 +477,21 @@
             display: flex;
             column-gap: 8px;
             .locationRating__val {
-                min-width: 30px;
+                min-width: 36px;
             }
         }
     }
 
     @media #{$mobile} {
-        display: none;
+        .locationRating__list {
+            .locationRating__item {
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                .locationRating__val {
+                    text-align: end;
+                }
+            }
+        }
     }
 }
 
