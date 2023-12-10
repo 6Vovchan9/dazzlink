@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { locationInfoMapping } from '@app/shared/constants/all.constants';
+import { allRatingName, locationInfoMapping } from '@app/shared/constants/all.constants';
 import { PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
@@ -26,7 +26,8 @@ export class PlacePageComponent {
   public additPlaceInfoData: {[key: string]: PlaceAttributeList} = {};
   public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];
   public descPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.description, TypeOfPlaceDetails.awards, TypeOfPlaceDetails.infoSource];
-  
+  public locationRatingList: Array<{name: string, value: number}> = [];
+
   public showSpinnerUnderPhoto = true;
   public amountLoadedPhotos = 0;
 
@@ -76,10 +77,10 @@ export class PlacePageComponent {
           }
         ),
         // delay(8000),
-        catchError(err => {
-          this.isLoading = false;
-          return of(null);
-        })
+        // catchError(err => {
+        //   this.isLoading = false;
+        //   return of(null);
+        // })
       )
       .subscribe(
         (place: PlaceDetails) => {
@@ -88,6 +89,7 @@ export class PlacePageComponent {
           // place.imageList = [];
           // place.imageList[0].href = null;
           // place.imageList.splice(3);
+          // delete place.rating2GIS;
           this.placeData = place;
           if (false) {
             place.attributeList = [
@@ -170,6 +172,7 @@ export class PlacePageComponent {
               }
             ];
           }
+          this.prepareLocationRating();
           this.prepareAdditPlaceData(place?.attributeList);
           this.isLoading = false;
         },
@@ -293,6 +296,25 @@ export class PlacePageComponent {
 
   showScroll() {
     document.body.classList.remove('no-scroll');
+  }
+
+  private prepareLocationRating(): void {
+
+    // this.locationRatingList = [
+    //   { name: 'rating2GIS', value: 4.1 },
+    //   { name: 'ratingGoogle', value: 4.7 },
+    //   { name: 'ratingTripadvisor', value: 3.9 },
+    //   { name: 'ratingYandex', value: 5 }
+    // ];
+
+    for (let rating of allRatingName) {
+      let value = +this.placeData[rating];
+      if (value) {
+        this.locationRatingList.push({ value, name: rating });
+      }
+    }
+
+    this.locationRatingList.sort((a, b) => b.value - a.value);
   }
 
   private prepareAdditPlaceData(data: Array<PlaceAttributeList> = []): void {

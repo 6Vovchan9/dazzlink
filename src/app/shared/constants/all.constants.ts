@@ -7,5 +7,11 @@ export const locationInfoMapping = {
     PHONE: 'Контакты',
     DESCRIPTION: 'Описание',
     AWARDS: 'Награды и подборки',
-    INFO_SOURCE: 'Источники информации'
+    INFO_SOURCE: 'Источники информации',
+    rating2GIS: '2gis',
+    ratingGoogle: 'Google Maps',
+    ratingTripadvisor: 'Tripadvisor',
+    ratingYandex: 'Яндекс Карты'
 };
+
+export const allRatingName: Array<string> = ['rating2GIS', 'ratingGoogle', 'ratingTripadvisor', 'ratingYandex'];

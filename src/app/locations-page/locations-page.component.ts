@@ -611,9 +611,9 @@ export class LocationsPageComponent implements OnInit {
 
     } else {
       this.locationsSub = this.locationsService.getAllLocations()
-        .pipe(
-          delay(2000)
-        )
+        // .pipe(
+        //   delay(2000)
+        // )
         .subscribe(
           value => {
             this.locationsNew = value;
