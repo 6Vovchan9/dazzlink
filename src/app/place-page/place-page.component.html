@@ -45,7 +45,7 @@
                                 {{placeData.subtitle}}
                             </span>
                         </div>
-                        <!-- Рейтинг места на desktop -->
+                        <!-- Рейтинг места -->
                         <div *ngIf="locationRatingList?.length" class="locationRating">
                             <ul class="locationRating__list">
                                 <li *ngFor="let rating of locationRatingList; index as photoIndex; first as isFirstPhoto"
@@ -85,7 +85,19 @@
                                                 {{locationInfoName[additPlaceInfoData[key].type]}}
                                             </div>
                                         </div>
-                                        <div class="additPlaceInfo__value" [innerHTML]="additPlaceInfoData[key].value"></div>
+                                        <ng-container *ngIf="key === 'PHONE'; else additPlaceInfoSimpleValue">
+                                            <ul class="additPlaceInfo__linkList">
+                                                <li class="additPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
+                                                    <a [href]=" 'tel:' + phoneItem " class="additPlaceInfo__link">{{ phoneItem }}</a>
+                                                </li>
+                                                <li class="additPlaceInfo__linkItem" *ngFor="let siteItem of additPlaceInfoData['SITE']?.value">
+                                                    <a [href]="siteItem" target="_blank" class="additPlaceInfo__link">{{ siteItem }}</a>
+                                                </li>
+                                            </ul>
+                                        </ng-container>
+                                        <ng-template #additPlaceInfoSimpleValue>
+                                            <div class="additPlaceInfo__value" [innerHTML]="additPlaceInfoData[key].value"></div>
+                                        </ng-template>
                                     </div>
                                 <!-- </ng-container> -->
                             </ng-container>

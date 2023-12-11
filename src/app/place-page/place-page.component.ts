@@ -102,7 +102,7 @@ export class PlacePageComponent {
               {
                 "group": 20,
                 "type": TypeOfPlaceDetails.phone,
-                "value": "8 963 752 34 89",
+                "value": "8 963 752 34 89 ",
                 "href": null
               },
               {
@@ -137,7 +137,7 @@ export class PlacePageComponent {
               {
                 "group": 20,
                 "type": TypeOfPlaceDetails.site,
-                "value": "https://testo.uz ",
+                "value": " https://testo.uz ",
                 "href": null
               },
               {
@@ -149,7 +149,7 @@ export class PlacePageComponent {
               {
                 "group": 20,
                 "type": TypeOfPlaceDetails.phone,
-                "value": "8 968 001 66 22",
+                "value": " 8 968 001 66 22",
                 "href": null
               },
               {
@@ -207,7 +207,7 @@ export class PlacePageComponent {
       const xAbs: number = Math.abs(this.initSwipePoint.pageX - finalPoint.pageX);
       const yAbs: number = Math.abs(this.initSwipePoint.pageY - finalPoint.pageY);
 
-      if (xAbs > 15 || yAbs > 120) {
+      if (xAbs > 15 || yAbs > 100) {
         if (xAbs > yAbs) {
           if (finalPoint.pageX < this.initSwipePoint.pageX) {
             /*СВАЙП ВЛЕВО*/
@@ -329,7 +329,7 @@ export class PlacePageComponent {
       if (infoItem.type in this.additPlaceInfoData) { // Если такое свойство уже есть тогда добавляем значение в его value
         if (infoItem.value) {
           const innerData = this.additPlaceInfoData[infoItem.type];
-          innerData.value = (innerData.value ? innerData.value + '\n' : '') + infoItem.value;
+          innerData.value = (innerData.value ? innerData.value.trim() + '\n' : '') + infoItem.value.trim();
         }
       } else {
         // if (this.additPlaceInfoTypes.includes(infoItem.type) || infoItem.type === TypeOfPlaceDetails.site) {
@@ -340,9 +340,11 @@ export class PlacePageComponent {
       }
     }
 
+    // Раньше клали в свойство "PHONE" данные из свойства "SITE",
+    // а теперь если с бэка не пришел телефон тогда создаем обертку "PHONE"
     if (TypeOfPlaceDetails.site in this.additPlaceInfoData) {
       let phoneData = this.additPlaceInfoData[TypeOfPlaceDetails.phone];
-      const site = this.additPlaceInfoData[TypeOfPlaceDetails.site];
+      // const site = this.additPlaceInfoData[TypeOfPlaceDetails.site];
 
       if (!phoneData?.value) {
         phoneData = this.additPlaceInfoData[TypeOfPlaceDetails.phone] = {
@@ -351,9 +353,21 @@ export class PlacePageComponent {
         }
       }
 
-      phoneData.value = (phoneData.value ? phoneData.value + '\n' : '') + site.value;
+      // phoneData.value = (phoneData.value ? phoneData.value + '\n' : '') + site.value;
 
       // delete this.additPlaceInfoData[TypeOfPlaceDetails.site];
+    }
+
+    // Тут ниже превращаем value у "PHONE" в массив
+    const phoneVal = this.additPlaceInfoData[TypeOfPlaceDetails.phone]?.value;
+    if (phoneVal) {
+      this.additPlaceInfoData[TypeOfPlaceDetails.phone].value = phoneVal.split('\n');
+    }
+
+    // Тут ниже превращаем value у "SITE" в массив
+    const siteVal = this.additPlaceInfoData[TypeOfPlaceDetails.site]?.value;
+    if (siteVal) {
+      this.additPlaceInfoData[TypeOfPlaceDetails.site].value = siteVal.split('\n');
     }
   }
 

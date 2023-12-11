@@ -112,6 +112,14 @@
             white-space: pre-wrap;
         }
 
+        .additPlaceInfo__linkList {
+            margin-left: 40px;
+            margin-top: 4px;
+            .additPlaceInfo__linkItem {
+                text-decoration: underline;
+            }
+        }
+
         &--address {
             .additPlaceInfo__title .additPlaceInfo__titleLogo {
                 background-image: url('/assets/icons/locationAddress.svg');

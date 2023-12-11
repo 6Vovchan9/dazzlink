@@ -116,7 +116,7 @@ export type PlaceDetails = {
 export type PlaceAttributeList = {
     group?: number,
     type: TypeOfPlaceDetails, // DESCRIPTION | WORKING_HOURS | CUISINE | MAP | SITE | PHONE
-    value: string,
+    value: any,
     href?: {
         coordinates: {
             lat: number,

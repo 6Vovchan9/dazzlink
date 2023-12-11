@@ -11,7 +11,7 @@ export const environment: Environment = {
   rovraggeUrl: '/dating/api/article-content',
   prodArticleUrl: '/article-content',
   rovraggePlacesUrl: '/dating/api/meeting-places',
-  prodPlacesUrl: '/dating/api/meeting-places'
+  prodPlacesUrl: 'https://stage-api.dazzlink.asia/meeting-places'
 };
 
 /*
