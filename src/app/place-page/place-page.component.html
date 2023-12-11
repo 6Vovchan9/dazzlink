@@ -91,7 +91,7 @@
                                                     <a [href]=" 'tel:' + phoneItem " class="additPlaceInfo__link">{{ phoneItem }}</a>
                                                 </li>
                                                 <li class="additPlaceInfo__linkItem" *ngFor="let siteItem of additPlaceInfoData['SITE']?.value">
-                                                    <a [href]="siteItem" target="_blank" class="additPlaceInfo__link">{{ siteItem }}</a>
+                                                    <a [href]="siteItem" [title]="siteItem" target="_blank" class="additPlaceInfo__link">{{ siteItem }}</a>
                                                 </li>
                                             </ul>
                                         </ng-container>
@@ -202,7 +202,17 @@
                                     <div class="descPlaceInfo__title">
                                         {{locationInfoName[additPlaceInfoData[key].type]}}
                                     </div>
-                                    <div class="descPlaceInfo__value" [innerHTML]="additPlaceInfoData[key].value"></div>
+
+                                    <ng-container *ngIf="key === 'INFO_SOURCE'; else descPlaceInfoSimpleValue">
+                                        <ul class="descPlaceInfo__linkList">
+                                            <li class="descPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
+                                                <a [href]="phoneItem" [title]="phoneItem" target="_blank" class="descPlaceInfo__link">{{ phoneItem }}</a>
+                                            </li>
+                                        </ul>
+                                    </ng-container>
+                                    <ng-template #descPlaceInfoSimpleValue>
+                                        <div class="descPlaceInfo__value" [innerHTML]="additPlaceInfoData[key].value"></div>
+                                    </ng-template>
                                 </div>
                             </ng-container>
                         </ng-container>

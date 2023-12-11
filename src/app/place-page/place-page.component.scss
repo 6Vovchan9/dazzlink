@@ -116,7 +116,11 @@
             margin-left: 40px;
             margin-top: 4px;
             .additPlaceInfo__linkItem {
-                text-decoration: underline;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                .additPlaceInfo__link {
+                    text-decoration: underline;
+                }
             }
         }
 
@@ -155,6 +159,17 @@
         .descPlaceInfo__value {
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        .descPlaceInfo__linkList {
+            flex: 1;
+            overflow: hidden;
+            .descPlaceInfo__linkItem {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                .descPlaceInfo__link {
+                    text-decoration: underline;
+                }
+            }
         }
         &:first-child {
             margin-top: 0px;

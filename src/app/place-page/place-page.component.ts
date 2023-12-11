@@ -141,6 +141,12 @@ export class PlacePageComponent {
                 "href": null
               },
               {
+                "group": 30,
+                "type": TypeOfPlaceDetails.infoSource,
+                "value": "https://testo.uz ",
+                "href": null
+              },
+              {
                 "group": 20,
                 "type": TypeOfPlaceDetails.phone,
                 "value": null,
@@ -167,7 +173,7 @@ export class PlacePageComponent {
               {
                 "group": 30,
                 "type": TypeOfPlaceDetails.infoSource,
-                "value": "https://testo.uz;https://www.tripadvisor.com;https://www.google.ru/maps;https://yandex.kz/maps;https://2gis.uz",
+                "value": "https://www.tripadvisor.com\nhttps://www.google.ru/maps\nhttps://yandex.kz/maps\nhttps://2gis.uz",
                 "href": null
               }
             ];
@@ -369,6 +375,14 @@ export class PlacePageComponent {
     if (siteVal) {
       this.additPlaceInfoData[TypeOfPlaceDetails.site].value = siteVal.split('\n');
     }
+
+    // Тут ниже превращаем value у "SITE" в массив
+    const infoSourceVal = this.additPlaceInfoData[TypeOfPlaceDetails.infoSource]?.value;
+    if (infoSourceVal) {
+      this.additPlaceInfoData[TypeOfPlaceDetails.infoSource].value = infoSourceVal.split('\n');
+    }
+
+    // console.log(this.additPlaceInfoData);
   }
 
   public goToAllPlaces(): void {
