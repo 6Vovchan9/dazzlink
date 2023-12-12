@@ -204,6 +204,14 @@ button {
         background: linear-gradient(to right, RGBA(255, 255, 255, 0) 0%, #fff 50%, RGBA(255, 255, 255, 0) 100%);
         animation: 2s cubic-bezier(0.4, 0.0, 0.2, 1) .8s infinite normal none running load;
     }
+
+    &--shortHeight {
+        &:before {
+            height: 70%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
 }
 
 .withSkeletonLoader {
