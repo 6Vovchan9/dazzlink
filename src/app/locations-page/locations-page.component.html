@@ -15,7 +15,7 @@
                 <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
             </ng-container>
             <ng-template #filterOptionsBlock>
-                <ng-container *ngIf="filterFieldOptions?.length">
+                <ng-container *ngIf="filterFieldOptions?.length && !filterBarFixed">
                     <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
                 </ng-container>
             </ng-template>
@@ -27,7 +27,11 @@
                     <div #locationsWrapper class="pageContent__allAboutLocations">
                         <div class="pageContent__filterBar filterBarWrapper" [class.filterBarWrapper--position--fixed]="filterBarFixed">
                             <div class="filterBarWrapper__container">
-                                <div class="filterBarWrapper__fakeSidebar"></div>
+                                <div *ngIf="filterBarFixed" class="filterBarWrapper__fakeSidebar">
+                                    <ng-container *ngIf="showFilterControls">
+                                        <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
+                                    </ng-container>
+                                </div>
                                 <div class="filterBar">
                                     <div class="filterBar__length">
                                         <!-- Доступно {{locationsNew.placeCount}} мест -->
