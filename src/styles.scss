@@ -214,12 +214,6 @@ button {
     }
 }
 
-.withSkeletonLoader {
-    .skeletonLoader {
-        display: block;
-    }
-}
-
 @keyframes load {
     from {
         left: max(-100%, -232px);

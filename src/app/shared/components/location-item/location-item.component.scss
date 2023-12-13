@@ -16,8 +16,40 @@
     &:hover .placeDetails .placeDetails__main .placeDetails__title {
         color: var(--color-blue1);
     }
-    &.withSkeletonLoader {
+    &--withSkeleton {
         cursor: wait;
+        .skeletonLoader {
+            display: block;
+        }
+    }
+}
+
+.locationItem--withSkeleton {
+    .placeDetails {
+        .placeDetails__main, .placeDetails__addit {
+            .placeDetails__title, .placeDetails__rating, .placeDetails__another, .placeDetails__address {
+                position: relative;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #fff;
+                }
+                &:after {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 80%;
+                    background-color: #eee;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    border-radius: 20px;
+                }
+            }
+        }
     }
 }
 
@@ -77,35 +109,6 @@
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
-        }
-    }
-}
-
-.withSkeletonLoader {
-    .placeDetails {
-        .placeDetails__main, .placeDetails__addit {
-            .placeDetails__title, .placeDetails__rating, .placeDetails__another, .placeDetails__address {
-                position: relative;
-
-                &:before {
-                    content: '';
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    background-color: #fff;
-                }
-                &:after {
-                    content: '';
-                    position: absolute;
-                    width: 100%;
-                    height: 80%;
-                    background-color: #eee;
-                    left: 0;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    border-radius: 20px;
-                }
-            }
         }
     }
 }

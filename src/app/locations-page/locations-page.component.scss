@@ -454,3 +454,9 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         background-image: url('../../assets/icons/arrowForAuthor.svg');
     }
 }
+
+.withSkeletonLoader {
+    .skeletonLoader {
+        display: block;
+    }
+}
