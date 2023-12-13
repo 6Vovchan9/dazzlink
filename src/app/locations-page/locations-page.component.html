@@ -68,7 +68,7 @@
                         <ng-container *ngFor="let block of locationsNew.cityPlaceList">
                             <ng-container *ngIf="block.placeList?.length">
                                 <div class="pageContent__locationsBlock">
-                                    <div class="pageContent__locationsCity">{{block.cityTitle}}</div>
+                                    <div class="pageContent__locationsCity" [class.withSimpleSkeleton]="isSorting">{{block.cityTitle}}</div>
                                     <ul class="pageContent__locationsList">
                                         <li *ngFor="let location of block.placeList" class="pageContent__locationsItem">
                                             <app-location-item [isLoading]="isSorting"

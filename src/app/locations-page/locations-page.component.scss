@@ -148,6 +148,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     .pageContent__locationsBlock {
         margin-bottom: 48px;
         .pageContent__locationsCity {
+            display: inline-block;
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 24px;
