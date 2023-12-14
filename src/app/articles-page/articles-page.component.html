@@ -51,13 +51,28 @@
         </aside>
         <main class="pageContent">
             <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
-                <ng-container *ngIf="postList.length; else empty">
-                    <ul class="pageContent__articles">
-                        <li *ngFor="let post of postList" class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
-                            <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post>
-                        </li>
-                    </ul>
+                <ng-container *ngIf="errorInGetAllArticles; else successGetAllArticles">
+                    <div class="errorMessage">
+                        <div class="errorMessage__icon"></div>
+                        <div class="errorMessage__title">
+                            Есть проблема
+                        </div>
+                        <div class="errorMessage__text">
+                            Не смогли показать статьи, попробуйте<br>
+                            перезагрузить страницу или зайдите позже
+                        </div>
+                        <button class="errorMessage__btn" (click)="reloadArticles()">Перезагрузить</button>
+                    </div>
                 </ng-container>
+                <ng-template #successGetAllArticles>
+                    <ng-container *ngIf="postList.length; else empty">
+                        <ul class="pageContent__articles">
+                            <li *ngFor="let post of postList" class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
+                                <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post>
+                            </li>
+                        </ul>
+                    </ng-container>
+                </ng-template>
             </ng-container>
 
             <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
@@ -80,7 +95,18 @@
 <app-loader *ngIf="isLoading"></app-loader>
 
 <ng-template #empty>
-    <p>Список статей пуст</p>
+    <!-- <p>Список статей пуст</p> -->
+    <div class="errorMessage">
+        <div class="errorMessage__icon"></div>
+        <div class="errorMessage__title">
+            Пока ничего нет
+        </div>
+        <div class="errorMessage__text">
+            Сейчас список пуст, но мы уже собираем<br>
+            полезный материал, зайдите позже
+        </div>
+        <button class="errorMessage__btn" routerLink="/">На главную</button>
+    </div>
 </ng-template>
 <ng-template #loadingTemplate>
     <p>Идет загрузка статей...</p>

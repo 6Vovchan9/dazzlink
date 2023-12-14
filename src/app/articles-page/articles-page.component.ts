@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { EMPTY, Observable, Subscription, of } from 'rxjs';
+import { EMPTY, Observable, Observer, Subscription, of, throwError } from 'rxjs';
 import { catchError, delay, tap } from 'rxjs/operators';
 import { Post } from '@app/shared/interfaces';
 import { PostsService } from '@app/shared/services/posts.service';
@@ -20,6 +20,7 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
   public isLoading = true;
   private lSub: Subscription;
   private curLang: string;
+  public errorInGetAllArticles = false;
 
   constructor(
     private postsService: PostsService,
@@ -60,6 +61,7 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
         }),
         catchError(err => {
           this.isLoading = false;
+          this.errorInGetAllArticles = true;
           return of([
             // {
             //   id: 'ferb54grv',
@@ -71,6 +73,11 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
           ]);
         })
       )
+  }
+
+  private reloadArticles(): void {
+    this.errorInGetAllArticles = false;
+    this.getAllArticles();
   }
 
   goToPostPage(postId) {
