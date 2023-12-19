@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { allRatingName, locationInfoMapping } from '@app/shared/constants/all.constants';
-import { PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
+import { IVotingService, PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
 import { Subscription, of } from 'rxjs';
@@ -17,11 +17,13 @@ export class PlacePageComponent {
   @ViewChild('inputInGalleria') inputInGalleria: ElementRef;
 
   private lSub: Subscription;
+  private vSub: Subscription;
   public locationInfoName = locationInfoMapping;
   public isLoading = true;
   private placeId: string;
   public placeData: PlaceDetails;
   public placeEvaluation: 'like' | 'dislike';
+  private votingIsLoading = false;
   public additPlaceInfoItems: Array<PlaceAttributeList> = [];
   public additPlaceInfoData: {[key: string]: PlaceAttributeList} = {};
   public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];
@@ -84,6 +86,7 @@ export class PlacePageComponent {
       )
       .subscribe(
         (place: PlaceDetails) => {
+          if (place) this.getEvaluation();
           // delete place.imageList;
           // place.imageList = null;
           // place.imageList = [];
@@ -186,6 +189,14 @@ export class PlacePageComponent {
           this.isLoading = false;
         }
       );
+  }
+
+  private getEvaluation() {
+    const placesRating = JSON.parse(localStorage.getItem('placeEvaluation')) || [];
+    const aboutThisPlace = placesRating.find(about => about.placeId === this.placeId);
+    if (aboutThisPlace) {
+      this.placeEvaluation = aboutThisPlace.choice;
+    }
   }
 
   public onTouchmove(touchmoveEvent): void {
@@ -390,7 +401,48 @@ export class PlacePageComponent {
   }
 
   public onVoting(val: 'like' | 'dislike'): void {
+    if (!this.placeEvaluation && !this.votingIsLoading) {
+      console.log(`Фиксируем ваш ${val}`);
+      this.votingIsLoading = true;
+      this.vSub = this.locationsService.setPlaceVotingProd(this.placeId, val)
+        .subscribe(
+          (resp: IVotingService) => {
+            this.placeData['likeCount'] = resp['likeCount'];
+            this.placeData['dislikeCount'] = resp['dislikeCount'];
+            this.votingIsLoading = false;
+            this.placeEvaluation = val;
+            this.setPlaceEvaluationToLS(val);
+            console.log(`Зафиксировали ваш выбор!`, this.placeEvaluation);
+          },
+          () => {
+            this.votingIsLoading = false;
+          }
+        );
+      // Тут есть момент как можно обойти LS и наделать много лайков (нужно лайкнуть и быстро обновить страницу, нужно успеть перед тем как сервер ответит),
+      // решить это можно если вынести setArticleEvaluationToSSWithChoice из subscribe и в случае если фиксация реакиции
+      // завершится с ошибкой тогда нкжно будет удалить реакцию из LS
 
+      // this.placeEvaluation = val;
+      // this.setArticleEvaluationToSSWithChoice(val);
+    }
+  }
+
+  private setPlaceEvaluationToLS(choice?: 'like' | 'dislike'): void {
+    const curVal = JSON.parse(localStorage.getItem('placeEvaluation')) || [];
+
+    const aboutThisPlace = curVal.find(about => about.placeId === this.placeId);
+    // Возможно id-шник статьи уже есть в LS потому что она была ранее просмотрена, теперь для этой записи надо установить признак like/dislike
+    if (aboutThisPlace) {
+      aboutThisPlace.choice = choice;
+      localStorage.setItem('placeEvaluation', JSON.stringify(curVal));
+    } else {
+      const val: { placeId: string, choice?: string } = { placeId: this.placeId };
+      if (choice) {
+        val.choice = choice;
+      }
+      curVal.push(val);
+      localStorage.setItem('placeEvaluation', JSON.stringify(curVal));
+    }
   }
 
   public operatePriceRange(num = 1): Array<any> {

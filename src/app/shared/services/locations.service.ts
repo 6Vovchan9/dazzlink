@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { delay, map, tap } from "rxjs/operators";
 
 import { environment } from "src/environments/environment";
-import { Place, Post, RovraggeRespLocationsData, RovraggeRespWrapper, RovraggeRespFiltersData, CountryFilterItem } from "../interfaces";
+import { Place, Post, RovraggeRespLocationsData, RovraggeRespWrapper, RovraggeRespFiltersData, CountryFilterItem, IVotingService } from "../interfaces";
 import { PagesService } from "@app/shared/services/pages.service";
 
 @Injectable({ providedIn: 'root' })
@@ -80,6 +80,13 @@ export class LocationsService {
         ).pipe(
             map((resp: RovraggeRespWrapper) => resp.data)
         )
+    }
+
+    public setPlaceVotingProd(id: string, choice: 'like' | 'dislike'): Observable<IVotingService> {
+        return this.http.patch<RovraggeRespWrapper>(`${environment.prodPlacesUrl}/place/${id}/${choice}`, null)
+            .pipe(
+                map((resp: { [key: string]: any }) => resp.data)
+            )
     }
 
     create(location: Place): Observable<Place> {

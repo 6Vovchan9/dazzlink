@@ -4,6 +4,12 @@ export interface AdminData {
     returnSecureToken?: boolean;
 }
 
+export type IVotingService = {
+    dislikeCount: number,
+    likeCount: number,
+    id: string
+}
+
 export interface MainLayoutOptions {
     header: {
         withAnimation: boolean,

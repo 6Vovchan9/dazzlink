@@ -144,8 +144,8 @@ export class PostPageComponent implements OnInit, OnDestroy {
       // this.vSub = this.postsService.setArticleVoting(this.articleId, val)
       this.vSub = this.postsService.setArticleVotingProd(this.articleId, val)
         .pipe(
-        // delay(5000)
-      )
+          // delay(5000)
+        )
         .subscribe(
           resp => {
             this.postData['likeCount'] = resp['likeCount'];
