@@ -65,7 +65,7 @@ registerLocaleData(localeRu, 'ru');
     RadiobuttonFieldModule,
     DropdownFieldModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+  // providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },], // Это хороший итерсептор но он пока не нужен и лучше сейчас его отключить чтоб он не очищал localStorage
   bootstrap: [AppComponent]
 })
 export class AppModule { }
