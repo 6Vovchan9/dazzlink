@@ -4,13 +4,16 @@
             <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
         </aside>
         <aside class="sidebar" [class.hiddenInMobile]="webview">
+
             <!-- <button class="btn" (click)="clickByMybtn1()">myBtn1</button>
             <br><br>
             <button class="btn" (click)="clickByMybtn2()">myBtn2</button>
             <br><br>
-            <button class="btn" (click)="clickByMybtn3()">myBtn3</button> -->
-            <!-- <button class="btn" (click)="errorAfterSort = !errorAfterSort">Ошибка при получ локаций "After"</button> -->
-            <!-- {{errorAfterSort}} -->
+            <button class="btn" (click)="clickByMybtn3()">myBtn3</button>
+            <br><br>
+            <button class="btn" (click)="errorAfterSort = !errorAfterSort">Ошибка при получ локаций "After"</button>
+            {{errorAfterSort}} -->
+
             <ng-container *ngIf="!showFilterControls || !filterFieldOptions?.length; else filterOptionsBlock">
                 <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
             </ng-container>

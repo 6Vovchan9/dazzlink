@@ -10,6 +10,7 @@ import { CountryFilterItem, Place } from '@app/shared/interfaces';
 import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { Router } from '@angular/router';
+import { ToastService } from '@app/shared/services/toast.service';
 
 @Component({
   selector: 'app-locations-page',
@@ -62,6 +63,7 @@ export class LocationsPageComponent implements OnInit {
     private pagesService: PagesService,
     public mobileDetectService: MobileDetectService,
     private locationsService: LocationsService,
+    private toastService: ToastService,
     private router: Router
   ) { }
 
@@ -727,13 +729,14 @@ export class LocationsPageComponent implements OnInit {
               }
             );
           }
-        }, 8000)
+        }, 3000)
       })
 
       this.locationsAfterSortSub = stream$.subscribe(
         value => {
           this.locationsUpdating = false;
           console.log(`Успешно отсортировали (${sortVal})!`);
+          this.toastService.success('Отсортировано');
           this.locationsNew = value;
           this.lastSuccessSortVal = sortVal;
           this.filterBarGroup.get('sort').enable({ emitEvent: false });
@@ -743,6 +746,7 @@ export class LocationsPageComponent implements OnInit {
         () => {
           this.locationsUpdating = false;
           console.error('Ошибка при получении отсортированных локаций! Поэтому не обновляем порядок локаций и берем предыдущее успешное значение сортировки');
+          this.toastService.warning('Ошибка сортировки, попробуйте еще раз');
           this.filterBarGroup.get('sort').enable({ emitEvent: false });
           this.filterBarGroup.get('sort').setValue(this.lastSuccessSortVal, { emitEvent: false });
           // this.filterBarGroup.get('sort').reset(null, { emitEvent: false }); // или тут можно будет установить последнее успешное значение сортировки
@@ -761,6 +765,7 @@ export class LocationsPageComponent implements OnInit {
           value => {
             this.locationsUpdating = false;
             console.log(`Успешно отсортировали (${sortVal})!`);
+            this.toastService.success('Отсортировано');
             this.locationsNew = value;
             this.lastSuccessSortVal = sortVal;
             this.filterBarGroup.get('sort').enable({ emitEvent: false });
@@ -770,6 +775,7 @@ export class LocationsPageComponent implements OnInit {
           () => {
             this.locationsUpdating = false;
             console.error('Ошибка при получении отсортированных локаций! Поэтому не обновляем порядок локаций и берем предыдущее успешное значение сортировки');
+            this.toastService.warning('Ошибка сортировки, попробуйте еще раз');
             this.filterBarGroup.get('sort').enable({ emitEvent: false });
             this.filterBarGroup.get('sort').setValue(this.lastSuccessSortVal, { emitEvent: false });
             // this.filterBarGroup.get('sort').reset(null, { emitEvent: false }); // или тут можно будет установить последнее успешное значение сортировки
@@ -892,6 +898,7 @@ export class LocationsPageComponent implements OnInit {
         value => {
           this.locationsUpdating = false;
           console.log(`Успешно отфильтровали!`);
+          this.toastService.success('Отфильтровано');
           this.locationsNew = value;
           this.isSorting = false;
           if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false }); // Эти 2 подстраховки на случай когда начали соритровать и сразу принялись фильтровать
@@ -900,6 +907,7 @@ export class LocationsPageComponent implements OnInit {
         () => {
           this.locationsUpdating = false;
           console.error('Ошибка при фильтрации, сбрасываем фильтрацию/сортировку и запрашиваем чистый список локаций');
+          this.toastService.warning('Ошибка фильтрации, попробуйте еще раз');
           this.isSorting = false;
           this.afterFilterAndSortError();
           // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации
@@ -915,6 +923,7 @@ export class LocationsPageComponent implements OnInit {
           value => {
             this.locationsUpdating = false;
             console.log(`Успешно отфильтровали!`);
+            this.toastService.success('Отфильтровано');
             this.locationsNew = value;
             this.isSorting = false;
             if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false }); // Эти 2 подстраховки на случай когда начали соритровать и сразу принялись фильтровать
@@ -923,6 +932,7 @@ export class LocationsPageComponent implements OnInit {
           () => {
             this.locationsUpdating = false;
             console.error('Ошибка при фильтрации, сбрасываем фильтрацию/сортировку и запрашиваем чистый список локаций');
+            this.toastService.warning('Ошибка фильтрации, попробуйте еще раз');
             this.isSorting = false;
             this.afterFilterAndSortError();
             // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации

@@ -97,6 +97,13 @@ export type Place = {
     }>
 }
 
+export interface IToast {
+    type: ToastType;
+    text: string
+}
+
+export type ToastType = 'success' | 'warning' | 'danger';
+
 export type PlaceDetails = {
     id?: string,
     address?: string, // ул. Ислама Каримова, 17

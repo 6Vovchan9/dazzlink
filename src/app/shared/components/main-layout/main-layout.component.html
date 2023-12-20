@@ -13,6 +13,9 @@
         <div class="shadow"></div>
     </header>
 
+    <!-- Алерт -->
+    <app-toast [delay]="3000"></app-toast>
+
     <!-- Осн контент -->
     <div class="contentWrapper" [class.contentWrapper--noMargin]="webview">
         <router-outlet></router-outlet>

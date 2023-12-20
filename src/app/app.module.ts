@@ -28,6 +28,8 @@ import { LocationsPageComponent } from './locations-page/locations-page.componen
 import { LocationItemComponent } from './shared/components/location-item/location-item.component';
 import { CheckboxNewFieldComponent } from './shared/fields/checkbox-new-field/checkbox-new-field.component';
 import { PlacePageComponent } from './place-page/place-page.component';
+import { ToastService } from './shared/services/toast.service';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -44,6 +46,7 @@ registerLocaleData(localeRu, 'ru');
     LocationsPageComponent,
 
     HeaderComponent,
+    ToastComponent,
     FooterComponent,
     PostComponent,
     LocationItemComponent,
@@ -65,6 +68,7 @@ registerLocaleData(localeRu, 'ru');
     RadiobuttonFieldModule,
     DropdownFieldModule
   ],
+  providers: [ToastService],
   // providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },], // Это хороший итерсептор но он пока не нужен и лучше сейчас его отключить чтоб он не очищал localStorage
   bootstrap: [AppComponent]
 })
