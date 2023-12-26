@@ -131,7 +131,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             @media #{$notMobile} {
                 .filterBarWrapper__container {
                     .filterBarWrapper__fakeSidebar {
-                        pointer-events: auto;
+                        // pointer-events: auto;
                         display: block;
                         flex: 1;
                         max-width: 360px;
@@ -290,6 +290,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     // max-height: 100%;
     max-height: calc(100vh - 180px);
     margin-top: 20px;
+    pointer-events: auto;
 
     .filterOptionsBlock__content {
         flex: 1;
