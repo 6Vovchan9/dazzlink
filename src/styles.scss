@@ -17,7 +17,7 @@ html {
 body {
     margin: 0;
     color: var(--color-black1);
-    // background-color: $color-background;
+    // background-color: var(--tg-theme-bg-color); // переменная доступная благодаря script из index.html нужна для того чтобы регулировать стили приложения в завис от темы (светлая/темная) telegram
 
     &.no-scroll {
         overflow: hidden;

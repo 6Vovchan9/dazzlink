@@ -39,8 +39,13 @@ ng new dazzlink -> удаляем ранее созданный бандл, ес
 
 ## firebase hosting
 
-Глобально должен быть установлен пакет npm install -g firebase-tools, далее firebase login -> firebase init -> удаляем ранее созданный бандл, если есть (/dist или /docs) -> собираем проект ng build --output-path docs -> firebase deploy (эта инструкция есть на https://firebase.google.com)
+Глобально должен быть установлен пакет npm install -g firebase-tools, далее firebase login -> firebase init -> удаляем ранее созданный бандл, если есть (/dist или /docs) -> собираем проект ng build --output-path docs -> firebase deploy (эта инструкция есть на https://firebase.google.com и у Владилен Минин на ютубе видео от 5.12.23)
 
 ## svg-spinners 
 
 множество спиннеров (загрузчиков) тут https://github.com/n3r4zzurr0/svg-spinners
+
+## telegram bot
+
+For a description of the Bot API, see this page: https://core.telegram.org/bots/api и небольшая инструкция у Владилен Минин на ютубе видео от 5.12.23.
+Базовый тг бот: t.me/TgDazzlinkMyBot
