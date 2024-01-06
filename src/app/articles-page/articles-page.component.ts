@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
 import { EMPTY, Observable, Observer, Subscription, of, throwError } from 'rxjs';
 import { catchError, delay, tap } from 'rxjs/operators';
 import { Post } from '@app/shared/interfaces';
@@ -25,7 +25,7 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
   constructor(
     private postsService: PostsService,
     private pagesService: PagesService,
-    public mobileDetectService: MobileDetectService,
+    @Optional() public mobileDetectService: MobileDetectService,  // Если вдруг для этого сервиса не определен провайдер, чтоб мы не получили ошибку при обращении к нему в таком случае определяем его как опциональный
     private router: Router
   ) { }
 
@@ -98,7 +98,7 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
   }
 
   public mobileStoreSrc(): string {
-    const osDevice = this.mobileDetectService.osDevice;
+    const osDevice = this.mobileDetectService?.osDevice;
 
     if (osDevice?.toLowerCase() === 'ios') {
       return 'assets/images/linkIOSShort.svg';
@@ -110,7 +110,7 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
   }
 
   public goToStore(): void {
-    const osDevice = this.mobileDetectService.osDevice;
+    const osDevice = this.mobileDetectService?.osDevice;
     console.log('Идем в store');
     if (osDevice?.toLowerCase() === 'ios') {
       // window.location.href = 'https://www.apple.com/app-store';

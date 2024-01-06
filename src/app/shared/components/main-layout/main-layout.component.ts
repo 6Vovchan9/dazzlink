@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit, Optional } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
@@ -42,7 +42,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   constructor(
     private visitsService: VisitsService,
     private pagesService: PagesService,
-    public mobileDetectService: MobileDetectService,
+    @Optional() public mobileDetectService: MobileDetectService,
   ) { }
 
   ngDoCheck(): void {
@@ -136,7 +136,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   }
 
   public mobileStoreSrc(): string {
-    const osDevice = this.mobileDetectService.osDevice;
+    const osDevice = this.mobileDetectService?.osDevice;
 
     if (osDevice?.toLowerCase() === 'ios') {
       return 'assets/images/linkIOSShort.svg';
@@ -148,7 +148,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   }
 
   public goToStore(): void {
-    const osDevice = this.mobileDetectService.osDevice;
+    const osDevice = this.mobileDetectService?.osDevice;
     console.log('Идем в store');
     if (osDevice?.toLowerCase() === 'ios') {
       // window.location.href = 'https://www.apple.com/app-store';

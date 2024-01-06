@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
 import { Observable, Observer, Subscription, fromEvent, of } from 'rxjs';
 import { catchError, delay, map, tap } from 'rxjs/operators';
 
@@ -61,7 +61,7 @@ export class LocationsPageComponent implements OnInit {
   
   constructor(
     private pagesService: PagesService,
-    public mobileDetectService: MobileDetectService,
+    @Optional() public mobileDetectService: MobileDetectService,
     private locationsService: LocationsService,
     private toastService: ToastService,
     private router: Router
@@ -963,7 +963,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   public mobileStoreSrc(): string {
-    const osDevice = this.mobileDetectService.osDevice;
+    const osDevice = this.mobileDetectService?.osDevice;
 
     if (osDevice?.toLowerCase() === 'ios') {
       return 'assets/images/linkIOSShort.svg';
@@ -975,7 +975,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   public goToStore(): void {
-    const osDevice = this.mobileDetectService.osDevice;
+    const osDevice = this.mobileDetectService?.osDevice;
     console.log('Идем в store');
     if (osDevice?.toLowerCase() === 'ios') {
       // window.location.href = 'https://www.apple.com/app-store';
@@ -991,7 +991,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   public get getStorePath(): string {
-    const osDevice = this.mobileDetectService.osDevice;
+    const osDevice = this.mobileDetectService?.osDevice;
     if (osDevice?.toLowerCase() === 'ios') {
       return 'https://apps.apple.com/ru';
     } else if (osDevice?.toLowerCase() === 'androidos') {
