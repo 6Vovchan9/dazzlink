@@ -2,107 +2,107 @@
     <div class="container placePage__container">
         <ng-container *ngIf="placeData; else errorTemplate">
             <aside class="sidebar">
+                <!-- Кнопка назад -->
                 <div class="goBackBtn">
                     <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
-
-                    <!-- Фотки на мобиле -->
-                    <div class="locationPhotosInMobile"
-                        (touchstart)="onTouchstart($event)"
-                        (touchend)="onTouchend($event)"
-                        (touchmove)="onTouchmove($event)"
+                </div>
+                <!-- Фотки на мобиле -->
+                <div class="locationPhotosInMobile"
+                    (touchstart)="onTouchstart($event)"
+                    (touchend)="onTouchend($event)"
+                    (touchmove)="onTouchmove($event)"
+                >
+                    <img class="locationPhotosInMobile__img"
+                        [src]="placeData.imageList[curPhotoInGalleria]?.href"
+                        alt="Фото"
                     >
-                        <img class="locationPhotosInMobile__img"
-                            [src]="placeData.imageList[curPhotoInGalleria]?.href"
-                            alt="Фото"
+
+                    <!-- Кнопка чтоб открыть фотогалерею -->
+                    <button class="showGalleryBtn" (click)="openPhotoGalleria(curPhotoInGalleria)">
+                        <div class="showGalleryBtn__icon"></div>
+                    </button>
+
+                    <!-- Пагинация для фоток на мобиле -->
+                    <div class="photoPagination">
+                        <ul class="photoPagination__list">
+                            <li *ngFor="let photo of placeData.imageList; index as i" [class.photoPagination__item--active]="i === curPhotoInGalleria" class="photoPagination__item"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="placeMainInfo">
+                    <!-- Название -->
+                    <div class="moduleTitle">{{placeData.title || 'Название заведения'}}</div>
+                    <!-- $$ · Ресторан · Узбекская, Европейская -->
+                    <div class="placeMainInfo__another">
+                        <div class="placeMainInfo__anotherItem">
+                            <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
+                        </div>
+                        <span class="placeMainInfo__anotherItem">{{placeData?.subcategory || 'Кафе'}}</span>
+                        <span *ngIf="placeData?.subtitle"
+                            [title]="placeData.subtitle"
+                            class="placeMainInfo__anotherItem"
                         >
-
-                        <!-- Кнопка чтоб открыть фотогалерею -->
-                        <button class="showGalleryBtn" (click)="openPhotoGalleria(curPhotoInGalleria)">
-                            <div class="showGalleryBtn__icon"></div>
-                        </button>
-
-                        <!-- Пагинация для фоток на мобиле -->
-                        <div class="photoPagination">
-                            <ul class="photoPagination__list">
-                                <li *ngFor="let photo of placeData.imageList; index as i" [class.photoPagination__item--active]="i === curPhotoInGalleria" class="photoPagination__item"></li>
-                            </ul>
-                        </div>
+                            {{placeData.subtitle}}
+                        </span>
                     </div>
-
-                    <div class="placeMainInfo">
-                        <!-- Название -->
-                        <div class="moduleTitle">{{placeData.title || 'Название заведения'}}</div>
-                        <!-- $$ · Ресторан · Узбекская, Европейская -->
-                        <div class="placeMainInfo__another">
-                            <div class="placeMainInfo__anotherItem">
-                                <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
-                            </div>
-                            <span class="placeMainInfo__anotherItem">{{placeData?.subcategory || 'Кафе'}}</span>
-                            <span *ngIf="placeData?.subtitle"
-                                [title]="placeData.subtitle"
-                                class="placeMainInfo__anotherItem"
+                    <!-- Рейтинг места -->
+                    <div *ngIf="locationRatingList?.length" class="locationRating">
+                        <ul class="locationRating__list">
+                            <li *ngFor="let rating of locationRatingList; index as photoIndex; first as isFirstPhoto"
+                                class="locationRating__item"
                             >
-                                {{placeData.subtitle}}
-                            </span>
-                        </div>
-                        <!-- Рейтинг места -->
-                        <div *ngIf="locationRatingList?.length" class="locationRating">
-                            <ul class="locationRating__list">
-                                <li *ngFor="let rating of locationRatingList; index as photoIndex; first as isFirstPhoto"
-                                    class="locationRating__item"
+                                <div class="locationRating__val"
+                                    [ngStyle]="{
+                                        color: isFirstPhoto ?
+                                            rating.value < 4 ? '#D70015'
+                                            : rating.value <= 4.5 ? '#D78E00'
+                                            : '#248A3D'
+                                        : 'unset'
+                                    }"
                                 >
-                                    <div class="locationRating__val"
-                                        [ngStyle]="{
-                                            color: isFirstPhoto ?
-                                                rating.value < 4 ? '#D70015'
-                                                : rating.value <= 4.5 ? '#D78E00'
-                                                : '#248A3D'
-                                            : 'unset'
-                                        }"
-                                    >
-                                        {{ (rating.value || 5) | number: '.1-2' }}
-                                    </div>
-                                    <div class="locationRating__title">
-                                        {{ locationInfoName[rating.name] }}
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                                    {{ (rating.value || 5) | number: '.1-2' }}
+                                </div>
+                                <div class="locationRating__title">
+                                    {{ locationInfoName[rating.name] }}
+                                </div>
+                            </li>
+                        </ul>
                     </div>
+                </div>
 
-                    <!-- Время работы, адрес, контакты -->
-                    <div *ngIf="getAdditInfoKeys?.length" class="additPlaceInfo">
-                        <ng-container *ngFor="let key of additPlaceInfoTypes">
-                            <ng-container *ngIf="additPlaceInfoData[key]">
-                                <!-- <ng-container *ngIf="additPlaceInfoData[key].value"> -->
-                                    <div class="additPlaceInfo__item" [ngClass]="{
-                                        'additPlaceInfo__item--address': key === 'MAP',
-                                        'additPlaceInfo__item--contacts': key === 'PHONE'
-                                    }">
-                                        <div class="additPlaceInfo__title">
-                                            <div class="additPlaceInfo__titleLogo"></div>
-                                            <div class="additPlaceInfo__titleText">
-                                                {{locationInfoName[additPlaceInfoData[key].type]}}
-                                            </div>
+                <!-- Время работы, адрес, контакты -->
+                <div *ngIf="getAdditInfoKeys?.length" class="additPlaceInfo">
+                    <ng-container *ngFor="let key of additPlaceInfoTypes">
+                        <ng-container *ngIf="additPlaceInfoData[key]">
+                            <!-- <ng-container *ngIf="additPlaceInfoData[key].value"> -->
+                                <div class="additPlaceInfo__item" [ngClass]="{
+                                    'additPlaceInfo__item--address': key === 'MAP',
+                                    'additPlaceInfo__item--contacts': key === 'PHONE'
+                                }">
+                                    <div class="additPlaceInfo__title">
+                                        <div class="additPlaceInfo__titleLogo"></div>
+                                        <div class="additPlaceInfo__titleText">
+                                            {{locationInfoName[additPlaceInfoData[key].type]}}
                                         </div>
-                                        <ng-container *ngIf="key === 'PHONE'; else additPlaceInfoSimpleValue">
-                                            <ul class="additPlaceInfo__linkList">
-                                                <li class="additPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
-                                                    <a [href]=" 'tel:' + phoneItem " class="additPlaceInfo__link">{{ phoneItem }}</a>
-                                                </li>
-                                                <li class="additPlaceInfo__linkItem" *ngFor="let siteItem of additPlaceInfoData['SITE']?.value">
-                                                    <a [href]="siteItem" [title]="siteItem" target="_blank" class="additPlaceInfo__link">{{ siteItem }}</a>
-                                                </li>
-                                            </ul>
-                                        </ng-container>
-                                        <ng-template #additPlaceInfoSimpleValue>
-                                            <div class="additPlaceInfo__value" [innerHTML]="additPlaceInfoData[key].value"></div>
-                                        </ng-template>
                                     </div>
-                                <!-- </ng-container> -->
-                            </ng-container>
+                                    <ng-container *ngIf="key === 'PHONE'; else additPlaceInfoSimpleValue">
+                                        <ul class="additPlaceInfo__linkList">
+                                            <li class="additPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
+                                                <a [href]=" 'tel:' + phoneItem " class="additPlaceInfo__link">{{ phoneItem }}</a>
+                                            </li>
+                                            <li class="additPlaceInfo__linkItem" *ngFor="let siteItem of additPlaceInfoData['SITE']?.value">
+                                                <a [href]="siteItem" [title]="siteItem" target="_blank" class="additPlaceInfo__link">{{ siteItem }}</a>
+                                            </li>
+                                        </ul>
+                                    </ng-container>
+                                    <ng-template #additPlaceInfoSimpleValue>
+                                        <div class="additPlaceInfo__value" [innerHTML]="additPlaceInfoData[key].value"></div>
+                                    </ng-template>
+                                </div>
+                            <!-- </ng-container> -->
                         </ng-container>
-                    </div>
+                    </ng-container>
                 </div>
             </aside>
             <main class="pageContent">
@@ -229,21 +229,25 @@
 
                             <div (click)="onVoting('like')"
                                 class="feedbackVal feedbackVal--leftItem feedbackVal--like"
-                                [class.feedbackVal--active]="placeEvaluation === 'like'"
+                                [ngClass]="{
+                                    'feedbackVal--active': placeEvaluation === 'like',
+                                    'feedbackVal--disabled': placeEvaluation
+                                }"
                             >
                                 <div class="feedbackVal__icon">
-                                    <!-- <img src="assets/icons/likeIcon.svg" alt="Y"> -->
                                     <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
                                 </div>
                                 <div class="feedbackVal__amount">{{placeData?.likeCount}}</div>
                             </div>
 
                             <div (click)="onVoting('dislike')"
-                                class="feedbackVal feedbackVal--active"
-                                [class.feedbackVal--active]="placeEvaluation === 'dislike'"
+                                class="feedbackVal"
+                                [ngClass]="{
+                                    'feedbackVal--active': placeEvaluation === 'dislike',
+                                    'feedbackVal--disabled': placeEvaluation
+                                }"
                             >
                                 <div class="feedbackVal__icon">
-                                    <!-- <img src="assets/icons/dislikeIcon.svg" alt="N"> -->
                                     <ng-container *ngTemplateOutlet="dislikeFeedbackIcon"></ng-container>
                                 </div>
                                 <div class="feedbackVal__amount">{{placeData?.dislikeCount}}</div>

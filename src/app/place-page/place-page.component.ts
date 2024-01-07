@@ -4,7 +4,7 @@ import { allRatingName, locationInfoMapping } from '@app/shared/constants/all.co
 import { IVotingService, PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, pipe } from 'rxjs';
 import { catchError, delay, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -405,6 +405,7 @@ export class PlacePageComponent {
       console.log(`Фиксируем ваш ${val}`);
       this.votingIsLoading = true;
       this.vSub = this.locationsService.setPlaceVotingProd(this.placeId, val)
+        // .pipe(delay(10000))
         .subscribe(
           (resp: IVotingService) => {
             this.placeData['likeCount'] = resp['likeCount'];

@@ -340,10 +340,12 @@ button {
 }
 
 .feedbackVal {
+
     display: flex;
     column-gap: 10px;
     align-items: center;
     cursor: pointer;
+    
     .feedbackVal__icon {
         width: 27px;
         height: 27px;
@@ -360,6 +362,18 @@ button {
 
     &--leftItem {
         flex-direction: row-reverse;
+    }
+
+    &--disabled {
+        cursor: default;
+        .feedbackVal__amount {
+            color: var(--color-text-gray);
+        }
+        .feedbackVal__icon {
+            svg path {
+                fill: var(--color-text-gray);
+            }
+        }
     }
 
     &--active {
@@ -389,6 +403,25 @@ button {
     .feedbackVal__icon {
         svg path {
             fill: var(--color-green);
+        }
+    }
+}
+.feedback {
+    .feedback__values {
+        &:not(.feedback__values--loading) {
+            .feedbackVal:hover {
+                &:not(.feedbackVal--disabled) {
+                    .feedbackVal__amount {
+                        color: var(--color-blue1);
+                    }
+
+                    .feedbackVal__icon {
+                        svg path {
+                            fill: var(--color-blue1);
+                        }
+                    }
+                }
+            }
         }
     }
 }
