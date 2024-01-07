@@ -166,15 +166,15 @@
     flex-wrap: wrap;
     color: var(--color-text-gray);
     .postDetails__info {
-        margin-left: 11px;
+        margin-left: 13px;
         position: relative;
 
         &:before {
             content: '';
             position: absolute;
             display: block;
-            width: 4px;
-            height: 4px;
+            width: 2.5px;
+            height: 2.5px;
             border-radius: 50%;
             background-color: var(--color-text-gray);
             top: 50%;

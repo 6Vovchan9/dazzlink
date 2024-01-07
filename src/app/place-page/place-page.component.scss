@@ -62,7 +62,7 @@
         cursor: default;
         .placeMainInfo__anotherItem {
             position: relative;
-            padding-left: 10px;
+            padding-left: 13px;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
@@ -70,13 +70,13 @@
                 content: '';
                 position: absolute;
                 display: block;
-                width: 4px;
-                height: 4px;
+                width: 2.5px;
+                height: 2.5px;
                 border-radius: 50%;
                 background-color: var(--color-text-gray);
                 top: 50%;
                 left: 0;
-                transform: translate(3px, -50%);
+                transform: translate(6px, -50%);
             }
             &:first-child {
                 padding-left: 0px;
