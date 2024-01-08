@@ -122,9 +122,9 @@
                     <li class="menu__item" routerLinkActive="menu__item--active">
                         <a class="menu__link" (click)="goToAnotherPage('/agreements')" routerLink="/agreements">Компания</a>
                     </li>
-                    <li class="menu__item">
+                    <!-- <li class="menu__item">
                         <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
         </div>
@@ -147,7 +147,7 @@
                 </div>
             </div> -->
             <div class="footerInModal__col">
-                <div class="footerInModal__lang">
+                <!-- <div class="footerInModal__lang">
                     <app-dropdown-field
                         [formControl]="myForm.get('language')"
                         [options]="langFieldOptions"
@@ -157,7 +157,7 @@
                         optionLabel="value"
                         arrowIcon="assets/icons/planetForLang.svg">
                     </app-dropdown-field>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -186,9 +186,9 @@
                         <li class="menu__item" routerLinkActive="menu__item--active">
                             <a class="menu__link" routerLink="/agreements">Компания</a>
                         </li>
-                        <li class="menu__item">
+                        <!-- <li class="menu__item">
                             <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
-                        </li>
+                        </li> -->
                         <!-- <li class="menu__item">
                             <button (click)="getAmountOfUserVisits()">
                                 Кол-во визитов
@@ -197,7 +197,7 @@
                     </ul>
                 </nav>
             </div>
-            <div class="languageInHeader">
+            <!-- <div class="languageInHeader">
                 <app-dropdown-field
                     [formControl]="myForm.get('language')"
                     (ngModelChange)="onChangeLang($event)"
@@ -205,7 +205,7 @@
                     [multiple]="false"
                     optionLabel="value">
                 </app-dropdown-field>
-            </div>
+            </div> -->
             <!-- <button (click)="openNavPopup()" class="hamburger">
                 <div class="hamburger__line"></div>
             </button> -->
