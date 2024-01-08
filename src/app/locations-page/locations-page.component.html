@@ -71,7 +71,9 @@
                             <ng-container *ngFor="let block of locationsNew.cityPlaceList">
                                 <ng-container *ngIf="block.placeList?.length">
                                     <div class="pageContent__locationsBlock">
-                                        <div class="pageContent__locationsCity" [class.withSimpleSkeleton]="isSorting">{{block.cityTitle}}</div>
+                                        <div class="pageContent__locationsCity">
+                                            <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting">{{block.cityTitle}}</span>
+                                        </div>
                                         <ul class="pageContent__locationsList">
                                             <li *ngFor="let location of block.placeList" class="pageContent__locationsItem">
                                                 <app-location-item [isLoading]="isSorting"
@@ -195,14 +197,18 @@
     <div (click)="clickByFilterOptions($event)" class="filterOptionsBlock">
         <div class="filterOptionsBlock__content">
             <div class="filterOptionsBlock__header">
-                <div class="filterOptionsBlock__title">Фильтр города</div>
+                <div class="filterOptionsBlock__title">Фильтр городов</div>
                 <div (click)="onCloseFilterOptionsInMobile()" class="closeButtonInWindow closeButtonInWindow--color--black">
                     <div class="iconForCloseInModal"></div>
                 </div>
             </div>
             <ul class="filterOptionsBlock__allCountries">
                 <li *ngFor="let country of filterFieldOptions" class="filterOptionsBlock__country">
-                    <div class="filterOptionsBlock__countryName" [class.filterOptionsBlock__countryName--selected]="country['selectedСities']?.length">{{country.countryTitle + (country['selectedСities']?.length ? ': ' + country['selectedСities']?.length : '')}}</div>
+                    <div class="filterOptionsBlock__countryName"
+                        [class.filterOptionsBlock__countryName--selected]="country['selectedСities']?.length"
+                    >
+                        {{country.countryTitle + (country['selectedСities']?.length ? ': ' + country['selectedСities']?.length : '')}}
+                    </div>
                     <ul class="filterOptionsBlock__allCities">
                         <li *ngFor="let city of country.cityList" (click)="onSelectCity(country, city)" class="filterOptionsBlock__city">
                             <div class="cityForFilter">
