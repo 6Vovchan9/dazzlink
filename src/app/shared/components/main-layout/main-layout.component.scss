@@ -196,16 +196,16 @@
 
     .hamburger__line {
         margin: 8px 0;
-        width: 24px;
-        background-color: var(--color-blue);
+        width: 22px;
+        background-color: var(--color-black1);
         height: 2px;
         border-radius: 2px;
         position: relative;
 
         &:before {
             content: '';
-            width: 24px;
-            background-color: var(--color-blue);
+            width: 22px;
+            background-color: var(--color-black1);
             height: 2px;
             border-radius: 2px;
             display: block;
@@ -215,14 +215,59 @@
 
         &:after {
             content: '';
-            width: 24px;
-            background-color: var(--color-blue);
+            width: 22px;
+            background-color: var(--color-black1);
             height: 2px;
             border-radius: 2px;
             display: block;
             position: absolute;
             top: 8px;
         }
+    }
+
+    @media #{$notMobile} {
+        display: none;
+    }
+}
+
+.hamburger2 {
+    background-color: transparent;
+    width: 22px;
+    height: 9px;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    position: relative;
+
+    .hamburger2__line {
+        top: 0px;
+        width: 100%;
+        background-color: var(--color-black1);
+        height: 2px;
+        border-radius: 2px;
+        position: absolute;
+    }
+
+    &:before {
+        content: '';
+        width: 100%;
+        background-color: var(--color-black1);
+        height: 2px;
+        border-radius: 2px;
+        display: block;
+        position: absolute;
+        bottom: 0px;
+    }
+
+    &:after {
+        content: "";
+        display: block;
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     @media #{$notMobile} {

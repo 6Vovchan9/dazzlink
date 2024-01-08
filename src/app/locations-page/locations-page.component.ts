@@ -758,9 +758,9 @@ export class LocationsPageComponent implements OnInit {
 
     } else {
       this.locationsAfterSortSub = this.locationsService.getAllLocations(sortVal, filterVal)
-        .pipe(
-          delay(3000)
-        )
+        // .pipe(
+        //   delay(3000)
+        // )
         .subscribe(
           value => {
             this.locationsUpdating = false;
@@ -916,9 +916,9 @@ export class LocationsPageComponent implements OnInit {
 
     } else {
       this.locationsAfterFilterSub = this.locationsService.getAllLocations(sortVal, filterVal)
-        .pipe(
-          delay(3000)
-        )
+        // .pipe(
+        //   delay(3000)
+        // )
         .subscribe(
           value => {
             this.locationsUpdating = false;
