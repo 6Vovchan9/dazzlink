@@ -290,6 +290,11 @@
                 padding: 4px 8px;
                 color: var(--color-black1);
             }
+            &--active {
+                .menu__link {
+                    color: var(--color-text-gray);
+                }
+            }
             // &--active {
             //     cursor: default;
             //     background-color: var(--color-blue);
@@ -386,6 +391,10 @@
 .company {
     opacity: .6;
     font-size: 14px;
+
+    @media #{$notMobile} {
+        text-align: right;
+    }
 }
 
 .socialNetworks {
@@ -503,19 +512,29 @@
         min-height: 104px;
         justify-content: space-between;
         align-items: center;
-        padding: 24px;
+        padding: 24px 40px 24px 32px;
         border-radius: 24px;
         background-color: var(--color-black2);
         color: var(--color-white);
         margin-bottom: 20px;
-        row-gap: 20px;
+        row-gap: 16px;
+        column-gap: 24px;
         .footerNew__col {
+            .footerNew__btns {
+                display: flex;
+                align-items: center;
+                column-gap: 8px;
+            }
             .footerNew__socialNetworksBlock {
                 margin-right: 16px;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
                 row-gap: 8px;
+            }
+
+            &--forMobile {
+                display: none;
             }
         }
     }
@@ -528,14 +547,44 @@
             align-items: stretch;
             border-radius: 24px 24px 0 0;
             margin: 0;
+            padding: 20px;
             flex-direction: column;
             .footerNew__col {
+                display: block;
                 .footerNew__socialNetworksBlock {
                     margin: 0;
                     row-gap: 12px;
                     align-items: center;
                 }
+                .footerNew__links {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 16px -8px 0px;
+                    .footerNew__nav, .footerNew__socialNetworks {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        row-gap: 8px;
+                    }
+                    .footerNew__socialNetworks {
+                        align-items: flex-end;
+                    }
+                }
+                &--forDesktop {
+                    display: none;
+                }
             }
         }
     }
+}
+
+.btnInFooter {
+    cursor: pointer;
+    display: block;
+    border: none;
+    background-color: transparent;
+    color: var(--color-white);
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px;
 }
