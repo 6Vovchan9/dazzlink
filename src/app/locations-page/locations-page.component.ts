@@ -1075,7 +1075,7 @@ export class LocationsPageComponent implements OnInit {
 
     const mobileWidth = document.documentElement.clientWidth < 768;
 
-    if (!mobileWidth) { 
+    if (!mobileWidth) {
       if (this.locationsUpdating) { // Если фильтрация в данный момент идет тогда запускаем новую без задержки
         console.log('Делаем фильтрацию...');
         this.isSorting = true;

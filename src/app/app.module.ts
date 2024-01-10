@@ -30,6 +30,7 @@ import { CheckboxNewFieldComponent } from './shared/fields/checkbox-new-field/ch
 import { PlacePageComponent } from './place-page/place-page.component';
 import { ToastService } from './shared/services/toast.service';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { TeamPageComponent } from './team-page/team-page.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -44,6 +45,7 @@ registerLocaleData(localeRu, 'ru');
     PostPageComponent,
     PlacePageComponent,
     LocationsPageComponent,
+    TeamPageComponent,
 
     HeaderComponent,
     ToastComponent,
