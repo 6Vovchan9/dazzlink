@@ -65,9 +65,9 @@
             </div>
             <ul class="ourTeam__list">
                 <li *ngFor="let worker of ourPersonal" [class.ourTeam__item--withDetails]="worker.details" class="ourTeam__item">
-                    <div class="personCard">
+                    <div (click)="openPersonDescModal(worker)" class="personCard personCard--demo">
                         <div class="personCard__photo">
-                            
+                            <img [src]="worker.photo || 'assets/images/mockPhoto.jpg'" alt="фотка">
                         </div>
                         <div class="personCard__data">
                             <div class="personCard__firstRow">
@@ -90,3 +90,31 @@
         </div>
     </div>
 </main>
+
+<div *ngIf="chosenPersonData?.details" class="personDescModal">
+    <div class="container personDescModal__container">
+        <div class="personDescModal__content">
+            <div class="personDescModal__vita" [innerHTML]="chosenPersonData.details.vita"></div>
+            <div class="personDescModal__info">
+                <div class="personCard">
+                    <div class="personCard__photo">
+                        <img [src]="chosenPersonData.photo || 'assets/images/mockPhoto.jpg'" alt="фотка">
+                    </div>
+                    <div class="personCard__data">
+                        <div class="personCard__firstRow">
+                            <div class="personCard__name">
+                                {{chosenPersonData.name}}
+                            </div>
+                        </div>
+                        <div class="personCard__position">
+                            {{chosenPersonData.position}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="closeBtnInDesktop">
+            Close
+        </div> -->
+    </div>
+</div>

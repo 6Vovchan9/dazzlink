@@ -7,5 +7,12 @@ import { ourTeamList } from '@app/shared/constants/ourTeam.constants';
   styleUrls: ['./team-page.component.scss']
 })
 export class TeamPageComponent {
+
   public ourPersonal = ourTeamList;
+  public showNavModal = false;
+  public chosenPersonData;
+
+  public openPersonDescModal(persona): void {
+    this.chosenPersonData = persona;
+  }
 }
