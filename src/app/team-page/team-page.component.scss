@@ -213,19 +213,26 @@
 
 .personDescModal {
     position: fixed;
-    background-color: greenyellow;
+    background-color: #fff;
     top: 0;
     height: 100%;
     width: 100%;
     z-index: 110;
     .personDescModal__container {
+        display: flex;
         padding: 20px;
-        .personDescModal__content {
+        max-height: 100%;
+        .personDescModal__wrapper {
             display: flex;
+            overflow: hidden;
             flex-direction: column-reverse;
-            row-gap: 32px;
-            .personDescModal__vita {
-                font-size: 24px;
+            .personDescModal__content {
+                display: flex;
+                flex-direction: column;
+                row-gap: 32px;
+                .personDescModal__vita {
+                    font-size: 24px;
+                }
             }
         }
     }
@@ -233,18 +240,56 @@
     @media #{$notMobile} {
         .personDescModal__container {
             padding: 64px 20px;
-            background-color: antiquewhite;
-            .personDescModal__content {
-                margin-right: 160px;
+            .personDescModal__wrapper {
                 flex-direction: row;
-                .personDescModal__vita {
-                    flex: 2;
-                    margin-right: 8%;
+                .personDescModal__content {
+                    // margin-right: 160px;
+                    flex-direction: row-reverse;
+                    .personDescModal__vita {
+                        flex: 2;
+                        margin-right: 8%;
+                        overflow: scroll;
+                    }
+                    .personDescModal__info {
+                        flex: 1;
+                        min-width: 200px;
+                    }
                 }
-                .personDescModal__info {
-                    flex: 1;
+                .personDescModal__closeBtn {
+                    padding-left: 15%;
+                    padding-bottom: 50px;
+                    cursor: pointer;
+                    align-self: flex-start;
                 }
             }
+        }
+    }
+
+    @media #{$mobile} {
+        .personDescModal__container .personDescModal__wrapper {
+            .personDescModal__content {
+                overflow: scroll;
+                padding-top: 20px;
+            }
+            .personDescModal__closeBtn {
+                padding-bottom: 20px;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+
+@media #{$notMobile} {
+    .closeButtonInWindow {
+        margin-left: 76px;
+        &:after {
+            content: "Закрыть";
+            position: absolute;
+            right: 100%;
+            top: 0;
+            font-size: 16px;
+            transform: translateX(-4px);
         }
     }
 }

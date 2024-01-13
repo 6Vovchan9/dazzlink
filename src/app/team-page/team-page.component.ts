@@ -15,4 +15,8 @@ export class TeamPageComponent {
   public openPersonDescModal(persona): void {
     this.chosenPersonData = persona;
   }
+
+  public closePersonDescModal(): void {
+    this.chosenPersonData = null;
+  }
 }
