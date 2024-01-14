@@ -1,4 +1,6 @@
-export const ourTeamList: Array<any> = [
+import { IAboutPersonalData } from "../interfaces";
+
+export const ourTeamList: Array<IAboutPersonalData> = [
     {
         name: 'Амаль',
         position: 'Co-founder, CEO',
@@ -27,8 +29,7 @@ export const ourTeamList: Array<any> = [
     {
         name: 'Алексей',
         position: 'Head of Product and Design',
-        photo: '',
-        details: {}
+        photo: ''
     },
     {
         name: 'Никита',
@@ -38,14 +39,12 @@ export const ourTeamList: Array<any> = [
     {
         name: 'Антон',
         position: 'Head of Architecture and Analytics',
-        photo: '',
-        details: {}
+        photo: ''
     },
     {
         name: 'Александр',
         position: 'Head of Platform',
-        photo: '',
-        details: {}
+        photo: ''
     },
     {
         name: 'Станислав',

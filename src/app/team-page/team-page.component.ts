@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ourTeamList } from '@app/shared/constants/ourTeam.constants';
+import { IAboutPersonalData } from '@app/shared/interfaces';
 
 @Component({
   selector: 'app-team-page',
@@ -8,9 +9,9 @@ import { ourTeamList } from '@app/shared/constants/ourTeam.constants';
 })
 export class TeamPageComponent {
 
-  public ourPersonal = ourTeamList;
+  public ourPersonal: Array<IAboutPersonalData> = ourTeamList;
   public showNavModal = false;
-  public chosenPersonData;
+  public chosenPersonData: IAboutPersonalData;
 
   public openPersonDescModal(persona): void {
     this.chosenPersonData = persona;

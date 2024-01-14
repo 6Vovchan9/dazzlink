@@ -105,8 +105,8 @@ export class PlacePageComponent {
               {
                 "group": 20,
                 "type": TypeOfPlaceDetails.phone,
-                "value": "8 963 752 34 89 ",
-                "href": null
+                "value": "+7(905)786-14-94 ",
+                "href": { phone: 'tel:+79057861494' }
               },
               {
                 "group": 10,
@@ -141,7 +141,7 @@ export class PlacePageComponent {
                 "group": 20,
                 "type": TypeOfPlaceDetails.site,
                 "value": " https://testo.uz ",
-                "href": null
+                "href": { link: "https://testo.uz" }
               },
               {
                 "group": 30,
@@ -158,14 +158,14 @@ export class PlacePageComponent {
               {
                 "group": 20,
                 "type": TypeOfPlaceDetails.phone,
-                "value": " 8 968 001 66 22",
-                "href": null
+                "value": " +7(968)001-66-22",
+                "href": { phone: 'tel:+79680016622' }
               },
               {
                 "group": 20,
                 "type": TypeOfPlaceDetails.site,
-                "value": "https://ya.ru ",
-                "href": null
+                "value": "caravangroup.uz ",
+                "href": { link: "https://caravangroup.uz" }
               },
               {
                 "group": 30,
@@ -346,14 +346,22 @@ export class PlacePageComponent {
       if (infoItem.type in this.additPlaceInfoData) { // Если такое свойство уже есть тогда добавляем значение в его value
         if (infoItem.value) {
           const innerData = this.additPlaceInfoData[infoItem.type];
-          innerData.value = (innerData.value ? innerData.value.trim() + '\n' : '') + infoItem.value.trim();
+
+          if (infoItem.type === TypeOfPlaceDetails.site || infoItem.type === TypeOfPlaceDetails.phone) {
+            innerData.value.push(infoItem);
+          } else {
+            innerData.value = (innerData.value ? innerData.value.trim() + '\n' : '') + infoItem.value.trim();
+          }
         }
       } else {
-        // if (this.additPlaceInfoTypes.includes(infoItem.type) || infoItem.type === TypeOfPlaceDetails.site) {
-          if (infoItem.value) {
-            this.additPlaceInfoData[infoItem.type] = infoItem;
+        if (infoItem.value) {
+          this.additPlaceInfoData[infoItem.type] = infoItem;
+
+          if (infoItem.type === TypeOfPlaceDetails.site || infoItem.type === TypeOfPlaceDetails.phone) {
+            this.additPlaceInfoData[infoItem.type].value = [{ ...infoItem }];
+            delete this.additPlaceInfoData[infoItem.type].href; // Это не обязательно, просто для красоты
           }
-        // }
+        }
       }
     }
 
@@ -366,7 +374,7 @@ export class PlacePageComponent {
       if (!phoneData?.value) {
         phoneData = this.additPlaceInfoData[TypeOfPlaceDetails.phone] = {
           type: TypeOfPlaceDetails.phone,
-          value: ''
+          value: []
         }
       }
 
@@ -376,18 +384,18 @@ export class PlacePageComponent {
     }
 
     // Тут ниже превращаем value у "PHONE" в массив
-    const phoneVal = this.additPlaceInfoData[TypeOfPlaceDetails.phone]?.value;
-    if (phoneVal) {
-      this.additPlaceInfoData[TypeOfPlaceDetails.phone].value = phoneVal.split('\n');
-    }
+    // const phoneVal = this.additPlaceInfoData[TypeOfPlaceDetails.phone]?.value;
+    // if (phoneVal) {
+    //   this.additPlaceInfoData[TypeOfPlaceDetails.phone].value = phoneVal.split('\n');
+    // }
 
-    // Тут ниже превращаем value у "SITE" в массив
-    const siteVal = this.additPlaceInfoData[TypeOfPlaceDetails.site]?.value;
-    if (siteVal) {
-      this.additPlaceInfoData[TypeOfPlaceDetails.site].value = siteVal.split('\n');
-    }
+    // // Тут ниже превращаем value у "SITE" в массив
+    // const siteVal = this.additPlaceInfoData[TypeOfPlaceDetails.site]?.value;
+    // if (siteVal) {
+    //   this.additPlaceInfoData[TypeOfPlaceDetails.site].value = siteVal.split('\n');
+    // }
 
-    // Тут ниже превращаем value у "SITE" в массив
+    // Тут ниже превращаем value у "INFO_SOURCE" в массив
     const infoSourceVal = this.additPlaceInfoData[TypeOfPlaceDetails.infoSource]?.value;
     if (infoSourceVal) {
       this.additPlaceInfoData[TypeOfPlaceDetails.infoSource].value = infoSourceVal.split('\n');

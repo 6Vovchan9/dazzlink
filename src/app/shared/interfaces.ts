@@ -18,6 +18,15 @@ export interface MainLayoutOptions {
     footerFixed: boolean
 }
 
+export interface IAboutPersonalData {
+    name: string,
+    position: string,
+    photo?: string,
+    details?: {
+        vita: string
+    }
+}
+
 export interface RovraggeRespWrapper {
     result: {
         code: string,
@@ -131,10 +140,12 @@ export type PlaceAttributeList = {
     type: TypeOfPlaceDetails, // DESCRIPTION | WORKING_HOURS | CUISINE | MAP | SITE | PHONE
     value: any,
     href?: {
-        coordinates: {
+        coordinates?: {
             lat: number,
             lon: number
-        }
+        },
+        phone?: string,
+        link?: string
     }
 }
 

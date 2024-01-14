@@ -89,10 +89,10 @@
                                     <ng-container *ngIf="key === 'PHONE'; else additPlaceInfoSimpleValue">
                                         <ul class="additPlaceInfo__linkList">
                                             <li class="additPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
-                                                <a [href]=" 'tel:' + phoneItem " class="additPlaceInfo__link">{{ phoneItem }}</a>
+                                                <a [href]="phoneItem.href.phone" class="additPlaceInfo__link">{{ phoneItem.value }}</a>
                                             </li>
                                             <li class="additPlaceInfo__linkItem" *ngFor="let siteItem of additPlaceInfoData['SITE']?.value">
-                                                <a [href]="siteItem" [title]="siteItem" target="_blank" class="additPlaceInfo__link">{{ siteItem }}</a>
+                                                <a [href]="siteItem.href.link" [title]="siteItem.href.link" target="_blank" class="additPlaceInfo__link">{{ siteItem.value }}</a>
                                             </li>
                                         </ul>
                                     </ng-container>
