@@ -114,6 +114,14 @@
             margin-left: 40px;
             margin-top: 4px;
             white-space: pre-wrap;
+
+            &--link {
+                display: block;
+                white-space: unset;
+                &:hover {
+                    color: var(--color-blue1);
+                }
+            }
         }
 
         .additPlaceInfo__linkList {

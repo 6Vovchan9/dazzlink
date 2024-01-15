@@ -86,7 +86,30 @@
                                             {{locationInfoName[additPlaceInfoData[key].type]}}
                                         </div>
                                     </div>
-                                    <ng-container *ngIf="key === 'PHONE'; else additPlaceInfoSimpleValue">
+                                    <ng-container [ngSwitch]="key">
+                                        <ng-template ngSwitchCase="PHONE">
+                                            <ul class="additPlaceInfo__linkList">
+                                                <li class="additPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
+                                                    <a [href]="phoneItem.href.phone" class="additPlaceInfo__link">{{ phoneItem.value }}</a>
+                                                </li>
+                                                <li class="additPlaceInfo__linkItem" *ngFor="let siteItem of additPlaceInfoData['SITE']?.value">
+                                                    <a [href]="siteItem.href.link" [title]="siteItem.href.link" target="_blank" class="additPlaceInfo__link">{{ siteItem.value }}</a>
+                                                </li>
+                                            </ul>
+                                        </ng-template>
+                                        <ng-template ngSwitchCase="MAP">
+                                            <a [href]="getAddressCoordinates(additPlaceInfoData[key].href)"
+                                                target="_blank"
+                                                class="additPlaceInfo__value additPlaceInfo__value--link"
+                                            >
+                                                {{additPlaceInfoData[key].value}}
+                                            </a>
+                                        </ng-template>
+                                        <ng-template ngSwitchDefault>
+                                            <div class="additPlaceInfo__value" [innerHTML]="additPlaceInfoData[key].value"></div>
+                                        </ng-template>
+                                    </ng-container>
+                                    <!-- <ng-container *ngIf="key === 'PHONE'; else additPlaceInfoSimpleValue">
                                         <ul class="additPlaceInfo__linkList">
                                             <li class="additPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
                                                 <a [href]="phoneItem.href.phone" class="additPlaceInfo__link">{{ phoneItem.value }}</a>
@@ -98,7 +121,7 @@
                                     </ng-container>
                                     <ng-template #additPlaceInfoSimpleValue>
                                         <div class="additPlaceInfo__value" [innerHTML]="additPlaceInfoData[key].value"></div>
-                                    </ng-template>
+                                    </ng-template> -->
                                 </div>
                             <!-- </ng-container> -->
                         </ng-container>
