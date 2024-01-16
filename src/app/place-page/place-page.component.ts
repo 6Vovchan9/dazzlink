@@ -97,6 +97,12 @@ export class PlacePageComponent {
           if (false) {
             place.attributeList = [
               {
+                "group": 10,
+                "type": TypeOfPlaceDetails.hours,
+                "value": "Без перерыва",
+                "href": null
+              },
+              {
                 "group": 20,
                 "type": TypeOfPlaceDetails.phone,
                 "value": null,
@@ -127,6 +133,12 @@ export class PlacePageComponent {
                 "href": null
               },
               {
+                "group": 10,
+                "type": TypeOfPlaceDetails.description,
+                "value": "И вообще тут очень клёво",
+                "href": null
+              },
+              {
                 "group": 20,
                 "type": TypeOfPlaceDetails.map,
                 "value": "Узбекистан, Ташкент, ул. Шота Руставели, 18",
@@ -139,8 +151,19 @@ export class PlacePageComponent {
               },
               {
                 "group": 20,
+                "type": TypeOfPlaceDetails.map,
+                "value": "Узбекистан, Ташкент, ул. Абдуллы Каххара, 22",
+                "href": {
+                  "coordinates": {
+                    "lat": 41.285158,
+                    "lon": 69.257761
+                  }
+                }
+              },
+              {
+                "group": 20,
                 "type": TypeOfPlaceDetails.site,
-                "value": " https://testo.uz ",
+                "value": "testo.uz",
                 "href": { link: "https://testo.uz" }
               },
               {
@@ -170,13 +193,25 @@ export class PlacePageComponent {
               {
                 "group": 30,
                 "type": TypeOfPlaceDetails.awards,
-                "value": "–",
+                "value": "Топ-10 лучших ресторанов Ташкента по версии Tripadvisor",
                 "href": null
               },
               {
                 "group": 30,
                 "type": TypeOfPlaceDetails.infoSource,
-                "value": "https://www.tripadvisor.com\nhttps://www.google.ru/maps\nhttps://yandex.kz/maps\nhttps://2gis.uz",
+                "value": "https://www.tripadvisor.com",
+                "href": null
+              },
+              {
+                "group": 30,
+                "type": TypeOfPlaceDetails.infoSource,
+                "value": "https://www.google.ru/maps",
+                "href": null
+              },
+              {
+                "group": 30,
+                "type": TypeOfPlaceDetails.awards,
+                "value": "И есть звезда мишлен",
                 "href": null
               }
             ];
@@ -349,26 +384,26 @@ export class PlacePageComponent {
 
     for (let infoItem of data) {
 
-      if (infoItem.value) infoItem.value = infoItem.value.replace('\n', '\n');
+      // if (infoItem.value) infoItem.value = infoItem.value.replace('\n', '\n');
 
       if (infoItem.type in this.additPlaceInfoData) { // Если такое свойство уже есть тогда добавляем значение в его value
         if (infoItem.value) {
           const innerData = this.additPlaceInfoData[infoItem.type];
 
-          if (infoItem.type === TypeOfPlaceDetails.site || infoItem.type === TypeOfPlaceDetails.phone) {
+          // if (infoItem.type === TypeOfPlaceDetails.site || infoItem.type === TypeOfPlaceDetails.phone) {
             innerData.value.push(infoItem);
-          } else {
-            innerData.value = (innerData.value ? innerData.value.trim() + '\n' : '') + infoItem.value.trim();
-          }
+          // } else {
+          //   innerData.value = (innerData.value ? innerData.value.trim() + '\n' : '') + infoItem.value.trim();
+          // }
         }
       } else {
         if (infoItem.value) {
           this.additPlaceInfoData[infoItem.type] = infoItem;
 
-          if (infoItem.type === TypeOfPlaceDetails.site || infoItem.type === TypeOfPlaceDetails.phone) {
+          // if (infoItem.type === TypeOfPlaceDetails.site || infoItem.type === TypeOfPlaceDetails.phone) {
             this.additPlaceInfoData[infoItem.type].value = [{ ...infoItem }];
             delete this.additPlaceInfoData[infoItem.type].href; // Это не обязательно, просто для красоты
-          }
+          // }
         }
       }
     }
@@ -404,10 +439,10 @@ export class PlacePageComponent {
     // }
 
     // Тут ниже превращаем value у "INFO_SOURCE" в массив
-    const infoSourceVal = this.additPlaceInfoData[TypeOfPlaceDetails.infoSource]?.value;
-    if (infoSourceVal) {
-      this.additPlaceInfoData[TypeOfPlaceDetails.infoSource].value = infoSourceVal.split('\n');
-    }
+    // const infoSourceVal = this.additPlaceInfoData[TypeOfPlaceDetails.infoSource]?.value;
+    // if (infoSourceVal) {
+    //   this.additPlaceInfoData[TypeOfPlaceDetails.infoSource].value = infoSourceVal.split('\n');
+    // }
 
     // console.log(this.additPlaceInfoData);
   }

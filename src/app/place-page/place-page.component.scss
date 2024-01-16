@@ -40,6 +40,7 @@
 }
 
 .sidebar {
+    overflow: hidden;
     flex: 1;
     margin-bottom: 32px;
 
@@ -110,32 +111,24 @@
                 background-image: url('/assets/icons/workingHours.svg');
             }
         }
-        .additPlaceInfo__value {
-            margin-left: 40px;
-            margin-top: 4px;
-            white-space: pre-wrap;
-
-            &--link {
-                display: block;
-                white-space: unset;
-                &:hover {
-                    color: var(--color-blue1);
-                }
-            }
-        }
 
         .additPlaceInfo__linkList {
             margin-left: 40px;
             margin-top: 4px;
             .additPlaceInfo__linkItem {
-                text-overflow: ellipsis;
-                overflow: hidden;
+                display: flex;
                 .additPlaceInfo__link {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                     &:hover {
                         color: var(--color-blue1);
                     }
                 }
             }
+        }
+
+        .additPlaceInfo__value {
+            white-space: pre-wrap;
         }
 
         &--address {
@@ -170,22 +163,22 @@
             text-overflow: ellipsis;
             margin-bottom: 4px;
         }
-        .descPlaceInfo__value {
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
         .descPlaceInfo__linkList {
             flex: 1;
             overflow: hidden;
-            .descPlaceInfo__linkItem {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                .descPlaceInfo__link {
-                    &:hover {
-                        color: var(--color-blue1);
-                    }
-                }
-            }
+            // .descPlaceInfo__linkItem {
+            //     overflow: hidden;
+            //     text-overflow: ellipsis;
+            //     .descPlaceInfo__link {
+            //         &:hover {
+            //             color: var(--color-blue1);
+            //         }
+            //     }
+            // }
+        }
+        .descPlaceInfo__value {
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         &:first-child {
             margin-top: 0px;
@@ -198,9 +191,6 @@
                 width: 120px;
                 margin-right: 12px;
                 margin-bottom: 0px;
-            }
-            .descPlaceInfo__value {
-                flex: 1;
             }
         }
     }
