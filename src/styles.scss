@@ -318,6 +318,25 @@ button {
     line-height: 24px;
     font-weight: 700;
 
+    .feedback__text {
+        position: relative;
+        margin: 0 30px;
+    }
+
+    .feedback__spinner {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translate(10px, -50%);
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
     .feedback__values {
         display: flex;
         column-gap: 24px;
@@ -338,6 +357,10 @@ button {
     @media #{$notMobile} {
         flex-direction: row;
         justify-content: space-between;
+
+        .feedback__text {
+            margin-left: 0px;
+        }
     }
 }
 

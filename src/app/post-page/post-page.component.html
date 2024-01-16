@@ -52,7 +52,12 @@
                     <div class="postContent__text" [innerHTML]="postData.html"></div>
                     <!-- Как вам статья -->
                     <div class="postContent__feedback feedback">
-                        <div class="feedback__text">Как вам статья?</div>
+                        <div class="feedback__text">
+                            <span>Как вам локация?</span>
+                            <div *ngIf="votingIsLoading" class="feedback__spinner">
+                                <img src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
+                            </div>
+                        </div>
                         <div class="feedback__values"
                             [ngClass]="{
                                 'feedback__values--disabled': articleEvaluation,

@@ -153,6 +153,7 @@
 }
 
 .descPlaceInfo {
+    line-height: 24px;
     .descPlaceInfo__item {
         display: flex;
         flex-direction: column;
@@ -188,6 +189,7 @@
         .descPlaceInfo__item {
             flex-direction: row;
             .descPlaceInfo__title {
+                white-space: pre-wrap;
                 width: 120px;
                 margin-right: 12px;
                 margin-bottom: 0px;

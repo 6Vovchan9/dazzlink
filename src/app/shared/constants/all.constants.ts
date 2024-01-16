@@ -6,7 +6,7 @@ export const locationInfoMapping = {
     MAP: 'Адрес',
     PHONE: 'Контакты',
     DESCRIPTION: 'Описание',
-    AWARDS: 'Награды и подборки',
+    AWARDS: 'Награды\nи подборки',
     INFO_SOURCE: 'Источники информации',
     rating2GIS: '2gis',
     ratingGoogle: 'Google Maps',
