@@ -126,6 +126,24 @@ export class LocationsPageComponent implements OnInit {
     this.aboutProgressiveImage();
   }
 
+  public onResetAllFilters(): void {
+
+    // сбрасываем фильтрацию:
+    this.filterFieldOptions.forEach(country => {
+      country.cityList.forEach(city => delete city.selected);
+      delete country.selectedСities;
+    });
+    this.amountAllSelectedCities = [];
+
+    // this.subscriptionList(); // Отписываемся от всех запросов. Тут это не нужно
+
+    this.filterBarGroup.get('sort').disable({ emitEvent: false }); // Блокируем сортировку
+    this.isSorting = true; // Включаем скелетон
+
+    // запрашиваем новый список локаций:
+    this.filterLocationsOnBackend();
+  }
+
   private aboutProgressiveImage(): void {
     if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) {
       if (document.readyState === 'complete') {

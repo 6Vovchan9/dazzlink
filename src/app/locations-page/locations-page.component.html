@@ -198,6 +198,14 @@
         <div class="filterOptionsBlock__content">
             <div class="filterOptionsBlock__header">
                 <div class="filterOptionsBlock__title">Фильтр городов</div>
+                <button *ngIf="amountAllSelectedCities.length"
+                    class="filterOptionsBlock__resetBtn"
+                    [disabled]="timerForFilter || locationsUpdating"
+                    type="button"
+                    (click)="onResetAllFilters()"
+                >
+                    Сбросить
+                </button>
                 <div (click)="onCloseFilterOptionsInMobile()" class="closeButtonInWindow">
                     <div class="iconForCloseInModal"></div>
                 </div>
