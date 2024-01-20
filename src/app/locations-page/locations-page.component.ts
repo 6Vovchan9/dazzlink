@@ -34,6 +34,7 @@ export class LocationsPageComponent implements OnInit {
   public filterBarFixed = false;
   public filterBarGroup: UntypedFormGroup;
   public amountAllSelectedCities: Array<string> = [];
+  public amountAllSelectedCitiesBefore: Array<string> = [];
   private timerForFilter: any;
   public showFilterControls = false;
   public errorAfterSort = false;
@@ -1067,13 +1068,43 @@ export class LocationsPageComponent implements OnInit {
   }
 
   public onFilterFromMobile(): void {
+
+    const arrBefore = this.amountAllSelectedCitiesBefore;
+    const arrAfter  = this.amountAllSelectedCities;
+
+    console.log('Before:', arrBefore);
+    console.log('After:',  arrAfter);
+
     this.showFilterControls = false;
-    console.log('Делаем фильтрацию...');
-    this.isSorting = true;
-    this.filterLocationsOnBackend();
+
+    if (arrBefore.length === arrAfter.length && this.isArraysEqual(arrBefore, arrAfter)) {
+      console.log('He фильтруем города, выбор не изменился!');
+    } else {
+      console.log('Делаем фильтрацию городов...');
+      this.isSorting = true;
+      this.filterLocationsOnBackend();
+    }
+  }
+
+  private isArraysEqual(arr1, arr2): boolean {
+    console.log('Сравниваем списки городов до/после...');
+    let newArr1 = arr1.sort();
+    let newArr2 = arr2.sort();
+
+    const res = JSON.stringify(newArr1) == JSON.stringify(newArr2);
+    // console.log(res ? 'Списки городов до/после равны' : 'Списки городов до/после разные');
+
+    return res;
+  }
+
+  public onShowHideFilterControls() {
+    this.showFilterControls = !this.showFilterControls;
+
+    this.amountAllSelectedCitiesBefore = [...this.amountAllSelectedCities];
   }
 
   private onSelectCity(linkToCountry: any, linkToCity: any): void {
+
     this.filterBarGroup.get('sort').disable({ emitEvent: false });
     const curVal = linkToCity.selected;
     if (curVal) {

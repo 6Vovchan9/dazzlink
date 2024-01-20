@@ -44,7 +44,7 @@
                                             <!-- <button class="btn" (click)="isSorting = !isSorting">toggle</button> -->
                                             <div class="filterBar__item">
                                                 <!-- Фильтрация -->
-                                                <button [disabled]="!filterFieldOptions?.length" (click)="showFilterControls = !showFilterControls" class="filterButton">
+                                                <button [disabled]="!filterFieldOptions?.length" (click)="onShowHideFilterControls()" class="filterButton">
                                                     <div class="headInSortDropdown">
                                                         <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities.length"></div>
                                                         <div class="headInSortDropdown__text">Фильтр</div>
@@ -231,7 +231,8 @@
                 </li>
             </ul>
             <div class="filterOptionsBlock__btn">
-                <button (click)="onFilterFromMobile()" class="btn">Показать локации</button>
+                <button *ngIf="false" type="button" class="btn btn--white">Сбросить</button>
+                <button type="button" (click)="onFilterFromMobile()" class="btn btn--size--long">Показать локации</button>
             </div>
         </div>
     </div>
