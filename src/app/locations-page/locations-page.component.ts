@@ -145,6 +145,17 @@ export class LocationsPageComponent implements OnInit {
     this.filterLocationsOnBackend();
   }
 
+  public onResetAllFiltersOnMobile(): void {
+
+    // сбрасываем фильтрацию:
+    this.filterFieldOptions.forEach(country => {
+      country.cityList.forEach(city => delete city.selected);
+      delete country.selectedСities;
+    });
+    this.amountAllSelectedCities = [];
+
+  }
+
   private aboutProgressiveImage(): void {
     if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) {
       if (document.readyState === 'complete') {

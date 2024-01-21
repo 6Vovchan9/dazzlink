@@ -231,7 +231,7 @@
                 </li>
             </ul>
             <div class="filterOptionsBlock__btn">
-                <button *ngIf="false" type="button" class="btn btn--white">Сбросить</button>
+                <button *ngIf="amountAllSelectedCities.length" type="button" (click)="onResetAllFiltersOnMobile()" class="btn btn--white">Сбросить</button>
                 <button type="button" (click)="onFilterFromMobile()" class="btn btn--size--long">Показать локации</button>
             </div>
         </div>
