@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { requirementForCarModal, tooltipForMainVector } from '@app/shared/constants/modal/appComponent.constants';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { FieldOptions } from '@app/shared/fields/radiobutton-new-field/radiobutton-field.component';
@@ -14,7 +14,7 @@ export class AgreementsPageComponent implements OnInit {
 
   public inutVal: string = 'Иван Андреевич';
   public labelMargin: number = 10;
-  public myForm: FormGroup;
+  public myForm: UntypedFormGroup;
   public vectorFieldOptions: FieldOptions = {
     id: 'vectors',
     items: [
@@ -63,10 +63,10 @@ export class AgreementsPageComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.myForm = new FormGroup({
-      vectors: new FormControl({value: this.vectorFieldOptions.value, disabled: this.vectorFieldOptions.disabled}, this.vectorFieldOptions.required ? [Validators.required] : []),
-      gender: new FormControl({value: this.genderFieldOptions.value, disabled: this.genderFieldOptions.disabled}, this.genderFieldOptions.required ? [Validators.required] : []),
-      language: new FormControl({value: this.langFieldOptions.value, disabled: this.langFieldOptions.disabled}, this.langFieldOptions.required ? [Validators.required] : []),
+    this.myForm = new UntypedFormGroup({
+      vectors: new UntypedFormControl({value: this.vectorFieldOptions.value, disabled: this.vectorFieldOptions.disabled}, this.vectorFieldOptions.required ? [Validators.required] : []),
+      gender: new UntypedFormControl({value: this.genderFieldOptions.value, disabled: this.genderFieldOptions.disabled}, this.genderFieldOptions.required ? [Validators.required] : []),
+      language: new UntypedFormControl({value: this.langFieldOptions.value, disabled: this.langFieldOptions.disabled}, this.langFieldOptions.required ? [Validators.required] : []),
     });
   }
 

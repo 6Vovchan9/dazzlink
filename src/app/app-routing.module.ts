@@ -7,6 +7,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { PostPageComponent } from './post-page/post-page.component';
 import { LocationsPageComponent } from './locations-page/locations-page.component';
+import { PlacePageComponent } from './place-page/place-page.component';
+import { TeamPageComponent } from './team-page/team-page.component';
 
 const routes: Routes = [
   {
@@ -16,7 +18,9 @@ const routes: Routes = [
       { path: 'agreements', component: AgreementsPageComponent },
       { path: 'articles', component: ArticlesPageComponent },
       { path: 'locations', component: LocationsPageComponent },
+      { path: 'team', component: TeamPageComponent },
       { path: 'post/:id', component: PostPageComponent },
+      { path: 'place/:id', component: PlacePageComponent },
       // { path: '**', redirectTo: '/' }
     ]
   },

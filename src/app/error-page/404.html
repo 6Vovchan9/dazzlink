@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Скрипт для определения типа устройства -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.4/mobile-detect.min.js"></script>
+
+    <!-- Шрифт -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+
+    <title>Dazzlink</title>
+    <style>
+
+        html, body {
+            height: 100%;
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.42;
+        }
+
+        body {
+            margin: 0;
+            color: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        svg {
+            display: block;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        img {
+            display: block;
+        }
+
+        button {
+            color: #000;
+        }
+
+        .container {
+            margin: 0 auto;
+            max-width: 1240px;
+            padding: 0 20px;
+        }
+
+        .pageWrap {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            /* overflow: scroll; */
+        }
+
+        .contentWrapper {
+            flex: 1;
+        }
+
+        .page .page__container {
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+        .page .page__aboutError {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page .page__aboutError .page__errorCode {
+            max-width: 982px;
+            width: 100%;
+        }
+        .page .page__aboutError .page__errorMessage {
+            font-size: 24px;
+            line-height: 32px;
+            margin-top: 44px;
+        }
+        .page .page__links {
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .linkToApp {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 16px;
+            row-gap: 16px;
+        }
+        .linkToApp .linkToApp__item {
+            cursor: pointer;
+        }
+        .linkToApp .linkToApp__item .linkToApp__img {
+            height: 48px;
+            /* width: 100%; */
+        }
+
+        .header .header__container {
+            height: 84px;
+            padding: 30px 20px;
+            display: flex;
+            column-gap: 20px;
+        }
+        .header .header__container .header__col {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+        .header .header__container .header__col--alignRight {
+            justify-content: flex-end;
+        }
+        .header .header__container .header__col .header__menu {
+            line-height: 24px;
+            font-size: 16px;
+            display: none;
+        }
+
+        .logo {
+            height: 100%;
+            width: 126px;
+            display: flex;
+            /* max-height: 100%;
+            overflow: hidden; */
+        }
+        .logo .logo__image {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .menu .menu__list {
+            display: flex;
+        }
+        .menu--fd--column .menu__list {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .menu .menu__list .menu__item {
+            background-color: transparent;
+            border-radius: 12px;
+        }
+        .menu .menu__list .menu__item:hover {
+            background-color: #333;
+        }
+        .menu .menu__list .menu__item .menu__link {
+            cursor: default;
+            display: block;
+            text-decoration: none;
+            padding: 4px 8px;
+            color: #333;
+        }
+        .menu .menu__list .menu__item:hover .menu__link {
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .hamburger {
+            padding: 0;
+            cursor: pointer;
+            border: none;
+            margin-left: 20px;
+            background-color: transparent;
+            position: relative;
+        }
+        .hamburger:before {
+            content: "";
+            display: block;
+            height: 50px;
+            width: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .hamburger .hamburger__line {
+            margin: 8px 0;
+            width: 24px;
+            background-color: #5532EB;
+            height: 2px;
+            border-radius: 2px;
+            position: relative;
+        }
+        .hamburger .hamburger__line:before {
+            content: '';
+            width: 24px;
+            background-color: #5532EB;
+            height: 2px;
+            border-radius: 2px;
+            display: block;
+            position: absolute;
+            bottom: 8px;
+        }
+        .hamburger .hamburger__line:after {
+            content: '';
+            width: 24px;
+            background-color: #5532EB;
+            height: 2px;
+            border-radius: 2px;
+            display: block;
+            position: absolute;
+            top: 8px;
+        }
+
+        .footerNew .footerNew__content {
+            display: flex;
+            min-height: 104px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            border-radius: 24px;
+            background-color: #111;
+            color: #fff;
+            margin-bottom: 20px;
+            row-gap: 20px;
+        }
+        .footerNew .footerNew__content .footerNew__col .footerNew__socialNetworksBlock {
+            margin-right: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            row-gap: 8px;
+        }
+
+        .downloadApp {
+            cursor: pointer;
+            padding: 24px;
+            background-color: #f2f3f4;
+            color: #333;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px;
+        }
+        .downloadApp .downloadApp__title {
+            line-height: 24px;
+        }
+        .downloadApp .downloadApp__icon {
+            margin-left: 20px;
+        }
+        .downloadApp .downloadApp__icon svg {
+            display: none;
+        }
+
+        .socialNetworks .socialNetworks__list {
+            display: flex;
+            column-gap: 16px;
+            font-size: 14px;
+        }
+        .socialNetworks .socialNetworks__list .socialNetworks__item .socialNetworks__link {
+            color: #fff;
+            display: block;
+        }
+
+        .company {
+            cursor: default;
+            opacity: .6;
+            font-size: 14px;
+        }
+
+        .navigationModal {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            background-color: #f4f4f4;
+            z-index: 110;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 80px;
+            width: 100%;
+            min-width: 300px;
+            max-width: 800px;
+            max-height: 90%;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        .navigationModal .navigationModal__header {
+            margin-bottom: 30px;
+        }
+        .navigationModal .navigationModal__header .headerInModal {
+            display: flex;
+            column-gap: 20px;
+            /* align-items: center; */
+            justify-content: space-between;
+        }
+        .navigationModal .navigationModal__contentWrap {
+            flex: 1;
+        }
+        .navigationModal .navigationModal__contentWrap .navigationModal__content .navigationModal__menu {
+            font-size: 24px;
+            line-height: 32px;
+            margin-left: -12px;
+        }
+        .navigationModal .navigationModal__contentWrap .navigationModal__content .navigationModal__menu .menu__list .menu__item .menu__link {
+            padding: 12px;
+        }
+
+        .closeButtonInWindow {
+            cursor: pointer;
+            position: relative;
+        }
+        .closeButtonInWindow:before {
+            content: "";
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .closeButtonInWindow:hover .iconForCloseInModal {
+            transform: scale(1.4) rotate(180deg);
+        }
+
+        .iconForCloseInModal {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            transition: .7s;
+        }
+        .iconForCloseInModal:before {
+            content: "";
+            width: 2px;
+            height: 20px;
+            border-radius: 1px;
+            background-color: #5532EB;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            transform-origin: center center;
+        }
+        .iconForCloseInModal:after {
+            content: "";
+            width: 2px;
+            height: 20px;
+            border-radius: 1px;
+            background-color: #5532EB;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            transform-origin: center center;
+        }
+
+        @media (max-width: 767px) {
+
+            .page .page__links {
+                display: none;
+            }
+
+            .footerNew .footerNew__container {
+                padding: 0;
+            }
+            .footerNew .footerNew__content {
+                align-items: stretch;
+                border-radius: 24px 24px 0 0;
+                margin: 0;
+                flex-direction: column;
+            }
+            .footerNew .footerNew__content .footerNew__col .footerNew__socialNetworksBlock {
+                margin: 0;
+                row-gap: 12px;
+                align-items: center;
+            }
+
+            .navigationModal {
+                padding: 30px 20px;
+                height: 100%;
+                max-height: unset;
+                border-radius: 0px;
+                justify-content: center;
+            }
+        }
+
+        @media (min-width: 768px) {
+
+            .page .page__container {
+                margin-top: 34px;
+                margin-bottom: 140px;
+            }
+            .page .page__aboutError .page__errorMessage {
+                max-width: 560px;
+                text-align: center;
+                margin-top: 80px;
+            }
+
+            .header .header__container {
+                height: 98px;
+            }
+            .header .header__container .header__col .header__menu {
+                display: block;
+            }
+
+            .logo {
+                width: 200px;
+            }
+
+            .hamburger {
+                display: none;
+            }
+
+            .downloadApp {
+                padding: 24px 32px;
+            }
+            .downloadApp .downloadApp__icon {
+                display: none;
+            }
+
+            .socialNetworks {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pageWrap">
+        <header class="header">
+            <div class="container header__container">
+                <div class="header__col">
+                    <a href="https://dazzlink-e643b.web.app/" class="logo">
+                        <svg class="logo__image" viewBox="0 0 200 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_1729_22671)">
+                                <path d="M51.3378 0.107422V19.058C51.3378 29.5092 42.8215 38.0001 32.3177 38.0001H32.0161C28.8111 37.9568 25.6693 37.1017 22.8829 35.5143C20.0965 33.927 17.7563 31.6591 16.08 28.9217C15.0583 27.2608 14.3021 25.4499 13.8389 23.5549C14.8513 19.4717 17.1841 15.8392 20.4733 13.224C23.7626 10.6089 27.8232 9.15818 32.0217 9.09829C29.7068 9.16314 27.486 10.0307 25.7381 11.5529C25.5633 11.7026 25.3998 11.8523 25.2391 12.0133C23.752 13.4934 22.7705 15.4072 22.4353 17.4804C22.1 19.5536 22.4283 21.68 23.3729 23.5549C23.933 24.6583 24.6918 25.6485 25.6112 26.4755C25.9543 26.7824 26.3179 27.0655 26.6994 27.3229C28.201 28.3467 29.9524 28.9417 31.7658 29.0441C33.5792 29.1466 35.3863 28.7526 36.9932 27.9044C38.6002 27.0562 39.9465 25.7858 40.8878 24.2294C41.8291 22.673 42.3299 20.8892 42.3366 19.0693V9.08133V0.107422H51.3378Z" fill="url(#paint0_linear_1729_22671)"/>
+                                <path d="M37.5046 14.4594C36.4922 18.5425 34.1594 22.1751 30.8701 24.7902C27.5809 27.4054 23.5202 28.8561 19.3217 28.916C21.6365 28.85 23.8569 27.9826 25.6054 26.4613C25.7802 26.3116 25.9437 26.1619 26.1044 26.0009C27.5915 24.5208 28.573 22.6071 28.9082 20.5338C29.2434 18.4606 28.9152 16.3343 27.9706 14.4594C27.4105 13.3559 26.6516 12.3657 25.7323 11.5387C25.3891 11.2319 25.0256 10.9487 24.6441 10.6913C23.1418 9.6679 21.3899 9.07331 19.5761 8.9712C17.7623 8.86909 15.9549 9.26332 14.3477 10.1117C12.7404 10.96 11.3937 12.2305 10.4519 13.787C9.51006 15.3436 9.0086 17.1275 9.00122 18.9478V37.8871H0V18.9449C0 8.49373 8.51634 0 19.0201 0H19.3217C22.5245 0.0436027 25.6642 0.898017 28.449 2.48379C31.2337 4.06955 33.573 6.33517 35.2494 9.06995C36.2792 10.7365 37.0403 12.5553 37.5046 14.4594Z" fill="url(#paint1_linear_1729_22671)"/>
+                                <path d="M32.3178 0.107013H42.3197L35.2496 9.07246H32.0077C27.8083 9.12898 23.746 10.5784 20.4561 13.1941C17.1662 15.8098 14.8342 19.4442 13.8248 23.529C12.6657 18.7403 13.414 13.6876 15.9109 9.44248C17.5987 6.59171 19.9985 4.2306 22.8739 2.59167C25.7493 0.952738 29.0012 0.0925161 32.3093 0.095712L32.3178 0.107013Z" fill="#F99BF0"/>
+                                <path d="M38.0376 18.9449C38.0436 22.324 37.1388 25.6421 35.4187 28.5487C33.7327 31.4008 31.3332 33.7629 28.4573 35.4016C25.5815 37.0403 22.3287 37.8989 19.0204 37.8926H9.00146L16.0801 28.9243H19.322C23.521 28.8664 27.5826 27.4164 30.8722 24.8009C34.1618 22.1855 36.4942 18.5519 37.5048 14.4678C37.8586 15.9338 38.0374 17.4366 38.0376 18.9449Z" fill="#5353D3"/>
+                                <path d="M61.5283 20.3178C61.5283 14.0471 65.3453 10.9456 69.6444 10.9456C72.3619 10.9456 74.1548 11.8778 75.4911 13.7703H75.835V4.59863H80.5794V29.2014H76.1789L75.835 26.8145H75.4911C74.1492 28.676 72.3901 29.6759 69.6444 29.6759C65.3453 29.6844 61.5283 26.6168 61.5283 20.3178ZM75.9365 20.3178C75.9365 16.9282 73.9631 14.8747 71.1441 14.8747C68.3927 14.8747 66.3968 16.7023 66.3968 20.3178C66.3968 23.9334 68.3927 25.7638 71.1441 25.7638C73.9772 25.7553 75.9365 23.6876 75.9365 20.3178Z" fill="#262F66"/>
+                                <path d="M83.334 20.3175C83.334 14.0129 87.151 10.9453 91.4472 10.9453C94.1648 10.9453 95.9577 11.9113 97.2967 13.77H97.6378L97.9817 11.4255H102.385V29.2208H97.9817L97.6378 26.8142H97.2967C95.9549 28.7095 94.1958 29.6756 91.4472 29.6756C87.151 29.6841 83.334 26.5826 83.334 20.3175ZM97.7393 20.3175C97.7393 16.9279 95.766 14.8744 92.9469 14.8744C90.1955 14.8744 88.2025 16.702 88.2025 20.3175C88.2025 23.9331 90.1955 25.7634 92.9469 25.7634C95.7829 25.755 97.7393 23.6873 97.7393 20.3175Z" fill="#262F66"/>
+                                <path d="M105.756 29.2011V25.1336L115.076 15.832V15.4874H105.756V11.4199H121.368V15.4874L112.082 24.789V25.1336H121.368V29.2011H105.756Z" fill="#262F66"/>
+                                <path d="M124.052 29.2011V25.1336L133.372 15.832V15.4874H124.052V11.4199H139.667V15.4874L130.381 24.789V25.1336H139.667V29.2011H124.052Z" fill="#262F66"/>
+                                <path d="M143.036 29.2014V4.59863H147.828V29.2014H143.036Z" fill="#262F66"/>
+                                <path d="M151.462 6.49084C151.462 5.93832 151.625 5.39822 151.932 4.93882C152.238 4.47942 152.673 4.12136 153.183 3.90992C153.692 3.69848 154.253 3.64315 154.794 3.75094C155.335 3.85874 155.831 4.12479 156.221 4.51548C156.611 4.90617 156.877 5.40394 156.984 5.94584C157.092 6.48774 157.037 7.04944 156.826 7.5599C156.615 8.07036 156.257 8.50667 155.799 8.81363C155.34 9.12059 154.801 9.28443 154.25 9.28443C153.88 9.29787 153.511 9.2348 153.167 9.09916C152.823 8.96353 152.51 8.75825 152.248 8.49612C151.987 8.23398 151.782 7.92062 151.647 7.5756C151.511 7.23059 151.448 6.86132 151.462 6.49084ZM151.876 29.2011V11.4057H156.669V29.2011H151.876Z" fill="#262F66"/>
+                                <path d="M160.714 29.2008V19.3146C160.714 13.4562 164.153 10.9395 169.735 10.9395C175.317 10.9395 178.756 13.3856 178.756 19.2439V29.2037H173.989V19.2411C173.989 16.4504 172.512 15.0041 169.724 15.0041C166.935 15.0041 165.495 16.4842 165.495 19.3117V29.198L160.714 29.2008Z" fill="#262F66"/>
+                                <path d="M182.792 29.2014V4.59863H187.585V18.3801H187.929L194.187 11.4202H199.896L192.366 19.4478L200 29.2014H194.08L187.923 21.2076H187.579V29.2014H182.792Z" fill="#262F66"/>
+                            </g>
+                            <defs>
+                                <linearGradient id="paint0_linear_1729_22671" x1="13.8332" y1="19.0552" x2="51.3378" y2="19.0552" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#7E2EB7"/>
+                                    <stop offset="0.62" stop-color="#FF99EC"/>
+                                </linearGradient>
+                                <linearGradient id="paint1_linear_1729_22671" x1="55.6254" y1="16.2079" x2="12.2819" y2="19.0242" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0.23" stop-color="#2C2C84"/>
+                                    <stop offset="1" stop-color="#4A4AC6"/>
+                                </linearGradient>
+                                <clipPath id="clip0_1729_22671">
+                                    <rect width="200" height="38" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </a>
+                </div>
+                <div class="header__col header__col--alignRight">
+                    <div class="header__menu">
+                        <nav class="menu">
+                            <ul class="menu__list">
+                                <li class="menu__item">
+                                    <a class="menu__link" href="https://dazzlink-e643b.web.app/">Приложение</a>
+                                </li>
+                                <li class="menu__item">
+                                    <a class="menu__link" href="https://dazzlink-e643b.web.app/articles">Медиа</a>
+                                </li>
+                                <li class="menu__item">
+                                    <a class="menu__link" href="https://dazzlink-e643b.web.app/locations">Локации</a>
+                                </li>
+                                <li class="menu__item">
+                                    <a class="menu__link">Компания</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <button onclick="clickByHamburgerBtn()" class="hamburger">
+                        <div class="hamburger__line"></div>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="contentWrapper">
+            <main class="page">
+                <div class="container page__container">
+                    <div class="page__aboutError">
+                        <div class="page__errorCode">
+                            <svg viewBox="0 0 938 362" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.0113649 292.636V234.511L145.75 4.90908H195.864V85.3636H166.205L74.3295 230.761V233.489H281.432V292.636H0.0113649ZM167.568 354V274.909L168.932 249.17V4.90908H238.136V354H167.568ZM467.483 361.67C438.165 361.557 412.938 354.341 391.801 340.023C370.778 325.705 354.585 304.966 343.222 277.807C331.972 250.648 326.403 217.977 326.517 179.795C326.517 141.727 332.142 109.284 343.392 82.4659C354.756 55.6477 370.949 35.25 391.972 21.2727C413.108 7.18181 438.278 0.136351 467.483 0.136351C496.688 0.136351 521.801 7.18181 542.824 21.2727C563.96 35.3636 580.21 55.8182 591.574 82.6364C602.938 109.341 608.563 141.727 608.449 179.795C608.449 218.091 602.767 250.818 591.403 277.977C580.153 305.136 564.017 325.875 542.994 340.193C521.972 354.511 496.801 361.67 467.483 361.67ZM467.483 300.477C487.483 300.477 503.449 290.42 515.381 270.307C527.313 250.193 533.222 220.023 533.108 179.795C533.108 153.318 530.381 131.273 524.926 113.659C519.585 96.0454 511.972 82.8068 502.085 73.9432C492.312 65.0795 480.778 60.6477 467.483 60.6477C447.597 60.6477 431.688 70.5909 419.756 90.4773C407.824 110.364 401.801 140.136 401.688 179.795C401.688 206.614 404.358 229 409.699 246.955C415.153 264.795 422.824 278.205 432.71 287.182C442.597 296.045 454.188 300.477 467.483 300.477ZM655.793 292.636V234.511L801.531 4.90908H851.645V85.3636H821.986L730.111 230.761V233.489H937.213V292.636H655.793ZM823.349 354V274.909L824.713 249.17V4.90908H893.918V354H823.349Z" fill="#F2F3F4"/>
+                            </svg>
+                        </div>
+                        <div class="page__errorMessage">
+                            Страница не найдена, возможно она никогда не существовала или мы ее удалили.<br>Скачайте приложение.
+                        </div>
+                    </div>
+                    <div class="page__links linkToApp">
+                        <!-- IOS -->
+                        <a href="https://www.apple.com/app-store" target="_blank" class="linkToApp__item">
+                            <svg class="linkToApp__img" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="48" height="48" rx="12" fill="black"/>
+                                <path d="M30.7045 23.7631C30.729 21.9104 31.7481 20.1574 33.3648 19.187C32.3449 17.7649 30.6366 16.8632 28.8592 16.8089C26.9636 16.6147 25.1258 17.9164 24.1598 17.9164C23.1751 17.9164 21.6878 16.8282 20.0862 16.8604C17.9986 16.9262 16.0524 18.085 15.0368 19.8669C12.8535 23.5573 14.482 28.9809 16.5734 31.964C17.6198 33.4247 18.8427 35.0564 20.4428 34.9985C22.0086 34.9351 22.5935 34.0237 24.4836 34.0237C26.3561 34.0237 26.9048 34.9985 28.5374 34.9617C30.2176 34.9351 31.2762 33.4945 32.2859 32.02C33.0377 30.9792 33.6162 29.8288 34 28.6116C32.0254 27.7962 30.7068 25.8562 30.7045 23.7631Z" fill="white"/>
+                                <path d="M27.6208 14.8471C28.5369 13.7734 28.9882 12.3934 28.8789 11C27.4793 11.1435 26.1864 11.7966 25.2579 12.8291C24.35 13.8379 23.8775 15.1937 23.9668 16.5338C25.3669 16.5479 26.7434 15.9125 27.6208 14.8471Z" fill="white"/>
+                            </svg>
+                        </a>
+                        <!-- Android -->
+                        <a href="https://play.google.com" target="_blank" class="linkToApp__item">
+                            <svg class="linkToApp__img" viewBox="0 0 140 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="140" height="48" rx="12" fill="black"/>
+                                <path d="M48.362 24.206H50.602V25.676C50.056 26.068 49.384 26.292 48.726 26.292C47.088 26.292 45.702 24.864 45.702 23.184C45.702 21.518 47.088 20.09 48.726 20.09C49.608 20.09 50.546 20.51 51.12 21.168L52.618 19.824C51.652 18.816 50.168 18.214 48.726 18.214C45.94 18.214 43.574 20.482 43.574 23.184C43.574 25.886 45.94 28.168 48.726 28.168C50.168 28.168 51.652 27.566 52.618 26.558V22.596H48.362V24.206ZM57.8563 28.168C59.9983 28.168 61.7903 26.432 61.7903 24.374C61.7903 22.316 59.9983 20.594 57.8563 20.594C55.7003 20.594 53.8943 22.316 53.8943 24.374C53.8943 26.432 55.7003 28.168 57.8563 28.168ZM57.8563 26.446C56.7643 26.446 55.8543 25.494 55.8543 24.374C55.8543 23.254 56.7643 22.316 57.8563 22.316C58.9343 22.316 59.8443 23.254 59.8443 24.374C59.8443 25.494 58.9343 26.446 57.8563 26.446ZM66.7293 28.168C68.8713 28.168 70.6633 26.432 70.6633 24.374C70.6633 22.316 68.8713 20.594 66.7293 20.594C64.5733 20.594 62.7673 22.316 62.7673 24.374C62.7673 26.432 64.5733 28.168 66.7293 28.168ZM66.7293 26.446C65.6373 26.446 64.7273 25.494 64.7273 24.374C64.7273 23.254 65.6373 22.316 66.7293 22.316C67.8073 22.316 68.7173 23.254 68.7173 24.374C68.7173 25.494 67.8073 26.446 66.7293 26.446ZM77.2824 20.762V21.742C76.7924 21.056 75.8684 20.594 74.8884 20.594C73.0684 20.594 71.6824 22.008 71.6824 24.024C71.6824 26.04 73.0684 27.468 74.8884 27.468C75.8404 27.468 76.7084 27.048 77.2824 26.348V27.146C77.2824 28.084 76.4424 28.686 75.1264 28.686C74.2864 28.686 73.4464 28.42 72.9704 28L72.2564 29.442C72.9704 30.002 74.1744 30.408 75.4484 30.408C77.7304 30.408 79.3404 29.092 79.3404 27.23V20.762H77.2824ZM75.5324 25.746C74.5104 25.746 73.7824 25.032 73.7824 24.024C73.7824 23.016 74.5104 22.316 75.5324 22.316C76.5544 22.316 77.2824 23.016 77.2824 24.024C77.2824 25.032 76.5544 25.746 75.5324 25.746ZM81.1382 28H83.1822V18.214H81.1382V28ZM88.3823 26.362C87.5283 26.362 86.8983 25.83 86.6603 25.046H91.8823C91.8823 22.316 90.5523 20.594 88.2843 20.594C86.1703 20.594 84.5603 22.176 84.5603 24.36C84.5603 26.586 86.2403 28.168 88.3963 28.168C89.4603 28.168 90.7063 27.72 91.3503 27.048L90.0483 25.718C89.6563 26.096 88.9563 26.362 88.3823 26.362ZM88.3683 22.4C89.1943 22.4 89.7263 22.862 89.9223 23.576H86.6883C86.9543 22.848 87.5983 22.4 88.3683 22.4ZM97.2313 28H99.2893V24.878H101.557C103.643 24.878 105.183 23.534 105.183 21.63C105.183 19.726 103.643 18.382 101.557 18.382H97.2313V28ZM99.2893 22.988V20.272H101.333C102.355 20.272 103.055 20.804 103.055 21.63C103.055 22.456 102.355 22.988 101.333 22.988H99.2893ZM106.417 28H108.461V18.214H106.417V28ZM113.48 20.594C112.472 20.594 111.478 20.874 110.456 21.392L111.142 22.75C111.716 22.456 112.346 22.232 113.018 22.232C114.208 22.232 114.684 22.904 114.684 23.674V23.814C114.068 23.576 113.424 23.45 112.836 23.45C111.156 23.45 109.826 24.43 109.826 25.858C109.826 27.244 111.016 28.168 112.556 28.168C113.34 28.168 114.166 27.86 114.684 27.272V28H116.658V23.674C116.658 21.784 115.37 20.594 113.48 20.594ZM113.018 26.754C112.318 26.754 111.8 26.39 111.8 25.802C111.8 25.214 112.388 24.78 113.13 24.78C113.69 24.78 114.222 24.878 114.684 25.046V25.718C114.544 26.39 113.802 26.754 113.018 26.754ZM120.032 30.52C121.166 30.52 122.09 29.778 122.636 28.364L125.604 20.762H123.518L121.712 25.844L119.808 20.762H117.694L120.704 28.07L120.452 28.602C120.298 28.868 119.99 28.994 119.598 28.994C119.36 28.994 118.996 28.868 118.646 28.672L118.212 30.072C118.702 30.338 119.43 30.52 120.032 30.52Z" fill="white"/>
+                                <g filter="url(#filter0_ii_2809_26784)">
+                                    <path d="M13.463 11.3972C13.172 11.7052 13 12.1832 13 12.8022V34.9182C13 35.5382 13.172 36.0152 13.463 36.3232L13.537 36.3952L25.926 24.0062V23.8602V23.7142L13.537 11.3242L13.463 11.3972Z" fill="url(#paint0_linear_2809_26784)"/>
+                                    <path d="M30.055 28.137L25.926 24.006V23.86V23.714L30.056 19.584L30.149 19.637L35.042 22.417C36.439 23.211 36.439 24.51 35.042 25.305L30.149 28.085L30.055 28.137Z" fill="url(#paint1_linear_2809_26784)"/>
+                                    <g filter="url(#filter1_i_2809_26784)">
+                                        <path d="M30.1489 28.0834L25.9249 23.8594L13.4629 36.3224C13.9229 36.8104 14.6839 36.8704 15.5409 36.3844L30.1489 28.0834Z" fill="url(#paint2_linear_2809_26784)"/>
+                                    </g>
+                                    <path d="M30.1489 19.6361L15.5409 11.3361C14.6839 10.8491 13.9229 10.9101 13.4629 11.3981L25.9259 23.8611L30.1489 19.6361Z" fill="url(#paint3_linear_2809_26784)"/>
+                                </g>
+                                <defs>
+                                    <filter id="filter0_ii_2809_26784" x="13" y="11" width="23.0898" height="25.7207" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                        <feOffset dy="-0.15"/>
+                                        <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"/>
+                                        <feBlend mode="normal" in2="shape" result="effect1_innerShadow_2809_26784"/>
+                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                        <feOffset dy="0.15"/>
+                                        <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                                        <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.25 0"/>
+                                        <feBlend mode="normal" in2="effect1_innerShadow_2809_26784" result="effect2_innerShadow_2809_26784"/>
+                                    </filter>
+                                    <filter id="filter1_i_2809_26784" x="13.4629" y="23.8594" width="16.686" height="12.8613" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                        <feOffset dy="-0.15"/>
+                                        <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+                                        <feBlend mode="normal" in2="shape" result="effect1_innerShadow_2809_26784"/>
+                                    </filter>
+                                    <linearGradient id="paint0_linear_2809_26784" x1="24.8278" y1="12.5682" x2="8.0458" y2="29.3502" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#00A0FF"/>
+                                        <stop offset="0.0066" stop-color="#00A1FF"/>
+                                        <stop offset="0.2601" stop-color="#00BEFF"/>
+                                        <stop offset="0.5122" stop-color="#00D2FF"/>
+                                        <stop offset="0.7604" stop-color="#00DFFF"/>
+                                        <stop offset="1" stop-color="#00E3FF"/>
+                                    </linearGradient>
+                                    <linearGradient id="paint1_linear_2809_26784" x1="36.8605" y1="23.86" x2="12.6646" y2="23.86" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#FFE000"/>
+                                        <stop offset="0.4087" stop-color="#FFBD00"/>
+                                        <stop offset="0.7754" stop-color="#FFA500"/>
+                                        <stop offset="1" stop-color="#FF9C00"/>
+                                    </linearGradient>
+                                    <linearGradient id="paint2_linear_2809_26784" x1="27.855" y1="26.1533" x2="5.09649" y2="48.9118" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#FF3A44"/>
+                                        <stop offset="1" stop-color="#C31162"/>
+                                    </linearGradient>
+                                    <linearGradient id="paint3_linear_2809_26784" x1="10.3243" y1="4.03588" x2="20.4866" y2="14.1982" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#32A071"/>
+                                        <stop offset="0.0685" stop-color="#2DA771"/>
+                                        <stop offset="0.4762" stop-color="#15CF74"/>
+                                        <stop offset="0.8009" stop-color="#06E775"/>
+                                        <stop offset="1" stop-color="#00F076"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </a>
+                        <!-- Huawei -->
+                        <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
+                            <svg class="linkToApp__img" viewBox="0 0 140 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="140" height="48" rx="12" fill="black"/>
+                                <path d="M53.008 28H55.332L51.412 18.382H49.102L45.182 28H47.492L48.108 26.488H52.392L53.008 28ZM48.822 24.738L50.25 21.224L51.678 24.738H48.822ZM60.8757 20.594C59.8677 20.594 59.0277 21.028 58.4537 21.77V20.762H56.4097V30.408H58.4537V26.978C59.0277 27.734 59.8677 28.168 60.8757 28.168C62.8077 28.168 64.2077 26.6 64.2077 24.374C64.2077 22.162 62.8077 20.594 60.8757 20.594ZM60.2877 26.446C59.2937 26.446 58.5657 25.718 58.4537 24.654V24.094C58.5657 23.044 59.2937 22.316 60.2877 22.316C61.4217 22.316 62.2197 23.17 62.2197 24.374C62.2197 25.592 61.4217 26.446 60.2877 26.446ZM70.1179 20.594C69.1099 20.594 68.2699 21.028 67.6959 21.77V20.762H65.6519V30.408H67.6959V26.978C68.2699 27.734 69.1099 28.168 70.1179 28.168C72.0499 28.168 73.4499 26.6 73.4499 24.374C73.4499 22.162 72.0499 20.594 70.1179 20.594ZM69.5299 26.446C68.5359 26.446 67.8079 25.718 67.6959 24.654V24.094C67.8079 23.044 68.5359 22.316 69.5299 22.316C70.6639 22.316 71.4619 23.17 71.4619 24.374C71.4619 25.592 70.6639 26.446 69.5299 26.446ZM83.2702 24.206H85.5102V25.676C84.9642 26.068 84.2922 26.292 83.6342 26.292C81.9962 26.292 80.6102 24.864 80.6102 23.184C80.6102 21.518 81.9962 20.09 83.6342 20.09C84.5162 20.09 85.4542 20.51 86.0282 21.168L87.5262 19.824C86.5602 18.816 85.0762 18.214 83.6342 18.214C80.8482 18.214 78.4822 20.482 78.4822 23.184C78.4822 25.886 80.8482 28.168 83.6342 28.168C85.0762 28.168 86.5602 27.566 87.5262 26.558V22.596H83.2702V24.206ZM92.4425 20.594C91.4345 20.594 90.4405 20.874 89.4185 21.392L90.1045 22.75C90.6785 22.456 91.3085 22.232 91.9805 22.232C93.1705 22.232 93.6465 22.904 93.6465 23.674V23.814C93.0305 23.576 92.3865 23.45 91.7985 23.45C90.1185 23.45 88.7885 24.43 88.7885 25.858C88.7885 27.244 89.9785 28.168 91.5185 28.168C92.3025 28.168 93.1285 27.86 93.6465 27.272V28H95.6205V23.674C95.6205 21.784 94.3325 20.594 92.4425 20.594ZM91.9805 26.754C91.2805 26.754 90.7625 26.39 90.7625 25.802C90.7625 25.214 91.3505 24.78 92.0925 24.78C92.6525 24.78 93.1845 24.878 93.6465 25.046V25.718C93.5065 26.39 92.7645 26.754 91.9805 26.754ZM97.3433 28H99.3873V18.214H97.3433V28ZM101.171 28H103.215V18.214H101.171V28ZM108.416 26.362C107.562 26.362 106.932 25.83 106.694 25.046H111.916C111.916 22.316 110.586 20.594 108.318 20.594C106.204 20.594 104.594 22.176 104.594 24.36C104.594 26.586 106.274 28.168 108.43 28.168C109.494 28.168 110.74 27.72 111.384 27.048L110.082 25.718C109.69 26.096 108.99 26.362 108.416 26.362ZM108.402 22.4C109.228 22.4 109.76 22.862 109.956 23.576H106.722C106.988 22.848 107.632 22.4 108.402 22.4ZM115.342 22.106V20.762H113.298V28H115.342V24.542C115.342 23.184 116.308 22.316 117.82 22.316V20.594C116.714 20.594 115.818 21.168 115.342 22.106ZM120.652 30.52C121.786 30.52 122.71 29.778 123.256 28.364L126.224 20.762H124.138L122.332 25.844L120.428 20.762H118.314L121.324 28.07L121.072 28.602C120.918 28.868 120.61 28.994 120.218 28.994C119.98 28.994 119.616 28.868 119.266 28.672L118.832 30.072C119.322 30.338 120.05 30.52 120.652 30.52Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M32.2059 11.0007H21.1275C15.9088 11.0007 14 12.9095 14 18.1281V29.2067C14 34.4252 15.9088 36.334 21.1275 36.334H32.2024C37.4211 36.334 39.3333 34.4252 39.3333 29.2067V18.1281C39.3333 12.9095 37.4245 11.0007 32.2059 11.0007Z" fill="#C91C2E"/>
+                                <path d="M25.0522 25.6929H26.0682L25.5586 24.5078L25.0522 25.6929ZM24.8021 26.2903L24.5007 26.9799H23.8146L25.2738 23.6696H25.8666L27.3199 26.9799H26.6154L26.3178 26.2903H24.8021ZM35.8429 26.9776H36.5061V23.6696H35.8429V26.9776ZM33.2037 25.5561H34.4258V24.9533H33.2037V24.2752H34.9778V23.6716H32.5407V26.9796H35.0418V26.3762H33.2037V25.5561ZM30.5688 25.9471L29.8167 23.6695H29.2685L28.5165 25.9471L27.7847 23.671H27.0695L28.2239 26.9814H28.7802L29.5333 24.807L30.2861 26.9814H30.8474L31.9989 23.671H31.3021L30.5688 25.9471ZM22.8023 25.5653C22.8023 26.1038 22.5349 26.3915 22.0493 26.3915C21.561 26.3915 21.2922 26.0957 21.2922 25.5424V23.6714H20.6202V25.5653C20.6202 26.4971 21.1378 27.0312 22.0402 27.0312C22.9514 27.0312 23.4741 26.4868 23.4741 25.5379V23.6695H22.8023V25.5653ZM19.0167 23.6696H19.6885V26.9816H19.0167V25.6367H17.4991V26.9816H16.8271V23.6696H17.4991V25.0057H19.0167V23.6696Z" fill="white"/>
+                                <path d="M26.667 19.4512C24.3419 19.4512 22.4502 17.5594 22.4502 15.2343H23.0459C23.0459 17.231 24.6702 18.8555 26.667 18.8555C28.6638 18.8555 30.2881 17.231 30.2881 15.2343H30.8838C30.8838 17.5594 28.9921 19.4512 26.667 19.4512Z" fill="white"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div class="footerNew">
+            <div class="container footerNew__container">
+                <div class="footerNew__content">
+                    <div class="footerNew__col">
+                        <div onclick="goToAppRate()" class="downloadApp footerNew__download">
+                            <div class="downloadApp__title">Скачать приложение</div>
+                            <div class="downloadApp__icon">
+                                
+                                <!-- IOS -->
+                                <svg id="iosLinkInFooter" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="48" height="48" rx="12" fill="black"/>
+                                    <path d="M30.7045 23.7631C30.729 21.9104 31.7481 20.1574 33.3648 19.187C32.3449 17.7649 30.6366 16.8632 28.8592 16.8089C26.9636 16.6147 25.1258 17.9164 24.1598 17.9164C23.1751 17.9164 21.6878 16.8282 20.0862 16.8604C17.9986 16.9262 16.0524 18.085 15.0368 19.8669C12.8535 23.5573 14.482 28.9809 16.5734 31.964C17.6198 33.4247 18.8427 35.0564 20.4428 34.9985C22.0086 34.9351 22.5935 34.0237 24.4836 34.0237C26.3561 34.0237 26.9048 34.9985 28.5374 34.9617C30.2176 34.9351 31.2762 33.4945 32.2859 32.02C33.0377 30.9792 33.6162 29.8288 34 28.6116C32.0254 27.7962 30.7068 25.8562 30.7045 23.7631Z" fill="white"/>
+                                    <path d="M27.6208 14.8471C28.5369 13.7734 28.9882 12.3934 28.8789 11C27.4793 11.1435 26.1864 11.7966 25.2579 12.8291C24.35 13.8379 23.8775 15.1937 23.9668 16.5338C25.3669 16.5479 26.7434 15.9125 27.6208 14.8471Z" fill="white"/>
+                                </svg>
+
+                                <!-- Android -->
+                                <svg id="androidLinkInFooter" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="48" height="48" rx="12" fill="black"/>
+                                    <g filter="url(#filter0_ii_2337_28385)">
+                                        <path d="M14.432 12.3709C14.1605 12.6583 14 13.1043 14 13.6819V34.3189C14 34.8974 14.1605 35.3425 14.432 35.6299L14.5011 35.6971L26.0616 24.1366V24.0004V23.8641L14.5011 12.3027L14.432 12.3709Z" fill="url(#paint0_linear_2337_28385)"/>
+                                        <path d="M29.9144 27.9908L26.0615 24.136V23.9998V23.8636L29.9153 20.0098L30.0021 20.0592L34.5679 22.6533C35.8715 23.3942 35.8715 24.6063 34.5679 25.3482L30.0021 27.9423L29.9144 27.9908Z" fill="url(#paint1_linear_2337_28385)"/>
+                                        <g filter="url(#filter1_i_2337_28385)">
+                                        <path d="M30.0017 27.9415L26.0602 24L14.4316 35.6295C14.8609 36.0849 15.571 36.1409 16.3707 35.6874L30.0017 27.9415Z" fill="url(#paint2_linear_2337_28385)"/>
+                                        </g>
+                                        <path d="M30.0017 20.0585L16.3707 12.3136C15.571 11.8592 14.8609 11.9161 14.4316 12.3715L26.0612 24.001L30.0017 20.0585Z" fill="url(#paint3_linear_2337_28385)"/>
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_ii_2337_28385" x="14" y="12" width="21.5459" height="24" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="-0.15"/>
+                                            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"/>
+                                            <feBlend mode="normal" in2="shape" result="effect1_innerShadow_2337_28385"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="0.15"/>
+                                            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.25 0"/>
+                                            <feBlend mode="normal" in2="effect1_innerShadow_2337_28385" result="effect2_innerShadow_2337_28385"/>
+                                        </filter>
+                                        <filter id="filter1_i_2337_28385" x="14.4316" y="24" width="15.5703" height="12" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="-0.15"/>
+                                            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+                                            <feBlend mode="normal" in2="shape" result="effect1_innerShadow_2337_28385"/>
+                                        </filter>
+                                        <linearGradient id="paint0_linear_2337_28385" x1="25.0368" y1="13.4635" x2="9.37712" y2="29.1232" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#00A0FF"/>
+                                            <stop offset="0.0066" stop-color="#00A1FF"/>
+                                            <stop offset="0.2601" stop-color="#00BEFF"/>
+                                            <stop offset="0.5122" stop-color="#00D2FF"/>
+                                            <stop offset="0.7604" stop-color="#00DFFF"/>
+                                            <stop offset="1" stop-color="#00E3FF"/>
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear_2337_28385" x1="36.2648" y1="23.9998" x2="13.687" y2="23.9998" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#FFE000"/>
+                                            <stop offset="0.4087" stop-color="#FFBD00"/>
+                                            <stop offset="0.7754" stop-color="#FFA500"/>
+                                            <stop offset="1" stop-color="#FF9C00"/>
+                                        </linearGradient>
+                                        <linearGradient id="paint2_linear_2337_28385" x1="27.8613" y1="26.1405" x2="6.62476" y2="47.377" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#FF3A44"/>
+                                            <stop offset="1" stop-color="#C31162"/>
+                                        </linearGradient>
+                                        <linearGradient id="paint3_linear_2337_28385" x1="11.5029" y1="5.50161" x2="20.9856" y2="14.9843" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#32A071"/>
+                                            <stop offset="0.0685" stop-color="#2DA771"/>
+                                            <stop offset="0.4762" stop-color="#15CF74"/>
+                                            <stop offset="0.8009" stop-color="#06E775"/>
+                                            <stop offset="1" stop-color="#00F076"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+
+                                <!-- Huawei -->
+                                <svg id="appGalleryLinkInFooter" width="140" height="48" viewBox="0 0 140 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="140" height="48" rx="12" fill="black"/>
+                                    <path d="M53.008 28H55.332L51.412 18.382H49.102L45.182 28H47.492L48.108 26.488H52.392L53.008 28ZM48.822 24.738L50.25 21.224L51.678 24.738H48.822ZM60.8757 20.594C59.8677 20.594 59.0277 21.028 58.4537 21.77V20.762H56.4097V30.408H58.4537V26.978C59.0277 27.734 59.8677 28.168 60.8757 28.168C62.8077 28.168 64.2077 26.6 64.2077 24.374C64.2077 22.162 62.8077 20.594 60.8757 20.594ZM60.2877 26.446C59.2937 26.446 58.5657 25.718 58.4537 24.654V24.094C58.5657 23.044 59.2937 22.316 60.2877 22.316C61.4217 22.316 62.2197 23.17 62.2197 24.374C62.2197 25.592 61.4217 26.446 60.2877 26.446ZM70.1179 20.594C69.1099 20.594 68.2699 21.028 67.6959 21.77V20.762H65.6519V30.408H67.6959V26.978C68.2699 27.734 69.1099 28.168 70.1179 28.168C72.0499 28.168 73.4499 26.6 73.4499 24.374C73.4499 22.162 72.0499 20.594 70.1179 20.594ZM69.5299 26.446C68.5359 26.446 67.8079 25.718 67.6959 24.654V24.094C67.8079 23.044 68.5359 22.316 69.5299 22.316C70.6639 22.316 71.4619 23.17 71.4619 24.374C71.4619 25.592 70.6639 26.446 69.5299 26.446ZM83.2702 24.206H85.5102V25.676C84.9642 26.068 84.2922 26.292 83.6342 26.292C81.9962 26.292 80.6102 24.864 80.6102 23.184C80.6102 21.518 81.9962 20.09 83.6342 20.09C84.5162 20.09 85.4542 20.51 86.0282 21.168L87.5262 19.824C86.5602 18.816 85.0762 18.214 83.6342 18.214C80.8482 18.214 78.4822 20.482 78.4822 23.184C78.4822 25.886 80.8482 28.168 83.6342 28.168C85.0762 28.168 86.5602 27.566 87.5262 26.558V22.596H83.2702V24.206ZM92.4425 20.594C91.4345 20.594 90.4405 20.874 89.4185 21.392L90.1045 22.75C90.6785 22.456 91.3085 22.232 91.9805 22.232C93.1705 22.232 93.6465 22.904 93.6465 23.674V23.814C93.0305 23.576 92.3865 23.45 91.7985 23.45C90.1185 23.45 88.7885 24.43 88.7885 25.858C88.7885 27.244 89.9785 28.168 91.5185 28.168C92.3025 28.168 93.1285 27.86 93.6465 27.272V28H95.6205V23.674C95.6205 21.784 94.3325 20.594 92.4425 20.594ZM91.9805 26.754C91.2805 26.754 90.7625 26.39 90.7625 25.802C90.7625 25.214 91.3505 24.78 92.0925 24.78C92.6525 24.78 93.1845 24.878 93.6465 25.046V25.718C93.5065 26.39 92.7645 26.754 91.9805 26.754ZM97.3433 28H99.3873V18.214H97.3433V28ZM101.171 28H103.215V18.214H101.171V28ZM108.416 26.362C107.562 26.362 106.932 25.83 106.694 25.046H111.916C111.916 22.316 110.586 20.594 108.318 20.594C106.204 20.594 104.594 22.176 104.594 24.36C104.594 26.586 106.274 28.168 108.43 28.168C109.494 28.168 110.74 27.72 111.384 27.048L110.082 25.718C109.69 26.096 108.99 26.362 108.416 26.362ZM108.402 22.4C109.228 22.4 109.76 22.862 109.956 23.576H106.722C106.988 22.848 107.632 22.4 108.402 22.4ZM115.342 22.106V20.762H113.298V28H115.342V24.542C115.342 23.184 116.308 22.316 117.82 22.316V20.594C116.714 20.594 115.818 21.168 115.342 22.106ZM120.652 30.52C121.786 30.52 122.71 29.778 123.256 28.364L126.224 20.762H124.138L122.332 25.844L120.428 20.762H118.314L121.324 28.07L121.072 28.602C120.918 28.868 120.61 28.994 120.218 28.994C119.98 28.994 119.616 28.868 119.266 28.672L118.832 30.072C119.322 30.338 120.05 30.52 120.652 30.52Z" fill="white"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M32.2059 11.0007H21.1275C15.9088 11.0007 14 12.9095 14 18.1281V29.2067C14 34.4252 15.9088 36.334 21.1275 36.334H32.2024C37.4211 36.334 39.3333 34.4252 39.3333 29.2067V18.1281C39.3333 12.9095 37.4245 11.0007 32.2059 11.0007Z" fill="#C91C2E"/>
+                                    <path d="M25.0522 25.6929H26.0682L25.5586 24.5078L25.0522 25.6929ZM24.8021 26.2903L24.5007 26.9799H23.8146L25.2738 23.6696H25.8666L27.3199 26.9799H26.6154L26.3178 26.2903H24.8021ZM35.8429 26.9776H36.5061V23.6696H35.8429V26.9776ZM33.2037 25.5561H34.4258V24.9533H33.2037V24.2752H34.9778V23.6716H32.5407V26.9796H35.0418V26.3762H33.2037V25.5561ZM30.5688 25.9471L29.8167 23.6695H29.2685L28.5165 25.9471L27.7847 23.671H27.0695L28.2239 26.9814H28.7802L29.5333 24.807L30.2861 26.9814H30.8474L31.9989 23.671H31.3021L30.5688 25.9471ZM22.8023 25.5653C22.8023 26.1038 22.5349 26.3915 22.0493 26.3915C21.561 26.3915 21.2922 26.0957 21.2922 25.5424V23.6714H20.6202V25.5653C20.6202 26.4971 21.1378 27.0312 22.0402 27.0312C22.9514 27.0312 23.4741 26.4868 23.4741 25.5379V23.6695H22.8023V25.5653ZM19.0167 23.6696H19.6885V26.9816H19.0167V25.6367H17.4991V26.9816H16.8271V23.6696H17.4991V25.0057H19.0167V23.6696Z" fill="white"/>
+                                    <path d="M26.667 19.4512C24.3419 19.4512 22.4502 17.5594 22.4502 15.2343H23.0459C23.0459 17.231 24.6702 18.8555 26.667 18.8555C28.6638 18.8555 30.2881 17.231 30.2881 15.2343H30.8838C30.8838 17.5594 28.9921 19.4512 26.667 19.4512Z" fill="white"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footerNew__col">
+                        <div class="footerNew__socialNetworksBlock">
+                            <div class="socialNetworks">
+                                <ul class="socialNetworks__list">
+                                    <li class="socialNetworks__item">
+                                        <a href="https://instagram.com" target="_blank" class="socialNetworks__link">Instagram</a>
+                                    </li>
+                                    <li class="socialNetworks__item">
+                                        <a href="https://facebook.com" target="_blank" class="socialNetworks__link">Facebook</a>
+                                    </li>
+                                    <li class="socialNetworks__item">
+                                        <a href="https://linkedin.com" target="_blank" class="socialNetworks__link">LinkedIn</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="company">
+                                ООО&nbsp;«Даззл»&nbsp;<span id="curYear">2014</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка с навигацией для мобилы -->
+    <div id="navigationModal" class="navigationModal">
+        <div class="navigationModal__header">
+            <div class="headerInModal">
+                <div class="headerInModal__col">
+                    <a href="https://dazzlink-e643b.web.app/" class="logo">
+                        <svg class="logo__image" viewBox="0 0 200 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_1729_22671)">
+                                <path d="M51.3378 0.107422V19.058C51.3378 29.5092 42.8215 38.0001 32.3177 38.0001H32.0161C28.8111 37.9568 25.6693 37.1017 22.8829 35.5143C20.0965 33.927 17.7563 31.6591 16.08 28.9217C15.0583 27.2608 14.3021 25.4499 13.8389 23.5549C14.8513 19.4717 17.1841 15.8392 20.4733 13.224C23.7626 10.6089 27.8232 9.15818 32.0217 9.09829C29.7068 9.16314 27.486 10.0307 25.7381 11.5529C25.5633 11.7026 25.3998 11.8523 25.2391 12.0133C23.752 13.4934 22.7705 15.4072 22.4353 17.4804C22.1 19.5536 22.4283 21.68 23.3729 23.5549C23.933 24.6583 24.6918 25.6485 25.6112 26.4755C25.9543 26.7824 26.3179 27.0655 26.6994 27.3229C28.201 28.3467 29.9524 28.9417 31.7658 29.0441C33.5792 29.1466 35.3863 28.7526 36.9932 27.9044C38.6002 27.0562 39.9465 25.7858 40.8878 24.2294C41.8291 22.673 42.3299 20.8892 42.3366 19.0693V9.08133V0.107422H51.3378Z" fill="url(#paint0_linear_1729_22671)"/>
+                                <path d="M37.5046 14.4594C36.4922 18.5425 34.1594 22.1751 30.8701 24.7902C27.5809 27.4054 23.5202 28.8561 19.3217 28.916C21.6365 28.85 23.8569 27.9826 25.6054 26.4613C25.7802 26.3116 25.9437 26.1619 26.1044 26.0009C27.5915 24.5208 28.573 22.6071 28.9082 20.5338C29.2434 18.4606 28.9152 16.3343 27.9706 14.4594C27.4105 13.3559 26.6516 12.3657 25.7323 11.5387C25.3891 11.2319 25.0256 10.9487 24.6441 10.6913C23.1418 9.6679 21.3899 9.07331 19.5761 8.9712C17.7623 8.86909 15.9549 9.26332 14.3477 10.1117C12.7404 10.96 11.3937 12.2305 10.4519 13.787C9.51006 15.3436 9.0086 17.1275 9.00122 18.9478V37.8871H0V18.9449C0 8.49373 8.51634 0 19.0201 0H19.3217C22.5245 0.0436027 25.6642 0.898017 28.449 2.48379C31.2337 4.06955 33.573 6.33517 35.2494 9.06995C36.2792 10.7365 37.0403 12.5553 37.5046 14.4594Z" fill="url(#paint1_linear_1729_22671)"/>
+                                <path d="M32.3178 0.107013H42.3197L35.2496 9.07246H32.0077C27.8083 9.12898 23.746 10.5784 20.4561 13.1941C17.1662 15.8098 14.8342 19.4442 13.8248 23.529C12.6657 18.7403 13.414 13.6876 15.9109 9.44248C17.5987 6.59171 19.9985 4.2306 22.8739 2.59167C25.7493 0.952738 29.0012 0.0925161 32.3093 0.095712L32.3178 0.107013Z" fill="#F99BF0"/>
+                                <path d="M38.0376 18.9449C38.0436 22.324 37.1388 25.6421 35.4187 28.5487C33.7327 31.4008 31.3332 33.7629 28.4573 35.4016C25.5815 37.0403 22.3287 37.8989 19.0204 37.8926H9.00146L16.0801 28.9243H19.322C23.521 28.8664 27.5826 27.4164 30.8722 24.8009C34.1618 22.1855 36.4942 18.5519 37.5048 14.4678C37.8586 15.9338 38.0374 17.4366 38.0376 18.9449Z" fill="#5353D3"/>
+                                <path d="M61.5283 20.3178C61.5283 14.0471 65.3453 10.9456 69.6444 10.9456C72.3619 10.9456 74.1548 11.8778 75.4911 13.7703H75.835V4.59863H80.5794V29.2014H76.1789L75.835 26.8145H75.4911C74.1492 28.676 72.3901 29.6759 69.6444 29.6759C65.3453 29.6844 61.5283 26.6168 61.5283 20.3178ZM75.9365 20.3178C75.9365 16.9282 73.9631 14.8747 71.1441 14.8747C68.3927 14.8747 66.3968 16.7023 66.3968 20.3178C66.3968 23.9334 68.3927 25.7638 71.1441 25.7638C73.9772 25.7553 75.9365 23.6876 75.9365 20.3178Z" fill="#262F66"/>
+                                <path d="M83.334 20.3175C83.334 14.0129 87.151 10.9453 91.4472 10.9453C94.1648 10.9453 95.9577 11.9113 97.2967 13.77H97.6378L97.9817 11.4255H102.385V29.2208H97.9817L97.6378 26.8142H97.2967C95.9549 28.7095 94.1958 29.6756 91.4472 29.6756C87.151 29.6841 83.334 26.5826 83.334 20.3175ZM97.7393 20.3175C97.7393 16.9279 95.766 14.8744 92.9469 14.8744C90.1955 14.8744 88.2025 16.702 88.2025 20.3175C88.2025 23.9331 90.1955 25.7634 92.9469 25.7634C95.7829 25.755 97.7393 23.6873 97.7393 20.3175Z" fill="#262F66"/>
+                                <path d="M105.756 29.2011V25.1336L115.076 15.832V15.4874H105.756V11.4199H121.368V15.4874L112.082 24.789V25.1336H121.368V29.2011H105.756Z" fill="#262F66"/>
+                                <path d="M124.052 29.2011V25.1336L133.372 15.832V15.4874H124.052V11.4199H139.667V15.4874L130.381 24.789V25.1336H139.667V29.2011H124.052Z" fill="#262F66"/>
+                                <path d="M143.036 29.2014V4.59863H147.828V29.2014H143.036Z" fill="#262F66"/>
+                                <path d="M151.462 6.49084C151.462 5.93832 151.625 5.39822 151.932 4.93882C152.238 4.47942 152.673 4.12136 153.183 3.90992C153.692 3.69848 154.253 3.64315 154.794 3.75094C155.335 3.85874 155.831 4.12479 156.221 4.51548C156.611 4.90617 156.877 5.40394 156.984 5.94584C157.092 6.48774 157.037 7.04944 156.826 7.5599C156.615 8.07036 156.257 8.50667 155.799 8.81363C155.34 9.12059 154.801 9.28443 154.25 9.28443C153.88 9.29787 153.511 9.2348 153.167 9.09916C152.823 8.96353 152.51 8.75825 152.248 8.49612C151.987 8.23398 151.782 7.92062 151.647 7.5756C151.511 7.23059 151.448 6.86132 151.462 6.49084ZM151.876 29.2011V11.4057H156.669V29.2011H151.876Z" fill="#262F66"/>
+                                <path d="M160.714 29.2008V19.3146C160.714 13.4562 164.153 10.9395 169.735 10.9395C175.317 10.9395 178.756 13.3856 178.756 19.2439V29.2037H173.989V19.2411C173.989 16.4504 172.512 15.0041 169.724 15.0041C166.935 15.0041 165.495 16.4842 165.495 19.3117V29.198L160.714 29.2008Z" fill="#262F66"/>
+                                <path d="M182.792 29.2014V4.59863H187.585V18.3801H187.929L194.187 11.4202H199.896L192.366 19.4478L200 29.2014H194.08L187.923 21.2076H187.579V29.2014H182.792Z" fill="#262F66"/>
+                            </g>
+                            <defs>
+                                <linearGradient id="paint0_linear_1729_22671" x1="13.8332" y1="19.0552" x2="51.3378" y2="19.0552" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#7E2EB7"/>
+                                    <stop offset="0.62" stop-color="#FF99EC"/>
+                                </linearGradient>
+                                <linearGradient id="paint1_linear_1729_22671" x1="55.6254" y1="16.2079" x2="12.2819" y2="19.0242" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0.23" stop-color="#2C2C84"/>
+                                    <stop offset="1" stop-color="#4A4AC6"/>
+                                </linearGradient>
+                                <clipPath id="clip0_1729_22671">
+                                    <rect width="200" height="38" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </a>
+                </div>
+                <div class="headerInModal__col">
+                    <div onclick="closeNavModal()" class="closeButtonInWindow">
+                        <div class="iconForCloseInModal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navigationModal__contentWrap">
+            <div class="navigationModal__content">
+                <nav class="menu navigationModal__menu menu--fd--column">
+                    <ul class="menu__list">
+                        <li class="menu__item">
+                            <a href="https://dazzlink-e643b.web.app/" class="menu__link">Приложение</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="https://dazzlink-e643b.web.app/articles" class="menu__link">Медиа</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="https://dazzlink-e643b.web.app/locations" class="menu__link">Локации</a>
+                        </li>
+                        <li class="menu__item">
+                            <a class="menu__link">Компания</a>
+                        </li>
+                        <!-- <li class="menu__item">
+                            <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
+                        </li> -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function goToAppRate() {
+        let url;
+        const curOS = operateUserAgent()?.toLowerCase();
+        if (curOS === 'ios') {
+            url = new URL('https://apps.apple.com/ru');
+        } else if (curOS === 'androidos') {
+            url = new URL('https://play.google.com');
+        } else {
+            url = new URL('https://appgallery.huawei.com');
+        }
+        window.open(url);
+    }
+
+    function operateUserAgent() {
+        const mdClass = window['MobileDetect']; // Этот класс берется из скрипта в head
+        if (mdClass) {
+            const mbInstance = new mdClass(window.navigator.userAgent);
+            console.log("Mobile: " + mbInstance.mobile() + "; Phone: " + mbInstance.phone() + "; Tablet: " + mbInstance.tablet() + "; OS: " + mbInstance.os() + "; userAgent: " + mbInstance.userAgent());
+            return mbInstance.os();
+        }
+    }
+
+    function clickByHamburgerBtn() {
+        document.getElementById('navigationModal').style.display = 'flex';
+    }
+
+    function closeNavModal() {
+        document.getElementById('navigationModal').style.display = 'none';
+    }
+</script>
+<script>
+    document.getElementById('curYear').innerText = (new Date()).getFullYear();
+</script>
+<script>
+    let curOStagName;
+    const curOS = operateUserAgent()?.toLowerCase();
+    if (curOS === 'ios') {
+        curOStagName = 'iosLinkInFooter';
+    } else if (curOS === 'androidos') {
+        curOStagName = 'androidLinkInFooter';
+    } else {
+        curOStagName = 'appGalleryLinkInFooter';
+    }
+    document.getElementById(curOStagName).style.display = 'block';
+</script>
+</html>

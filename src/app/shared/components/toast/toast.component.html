@@ -1,0 +1,11 @@
+<div class="alert" [class.alert--shown]="showToast">
+    <div [ngClass]="{
+            'alert__wrap--success': toastData?.type === 'success',
+            'alert__wrap--warning': toastData?.type === 'warning',
+            'alert__wrap--danger':  toastData?.type === 'danger'
+        }"
+        class="alert__wrap"
+    >
+        {{toastData?.text}}
+    </div>
+</div>

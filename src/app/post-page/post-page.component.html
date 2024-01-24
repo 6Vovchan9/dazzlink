@@ -52,7 +52,12 @@
                     <div class="postContent__text" [innerHTML]="postData.html"></div>
                     <!-- Как вам статья -->
                     <div class="postContent__feedback feedback">
-                        <div class="feedback__text">Как вам статья?</div>
+                        <div class="feedback__text">
+                            <span>Как вам локация?</span>
+                            <div *ngIf="votingIsLoading" class="feedback__spinner">
+                                <img src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
+                            </div>
+                        </div>
                         <div class="feedback__values"
                             [ngClass]="{
                                 'feedback__values--disabled': articleEvaluation,
@@ -62,7 +67,10 @@
 
                             <div (click)="onVoting('like')"
                                 class="feedbackVal feedbackVal--leftItem feedbackVal--like"
-                                [class.feedbackVal--active]="articleEvaluation === 'like'"
+                                [ngClass]="{
+                                    'feedbackVal--active': articleEvaluation === 'like',
+                                    'feedbackVal--disabled': articleEvaluation
+                                }"
                             >
                                 <div class="feedbackVal__icon">
                                     <!-- <img src="assets/icons/likeIcon.svg" alt="Y"> -->
@@ -72,8 +80,11 @@
                             </div>
 
                             <div (click)="onVoting('dislike')"
-                                class="feedbackVal feedbackVal--active"
-                                [class.feedbackVal--active]="articleEvaluation === 'dislike'"
+                                class="feedbackVal"
+                                [ngClass]="{
+                                    'feedbackVal--active': articleEvaluation === 'dislike',
+                                    'feedbackVal--disabled': articleEvaluation
+                                }"
                             >
                                 <div class="feedbackVal__icon">
                                     <!-- <img src="assets/icons/dislikeIcon.svg" alt="N"> -->

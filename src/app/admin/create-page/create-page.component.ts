@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Place, Post } from 'src/app/shared/interfaces';
-import { PostsService } from 'src/app/shared/services/posts.service';
+import { Place, Post } from '@app/shared/interfaces';
+import { PostsService } from '@app/shared/services/posts.service';
 import { AlertService } from '../shared/services/alert.service';
 import { LocationsService } from '@app/shared/services/locations.service';
 

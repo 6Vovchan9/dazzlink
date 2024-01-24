@@ -26,6 +26,11 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 import { ProgressiveImageComponent } from './shared/components/progressive-image/progressive-image.component';
 import { LocationsPageComponent } from './locations-page/locations-page.component';
 import { LocationItemComponent } from './shared/components/location-item/location-item.component';
+import { CheckboxNewFieldComponent } from './shared/fields/checkbox-new-field/checkbox-new-field.component';
+import { PlacePageComponent } from './place-page/place-page.component';
+import { ToastService } from './shared/services/toast.service';
+import { ToastComponent } from './shared/components/toast/toast.component';
+import { TeamPageComponent } from './team-page/team-page.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -38,16 +43,20 @@ registerLocaleData(localeRu, 'ru');
     AgreementsPageComponent,
     ArticlesPageComponent,
     PostPageComponent,
+    PlacePageComponent,
     LocationsPageComponent,
+    TeamPageComponent,
 
     HeaderComponent,
+    ToastComponent,
     FooterComponent,
     PostComponent,
     LocationItemComponent,
     ModalComponent,
     AccoTriggerComponent,
     GoBackBtnComponent,
-    ProgressiveImageComponent
+    ProgressiveImageComponent,
+    CheckboxNewFieldComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +70,8 @@ registerLocaleData(localeRu, 'ru');
     RadiobuttonFieldModule,
     DropdownFieldModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+  providers: [ToastService],
+  // providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },], // Это хороший итерсептор но он пока не нужен и лучше сейчас его отключить чтоб он не очищал localStorage
   bootstrap: [AppComponent]
 })
 export class AppModule { }

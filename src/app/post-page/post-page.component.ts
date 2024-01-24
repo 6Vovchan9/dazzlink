@@ -54,7 +54,8 @@ export class PostPageComponent implements OnInit, OnDestroy {
           (params: Params) => {
             this.articleId = params['id'];
             // return this.postsService.getById(params['id']);
-            return this.postsService.getByIdRovragge(params['id']);
+            // return this.postsService.getByIdRovragge(params['id']);
+            return this.postsService.getByIdProd(params['id']);
           }
         ),
         catchError(err => {
@@ -110,7 +111,8 @@ export class PostPageComponent implements OnInit, OnDestroy {
         this.articleEvaluation = aboutThisArticle.choice;
       } else {
         console.log(`Фиксируем просмотр статьи "${this.articleId}"!`);
-        this.eSub = this.postsService.setArticleEvaluation(this.articleId)
+        // this.eSub = this.postsService.setArticleEvaluation(this.articleId)
+        this.eSub = this.postsService.setArticleEvaluationProd(this.articleId)
           .subscribe(
             () => {
               this.setArticleEvaluationToSS();
@@ -139,10 +141,11 @@ export class PostPageComponent implements OnInit, OnDestroy {
     if (!this.articleEvaluation && !this.votingIsLoading) {
       console.log(`Фиксируем ваш ${val}`);
       this.votingIsLoading = true;
-      this.vSub = this.postsService.setArticleVoting(this.articleId, val)
-        .pipe(
-        // delay(5000)
-      )
+      // this.vSub = this.postsService.setArticleVoting(this.articleId, val)
+      this.vSub = this.postsService.setArticleVotingProd(this.articleId, val)
+        // .pipe(
+        //   delay(5000)
+        // )
         .subscribe(
           resp => {
             this.postData['likeCount'] = resp['likeCount'];

@@ -55,7 +55,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "8kb",
-                  "maximumError": "10kb"
+                  "maximumError": "12kb"
                 }
               ],
               "fileReplacements": [
@@ -115,6 +115,5 @@
         }
       }
     }
-  },
-  "defaultProject": "myProject"
+  }
 }

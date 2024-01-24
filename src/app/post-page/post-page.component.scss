@@ -103,11 +103,11 @@
 
 .postTitle {
     .postTitle__img {
-        background-color: var(--color-text-gray);
+        background-color: var(--color-light-gray);
         min-height: 200px;
         border-radius: 32px;
         overflow: hidden;
-        max-width: 360px;
+        // max-width: 360px;
         margin-top: 24px;
 
         img {
@@ -166,15 +166,15 @@
     flex-wrap: wrap;
     color: var(--color-text-gray);
     .postDetails__info {
-        margin-left: 11px;
+        margin-left: 13px;
         position: relative;
 
         &:before {
             content: '';
             position: absolute;
             display: block;
-            width: 4px;
-            height: 4px;
+            width: 2.5px;
+            height: 2.5px;
             border-radius: 50%;
             background-color: var(--color-text-gray);
             top: 50%;
@@ -187,95 +187,6 @@
             &:before {
                 display: none;
             }
-        }
-    }
-}
-
-.feedback {
-    display: flex;
-    flex-direction: column;
-    column-gap: 24px;
-    row-gap: 14px;
-    align-items: center;
-    background-color: var(--color-gray1);
-    padding: 24px 28px;
-    border-radius: 20px;
-    line-height: 24px;
-    font-weight: 700;
-
-    .feedback__values {
-        display: flex;
-        column-gap: 24px;
-
-        &--disabled {
-            .feedbackVal {
-                cursor: default;
-            }
-        }
-
-        &--loading {
-            .feedbackVal {
-                cursor: wait;
-            }
-        }
-    }
-
-    @media #{$notMobile} {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-}
-
-.feedbackVal {
-    display: flex;
-    column-gap: 10px;
-    align-items: center;
-    cursor: pointer;
-    .feedbackVal__icon {
-        width: 27px;
-        height: 27px;
-
-        img, svg {
-            max-width: 100%;
-            max-height: 100%;
-        }
-    }
-
-    .feedbackVal__amount {
-        color: var(--color-text-gray);
-    }
-
-    &--leftItem {
-        flex-direction: row-reverse;
-    }
-
-    &--active {
-        cursor: default;
-        transform: scale(1.2);
-        .feedbackVal__amount {
-            color: var(--color-red);
-        }
-        .feedbackVal__icon {
-            svg path {
-                fill: var(--color-red);
-            }
-        }
-    }
-
-    @media #{$notMobile} {
-        &--leftItem {
-            flex-direction: row;
-        }
-    }
-}
-
-.feedbackVal--active.feedbackVal--like {
-    .feedbackVal__amount {
-        color: var(--color-green);
-    }
-    .feedbackVal__icon {
-        svg path {
-            fill: var(--color-green);
         }
     }
 }

@@ -1,5 +1,5 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, DoCheck, OnInit, Optional } from '@angular/core';
+import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
@@ -18,7 +18,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   public showNavModal = false;
   public scrollDown = false;
   private prewScrollTop = 0;
-  public myForm: FormGroup;
+  public myForm: UntypedFormGroup;
   public mainLayoutOpt: MainLayoutOptions = {
     header: {
       fixed: true,
@@ -42,7 +42,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   constructor(
     private visitsService: VisitsService,
     private pagesService: PagesService,
-    public mobileDetectService: MobileDetectService,
+    @Optional() public mobileDetectService: MobileDetectService,
   ) { }
 
   ngDoCheck(): void {
@@ -91,9 +91,8 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   private createForm(): void {
 
     const langFromService = this.pagesService.currentLanguage.getValue();
-
-    this.myForm = new FormGroup({
-      language: new FormControl({value: langFromService, disabled: this.langFieldOptions.disabled}, this.langFieldOptions.required ? [Validators.required] : []),
+    this.myForm = new UntypedFormGroup({
+      language: new FormControl<string | null>({ value: langFromService, disabled: this.langFieldOptions.disabled }, this.langFieldOptions.required ? [Validators.required] : []),
     });
   }
 
@@ -137,7 +136,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   }
 
   public mobileStoreSrc(): string {
-    const osDevice = this.mobileDetectService.osDevice;
+    const osDevice = this.mobileDetectService?.osDevice;
 
     if (osDevice?.toLowerCase() === 'ios') {
       return 'assets/images/linkIOSShort.svg';
@@ -149,7 +148,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   }
 
   public goToStore(): void {
-    const osDevice = this.mobileDetectService.osDevice;
+    const osDevice = this.mobileDetectService?.osDevice;
     console.log('Идем в store');
     if (osDevice?.toLowerCase() === 'ios') {
       // window.location.href = 'https://www.apple.com/app-store';

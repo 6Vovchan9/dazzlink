@@ -2,22 +2,37 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    transition: .2s;
+    // transition: .2s;
 
     .appGoBackPage__arrow {
         margin-right: 10px;
     }
 
+    // &:hover { // Если это вернем то надо и все transition в этом файле включить
+    //     .arrowInBtn {
+    //         // width: 38px;
+
+    //         .arrowInBtn__stick {
+    //             width: 32px;
+    //         }
+
+    //         .arrowInBtn__triangle {
+    //             right: 38px;
+    //         }
+    //     }
+    // }
+
     &:hover {
+        color: var(--color-blue1);
+
         .arrowInBtn {
-            // width: 38px;
 
             .arrowInBtn__stick {
-                width: 32px;
+                background-color: var(--color-blue1);
             }
 
             .arrowInBtn__triangle {
-                right: 38px;
+                border-color: var(--color-blue1);
             }
         }
     }
@@ -27,7 +42,7 @@
     position: relative;
     width: 28px;
     height: 24px;
-    transition: .2s;
+    // transition: .2s;
 
     .arrowInBtn__triangle {
         position: absolute;
@@ -41,7 +56,7 @@
         right: 28px;
         transform: rotate(-135deg);
         transform-origin: right top;
-        transition: .2s;
+        // transition: .2s;
     }
 
     .arrowInBtn__stick {
@@ -53,6 +68,6 @@
         top: 50%;
         right: 4px;
         transform: translate(0, -50%);
-        transition: .2s;
+        // transition: .2s;
     }
 }
