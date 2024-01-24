@@ -158,7 +158,7 @@
             Сейчас список пуст, но мы уже собираем<br>
             полезный материал, зайдите позже
         </div>
-        <button class="errorMessage__btn" routerLink="/">На главную</button>
+        <button class="errorMessage__btn" type="button" routerLink="/">На главную</button>
     </div>
 </ng-template>
 <ng-template #loadingTemplate>
@@ -230,9 +230,15 @@
                     </ul>
                 </li>
             </ul>
-            <div class="filterOptionsBlock__btn">
-                <button *ngIf="amountAllSelectedCities.length" type="button" (click)="onResetAllFiltersOnMobile()" class="btn btn--white">Сбросить</button>
-                <button type="button" (click)="onFilterFromMobile()" class="btn btn--size--long">Показать локации</button>
+            <div class="filterOptionsBlock__btnBar">
+                <button *ngIf="amountAllSelectedCities.length"
+                    type="button"
+                    (click)="onResetAllFiltersOnMobile()"
+                    class="btn btn--white filterOptionsBlock__btnItem"
+                >
+                    Сбросить
+                </button>
+                <button type="button" (click)="onFilterFromMobile()" class="btn btn--size--long filterOptionsBlock__btnItem">Показать локации</button>
             </div>
         </div>
     </div>

@@ -31,6 +31,8 @@ import { PlacePageComponent } from './place-page/place-page.component';
 import { ToastService } from './shared/services/toast.service';
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { TeamPageComponent } from './team-page/team-page.component';
+import { HelpPageComponent } from './help-page/help-page.component';
+import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -46,6 +48,8 @@ registerLocaleData(localeRu, 'ru');
     PlacePageComponent,
     LocationsPageComponent,
     TeamPageComponent,
+    HelpPageComponent,
+    LegalInfoPageComponent,
 
     HeaderComponent,
     ToastComponent,

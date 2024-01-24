@@ -1,0 +1,25 @@
+@import "variables";
+
+.page {
+    .page__container {
+        margin-top: 20px;
+        margin-bottom: 50px;
+    }
+    @media #{$notMobile} {
+        .page__container {
+            margin-top: 34px;
+            margin-bottom: 140px;
+        }
+    }
+}
+
+.legalInfoPage {
+    .legalInfoPage__errorMessage {
+        margin-top: 32px;
+    }
+    @media #{$notMobile} {
+        .legalInfoPage__errorMessage {
+            margin-top: 48px;
+        }
+    }
+}

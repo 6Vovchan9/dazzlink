@@ -389,11 +389,15 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             }
         }
 
-        .filterOptionsBlock__btn {
+        .filterOptionsBlock__btnBar {
             display: none;
             // .btn {
             //     width: 100%;
             // }
+
+            .filterOptionsBlock__btnItem {
+                padding: 12px 20px;
+            }
         }
     }
 
@@ -407,7 +411,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         //     }
         // }
         .filterOptionsBlock__content {
-            .filterOptionsBlock__btn {
+            .filterOptionsBlock__btnBar {
                 display: flex;
                 column-gap: 8px;
                 margin-top: 12px;

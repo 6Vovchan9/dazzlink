@@ -9,6 +9,8 @@ import { PostPageComponent } from './post-page/post-page.component';
 import { LocationsPageComponent } from './locations-page/locations-page.component';
 import { PlacePageComponent } from './place-page/place-page.component';
 import { TeamPageComponent } from './team-page/team-page.component';
+import { HelpPageComponent } from './help-page/help-page.component';
+import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
 
 const routes: Routes = [
   {
@@ -19,6 +21,8 @@ const routes: Routes = [
       { path: 'articles', component: ArticlesPageComponent },
       { path: 'locations', component: LocationsPageComponent },
       { path: 'team', component: TeamPageComponent },
+      { path: 'help', component: HelpPageComponent },
+      { path: 'legal-info', component: LegalInfoPageComponent },
       { path: 'post/:id', component: PostPageComponent },
       { path: 'place/:id', component: PlacePageComponent },
       // { path: '**', redirectTo: '/' }
