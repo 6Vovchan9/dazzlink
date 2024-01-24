@@ -1,0 +1,30 @@
+@import "variables";
+
+.page {
+    .page__container {
+        display: flex;
+        margin-top: 20px;
+        margin-bottom: 50px;
+    }
+    @media #{$notMobile} {
+        .page__container {
+            margin-top: 34px;
+            margin-bottom: 140px;
+        }
+    }
+}
+
+.sidebar {
+    flex: 1;
+    display: none;
+
+    @media #{$notMobile} {
+        display: block;
+        max-width: 360px;
+        margin-right: 8%;
+    }
+}
+
+.pageContent {
+    flex: 2;
+}

@@ -135,13 +135,15 @@ button {
         font-size: 40px;
     }
 
-    // @media #{$notMobile} {
-    //     font-size: 48px;
+    &--scalable {
+        font-size: 24px;
+    }
 
-    //     &--main {
-    //         font-size: 64px;
-    //     }
-    // }
+    @media #{$notMobile} {
+        &--scalable {
+            font-size: 40px;
+        }
+    }
 }
 
 .downloadApp {

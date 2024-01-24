@@ -11,7 +11,7 @@
                         <div class="postDetails__info">{{postData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}</div>
                         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} {{buildViewCount(postData.viewCount)}}</div>
                     </div>
-                    <div class="moduleTitle">{{postData.title}}</div>
+                    <h2 class="moduleTitle moduleTitle--scalable">{{postData.title}}</h2>
                     <div class="postTitle__img">
                         <ng-container *ngIf="postData.imageUrl; else defaultPostImg">
                             <img [src]="postData.imageUrl" alt="Картинка статьи">
