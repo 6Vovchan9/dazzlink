@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Post } from 'src/app/shared/interfaces';
-import { PostsService } from 'src/app/shared/services/posts.service';
+import { Post } from '@app/shared/interfaces';
+import { PostsService } from '@app/shared/services/posts.service';
 import { AlertService } from '../shared/services/alert.service';
 
 @Component({
