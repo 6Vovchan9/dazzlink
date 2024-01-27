@@ -124,7 +124,7 @@ export class LocationsPageComponent implements OnInit {
     this.getSort();
     this.getFilters();
     this.getAllLocations();
-    this.aboutProgressiveImage();
+    // this.aboutProgressiveImage();
   }
 
   public onResetAllFilters(): void {
