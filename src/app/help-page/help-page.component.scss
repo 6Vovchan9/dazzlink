@@ -1,15 +1,69 @@
 @import "variables";
 
-.page {
-    .page__container {
+.helpPage {
+    .helpPage__container {
         display: flex;
         margin-top: 20px;
         margin-bottom: 50px;
+
+        .helpPage__anchorNav {
+            margin-top: 24px;
+        }
     }
     @media #{$notMobile} {
-        .page__container {
+        .helpPage__container {
             margin-top: 34px;
             margin-bottom: 140px;
+        }
+    }
+}
+
+.anchorNav {
+    .anchorNav__list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.block1, .block2, .block3 {
+    height: 900px;
+    background-color: aquamarine;
+}
+
+.block2 {
+    background-color: blueviolet;
+}
+
+.anchorLink {
+    display: block;
+    line-height: 24px;
+    padding: 4px 10px;
+    position: relative;
+
+    &:hover {
+        color: var(--color-blue1);
+    }
+
+    &:before, &:after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: var(--color-gray1);
+    }
+
+    &:after {
+        display: none;
+        border-radius: 2px;
+        background-color: var(--color-black1);
+    }
+
+    &--active {
+        &:after {
+            display: block;
         }
     }
 }

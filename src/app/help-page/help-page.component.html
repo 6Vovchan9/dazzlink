@@ -1,12 +1,49 @@
-<main class="page">
-    <div class="container page__container">
+<main class="helpPage">
+    <div class="container helpPage__container">
         <!-- <div class="helpPage">
         </div> -->
         <aside class="sidebar">
             <h2 class="moduleTitle moduleTitle--main">Помощь</h2>
+            <div class="helpPage__anchorNav anchorNav">
+                <ul class="anchorNav__list">
+                    <li class="anchorNav__item">
+                        <a class="anchorLink"
+                            routerLink="/help"
+                            fragment="phones"
+                            [queryParams]="{page: 1}"
+                        >
+                            Телефоны доверия
+                        </a>
+                    </li>
+                    <li class="anchorNav__item">
+                        <a [routerLink]="['/help']" [fragment]="'support'" class="anchorLink">
+                            Поддержка сервиса
+                        </a>
+                    </li>
+                    <li class="anchorNav__item">
+                        <a [routerLink]="'/help'" fragment="questions" class="anchorLink">
+                            Популярные вопросы
+                        </a>
+                    </li>
+                    <!-- <li class="anchorNav__item">
+                        <a href="#questions" class="anchorLink">
+                            <div class="anchorLink__state"></div>
+                            <div class="anchorLink__text">Популярные вопросы</div>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
         </aside>
         <main class="pageContent">
-            pageContent
+            <div id="phones" class="block1">
+                block1
+            </div>
+            <div id="support" class="block2">
+                block2
+            </div>
+            <div id="questions" class="block3">
+                block3
+            </div>
         </main>
     </div>
 </main>
