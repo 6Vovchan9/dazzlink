@@ -12,7 +12,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         flex-direction: column;
 
         margin-top: 20px;
-        margin-bottom: 50px;
+        // margin-bottom: 50px;
     }
 
     @media #{$notMobile} {
@@ -21,7 +21,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             flex-direction: row;
             padding: 0 $spacingVal;
             margin-top: 34px;
-            margin-bottom: 140px;
+            // margin-bottom: 140px;
         }
     }
 }
@@ -36,7 +36,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 .sidebar {
     display: none;
     flex: 1;
-    margin-bottom: 72px;
+    margin-bottom: 36px;
 
     &--forMobile {
         display: block;
@@ -78,6 +78,8 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     }
 
     @media #{$notMobile} {
+        position: sticky;
+        top: 10px;
         .aboutPage__links {
             &--forDesktop {
                 display: block;
@@ -90,59 +92,61 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 }
 
 .pageContent {
+
     flex: 2;
+    margin-bottom: 32px;
 
-    .pageContent__allAboutLocations {
-        position: relative;
-        padding-top: 76px;
-    }
+    // .pageContent__allAboutLocations {
+    //     position: relative;
+    //     padding-top: 76px;
+    // }
 
-    .pageContent__filterBar {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 10;
-    }
+    // .pageContent__filterBar {
+    //     position: absolute;
+    //     top: 0;
+    //     width: 100%;
+    //     z-index: 10;
+    // }
 
-    .filterBarWrapper {
-        .filterBarWrapper__container {
-            .filterBarWrapper__fakeSidebar {
-                display: none;
-            }
-        }
-        &--position--fixed {
-            pointer-events: none;
-            position: fixed;
-            left: 0;
+    // .filterBarWrapper {
+    //     .filterBarWrapper__container {
+    //         .filterBarWrapper__fakeSidebar {
+    //             display: none;
+    //         }
+    //     }
+    //     &--position--fixed {
+    //         pointer-events: none;
+    //         position: fixed;
+    //         left: 0;
 
-            .filterBarWrapper__container {
-                margin: 0 auto;
-                max-width: 1240px;
-                padding: 0 20px;
-                display: flex;
+    //         .filterBarWrapper__container {
+    //             margin: 0 auto;
+    //             max-width: 1240px;
+    //             padding: 0 20px;
+    //             display: flex;
 
-                .filterBar {
-                    pointer-events: auto;
-                    flex: 1;
-                }
-            }
+    //             .filterBar {
+    //                 pointer-events: auto;
+    //                 flex: 1;
+    //             }
+    //         }
 
-            @media #{$notMobile} {
-                .filterBarWrapper__container {
-                    .filterBarWrapper__fakeSidebar {
-                        // pointer-events: auto;
-                        display: block;
-                        flex: 1;
-                        max-width: 360px;
-                        margin-right: 8%;
-                    }
-                    .filterBar {
-                        flex: 2;
-                    }
-                }
-            }
-        }
-    }
+    //         @media #{$notMobile} {
+    //             .filterBarWrapper__container {
+    //                 .filterBarWrapper__fakeSidebar {
+    //                     // pointer-events: auto;
+    //                     display: block;
+    //                     flex: 1;
+    //                     max-width: 360px;
+    //                     margin-right: 8%;
+    //                 }
+    //                 .filterBar {
+    //                     flex: 2;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     .pageContent__locationsBlock {
         margin-bottom: 48px;
@@ -164,6 +168,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     }
 
     @media #{$notMobile} {
+        margin-bottom: 48px;
         .pageContent__locationsBlock {
             .pageContent__locationsList {
                 flex-wrap: wrap;
@@ -192,13 +197,17 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 }
 
 .filterBar {
+    position: sticky;
+    z-index: 10;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 9px 0;
+    padding: 4px 0;
     background-color: var(--color-white);
-    height: 56px;
+    // height: 56px;
     line-height: 24px;
+    margin-bottom: 20px;
     .filterBar__length {
         color: var(--color-text-gray);
         font-weight: 700;
@@ -213,6 +222,10 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         //         margin-right: unset;
         //     }
         // }
+    }
+
+    @media #{$notMobile} {
+        padding: 8px 0;
     }
 }
 
@@ -291,8 +304,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     border-radius: 20px;
     // max-height: 100%;
     max-height: calc(100vh - 180px);
-    margin-top: 20px;
-    pointer-events: auto;
+    // pointer-events: auto;
 
     .filterOptionsBlock__content {
         flex: 1;
@@ -401,7 +413,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     }
 
     @media #{$mobile} {
-        margin-top: 0px;
         max-height: 90%;
         border-radius: 20px 20px 0 0;
         // .filterOptionsBlock__allCountries .filterOptionsBlock__country {
@@ -416,6 +427,13 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                 margin-top: 12px;
             }
         }
+    }
+
+    @media #{$notMobile} {
+        position: sticky;
+        top: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 }
 

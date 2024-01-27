@@ -3,7 +3,7 @@
         <aside class="sidebar sidebar--forMobile" [class.hiddenInMobile]="webview">
             <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
         </aside>
-        <aside class="sidebar" [class.hiddenInMobile]="webview">
+        <aside class="sidebar">
 
             <!-- <button class="btn" (click)="clickByMybtn1()">myBtn1</button>
             <br><br>
@@ -15,12 +15,13 @@
             {{errorAfterSort}} -->
 
             <ng-container *ngIf="!showFilterControls || !filterFieldOptions?.length; else filterOptionsBlock">
+                <!-- Инф о странице -->
                 <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
             </ng-container>
             <ng-template #filterOptionsBlock>
-                <ng-container *ngIf="filterFieldOptions?.length && !filterBarFixed">
+                <!-- <ng-container *ngIf="filterFieldOptions?.length && !filterBarFixed"> -->
                     <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
-                </ng-container>
+                <!-- </ng-container> -->
             </ng-template>
         </aside>
         <main class="pageContent">
@@ -28,13 +29,15 @@
                 <ng-container *ngIf="locationsNew; else errorInGetAllLocations">
                     <ng-container *ngIf="locationsNew.placeCount; else empty">
                         <div #locationsWrapper class="pageContent__allAboutLocations">
-                            <div class="pageContent__filterBar filterBarWrapper" [class.filterBarWrapper--position--fixed]="filterBarFixed">
+
+                            <!-- Фильтр бар -->
+                            <!-- <div class="pageContent__filterBar filterBarWrapper" [class.filterBarWrapper--position--fixed]="filterBarFixed">
                                 <div class="filterBarWrapper__container">
                                     <div *ngIf="filterBarFixed" class="filterBarWrapper__fakeSidebar">
                                         <ng-container *ngIf="showFilterControls">
                                             <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
                                         </ng-container>
-                                    </div>
+                                    </div> -->
                                     <div class="filterBar">
                                         <div class="filterBar__length">
                                             <!-- Доступно {{locationsNew.placeCount}} мест -->
@@ -65,9 +68,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                <!-- </div>
+                            </div> -->
 
+                            <!-- Список локаций -->
                             <ng-container *ngFor="let block of locationsNew.cityPlaceList">
                                 <ng-container *ngIf="block.placeList?.length">
                                     <div class="pageContent__locationsBlock">
@@ -97,6 +101,7 @@
                                 </ng-container>
                             </ng-container>
 
+                            <!-- Кнопка другие локации -->
                             <div class="pageContent__toAnotherLocations">
                                 <a class="goToAnotherLocations" [href]="getStorePath" target="_blank">
                                     <div class="goToAnotherLocations__text">
