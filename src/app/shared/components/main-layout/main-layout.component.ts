@@ -58,7 +58,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   }
 
   public checkLocationsPageOrNot(): boolean {
-    return window.location.pathname.includes('locations');
+    return window.location.pathname.includes('locations') || window.location.pathname.includes('help');
   }
 
   onScrollPage(e) {

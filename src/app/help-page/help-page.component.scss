@@ -18,6 +18,11 @@
     }
 }
 
+.aboutPage {
+    position: sticky;
+    top: 20px;
+}
+
 .anchorNav {
     .anchorNav__list {
         display: flex;
@@ -81,4 +86,18 @@
 
 .pageContent {
     flex: 2;
+}
+
+.stickyMenuWrapper {
+    .updatePageInfo {
+        color: var(--color-text-gray);
+        line-height: 24px;
+    }
+
+    // @media #{$mobile} {
+    //     padding-top: 12px;
+    //     position: sticky;
+    //     top: 0;
+    //     background-color: var(--color-white);
+    // }
 }

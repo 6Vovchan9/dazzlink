@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class HelpPageComponent implements OnInit {
 
   private route: ActivatedRoute = inject(ActivatedRoute)
+  public updatePageInfo: Date = new Date("2024-01-21");
 
   constructor() { }
 
