@@ -1,5 +1,5 @@
-export const headerHeightInDesktop = 98;
-export const headerHeightInMobile = 84;
+export const headerHeightInDesktop = 80;
+export const headerHeightInMobile = 64;
 
 export const locationInfoMapping = {
     WORKING_HOURS: 'Время работы',

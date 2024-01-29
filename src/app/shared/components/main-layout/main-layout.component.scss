@@ -99,8 +99,8 @@
 .header {
 
     .header__container {
-        height: $headerHeightInMobile;
-        padding: 30px 20px;
+        // height: $headerHeightInMobile;
+        padding: 20px;
         display: flex;
         column-gap: 20px;
 
@@ -124,7 +124,8 @@
         }
 
         @media #{$notMobile} {
-            height: $headerHeightInDesktop;
+            // height: $headerHeightInDesktop;
+            padding: 24px 20px;
         }
     }
 
@@ -142,8 +143,8 @@
 }
 
 .logo {
-    width: 126px;
-    // height: 38px;
+    // width: 126px;
+    height: 24px;
     display: flex;
     max-height: 100%;
     overflow: hidden;
@@ -160,7 +161,8 @@
     }
 
     @media #{$notMobile} {
-        width: 168px;
+        // width: 168px;
+        height: 32px;
     }
 }
 
@@ -587,4 +589,5 @@
     font-size: 14px;
     line-height: 20px;
     padding: 8px;
+    text-align: center;
 }
