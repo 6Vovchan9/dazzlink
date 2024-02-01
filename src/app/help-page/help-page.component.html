@@ -6,7 +6,7 @@
                 <div class="helpPage__anchorNav anchorNav">
                     <ul class="anchorNav__list">
                         <li class="anchorNav__item">
-                            <a class="anchorLink"
+                            <a class="anchorLink anchorLink--active"
                                 routerLink="/help"
                                 fragment="phones"
                                 [queryParams]="{page: 1}"
@@ -39,6 +39,25 @@
             <div class="stickyMenuWrapper">
                 <div class="updatePageInfo">
                     Обновлено {{updatePageInfo | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}
+                </div>
+                <div class="inlineAnchorNav">
+                    <ul class="inlineAnchorNav__list">
+                        <li class="inlineAnchorNav__item">
+                            <a [routerLink]="['/help']" fragment="phones" class="inlineAnchorLink inlineAnchorLink--active">
+                                Телефоны&nbsp;доверия
+                            </a>
+                        </li>
+                        <li class="inlineAnchorNav__item">
+                            <a [routerLink]="['/help']" [fragment]="'support'" class="inlineAnchorLink">
+                                Поддержка&nbsp;сервиса
+                            </a>
+                        </li>
+                        <li class="inlineAnchorNav__item">
+                            <a [routerLink]="['/help']" fragment="questions" class="inlineAnchorLink">
+                                Популярные&nbsp;вопросы
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div id="phones" class="phonesBlock">
