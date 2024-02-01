@@ -19,7 +19,16 @@ export class HelpPageComponent implements OnInit {
     })
   }
 
+  clickByMyBtn() {
+    // document.getElementById('pageWrap').scrollBy(0,10);
+    document.getElementById('pageWrap').scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }
+
   private jumpToSection(section): void {
-    document.getElementById(section).scrollIntoView({behavior: 'smooth'})
+    document.getElementById(section).scrollIntoView({ behavior: 'smooth', block: "center" })
   }
 }

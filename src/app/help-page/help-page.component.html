@@ -32,6 +32,7 @@
                         </li> -->
                     </ul>
                 </div>
+                <button (click)="clickByMyBtn()">My</button>
             </div>
         </aside>
         <main class="pageContent">
@@ -40,14 +41,71 @@
                     Обновлено {{updatePageInfo | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}
                 </div>
             </div>
-            <div id="phones" class="block1">
-                block1
+            <div id="phones" class="phonesBlock">
+                <h3 class="phonesBlock__title moduleTitle">Телефоны доверия</h3>
+                <div class="phonesBlock__area">
+                    <h4 class="phonesBlock__country moduleTitle moduleTitle--small">Узбекистан</h4>
+                    <ul class="phonesBlock__phones">
+                        <li class="phonesBlock__phoneItem">
+                            <a class="phonesBlock__val" href="tel:1259">
+                                Номер: 1259
+                            </a>
+                            <div class="phonesBlock__desc">
+                                Горячая линия МВД Узбекистана по борьбе с насилием против женщин.
+                            </div>
+                            <div class="phonesBlock__source">
+                                Источник информации <a href="https://uznews.uz/" class="phonesBlock__sourceLink" target="_blank">uznews.uz</a>
+                            </div>
+                        </li>
+                        <li class="phonesBlock__phoneItem">
+                            <a class="phonesBlock__val" href="tel:+998712561418">
+                                Номер: +998 71-256-14-18
+                            </a>
+                            <div class="phonesBlock__desc">
+                                Отдел по вопросам женщин МВД Узбекистана (по всей республике).
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div id="support" class="block2">
-                block2
+            <div id="support" class="supportBlock">
+                <h3 class="supportBlock__title moduleTitle">Поддержка сервиса</h3>
+                <a href="mailto:support@dazzlink.asia" class="connectWithUsBtn connectWithUsBtn--gray">
+                    <div class="connectWithUsBtn__head">
+                        Нужна помощь? 
+                    </div>
+                    <div class="connectWithUsBtn__link">
+                        support@dazzlink.asia
+                    </div>
+                </a>
             </div>
-            <div id="questions" class="block3">
-                block3
+            <div id="questions" class="questionsBlock">
+                <h3 class="questionsBlock__title moduleTitle">Популярные вопросы</h3>
+                <ul class="questionsBlock__list">
+                    <li class="questionsBlock__item">
+                        <div class="questionsBlock__question">
+                            Какое фото использовать?
+                        </div>
+                        <div class="questionsBlock__answer">
+                            Загружай фото только с собой!
+                            Не добавляй фото с друзьями, потому что все пришли посмотреть на тебя,
+                            а не на них. Фото с солнцезащитными очками тоже не подойдут,
+                            так как будут скрывать твое лицо.
+                        </div>
+                    </li>
+                    <li class="questionsBlock__item">
+                        <div class="questionsBlock__question">
+                            Сколько в день дается бесплатных лайков?
+                        </div>
+                        <div class="questionsBlock__answer">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate a consequuntur ipsum distinctio natus ea
+                            voluptatibus rerum, molestiae iste blanditiis ratione autem quis perspiciatis quos sed enim voluptatum voluptas
+                            quisquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur natus quidem, soluta voluptatum
+                            porro, fugit omnis nesciunt impedit nisi totam, fuga dolore tempore non quaerat quam!
+                            Sed repellat soluta architecto!
+                        </div>
+                    </li>
+                </ul>
             </div>
         </main>
     </div>

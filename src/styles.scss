@@ -135,6 +135,10 @@ button {
         font-size: 40px;
     }
 
+    &--small {
+        font-size: 24px;
+    }
+
     &--scalable {
         font-size: 24px;
     }
@@ -502,5 +506,26 @@ button {
     margin-bottom: 16px;
     &:last-child {
         margin-bottom: 0px;
+    }
+}
+
+.connectWithUsBtn {
+    font-size: 16px;
+    display: block;
+    padding: 24px;
+    border-radius: 24px;
+    background-color: var(--color-white);
+    text-align: center;
+    .connectWithUsBtn__head {
+        color: var(--color-text-gray);
+        margin-bottom: 8px;
+    }
+
+    &--gray {
+        background-color: var(--color-gray1);
+    }
+
+    @media #{$notMobile} {
+        font-size: 24px;
     }
 }
