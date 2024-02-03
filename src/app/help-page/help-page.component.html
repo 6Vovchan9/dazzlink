@@ -6,21 +6,30 @@
                 <div class="helpPage__anchorNav anchorNav">
                     <ul class="anchorNav__list">
                         <li class="anchorNav__item">
-                            <a class="anchorLink anchorLink--active"
+                            <!-- <a class="anchorLink"
+                                [ngClass]="{'anchorLink--active': curSection === 'phones'}"
                                 routerLink="/help"
                                 fragment="phones"
                                 [queryParams]="{page: 1}"
+                                (click)="onNavInDesktop('phones')"
+                            >
+                                Телефоны доверия
+                            </a> -->
+                            <a class="anchorLink"
+                                [ngClass]="{'anchorLink--active': curSection === 'phones'}"
+                                routerLink="/help"
+                                (click)="onNavInDesktop('phones')"
                             >
                                 Телефоны доверия
                             </a>
                         </li>
                         <li class="anchorNav__item">
-                            <a [routerLink]="['/help']" [fragment]="'support'" class="anchorLink">
+                            <a [routerLink]="['/help']" class="anchorLink" [ngClass]="{'anchorLink--active': curSection === 'support'}" (click)="onNavInDesktop('support')">
                                 Поддержка сервиса
                             </a>
                         </li>
                         <li class="anchorNav__item">
-                            <a [routerLink]="'/help'" fragment="questions" class="anchorLink">
+                            <a [routerLink]="'/help'" class="anchorLink" [ngClass]="{'anchorLink--active': curSection === 'questions'}" (click)="onNavInDesktop('questions')">
                                 Популярные вопросы
                             </a>
                         </li>
@@ -32,7 +41,7 @@
                         </li> -->
                     </ul>
                 </div>
-                <button (click)="clickByMyBtn()">My</button>
+                <!-- <button (click)="scrollToTop()">My1</button> -->
             </div>
         </aside>
         <main class="pageContent">
@@ -42,25 +51,40 @@
                 </div>
                 <div class="inlineAnchorNav">
                     <ul class="inlineAnchorNav__list">
-                        <li class="inlineAnchorNav__item">
-                            <a [routerLink]="['/help']" fragment="phones" class="inlineAnchorLink inlineAnchorLink--active">
+                        <li class="inlineAnchorNav__item" id="phoneTab">
+                            <a [routerLink]="['/help']"
+                                (click)="onNavInMobile('phones', 'phoneTab')"
+                                class="inlineAnchorLink inlineAnchorLink--active"
+                                [ngClass]="{'inlineAnchorLink--active': curSection === 'phones'}"
+                            >
                                 Телефоны&nbsp;доверия
                             </a>
                         </li>
-                        <li class="inlineAnchorNav__item">
-                            <a [routerLink]="['/help']" [fragment]="'support'" class="inlineAnchorLink">
+                        <li class="inlineAnchorNav__item" id="supportTab">
+                            <a [routerLink]="['/help']"
+                                (click)="onNavInMobile('support', 'supportTab')"
+                                class="inlineAnchorLink"
+                                [ngClass]="{'inlineAnchorLink--active': curSection === 'support'}"
+                            >
                                 Поддержка&nbsp;сервиса
                             </a>
                         </li>
-                        <li class="inlineAnchorNav__item">
-                            <a [routerLink]="['/help']" fragment="questions" class="inlineAnchorLink">
+                        <li class="inlineAnchorNav__item" id="questionTab">
+                            <a [routerLink]="['/help']"
+                                (click)="onNavInMobile('questions', 'questionTab')"
+                                class="inlineAnchorLink"
+                                [ngClass]="{'inlineAnchorLink--active': curSection === 'questions'}"
+                            >
                                 Популярные&nbsp;вопросы
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="phonesBlock">
+            <!-- <button (click)="clickByMyBtn2()">
+                My2
+            </button> -->
+            <div class="phonesBlock" #section>
                 <span id="phones" class="anchoroffset"></span>
                 <h3 class="phonesBlock__title moduleTitle">Телефоны доверия</h3>
                 <div class="phonesBlock__area">
@@ -88,7 +112,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="supportBlock">
+            <div class="supportBlock" #section>
                 <span id="support" class="anchoroffset"></span>
                 <h3 class="supportBlock__title moduleTitle">Поддержка сервиса</h3>
                 <a href="mailto:support@dazzlink.asia" class="connectWithUsBtn connectWithUsBtn--gray">
@@ -100,7 +124,7 @@
                     </div>
                 </a>
             </div>
-            <div class="questionsBlock">
+            <div class="questionsBlock" #section>
                 <span id="questions" class="anchoroffset"></span>
                 <h3 class="questionsBlock__title moduleTitle">Популярные вопросы</h3>
                 <ul class="questionsBlock__list">
@@ -132,3 +156,7 @@
         </main>
     </div>
 </main>
+
+<!-- <div class="rootMargin">
+    <div class="rootMargin__block"></div>
+</div> -->
