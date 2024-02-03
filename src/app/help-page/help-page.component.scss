@@ -252,3 +252,14 @@
         }
     }
 }
+
+.anchoroffset {
+    display: block;
+    position: relative;
+    top: -88px;
+    visibility: hidden;
+
+    @media #{$notMobile} {
+        top: -4px;
+    }
+}

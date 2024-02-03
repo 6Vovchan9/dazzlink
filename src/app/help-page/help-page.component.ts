@@ -29,6 +29,6 @@ export class HelpPageComponent implements OnInit {
   }
 
   private jumpToSection(section): void {
-    document.getElementById(section).scrollIntoView({ behavior: 'smooth', block: "center" })
+    document.getElementById(section).scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 }
