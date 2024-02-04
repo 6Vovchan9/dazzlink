@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-help-page',
   templateUrl: './help-page.component.html',
   styleUrls: ['./help-page.component.scss']
 })
-export class HelpPageComponent implements OnInit, AfterViewInit {
+export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChildren('section', { read: ElementRef }) sectionsRef: QueryList<ElementRef>;
 
@@ -15,24 +16,39 @@ export class HelpPageComponent implements OnInit, AfterViewInit {
   public curSection: 'phones' | 'support' | 'questions' = 'phones';
   private observer: IntersectionObserver;
 
+  private resizeObservable$: Observable<Event>;
+  private resizeSubscription$: Subscription;
+
   constructor() { }
 
   ngOnInit(): void {
-    this.route.fragment.subscribe(data => {
-      if (data) this.jumpToSection(data);
-    });
+
+    this.aboutWindowResize();
+
+    // this.route.fragment.subscribe(data => {
+    //   if (data) this.jumpToSection(data);
+    // });
 
     this.intersectionObserver();
   }
 
   ngAfterViewInit(): void {
+    
     this.scrollToTop();
 
     // console.log(this.sectionsRef);
-    // this.sectionsRef.forEach(el => {
-    //   // console.log(el.nativeElement);
-    //   this.observer.observe(el.nativeElement);
-    // });
+    this.sectionsRef.forEach(el => {
+      // console.log(el.nativeElement);
+      this.observer.observe(el.nativeElement);
+    });
+  }
+
+  private aboutWindowResize(): void {
+    this.resizeObservable$ = fromEvent(window, 'resize');
+    this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
+      // console.log('event: ', evt);
+      this.updateObserver();
+    });
   }
 
   scrollToTop() {
@@ -43,12 +59,20 @@ export class HelpPageComponent implements OnInit, AfterViewInit {
     });
   }
 
+  private updateObserver(): void {
+    this.observer.disconnect();
+    this.intersectionObserver();
+    this.sectionsRef.forEach(el => {
+      this.observer.observe(el.nativeElement);
+    });
+  }
+
   clickByMyBtn2() {
     document.getElementById('phoneTab').scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   }
 
   public onNavInMobile(sectionName, tabName): void {
-    this.curSection = sectionName;
+    // this.curSection = sectionName;
 
     // Нельзя 2 подряд behavior: 'smooth' поэтому ниже придется обойтись без него:
     document.getElementById(tabName).scrollIntoView({ block: 'nearest', inline: 'center' });
@@ -56,7 +80,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit {
   }
 
   public onNavInDesktop(sectionName): void {
-    this.curSection = sectionName;
+    // this.curSection = sectionName;
     this.jumpToSection(sectionName);
   }
 
@@ -67,24 +91,33 @@ export class HelpPageComponent implements OnInit, AfterViewInit {
   private intersectionObserver() {
 
     const clientH = document.documentElement.clientHeight;
-    const rootMarginH = Math.trunc(clientH / 2) - 4;
+    const rootMarginH1 = Math.trunc(clientH / 2) - 4;
+    const marginTop = 154;
+    const rootMarginH2 = clientH - marginTop - 4;
 
-    let options = {
+    // console.log(clientH, rootMarginH1, rootMarginH2);
+
+    const optionsForObserver = {
       root: null,
       // rootMargin: '0px',
-      rootMargin: `-${rootMarginH}px 0px -${rootMarginH}px 0px`,
+      // rootMargin: `-${rootMarginH1}px 0px -${rootMarginH1}px 0px`,
+      rootMargin: `-${marginTop}px 0px -${rootMarginH2}px 0px`,
       threshold: 0
     };
 
-
     this.observer = new IntersectionObserver((entries) => {
-      console.log(entries);
-      // entries.forEach(entry => {
-      //   if (entry.isIntersecting) {
-      //     console.log(entry.target);
-      //     this.curSection = entry.target.firstChild['id'];
-      //   }
-      // })
-    }, options);
+      // console.log(entries);
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // console.log(entry.target);
+          this.curSection = entry.target.firstChild['id'];
+        }
+      });
+    }, optionsForObserver);
+  }
+
+  ngOnDestroy(): void {
+    this.resizeSubscription$?.unsubscribe();
+    this.observer?.disconnect();
   }
 }
