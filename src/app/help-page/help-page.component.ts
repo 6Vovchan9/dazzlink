@@ -60,7 +60,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  scrollToTop() {
+  private scrollToTop(): void {
     document.getElementById('pageWrap').scrollTo({
       top: 0,
       left: 0,
