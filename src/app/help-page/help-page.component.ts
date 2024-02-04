@@ -14,8 +14,14 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private route: ActivatedRoute = inject(ActivatedRoute)
   public updatePageInfo: Date = new Date("2024-01-21");
+  
   public curSection: 'phones' | 'support' | 'questions' = 'phones';
   private observer: IntersectionObserver;
+  public sectionDictionary = {
+    phones: 'phoneTab',
+    support: 'supportTab',
+    questions: 'questionTab'
+  };
 
   private resizeObservable$: Observable<Event>;
   private resizeSubscription$: Subscription;
@@ -74,11 +80,11 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
     document.getElementById('phoneTab').scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   }
 
-  public onNavInMobile(sectionName, tabName): void {
+  public onNavInMobile(sectionName): void {
     // this.curSection = sectionName;
 
     // Нельзя 2 подряд behavior: 'smooth' поэтому ниже придется обойтись без него:
-    document.getElementById(tabName).scrollIntoView({ block: 'nearest', inline: 'center' });
+    document.getElementById(this.sectionDictionary[sectionName]).scrollIntoView({ block: 'nearest', inline: 'center' });
     this.jumpToSection(sectionName);
   }
 
@@ -113,10 +119,16 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           // console.log(entry.target);
-          this.curSection = entry.target.firstChild['id'];
+          const sectionName = entry.target.firstChild['id'];
+          this.curSection = sectionName;
+          // this.inlineScrollInTabBar(sectionName);
         }
       });
     }, optionsForObserver);
+  }
+
+  private inlineScrollInTabBar(sectionName): void {
+    document.getElementById(this.sectionDictionary[sectionName]).scrollIntoView({ block: 'nearest', inline: 'center' });
   }
 
   ngOnDestroy(): void {

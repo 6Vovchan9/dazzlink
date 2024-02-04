@@ -51,27 +51,27 @@
                 </div>
                 <div class="inlineAnchorNav">
                     <ul class="inlineAnchorNav__list">
-                        <li class="inlineAnchorNav__item" id="phoneTab">
+                        <li class="inlineAnchorNav__item" [id]="sectionDictionary['phones']">
                             <a [routerLink]="['/help']"
-                                (click)="onNavInMobile('phones', 'phoneTab')"
+                                (click)="onNavInMobile('phones')"
                                 class="inlineAnchorLink inlineAnchorLink--active"
                                 [ngClass]="{'inlineAnchorLink--active': curSection === 'phones'}"
                             >
                                 Телефоны&nbsp;доверия
                             </a>
                         </li>
-                        <li class="inlineAnchorNav__item" id="supportTab">
+                        <li class="inlineAnchorNav__item" [id]="sectionDictionary['support']">
                             <a [routerLink]="['/help']"
-                                (click)="onNavInMobile('support', 'supportTab')"
+                                (click)="onNavInMobile('support')"
                                 class="inlineAnchorLink"
                                 [ngClass]="{'inlineAnchorLink--active': curSection === 'support'}"
                             >
                                 Поддержка&nbsp;сервиса
                             </a>
                         </li>
-                        <li class="inlineAnchorNav__item" id="questionTab">
+                        <li class="inlineAnchorNav__item" [id]="sectionDictionary['questions']">
                             <a [routerLink]="['/help']"
-                                (click)="onNavInMobile('questions', 'questionTab')"
+                                (click)="onNavInMobile('questions')"
                                 class="inlineAnchorLink"
                                 [ngClass]="{'inlineAnchorLink--active': curSection === 'questions'}"
                             >
