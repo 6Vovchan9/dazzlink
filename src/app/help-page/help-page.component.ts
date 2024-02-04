@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-help-page',
@@ -44,7 +45,9 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private aboutWindowResize(): void {
-    this.resizeObservable$ = fromEvent(window, 'resize');
+    this.resizeObservable$ = fromEvent(window, 'resize').pipe(
+      debounceTime(1000)
+    );
     this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
       // console.log('event: ', evt);
       this.updateObserver();
