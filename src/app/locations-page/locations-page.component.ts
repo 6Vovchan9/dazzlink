@@ -11,6 +11,7 @@ import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validator
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { Router } from '@angular/router';
 import { ToastService } from '@app/shared/services/toast.service';
+import { GlobalModalService } from '@app/shared/services/global-modal.service';
 
 @Component({
   selector: 'app-locations-page',
@@ -65,7 +66,8 @@ export class LocationsPageComponent implements OnInit {
     @Optional() public mobileDetectService: MobileDetectService,
     private locationsService: LocationsService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    public modalService: GlobalModalService,
   ) { }
 
   clickByMybtn1() {
@@ -1017,6 +1019,14 @@ export class LocationsPageComponent implements OnInit {
     } else {
       // window.location.href = 'https://appgallery.huawei.com';
       window.open('https://appgallery.huawei.com');
+    }
+  }
+
+  public goToAnotherLocations(): void {
+    if (this.mobileDetectService.mobileOrTabletDevice) {
+      this.goToStore();
+    } else {
+      this.modalService.open({ component: 'mainLayoutComponent' }); // на аргумент можно не обращать внимание
     }
   }
 

@@ -103,12 +103,12 @@
 
                             <!-- Кнопка другие локации -->
                             <div class="pageContent__toAnotherLocations">
-                                <a class="goToAnotherLocations" [href]="getStorePath" target="_blank">
+                                <button class="goToAnotherLocations" type="button" (click)="goToAnotherLocations()">
                                     <div class="goToAnotherLocations__text">
                                         Другие локации для выбранного города доступны в приложении
                                     </div>
                                     <div class="goToAnotherLocations__icon"></div>
-                                </a>
+                                </button>
                             </div>
 
                             <!-- <div class="pageContent__locationsBlock" [class.withSkeletonLoader]="isSorting">

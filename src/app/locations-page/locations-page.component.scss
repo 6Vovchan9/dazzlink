@@ -519,8 +519,12 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     padding: 24px 28px;
     border-radius: 20px;
     cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: start;
     .goToAnotherLocations__text {
         flex: 1;
+        font-size: 16px;
         font-weight: 700;
         line-height: 24px;
     }
