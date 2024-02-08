@@ -77,7 +77,8 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   clickByMyBtn2() {
-    document.getElementById('phoneTab').scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    // document.getElementById('phoneTab').scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    // this.modalService.open({component: 'mainLayoutComponent'});
   }
 
   public onNavInMobile(sectionName): void {

@@ -73,7 +73,7 @@
                 </div>
                 <div class="footerNew__col footerNew__col--forDesktop">
                     <div class="footerNew__btns">
-                        <button class="btnInFooter" type="button">Скачать приложение</button>
+                        <button (click)="openQRModal()" class="btnInFooter" type="button">Скачать приложение</button>
                         <a class="btnInFooter" routerLink="/help">Помощь</a>
                         <a class="btnInFooter" routerLink="/legal-info">Правовая информация</a>
                         <a href="https://instagram.com" target="_blank" class="btnInFooter">Instagram</a>
@@ -129,7 +129,7 @@
         <div class="headerInModal">
             <div class="headerInModal__col">
                 <a routerLink="/" (click)="goToAnotherPage()" class="logo">
-                    <img src="assets/images/logo.svg" class="logo__image" alt="logotip">
+                    <img src="assets/images/fullLogo.svg" class="logo__image" alt="logotip">
                 </a>
             </div>
             <div class="headerInModal__col">
@@ -196,11 +196,51 @@
     </div>
 </div>
 
+<ng-container *ngIf="modalService?.modalData$ | async as modalData">
+    <ng-container *ngIf="modalData.component === 'mainLayoutComponent'">
+        <div class="qrModal">
+            <div class="container qrModal__container">
+                <div class="qrModal__content">
+                    <div class="qrContent">
+                        <div class="qrContent__content">
+                            <div class="qrContent__logo">
+                                <img src="assets/images/logo.svg" class="qrContent__logoIcon" alt="logotip">
+                                <div class="qrContent__logoText">
+                                    <img src="assets/images/logoText.svg" alt="logotip">
+                                </div>
+                            </div>
+                            <div class="qrContent__qr">
+                                <img src="assets/images/appAdv2.png" class="qrContent__qrImage" alt="qr">
+                            </div>
+                            <div class="qrContent__message">
+                                Наведите камеру на QR-код, чтоб скачать приложение
+                            </div>
+                        </div>
+                    </div>
+                    <div class="qrModal__desc">
+                        <div class="qrModal__title">
+                            Постройте великолепные отношения
+                        </div>
+                        <div class="qrModal__text">
+                            Погрузитесь в мир Dazzlink — узнавайте новое, знакомьтесь и посещайте места
+                        </div>
+                    </div>
+                    <div class="qrModal__closeButtonWrap" (click)="clickByCloseModal()">
+                        <div class="qrModal__closeButton closeButtonInWindow">
+                            <div class="iconForCloseInModal"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+
 <ng-template #headerContent>
     <div class="container header__container">
         <div class="header__col">
             <a routerLink="/" class="logo">
-                <img src="assets/images/logo.svg" class="logo__image" alt="logotip">
+                <img src="assets/images/fullLogo.svg" class="logo__image" alt="logotip">
             </a>
         </div>
         <div class="header__col header__col--alignRight">

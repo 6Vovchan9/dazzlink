@@ -4,6 +4,7 @@ import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@
 import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { MainLayoutOptions } from '@app/shared/interfaces';
+import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { PagesService } from '@app/shared/services/pages.service';
 import { VisitsService } from '@app/shared/services/visits.service';
@@ -42,6 +43,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   constructor(
     private visitsService: VisitsService,
     private pagesService: PagesService,
+    public modalService: GlobalModalService,
     @Optional() public mobileDetectService: MobileDetectService,
   ) { }
 
@@ -59,6 +61,10 @@ export class MainLayoutComponent implements OnInit, DoCheck {
 
   public checkLocationsPageOrNot(): boolean {
     return window.location.pathname.includes('locations') || window.location.pathname.includes('help');
+  }
+
+  clickByCloseModal(modalName) {
+    this.modalService.close();
   }
 
   onScrollPage(e) {
@@ -161,6 +167,10 @@ export class MainLayoutComponent implements OnInit, DoCheck {
       // window.location.href = 'https://appgallery.huawei.com';
       window.open('https://appgallery.huawei.com');
     }
+  }
+
+  public openQRModal(): void {
+    this.modalService.open({ component: 'mainLayoutComponent' }); // на аргумент можно не обращать внимание
   }
 
 }

@@ -10,7 +10,7 @@ export interface ModalData {
   titleText?: string;
   mainText?: Array<MainTextBlock>;
   additContent?: Array<MainTextBlock>;
-  component: 'refinDescPage' | 'appComponent'; // Компонент в котором будет исп модалка
+  component: 'appComponent' | 'mainLayoutComponent'; // Компонент в котором будет исп модалка
   buttons?: AboutModalButtons;
 }
 
