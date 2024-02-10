@@ -563,7 +563,7 @@
     .navigationModal__header {
 
         // background-color: aquamarine;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
 
         .headerInModal {
             display: flex;
@@ -578,7 +578,9 @@
             .navigationModal__menu {
                 font-size: 24px;
                 line-height: 32px;
+                font-weight: 700;
                 margin-left: -12px;
+                margin-top: 24px;
 
                 .menu__list {
                     .menu__item {
@@ -613,7 +615,7 @@
     }
 
     @media #{$mobile} {
-        padding: 30px 20px;
+        padding: 20px;
         height: 100%;
         max-height: unset;
         border-radius: 0px;
