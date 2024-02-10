@@ -145,7 +145,8 @@ export type PlaceAttributeList = {
             lon: number
         },
         phone?: string,
-        link?: string
+        link?: string,
+        yandexOrgId?: number
     }
 }
 

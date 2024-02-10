@@ -157,7 +157,8 @@ export class PlacePageComponent {
                   "coordinates": {
                     "lat": 41.285158,
                     "lon": 69.257761
-                  }
+                  },
+                  yandexOrgId: 163533281445
                 }
               },
               {
@@ -226,12 +227,16 @@ export class PlacePageComponent {
       );
   }
 
-  public getAddressCoordinates(href: {coordinates: {lat: number, lon: number}}): string {
-    // return 'https://yandex.com/maps/org/1738816284'; // Если будет oid организации то сможем открывать ее карточку 
+  public getAddressCoordinates(href: { coordinates: { lat: number, lon: number }, yandexOrgId: number }): string {
+    if (href.yandexOrgId) { // Если есть oid организации, то можем открыть ее карточку:
+      return 'https://yandex.com/maps/org/' + (href.yandexOrgId || '1738816284');
+    } else {
+      return 'https://yandex.com/maps?whatshere[zoom]=17&whatshere[point]='
+        + (href?.coordinates?.lat ? (href.coordinates.lon + ',' + href.coordinates.lat) : '37.617698,55.755864')
+      ;
+    }
     // return 'https://maps.yandex.com/?whatshere[zoom]=17&whatshere[point]='
     //   + (href?.coordinates?.lat ? (href.coordinates.lon + ',' + href.coordinates.lat) : '37.617698,55.755864');
-    return 'https://yandex.com/maps?whatshere[zoom]=17&whatshere[point]='
-      + (href?.coordinates?.lat ? (href.coordinates.lon + ',' + href.coordinates.lat) : '37.617698,55.755864');
   }
 
   private getEvaluation() {
