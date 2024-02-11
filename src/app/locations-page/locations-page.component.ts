@@ -93,6 +93,7 @@ export class LocationsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.langSub = this.pagesService.currentLanguage.subscribe(
       lang => {
         this.curLang = lang;

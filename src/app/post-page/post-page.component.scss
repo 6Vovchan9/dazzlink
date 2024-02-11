@@ -208,11 +208,12 @@
     .articleList {
         padding-left: 24px;
     }
-    .articleListItem {
+
+    ol .articleListItem {
         list-style: decimal;
-        margin-bottom: 16px;
-        &:last-child {
-            margin-bottom: 0px;
-        }
+    }
+
+    ul .articleListItem {
+        list-style: disc;
     }
 }
