@@ -28,8 +28,19 @@ export class MobileDetectService {
         }
     }
 
+    public mobileStoreIconSrc(): string {
+        if (this.osDevice?.toLowerCase() === 'ios') {
+          return 'assets/images/linkIOSShort.svg';
+        } else if (this.osDevice?.toLowerCase() === 'androidos') {
+          return 'assets/images/linkAndroidShort.svg';
+        } else {
+          return 'assets/images/linkAppGallery.svg';
+        }
+      }
+
     public goToDeviceStore(): void {
         // if (this.osDevice?.toLowerCase()) { // если это планшет или телефон
+            console.log('Идем в store');
             if (this.osDevice?.toLowerCase() === 'ios') {
                 // window.location.href = 'https://www.apple.com/app-store';
                 this.window.location.href = 'https://apps.apple.com/ru';

@@ -994,50 +994,11 @@ export class LocationsPageComponent implements OnInit {
     this.getAllLocations();
   }
 
-  public mobileStoreSrc(): string {
-    const osDevice = this.mobileDetectService?.osDevice;
-
-    if (osDevice?.toLowerCase() === 'ios') {
-      return 'assets/images/linkIOSShort.svg';
-    } else if (osDevice?.toLowerCase() === 'androidos') {
-      return 'assets/images/linkAndroidShort.svg';
-    } else {
-      return 'assets/images/linkAppGallery.svg';
-    }
-  }
-
-  public goToStore(): void {
-    const osDevice = this.mobileDetectService?.osDevice;
-    console.log('Идем в store');
-    if (osDevice?.toLowerCase() === 'ios') {
-      // window.location.href = 'https://www.apple.com/app-store';
-      window.location.href = 'https://apps.apple.com/ru';
-    } else if (osDevice?.toLowerCase() === 'androidos') {
-      // window.open('https://play.google.com', '_blank');
-      // window.location.href = 'https://play.google.com';
-      window.open('https://play.google.com');
-    } else {
-      // window.location.href = 'https://appgallery.huawei.com';
-      window.open('https://appgallery.huawei.com');
-    }
-  }
-
   public goToAnotherLocations(): void {
     if (this.mobileDetectService.mobileOrTabletDevice) {
-      this.goToStore();
+      this.mobileDetectService?.goToDeviceStore();
     } else {
       this.modalService.open({ component: 'mainLayoutComponent' }); // на аргумент можно не обращать внимание
-    }
-  }
-
-  public get getStorePath(): string {
-    const osDevice = this.mobileDetectService?.osDevice;
-    if (osDevice?.toLowerCase() === 'ios') {
-      return 'https://apps.apple.com/ru';
-    } else if (osDevice?.toLowerCase() === 'androidos') {
-      return 'https://play.google.com';
-    } else {
-      return 'https://appgallery.huawei.com';
     }
   }
 

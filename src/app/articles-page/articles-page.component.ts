@@ -97,34 +97,6 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  public mobileStoreSrc(): string {
-    const osDevice = this.mobileDetectService?.osDevice;
-
-    if (osDevice?.toLowerCase() === 'ios') {
-      return 'assets/images/linkIOSShort.svg';
-    } else if (osDevice?.toLowerCase() === 'androidos') {
-      return 'assets/images/linkAndroidShort.svg';
-    } else {
-      return 'assets/images/linkAppGallery.svg';
-    }
-  }
-
-  public goToStore(): void {
-    const osDevice = this.mobileDetectService?.osDevice;
-    console.log('Идем в store');
-    if (osDevice?.toLowerCase() === 'ios') {
-      // window.location.href = 'https://www.apple.com/app-store';
-      window.location.href = 'https://apps.apple.com/ru';
-    } else if (osDevice?.toLowerCase() === 'androidos') {
-      // window.open('https://play.google.com', '_blank');
-      // window.location.href = 'https://play.google.com';
-      window.open('https://play.google.com');
-    } else {
-      // window.location.href = 'https://appgallery.huawei.com';
-      window.open('https://appgallery.huawei.com');
-    }
-  }
-
   public getContent(key: string): string {
     return langArr[key][this.curLang];
   }
