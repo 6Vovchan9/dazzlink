@@ -29,25 +29,34 @@ export class MobileDetectService {
     }
 
     public mobileStoreIconSrc(): string {
+        const uAgent = this.window.navigator.userAgent.toLowerCase();
         if (this.osDevice?.toLowerCase() === 'ios') {
-          return 'assets/images/linkIOSShort.svg';
+            return 'assets/images/linkIOSShort.svg';
         } else if (this.osDevice?.toLowerCase() === 'androidos') {
-          return 'assets/images/linkAndroidShort.svg';
+            if (/hms/.test(uAgent) && !/gms/.test(uAgent)) {
+                return 'assets/images/linkAppGallery.svg';
+            }
+            return 'assets/images/linkAndroidShort.svg';
         } else {
-          return 'assets/images/linkAppGallery.svg';
+            return 'assets/images/linkAppGallery.svg';
         }
-      }
+    }
 
     public goToDeviceStore(): void {
+        const uAgent = this.window.navigator.userAgent.toLowerCase();
         // if (this.osDevice?.toLowerCase()) { // если это планшет или телефон
             console.log('Идем в store');
             if (this.osDevice?.toLowerCase() === 'ios') {
                 // window.location.href = 'https://www.apple.com/app-store';
                 this.window.location.href = 'https://apps.apple.com/ru';
             } else if (this.osDevice?.toLowerCase() === 'androidos') {
-                // window.open('https://play.google.com', '_blank');
-                // window.location.href = 'https://play.google.com';
-                this.window.open('https://play.google.com');
+                if (/hms/.test(uAgent) && !/gms/.test(uAgent)) {
+                    this.window.open('https://appgallery.huawei.com');
+                } else {
+                    // window.open('https://play.google.com', '_blank');
+                    // window.location.href = 'https://play.google.com';
+                    this.window.open('https://play.google.com');
+                }
             } else {
                 // window.location.href = 'https://appgallery.huawei.com';
                 this.window.open('https://appgallery.huawei.com');
