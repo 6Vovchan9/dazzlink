@@ -72,14 +72,14 @@ export class PostPageComponent implements OnInit, OnDestroy {
             //       // link: null,
             //       name: 'Игорь',
             //       occupation: 'Водитель',
-            //       imageUrl: 'assets/images/linkToArticlesX2.jpg'
+            //       imageUrl: 'assets/images/home-page/linkToArticlesX2.jpg'
             //     },
             //     {
             //       // link: 'grg/gvsv/bsdfv/bdfv3',
             //       // link: null,
             //       name: 'Диана Семеновна',
             //       occupation: 'Бухгалтер',
-            //       // imageUrl: 'assets/images/linkToArticlesX2.jpg'
+            //       // imageUrl: 'assets/images/home-page/linkToArticlesX2.jpg'
             //     }
             //   ],
             //   published: new Date(),

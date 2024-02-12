@@ -563,7 +563,7 @@ export class LocationsPageComponent implements OnInit {
                       "imageList": [
                         {
                           "type": null,
-                          "href": 'assets/images/linkToArticlesX2.jpg'
+                          "href": 'assets/images/home-page/linkToArticlesX2.jpg'
                         }
                       ]
                     },
@@ -695,7 +695,7 @@ export class LocationsPageComponent implements OnInit {
                         "imageList": [
                           {
                             "type": null,
-                            "href": 'assets/images/linkToArticlesX2.jpg'
+                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
                           }
                         ]
                       },
@@ -857,7 +857,7 @@ export class LocationsPageComponent implements OnInit {
                         "imageList": [
                           {
                             "type": null,
-                            "href": 'assets/images/linkToArticlesX2.jpg'
+                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
                           }
                         ]
                       },
