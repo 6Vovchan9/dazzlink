@@ -3,12 +3,12 @@
 .page {
     .page__container {
         margin-top: 20px;
-        margin-bottom: 50px;
+        margin-bottom: 32px;
     }
     @media #{$notMobile} {
         .page__container {
             margin-top: 34px;
-            margin-bottom: 140px;
+            margin-bottom: 48px;
         }
     }
 }
