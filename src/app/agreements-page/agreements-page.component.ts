@@ -23,14 +23,14 @@ export class AgreementsPageComponent implements OnInit {
         showItemDesc: true,
         caption: 'Без справок',
         id: 'mainVector',
-        iconSrc: 'assets/images/linkAndroid.png'
+        iconSrc: 'assets/images/store/linkAndroid.png'
       },
       {
         value: 'carVector',
         showItemDesc: true,
         caption: 'Без справок с залогом<br>авто <span class="highlight">ставка ниже<br>на 3% годовых</span>',
         id: 'carVector',
-        iconSrc: 'assets/images/linkIOS.png'
+        iconSrc: 'assets/images/store/linkIOS.png'
       }
     ],
     value: 'carVector'

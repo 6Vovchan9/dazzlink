@@ -31,14 +31,14 @@ export class MobileDetectService {
     public mobileStoreIconSrc(): string {
         const uAgent = this.window.navigator.userAgent.toLowerCase();
         if (this.osDevice?.toLowerCase() === 'ios') {
-            return 'assets/images/linkIOSShort.svg';
+            return 'assets/images/store/linkIOSLite.svg';
         } else if (this.osDevice?.toLowerCase() === 'androidos') {
             if (/hms/.test(uAgent) && !/gms/.test(uAgent)) {
-                return 'assets/images/linkAppGallery.svg';
+                return 'assets/images/store/linkAppGallery.svg';
             }
-            return 'assets/images/linkAndroidShort.svg';
+            return 'assets/images/store/linkAndroidLite.svg';
         } else {
-            return 'assets/images/linkAppGallery.svg';
+            return 'assets/images/store/linkAppGallery.svg';
         }
     }
 
