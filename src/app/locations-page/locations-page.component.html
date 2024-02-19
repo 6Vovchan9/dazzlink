@@ -11,7 +11,10 @@
             <br><br>
             <button class="btn" (click)="clickByMybtn3()">myBtn3</button>
             <br><br>
-            <button class="btn" (click)="errorAfterSort = !errorAfterSort">Ошибка при получ локаций "After"</button>
+            <button class="btn" (click)="errorInGetAllLocations = !errorInGetAllLocations">toggle errorInGetAllLocations</button>
+            {{errorInGetAllLocations}}
+            <br><br>
+            <button class="btn" (click)="errorAfterSort = !errorAfterSort">toggle errorAfterSort</button>
             {{errorAfterSort}} -->
 
             <ng-container *ngIf="!showFilterControls || !filterFieldOptions?.length; else filterOptionsBlock">
@@ -136,7 +139,7 @@
                             Не смогли показать локации, попробуйте<br>
                             перезагрузить страницу или зайдите позже
                         </div>
-                        <button class="errorMessage__btn" (click)="getAllLocations()">Перезагрузить</button>
+                        <button class="errorMessage__btn" (click)="retryGetAllLocations()">Перезагрузить</button>
                     </div>
                 </ng-template>
             </ng-container>

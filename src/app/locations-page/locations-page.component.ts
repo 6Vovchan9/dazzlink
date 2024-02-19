@@ -39,6 +39,7 @@ export class LocationsPageComponent implements OnInit {
   private timerForFilter: any;
   public showFilterControls = false;
   public errorAfterSort = false;
+  public errorInGetAllLocations = false;
   private lastSuccessSortVal: string = null;
   private locationsUpdating = false;
   public dropdownHeadForSort = `
@@ -534,102 +535,118 @@ export class LocationsPageComponent implements OnInit {
 
   }
 
+  private retryGetAllLocations(): void {
+    this.getAllLocations();
+    if (!this.sortFieldOptions.items.length) {
+      console.log('Нет параметров сортировки, запросим их снова');
+      this.getSort();
+    }
+    if (!this.filterFieldOptions?.length) {
+      console.log('Нет параметров фильтрации, запросим их снова');
+      this.getFilters();
+    }
+  }
+
   private getAllLocations(): void {
     this.isLoading = true;
     if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {
-          console.warn('locationsGet ок!');
-          // observer.next({})
-          // observer.next(null)
-          observer.next(
-            {
-              "placeCount": 5,
-              "cityPlaceList": [
-                {
-                  "cityCode": "Tashkent",
-                  "cityTitle": "Ташкент",
-                  "placeList": [
-                    {
-                      "id": "-NgTNTZzxh9cram2eEd2",
-                      "categoryCode": "RESTAURANTS",
-                      "title": "Чайхана Navat и еще очень много всего инетересного",
-                      "subtitle": "Узбекская кухня",
-                      "subcategory": "Бар",
-                      "priceRange": 23,
-                      "rating": 4.5,
-                      "address": "ул. Ислама Каримова, 15",
-                      "imageList": [
-                        {
-                          "type": null,
-                          "href": 'assets/images/home-page/linkToArticlesX2.jpg'
-                        }
-                      ]
-                    },
-                    {
-                      "id": "-NgVSDcz4AMZ_2JA8yMZ",
-                      "title": "Кафе у Лидии",
-                      "subtitle": "Русская кухня",
-                      "subcategory": "Бистро",
-                      "priceRange": 1,
-                      "rating": 5,
-                      "address": "ул. Гагарина, 37",
-                      "imageList": [
-                        {
-                          "type": null,
-                          "href": 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
-                        }
-                      ]
-                    },
-                    {
-                      "id": "-NgYZORk7JcAD5y9fYvM",
-                      "title": "Angry Birds",
-                      // "subtitle": "Кавказская кухня",
-                      "subcategory": "Кафе",
-                      "priceRange": '2',
-                      "rating": 3.98,
-                      "address": "ул. Флерова, 4а",
-                    },
-                    {
-                      "id": "-NgYZORk7JcAD5y9ffSl",
-                      "title": "Люксор",
-                      "subtitle": "Боевик",
-                      "subcategory": "Кинотеатр",
-                      "priceRange": '1',
-                      "rating": 4,
-                      "address": "ул. Трубецкая, 106",
-                    },
-                  ]
-                },
-                {
-                  "cityCode": null,
-                  "cityTitle": "Алматы",
-                  "placeList": [
-                    {
-                      "id": "-NgVRC20Iit-rnFDKsza",
-                      "categoryCode": "RESTAURANTS",
-                      "title": "Старый город",
-                      "subtitle": "Европейская",
-                      "subcategory": "Ресторан",
-                      "priceRange": 2,
-                      "rating": 4.2,
-                      "address": "проспект Ленина, 17",
-                      "imageList": null
-                    }
-                  ]
-                },
-                {
-                  "cityTitle": "Москва",
-                  "placeList": []
-                },
-                {
-                  "cityTitle": "Ереван",
-                }
-              ]
-            }
-          )
-          // observer.error('Error')
+          if (this.errorInGetAllLocations) {
+            console.warn('locationsGet error :(');
+            // observer.next({});
+            observer.next(null);
+            // observer.error('Error');
+          } else {
+            console.warn('locationsGet ок!');
+            observer.next(
+              {
+                "placeCount": 5,
+                "cityPlaceList": [
+                  {
+                    "cityCode": "Tashkent",
+                    "cityTitle": "Ташкент",
+                    "placeList": [
+                      {
+                        "id": "-NgTNTZzxh9cram2eEd2",
+                        "categoryCode": "RESTAURANTS",
+                        "title": "Чайхана Navat и еще очень много всего инетересного",
+                        "subtitle": "Узбекская кухня",
+                        "subcategory": "Бар",
+                        "priceRange": 23,
+                        "rating": 4.5,
+                        "address": "ул. Ислама Каримова, 15",
+                        "imageList": [
+                          {
+                            "type": null,
+                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
+                          }
+                        ]
+                      },
+                      {
+                        "id": "-NgVSDcz4AMZ_2JA8yMZ",
+                        "title": "Кафе у Лидии",
+                        "subtitle": "Русская кухня",
+                        "subcategory": "Бистро",
+                        "priceRange": 1,
+                        "rating": 5,
+                        "address": "ул. Гагарина, 37",
+                        "imageList": [
+                          {
+                            "type": null,
+                            "href": 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
+                          }
+                        ]
+                      },
+                      {
+                        "id": "-NgYZORk7JcAD5y9fYvM",
+                        "title": "Angry Birds",
+                        // "subtitle": "Кавказская кухня",
+                        "subcategory": "Кафе",
+                        "priceRange": '2',
+                        "rating": 3.98,
+                        "address": "ул. Флерова, 4а",
+                      },
+                      {
+                        "id": "-NgYZORk7JcAD5y9ffSl",
+                        "title": "Люксор",
+                        "subtitle": "Боевик",
+                        "subcategory": "Кинотеатр",
+                        "priceRange": '1',
+                        "rating": 4,
+                        "address": "ул. Трубецкая, 106",
+                      },
+                    ]
+                  },
+                  {
+                    "cityCode": null,
+                    "cityTitle": "Алматы",
+                    "placeList": [
+                      {
+                        "id": "-NgVRC20Iit-rnFDKsza",
+                        "categoryCode": "RESTAURANTS",
+                        "title": "Старый город",
+                        "subtitle": "Европейская",
+                        "subcategory": "Ресторан",
+                        "priceRange": 2,
+                        "rating": 4.2,
+                        "address": "проспект Ленина, 17",
+                        "imageList": null
+                      }
+                    ]
+                  },
+                  {
+                    "cityTitle": "Москва",
+                    "placeList": []
+                  },
+                  {
+                    "cityTitle": "Ереван",
+                  }
+                ]
+              }
+            );
+          }
         }, 2000)
       })
 
