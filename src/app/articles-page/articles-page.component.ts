@@ -51,28 +51,52 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
 
   private getAllArticles(): void {
     this.isLoading = true;
-    // this.posts$ = this.postsService.getAll()
-    // this.posts$ = this.postsService.getAllRovragge()
-    this.posts$ = this.postsService.getAllProd()
-      .pipe(
+
+    if (false) {
+      this.posts$ = new Observable((observer: Observer<any>) => {
+        console.warn('locationsGet пошел');
+        setTimeout(() => {
+          console.warn('locationsGet error :(');
+          // observer.next({});
+          // observer.next(null);
+          observer.error('Error');
+        })
+      }).pipe(
         tap(val => {
-          // console.log(val);
+          console.log('3', val);
           this.isLoading = false;
         }),
         catchError(err => {
+          console.log('4');
           this.isLoading = false;
           this.errorInGetAllArticles = true;
-          return of([
-            // {
-            //   id: 'ferb54grv',
-            //   title: 'title',
-            //   // imageUrl: null,
-            //   viewCount: 22,
-            //   published: new Date(),
-            // }
-          ]);
+          return of([]);
         })
       )
+    } else {
+      // this.posts$ = this.postsService.getAll()
+      // this.posts$ = this.postsService.getAllRovragge()
+      this.posts$ = this.postsService.getAllProd()
+        .pipe(
+          tap(val => {
+            // console.log(val);
+            this.isLoading = false;
+          }),
+          catchError(err => {
+            this.isLoading = false;
+            this.errorInGetAllArticles = true;
+            return of([
+              // {
+              //   id: 'ferb54grv',
+              //   title: 'title',
+              //   // imageUrl: null,
+              //   viewCount: 22,
+              //   published: new Date(),
+              // }
+            ]);
+          })
+        )
+    }
   }
 
   private reloadArticles(): void {
