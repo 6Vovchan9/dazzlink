@@ -1,0 +1,241 @@
+<main class="page">
+    <div class="container page__container">
+        <aside class="sidebar sidebar--forMobile" [class.hiddenInMobile]="webview">
+            <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
+        </aside>
+        <aside class="sidebar">
+
+            <ng-container *ngIf="!showFilterControls || !filterFieldOptions?.length; else filterOptionsBlock">
+                <!-- Инф о странице -->
+                <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
+            </ng-container>
+            <ng-template #filterOptionsBlock>
+                <!-- <ng-container *ngIf="filterFieldOptions?.length && !filterBarFixed"> -->
+                    <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
+                <!-- </ng-container> -->
+            </ng-template>
+        </aside>
+        <main class="pageContent">
+            <ng-container *ngIf="!isLoading; else loadingTemplate">
+                <ng-container *ngIf="locationsNew; else errorInGetAllLocations">
+                    <ng-container *ngIf="locationsNew.placeCount; else empty">
+                        <div #locationsWrapper class="pageContent__allAboutLocations">
+
+                            <!-- Фильтр бар -->
+                            <!-- <div class="pageContent__filterBar filterBarWrapper" [class.filterBarWrapper--position--fixed]="filterBarFixed">
+                                <div class="filterBarWrapper__container">
+                                    <div *ngIf="filterBarFixed" class="filterBarWrapper__fakeSidebar">
+                                        <ng-container *ngIf="showFilterControls">
+                                            <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
+                                        </ng-container>
+                                    </div> -->
+                                    <div class="filterBar">
+                                        <div class="filterBar__length">
+                                            <!-- Доступно {{locationsNew.placeCount}} мест -->
+                                            {{getAmountOfAllSelectedCities()}}
+                                        </div>
+                                        <div class="filterBar__controls">
+                                            <!-- <button class="btn" (click)="isSorting = !isSorting">toggle</button> -->
+                                            <div class="filterBar__item">
+                                                <!-- Фильтрация -->
+                                                <button [disabled]="!filterFieldOptions?.length" (click)="onShowHideFilterControls()" class="filterButton">
+                                                    <div class="headInSortDropdown">
+                                                        <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities.length"></div>
+                                                        <div class="headInSortDropdown__text">Фильтр</div>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                            <div *ngIf="filterBarGroup" class="filterBar__item">
+                                                <!-- Сортировка -->
+                                                <!-- (ngModelChange)="onChangeSort($event)" -->
+                                                <app-dropdown-field
+                                                    [formControl]="filterBarGroup.get('sort')"
+                                                    [options]="sortFieldOptions"
+                                                    [showArrowIcon]="false"
+                                                    [highlightHead]="false"
+                                                    [dropdownHead]="dropdownHeadForSort"
+                                                    optionLabel="value">
+                                                </app-dropdown-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- </div>
+                            </div> -->
+
+                            <!-- Список локаций -->
+                            <ng-container *ngFor="let block of locationsNew.cityPlaceList">
+                                <ng-container *ngIf="block.placeList?.length">
+                                    <div class="pageContent__locationsBlock">
+                                        <div class="pageContent__locationsCity">
+                                            <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting">{{block.cityTitle}}</span>
+                                        </div>
+                                        <ul class="pageContent__locationsList">
+                                            <li *ngFor="let location of block.placeList" class="pageContent__locationsItem">
+                                                <app-location-item [isLoading]="isSorting"
+                                                    (click)="goToLocationDesc(location.id)"
+                                                    [placeData]="location"
+                                                ></app-location-item>
+                                            </li>
+                                        </ul>
+                                        <!-- Angular 17:
+                                        <ul class="pageContent__locationsList">
+                                            @for (location of block.placeList; track location) {
+                                                <li class="pageContent__locationsItem">
+                                                    ...
+                                                </li>
+                                            }
+                                            @if (2 > 1) {
+                                                <hr />
+                                            }
+                                        </ul> -->
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+
+                            <!-- Кнопка другие локации -->
+                            <div class="pageContent__toAnotherLocations">
+                                <button class="goToAnotherLocations" type="button" (click)="goToAnotherLocations()">
+                                    <div class="goToAnotherLocations__text">
+                                        Другие локации для выбранного города доступны в приложении
+                                    </div>
+                                    <div class="goToAnotherLocations__icon"></div>
+                                </button>
+                            </div>
+
+                            <!-- <div class="pageContent__locationsBlock" [class.withSkeletonLoader]="isSorting">
+                                <div class="skeletonExample">
+                                    <div class="someFakeImg">
+                                        <div class="skeletonLoader"></div>
+                                    </div>
+                                </div>
+                                <div class="skeletonExample">
+                                    <div class="someFakeImg">
+                                        <div class="skeletonLoader"></div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <ng-template #errorInGetAllLocations>
+                    <div class="errorMessage">
+                        <div class="errorMessage__icon"></div>
+                        <div class="errorMessage__title">
+                            Есть проблема
+                        </div>
+                        <div class="errorMessage__text">
+                            Не смогли показать локации, попробуйте<br>
+                            перезагрузить страницу или зайдите позже
+                        </div>
+                        <button class="errorMessage__btn" (click)="retryGetAllLocations()">Перезагрузить</button>
+                    </div>
+                </ng-template>
+            </ng-container>
+        </main>
+    </div>
+</main>
+
+<div *ngIf="showFilterControls && filterFieldOptions?.length" class="filterOptionsForMobile">
+    <div class="filterOptionsForMobile__content" (click)="onCloseFilterOptionsInMobile()">
+        <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
+    </div>
+</div>
+
+<app-loader *ngIf="isLoading"></app-loader>
+
+<ng-template #empty>
+    <!-- <p>Список локаций пуст</p> -->
+    <div class="errorMessage">
+        <div class="errorMessage__icon"></div>
+        <div class="errorMessage__title">
+            Пока ничего нет
+        </div>
+        <div class="errorMessage__text">
+            Сейчас список пуст, но мы уже собираем<br>
+            полезный материал, зайдите позже
+        </div>
+        <button class="errorMessage__btn" type="button" routerLink="/">На главную</button>
+    </div>
+</ng-template>
+<ng-template #loadingTemplate>
+    <p>Идет загрузка локаций...</p>
+</ng-template>
+<ng-template #aboutPageContent>
+    <div class="aboutPage">
+        <h2 class="moduleTitle moduleTitle--main">Локации</h2>
+        <div class="aboutPage__text">
+            Подборка мест для романтических свиданий и ещё какие-то слова чтобы добить до трех строк и было красиво
+        </div>
+        <div class="aboutPage__links aboutPage__links--forDesktop">
+            <div class="linkToApp">
+                <a href="https://www.apple.com/app-store" target="_blank" class="linkToApp__item">
+                    <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
+                </a>
+                <a href="https://play.google.com" target="_blank" class="linkToApp__item">
+                    <img src="assets/images/store/linkAndroidLite.svg" class="linkToApp__img" alt="linkAndroid">
+                </a>
+                <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
+                    <img src="assets/images/store/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
+                </a>
+            </div>
+        </div>
+        <div class="aboutPage__links aboutPage__links--forMobile">
+            <div (click)="mobileDetectService?.goToDeviceStore()" class="downloadApp">
+                <div class="downloadApp__title">Скачайте<br>приложение</div>
+                <div class="downloadApp__icon">
+                    <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #filterOptionsBlockTemplate>
+    <div (click)="clickByFilterOptions($event)" class="filterOptionsBlock">
+        <div class="filterOptionsBlock__content">
+            <div class="filterOptionsBlock__header">
+                <div class="filterOptionsBlock__title">Фильтр городов</div>
+                <button *ngIf="amountAllSelectedCities.length"
+                    class="filterOptionsBlock__resetBtn"
+                    [disabled]="timerForFilter || locationsUpdating"
+                    type="button"
+                    (click)="onResetAllFilters()"
+                >
+                    Сбросить
+                </button>
+                <div (click)="onCloseFilterOptionsInMobile()" class="closeButtonInWindow">
+                    <div class="iconForCloseInModal"></div>
+                </div>
+            </div>
+            <ul class="filterOptionsBlock__allCountries">
+                <li *ngFor="let country of filterFieldOptions" class="filterOptionsBlock__country">
+                    <div class="filterOptionsBlock__countryName"
+                        [class.filterOptionsBlock__countryName--selected]="country['selectedСities']?.length"
+                    >
+                        {{country.countryTitle + (country['selectedСities']?.length ? ': ' + country['selectedСities']?.length : '')}}
+                    </div>
+                    <ul class="filterOptionsBlock__allCities">
+                        <li *ngFor="let city of country.cityList" (click)="onSelectCity(country, city)" class="filterOptionsBlock__city">
+                            <div class="cityForFilter">
+                                <div class="cityForFilter__checkbox">
+                                    <div class="cityForFilter__box" [class.cityForFilter__box--selected]="city.selected"></div>
+                                    <div class="cityForFilter__name">{{city.title}}</div>
+                                </div>
+                                <div class="cityForFilter__amountPlace">{{city.count}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="filterOptionsBlock__btnBar">
+                <button *ngIf="amountAllSelectedCities.length"
+                    type="button"
+                    (click)="onResetAllFiltersOnMobile()"
+                    class="btn btn--white filterOptionsBlock__btnItem"
+                >
+                    Сбросить
+                </button>
+                <button type="button" (click)="onFilterFromMobile()" class="btn btn--size--long filterOptionsBlock__btnItem">Показать локации</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

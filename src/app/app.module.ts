@@ -24,7 +24,8 @@ import { PostPageComponent } from './post-page/post-page.component';
 import { GoBackBtnComponent } from './shared/components/go-back-btn/go-back-btn.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { ProgressiveImageComponent } from './shared/components/progressive-image/progressive-image.component';
-import { LocationsPageComponent } from './locations-page/locations-page.component';
+// import { LocationsPageComponent } from './locations-page/locations-page.component';
+import { LocationsPageWithFrontFilterComponent } from './locations-page-with-front-filter/locations-page-with-front-filter.component';
 import { LocationItemComponent } from './shared/components/location-item/location-item.component';
 import { CheckboxNewFieldComponent } from './shared/fields/checkbox-new-field/checkbox-new-field.component';
 import { PlacePageComponent } from './place-page/place-page.component';
@@ -46,7 +47,8 @@ registerLocaleData(localeRu, 'ru');
     ArticlesPageComponent,
     PostPageComponent,
     PlacePageComponent,
-    LocationsPageComponent,
+    // LocationsPageComponent, // Фильтрация и сортировка на бэке
+    LocationsPageWithFrontFilterComponent, // Фильтрация и сортировка на фронте
     TeamPageComponent,
     HelpPageComponent,
     LegalInfoPageComponent,

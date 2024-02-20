@@ -11,6 +11,7 @@ import { PlacePageComponent } from './place-page/place-page.component';
 import { TeamPageComponent } from './team-page/team-page.component';
 import { HelpPageComponent } from './help-page/help-page.component';
 import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
+import { LocationsPageWithFrontFilterComponent } from './locations-page-with-front-filter/locations-page-with-front-filter.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
       { path: '', component: HomePageComponent },
       { path: 'agreements', component: AgreementsPageComponent },
       { path: 'articles', component: ArticlesPageComponent },
-      { path: 'locations', component: LocationsPageComponent },
+      // { path: 'locations', component: LocationsPageComponent }, // Фильтрация и сортировка на бэке
+      { path: 'locations', component: LocationsPageWithFrontFilterComponent }, // Фильтрация и сортировка на фронте
       { path: 'team', component: TeamPageComponent },
       { path: 'help', component: HelpPageComponent },
       { path: 'legal-info', component: LegalInfoPageComponent },
