@@ -93,6 +93,7 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   public setDisabledState?(isDisabled: boolean): void {
+    if (isDisabled) this.closedState = true;
     this.disabledControl = isDisabled;
   }
 
