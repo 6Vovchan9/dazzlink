@@ -5,7 +5,7 @@ import { catchError, delay, map, tap } from 'rxjs/operators';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { LocationsService } from '@app/shared/services/locations.service';
-import { CountryFilterItem, Place, RovraggeRespLocationsData } from '@app/shared/interfaces';
+import { CountryFilterItem, Place, RespCityPlaceList, RovraggeRespLocationsData } from '@app/shared/interfaces';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { Router } from '@angular/router';
@@ -20,6 +20,7 @@ import { GlobalModalService } from '@app/shared/services/global-modal.service';
 export class LocationsPageWithFrontFilterComponent implements OnInit {
 
   public locationsNew: RovraggeRespLocationsData;
+  public filteredLocations: Array<RespCityPlaceList>;
   public isLoading = true;
   public isSorting = false;
   private locationsSub: Subscription;
@@ -31,6 +32,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   private pageWrapScrollSub: Subscription;
   public filterBarFixed = false;
   public filterBarGroup: UntypedFormGroup;
+  private selectedCitiesMap: {[key: string]: 'chosen'} = {};
   public amountAllSelectedCities: Array<string> = [];
   public amountAllSelectedCitiesBefore: Array<string> = [];
   private timerForFilter: any;
@@ -81,15 +83,21 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
       country.cityList.forEach(city => delete city.selected);
       delete country.selectedСities;
     });
-    this.amountAllSelectedCities = [];
 
-    // this.subscriptionList(); // Отписываемся от всех запросов. Тут это не нужно
+    this.amountAllSelectedCities = [];
+    this.selectedCitiesMap = {};
 
     this.filterBarGroup.get('sort').disable({ emitEvent: false }); // Блокируем сортировку
     this.isSorting = true; // Включаем скелетон
 
-    // запрашиваем новый список локаций:
-    this.filterLocationsOnBackend();
+    setTimeout(() => {
+      this.filteredLocations = this.locationsNew.cityPlaceList;
+      console.log(`Успешно отфильтровали!`);
+      this.toastService.success('Отфильтровано');
+      this.isSorting = false;
+      if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false });
+    }, 1600);
+
   }
 
   public onResetAllFiltersOnMobile(): void {
@@ -100,6 +108,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
       delete country.selectedСities;
     });
     this.amountAllSelectedCities = [];
+    this.selectedCitiesMap = {};
 
   }
 
@@ -135,39 +144,61 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     this.getAllLocationsAfterFilter(sortControlVal, filterString);
   }
 
-  // private sortLocationsList(): void {
+  private filterLocationsOnFront() {
 
-  //   const sortControlVal = this.filterBarGroup?.get('sort')?.value;
+    if (this.amountAllSelectedCities.length) {
+      this.filteredLocations = this.locationsNew.cityPlaceList.filter(city => {
+        return city.cityCode in this.selectedCitiesMap;
+      });
+    } else {
+      this.filteredLocations = this.locationsNew.cityPlaceList;
+    }
+  
+    console.log(`Успешно отфильтровали!`);
+    this.toastService.success('Отфильтровано');
+    this.isSorting = false;
+    if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false });
+  }
 
-  //   if (sortControlVal === 'price_asc') {
-  //     console.log('Сортируем от меньшего к большему');
-  //     this.locationsNew.cityPlaceList.forEach(el => {
-  //       if (el.placeList?.length) {
-  //         el.placeList.sort((a, b) => {
-  //           return a.priceRange - b.priceRange;
-  //         })
-  //       }
-  //     });
-  //   } else if (sortControlVal === 'price_desc') {
-  //     console.log('Сортируем от большего к меньшему');
-  //     this.locationsNew.cityPlaceList.forEach(el => {
-  //       if (el.placeList?.length) {
-  //         el.placeList.sort((a, b) => {
-  //           return b.priceRange - a.priceRange;
-  //         })
-  //       }
-  //     });
-  //   } else if (sortControlVal === 'rating_desc') {
-  //     console.log('Сортируем по рейтингу');
-  //     this.locationsNew.cityPlaceList.forEach(el => {
-  //       if (el.placeList?.length) {
-  //         el.placeList.sort((a, b) => {
-  //           return b.rating - a.rating;
-  //         })
-  //       }
-  //     });
-  //   }
-  // }
+  private sortLocationsOnFront(): void {
+
+    const sortControlVal = this.filterBarGroup?.get('sort')?.value;
+
+    if (sortControlVal === 'price_asc') {
+      console.log('Сортируем от меньшего к большему');
+      this.locationsNew.cityPlaceList.forEach(el => {
+        if (el.placeList?.length) {
+          el.placeList.sort((a, b) => {
+            return a.priceRange - b.priceRange;
+          })
+        }
+      });
+    } else if (sortControlVal === 'price_desc') {
+      console.log('Сортируем от большего к меньшему');
+      this.locationsNew.cityPlaceList.forEach(el => {
+        if (el.placeList?.length) {
+          el.placeList.sort((a, b) => {
+            return b.priceRange - a.priceRange;
+          })
+        }
+      });
+    } else if (sortControlVal === 'rating_desc') {
+      console.log('Сортируем по рейтингу');
+      this.locationsNew.cityPlaceList.forEach(el => {
+        if (el.placeList?.length) {
+          el.placeList.sort((a, b) => {
+            return b.rating - a.rating;
+          })
+        }
+      });
+    }
+
+    console.log(`Успешно отсортировали (${sortControlVal})!`);
+    this.toastService.success('Отсортировано');
+    this.filterBarGroup.get('sort').enable({ emitEvent: false });
+    this.setIconForSortDropdown(sortControlVal);
+    this.isSorting = false;
+  }
 
   private getSort(): void {
     if (false) {
@@ -535,10 +566,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
         .subscribe(
           value => {
             this.locationsNew = value;
+            this.filteredLocations = value.cityPlaceList;
             this.isLoading = false;
           },
           () => {
-            this.locationsNew = null;
+            this.locationsNew = this.filteredLocations = null;
             this.isLoading = false;
           }
         );
@@ -547,132 +579,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
 
   private getAllLocationsAfterSort(sortVal?: string, filterVal?: string): void {
     this.locationsUpdating = true;
-    if (false) {
-      const stream$ = new Observable((observer: Observer<any>) => {
-        console.warn('afterSortGetLocations пошел');
-        setTimeout(() => {
-          if (this.errorAfterSort) {
-            console.warn('afterSortGetLocations error!');
-            observer.error('Error');
-          } else {
-            console.warn('afterSortGetLocations ок!');
-            // observer.next({});
-            // observer.next(null);
-            observer.next(
-              {
-                "placeCount": 5,
-                "cityPlaceList": [
-                  {
-                    "cityCode": "Tashkent",
-                    "cityTitle": "Ташкент",
-                    "placeList": [
-                      {
-                        "id": "-NgTNTZzxh9cram2eEd2",
-                        "categoryCode": "RESTAURANTS",
-                        "title": "Чайхана Navat и еще очень много всего инетересного",
-                        "subtitle": "Узбекская кухня",
-                        "subcategory": "Бар",
-                        "priceRange": 23,
-                        "rating": 4.5,
-                        "address": "ул. Ислама Каримова, 15",
-                        "imageList": [
-                          {
-                            "type": null,
-                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
-                          }
-                        ]
-                      },
-                      {
-                        "id": "-NgVSDcz4AMZ_2JA8yMZ",
-                        "title": "Кафе у Лидии",
-                        "subtitle": "Русская кухня",
-                        "subcategory": "Бистро",
-                        "priceRange": 1,
-                        "rating": 5,
-                        "address": "ул. Гагарина, 37",
-                        "imageList": [
-                          {
-                            "type": null,
-                            "href": 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
-                          }
-                        ]
-                      },
-                      {
-                        "id": "-NgYZORk7JcAD5y9fYvM",
-                        "title": "Angry Birds",
-                        // "subtitle": "Кавказская кухня",
-                        "subcategory": "Кафе",
-                        "priceRange": '2',
-                        "rating": 3.98,
-                        "address": "ул. Флерова, 4а",
-                      },
-                      {
-                        "id": "-NgYZORk7JcAD5y9ffSl",
-                        "title": "Люксор",
-                        "subtitle": "Боевик",
-                        "subcategory": "Кинотеатр",
-                        "priceRange": '1',
-                        "rating": 4,
-                        "address": "ул. Трубецкая, 106",
-                      },
-                    ]
-                  },
-                  {
-                    "cityCode": null,
-                    "cityTitle": "Алматы",
-                    "placeList": [
-                      {
-                        "id": "-NgVRC20Iit-rnFDKsza",
-                        "categoryCode": "RESTAURANTS",
-                        "title": "Старый город",
-                        "subtitle": "Европейская",
-                        "subcategory": "Ресторан",
-                        "priceRange": 2,
-                        "rating": 4.2,
-                        "address": "проспект Ленина, 17",
-                        "imageList": null
-                      }
-                    ]
-                  },
-                  {
-                    "cityTitle": "Москва",
-                    "placeList": []
-                  },
-                  {
-                    "cityTitle": "Ереван",
-                  }
-                ]
-              }
-            );
-          }
-        }, 3000)
-      })
-
-      this.locationsAfterSortSub = stream$.subscribe(
-        value => {
-          this.locationsUpdating = false;
-          console.log(`Успешно отсортировали (${sortVal})!`);
-          this.toastService.success('Отсортировано');
-          this.locationsNew = value;
-          this.lastSuccessSortVal = sortVal;
-          this.filterBarGroup.get('sort').enable({ emitEvent: false });
-          this.setIconForSortDropdown(sortVal);
-          this.isSorting = false;
-        },
-        () => {
-          this.locationsUpdating = false;
-          console.error('Ошибка при получении отсортированных локаций! Поэтому не обновляем порядок локаций и берем предыдущее успешное значение сортировки');
-          this.toastService.warning('Ошибка сортировки, попробуйте еще раз');
-          this.filterBarGroup.get('sort').enable({ emitEvent: false });
-          this.filterBarGroup.get('sort').setValue(this.lastSuccessSortVal, { emitEvent: false });
-          // this.filterBarGroup.get('sort').reset(null, { emitEvent: false }); // или тут можно будет установить последнее успешное значение сортировки
-          this.setIconForSortDropdown(this.lastSuccessSortVal);
-          this.isSorting = false;
-          // Нужно будет как ниб показать сообщ о том что не удалось отсортировать локации
-        }
-      );
-
-    } else {
       this.locationsAfterSortSub = this.locationsService.getAllLocations(sortVal, filterVal)
         // .pipe(
         //   delay(3000)
@@ -700,7 +606,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
             // Нужно будет как ниб показать сообщ о том что не удалось отсортировать локации
           }
         );
-    }
   }
 
   private getAllLocationsAfterFilter(sortVal?: string, filterVal?: string): void {
@@ -709,132 +614,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
       this.locationsAfterSortSub?.unsubscribe();
     }
     this.locationsUpdating = true;
-    if (false) {
-      const stream$ = new Observable((observer: Observer<any>) => {
-        console.warn('afterFilterGetLocations пошел');
-        setTimeout(() => {
-          if (this.errorAfterSort) {
-            console.warn('afterFilterGetLocations error!');
-            observer.error('Error');
-          } else {
-            console.warn('afterFilterGetLocations ок!');
-            // observer.next({});
-            // observer.next(null);
-            observer.next(
-              {
-                "placeCount": 5,
-                "cityPlaceList": [
-                  {
-                    "cityCode": "Tashkent",
-                    "cityTitle": "Ташкент",
-                    "placeList": [
-                      {
-                        "id": "-NgTNTZzxh9cram2eEd2",
-                        "categoryCode": "RESTAURANTS",
-                        "title": "Чайхана Navat и еще очень много всего инетересного",
-                        "subtitle": "Узбекская кухня",
-                        "subcategory": "Бар",
-                        "priceRange": 23,
-                        "rating": 4.5,
-                        "address": "ул. Ислама Каримова, 15",
-                        "imageList": [
-                          {
-                            "type": null,
-                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
-                          }
-                        ]
-                      },
-                      {
-                        "id": "-NgVSDcz4AMZ_2JA8yMZ",
-                        "title": "Кафе у Лидии",
-                        "subtitle": "Русская кухня",
-                        "subcategory": "Бистро",
-                        "priceRange": 1,
-                        "rating": 5,
-                        "address": "ул. Гагарина, 37",
-                        "imageList": [
-                          {
-                            "type": null,
-                            "href": 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
-                          }
-                        ]
-                      },
-                      {
-                        "id": "-NgYZORk7JcAD5y9fYvM",
-                        "title": "Angry Birds",
-                        // "subtitle": "Кавказская кухня",
-                        "subcategory": "Кафе",
-                        "priceRange": '2',
-                        "rating": 3.98,
-                        "address": "ул. Флерова, 4а",
-                      },
-                      {
-                        "id": "-NgYZORk7JcAD5y9ffSl",
-                        "title": "Люксор",
-                        "subtitle": "Боевик",
-                        "subcategory": "Кинотеатр",
-                        "priceRange": '1',
-                        "rating": 4,
-                        "address": "ул. Трубецкая, 106",
-                      },
-                    ]
-                  },
-                  {
-                    "cityCode": null,
-                    "cityTitle": "Алматы",
-                    "placeList": [
-                      {
-                        "id": "-NgVRC20Iit-rnFDKsza",
-                        "categoryCode": "RESTAURANTS",
-                        "title": "Старый город",
-                        "subtitle": "Европейская",
-                        "subcategory": "Ресторан",
-                        "priceRange": 2,
-                        "rating": 4.2,
-                        "address": "проспект Ленина, 17",
-                        "imageList": null
-                      }
-                    ]
-                  },
-                  {
-                    "cityTitle": "Москва",
-                    "placeList": []
-                  },
-                  {
-                    "cityTitle": "Ереван",
-                  }
-                ]
-              }
-            );
-          }
-        }, 3000)
-      })
-
-      this.locationsAfterFilterSub = stream$.subscribe(
-        value => {
-          this.locationsUpdating = false;
-          console.log(`Успешно отфильтровали!`);
-          this.toastService.success('Отфильтровано');
-          this.locationsNew = value;
-          this.isSorting = false;
-          if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false }); // Эти 2 подстраховки на случай когда начали соритровать и сразу принялись фильтровать
-          if (this.filterBarGroup.get('sort').value) this.setIconForSortDropdown(this.filterBarGroup.get('sort').value);
-        },
-        () => {
-          this.locationsUpdating = false;
-          console.error('Ошибка при фильтрации, сбрасываем фильтрацию/сортировку и запрашиваем чистый список локаций');
-          this.toastService.warning('Ошибка фильтрации, попробуйте еще раз');
-          this.isSorting = false;
-          this.afterFilterAndSortError();
-          // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации
-        }
-      );
-
-    } else {
       this.locationsAfterFilterSub = this.locationsService.getAllLocations(sortVal, filterVal)
-        // .pipe(
-        //   delay(3000)
-        // )
         .subscribe(
           value => {
             this.locationsUpdating = false;
@@ -854,7 +634,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
             // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации
           }
         );
-    }
   }
 
   private afterFilterAndSortError(): void {
@@ -893,7 +672,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   public onChangeSort(sortValue: string): void {
     this.isSorting = true;
     this.filterBarGroup.get('sort').disable({ emitEvent: false });
-    this.sortLocationsOnBackend();
+    setTimeout(() => this.sortLocationsOnFront(), 1600);
   }
 
   public onCloseFilterOptionsInMobile(): void {
@@ -948,7 +727,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     } else {
       console.log('Делаем фильтрацию городов...');
       this.isSorting = true;
-      this.filterLocationsOnBackend();
+      this.filterBarGroup.get('sort').disable({ emitEvent: false });
+      setTimeout(() => this.filterLocationsOnFront(), 1600);
     }
   }
 
@@ -971,21 +751,20 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
 
   private onSelectCity(linkToCountry: any, linkToCity: any): void {
 
-    this.filterBarGroup.get('sort').disable({ emitEvent: false });
     const curVal = linkToCity.selected;
     if (curVal) {
       console.log('Отжали какой-то город');
       linkToCity.selected = false;
       linkToCountry.selectedСities = linkToCountry.selectedСities.filter(el => el !== linkToCity.code);
-      // this.amountAllSelectedCities -= 1;
       this.amountAllSelectedCities = this.amountAllSelectedCities.filter(el => el !== linkToCity.code);
+      delete this.selectedCitiesMap[linkToCity.code];
     } else {
       console.log('Выбрали еще какой-то город');
       linkToCity.selected = true;
       if (!linkToCountry.selectedСities?.length) { linkToCountry.selectedСities = [] };
       linkToCountry.selectedСities.push(linkToCity.code);
-      // this.amountAllSelectedCities += 1;
       this.amountAllSelectedCities.push(linkToCity.code);
+      this.selectedCitiesMap[linkToCity.code] = 'chosen';
     }
 
     const mobileWidth = document.documentElement.clientWidth < 768;
@@ -994,7 +773,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
       if (this.locationsUpdating) { // Если фильтрация в данный момент идет тогда запускаем новую без задержки
         console.log('Делаем фильтрацию...');
         this.isSorting = true;
-        this.filterLocationsOnBackend();
+        this.filterBarGroup.get('sort').disable({ emitEvent: false });
+        setTimeout(() => this.filterLocationsOnFront(), 1600);
       } else {
         if (this.timerForFilter) { // Это задержка, чтоб не отправлять запрос при каждом клике по фильтрации
           clearTimeout(this.timerForFilter);
@@ -1004,10 +784,17 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
           this.timerForFilter = null;
           console.log('Делаем фильтрацию...');
           this.isSorting = true;
-          this.filterLocationsOnBackend();
+          this.filterBarGroup.get('sort').disable({ emitEvent: false });
+          setTimeout(() => this.filterLocationsOnFront(), 1600);
         }, 1500);
       }
     }
+
+    // console.log('- Опции фильтрации:', this.filterFieldOptions);
+    // console.log('- Список городов в кот-ых показ-ем локации:', this.amountAllSelectedCities);
+    // console.log('- Список городов в кот-ых показ-ем локации:', this.selectedCitiesMap);
+    // console.log('- Список локаций (locationsNew):', this.locationsNew);
+    // console.log('- Список локаций (filteredLocations):', this.filteredLocations);
   }
 
   private getAmountOfAllSelectedCities(): string {

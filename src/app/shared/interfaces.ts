@@ -38,11 +38,13 @@ export interface RovraggeRespWrapper {
 
 export interface RovraggeRespLocationsData {
     placeCount: number;
-    cityPlaceList: {
-        cityCode: string,
-        cityTitle: string,
-        placeList: Array<Place>
-    }
+    cityPlaceList: Array<RespCityPlaceList>
+}
+
+export interface RespCityPlaceList {
+    cityCode: string,
+    cityTitle: string,
+    placeList: Array<Place>
 }
 
 export interface RovraggeRespFiltersData {
