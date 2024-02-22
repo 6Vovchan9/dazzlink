@@ -1082,6 +1082,7 @@ export class LocationsPageComponent implements OnInit {
     } else {
       console.log('Делаем фильтрацию городов...');
       this.isSorting = true;
+      this.filterBarGroup.get('sort').disable({ emitEvent: false });
       this.filterLocationsOnBackend();
     }
   }
@@ -1105,7 +1106,6 @@ export class LocationsPageComponent implements OnInit {
 
   private onSelectCity(linkToCountry: any, linkToCity: any): void {
 
-    this.filterBarGroup.get('sort').disable({ emitEvent: false });
     const curVal = linkToCity.selected;
     if (curVal) {
       console.log('Отжали какой-то город');
@@ -1128,6 +1128,7 @@ export class LocationsPageComponent implements OnInit {
       if (this.locationsUpdating) { // Если фильтрация в данный момент идет тогда запускаем новую без задержки
         console.log('Делаем фильтрацию...');
         this.isSorting = true;
+        this.filterBarGroup.get('sort').disable({ emitEvent: false });
         this.filterLocationsOnBackend();
       } else {
         if (this.timerForFilter) { // Это задержка, чтоб не отправлять запрос при каждом клике по фильтрации
@@ -1138,6 +1139,7 @@ export class LocationsPageComponent implements OnInit {
           this.timerForFilter = null;
           console.log('Делаем фильтрацию...');
           this.isSorting = true;
+          this.filterBarGroup.get('sort').disable({ emitEvent: false });
           this.filterLocationsOnBackend();
         }, 1500);
       }
