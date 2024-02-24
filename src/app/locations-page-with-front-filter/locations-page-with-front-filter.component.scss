@@ -510,6 +510,13 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     .cityForFilter__amountPlace {
         color: var(--color-text-gray);
     }
+
+    &.disabled {
+        cursor: not-allowed;
+        .cityForFilter__checkbox {
+            opacity: .3;
+        }
+    }
 }
 
 .goToAnotherLocations {

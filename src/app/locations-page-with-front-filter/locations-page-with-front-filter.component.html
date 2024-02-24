@@ -215,7 +215,7 @@
                     </div>
                     <ul class="filterOptionsBlock__allCities">
                         <li *ngFor="let city of country.cityList" (click)="onSelectCity(country, city)" class="filterOptionsBlock__city">
-                            <div class="cityForFilter">
+                            <div class="cityForFilter" [class.disabled]="!+city.count">
                                 <div class="cityForFilter__checkbox">
                                     <div class="cityForFilter__box" [class.cityForFilter__box--selected]="city.selected"></div>
                                     <div class="cityForFilter__name">{{city.title}}</div>

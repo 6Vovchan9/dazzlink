@@ -749,7 +749,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     this.amountAllSelectedCitiesBefore = [...this.amountAllSelectedCities];
   }
 
-  private onSelectCity(linkToCountry: any, linkToCity: any): void {
+  private onSelectCity(linkToCountry: CountryFilterItem, linkToCity: any): void {
+
+    if (!+linkToCity.count) {
+      return;
+    }
 
     const curVal = linkToCity.selected;
     if (curVal) {
