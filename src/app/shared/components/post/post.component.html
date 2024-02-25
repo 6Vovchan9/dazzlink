@@ -4,7 +4,7 @@
 <div class="post">
     <div class="post__img">
         <ng-container *ngIf="postData.imageUrl; else defaultPostImg">
-            <img [src]="postData.imageUrl" alt="Картинка статьи">
+            <img [src]="postData.imageUrl" loading="lazy" alt="Картинка статьи">
         </ng-container>
     </div>
     <div class="post__details postDetails">

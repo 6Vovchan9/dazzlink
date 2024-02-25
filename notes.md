@@ -28,4 +28,16 @@ For a description of the Bot API, see this page: https://core.telegram.org/bots/
 
 ## IntersectionObserver
 
-При помощи этого API можно: 1) подсветить активный пункт меню при скролле страницы 2) запустить/остановить видео на странице при скролле 3) подгружать картинки при по мере их видимости на странице (через data-href атрибут) 4) реализовать бесконечный скролл (запрос/обращение на бэк за доп данными когда пролистали все имеющиеся)
+При помощи этого API можно:
+1) подсветить активный пункт меню при скролле страницы
+2) запустить/остановить видео на странице при скролле
+3) подгружать картинки при по мере их видимости на странице (через data-href атрибут)
+4) реализовать бесконечный скролл (запрос/обращение на бэк за доп данными когда пролистали все имеющиеся)
+
+## progressive jpg
+
+Можно реализовать собственный прогрессивный загрузчик изображений как я это сделал в home-page.component по инструкции https://www.internet-technologies.ru/articles/kak-sozdat-sobstvennyy-progressivnyy-zagruzchik-izobrazheniy.html или сделать изображение прогрессивным:
+1) устанавливаем менеджер недостающих пакетов для macOS - "Homebrew", командой /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2) устанавливаем утилиту brew install imagemagick
+3) преобразуем конкретный файл в прогрессив convert example.jpg -interlace plane result.jpg
+Проверить является ли jpg прогрессивным можно тут https://www.thewebmaster.com/progressive-jpeg-tester/

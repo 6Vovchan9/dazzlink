@@ -1,7 +1,7 @@
 <div class="locationItem" [class.locationItem--withSkeleton]="isLoading">
     <div class="locationItem__img">
         <ng-container *ngIf="placeData?.imageList?.length; else defaultPlaceImg">
-            <img [src]="placeData.imageList[0].href" alt="Фото локации">
+            <img [src]="placeData.imageList[0].href" loading="lazy" alt="Фото локации">
         </ng-container>
 
         <div class="skeletonLoader"></div>
