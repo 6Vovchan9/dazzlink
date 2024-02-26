@@ -1,4 +1,10 @@
-<main *ngIf="!isLoading" class="postPage">
+<main *ngIf="!isLoading"
+    class="postPage"
+    [class.postPage--newFont]="
+        postData.id === '34ba9cdc-a215-4eb6-9644-e3bce1d678bf'
+        || postData.id === 'cac68194-4d96-4f5b-8423-dc18a7129a8d'
+    "
+>
     <div class="container postPage__container">
         <ng-container *ngIf="postData; else errorTemplate">
             <aside class="sidebar">
@@ -11,7 +17,7 @@
                         <div class="postDetails__info">{{postData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}</div>
                         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} {{buildViewCount(postData.viewCount)}}</div>
                     </div>
-                    <h2 class="moduleTitle moduleTitle--scalable">{{postData.title}}</h2>
+                    <h2 class="moduleTitle moduleTitle--scalable postTitle__moduleTitle">{{postData.title}}</h2>
                     <div class="postTitle__img">
                         <ng-container *ngIf="postData.imageUrl; else defaultPostImg">
                             <img [src]="postData.imageUrl" alt="Картинка статьи">

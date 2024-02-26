@@ -22,6 +22,65 @@
             flex-direction: row;
         }
     }
+
+    &--newFont {
+        font-family: Nunito;
+
+        .moduleTitle {
+            font-weight: 900;
+        }
+
+        .sidebar {
+            @media #{$mobile} {
+                margin-bottom: 48px;
+            }
+        }
+
+        .postTitle {
+            .postTitle__img {
+                @media #{$mobile} {
+                    margin-top: 48px;
+                }
+            }
+            .postTitle__details {
+                margin-bottom: 12px;
+            }
+            .postTitle__moduleTitle {
+                font-size: 32px;
+                @media #{$notMobile} {
+                    font-size: 40px;
+                }
+            }
+        }
+
+        .pageContent {
+            .postContent {
+                .postContent__details {
+                    line-height: 24px;
+                    @media #{$mobile} {
+                        margin-bottom: 12px;
+                    }
+                }
+                .postContent__text {
+                    font-size: 20px;
+                    line-height: 28px;
+                }
+                .postContent__feedback {
+                    margin-top: 24px;
+                    @media #{$notMobile} {
+                        margin-top: 48px;
+                    }
+                }
+                .postContent__authorList {
+                    margin-top: 20px;
+                }
+            }
+        }
+
+        @media #{$mobile} {
+            margin-bottom: 20px;
+        }
+    }
 }
 
 .authorCard {
@@ -220,5 +279,26 @@
 
     ul .articleListItem {
         list-style: disc;
+    }
+
+    .postPage--newFont {
+        .articleParagraph {
+            margin-bottom: 24px;
+        }
+
+        .articleParagraphAfterList {
+            margin-top: 24px;
+        }
+
+        .articleHeader {
+            font-size: 28px;
+            line-height: 32px;
+            margin-bottom: 24px;
+            margin-top: 64px;
+        }
+
+        .articleListItem {
+            margin-top: 12px;
+        }
     }
 }
