@@ -260,6 +260,10 @@
 
     .articleParagraphAfterList {
         margin-top: 32px;
+        margin-bottom: 16px;
+        &:last-child {
+            margin-bottom: 0px;
+        }
     }
 
     .articleHeader {
