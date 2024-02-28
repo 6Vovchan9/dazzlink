@@ -1,9 +1,9 @@
 <main *ngIf="!isLoading"
     class="postPage"
     [class.postPage--newFont]="
-        postData.id === '34ba9cdc-a215-4eb6-9644-e3bce1d678bf'
-        || postData.id === 'cac68194-4d96-4f5b-8423-dc18a7129a8d'
-        || postData.id === 'a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e'
+        postData?.id === '34ba9cdc-a215-4eb6-9644-e3bce1d678bf'
+        || postData?.id === 'cac68194-4d96-4f5b-8423-dc18a7129a8d'
+        || postData?.id === 'a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e'
     "
 >
     <div class="container postPage__container">

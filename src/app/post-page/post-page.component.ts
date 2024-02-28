@@ -98,9 +98,13 @@ export class PostPageComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         (post: Post) => {
-          if (post) this.getEvaluation();
-          this.postData = post;
-          this.isLoading = false;
+          if (post) {
+            this.getEvaluation();
+            this.postData = post;
+            this.isLoading = false;
+          } else {
+            this.goToAllArticles();
+          }
         },
         err => {
           this.isLoading = false;
