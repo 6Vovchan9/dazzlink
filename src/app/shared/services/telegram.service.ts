@@ -28,6 +28,10 @@ export class TelegramService {
         return this.tg?.BackButton;
     }
 
+    public sendData(data: object): void {
+        this.tg?.sendData(JSON.stringify(data)); // Этот метод позволяет отправлять данные боту, далее мы можем принимать эти данные через событие WEB_APP_DATA. Но этот метод доступен только если приложение запущено через "Keyboard button"
+    }
+
     public ready(): void {
         this.tg?.ready();
     }

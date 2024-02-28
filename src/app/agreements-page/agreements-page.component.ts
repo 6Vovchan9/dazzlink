@@ -4,6 +4,7 @@ import { requirementForCarModal, tooltipForMainVector } from '@app/shared/consta
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { FieldOptions } from '@app/shared/fields/radiobutton-new-field/radiobutton-field.component';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
+import { TelegramService } from '@app/shared/services/telegram.service';
 
 @Component({
   selector: 'app-agreements-page',
@@ -55,11 +56,21 @@ export class AgreementsPageComponent implements OnInit {
   };
 
   constructor(
-    public modalService: GlobalModalService
+    public modalService: GlobalModalService,
+    private tgService: TelegramService
   ) { }
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  public sendMessageInTelegram(): void {
+    const messData = {
+      from: 'dazzlink',
+      date: new Date(),
+      message: this.inutVal
+    };
+    this.tgService.sendData(messData);
   }
 
   private createForm(): void {

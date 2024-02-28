@@ -31,6 +31,7 @@
             <label [ngStyle]="{marginBottom: labelMargin + 'px'}" class="myInput__label" for="myInput">Имя клиента:</label>
             <input class="myInput__input" id="myInput" type="text" [(ngModel)]="inutVal">
             <div class="myInput__val">Нашего клиента зовут: {{inutVal}}</div>
+            <button [ngStyle]="{marginTop: 10 + 'px'}" (click)="sendMessageInTelegram()">Отправить в телегу</button>
         </div>
     </div>
 

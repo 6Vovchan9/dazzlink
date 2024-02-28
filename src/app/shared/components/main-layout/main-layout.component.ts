@@ -150,6 +150,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
 
   private clickByCompanyBlock(): void {
     if (this.tgService.mainTgButton) {
+      this.tgService.mainTgButton.setText('MainButton');
       this.tgService.mainTgButton.show();
     }
   }
