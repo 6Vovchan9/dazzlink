@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { GlobalModalService, ModalData } from '@app/shared/services/global-modal.service';
+import { TelegramService } from '@app/shared/services/telegram.service';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +9,15 @@ import { GlobalModalService, ModalData } from '@app/shared/services/global-modal
 })
 export class AppComponent implements OnInit {
 
+  private tgService = inject(TelegramService);
+
   constructor(
     public modalService: GlobalModalService
   ) { }
 
   ngOnInit(): void {
     // console.log(navigator.userAgent);
+    this.tgService.ready(); // Это для телеги
     console.log('Dazzlink: v.2.2.27');
   }
 

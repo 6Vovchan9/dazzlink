@@ -36,7 +36,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.setTgBackButton();
+    this.setTgBackButton(); // Это для появления кнопки "Назад" в телеге
 
     this.lSub = this.pagesService.currentLanguage.subscribe(
       lang => {
@@ -229,7 +229,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.deleteTgBackButton();
+    this.deleteTgBackButton(); // Это для удаления кнопки "Назад" в телеге
     this.lSub?.unsubscribe();
     this.eSub?.unsubscribe();
     // this.vSub?.unsubscribe();

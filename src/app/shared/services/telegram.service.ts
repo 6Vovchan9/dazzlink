@@ -27,4 +27,8 @@ export class TelegramService {
     get backTgButton(): IMainTgButton {
         return this.tg?.BackButton;
     }
+
+    public ready(): void {
+        this.tg?.ready();
+    }
 }
