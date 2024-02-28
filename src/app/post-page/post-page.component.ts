@@ -6,6 +6,7 @@ import { PostsService } from '@app/shared/services/posts.service';
 import { Post } from '@app/shared/interfaces';
 import { PagesService } from '@app/shared/services/pages.service';
 import { Subscription, of } from 'rxjs';
+import { TelegramService } from '@app/shared/services/telegram.service';
 
 @Component({
   selector: 'app-post-page',
@@ -27,10 +28,15 @@ export class PostPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private postsService: PostsService,
     private pagesService: PagesService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private tgService: TelegramService
+  ) {
+    this.goBackByTg = this.goBackByTg.bind(this);
+  }
 
   ngOnInit(): void {
+
+    this.setTgBackButton();
 
     this.lSub = this.pagesService.currentLanguage.subscribe(
       lang => {
@@ -100,6 +106,25 @@ export class PostPageComponent implements OnInit, OnDestroy {
           this.isLoading = false;
         }
       );
+  }
+
+  private setTgBackButton() {
+
+    if (this.tgService.backTgButton) {
+      this.tgService.backTgButton.show();
+      this.tgService.backTgButton.onClick(this.goBackByTg);
+    }
+  }
+
+  private deleteTgBackButton() {
+    if (this.tgService.backTgButton) {
+      this.tgService.backTgButton.hide();
+      this.tgService.backTgButton?.offClick(this.goBackByTg);
+    }
+  }
+
+  private goBackByTg() {
+    this.goToAllArticles();
   }
 
   private getEvaluation() {
@@ -204,6 +229,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.deleteTgBackButton();
     this.lSub?.unsubscribe();
     this.eSub?.unsubscribe();
     // this.vSub?.unsubscribe();

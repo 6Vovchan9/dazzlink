@@ -163,6 +163,12 @@ export enum TypeOfPlaceDetails {
     awards = 'AWARDS'
 }
 
+export enum HelpPageSections {
+    Contacts = 'phones',
+    Support = 'support',
+    Questions = 'questions'
+}
+
 export interface VisitsAmount {
     amount: number;
 }

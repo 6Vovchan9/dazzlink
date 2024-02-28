@@ -12,7 +12,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChildren('section', { read: ElementRef }) sectionsRef: QueryList<ElementRef>;
 
-  private route: ActivatedRoute = inject(ActivatedRoute)
+  private route: ActivatedRoute = inject(ActivatedRoute);
   public updatePageInfo: Date = new Date("2024-01-21");
   
   public curSection: 'phones' | 'support' | 'questions' = 'phones';

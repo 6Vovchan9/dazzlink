@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit, Optional } from '@angular/core';
+import { Component, DoCheck, OnInit, Optional, inject } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
@@ -7,6 +7,7 @@ import { MainLayoutOptions } from '@app/shared/interfaces';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { PagesService } from '@app/shared/services/pages.service';
+import { TelegramService } from '@app/shared/services/telegram.service';
 import { VisitsService } from '@app/shared/services/visits.service';
 
 @Component({
@@ -39,6 +40,8 @@ export class MainLayoutComponent implements OnInit, DoCheck {
     ],
     // value: 'RU'
   };
+
+  private tgService = inject(TelegramService);
 
   constructor(
     private visitsService: VisitsService,
@@ -143,6 +146,12 @@ export class MainLayoutComponent implements OnInit, DoCheck {
 
   public openQRModal(): void {
     this.modalService.open({ component: 'mainLayoutComponent' }); // на аргумент можно не обращать внимание
+  }
+
+  private clickByCompanyBlock(): void {
+    if (this.tgService.mainTgButton) {
+      this.tgService.mainTgButton.show();
+    }
   }
 
 }
