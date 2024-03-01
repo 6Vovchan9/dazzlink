@@ -47,8 +47,10 @@
             }
             .postTitle__moduleTitle {
                 font-size: 32px;
+                line-height: 40px;
                 @media #{$notMobile} {
                     font-size: 40px;
+                    line-height: 44px;
                 }
             }
         }
@@ -70,9 +72,6 @@
                     @media #{$notMobile} {
                         margin-top: 48px;
                     }
-                }
-                .postContent__authorList {
-                    margin-top: 20px;
                 }
             }
         }
@@ -224,6 +223,7 @@
     display: flex;
     flex-wrap: wrap;
     color: var(--color-text-gray);
+    font-weight: bold;
     .postDetails__info {
         margin-left: 13px;
         position: relative;
@@ -269,7 +269,7 @@
     .articleHeader {
         display: block;
         font-size: 24px;
-        font-weight: 700;
+        font-weight: bold;
         margin-bottom: 16px;
         margin-top: 32px;
     }

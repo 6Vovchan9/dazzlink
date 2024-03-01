@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <!-- Автор статьи для компа -->
-                <ul *ngIf="postData.authorList?.length" class="sidebar__authorList">
+                <!-- <ul *ngIf="postData.authorList?.length" class="sidebar__authorList">
                     <a *ngFor="let author of postData.authorList"
                         [href]="author.link || 'https://vk.com/'"
                         target="_blank"
@@ -47,7 +47,7 @@
                         </div>
                         <div class="authorCard__arrow"></div>
                     </a>
-                </ul>
+                </ul> -->
             </aside>
             <main class="pageContent">
                 <div class="postContent">
@@ -63,7 +63,7 @@
                     <!-- Как вам статья -->
                     <div class="postContent__feedback feedback">
                         <div class="feedback__text">
-                            <span>Как вам локация?</span>
+                            <span>Как вам статья?</span>
                             <div *ngIf="votingIsLoading" class="feedback__spinner">
                                 <img src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
                             </div>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <!-- Автор статьи для мобилы -->
-                    <ul *ngIf="postData.authorList?.length" class="postContent__authorList">
+                    <!-- <ul *ngIf="postData.authorList?.length" class="postContent__authorList">
                         <a *ngFor="let author of postData.authorList"
                             [href]="author.link || 'https://vk.com/'"
                             target="_blank"
@@ -127,7 +127,7 @@
                             </div>
                             <div class="authorCard__arrow"></div>
                         </a>
-                    </ul>
+                    </ul> -->
                 </div>
             </main>
         </ng-container>
