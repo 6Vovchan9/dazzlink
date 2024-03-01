@@ -63,7 +63,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   }
 
   public checkLocationsPageOrNot(): boolean {
-    return window.location.pathname.includes('locations') || window.location.pathname.includes('help');
+    return window.location.pathname.includes('locations') || window.location.pathname.includes('help') || window.location.pathname.includes('agreements');
   }
 
   clickByCloseModal(modalName) {

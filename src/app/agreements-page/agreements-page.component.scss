@@ -1,24 +1,46 @@
-.wrapper {
-    display: block;
-    max-width: 500px;
-    margin-left: 20px;
-}
-
-.block {
-    margin-bottom: 30px;
-}
+@import "variables";
 
 .myInput {
-
+    max-width: 700px;
     margin-top: 30px;
     border: 1px solid black;
     padding: 10px;
+
+    .myInput__message {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
 
     .myInput__label {
         display: block;
     }
 
+    .myInput__input {
+        width: 100%;
+    }
+
     .myInput__val {
         margin-top: 10px;
+    }
+}
+
+.page {
+
+    .page__container {
+        display: flex;
+        flex-direction: column;
+
+        margin-top: 20px;
+        margin-bottom: 32px;
+    }
+
+    @media #{$notMobile} {
+
+        .page__container {
+            flex-direction: row;
+
+            margin-top: 34px;
+            margin-bottom: 48px;
+        }
     }
 }

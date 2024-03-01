@@ -13,7 +13,7 @@ import { TelegramService } from '@app/shared/services/telegram.service';
 })
 export class AgreementsPageComponent implements OnInit {
 
-  public inutVal: string = 'Иван Андреевич';
+  public inutVal: string = 'проснулся, позавтракал, выгулял собаку, посмотрел фильм и лег спать';
   public labelMargin: number = 10;
   public myForm: UntypedFormGroup;
   public vectorFieldOptions: FieldOptions = {

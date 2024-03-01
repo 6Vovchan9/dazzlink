@@ -1,41 +1,44 @@
-<div class="wrapper">
-    <div class="block">
-        <app-radiobutton-field
-            [formControl]="myForm.get('vectors')"
-            [options]="vectorFieldOptions"
-            (clickByItemDesc)="showVectorDesc($event)"
-            optionLabel="value">
-        </app-radiobutton-field>
-    </div>
+<main class="page">
+    <div class="container page__container">
+        <!-- <div class="block">
+            <app-radiobutton-field
+                [formControl]="myForm.get('vectors')"
+                [options]="vectorFieldOptions"
+                (clickByItemDesc)="showVectorDesc($event)"
+                optionLabel="value">
+            </app-radiobutton-field>
+        </div>
 
-    <div class="block">
-        <app-radiobutton-field
-            [formControl]="myForm.get('gender')"
-            [options]="genderFieldOptions"
-            [buttonStyle]="true"
-            optionLabel="value">
-        </app-radiobutton-field>
-    </div>
+        <div class="block">
+            <app-radiobutton-field
+                [formControl]="myForm.get('gender')"
+                [options]="genderFieldOptions"
+                [buttonStyle]="true"
+                optionLabel="value">
+            </app-radiobutton-field>
+        </div>
 
-    <div style="max-width: 300px;" class="block">
-        <app-dropdown-field
-            [formControl]="myForm.get('language')"
-            [options]="langFieldOptions"
-            [multiple]="false"
-            optionLabel="value">
-        </app-dropdown-field>
-    </div>
+        <div style="max-width: 300px;" class="block">
+            <app-dropdown-field
+                [formControl]="myForm.get('language')"
+                [options]="langFieldOptions"
+                [multiple]="false"
+                optionLabel="value">
+            </app-dropdown-field>
+        </div>
 
-    <div class="block">
-        <div class="myInput">
-            <label [ngStyle]="{marginBottom: labelMargin + 'px'}" class="myInput__label" for="myInput">Имя клиента:</label>
-            <input class="myInput__input" id="myInput" type="text" [(ngModel)]="inutVal">
-            <div class="myInput__val">Нашего клиента зовут: {{inutVal}}</div>
-            <button [ngStyle]="{marginTop: 10 + 'px'}" (click)="sendMessageInTelegram()">Отправить в телегу</button>
+        <div class="block">
+            <button class="btn" (click)="myBtn()">openModal</button>
+        </div> -->
+
+        <div class="block">
+            <div class="myInput">
+                <span class="myInput__message">Давайте напишем при помощи chatGPT красочную историю как я провел день,<br>напишите тезисы в свободной форме:</span>
+                <label class="myInput__label" for="myInput">Тезисы:</label>
+                <input class="myInput__input" id="myInput" type="text" [(ngModel)]="inutVal">
+                <div class="myInput__val">Ваши тезисы: {{inutVal}}</div>
+                <button [ngStyle]="{marginTop: labelMargin + 'px'}" (click)="sendMessageInTelegram()">Начнем!</button>
+            </div>
         </div>
     </div>
-
-    <div class="block">
-        <button class="btn" (click)="myBtn()">openModal</button>
-    </div>
-</div>
+</main>
