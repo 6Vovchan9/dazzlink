@@ -83,10 +83,17 @@
                                         </div>
                                         <ul class="pageContent__locationsList">
                                             <li *ngFor="let location of block.placeList" class="pageContent__locationsItem">
-                                                <app-location-item [isLoading]="isSorting"
+                                                <!-- <app-location-item [isLoading]="isSorting"
                                                     (click)="goToLocationDesc(location.id)"
                                                     [placeData]="location"
-                                                ></app-location-item>
+                                                ></app-location-item> -->
+                                                <a [routerLink]="['/place', location.id]"
+                                                    target="_blank"
+                                                    class="pageContent__locationLink"
+                                                    [class.pageContent__locationLink--disabled]="isSorting"
+                                                >
+                                                    <app-location-item [isLoading]="isSorting" [placeData]="location"></app-location-item>
+                                                </a>
                                             </li>
                                         </ul>
                                         <!-- Angular 17:

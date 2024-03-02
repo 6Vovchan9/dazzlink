@@ -191,6 +191,12 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                     // &:last-child {
                     //     padding-right: unset;
                     // }
+
+                    .pageContent__locationLink {
+                        &--disabled {
+                            pointer-events: none;
+                        }
+                    }
                 }
             }
         }
