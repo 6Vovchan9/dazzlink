@@ -59,8 +59,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   };
   public filterFieldOptions: Array<CountryFilterItem>;
 
-  @ViewChild('locationsWrapper') locationsWrapper: ElementRef;
-  
   constructor(
     @Optional() public mobileDetectService: MobileDetectService,
     private locationsService: LocationsService,
