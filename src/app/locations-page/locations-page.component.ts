@@ -1129,10 +1129,11 @@ export class LocationsPageComponent implements OnInit {
     const mobileWidth = document.documentElement.clientWidth < 768;
 
     if (!mobileWidth) {
+      this.filterBarGroup.get('sort').disable({ emitEvent: false });
       if (this.locationsUpdating) { // Если фильтрация в данный момент идет тогда запускаем новую без задержки
         console.log('Делаем фильтрацию...');
         this.isSorting = true;
-        this.filterBarGroup.get('sort').disable({ emitEvent: false });
+        // this.filterBarGroup.get('sort').disable({ emitEvent: false });
         this.filterLocationsOnBackend();
       } else {
         if (this.timerForFilter) { // Это задержка, чтоб не отправлять запрос при каждом клике по фильтрации

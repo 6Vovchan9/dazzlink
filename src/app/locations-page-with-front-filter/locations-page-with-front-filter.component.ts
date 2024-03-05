@@ -252,6 +252,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     } else {
       this.sSub = this.locationsService.getSortOptions()
         .pipe(
+          delay(4000),
           map((resp: Array<{ title?: string, code?: string, details?: string, value?: string }>) => {
             if (resp.length) {
               resp = resp.map(el => {
@@ -415,6 +416,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
         );
     } else {
       this.fSub = this.locationsService.getFilterOptions()
+        .pipe(delay(2000))
         .subscribe(
           (value: Array<CountryFilterItem>) => {
             this.filterFieldOptions = value?.filter(el => el.cityList?.length);
@@ -561,7 +563,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
 
     } else {
       this.locationsSub = this.locationsService.getAllLocations()
-        .subscribe(
+      .pipe(delay(6000))  
+      .subscribe(
           value => {
             this.locationsNew = value;
             this.filteredLocations = value.cityPlaceList;
@@ -772,10 +775,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     const mobileWidth = document.documentElement.clientWidth < 768;
 
     if (!mobileWidth) {
+      this.filterBarGroup.get('sort').disable({ emitEvent: false });
       if (this.locationsUpdating) { // Если фильтрация в данный момент идет тогда запускаем новую без задержки
         console.log('Делаем фильтрацию...');
         this.isSorting = true;
-        this.filterBarGroup.get('sort').disable({ emitEvent: false });
+        // this.filterBarGroup.get('sort').disable({ emitEvent: false });
         setTimeout(() => this.filterLocationsOnFront(), 1600);
       } else {
         if (this.timerForFilter) { // Это задержка, чтоб не отправлять запрос при каждом клике по фильтрации
@@ -799,7 +803,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     // console.log('- Список локаций (filteredLocations):', this.filteredLocations);
   }
 
-  private getAmountOfAllSelectedCities(): string {
+  public getAmountOfAllSelectedCities(): string {
     return this.amountAllSelectedCities.length ? `Показан ${this.amountAllSelectedCities.length} из 20 городов` : 'Показаны все города'
   }
 
