@@ -165,6 +165,14 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             display: flex;
             flex-direction: column;
             row-gap: 32px;
+
+            .pageContent__locationsItem {
+                .pageContent__locationLink {
+                    &--disabled {
+                        pointer-events: none;
+                    }
+                }
+            }
         }
     }
 
@@ -191,12 +199,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                     // &:last-child {
                     //     padding-right: unset;
                     // }
-
-                    .pageContent__locationLink {
-                        &--disabled {
-                            pointer-events: none;
-                        }
-                    }
                 }
             }
         }
@@ -205,7 +207,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
 .filterBar {
     position: sticky;
-    z-index: 10;
+    z-index: 30;
     top: 0;
     display: flex;
     justify-content: space-between;
