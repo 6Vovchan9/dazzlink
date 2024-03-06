@@ -11,7 +11,7 @@ import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-fiel
 import { Router } from '@angular/router';
 import { ToastService } from '@app/shared/services/toast.service';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
-import { MOCK_LOCATIONS_FOR_SKELETON } from '@app/shared/mock/locations';
+import { MOCK_LOCATIONS, MOCK_LOCATIONS_FOR_SKELETON } from '@app/shared/mock/locations';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -467,92 +467,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
             // });
           } else {
             console.warn('locationsGet ок!');
-            observer.next(
-              {
-                "placeCount": 5,
-                "cityPlaceList": [
-                  {
-                    "cityCode": "Tashkent",
-                    "cityTitle": "Ташкент",
-                    "placeList": [
-                      {
-                        "id": "-NgTNTZzxh9cram2eEd2",
-                        "categoryCode": "RESTAURANTS",
-                        "title": "Чайхана Navat и еще очень много всего инетересного",
-                        "subtitle": "Узбекская кухня",
-                        "subcategory": "Бар",
-                        "priceRange": 23,
-                        "rating": 4.5,
-                        "address": "ул. Ислама Каримова, 15",
-                        "imageList": [
-                          {
-                            "type": null,
-                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
-                          }
-                        ]
-                      },
-                      {
-                        "id": "-NgVSDcz4AMZ_2JA8yMZ",
-                        "title": "Кафе у Лидии",
-                        "subtitle": "Русская кухня",
-                        "subcategory": "Бистро",
-                        "priceRange": 1,
-                        "rating": 5,
-                        "address": "ул. Гагарина, 37",
-                        "imageList": [
-                          {
-                            "type": null,
-                            "href": 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
-                          }
-                        ]
-                      },
-                      {
-                        "id": "-NgYZORk7JcAD5y9fYvM",
-                        "title": "Angry Birds",
-                        // "subtitle": "Кавказская кухня",
-                        "subcategory": "Кафе",
-                        "priceRange": '2',
-                        "rating": 3.98,
-                        "address": "ул. Флерова, 4а",
-                      },
-                      {
-                        "id": "-NgYZORk7JcAD5y9ffSl",
-                        "title": "Люксор",
-                        "subtitle": "Боевик",
-                        "subcategory": "Кинотеатр",
-                        "priceRange": '1',
-                        "rating": 4,
-                        "address": "ул. Трубецкая, 106",
-                      },
-                    ]
-                  },
-                  {
-                    "cityCode": null,
-                    "cityTitle": "Алматы",
-                    "placeList": [
-                      {
-                        "id": "-NgVRC20Iit-rnFDKsza",
-                        "categoryCode": "RESTAURANTS",
-                        "title": "Старый город",
-                        "subtitle": "Европейская",
-                        "subcategory": "Ресторан",
-                        "priceRange": 2,
-                        "rating": 4.2,
-                        "address": "проспект Ленина, 17",
-                        "imageList": null
-                      }
-                    ]
-                  },
-                  {
-                    "cityTitle": "Москва",
-                    "placeList": []
-                  },
-                  {
-                    "cityTitle": "Ереван",
-                  }
-                ]
-              }
-            );
+            observer.next(MOCK_LOCATIONS);
           }
         }, 2000)
       })
