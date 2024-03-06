@@ -193,6 +193,7 @@ button {
 .withSimpleSkeleton {
     position: relative;
     color: transparent;
+    overflow: hidden;
     &:before {
         content: '';
         position: absolute;
@@ -201,7 +202,8 @@ button {
         background-color: #eee;
         border-radius: 20px;
         top: 50%;
-        transform: translateY(-50%)
+        transform: translateY(-50%);
+        z-index: 10;
     }
     &:after {
         content: '';
@@ -214,6 +216,7 @@ button {
         max-width: 232px;
         background: linear-gradient(to right, RGBA(255, 255, 255, 0) 0%, #fff 50%, RGBA(255, 255, 255, 0) 100%);
         animation: 2s cubic-bezier(0.4, 0.0, 0.2, 1) .8s infinite normal none running load;
+        z-index: 20;
     }
 }
 

@@ -11,6 +11,7 @@ import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-fiel
 import { Router } from '@angular/router';
 import { ToastService } from '@app/shared/services/toast.service';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
+import { MOCK_LOCATIONS_FOR_SKELETON } from '@app/shared/mock/locations';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -19,7 +20,7 @@ import { GlobalModalService } from '@app/shared/services/global-modal.service';
 })
 export class LocationsPageWithFrontFilterComponent implements OnInit {
 
-  public locationsNew: RovraggeRespLocationsData;
+  public locationsNew: RovraggeRespLocationsData = MOCK_LOCATIONS_FOR_SKELETON;
   public filteredLocations: Array<RespCityPlaceList>;
   public isLoading = true;
   public isSorting = false;
@@ -65,7 +66,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     private toastService: ToastService,
     private router: Router,
     public modalService: GlobalModalService,
-  ) { }
+  ) {
+    this.filteredLocations = this.locationsNew.cityPlaceList;
+  }
 
   ngOnInit(): void {
     this.createForm();
@@ -252,7 +255,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     } else {
       this.sSub = this.locationsService.getSortOptions()
         .pipe(
-          delay(4000),
+          // delay(4000),
           map((resp: Array<{ title?: string, code?: string, details?: string, value?: string }>) => {
             if (resp.length) {
               resp = resp.map(el => {
@@ -416,7 +419,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
         );
     } else {
       this.fSub = this.locationsService.getFilterOptions()
-        .pipe(delay(2000))
+        // .pipe(delay(2000))
         .subscribe(
           (value: Array<CountryFilterItem>) => {
             this.filterFieldOptions = value?.filter(el => el.cityList?.length);
@@ -454,10 +457,14 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
         console.warn('locationsGet пошел');
         setTimeout(() => {
           if (this.errorInGetAllLocations) {
-            console.warn('locationsGet error :(');
+            console.warn('locationsGet что-то пошло не так :(');
             // observer.next({});
             observer.next(null);
             // observer.error('Error');
+            // observer.next({
+            //   placeCount: 0,
+            //   cityPlaceList: []
+            // });
           } else {
             console.warn('locationsGet ок!');
             observer.next(
@@ -550,24 +557,27 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
         }, 2000)
       })
 
-      this.locationsSub = stream$.subscribe(
-        value => {
-          this.locationsNew = value;
-          this.isLoading = false;
-        },
-        () => {
-          this.locationsNew = null;
-          this.isLoading = false;
-        }
-      );
+      this.locationsSub = stream$
+        // .pipe(delay(6000))
+        .subscribe(
+          value => {
+            this.locationsNew = value;
+            this.filteredLocations = value?.cityPlaceList;
+            this.isLoading = false;
+          },
+          () => {
+            this.locationsNew = this.filteredLocations = null;
+            this.isLoading = false;
+          }
+        );
 
     } else {
       this.locationsSub = this.locationsService.getAllLocations()
-      .pipe(delay(6000))  
-      .subscribe(
+        // .pipe(delay(6000))
+        .subscribe(
           value => {
             this.locationsNew = value;
-            this.filteredLocations = value.cityPlaceList;
+            this.filteredLocations = value?.cityPlaceList;
             this.isLoading = false;
           },
           () => {
