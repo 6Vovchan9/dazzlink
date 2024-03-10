@@ -275,6 +275,23 @@
     }
     .articleList {
         padding-left: 24px;
+
+        .articleListItem {
+            margin-top: 12px;
+            p {
+                margin-top: 4px;
+    
+                &:first-child {
+                    margin-top: 0px;
+                }
+            }
+        }
+
+        &--inner {
+            .articleListItem {
+                margin-top: 4px;
+            }
+        }
     }
 
     ol .articleListItem {
@@ -299,10 +316,6 @@
             line-height: 32px;
             margin-bottom: 24px;
             margin-top: 64px;
-        }
-
-        .articleListItem {
-            margin-top: 12px;
         }
     }
 }
