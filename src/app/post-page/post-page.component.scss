@@ -5,9 +5,9 @@
 } // Это все для того чтобы когда контента мало footer все равно был прижат к низу
 
 .postPage {
-
+    font-family: Nunito;
     margin-top: 20px;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
 
     .postPage__container {
         display: flex;
@@ -20,64 +20,6 @@
 
         .postPage__container {
             flex-direction: row;
-        }
-    }
-
-    &--newFont {
-        font-family: Nunito;
-
-        .moduleTitle {
-            font-weight: 900;
-        }
-
-        .sidebar {
-            @media #{$mobile} {
-                margin-bottom: 48px;
-            }
-        }
-
-        .postTitle {
-            .postTitle__img {
-                @media #{$mobile} {
-                    margin-top: 48px;
-                }
-            }
-            .postTitle__details {
-                margin-bottom: 12px;
-            }
-            .postTitle__moduleTitle {
-                font-size: 32px;
-                line-height: 40px;
-                @media #{$notMobile} {
-                    font-size: 40px;
-                    line-height: 44px;
-                }
-            }
-        }
-
-        .pageContent {
-            .postContent {
-                .postContent__details {
-                    line-height: 24px;
-                    @media #{$mobile} {
-                        margin-bottom: 12px;
-                    }
-                }
-                .postContent__text {
-                    font-size: 20px;
-                    line-height: 28px;
-                }
-                .postContent__feedback {
-                    margin-top: 24px;
-                    @media #{$notMobile} {
-                        margin-top: 48px;
-                    }
-                }
-            }
-        }
-
-        @media #{$mobile} {
-            margin-bottom: 20px;
         }
     }
 }
@@ -128,7 +70,7 @@
     // margin-right: 8%;
     flex: 1;
     // max-width: 360px;
-    margin-bottom: 72px;
+    margin-bottom: 48px;
 
     .sidebar__authorList {
         display: none;
@@ -166,14 +108,31 @@
         border-radius: 32px;
         overflow: hidden;
         // max-width: 360px;
-        margin-top: 24px;
+        margin-top: 48px;
 
         img {
             max-width: 100%;
         }
     }
 
+    .postTitle__details {
+        margin-bottom: 12px;
+    }
+
+    .postTitle__moduleTitle {
+        font-weight: 900;
+        font-size: 32px;
+        line-height: 40px;
+        @media #{$notMobile} {
+            font-size: 40px;
+            line-height: 44px;
+        }
+    }
+
     @media #{$notMobile} {
+        .postTitle__img {
+            margin-top: 24px;
+        }
         .postTitle__details {
             display: none;
         }
@@ -189,12 +148,12 @@
             margin-bottom: 24px;
         }
         .postContent__text {
-            line-height: 24px;
+            font-size: 20px;
+            line-height: 28px;
         }
         .postContent__feedback {
-            margin-top: 32px;
+            margin-top: 24px;
         }
-
         .postContent__authorList {
             margin-top: 16px;
             .postContent__author {
@@ -211,6 +170,9 @@
             .postContent__details {
                 display: flex;
             }
+            .postContent__feedback {
+                margin-top: 48px;
+            }
             .postContent__authorList {
                 display: none;
             }
@@ -219,11 +181,11 @@
 }
 
 .postDetails {
-    margin-bottom: 4px;
     display: flex;
     flex-wrap: wrap;
     color: var(--color-text-gray);
     font-weight: bold;
+    line-height: 24px;
     .postDetails__info {
         margin-left: 13px;
         position: relative;
@@ -252,15 +214,7 @@
 
 ::ng-deep {
     .articleParagraph {
-        margin-bottom: 16px;
-        &:last-child {
-            margin-bottom: 0px;
-        }
-    }
-
-    .articleParagraphAfterList {
-        margin-top: 32px;
-        margin-bottom: 16px;
+        margin-bottom: 24px;
         &:last-child {
             margin-bottom: 0px;
         }
@@ -268,10 +222,11 @@
 
     .articleHeader {
         display: block;
-        font-size: 24px;
         font-weight: bold;
-        margin-bottom: 16px;
-        margin-top: 32px;
+        font-size: 28px;
+        line-height: 32px;
+        margin-bottom: 24px;
+        margin-top: 64px;
     }
     .articleList {
         padding-left: 24px;
@@ -300,22 +255,5 @@
 
     ul .articleListItem {
         list-style: disc;
-    }
-
-    .postPage--newFont {
-        .articleParagraph {
-            margin-bottom: 24px;
-        }
-
-        .articleParagraphAfterList {
-            margin-top: 24px;
-        }
-
-        .articleHeader {
-            font-size: 28px;
-            line-height: 32px;
-            margin-bottom: 24px;
-            margin-top: 64px;
-        }
     }
 }
