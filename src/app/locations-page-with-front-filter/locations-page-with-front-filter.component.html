@@ -231,6 +231,9 @@
             Не смогли показать локации, попробуйте<br>
             перезагрузить страницу или зайдите позже
         </div>
-        <button class="errorMessage__btn" (click)="retryGetAllLocations()">Перезагрузить</button>
+        <button class="errorMessage__btn" [disabled]="isLoading" [class.errorMessage__btn--isLoading]="isLoading" (click)="retryGetAllLocations()">
+            Перезагрузить
+            <img class="errorMessage__btnSpinner" src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
+        </button>
     </div>
 </ng-template>

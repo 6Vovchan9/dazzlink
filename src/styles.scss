@@ -59,6 +59,9 @@ img {
 
 button {
     color: #000;
+    &[disabled] {
+        color: rgb(0 0 0 / 20%);
+    }
 }
 
 // Этим отключаем scrollBar во всем приложении:
@@ -489,6 +492,7 @@ button {
         font-weight: 700;
     }
     .errorMessage__btn {
+        position: relative;
         cursor: pointer;
         margin-top: 16px;
         font-size: 16px;
@@ -497,6 +501,27 @@ button {
         border-radius: 16px;
         border: none;
         background-color: white;
+
+
+        .errorMessage__btnSpinner {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            max-height: 30px;
+            max-width: 30px;
+            transform: translate(-50%, -50%);
+        }
+
+        &--isLoading {
+            cursor: wait;
+
+            .errorMessage__btnSpinner {
+                display: block;
+            }
+        }
     }
 
     @media #{$notMobile} {
