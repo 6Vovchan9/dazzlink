@@ -222,9 +222,15 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     align-items: center;
     padding: 4px 0;
     background-color: var(--color-white);
-    // height: 56px;
+    background-color: rgb(255 255 255 / 90%);
+
+    backdrop-filter: blur(4px); // фильтр накладывается на фон элемента
+    // filter: blur(4px); // фильтр накладывается на сам элемент
+    // background: filter(url(path/to/img.jpg), blur(5px)); // есть еще такой вариант
+
     line-height: 24px;
     margin-bottom: 20px;
+    // height: 56px;
 
     .filterBar__length {
         color: var(--color-text-gray);
