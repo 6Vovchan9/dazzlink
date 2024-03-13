@@ -22,7 +22,7 @@
                         <div class="pageContent__allAboutLocations">
 
                             <!-- Фильтр бар -->
-                            <div class="filterBar" *ngIf="locationsNew?.placeCount">
+                            <div class="filterBar" [class.filterBar--withLoading]="isLoading" *ngIf="locationsNew?.placeCount">
                                 <div class="filterBar__length" [class.withSimpleSkeleton]="isLoading">
                                     <!-- Доступно {{locationsNew.placeCount}} мест -->
                                     {{getAmountOfAllSelectedCities()}}
@@ -110,6 +110,7 @@
                             </ng-container>
                             <!-- </ng-container> -->
                         </div>
+                        <div *ngIf="isLoading" class="gradientForLocationLoading"></div>
                     <!-- </ng-container> -->
                 <!-- </ng-container> -->
             <!-- </ng-container> -->

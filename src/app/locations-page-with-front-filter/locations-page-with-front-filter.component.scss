@@ -93,7 +93,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 }
 
 .pageContent {
-
+    position: relative;
     flex: 2;
     margin-bottom: 32px;
 
@@ -203,6 +203,14 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             }
         }
     }
+
+    .gradientForLocationLoading {
+        position: absolute;
+        height: 400px;
+        width: 100%;
+        bottom: 0px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+    }
 }
 
 .filterBar {
@@ -217,6 +225,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     // height: 56px;
     line-height: 24px;
     margin-bottom: 20px;
+
     .filterBar__length {
         color: var(--color-text-gray);
         font-weight: 700;
@@ -233,6 +242,10 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             }
         }
 
+    }
+
+    &--withLoading {
+        position: static;
     }
 
     @media #{$notMobile} {
