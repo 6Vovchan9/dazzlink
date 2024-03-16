@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="filterBar__controls">
                                     <!-- <button class="btn" (click)="isSorting = !isSorting">toggle</button> -->
-                                    <div class="filterBar__item" [class.withSimpleSkeleton]="isLoading">
+                                    <div class="filterBar__item" [class.withSkeletonLoader]="isLoading">
                                         <!-- Фильтрация -->
                                         <button class="filterButton"
                                             [disabled]="!filterFieldOptions?.length"
@@ -40,8 +40,9 @@
                                                 <div class="headInSortDropdown__text">Фильтр</div>
                                             </div>
                                         </button>
+                                        <div class="skeletonLoader skeletonLoader--shortHeight"></div>
                                     </div>
-                                    <div *ngIf="filterBarGroup" class="filterBar__item" [class.withSimpleSkeleton]="isLoading">
+                                    <div *ngIf="filterBarGroup" class="filterBar__item" [class.withSkeletonLoader]="isLoading">
                                         <!-- Сортировка -->
                                         <!-- (ngModelChange)="onChangeSort($event)" -->
                                         <app-dropdown-field
@@ -52,6 +53,7 @@
                                             [dropdownHead]="dropdownHeadForSort"
                                             optionLabel="value">
                                         </app-dropdown-field>
+                                        <div class="skeletonLoader skeletonLoader--shortHeight"></div>
                                     </div>
                                 </div>
                             </div>
