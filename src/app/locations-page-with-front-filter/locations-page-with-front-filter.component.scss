@@ -240,16 +240,23 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     .filterBar__controls {
         display: flex;
         align-items: center;
-        // margin-right: -16px;
+        margin-right: -16px;
         .filterBar__item {
             position: relative;
             overflow: hidden;
-            margin-right: 8px;
-            &:last-child {
-                margin-right: unset;
-            }
+            // margin-right: 8px;
+            // &:last-child {
+            //     margin-right: unset;
+            // }
         }
 
+    }
+
+    .filterBar__skeleton {
+        &:before {
+            width: calc(100% - 24px);
+            left: 8px;
+        }
     }
 
     &--withLoading {
