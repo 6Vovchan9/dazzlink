@@ -3,8 +3,6 @@
         <ng-container *ngIf="placeData?.imageList?.length; else defaultPlaceImg">
             <img [src]="placeData.imageList[0].href" loading="lazy" alt="Фото локации">
         </ng-container>
-
-        <div class="skeletonLoader"></div>
     </div>
     <!-- <div class="locationItem__details placeDetails">
         <div class="placeDetails__info">{{placeData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}</div>
@@ -47,10 +45,9 @@
                 </div>
                 <div class="placeDetails__address">{{placeData?.address}}</div>
             </div>
-
-            <div class="skeletonLoader skeletonLoader--inPlaceDetails"></div>
         </div>
     </div>
+    <div class="skeletonLoader skeletonLoader--inPlaceDetails"></div>
 </div>
 
 <ng-template #defaultPlaceImg>
