@@ -243,11 +243,13 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         margin-right: -16px;
         .filterBar__item {
             position: relative;
-            overflow: hidden;
             // margin-right: 8px;
             // &:last-child {
             //     margin-right: unset;
             // }
+            &.withSkeletonLoader {
+                overflow: hidden;
+            }
         }
 
     }
