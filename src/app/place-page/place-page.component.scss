@@ -57,7 +57,7 @@
 }
 
 .placeMainInfo {
-    margin-top: 24px;
+    margin-top: 16px;
     .placeMainInfo__another {
         margin-top: 4px;
         display: flex;
@@ -90,6 +90,10 @@
                 }
             }
         }
+    }
+
+    @media #{$notMobile} {
+        margin-top: 24px;
     }
 }
 
