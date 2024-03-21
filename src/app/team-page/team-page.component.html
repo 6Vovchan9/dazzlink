@@ -109,28 +109,30 @@
                 науки о данных, наук об обучении
             </div>
             <ul class="ourTeam__list">
-                <li *ngFor="let worker of ourPersonal" [class.ourTeam__item--withDetails]="worker.details?.vita" class="ourTeam__item">
-                    <div (click)="openPersonDescModal(worker)" class="personCard personCard--demo">
-                        <div class="personCard__photo">
-                            <img [src]="worker.photo || 'assets/images/mockPhoto.jpg'" alt="фотка">
-                        </div>
-                        <div class="personCard__data">
-                            <div class="personCard__firstRow">
-                                <div class="personCard__name">
-                                    {{worker.name}}
+                @for (worker of ourPersonal; track $index; let count = $count) {
+                    <li [class.ourTeam__item--withDetails]="worker.details?.vita" class="ourTeam__item">
+                        <div (click)="openPersonDescModal(worker)" class="personCard personCard--demo">
+                            <div class="personCard__photo">
+                                <img [src]="worker.photo || 'assets/images/mockPhoto.jpg'" alt="фотка">
+                            </div>
+                            <div class="personCard__data">
+                                <div class="personCard__firstRow">
+                                    <div class="personCard__name">
+                                        {{worker.name}}
+                                    </div>
+                                    <div *ngIf="worker.details?.vita" class="personCard__goToPersonDesc">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.775 2.37461L3.15 2.37461C2.82362 2.37461 2.54618 2.26038 2.3177 2.03191C2.08923 1.80343 1.975 1.52599 1.975 1.19961C1.975 0.866276 2.08923 0.582943 2.3177 0.349609C2.54618 0.116276 2.82362 -0.000391006 3.15 -0.000391006L11.25 -0.000391006C11.4625 -0.000391006 11.6406 0.0714846 11.7844 0.215234C11.9281 0.358984 12 0.537109 12 0.749609L12 8.84961C12 9.17599 11.8833 9.45343 11.65 9.68191C11.4167 9.91038 11.1333 10.0246 10.8 10.0246C10.4667 10.0246 10.1875 9.91038 9.9625 9.68191C9.7375 9.45343 9.625 9.17599 9.625 8.84961V4.22461L2.75 11.0996C2.49715 11.3496 2.1881 11.4746 1.82285 11.4746C1.45762 11.4746 1.15 11.3485 0.9 11.0962C0.65 10.8439 0.525 10.5356 0.525 10.1712C0.525 9.80681 0.65 9.49961 0.9 9.24961L7.775 2.37461Z" fill="#A8A8A8"/>
+                                        </svg>
+                                    </div>
                                 </div>
-                                <div *ngIf="worker.details?.vita" class="personCard__goToPersonDesc">
-                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.775 2.37461L3.15 2.37461C2.82362 2.37461 2.54618 2.26038 2.3177 2.03191C2.08923 1.80343 1.975 1.52599 1.975 1.19961C1.975 0.866276 2.08923 0.582943 2.3177 0.349609C2.54618 0.116276 2.82362 -0.000391006 3.15 -0.000391006L11.25 -0.000391006C11.4625 -0.000391006 11.6406 0.0714846 11.7844 0.215234C11.9281 0.358984 12 0.537109 12 0.749609L12 8.84961C12 9.17599 11.8833 9.45343 11.65 9.68191C11.4167 9.91038 11.1333 10.0246 10.8 10.0246C10.4667 10.0246 10.1875 9.91038 9.9625 9.68191C9.7375 9.45343 9.625 9.17599 9.625 8.84961V4.22461L2.75 11.0996C2.49715 11.3496 2.1881 11.4746 1.82285 11.4746C1.45762 11.4746 1.15 11.3485 0.9 11.0962C0.65 10.8439 0.525 10.5356 0.525 10.1712C0.525 9.80681 0.65 9.49961 0.9 9.24961L7.775 2.37461Z" fill="#A8A8A8"/>
-                                    </svg>
+                                <div class="personCard__position">
+                                    {{worker.position}}
                                 </div>
                             </div>
-                            <div class="personCard__position">
-                                {{worker.position}}
-                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                }
             </ul>
         </div>
     </div>
