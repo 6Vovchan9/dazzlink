@@ -156,9 +156,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 24px;
-            .pageContent__city {
-                overflow: hidden;
-            }
         }
 
         .pageContent__locationsList {
@@ -236,6 +233,8 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         color: var(--color-text-gray);
         font-weight: 700;
         padding: 8px 0px;
+        position: relative;
+        overflow: hidden;
     }
     .filterBar__controls {
         display: flex;

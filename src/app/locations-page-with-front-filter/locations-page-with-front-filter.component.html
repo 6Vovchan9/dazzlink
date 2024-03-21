@@ -23,9 +23,10 @@
 
                             <!-- Фильтр бар -->
                             <div class="filterBar" [class.filterBar--withLoading]="isLoading" *ngIf="locationsNew?.placeCount">
-                                <div class="filterBar__length" [class.withSimpleSkeleton]="isLoading">
+                                <div class="filterBar__length" [class.withSkeletonLoader]="isLoading">
                                     <!-- Доступно {{locationsNew.placeCount}} мест -->
                                     {{getAmountOfAllSelectedCities()}}
+                                    <div class="skeletonLoader skeletonLoader--shortHeight"></div>
                                 </div>
                                 <div class="filterBar__controls">
                                     <!-- <button class="btn" (click)="isSorting = !isSorting">toggle</button> -->
