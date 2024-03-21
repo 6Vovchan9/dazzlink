@@ -5,15 +5,14 @@
         </aside>
         <aside class="sidebar">
 
-            <ng-container *ngIf="!showFilterControls || !filterFieldOptions?.length; else filterOptionsBlock">
+            @if (!showFilterControls || !filterFieldOptions?.length){
                 <!-- Инф о странице -->
                 <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
-            </ng-container>
-            <ng-template #filterOptionsBlock>
-                <!-- <ng-container *ngIf="filterFieldOptions?.length && !filterBarFixed"> -->
-                    <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
-                <!-- </ng-container> -->
-            </ng-template>
+            } @else {
+                <!-- Список городов для фильтрации -->
+                <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
+            }
+
         </aside>
         <main class="pageContent">
             <!-- <ng-container *ngIf="!isLoading; else loadingTemplate"> -->
@@ -85,17 +84,6 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                        <!-- Angular 17:
-                                        <ul class="pageContent__locationsList">
-                                            @for (location of block.placeList; track location) {
-                                                <li class="pageContent__locationsItem">
-                                                    ...
-                                                </li>
-                                            }
-                                            @if (2 > 1) {
-                                                <hr />
-                                            }
-                                        </ul> -->
                                     </div>
                                 </ng-container>
                             </ng-container>

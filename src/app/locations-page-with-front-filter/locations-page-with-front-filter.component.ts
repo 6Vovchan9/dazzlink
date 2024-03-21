@@ -31,7 +31,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   private sSub: Subscription;
   private curLang: string;
   private pageWrapScrollSub: Subscription;
-  public filterBarFixed = false;
   public filterBarGroup: UntypedFormGroup;
   private selectedCitiesMap: {[key: string]: 'chosen'} = {};
   public amountAllSelectedCities: Array<string> = [];
