@@ -5,7 +5,7 @@
         </aside>
         <aside class="sidebar">
 
-            @if (!showFilterControls || !filterFieldOptions?.length){
+            @if (!showFilterControls || !filterFieldOptions?.length) {
                 <!-- Инф о странице -->
                 <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
             } @else {
@@ -62,31 +62,34 @@
                             <ng-container *ngIf="locationsNew; else errorInGetAllLocations">
                             <ng-container *ngIf="locationsNew.placeCount; else empty">
                             <!-- Список локаций -->
-                            <ng-container *ngFor="let block of filteredLocations">
-                                <ng-container *ngIf="block.placeList?.length">
+
+                            @for (block of filteredLocations; track block.cityCode) {
+                                @if (block.placeList?.length) {
                                     <div class="pageContent__locationsBlock">
                                         <div class="pageContent__locationsCity">
                                             <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting || isLoading">{{block.cityTitle}}</span>
                                         </div>
                                         <ul class="pageContent__locationsList">
-                                            <li *ngFor="let location of block.placeList" class="pageContent__locationsItem">
-                                                <!-- <app-location-item [isLoading]="isSorting"
-                                                    (click)="goToLocationDesc(location.id)"
-                                                    [placeData]="location"
-                                                ></app-location-item> -->
-                                                <a [routerLink]="['/place', location.id || 'id']"
-                                                    target="_blank"
-                                                    class="pageContent__locationLink"
-                                                    [class.pageContent__locationLink--disabled]="isSorting || isLoading"
-                                                >
-                                                    <app-location-item [isLoading]="isSorting || isLoading" [placeData]="location">
-                                                    </app-location-item>
-                                                </a>
-                                            </li>
+                                            @for (location of block.placeList; track location.id) {
+                                                <li class="pageContent__locationsItem">
+                                                    <!-- <app-location-item [isLoading]="isSorting"
+                                                        (click)="goToLocationDesc(location.id)"
+                                                        [placeData]="location"
+                                                    ></app-location-item> -->
+                                                    <a [routerLink]="['/place', location.id || 'id']"
+                                                        target="_blank"
+                                                        class="pageContent__locationLink"
+                                                        [class.pageContent__locationLink--disabled]="isSorting || isLoading"
+                                                    >
+                                                        <app-location-item [isLoading]="isSorting || isLoading" [placeData]="location">
+                                                        </app-location-item>
+                                                    </a>
+                                                </li>
+                                            }
                                         </ul>
                                     </div>
-                                </ng-container>
-                            </ng-container>
+                                }
+                            }
 
                             <!-- Кнопка другие локации -->
                             <div *ngIf="!isLoading" class="pageContent__toAnotherLocations">
