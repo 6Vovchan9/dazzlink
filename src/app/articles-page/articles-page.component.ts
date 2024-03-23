@@ -49,6 +49,10 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
     return result;
   }
 
+  public trackPost(index: number, post: Post): string {
+    return post.id;
+  }
+
   private getAllArticles(): void {
     this.isLoading = true;
 
@@ -59,6 +63,7 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
           console.warn('locationsGet error :(');
           // observer.next({});
           // observer.next(null);
+          // observer.next([]);
           observer.error('Error');
         })
       }).pipe(

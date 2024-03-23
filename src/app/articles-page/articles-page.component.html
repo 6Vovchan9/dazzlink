@@ -62,16 +62,22 @@
                     </div>
                 </ng-container>
                 <ng-template #successGetAllArticles>
-                    <ng-container *ngIf="postList.length; else empty">
+
+                    @if (postList.length){
                         <ul class="pageContent__articles">
-                            <li *ngFor="let post of postList" class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
-                                <!-- <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post> -->
-                                <a [routerLink]="['/post', post.id]" class="pageContent__articleLink">
-                                    <app-post [postData]="post"></app-post>
-                                </a>
-                            </li>
+                            @for (post of postList; track trackPost;) {
+                                <li class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
+                                    <!-- <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post> -->
+                                    <a [routerLink]="['/post', post.id]" class="pageContent__articleLink">
+                                        <app-post [postData]="post"></app-post>
+                                    </a>
+                                </li>
+                            }
                         </ul>
-                    </ng-container>
+                    } @else {
+                        <ng-container *ngTemplateOutlet="empty"></ng-container> 
+                    }
+
                 </ng-template>
             </ng-container>
 
