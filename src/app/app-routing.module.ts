@@ -16,7 +16,7 @@ import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.compon
 const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
-      { path: '', redirectTo: '/', pathMatch: 'full' },
+      // { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: '', component: HomePageComponent },
       { path: 'agreements', component: AgreementsPageComponent },
       { path: 'articles', component: ArticlesPageComponent },
