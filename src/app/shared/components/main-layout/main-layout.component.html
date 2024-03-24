@@ -1,5 +1,6 @@
 <div class="pageWrap"
     id="pageWrap"
+    #pageWrap
     (scroll)="onScrollPage($event)"
     [ngClass]="{
         'pageWrap--headerFixed': mainLayoutOpt.header.fixed && !mainLayoutOpt.footerFixed && !mainLayoutOpt.header.withAnimation,

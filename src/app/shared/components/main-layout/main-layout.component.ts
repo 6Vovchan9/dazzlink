@@ -1,5 +1,6 @@
-import { Component, DoCheck, OnInit, Optional, inject } from '@angular/core';
+import { Component, DoCheck, ElementRef, OnDestroy, OnInit, Optional, ViewChild, inject } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { NavigationEnd, Router } from '@angular/router';
 
 import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
@@ -9,13 +10,17 @@ import { MobileDetectService } from '@app/shared/services/mobile-detect.service'
 import { PagesService } from '@app/shared/services/pages.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { VisitsService } from '@app/shared/services/visits.service';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss']
 })
-export class MainLayoutComponent implements OnInit, DoCheck {
+export class MainLayoutComponent implements OnInit, DoCheck, OnDestroy {
+
+  @ViewChild('pageWrap') pageWrapEl: ElementRef;
 
   public showNavModal = false;
   public scrollDown = false;
@@ -40,6 +45,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
     ],
     // value: 'RU'
   };
+  private rSub: Subscription;
 
   private tgService = inject(TelegramService);
 
@@ -47,6 +53,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
     private visitsService: VisitsService,
     private pagesService: PagesService,
     public modalService: GlobalModalService,
+    private router: Router,
     @Optional() public mobileDetectService: MobileDetectService,
   ) { }
 
@@ -60,6 +67,22 @@ export class MainLayoutComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {
     this.createForm();
+    this.scrollToTop();
+  }
+
+  private scrollToTop(): void {
+    this.rSub = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(
+      val => {
+        this.pageWrapEl.nativeElement.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth"
+        })
+        // console.log(val);
+      }
+    )
   }
 
   public checkLocationsPageOrNot(): boolean {
@@ -153,6 +176,10 @@ export class MainLayoutComponent implements OnInit, DoCheck {
       this.tgService.mainTgButton.setText('MainButton');
       this.tgService.mainTgButton.show();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.rSub?.unsubscribe();
   }
 
 }

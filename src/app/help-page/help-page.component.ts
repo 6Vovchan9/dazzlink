@@ -24,7 +24,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   private resizeObservable$: Observable<Event>;
-  private resizeSubscription$: Subscription;
+  private resizeSubscription: Subscription;
 
   constructor() { }
 
@@ -40,9 +40,6 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    
-    this.scrollToTop();
-
     // console.log(this.sectionsRef);
     this.sectionsRef.forEach(el => {
       // console.log(el.nativeElement);
@@ -54,17 +51,9 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.resizeObservable$ = fromEvent(window, 'resize').pipe(
       debounceTime(1000)
     );
-    this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
+    this.resizeSubscription = this.resizeObservable$.subscribe(evt => {
       // console.log('event: ', evt);
       this.updateObserver();
-    });
-  }
-
-  private scrollToTop(): void {
-    document.getElementById('pageWrap').scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
     });
   }
 
@@ -133,7 +122,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.resizeSubscription$?.unsubscribe();
+    this.resizeSubscription?.unsubscribe();
     this.observer?.disconnect();
   }
 }
