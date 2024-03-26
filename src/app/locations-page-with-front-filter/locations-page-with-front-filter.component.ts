@@ -36,6 +36,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   public amountAllSelectedCities: Array<string> = [];
   public amountAllSelectedCitiesBefore: Array<string> = [];
   private timerForFilter: any;
+  private aboutType: unknown;
   public showFilterControls = false;
   public errorAfterSort = false;
   public errorInGetAllLocations = false;
@@ -488,17 +489,20 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     } else {
       this.locationsSub = this.locationsService.getAllLocations()
         .pipe(delay(2000))
-        .subscribe(
-          value => {
+        .subscribe({
+          next: value => {
+            // console.log(value);
+            // let locationsForYmap = value.cityPlaceList.map(el1 => el1.placeList).flat();
+            // console.log(locationsForYmap);
             this.locationsNew = value;
             this.filteredLocations = value?.cityPlaceList;
             this.isLoading = false;
           },
-          () => {
+          error: () => {
             this.locationsNew = this.filteredLocations = null;
             this.isLoading = false;
           }
-        );
+        });
     }
   }
 

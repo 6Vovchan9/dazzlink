@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=7367c576-0f49-48d4-a0a7-0faff8a195e2" type="text/javascript"></script> -->
+
     <!-- Скрипт для определения типа устройства -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.4/mobile-detect.min.js"></script>
 
@@ -31,6 +33,10 @@
         body {
             margin: 0;
             color: #333;
+        }
+
+        #map {
+            width: 100%; height: 600px; padding: 0; margin: 0;
         }
 
         * {
@@ -606,7 +612,9 @@
                                 <path d="M26.667 19.4512C24.3419 19.4512 22.4502 17.5594 22.4502 15.2343H23.0459C23.0459 17.231 24.6702 18.8555 26.667 18.8555C28.6638 18.8555 30.2881 17.231 30.2881 15.2343H30.8838C30.8838 17.5594 28.9921 19.4512 26.667 19.4512Z" fill="white"/>
                             </svg>
                         </a>
+                        <!-- <button type="button" onclick="startYmaps()">Кнопка</button> -->
                     </div>
+                    <!-- <div id="map"></div> -->
                 </div>
             </main>
         </div>
@@ -839,5 +847,102 @@
         curOStagName = 'appGalleryLinkInFooter';
     }
     document.getElementById(curOStagName).style.display = 'block';
+</script>
+<!-- Яндекс скрипт -->
+<script>
+    function init() {
+        var myMap = new ymaps.Map('map', {
+            center: [40, 50],
+            zoom: 17,
+            controls: []
+        });
+
+        let counter = 0;
+
+        var searchControl = new ymaps.control.SearchControl({
+            options: {
+                provider: 'yandex#search'
+            }
+        });
+
+        myMap.controls.add(searchControl);
+
+        var latLonNameArray = [
+            {title: "Caravan", coordinates: [41.285158, 69.257761]},
+            {title: "Na-Nebe", coordinates: [41.327953, 69.278003]},
+            {title: "Лондонъ", coordinates: [49.817427, 73.099086]}
+        ];
+
+        var name = null;
+        var data = null;
+
+        var result = [];
+
+        function shiftLatLonName() {
+            if (latLonNameArray.length) {
+                var latLonName = latLonNameArray.shift();
+
+                name = latLonName.title;
+                data = latLonName;
+
+                myMap.setCenter(latLonName.coordinates, 17, {
+                    checkZoomRange: false
+                });
+            }
+        }
+
+        searchControl.events.add('load', function () {
+            var geoObjectsArray = searchControl.getResultsArray();
+
+            if (geoObjectsArray.length) {
+                var object = geoObjectsArray[0];
+                console.log(++counter);
+                var rating = object.properties.get('rating');
+                var companyMetaData = object.properties.get('companyMetaData');
+                
+                if (companyMetaData != null && rating != null) {
+                    companyMetaData['rating'] = rating.score
+                }
+
+                const locationData = {
+                    request: data,
+                    response: companyMetaData
+                }
+
+                result.push(locationData);
+            } else {
+                result.push({request: data, response: null});
+            }
+
+            if (latLonNameArray.length) {
+                setTimeout(function () {
+                    shiftLatLonName();
+                }, 1000);
+            } else {
+                counter = 0
+                var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result));
+                var downloadAnchorNode = document.createElement('a');
+                downloadAnchorNode.setAttribute("href", dataStr);
+                downloadAnchorNode.setAttribute("download", "result.json");
+                document.body.appendChild(downloadAnchorNode);
+                downloadAnchorNode.click();
+                downloadAnchorNode.remove();
+            }
+        }, this);
+
+        myMap.events.add('boundschange', function (event) {
+            if (name != null) {
+                let org = name;
+                name = null;
+                searchControl.search(org);
+            }
+        }, this);
+
+        shiftLatLonName();
+    }
+
+    function startYmaps() {
+        ymaps.ready(init);
+    }
 </script>
 </html>

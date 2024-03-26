@@ -32,6 +32,7 @@ export class LocationsService {
             customQueryParams['cityCode'] = filterVal;
         }
 
+        // 'x-source-channel': dazzlink-android'
         return this.http.get(
             `${environment.prodPlacesUrl}/place`,
             {
