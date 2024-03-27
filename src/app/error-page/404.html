@@ -848,9 +848,11 @@
     }
     document.getElementById(curOStagName).style.display = 'block';
 </script>
+<!-- Список локаций для яндекса -->
+<script src="/src/app/shared/constants/allLocations.js"></script>
 <!-- Яндекс скрипт -->
 <script>
-    function init() {
+    function init1() {
         var myMap = new ymaps.Map('map', {
             center: [40, 50],
             zoom: 17,
@@ -880,7 +882,7 @@
 
         function shiftLatLonName() {
             if (latLonNameArray.length) {
-                var latLonName = latLonNameArray.shift();
+                let latLonName = latLonNameArray.shift();
 
                 name = latLonName.title;
                 data = latLonName;
@@ -892,16 +894,16 @@
         }
 
         searchControl.events.add('load', function () {
-            var geoObjectsArray = searchControl.getResultsArray();
+            let geoObjectsArray = searchControl.getResultsArray();
 
             if (geoObjectsArray.length) {
-                var object = geoObjectsArray[0];
+                let object = geoObjectsArray[0];
                 console.log(++counter);
-                var rating = object.properties.get('rating');
-                var companyMetaData = object.properties.get('companyMetaData');
+                let rating = object.properties.get('rating');
+                let companyMetaData = object.properties.get('companyMetaData');
                 
                 if (companyMetaData != null && rating != null) {
-                    companyMetaData['rating'] = rating.score
+                    companyMetaData['rating'] = rating.score;
                 }
 
                 const locationData = {
@@ -920,8 +922,8 @@
                 }, 1000);
             } else {
                 counter = 0
-                var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result));
-                var downloadAnchorNode = document.createElement('a');
+                let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result));
+                let downloadAnchorNode = document.createElement('a');
                 downloadAnchorNode.setAttribute("href", dataStr);
                 downloadAnchorNode.setAttribute("download", "result.json");
                 document.body.appendChild(downloadAnchorNode);
@@ -941,8 +943,57 @@
         shiftLatLonName();
     }
 
+    async function init2(ymaps) {
+
+        const example = [
+            {title: "Caravan", address: "ул. Абдуллы Каххара, 22", yandex_org_id: '163533281445'},
+            {title: "Na-Nebe", address: "массив Киёт, 57А", yandex_org_id: '48671443153'},
+            {title: "Лондонъ", address: "просп. Нурсултана Назарбаева, 38", yandex_org_id: '211644866133'}
+        ];
+        let counter = 0;
+        const result = [];
+
+        console.log('До');
+
+        for (let item of example) {
+            console.log(++counter, item.title);
+            try {
+                const orgInfo = await ymaps.findOrganization(item.yandex_org_id);
+
+                const rating = orgInfo.properties.get('rating');
+                const companyMetaData = orgInfo.properties.get('companyMetaData');
+
+                if (companyMetaData && rating?.score) {
+                    companyMetaData['rating'] = rating.score;
+                }
+
+                const locationData = {
+                    request: item,
+                    response: companyMetaData
+                }
+
+                result.push(locationData);
+            } catch (err) {
+                result.push({request: item, response: null});
+            }
+        }
+        counter = 0;
+
+        // Скачиваем файл с результатами:
+        let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result));
+        let downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "result.json");
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+
+        console.log('После');
+        console.log('Результат: ', result);
+    }
+
     function startYmaps() {
-        ymaps.ready(init);
+        if (window['ymaps']) ymaps.ready(init2);
     }
 </script>
 </html>
