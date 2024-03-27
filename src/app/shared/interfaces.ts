@@ -1,3 +1,48 @@
+// Пример 1:
+type objType1 = {
+    one: string,
+    two: number
+}
+
+type objType2 = {
+    three: boolean
+}
+
+type objCommonType = objType1 & objType2;
+
+// Пример 2:
+interface IMy1 {
+    one: string,
+    two: number
+}
+
+interface IMy2 extends IMy1 {
+    three: boolean
+}
+
+// Пример 3:
+interface IHuman {
+    age: number,
+    name: string,
+    walk: () => number
+}
+
+type THuman = {
+    talk: (always?: boolean) => void
+}
+
+class Human implements IHuman, THuman {
+    age: 19;
+    name: 'Ivan';
+    walk() {
+        return 4
+    }
+    talk() {
+        console.log('Hello' + this.name)
+    }
+}
+
+// Остальное:
 export interface AdminData {
     email: string;
     password: string;
