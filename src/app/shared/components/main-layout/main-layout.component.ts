@@ -1,7 +1,10 @@
 import { Component, DoCheck, ElementRef, OnDestroy, OnInit, Optional, ViewChild, inject } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
+import { AbsractExample } from '@app/shared/abstract.class';
 import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { MainLayoutOptions } from '@app/shared/interfaces';
@@ -10,15 +13,13 @@ import { MobileDetectService } from '@app/shared/services/mobile-detect.service'
 import { PagesService } from '@app/shared/services/pages.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { VisitsService } from '@app/shared/services/visits.service';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss']
 })
-export class MainLayoutComponent implements OnInit, DoCheck, OnDestroy {
+export class MainLayoutComponent extends AbsractExample implements OnInit, DoCheck, OnDestroy {
 
   @ViewChild('pageWrap') pageWrapEl: ElementRef;
 
@@ -55,7 +56,11 @@ export class MainLayoutComponent implements OnInit, DoCheck, OnDestroy {
     public modalService: GlobalModalService,
     private router: Router,
     @Optional() public mobileDetectService: MobileDetectService,
-  ) { }
+  ) { super() }
+
+  requiredMethod(): number {
+    return Math.PI * Math.pow(this.radius, 2);
+  }
 
   ngDoCheck(): void {
     if (this.checkLocationsPageOrNot()) {
@@ -157,14 +162,6 @@ export class MainLayoutComponent implements OnInit, DoCheck, OnDestroy {
   public closeNavPopup(): void {
     this.showNavModal = false;
     this.showScroll();
-  }
-
-  private hideScroll(): void {
-    document.body.classList.add('no-scroll');
-  }
-
-  private showScroll(): void {
-    document.body.classList.remove('no-scroll');
   }
 
   public openQRModal(): void {

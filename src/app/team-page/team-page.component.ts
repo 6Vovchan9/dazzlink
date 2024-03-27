@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { AbsractExample } from '@app/shared/abstract.class';
 import { ourTeamList } from '@app/shared/constants/ourTeam.constants';
 import { IAboutPersonalData } from '@app/shared/interfaces';
 
@@ -7,14 +8,28 @@ import { IAboutPersonalData } from '@app/shared/interfaces';
   templateUrl: './team-page.component.html',
   styleUrls: ['./team-page.component.scss']
 })
-export class TeamPageComponent implements AfterViewInit {
+export class TeamPageComponent extends AbsractExample implements AfterViewInit {
 
   public ourPersonal: Array<IAboutPersonalData> = ourTeamList;
   public showNavModal = false;
   public chosenPersonData: IAboutPersonalData;
 
+  // constructor() {
+  //   super();
+  // }
+
   ngAfterViewInit(): void {
+    // console.log(this.getName());
     this.scrollToTop();
+  }
+
+  requiredMethod(): number {
+    return Math.PI * Math.pow(this.radius, 2);
+  }
+
+  getName(): string {
+    let greeting = super.getName() + ' hello!';
+    return greeting;
   }
 
   private scrollToTop(): void {
@@ -33,13 +48,5 @@ export class TeamPageComponent implements AfterViewInit {
   public closePersonDescModal(): void {
     this.chosenPersonData = null;
     this.showScroll();
-  }
-
-  private hideScroll(): void {
-    document.body.classList.add('no-scroll');
-  }
-
-  private showScroll(): void {
-    document.body.classList.remove('no-scroll');
   }
 }
