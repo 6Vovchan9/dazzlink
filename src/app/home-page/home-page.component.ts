@@ -25,7 +25,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   private curLang: string;
   private lSub: Subscription;
   private pageWrapScrollSub: Subscription;
-  public appOpportunityMenu: {[key: string]: IOpportunityMenu} = {
+  public appOpportunityMenu: Record<string, IOpportunityMenu> = {
     media: {
       type: 'link',
       caption: 'Медиа про психологию отношений'

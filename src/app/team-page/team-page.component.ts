@@ -40,7 +40,7 @@ export class TeamPageComponent extends AbsractExample implements AfterViewInit {
     });
   }
 
-  public openPersonDescModal(persona): void {
+  public openPersonDescModal(persona: IAboutPersonalData): void {
     this.chosenPersonData = persona;
     this.hideScroll();
   }
