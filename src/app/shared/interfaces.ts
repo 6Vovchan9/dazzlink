@@ -42,6 +42,32 @@ class Human implements IHuman, THuman {
     }
 }
 
+// Пример 4 (когда не можем указать тип или интерфейс для переменной):
+const str4 = 'Hello';
+const anyString: typeof str4 = 'Hello';
+
+const obj4 = {
+    name: 'Ivan',
+    age: 12
+}
+const func4 = (myObject: typeof obj4) => { }
+func4({name: 'Petr', age: 32});
+
+// Пример 5:
+interface IGeneric<R> {
+    field: R
+}
+
+class Class5 implements IGeneric<number> {
+    field = 45;
+}
+
+function func5<T, U>(val: T): T {
+    return val;
+}
+
+func5<number, string>(6);
+
 // Остальное:
 export interface AdminData {
     email: string;
