@@ -261,6 +261,7 @@
             display: flex;
             overflow: hidden;
             flex-direction: column-reverse;
+            row-gap: 20px;
             .personDescModal__content {
                 display: flex;
                 flex-direction: column;
@@ -304,14 +305,23 @@
         .personDescModal__container .personDescModal__wrapper {
             .personDescModal__content {
                 overflow: scroll;
-                padding-top: 20px;
+                .personDescModal__info {
+                    padding-top: 20px;
+                }
             }
             .personDescModal__closeBtn {
-                padding-bottom: 20px;
                 display: flex;
                 justify-content: flex-end;
             }
         }
+    }
+}
+
+.closeButtonInWindow {
+    &:before {
+        width: 64px;
+        height: 64px;
+        background-color: pink;
     }
 }
 
