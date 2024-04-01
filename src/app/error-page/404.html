@@ -947,8 +947,16 @@
 
         const example = [
             {title: "Caravan", address: "ул. Абдуллы Каххара, 22", yandex_org_id: '163533281445'},
-            {title: "Na-Nebe", address: "массив Киёт, 57А", yandex_org_id: '48671443153'},
-            {title: "Лондонъ", address: "просп. Нурсултана Назарбаева, 38", yandex_org_id: '211644866133'}
+            // {title: "Na-Nebe", address: "массив Киёт, 57А", yandex_org_id: '48671443153'},
+            {title: "Mumtoz", address: "ул. Мустакиллик", yandex_org_id: '97158661543'},
+            {title: "Palma", address: "ул. Аль-Фергани, 37В", yandex_org_id: '30230071491'},
+            {title: "Kazakhasia", address: "ул. Казыбек би, 25", yandex_org_id: '69482490149'},
+            {title: "Усадьба Ладушки", address: "ул. Байтурсынова, 74/4", yandex_org_id: '195244551976'},
+            {title: "Лондонъ", address: "просп. Нурсултана Назарбаева, 38", yandex_org_id: '211644866133'},
+            {title: "Кироги", address: "ул. Пичугина, 37", yandex_org_id: '1237955088'},
+            {title: "Золотой Телёнок", address: "просп. Каржаубайулы, 249/4", yandex_org_id: '219227216750'},
+            {title: "Zorro", address: "Привокзальная площадь, 3", yandex_org_id: '167642788385'},
+            // {title: "Фламинго", address: "ул. Ислама Каримова", yandex_org_id: '69797480050'}
         ];
         let counter = 0;
         const result = [];
@@ -959,34 +967,52 @@
             console.log(++counter, item.title);
             try {
                 const orgInfo = await ymaps.findOrganization(item.yandex_org_id);
-
+                let geocodeJson;
+                let point = orgInfo.properties.get('point');
+                // console.log(point);
+                if (point) {
+                    let geocodeResp = await fetch(`https://geocode-maps.yandex.ru/1.x/?apikey=7367c576-0f49-48d4-a0a7-0faff8a195e2&format=json&geocode=${point.join(',')}`);
+                    geocodeJson = await geocodeResp.json();
+                    // console.log(geocodeJson?.response?.GeoObjectCollection?.featureMember?.[0]?.GeoObject);
+                }
                 const rating = orgInfo.properties.get('rating');
                 const companyMetaData = orgInfo.properties.get('companyMetaData');
-
-                if (companyMetaData && rating?.score) {
-                    companyMetaData['rating'] = rating.score;
+                let respVal;
+                if (companyMetaData) {
+                    respVal = {
+                        address: companyMetaData.address,
+                        id: companyMetaData.id,
+                        name: companyMetaData.name,
+                    }
+                    if (rating?.score) respVal.rating = rating.score;
+                    if (point) respVal.point = point;
+                    respVal.addressShort = geocodeJson?.response?.GeoObjectCollection?.featureMember?.[0]?.GeoObject?.name;
+                    respVal.addressFull = geocodeJson?.response?.GeoObjectCollection?.featureMember?.[0]?.GeoObject?.metaDataProperty?.GeocoderMetaData?.text;
                 }
+
+                // console.log(respVal);
 
                 const locationData = {
                     request: item,
-                    response: companyMetaData
+                    response: respVal
                 }
 
                 result.push(locationData);
             } catch (err) {
+                console.error(err);
                 result.push({request: item, response: null});
             }
         }
         counter = 0;
 
         // Скачиваем файл с результатами:
-        let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result));
-        let downloadAnchorNode = document.createElement('a');
-        downloadAnchorNode.setAttribute("href", dataStr);
-        downloadAnchorNode.setAttribute("download", "result.json");
-        document.body.appendChild(downloadAnchorNode);
-        downloadAnchorNode.click();
-        downloadAnchorNode.remove();
+        // let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result));
+        // let downloadAnchorNode = document.createElement('a');
+        // downloadAnchorNode.setAttribute("href", dataStr);
+        // downloadAnchorNode.setAttribute("download", "result.json");
+        // document.body.appendChild(downloadAnchorNode);
+        // downloadAnchorNode.click();
+        // downloadAnchorNode.remove();
 
         console.log('После');
         console.log('Результат: ', result);
