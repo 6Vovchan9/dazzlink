@@ -488,7 +488,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
 
     } else {
       this.locationsSub = this.locationsService.getAllLocations()
-        .pipe(delay(2000))
+        // .pipe(delay(2000))
         .subscribe({
           next: value => {
             // console.log(value);

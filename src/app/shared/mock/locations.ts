@@ -9,11 +9,27 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
             "placeList": [
                 {
                     "categoryCode": "RESTAURANTS",
-                    "title": "Старый город",
-                    "subtitle": "Европейская",
+                    "title": "10abcdefgh",
+                    "subtitle": "Итальянская",
                     "subcategory": "Ресторан",
-                    "rating": 4.2,
-                    "address": "проспект Ленина, 17",
+                    "rating": 5,
+                    "address": "просп. Название",
+                },
+                {
+                    "categoryCode": "RESTAURANTS",
+                    "title": "4abc",
+                    "subtitle": "Европейская",
+                    "subcategory": "Ресто-бар",
+                    "rating": 3.9,
+                    "address": "ул. Достык, 16",
+                },
+                {
+                    "categoryCode": "RESTAURANTS",
+                    "title": "5abcd",
+                    "subtitle": "Европейская",
+                    "subcategory": "Кафе",
+                    "rating": 4.9,
+                    "address": "5-й микрорайон, 16",
                 }
             ]
         },
@@ -23,19 +39,27 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
             placeList: [
                 {
                     "categoryCode": "RESTAURANTS",
-                    "title": "Чайхана Navat и еще очень много всего инетересного",
-                    "subtitle": "Узбекская кухня",
-                    "subcategory": "Бар",
-                    "rating": 4.5,
-                    "address": "ул. Ислама Каримова, 15"
+                    "title": "10qwertyuiopasdfghjklzxcvbnmqwertyuiop",
+                    "subtitle": "Итальянская",
+                    "subcategory": "Ресторан",
+                    "rating": 5.4,
+                    "address": "просп. Кабанбай Батыра, 1",
                 },
                 {
-                    categoryCode: "RESTAURANTS",
-                    "title": "Кафе у Лидии",
-                    "subtitle": "Русская кухня",
-                    "subcategory": "Бистро",
-                    "rating": 5,
-                    "address": "ул. Гагарина, 37"
+                    "categoryCode": "RESTAURANTS",
+                    "title": "4abctyy",
+                    "subtitle": "Европейская",
+                    "subcategory": "Ресто-бар",
+                    "rating": 3,
+                    "address": "ул. Достык, 16",
+                },
+                {
+                    "categoryCode": "RESTAURANTS",
+                    "title": "5abcbnytrv",
+                    "subtitle": "Европейская",
+                    "subcategory": "Кафе",
+                    "rating": 4.9,
+                    "address": "5-й микрорайон",
                 }
             ]
         },
@@ -48,7 +72,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "title": "La Riviere",
                     "subtitle": "Итальянская",
                     "subcategory": "Ресторан",
-                    "rating": 5,
+                    "rating": 5.4,
                     "address": "просп. Кабанбай Батыра, 1",
                 },
                 {
@@ -64,7 +88,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "title": "Zamin",
                     "subtitle": "Европейская",
                     "subcategory": "Кафе",
-                    "rating": 4.9,
+                    "rating": 4,
                     "address": "5-й микрорайон, 16",
                 }
             ]
