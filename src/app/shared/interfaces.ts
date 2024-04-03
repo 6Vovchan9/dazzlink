@@ -152,6 +152,17 @@ export type PlaceAttributeList = {
     }
 }
 
+export interface ILocationCategories {
+    code: ECategoryCodes,
+    name: string
+}
+
+export  enum ECategoryCodes {
+    Restaurants = 'food',
+    Museums = 'art',
+    Nature = 'nature'
+}
+
 export enum TypeOfPlaceDetails {
     description = 'DESCRIPTION',
     hours = 'WORKING_HOURS',

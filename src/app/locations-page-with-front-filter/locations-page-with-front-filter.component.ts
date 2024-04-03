@@ -5,13 +5,14 @@ import { catchError, delay, map, tap } from 'rxjs/operators';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { LocationsService } from '@app/shared/services/locations.service';
-import { CountryFilterItem, Place, RespCityPlaceList, RovraggeRespLocationsData } from '@app/shared/interfaces';
+import { CountryFilterItem, ECategoryCodes, ILocationCategories, Place, RespCityPlaceList, RovraggeRespLocationsData } from '@app/shared/interfaces';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastService } from '@app/shared/services/toast.service';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MOCK_LOCATIONS, MOCK_LOCATIONS_FOR_SKELETON } from '@app/shared/mock/locations';
+import { CATEGORYCODES } from '@app/shared/constants/all.constants';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -24,6 +25,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   public filteredLocations: Array<RespCityPlaceList>;
   public isLoading = true;
   public isSorting = false;
+  public curCategoryCode: ECategoryCodes = ECategoryCodes.Restaurants;
+  protected categoryCodes: Array<ILocationCategories> = CATEGORYCODES;
   private locationsSub: Subscription;
   private locationsAfterFilterSub: Subscription;
   private locationsAfterSortSub: Subscription;
@@ -65,12 +68,20 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     private locationsService: LocationsService,
     private toastService: ToastService,
     private router: Router,
+    private route: ActivatedRoute,
     public modalService: GlobalModalService,
   ) {
     this.filteredLocations = this.locationsNew.cityPlaceList;
   }
 
   ngOnInit(): void {
+
+    this.route.queryParams.subscribe(
+      (params: Params) => {
+        console.log(params);
+      }
+    )
+
     this.createForm();
     this.getSort();
     this.getFilters();
@@ -733,6 +744,20 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
 
   public getAmountOfAllSelectedCities(): string {
     return this.amountAllSelectedCities.length ? `Показан ${this.amountAllSelectedCities.length} из 20 городов` : 'Показаны все города'
+  }
+
+  public onChangeCurCategory(categoryVal: ECategoryCodes): void {
+    const categoryParam: ECategoryCodes = categoryVal === ECategoryCodes.Restaurants ? null : categoryVal;
+    this.router.navigate(
+      [],
+      {
+        queryParams: { category: categoryParam }
+      }
+    ).then(
+      (success: boolean) => {
+        this.curCategoryCode = categoryVal;
+      }
+    )
   }
 
   public goToLocationDesc(id: string): void {

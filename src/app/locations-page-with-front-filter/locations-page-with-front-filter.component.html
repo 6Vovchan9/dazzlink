@@ -20,6 +20,23 @@
                     <!-- <ng-container *ngIf="locationsNew.placeCount; else empty"> -->
                         <div class="pageContent__allAboutLocations">
 
+                            <!-- Разновидность локаций -->
+                            <div class="categoryCodes">
+                                <ul class="categoryCodes__list">
+                                    @for (category of categoryCodes; track $index) {
+                                        <li class="categoryCodes__item">
+                                            <button type="button"
+                                                class="categoryCodes__btn"
+                                                [class.categoryCodes__btn--active]="curCategoryCode === category.code"
+                                                (click)="onChangeCurCategory(category.code)"
+                                            >
+                                                {{category.name}}
+                                            </button>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+
                             <!-- Фильтр бар -->
                             <div class="filterBar" [class.filterBar--withLoading]="isLoading" *ngIf="locationsNew?.placeCount">
                                 <div class="filterBar__length" [class.withSkeletonLoader]="isLoading">
@@ -60,47 +77,47 @@
 
                             <!-- <ng-container *ngIf="!isLoading; else loadingTemplate"> -->
                             <ng-container *ngIf="locationsNew; else errorInGetAllLocations">
-                            <ng-container *ngIf="locationsNew.placeCount; else empty">
-                            <!-- Список локаций -->
+                                <ng-container *ngIf="locationsNew.placeCount; else empty">
+                                    <!-- Список локаций -->
 
-                            @for (block of filteredLocations; track block.cityCode) {
-                                @if (block.placeList?.length) {
-                                    <div class="pageContent__locationsBlock">
-                                        <div class="pageContent__locationsCity">
-                                            <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting || isLoading">{{block.cityTitle}}</span>
-                                        </div>
-                                        <ul class="pageContent__locationsList">
-                                            @for (location of block.placeList; track location.id) {
-                                                <li class="pageContent__locationsItem">
-                                                    <!-- <app-location-item [isLoading]="isSorting"
-                                                        (click)="goToLocationDesc(location.id)"
-                                                        [placeData]="location"
-                                                    ></app-location-item> -->
-                                                    <a [routerLink]="['/place', location.id || 'id']"
-                                                        target="_blank"
-                                                        class="pageContent__locationLink"
-                                                        [class.pageContent__locationLink--disabled]="isSorting || isLoading"
-                                                    >
-                                                        <app-location-item [isLoading]="isSorting || isLoading" [placeData]="location">
-                                                        </app-location-item>
-                                                    </a>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                }
-                            }
+                                    @for (block of filteredLocations; track block.cityCode) {
+                                        @if (block.placeList?.length) {
+                                            <div class="pageContent__locationsBlock">
+                                                <div class="pageContent__locationsCity">
+                                                    <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting || isLoading">{{block.cityTitle}}</span>
+                                                </div>
+                                                <ul class="pageContent__locationsList">
+                                                    @for (location of block.placeList; track location.id) {
+                                                        <li class="pageContent__locationsItem">
+                                                            <!-- <app-location-item [isLoading]="isSorting"
+                                                                (click)="goToLocationDesc(location.id)"
+                                                                [placeData]="location"
+                                                            ></app-location-item> -->
+                                                            <a [routerLink]="['/place', location.id || 'id']"
+                                                                target="_blank"
+                                                                class="pageContent__locationLink"
+                                                                [class.pageContent__locationLink--disabled]="isSorting || isLoading"
+                                                            >
+                                                                <app-location-item [isLoading]="isSorting || isLoading" [placeData]="location">
+                                                                </app-location-item>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
 
-                            <!-- Кнопка другие локации -->
-                            <div *ngIf="!isLoading" class="pageContent__toAnotherLocations">
-                                <button class="goToAnotherLocations" type="button" (click)="goToAnotherLocations()">
-                                    <div class="goToAnotherLocations__text">
-                                        Другие локации для выбранного города доступны в приложении
+                                    <!-- Кнопка другие локации -->
+                                    <div *ngIf="!isLoading" class="pageContent__toAnotherLocations">
+                                        <button class="goToAnotherLocations" type="button" (click)="goToAnotherLocations()">
+                                            <div class="goToAnotherLocations__text">
+                                                Другие локации для выбранного города доступны в приложении
+                                            </div>
+                                            <div class="goToAnotherLocations__icon"></div>
+                                        </button>
                                     </div>
-                                    <div class="goToAnotherLocations__icon"></div>
-                                </button>
-                            </div>
-                            </ng-container>
+                                </ng-container>
                             </ng-container>
                             <!-- </ng-container> -->
                         </div>
