@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
-import { Observable, Observer, Subscription, fromEvent, of } from 'rxjs';
-import { catchError, delay, map, tap } from 'rxjs/operators';
+import { Observable, Observer, Subject, Subscription, fromEvent, of } from 'rxjs';
+import { catchError, delay, map, takeUntil, tap } from 'rxjs/operators';
 
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
@@ -62,6 +62,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     ],
   };
   public filterFieldOptions: Array<CountryFilterItem>;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     @Optional() public mobileDetectService: MobileDetectService,
@@ -75,12 +76,17 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.route.queryParams.subscribe(
-      (params: Params) => {
-        console.log(params);
-      }
-    )
+    this.route.queryParams
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (params: Params) => {
+          const isValueExists = Object.values(ECategoryCodes).includes(params.category);
+          if (isValueExists) {
+            this.curCategoryCode = params.category;
+          }
+          console.log('Сейчас:', this.curCategoryCode);
+        }
+      );
 
     this.createForm();
     this.getSort();
@@ -747,11 +753,14 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   }
 
   public onChangeCurCategory(categoryVal: ECategoryCodes): void {
-    const categoryParam: ECategoryCodes = categoryVal === ECategoryCodes.Restaurants ? null : categoryVal;
+    // const categoryParam: ECategoryCodes = categoryVal === ECategoryCodes.Restaurants ? null : categoryVal;
+    const categoryParam: ECategoryCodes = categoryVal;
     this.router.navigate(
       [],
       {
-        queryParams: { category: categoryParam }
+        queryParams: { category: categoryParam },
+        replaceUrl: true
+        // queryParamsHandling: 'merge'
       }
     ).then(
       (success: boolean) => {
@@ -783,6 +792,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     this.pageWrapScrollSub?.unsubscribe();
     this.locationsSub?.unsubscribe();
     this.subscriptionList();
+
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
 }

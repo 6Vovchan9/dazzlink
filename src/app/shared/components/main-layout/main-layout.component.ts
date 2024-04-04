@@ -1,6 +1,6 @@
 import { Component, DoCheck, ElementRef, OnDestroy, OnInit, Optional, ViewChild, inject } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { NavigationEnd, Router } from '@angular/router';
+import { IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -27,6 +27,12 @@ export class MainLayoutComponent extends AbsractExample implements OnInit, DoChe
   public scrollDown = false;
   private prewScrollTop = 0;
   public myForm: UntypedFormGroup;
+  public routerLinkActiveOptions: IsActiveMatchOptions = {
+    matrixParams: 'ignored',
+    queryParams: 'ignored',
+    fragment: 'ignored',
+    paths: 'subset'
+  };
   public mainLayoutOpt: MainLayoutOptions = {
     header: {
       fixed: true,

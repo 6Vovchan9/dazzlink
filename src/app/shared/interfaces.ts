@@ -157,7 +157,7 @@ export interface ILocationCategories {
     name: string
 }
 
-export  enum ECategoryCodes {
+export enum ECategoryCodes {
     Restaurants = 'food',
     Museums = 'art',
     Nature = 'nature'

@@ -193,6 +193,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   public onAccoTriggerClick(path: Array<string>): void {
     this.router.navigate(
       path,
+      { queryParams: { category: 'food' } }
       // {skipLocationChange: true}
     );
   }
