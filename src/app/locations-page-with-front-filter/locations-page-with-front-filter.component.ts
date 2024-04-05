@@ -141,11 +141,13 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
 
     this.filterBarGroup.addControl('sort', new UntypedFormControl({ value: null, disabled: true }));
 
-    this.filterBarGroup.get('sort').valueChanges.subscribe(
-      val => {
-        this.onChangeSort(val);
-      }
-    );
+    this.filterBarGroup.get('sort').valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        val => {
+          this.onChangeSort(val);
+        }
+      );
 
   }
 
