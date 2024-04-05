@@ -158,9 +158,9 @@ export interface ILocationCategories {
 }
 
 export enum ECategoryCodes {
-    Restaurants = 'food',
-    Museums = 'art',
-    Nature = 'nature'
+    restaurants = 'food',
+    museums = 'art',
+    nature = 'nature'
 }
 
 export enum TypeOfPlaceDetails {

@@ -18,15 +18,15 @@ export const locationInfoMapping = {
 
 export const CATEGORYCODES: Array<ILocationCategories> = [
     {
-        code: ECategoryCodes.Restaurants,
+        code: ECategoryCodes.restaurants,
         name: 'Еда'
     },
     {
-        code: ECategoryCodes.Museums,
+        code: ECategoryCodes.museums,
         name: 'Искусство'
     },
     {
-        code: ECategoryCodes.Nature,
+        code: ECategoryCodes.nature,
         name: 'Природа'
     }
 ];

@@ -25,7 +25,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   public filteredLocations: Array<RespCityPlaceList>;
   public isLoading = true;
   public isSorting = false;
-  public curCategoryCode: ECategoryCodes = ECategoryCodes.Restaurants;
+  public curCategoryCode: ECategoryCodes = ECategoryCodes.restaurants;
   protected categoryCodes: Array<ILocationCategories> = CATEGORYCODES;
   private locationsSub: Subscription;
   private locationsAfterFilterSub: Subscription;
@@ -76,6 +76,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.route.queryParams
       .pipe(takeUntil(this.destroy$))
       .subscribe(
@@ -753,7 +754,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   }
 
   public onChangeCurCategory(categoryVal: ECategoryCodes): void {
-    // const categoryParam: ECategoryCodes = categoryVal === ECategoryCodes.Restaurants ? null : categoryVal;
+    // const categoryParam: ECategoryCodes = categoryVal === ECategoryCodes.restaurants ? null : categoryVal;
     const categoryParam: ECategoryCodes = categoryVal;
     this.router.navigate(
       [],

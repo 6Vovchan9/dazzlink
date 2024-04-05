@@ -1,13 +1,13 @@
 import { Component, DoCheck, ElementRef, OnDestroy, OnInit, Optional, ViewChild, inject } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { AbsractExample } from '@app/shared/abstract.class';
 import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
-import { MainLayoutOptions } from '@app/shared/interfaces';
+import { ECategoryCodes, MainLayoutOptions } from '@app/shared/interfaces';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { PagesService } from '@app/shared/services/pages.service';
@@ -129,6 +129,10 @@ export class MainLayoutComponent extends AbsractExample implements OnInit, DoChe
     const result = navigator.userAgent.includes('Dazzlink');
     // return true;
     return result;
+  }
+
+  public get categoryParam(): ECategoryCodes {
+    return ECategoryCodes.restaurants;
   }
 
   private createForm(): void {
