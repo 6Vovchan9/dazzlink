@@ -33,12 +33,13 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   private fSub: Subscription;
   private sSub: Subscription;
   private curLang: string;
-  private pageWrapScrollSub: Subscription;
   public filterBarGroup: UntypedFormGroup;
   private selectedCitiesMap: Record<string, 'chosen'> = {};
   public amountAllSelectedCities: Array<string> = [];
   public amountAllSelectedCitiesBefore: Array<string> = [];
-  private timerForFilter: any;
+  private debounceTimeForFilter: any;
+  private fakeDelayForFilter: any;
+  private fakeDelayForSort: any;
   private aboutType: unknown;
   public showFilterControls = false;
   public errorAfterSort = false;
@@ -91,6 +92,24 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
       ).subscribe(
         (params: Params) => {
           console.log('Сейчас:', this.curCategoryCode);
+
+          // Строки ниже это для сброса всего связанного с фильтрацией
+          this.amountAllSelectedCities = [];
+          this.selectedCitiesMap = {};
+          this.showFilterControls = false;
+          this.filterFieldOptions = null;
+          
+          // Ниже 4 строки это для сброса всего связанного с FormControl-ом сортировки
+          this.filterBarGroup.get('sort').setValue(null, { emitEvent: false });
+          this.filterBarGroup.get('sort').disable({ emitEvent: false });
+          this.sortFieldOptions.items = [];
+          this.setIconForSortDropdown(null);
+
+           // Отписываемся от всех запросов:
+          this.subscriptionList();
+
+          // Снова запрашиваем локации фильтрацию и сортировку:
+
         }
       );
 
@@ -148,7 +167,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
           this.onChangeSort(val);
         }
       );
-
   }
 
   public get webview(): boolean {
@@ -170,7 +188,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     this.getAllLocationsAfterFilter(sortControlVal, filterString);
   }
 
-  private filterLocationsOnFront() {
+  private filterLocationsOnFront(): void {
 
     if (this.amountAllSelectedCities.length) {
       this.filteredLocations = this.allLocations.cityPlaceList.filter(city => {
@@ -626,7 +644,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   public onChangeSort(sortValue: string): void {
     this.isSorting = true;
     this.filterBarGroup.get('sort').disable({ emitEvent: false });
-    setTimeout(() => this.sortLocationsOnFront(), 1600);
+    this.fakeDelayForSort = setTimeout(() => this.sortLocationsOnFront(), 1600);
   }
 
   public onCloseFilterOptionsInMobile(): void {
@@ -682,7 +700,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
       console.log('Делаем фильтрацию городов...');
       this.isSorting = true;
       this.filterBarGroup.get('sort').disable({ emitEvent: false });
-      setTimeout(() => this.filterLocationsOnFront(), 1600);
+      this.fakeDelayForFilter = setTimeout(() => this.filterLocationsOnFront(), 1600);
     }
   }
 
@@ -733,27 +751,21 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
         console.log('Делаем фильтрацию...');
         this.isSorting = true;
         // this.filterBarGroup.get('sort').disable({ emitEvent: false });
-        setTimeout(() => this.filterLocationsOnFront(), 1600);
+        this.fakeDelayForFilter = setTimeout(() => this.filterLocationsOnFront(), 1600);
       } else {
-        if (this.timerForFilter) { // Это задержка, чтоб не отправлять запрос при каждом клике по фильтрации
-          clearTimeout(this.timerForFilter);
+        if (this.debounceTimeForFilter) { // Это задержка, чтоб не отправлять запрос при каждом клике по фильтрации
+          clearTimeout(this.debounceTimeForFilter);
         }
 
-        this.timerForFilter = setTimeout(() => {
-          this.timerForFilter = null;
+        this.debounceTimeForFilter = setTimeout(() => {
+          this.debounceTimeForFilter = null;
           console.log('Делаем фильтрацию...');
           this.isSorting = true;
-          this.filterBarGroup.get('sort').disable({ emitEvent: false });
-          setTimeout(() => this.filterLocationsOnFront(), 1600);
+          this.filterBarGroup.get('sort').disable({ emitEvent: false }); // Если это убрать то контрол раздизейблится если запустить сортировку и быстро запустить фильтрацию
+          this.fakeDelayForFilter = setTimeout(() => this.filterLocationsOnFront(), 1600);
         }, 1500);
       }
     }
-
-    // console.log('- Опции фильтрации:', this.filterFieldOptions);
-    // console.log('- Список городов в кот-ых показ-ем локации:', this.amountAllSelectedCities);
-    // console.log('- Список городов в кот-ых показ-ем локации:', this.selectedCitiesMap);
-    // console.log('- Список локаций (allLocations):', this.allLocations);
-    // console.log('- Список локаций (filteredLocations):', this.filteredLocations);
   }
 
   public getAmountOfAllSelectedCities(): string {
@@ -789,16 +801,17 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   }
 
   private subscriptionList(): void {
+    this.locationsSub?.unsubscribe();
     this.locationsAfterFilterSub?.unsubscribe();
     this.locationsAfterSortSub?.unsubscribe();
     this.fSub?.unsubscribe();
     this.sSub?.unsubscribe();
-    clearTimeout(this.timerForFilter);
+    clearTimeout(this.debounceTimeForFilter);
+    clearTimeout(this.fakeDelayForFilter);
+    clearTimeout(this.fakeDelayForSort);
   }
 
   public ngOnDestroy(): void {
-    this.pageWrapScrollSub?.unsubscribe();
-    this.locationsSub?.unsubscribe();
     this.subscriptionList();
 
     this.destroy$.next(true);

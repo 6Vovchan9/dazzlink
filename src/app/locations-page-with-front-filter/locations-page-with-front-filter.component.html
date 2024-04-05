@@ -190,7 +190,7 @@
                 <div class="filterOptionsBlock__title">Фильтр городов</div>
                 <button *ngIf="amountAllSelectedCities.length"
                     class="filterOptionsBlock__resetBtn"
-                    [disabled]="timerForFilter || locationsUpdating"
+                    [disabled]="debounceTimeForFilter || locationsUpdating"
                     type="button"
                     (click)="onResetAllFilters()"
                 >
