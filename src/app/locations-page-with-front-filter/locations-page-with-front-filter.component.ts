@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
 import { Observable, Observer, Subject, Subscription, fromEvent, of } from 'rxjs';
-import { catchError, delay, map, takeUntil, tap } from 'rxjs/operators';
+import { catchError, delay, filter, map, skip, takeUntil, tap } from 'rxjs/operators';
 
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
@@ -21,7 +21,7 @@ import { CATEGORYCODES } from '@app/shared/constants/all.constants';
 })
 export class LocationsPageWithFrontFilterComponent implements OnInit {
 
-  public locationsNew: RovraggeRespLocationsData = MOCK_LOCATIONS_FOR_SKELETON;
+  public allLocations: RovraggeRespLocationsData = MOCK_LOCATIONS_FOR_SKELETON;
   public filteredLocations: Array<RespCityPlaceList>;
   public isLoading = true;
   public isSorting = false;
@@ -72,19 +72,24 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     private route: ActivatedRoute,
     public modalService: GlobalModalService,
   ) {
-    this.filteredLocations = this.locationsNew.cityPlaceList;
+    this.filteredLocations = this.allLocations.cityPlaceList;
   }
 
   ngOnInit(): void {
 
     this.route.queryParams
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (params: Params) => {
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((params: Params) => {
           const isValueExists = Object.values(ECategoryCodes).includes(params.category);
           if (isValueExists) {
             this.curCategoryCode = params.category;
           }
+        }),
+        // skip(1),
+        filter((val, index) => index > 0)
+      ).subscribe(
+        (params: Params) => {
           console.log('Сейчас:', this.curCategoryCode);
         }
       );
@@ -110,7 +115,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     this.isSorting = true; // Включаем скелетон
 
     setTimeout(() => {
-      this.filteredLocations = this.locationsNew.cityPlaceList;
+      this.filteredLocations = this.allLocations.cityPlaceList;
       console.log(`Успешно отфильтровали!`);
       this.toastService.success('Отфильтровано');
       this.isSorting = false;
@@ -166,11 +171,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   private filterLocationsOnFront() {
 
     if (this.amountAllSelectedCities.length) {
-      this.filteredLocations = this.locationsNew.cityPlaceList.filter(city => {
+      this.filteredLocations = this.allLocations.cityPlaceList.filter(city => {
         return city.cityCode in this.selectedCitiesMap;
       });
     } else {
-      this.filteredLocations = this.locationsNew.cityPlaceList;
+      this.filteredLocations = this.allLocations.cityPlaceList;
     }
   
     console.log(`Успешно отфильтровали!`);
@@ -185,7 +190,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
 
     if (sortControlVal === 'price_asc') {
       console.log('Сортируем от меньшего к большему');
-      this.locationsNew.cityPlaceList.forEach(el => {
+      this.allLocations.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
           el.placeList.sort((a, b) => {
             return a.priceRange - b.priceRange;
@@ -194,7 +199,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
       });
     } else if (sortControlVal === 'price_desc') {
       console.log('Сортируем от большего к меньшему');
-      this.locationsNew.cityPlaceList.forEach(el => {
+      this.allLocations.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
           el.placeList.sort((a, b) => {
             return b.priceRange - a.priceRange;
@@ -203,7 +208,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
       });
     } else if (sortControlVal === 'rating_desc') {
       console.log('Сортируем по рейтингу');
-      this.locationsNew.cityPlaceList.forEach(el => {
+      this.allLocations.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
           el.placeList.sort((a, b) => {
             return b.rating - a.rating;
@@ -494,12 +499,12 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
         // .pipe(delay(6000))
         .subscribe(
           value => {
-            this.locationsNew = value;
+            this.allLocations = value;
             this.filteredLocations = value?.cityPlaceList;
             this.isLoading = false;
           },
           () => {
-            this.locationsNew = this.filteredLocations = null;
+            this.allLocations = this.filteredLocations = null;
             this.isLoading = false;
           }
         );
@@ -512,12 +517,12 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
             // console.log(value);
             // let locationsForYmap = value.cityPlaceList.map(el1 => el1.placeList).flat();
             // console.log(locationsForYmap);
-            this.locationsNew = value;
+            this.allLocations = value;
             this.filteredLocations = value?.cityPlaceList;
             this.isLoading = false;
           },
           error: () => {
-            this.locationsNew = this.filteredLocations = null;
+            this.allLocations = this.filteredLocations = null;
             this.isLoading = false;
           }
         });
@@ -535,7 +540,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
             this.locationsUpdating = false;
             console.log(`Успешно отсортировали (${sortVal})!`);
             this.toastService.success('Отсортировано');
-            this.locationsNew = value;
+            this.allLocations = value;
             this.lastSuccessSortVal = sortVal;
             this.filterBarGroup.get('sort').enable({ emitEvent: false });
             this.setIconForSortDropdown(sortVal);
@@ -567,7 +572,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
             this.locationsUpdating = false;
             console.log(`Успешно отфильтровали!`);
             this.toastService.success('Отфильтровано');
-            this.locationsNew = value;
+            this.allLocations = value;
             this.isSorting = false;
             if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false }); // Эти 2 подстраховки на случай когда начали соритровать и сразу принялись фильтровать
             if (this.filterBarGroup.get('sort').value) this.setIconForSortDropdown(this.filterBarGroup.get('sort').value);
@@ -745,7 +750,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     // console.log('- Опции фильтрации:', this.filterFieldOptions);
     // console.log('- Список городов в кот-ых показ-ем локации:', this.amountAllSelectedCities);
     // console.log('- Список городов в кот-ых показ-ем локации:', this.selectedCitiesMap);
-    // console.log('- Список локаций (locationsNew):', this.locationsNew);
+    // console.log('- Список локаций (allLocations):', this.allLocations);
     // console.log('- Список локаций (filteredLocations):', this.filteredLocations);
   }
 

@@ -16,8 +16,8 @@
         </aside>
         <main class="pageContent">
             <!-- <ng-container *ngIf="!isLoading; else loadingTemplate"> -->
-                <!-- <ng-container *ngIf="locationsNew; else errorInGetAllLocations"> -->
-                    <!-- <ng-container *ngIf="locationsNew.placeCount; else empty"> -->
+                <!-- <ng-container *ngIf="allLocations; else errorInGetAllLocations"> -->
+                    <!-- <ng-container *ngIf="allLocations.placeCount; else empty"> -->
                         <div class="pageContent__allAboutLocations">
 
                             <!-- Разновидность локаций -->
@@ -38,9 +38,9 @@
                             </div>
 
                             <!-- Фильтр бар -->
-                            <div class="filterBar" [class.filterBar--withLoading]="isLoading" *ngIf="locationsNew?.placeCount">
+                            <div class="filterBar" [class.filterBar--withLoading]="isLoading" *ngIf="allLocations?.placeCount">
                                 <div class="filterBar__length" [class.withSkeletonLoader]="isLoading">
-                                    <!-- Доступно {{locationsNew.placeCount}} мест -->
+                                    <!-- Доступно {{allLocations.placeCount}} мест -->
                                     {{getAmountOfAllSelectedCities()}}
                                     <div class="skeletonLoader skeletonLoader--shortHeight"></div>
                                 </div>
@@ -76,8 +76,8 @@
                             </div>
 
                             <!-- <ng-container *ngIf="!isLoading; else loadingTemplate"> -->
-                            <ng-container *ngIf="locationsNew; else errorInGetAllLocations">
-                                <ng-container *ngIf="locationsNew.placeCount; else empty">
+                            <ng-container *ngIf="allLocations; else errorInGetAllLocations">
+                                <ng-container *ngIf="allLocations.placeCount; else empty">
                                     <!-- Список локаций -->
 
                                     @for (block of filteredLocations; track block.cityCode) {
