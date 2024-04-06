@@ -109,10 +109,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
           this.subscriptionList();
 
           // Снова запрашиваем локации фильтрацию и сортировку:
-
+          this.retryGetAllLocations();
         }
       );
-
+      
+    console.log('Сейчас:', this.curCategoryCode);
     this.createForm();
     this.getSort();
     this.getFilters();
@@ -499,7 +500,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {
-          if (this.errorInGetAllLocations) {
+          if (this.errorInGetAllLocations || true) {
             console.warn('locationsGet что-то пошло не так :(');
             // observer.next({});
             observer.next(null);
