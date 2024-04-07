@@ -514,8 +514,9 @@ button {
         }
 
         &--isLoading {
-            cursor: wait;
-
+            cursor: default;
+            color: transparent;
+            background-color: transparent;
             .errorMessage__btnSpinner {
                 display: block;
             }

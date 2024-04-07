@@ -500,7 +500,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {
-          if (this.errorInGetAllLocations || true) {
+          if (this.errorInGetAllLocations) {
             console.warn('locationsGet что-то пошло не так :(');
             // observer.next({});
             observer.next(null);

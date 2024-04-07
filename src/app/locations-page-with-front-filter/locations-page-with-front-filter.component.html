@@ -121,7 +121,8 @@
                             </ng-container>
                             <!-- </ng-container> -->
                         </div>
-                        <div *ngIf="isLoading" class="gradientForLocationLoading"></div>
+                        <!-- && allLocations чтобы не показывать gradient когда отображается баннер #errorInGetAllLocations -->
+                        <div *ngIf="isLoading && allLocations" class="gradientForLocationLoading"></div>
                     <!-- </ng-container> -->
                 <!-- </ng-container> -->
             <!-- </ng-container> -->
