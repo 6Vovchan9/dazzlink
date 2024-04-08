@@ -36,7 +36,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 .sidebar {
     display: none;
     flex: 1;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
 
     &--forMobile {
         display: block;
@@ -61,7 +61,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 }
 
 .aboutPage {
-    margin-bottom: 20px;
     .aboutPage__text {
         margin-top: 12px;
     }
@@ -80,7 +79,8 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
     @media #{$notMobile} {
         position: sticky;
-        top: 10px;
+        margin-bottom: 20px;
+        top: 0px;
         .aboutPage__links {
             &--forDesktop {
                 display: block;
@@ -237,24 +237,43 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     }
 }
 
-.filterBar {
+.stickyBar {
     position: sticky;
     z-index: 30;
     top: 0;
+    margin-bottom: 20px;
+    background-color: var(--color-white);
+    padding: 8px 0px 4px;
+
+    &--withLoading {
+        position: relative;
+    }
+
+    @media #{$notMobile} {
+        padding: 8px 0px;
+    }
+
+    // &:before {
+    //     content: '';
+    //     position: absolute;
+    //     top: 100%;
+    //     left: 0px;
+    //     width: 100%;
+    //     height: 20px;
+    //     background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+    // }
+}
+
+.filterBar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 0;
-    background-color: var(--color-white);
-    background-color: rgb(255 255 255);
 
     // backdrop-filter: blur(4px); // фильтр накладывается на фон элемента
     // filter: blur(4px); // фильтр накладывается на сам элемент
     // background: filter(url(path/to/img.jpg), blur(5px)); // есть еще такой вариант
 
     line-height: 24px;
-    margin-bottom: 20px;
-    // height: 56px;
 
     .filterBar__length {
         color: var(--color-text-gray);
@@ -285,24 +304,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             width: calc(100% - 24px);
             left: 8px;
         }
-    }
-
-    &--withLoading {
-        position: relative;
-    }
-
-    // &:before {
-    //     content: '';
-    //     position: absolute;
-    //     top: 100%;
-    //     left: 0px;
-    //     width: 100%;
-    //     height: 20px;
-    //     background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
-    // }
-
-    @media #{$notMobile} {
-        padding: 8px 0;
     }
 }
 
