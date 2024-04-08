@@ -212,6 +212,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
 .categoryCodes {
     margin-bottom: 8px;
+    overflow: scroll;
     .categoryCodes__list {
         display: flex;
         column-gap: 12px;
@@ -226,6 +227,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                 border: 0px;
                 cursor: pointer;
                 background-color: var(--color-gray1);
+                text-wrap: nowrap;
 
                 &--active {
                     cursor: default;
