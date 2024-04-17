@@ -148,11 +148,10 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     const scrollHeight = pageWrap.scrollHeight;
     const offsetHeight = pageWrap.offsetHeight;
     this.hideScrollProgress = scrollTop < offsetHeight;
-    // console.log(scrollTop, scrollHeight, offsetHeight);
     const radius = svgCircleElement.getAttribute('r');
 
     const circleLength = 2 * Math.PI * +radius;
-    const percentageProgress = Math.floor(scrollTop / (scrollHeight - offsetHeight) * 100);
+    const percentageProgress = Math.round(scrollTop / (scrollHeight - offsetHeight) * 100);
 
     svgCircleElement.setAttribute('stroke-dasharray', String(circleLength));
 		svgCircleElement.setAttribute('stroke-dashoffset', String(circleLength - circleLength * percentageProgress / 100));

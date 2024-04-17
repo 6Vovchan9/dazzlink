@@ -568,6 +568,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 .scrollProgress {
     cursor: pointer;
     background-color: var(--color-black1);
+    box-shadow: 0px 0px 10px 0px var(--color-black1);
     border-radius: 50%;
 
     position: absolute;
