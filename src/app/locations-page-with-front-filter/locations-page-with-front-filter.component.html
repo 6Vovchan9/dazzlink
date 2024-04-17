@@ -13,6 +13,14 @@
                 <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
             }
 
+            <!-- <div class="scrollProgressWrapper">
+                <div class="scrollProgress" (click)="scrollToTop()" [class.scrollProgress--hidden]="hideScrollProgress">
+                    <svg class="scrollProgress__svg" viewBox="-10 -10 300 300">
+                        <circle #progressCircle class="scrollProgress__circle" r="124" cx="140" cy="140" fill="none" stroke="white" stroke-width="20"></circle>
+                    </svg>
+                </div>
+            </div> -->
+
         </aside>
         <main class="pageContent">
             <!-- <ng-container *ngIf="!isLoading; else loadingTemplate"> -->
@@ -82,7 +90,6 @@
                             <ng-container *ngIf="allLocations; else errorInGetAllLocations">
                                 <ng-container *ngIf="allLocations.placeCount; else empty">
                                     <!-- Список локаций -->
-
                                     @for (block of filteredLocations; track block.cityCode) {
                                         @if (block.placeList?.length) {
                                             <div class="pageContent__locationsBlock">
@@ -110,7 +117,14 @@
                                             </div>
                                         }
                                     }
-
+                                    <!-- Кнопка наверх -->
+                                    <div class="pageContent__scrollToTopBtn scrollProgressWrapper">
+                                        <div class="scrollProgress" (click)="scrollToTop()" [class.scrollProgress--hidden]="hideScrollProgress">
+                                            <svg class="scrollProgress__svg" viewBox="-10 -10 300 300">
+                                                <circle #progressCircle class="scrollProgress__circle" r="124" cx="140" cy="140" fill="none" stroke="white" stroke-width="20"></circle>
+                                            </svg>
+                                        </div>
+                                    </div>
                                     <!-- Кнопка другие локации -->
                                     <div *ngIf="!isLoading" class="pageContent__toAnotherLocations">
                                         <button class="goToAnotherLocations" type="button" (click)="goToAnotherLocations()">
@@ -134,13 +148,6 @@
     <!-- <div class="myBlock">
         <div class="myBlock__body"></div>
     </div> -->
-    <div class="scrollProgressWrapper">
-        <div class="scrollProgress" (click)="scrollToTop()" [class.scrollProgress--hidden]="hideScrollProgress">
-            <svg class="scrollProgress__svg" viewBox="-10 -10 300 300">
-                <circle #progressCircle class="scrollProgress__circle" r="124" cx="140" cy="140" fill="none" stroke="white" stroke-width="20"></circle>
-            </svg>
-        </div>
-    </div>
 </main>
 
 <div *ngIf="showFilterControls && filterFieldOptions?.length" class="filterOptionsForMobile">
