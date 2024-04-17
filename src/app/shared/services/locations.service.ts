@@ -15,14 +15,14 @@ export class LocationsService {
         private pagesService: PagesService
     ) { }
 
-    getAllLocations(sortVal?: string, filterVal?: string): Observable<RovraggeRespLocationsData> {
+    getAllLocations(sortVal?: string, filterVal?: string, categoryCode = 'RESTAURANTS'): Observable<RovraggeRespLocationsData> {
 
         const options = {
             headers: new HttpHeaders({ 'x-accept-language': this.pagesService.currentLanguage.getValue() || 'ru' })
         };
 
         // let queryParams = new HttpParams().appendAll({ categoryCode: 'REST', sort: sortVal });
-        const customQueryParams = { categoryCode: 'RESTAURANTS' };
+        const customQueryParams = { categoryCode };
 
         if (sortVal) {
             customQueryParams['sort'] = sortVal;

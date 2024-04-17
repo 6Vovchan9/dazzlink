@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
 import { Observable, Observer, Subject, Subscription, fromEvent, of } from 'rxjs';
-import { catchError, delay, filter, map, skip, takeUntil, tap } from 'rxjs/operators';
+import { catchError, debounceTime, delay, filter, map, skip, skipWhile, takeUntil, tap } from 'rxjs/operators';
 
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
@@ -19,7 +19,9 @@ import { CATEGORYCODES } from '@app/shared/constants/all.constants';
   templateUrl: './locations-page-with-front-filter.component.html',
   styleUrls: ['./locations-page-with-front-filter.component.scss']
 })
-export class LocationsPageWithFrontFilterComponent implements OnInit {
+export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('progressCircle') progressCircle: ElementRef;
 
   public allLocations: RovraggeRespLocationsData = MOCK_LOCATIONS_FOR_SKELETON;
   public filteredLocations: Array<RespCityPlaceList>;
@@ -64,6 +66,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
   };
   public filterFieldOptions: Array<CountryFilterItem>;
   private destroy$: Subject<boolean> = new Subject<boolean>();
+  public hideScrollProgress = true;
 
   constructor(
     @Optional() public mobileDetectService: MobileDetectService,
@@ -118,6 +121,41 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
     this.getSort();
     this.getFilters();
     this.getAllLocations();
+  }
+
+  ngAfterViewInit(): void {
+    // this.operatePageWrapScroll();
+
+    const pageWrap = document.getElementById('pageWrap');
+    fromEvent<Event>(pageWrap, 'scroll')
+      .pipe(
+        takeUntil(this.destroy$),
+        skipWhile(() => this.isLoading),
+        map(e => (e.target as HTMLDivElement))
+      )
+      .subscribe(
+        (el: HTMLDivElement) => {
+          this.operatePageWrapScroll();
+        }
+      );
+  }
+
+  private operatePageWrapScroll(): void {
+    const pageWrap = document.getElementById('pageWrap');
+    const svgCircleElement = this.progressCircle.nativeElement as SVGCircleElement;
+
+    const scrollTop = pageWrap.scrollTop;
+    const scrollHeight = pageWrap.scrollHeight;
+    const offsetHeight = pageWrap.offsetHeight;
+    this.hideScrollProgress = scrollTop < offsetHeight;
+    // console.log(scrollTop, scrollHeight, offsetHeight);
+    const radius = svgCircleElement.getAttribute('r');
+
+    const circleLength = 2 * Math.PI * +radius;
+    const percentageProgress = Math.floor(scrollTop / (scrollHeight - offsetHeight) * 100);
+
+    svgCircleElement.setAttribute('stroke-dasharray', String(circleLength));
+		svgCircleElement.setAttribute('stroke-dashoffset', String(circleLength - circleLength * percentageProgress / 100));
   }
 
   public onResetAllFilters(): void {
@@ -540,10 +578,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit {
             // console.log(locationsForYmap);
             this.allLocations = value;
             this.filteredLocations = value?.cityPlaceList;
-            this.isLoading = false;
           },
           error: () => {
             this.allLocations = this.filteredLocations = null;
+          },
+          complete: () => {
             this.isLoading = false;
           }
         });

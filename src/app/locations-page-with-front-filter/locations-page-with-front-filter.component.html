@@ -133,6 +133,12 @@
     </div>
 </main>
 
+<div class="scrollProgress" [class.scrollProgress--hidden]="hideScrollProgress">
+    <svg class="scrollProgress__svg" viewBox="-10 -10 300 300">
+        <circle #progressCircle class="scrollProgress__circle" r="124" cx="140" cy="140" fill="none" stroke="white" stroke-width="20"></circle>
+    </svg>
+</div>
+
 <div *ngIf="showFilterControls && filterFieldOptions?.length" class="filterOptionsForMobile">
     <div class="filterOptionsForMobile__content" (click)="onCloseFilterOptionsInMobile()">
         <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>

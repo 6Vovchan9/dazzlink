@@ -1,4 +1,9 @@
 // Чтоб запустить этот файл: 1) tsc helper 2) node helper
+
+let num1 = 123_456_789;
+let num2 = 2e7;
+let num3 = 4e-4;
+
 // ---//--- Пример 1: ---//---
 type objType1 = {
     one: string,
