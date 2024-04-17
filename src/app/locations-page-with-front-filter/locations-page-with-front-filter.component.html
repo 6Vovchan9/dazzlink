@@ -135,7 +135,7 @@
         <div class="myBlock__body"></div>
     </div> -->
     <div class="scrollProgressWrapper">
-        <div class="scrollProgress" [class.scrollProgress--hidden]="hideScrollProgress">
+        <div class="scrollProgress" (click)="scrollToTop()" [class.scrollProgress--hidden]="hideScrollProgress">
             <svg class="scrollProgress__svg" viewBox="-10 -10 300 300">
                 <circle #progressCircle class="scrollProgress__circle" r="124" cx="140" cy="140" fill="none" stroke="white" stroke-width="20"></circle>
             </svg>

@@ -840,6 +840,14 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     )
   }
 
+  public scrollToTop(): void {
+    document.getElementById('pageWrap')?.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }
+
   private subscriptionList(): void {
     this.locationsSub?.unsubscribe();
     this.locationsAfterFilterSub?.unsubscribe();

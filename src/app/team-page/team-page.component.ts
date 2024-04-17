@@ -20,7 +20,7 @@ export class TeamPageComponent extends AbsractExample implements AfterViewInit {
 
   ngAfterViewInit(): void {
     // console.log(this.getName());
-    this.scrollToTop();
+    // this.scrollToTop();
   }
 
   requiredMethod(): number {
