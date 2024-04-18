@@ -1,4 +1,4 @@
-import { ILocationCategoriesNew, RovraggeRespLocationsData } from "@app/shared/interfaces";
+import { ILocationCategories, RovraggeRespLocationsData } from "@app/shared/interfaces";
 
 export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
     placeCount: 2,
@@ -96,7 +96,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
     ]
 }
 
-export const MOCK_CATEGORIES_FOR_SKELETON: Array<ILocationCategoriesNew> = [
+export const MOCK_CATEGORIES_FOR_SKELETON: Array<ILocationCategories> = [
     {
         category: 'RESTAURANTS',
         title: 'Еда',

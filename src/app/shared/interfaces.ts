@@ -69,7 +69,7 @@ export interface CountryFilterItem {
     selectedСities?: Array<string>
 }
 
-export interface ILocationCategoriesNew {
+export interface ILocationCategories {
     category: string,
     title?: string,
     active?: boolean,
@@ -157,11 +157,6 @@ export type PlaceAttributeList = {
         link?: string,
         yandexOrgId?: number
     }
-}
-
-export interface ILocationCategories {
-    code: ECategoryCodes,
-    name: string
 }
 
 export enum ECategoryCodes {

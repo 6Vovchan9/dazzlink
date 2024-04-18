@@ -12,7 +12,7 @@ import {
     RovraggeRespFiltersData,
     CountryFilterItem,
     IVotingService,
-    ILocationCategoriesNew
+    ILocationCategories
 } from "../interfaces";
 import { PagesService } from "@app/shared/services/pages.service";
 
@@ -79,7 +79,7 @@ export class LocationsService {
         )
     }
 
-    public getCategoryOptions(): Observable<Array<ILocationCategoriesNew>> {
+    public getCategoryOptions(): Observable<Array<ILocationCategories>> {
         return this.http.get(
             `${environment.prodPlacesUrl}/place/category`,
             {

@@ -5,7 +5,7 @@ import { catchError, debounceTime, delay, filter, map, skip, skipWhile, takeUnti
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { LocationsService } from '@app/shared/services/locations.service';
-import { CountryFilterItem, ECategoryCodes, ILocationCategories, ILocationCategoriesNew, Place, RespCityPlaceList, RovraggeRespLocationsData } from '@app/shared/interfaces';
+import { CountryFilterItem, ILocationCategories, Place, RespCityPlaceList, RovraggeRespLocationsData } from '@app/shared/interfaces';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -26,8 +26,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public filteredLocations: Array<RespCityPlaceList>;
   public isLoading = true;
   public isSorting = false;
-  public curCategoryCode: ECategoryCodes = ECategoryCodes.restaurants;
-  protected categoryCodes: { selected?: string, list: Array<ILocationCategoriesNew> } = {
+  protected categoryCodes: { selected?: string, list: Array<ILocationCategories> } = {
     list: MOCK_CATEGORIES_FOR_SKELETON
   };
   private locationsSub: Subscription;
@@ -83,32 +82,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   ngOnInit(): void {
-
-    if (false) {
-      this.route.queryParams
-        .pipe(
-          takeUntil(this.destroy$),
-          tap((params: Params) => {
-            const isValueExists = Object.values(ECategoryCodes).includes(params.category);
-            if (isValueExists) {
-              this.curCategoryCode = params.category;
-            }
-          }),
-          // skip(1),
-          filter((val, index) => index > 0)
-        ).subscribe(
-          (params: Params) => {
-            this.afterChangeCategory();
-          }
-        );
-    }
-      
-    console.log('Сейчас:', this.curCategoryCode);
     this.createForm();
     this.getCategories();
-    // this.getSort();
-    // this.getFilters();
-    // this.getAllLocations();
   }
 
   ngAfterViewInit(): void {
@@ -931,7 +906,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     return this.amountAllSelectedCities.length ? `Показан ${this.amountAllSelectedCities.length} из 20 городов` : 'Показаны все города'
   }
 
-  public onChangeCurCategory(categoryItem: ILocationCategoriesNew): void {
+  public onChangeCurCategory(categoryItem: ILocationCategories): void {
 
     this.router.navigate(
       [],
@@ -946,7 +921,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.afterChangeCategory();
   }
 
-  private setActiveCategory(curCategory: ILocationCategoriesNew) {
+  private setActiveCategory(curCategory: ILocationCategories) {
     this.categoryCodes.selected = curCategory.category;
     // сначала у всех категорий убираем active:
     this.categoryCodes.list = this.categoryCodes.list.map(el => {

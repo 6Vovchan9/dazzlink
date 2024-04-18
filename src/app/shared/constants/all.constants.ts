@@ -1,5 +1,3 @@
-import { ECategoryCodes } from "../interfaces";
-
 export const headerHeightInDesktop = 80;
 export const headerHeightInMobile = 64;
 

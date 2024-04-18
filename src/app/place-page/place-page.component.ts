@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { allRatingName, locationInfoMapping } from '@app/shared/constants/all.constants';
-import { ECategoryCodes, IVotingService, PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
+import { IVotingService, PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
 import { Subscription, of, pipe } from 'rxjs';
@@ -456,7 +456,7 @@ export class PlacePageComponent {
     this.router.navigate(
       ['/locations'],
       {
-        queryParams: { category: ECategoryCodes[this.placeData.categoryCode.toLowerCase()] || ECategoryCodes.restaurants }
+        queryParams: { category: this.placeData.categoryCode }
       }
     );
   }
