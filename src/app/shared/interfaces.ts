@@ -69,6 +69,13 @@ export interface CountryFilterItem {
     selectedСities?: Array<string>
 }
 
+export interface ILocationCategoriesNew {
+    category: string,
+    title?: string,
+    active?: boolean,
+    subcategoryList?: Array<{ title: string, code: string }>
+}
+
 export interface FbAuthResponse {
     idToken: string;
     expiresIn: string;

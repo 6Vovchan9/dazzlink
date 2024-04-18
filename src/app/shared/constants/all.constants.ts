@@ -1,4 +1,4 @@
-import { ECategoryCodes, ILocationCategories } from "../interfaces";
+import { ECategoryCodes } from "../interfaces";
 
 export const headerHeightInDesktop = 80;
 export const headerHeightInMobile = 64;
@@ -15,20 +15,5 @@ export const locationInfoMapping = {
     ratingTripadvisor: 'Tripadvisor',
     ratingYandex: 'Яндекс Карты'
 };
-
-export const CATEGORYCODES: Array<ILocationCategories> = [
-    {
-        code: ECategoryCodes.restaurants,
-        name: 'Еда'
-    },
-    {
-        code: ECategoryCodes.museums,
-        name: 'Искусство'
-    },
-    {
-        code: ECategoryCodes.nature,
-        name: 'Природа'
-    }
-];
 
 export const allRatingName: Array<string> = ['rating2GIS', 'ratingGoogle', 'ratingTripadvisor', 'ratingYandex'];

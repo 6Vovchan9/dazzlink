@@ -1,4 +1,4 @@
-import { RovraggeRespLocationsData } from "@app/shared/interfaces";
+import { ILocationCategoriesNew, RovraggeRespLocationsData } from "@app/shared/interfaces";
 
 export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
     placeCount: 2,
@@ -95,6 +95,21 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
         }
     ]
 }
+
+export const MOCK_CATEGORIES_FOR_SKELETON: Array<ILocationCategoriesNew> = [
+    {
+        category: 'RESTAURANTS',
+        title: 'Еда',
+    },
+    {
+        category: 'MUSEUMS',
+        title: 'Искусство'
+    },
+    {
+        category: 'NATURE',
+        title: 'Природа'
+    }
+];
 
 export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
     "placeCount": 5,

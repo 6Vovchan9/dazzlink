@@ -4,7 +4,16 @@ import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { delay, map, tap } from "rxjs/operators";
 
 import { environment } from "src/environments/environment";
-import { Place, Post, RovraggeRespLocationsData, RovraggeRespWrapper, RovraggeRespFiltersData, CountryFilterItem, IVotingService } from "../interfaces";
+import {
+    Place,
+    Post,
+    RovraggeRespLocationsData,
+    RovraggeRespWrapper,
+    RovraggeRespFiltersData,
+    CountryFilterItem,
+    IVotingService,
+    ILocationCategoriesNew
+} from "../interfaces";
 import { PagesService } from "@app/shared/services/pages.service";
 
 @Injectable({ providedIn: 'root' })
@@ -63,6 +72,20 @@ export class LocationsService {
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
+                },
+            }
+        ).pipe(
+            map((resp: RovraggeRespWrapper) => resp.data)
+        )
+    }
+
+    public getCategoryOptions(): Observable<Array<ILocationCategoriesNew>> {
+        return this.http.get(
+            `${environment.prodPlacesUrl}/place/category`,
+            {
+                headers: {
+                    'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
+                    'x-source-channel': 'dazzlink-web'
                 },
             }
         ).pipe(

@@ -31,19 +31,21 @@
                             <div class="stickyBar" [class.stickyBar--withLoading]="isLoading">
 
                                 <!-- Разновидность локаций -->
-                                <div class="categoryCodes">
+                                <div class="categoryCodes" [class.categoryCodes--withSkeleton]="locationCategoriesWithSkeleton">
                                     <ul class="categoryCodes__list">
-                                        @for (category of categoryCodes; track $index) {
+                                        @for (item of categoryCodes.list; track $index) {
                                             <li class="categoryCodes__item">
                                                 <button type="button"
                                                     class="categoryCodes__btn"
-                                                    [class.categoryCodes__btn--active]="curCategoryCode === category.code"
-                                                    (click)="onChangeCurCategory(category.code)"
+                                                    [disabled]="disabledLocationCategories"
+                                                    [class.categoryCodes__btn--active]="item.active"
+                                                    (click)="onChangeCurCategory(item)"
                                                 >
-                                                    {{category.name}}
+                                                    {{item.title}}
                                                 </button>
                                             </li>
                                         }
+                                        <div class="skeletonLoader categoryCodes__skeletonLoader"></div>
                                     </ul>
                                 </div>
 

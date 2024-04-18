@@ -1,18 +1,17 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
-import { Observable, Observer, Subject, Subscription, fromEvent, of } from 'rxjs';
+import { Observable, Observer, Subject, Subscription, fromEvent, of, throwError } from 'rxjs';
 import { catchError, debounceTime, delay, filter, map, skip, skipWhile, takeUntil, tap } from 'rxjs/operators';
 
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { LocationsService } from '@app/shared/services/locations.service';
-import { CountryFilterItem, ECategoryCodes, ILocationCategories, Place, RespCityPlaceList, RovraggeRespLocationsData } from '@app/shared/interfaces';
+import { CountryFilterItem, ECategoryCodes, ILocationCategories, ILocationCategoriesNew, Place, RespCityPlaceList, RovraggeRespLocationsData } from '@app/shared/interfaces';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastService } from '@app/shared/services/toast.service';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
-import { MOCK_LOCATIONS, MOCK_LOCATIONS_FOR_SKELETON } from '@app/shared/mock/locations';
-import { CATEGORYCODES } from '@app/shared/constants/all.constants';
+import { MOCK_CATEGORIES_FOR_SKELETON, MOCK_LOCATIONS, MOCK_LOCATIONS_FOR_SKELETON } from '@app/shared/mock/locations';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -28,7 +27,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public isLoading = true;
   public isSorting = false;
   public curCategoryCode: ECategoryCodes = ECategoryCodes.restaurants;
-  protected categoryCodes: Array<ILocationCategories> = CATEGORYCODES;
+  protected categoryCodes: { selected?: string, list: Array<ILocationCategoriesNew> } = {
+    list: MOCK_CATEGORIES_FOR_SKELETON
+  };
   private locationsSub: Subscription;
   private locationsAfterFilterSub: Subscription;
   private locationsAfterSortSub: Subscription;
@@ -43,6 +44,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   private fakeDelayForFilter: any;
   private fakeDelayForSort: any;
   private aboutType: unknown;
+  public disabledLocationCategories = true;
+  public locationCategoriesWithSkeleton = true;
   public showFilterControls = false;
   public errorAfterSort = false;
   public errorInGetAllLocations = false;
@@ -81,46 +84,31 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   ngOnInit(): void {
 
-    this.route.queryParams
-      .pipe(
-        takeUntil(this.destroy$),
-        tap((params: Params) => {
-          const isValueExists = Object.values(ECategoryCodes).includes(params.category);
-          if (isValueExists) {
-            this.curCategoryCode = params.category;
+    if (false) {
+      this.route.queryParams
+        .pipe(
+          takeUntil(this.destroy$),
+          tap((params: Params) => {
+            const isValueExists = Object.values(ECategoryCodes).includes(params.category);
+            if (isValueExists) {
+              this.curCategoryCode = params.category;
+            }
+          }),
+          // skip(1),
+          filter((val, index) => index > 0)
+        ).subscribe(
+          (params: Params) => {
+            this.afterChangeCategory();
           }
-        }),
-        // skip(1),
-        filter((val, index) => index > 0)
-      ).subscribe(
-        (params: Params) => {
-          console.log('Сейчас:', this.curCategoryCode);
-
-          // Строки ниже это для сброса всего связанного с фильтрацией
-          this.amountAllSelectedCities = [];
-          this.selectedCitiesMap = {};
-          this.showFilterControls = false;
-          this.filterFieldOptions = null;
-          
-          // Ниже 4 строки это для сброса всего связанного с FormControl-ом сортировки
-          this.filterBarGroup.get('sort').setValue(null, { emitEvent: false });
-          this.filterBarGroup.get('sort').disable({ emitEvent: false });
-          this.sortFieldOptions.items = [];
-          this.setIconForSortDropdown(null);
-
-           // Отписываемся от всех запросов:
-          this.subscriptionList();
-
-          // Снова запрашиваем локации фильтрацию и сортировку:
-          this.retryGetAllLocations();
-        }
-      );
+        );
+    }
       
     console.log('Сейчас:', this.curCategoryCode);
     this.createForm();
-    this.getSort();
-    this.getFilters();
-    this.getAllLocations();
+    this.getCategories();
+    // this.getSort();
+    // this.getFilters();
+    // this.getAllLocations();
   }
 
   ngAfterViewInit(): void {
@@ -280,6 +268,138 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.filterBarGroup.get('sort').enable({ emitEvent: false });
     this.setIconForSortDropdown(sortControlVal);
     this.isSorting = false;
+  }
+
+  private getCategories(): void {
+    if (true) {
+      const stream$ = new Observable((observer: Observer<any>) => {
+        console.warn('categorGet пошел');
+        setTimeout(() => {
+          // observer.next({})
+          // observer.next(null)
+          if (this.curLang === 'KZ') {
+            console.warn('categorGet error!');
+            observer.error('Error');
+          } else {
+            console.warn('categorGet ок!');
+            observer.next([
+              {
+                "category": "RESTAURANTS",
+                "title": "Еда",
+                "subcategoryList": [
+                  {
+                    "title": "string",
+                    "code": "string"
+                  }
+                ]
+              },
+              {
+                "category": "MUSEUMS",
+                "title": "Искусство",
+                "subcategoryList": [
+                  {
+                    "title": "string",
+                    "code": "string"
+                  }
+                ]
+              },
+              {
+                "category": "NATURE",
+                "title": "Природа",
+                "subcategoryList": [
+                  {
+                    "title": "string",
+                    "code": "string"
+                  }
+                ]
+              }
+            ]);
+          }
+        }, 2000)
+      })
+
+      this.sSub = stream$
+        .pipe(
+          tap(val => {
+            if (!val?.length) {
+              console.log('Пустой список категорий!');
+              throw new Error('Пустой список категорий!');
+            }
+          })
+        )
+        .subscribe({
+          next: value => {
+            let queryParams = this.route.snapshot.queryParams;
+            this.categoryCodes.selected = value[0].category;
+
+            if (queryParams.category) {
+              let detectedEl = value.find(item => item.category === queryParams.category);
+              if (detectedEl) {
+                detectedEl.active = true;
+                this.categoryCodes.selected = detectedEl.category;
+              } else {
+                value[0].active = true;
+              }
+            } else {
+              value[0].active = true;
+            }
+
+            this.categoryCodes.list = value;
+            this.disabledLocationCategories = this.locationCategoriesWithSkeleton = false;
+            
+            this.getAllOptionsAfterCategories();
+          },
+          error: err => {
+            console.log('Ошибка');
+            let selectedMockCategory = this.categoryCodes.list[0];
+            selectedMockCategory.active = true;
+            this.categoryCodes.selected = selectedMockCategory.category;
+            this.locationCategoriesWithSkeleton = false;
+            this.getAllOptionsAfterCategories();
+          }
+        });
+    } else {
+      this.locationsService.getCategoryOptions()
+        .pipe(
+          takeUntil(this.destroy$),
+          // delay(4000),
+        )
+        .subscribe(
+          value => {
+            console.log(value);
+          },
+          () => {
+            console.error('Ошибка при получении сортировки');
+          }
+        );
+    }
+  }
+
+  private getAllOptionsAfterCategories(): void {
+    this.getSort();
+    this.getFilters();
+    this.getAllLocations();
+  }
+
+  private afterChangeCategory(): void {
+
+    // Строки ниже это для сброса всего связанного с фильтрацией
+    this.amountAllSelectedCities = [];
+    this.selectedCitiesMap = {};
+    this.showFilterControls = false;
+    this.filterFieldOptions = null;
+
+    // Ниже 4 строки это для сброса всего связанного с FormControl-ом сортировки
+    this.filterBarGroup.get('sort').setValue(null, { emitEvent: false });
+    this.filterBarGroup.get('sort').disable({ emitEvent: false });
+    this.sortFieldOptions.items = [];
+    this.setIconForSortDropdown(null);
+
+    // Отписываемся от всех запросов:
+    this.subscriptionList();
+
+    // Снова запрашиваем локации, фильтрацию и сортировку:
+    this.retryGetAllLocations();
   }
 
   private getSort(): void {
@@ -811,21 +931,30 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     return this.amountAllSelectedCities.length ? `Показан ${this.amountAllSelectedCities.length} из 20 городов` : 'Показаны все города'
   }
 
-  public onChangeCurCategory(categoryVal: ECategoryCodes): void {
-    // const categoryParam: ECategoryCodes = categoryVal === ECategoryCodes.restaurants ? null : categoryVal;
-    const categoryParam: ECategoryCodes = categoryVal;
+  public onChangeCurCategory(categoryItem: ILocationCategoriesNew): void {
+
     this.router.navigate(
       [],
       {
-        queryParams: { category: categoryParam },
+        queryParams: { category: categoryItem.category },
         replaceUrl: true
         // queryParamsHandling: 'merge'
       }
-    ).then(
-      (success: boolean) => {
-        this.curCategoryCode = categoryVal;
-      }
     )
+    
+    this.setActiveCategory(categoryItem);
+    this.afterChangeCategory();
+  }
+
+  private setActiveCategory(curCategory: ILocationCategoriesNew) {
+    this.categoryCodes.selected = curCategory.category;
+    // сначала у всех категорий убираем active:
+    this.categoryCodes.list = this.categoryCodes.list.map(el => {
+      delete el.active;
+      return el;
+    });
+    // а выбранной ставим active = true:
+    curCategory.active = true;
   }
 
   public goToLocationDesc(id: string): void {

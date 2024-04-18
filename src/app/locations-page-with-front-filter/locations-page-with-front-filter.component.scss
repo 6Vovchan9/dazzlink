@@ -214,7 +214,8 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     margin-bottom: 8px;
     overflow: scroll;
     .categoryCodes__list {
-        display: flex;
+        overflow: hidden;
+        display: inline-flex;
         column-gap: 12px;
         .categoryCodes__item {
             .categoryCodes__btn {
@@ -234,7 +235,33 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                     background-color: var(--color-black1);
                     color: var(--color-gray1);
                 }
+
+                &[disabled] {
+                    opacity: .3;
+                    cursor: not-allowed;
+                }
             }
+        }
+    }
+    .categoryCodes__skeletonLoader {
+        background-color: transparent;
+        &:before {
+            background-color: transparent;
+        }
+    }
+    &--withSkeleton {
+        .categoryCodes__list {
+            position: relative;
+            .categoryCodes__item .categoryCodes__btn {
+                background-color: #eee;
+                color: #eee;
+                &[disabled] {
+                    opacity: 1;
+                }
+            }
+        }
+        .skeletonLoader {
+            display: block;
         }
     }
 }
