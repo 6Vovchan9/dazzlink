@@ -246,7 +246,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private getCategories(): void {
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('categorGet пошел');
         setTimeout(() => {
@@ -297,7 +297,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         .pipe(
           tap(val => {
             if (!val?.length) {
-              console.log('Пустой список категорий!');
               throw new Error('Пустой список категорий!');
             }
           })
@@ -325,7 +324,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             this.getAllOptionsAfterCategories();
           },
           error: err => {
-            console.log('Ошибка');
             let selectedMockCategory = this.categoryCodes.list[0];
             selectedMockCategory.active = true;
             this.categoryCodes.selected = selectedMockCategory.category;
@@ -338,13 +336,40 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         .pipe(
           takeUntil(this.destroy$),
           // delay(4000),
+          tap(val => {
+            if (!val?.length) {
+              throw new Error('Пустой список категорий!');
+            }
+          })
         )
         .subscribe(
           value => {
-            console.log(value);
+            let queryParams = this.route.snapshot.queryParams;
+            this.categoryCodes.selected = value[0].category;
+
+            if (queryParams.category) {
+              let detectedEl = value.find(item => item.category === queryParams.category);
+              if (detectedEl) {
+                detectedEl.active = true;
+                this.categoryCodes.selected = detectedEl.category;
+              } else {
+                value[0].active = true;
+              }
+            } else {
+              value[0].active = true;
+            }
+
+            this.categoryCodes.list = value;
+            this.disabledLocationCategories = this.locationCategoriesWithSkeleton = false;
+            
+            this.getAllOptionsAfterCategories();
           },
           () => {
-            console.error('Ошибка при получении сортировки');
+            let selectedMockCategory = this.categoryCodes.list[0];
+            selectedMockCategory.active = true;
+            this.categoryCodes.selected = selectedMockCategory.category;
+            this.locationCategoriesWithSkeleton = false;
+            this.getAllOptionsAfterCategories();
           }
         );
     }
@@ -429,7 +454,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           }
         );
     } else {
-      this.sSub = this.locationsService.getSortOptions()
+      this.sSub = this.locationsService.getSortOptions(this.categoryCodes.selected)
         .pipe(
           // delay(4000),
           map((resp: Array<{ title?: string, code?: string, details?: string, value?: string }>) => {
@@ -594,7 +619,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           }
         );
     } else {
-      this.fSub = this.locationsService.getFilterOptions()
+      this.fSub = this.locationsService.getFilterOptions(this.categoryCodes.selected)
         // .pipe(delay(2000))
         .subscribe(
           (value: Array<CountryFilterItem>) => {
@@ -663,7 +688,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         );
 
     } else {
-      this.locationsSub = this.locationsService.getAllLocations()
+      this.locationsSub = this.locationsService.getAllLocations(null, null, this.categoryCodes.selected)
         // .pipe(delay(2000))
         .subscribe({
           next: value => {
@@ -672,11 +697,10 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             // console.log(locationsForYmap);
             this.allLocations = value;
             this.filteredLocations = value?.cityPlaceList;
+            this.isLoading = false;
           },
           error: () => {
             this.allLocations = this.filteredLocations = null;
-          },
-          complete: () => {
             this.isLoading = false;
           }
         });

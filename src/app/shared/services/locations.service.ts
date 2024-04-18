@@ -66,19 +66,6 @@ export class LocationsService {
             )
     }
 
-    public getFilterOptions(): Observable<Array<CountryFilterItem>> {
-        return this.http.get(
-            `${environment.prodPlacesUrl}/place/filter/city`,
-            {
-                headers: {
-                    'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
-                },
-            }
-        ).pipe(
-            map((resp: RovraggeRespWrapper) => resp.data)
-        )
-    }
-
     public getCategoryOptions(): Observable<Array<ILocationCategories>> {
         return this.http.get(
             `${environment.prodPlacesUrl}/place/category`,
@@ -93,13 +80,34 @@ export class LocationsService {
         )
     }
 
-    public getSortOptions(): Observable<Array<{ title: string, code: string }>> {
+    public getFilterOptions(categoryCode = 'RESTAURANTS'): Observable<Array<CountryFilterItem>> {
+        
+        const customQueryParams = { categoryCode };
+
+        return this.http.get(
+            `${environment.prodPlacesUrl}/place/filter/city`,
+            {
+                headers: {
+                    'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
+                },
+                params: customQueryParams
+            }
+        ).pipe(
+            map((resp: RovraggeRespWrapper) => resp.data)
+        )
+    }
+
+    public getSortOptions(categoryCode = 'RESTAURANTS'): Observable<Array<{ title: string, code: string }>> {
+
+        const customQueryParams = { categoryCode };
+
         return this.http.get(
             `${environment.prodPlacesUrl}/place/sort`,
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
-                }
+                },
+                params: customQueryParams
             }
         ).pipe(
             map((resp: RovraggeRespWrapper) => resp.data)
