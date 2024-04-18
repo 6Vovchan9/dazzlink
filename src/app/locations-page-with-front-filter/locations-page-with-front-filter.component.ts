@@ -105,19 +105,21 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   private operatePageWrapScroll(): void {
     const pageWrap = document.getElementById('pageWrap');
-    const svgCircleElement = this.progressCircle.nativeElement as SVGCircleElement;
+    const svgCircleElement = this.progressCircle?.nativeElement as SVGCircleElement;
 
-    const scrollTop = pageWrap.scrollTop;
-    const scrollHeight = pageWrap.scrollHeight;
-    const offsetHeight = pageWrap.offsetHeight;
-    this.hideScrollProgress = scrollTop < offsetHeight;
-    const radius = svgCircleElement.getAttribute('r');
+    if (svgCircleElement) {
+      const scrollTop = pageWrap.scrollTop;
+      const scrollHeight = pageWrap.scrollHeight;
+      const offsetHeight = pageWrap.offsetHeight;
+      this.hideScrollProgress = scrollTop < offsetHeight;
+      const radius = svgCircleElement.getAttribute('r');
 
-    const circleLength = 2 * Math.PI * +radius;
-    const percentageProgress = Math.round(scrollTop / (scrollHeight - offsetHeight) * 100);
+      const circleLength = 2 * Math.PI * +radius;
+      const percentageProgress = Math.round(scrollTop / (scrollHeight - offsetHeight) * 100);
 
-    svgCircleElement.setAttribute('stroke-dasharray', String(circleLength));
-		svgCircleElement.setAttribute('stroke-dashoffset', String(circleLength - circleLength * percentageProgress / 100));
+      svgCircleElement.setAttribute('stroke-dasharray', String(circleLength));
+      svgCircleElement.setAttribute('stroke-dashoffset', String(circleLength - circleLength * percentageProgress / 100));
+    }
   }
 
   public onResetAllFilters(): void {
