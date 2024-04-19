@@ -110,7 +110,10 @@
                                                                 class="pageContent__locationLink"
                                                                 [class.pageContent__locationLink--disabled]="isSorting || isLoading"
                                                             >
-                                                                <app-location-item [isLoading]="isSorting || isLoading" [placeData]="location">
+                                                                <app-location-item
+                                                                    [isLoading]="isSorting || isLoading"
+                                                                    [placeData]="location"
+                                                                >
                                                                 </app-location-item>
                                                             </a>
                                                         </li>

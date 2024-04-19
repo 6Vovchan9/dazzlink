@@ -105,7 +105,8 @@ export type Place = {
     address?: string, // ул. Ислама Каримова, 17
     categoryCode: string, // RESTAURANTS
     subcategory?: string, // Бар
-    title?: string,// Чайхана
+    title?: string, // Государственный музей истории Узбекистана
+    displayName?: string, // Музей истории Узбекистана
     subtitle?: string, // Узбекская кухня
     priceRange?: number, // Средний чек: $, $$ или $$$
     rating: number,

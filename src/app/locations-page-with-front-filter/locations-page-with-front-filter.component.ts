@@ -975,6 +975,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       left: 0,
       behavior: "smooth"
     });
+
+    // document.getElementById('pageWrap').scrollTop = 0;
   }
 
   private subscriptionList(): void {

@@ -159,7 +159,7 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                 },
                 {
                     "id": "-NgYZORk7JcAD5y9ffSl",
-                    "title": "Люксор",
+                    // "title": "Люксор",
                     "subtitle": "Боевик",
                     "subcategory": "Кинотеатр",
                     "priceRange": '1',
@@ -176,6 +176,7 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                     "id": "-NgVRC20Iit-rnFDKsza",
                     "categoryCode": "RESTAURANTS",
                     "title": "Старый город",
+                    "displayName": "Старичок",
                     "subtitle": "Европейская",
                     "subcategory": "Ресторан",
                     "priceRange": 2,
