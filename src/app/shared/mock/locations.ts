@@ -98,15 +98,15 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
 
 export const MOCK_CATEGORIES_FOR_SKELETON: Array<ILocationCategories> = [
     {
-        category: 'RESTAURANTS',
+        code: 'RESTAURANTS',
         title: 'Еда',
     },
     {
-        category: 'MUSEUMS',
+        code: 'MUSEUMS',
         title: 'Искусство'
     },
     {
-        category: 'NATURE',
+        code: 'NATURE',
         title: 'Природа'
     }
 ];

@@ -70,7 +70,7 @@ export interface CountryFilterItem {
 }
 
 export interface ILocationCategories {
-    category: string,
+    code: string,
     title?: string,
     active?: boolean,
     subcategoryList?: Array<{ title: string, code: string }>

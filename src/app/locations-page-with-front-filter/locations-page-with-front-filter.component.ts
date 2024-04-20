@@ -249,7 +249,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   private getCategories(): void {
     if (false) {
-      const stream$ = new Observable((observer: Observer<any>) => {
+      const stream$ = new Observable((observer: Observer<Array<ILocationCategories>>) => {
         console.warn('categorGet пошел');
         setTimeout(() => {
           // observer.next({})
@@ -261,7 +261,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             console.warn('categorGet ок!');
             observer.next([
               {
-                "category": "RESTAURANTS",
+                "code": "RESTAURANTS",
                 "title": "Еда",
                 "subcategoryList": [
                   {
@@ -271,7 +271,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
                 ]
               },
               {
-                "category": "MUSEUMS",
+                "code": "ART",
                 "title": "Искусство",
                 "subcategoryList": [
                   {
@@ -281,7 +281,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
                 ]
               },
               {
-                "category": "NATURE",
+                "code": "PARKS",
                 "title": "Природа",
                 "subcategoryList": [
                   {
@@ -306,13 +306,13 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         .subscribe({
           next: value => {
             let queryParams = this.route.snapshot.queryParams;
-            this.categoryCodes.selected = value[0].category;
+            this.categoryCodes.selected = value[0].code;
 
             if (queryParams.category) {
-              let detectedEl = value.find(item => item.category === queryParams.category);
+              let detectedEl = value.find(item => item.code === queryParams.category);
               if (detectedEl) {
                 detectedEl.active = true;
-                this.categoryCodes.selected = detectedEl.category;
+                this.categoryCodes.selected = detectedEl.code;
               } else {
                 value[0].active = true;
               }
@@ -328,7 +328,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           error: err => {
             let selectedMockCategory = this.categoryCodes.list[0];
             selectedMockCategory.active = true;
-            this.categoryCodes.selected = selectedMockCategory.category;
+            this.categoryCodes.selected = selectedMockCategory.code;
             this.locationCategoriesWithSkeleton = false;
             this.getAllOptionsAfterCategories();
           }
@@ -347,13 +347,13 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         .subscribe(
           value => {
             let queryParams = this.route.snapshot.queryParams;
-            this.categoryCodes.selected = value[0].category;
+            this.categoryCodes.selected = value[0].code;
 
             if (queryParams.category) {
-              let detectedEl = value.find(item => item.category === queryParams.category);
+              let detectedEl = value.find(item => item.code === queryParams.category);
               if (detectedEl) {
                 detectedEl.active = true;
-                this.categoryCodes.selected = detectedEl.category;
+                this.categoryCodes.selected = detectedEl.code;
               } else {
                 value[0].active = true;
               }
@@ -369,7 +369,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           () => {
             let selectedMockCategory = this.categoryCodes.list[0];
             selectedMockCategory.active = true;
-            this.categoryCodes.selected = selectedMockCategory.category;
+            this.categoryCodes.selected = selectedMockCategory.code;
             this.locationCategoriesWithSkeleton = false;
             this.getAllOptionsAfterCategories();
           }
@@ -937,7 +937,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.router.navigate(
       [],
       {
-        queryParams: { category: categoryItem.category },
+        queryParams: { category: categoryItem.code },
         replaceUrl: true
         // queryParamsHandling: 'merge'
       }
@@ -948,7 +948,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private setActiveCategory(curCategory: ILocationCategories) {
-    this.categoryCodes.selected = curCategory.category;
+    this.categoryCodes.selected = curCategory.code;
     // сначала у всех категорий убираем active:
     this.categoryCodes.list = this.categoryCodes.list.map(el => {
       delete el.active;
