@@ -58,19 +58,6 @@
                                     </div>
                                     <div class="filterBar__controls">
                                         <!-- <button class="btn" (click)="isSorting = !isSorting">toggle</button> -->
-                                        <div class="filterBar__item" [class.withSkeletonLoader]="isLoading">
-                                            <!-- Фильтрация -->
-                                            <button class="filterButton"
-                                                [disabled]="!filterFieldOptions?.length"
-                                                (click)="onShowHideFilterControls()"
-                                            >
-                                                <div class="headInSortDropdown">
-                                                    <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities.length"></div>
-                                                    <div class="headInSortDropdown__text">Фильтр</div>
-                                                </div>
-                                            </button>
-                                            <div class="skeletonLoader skeletonLoader--shortHeight"></div>
-                                        </div>
                                         <div *ngIf="filterBarGroup" class="filterBar__item" [class.withSkeletonLoader]="isLoading">
                                             <!-- Сортировка -->
                                             <!-- (ngModelChange)="onChangeSort($event)" -->
@@ -82,6 +69,19 @@
                                                 [dropdownHead]="dropdownHeadForSort"
                                                 optionLabel="value">
                                             </app-dropdown-field>
+                                            <div class="skeletonLoader skeletonLoader--shortHeight"></div>
+                                        </div>
+                                        <div class="filterBar__item" [class.withSkeletonLoader]="isLoading">
+                                            <!-- Фильтрация -->
+                                            <button class="filterButton"
+                                                [disabled]="!filterFieldOptions?.length"
+                                                (click)="onShowHideFilterControls()"
+                                            >
+                                                <div class="headInSortDropdown">
+                                                    <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities.length"></div>
+                                                    <div class="headInSortDropdown__text">Фильтр</div>
+                                                </div>
+                                            </button>
                                             <div class="skeletonLoader skeletonLoader--shortHeight filterBar__skeleton"></div>
                                         </div>
                                     </div>

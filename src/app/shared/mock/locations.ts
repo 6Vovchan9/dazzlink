@@ -183,6 +183,18 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                     "rating": 4.2,
                     "address": "проспект Ленина, 17",
                     "imageList": null
+                },
+                {
+                    "id": "-NgVRC20Iit-rnFDKsza",
+                    "categoryCode": "RESTAURANTS",
+                    "title": "Старый русский",
+                    "displayName": "Гусь",
+                    "subtitle": "Еврейская",
+                    "subcategory": "Бар",
+                    // "priceRange": 2,
+                    "rating": 4.2,
+                    "address": "улица Фрунзе, 1",
+                    "imageList": null
                 }
             ]
         },
