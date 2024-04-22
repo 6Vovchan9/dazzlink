@@ -430,7 +430,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       this.sSub = stream$
         .pipe(
           map(resp => {
-            if (resp.length) {
+            if (resp?.length) {
+              resp = resp.filter(el => el && Object.keys(el).length);
               resp = resp.map(el => {
                 const res = {
                   details: el.title || el.code,
@@ -444,7 +445,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         )
         .subscribe(
           value => {
-            if (value.length) {
+            if (value?.length) {
               this.filterBarGroup.get('sort').enable({ emitEvent: false });
               this.sortFieldOptions.items = value;
             } else {
@@ -460,7 +461,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         .pipe(
           // delay(4000),
           map((resp: Array<{ title?: string, code?: string, details?: string, value?: string }>) => {
-            if (resp.length) {
+            if (resp?.length) {
+              resp = resp.filter(el => el && Object.keys(el).length);
               resp = resp.map(el => {
                 const res = {
                   details: el.title || el.code,
@@ -474,7 +476,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         )
         .subscribe(
           (value: Array<{ details: string, value: string }>) => {
-            if (value.length) {
+            if (value?.length) {
               this.filterBarGroup.get('sort').enable({ emitEvent: false });
               this.sortFieldOptions.items = value;
             } else {
