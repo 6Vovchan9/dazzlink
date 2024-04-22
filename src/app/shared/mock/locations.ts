@@ -139,7 +139,7 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                     "title": "Кафе у Лидии",
                     "subtitle": "Русская кухня",
                     "subcategory": "Бистро",
-                    "priceRange": 1,
+                    "priceRange": 0,
                     "rating": 5,
                     "address": "ул. Гагарина, 37",
                     "imageList": [
@@ -153,7 +153,7 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                     "id": "-NgYZORk7JcAD5y9fYvM",
                     "title": "Angry Birds",
                     "subcategory": "Кафе",
-                    "priceRange": '2',
+                    "priceRange": null,
                     "rating": 3.98,
                     "address": "ул. Флерова, 4а",
                 },

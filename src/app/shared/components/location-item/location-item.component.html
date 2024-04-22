@@ -30,9 +30,11 @@
             <div class="placeDetails__addit">
                 <div class="placeDetails__another">
                     <!-- $$$ -->
-                    <div class="placeDetails__anotherItem">
-                        <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
-                    </div>
+                    @if (placeData?.priceRange) {
+                        <div class="placeDetails__anotherItem">
+                            <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
+                        </div>
+                    }
                     <!-- Ресторан -->
                     <span class="placeDetails__anotherItem placeDetails__anotherItem--withEllipsis">{{placeData?.subcategory || 'Кафе'}}</span>
                     <!-- Кухня -->
