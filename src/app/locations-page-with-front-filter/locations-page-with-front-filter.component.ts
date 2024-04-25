@@ -411,7 +411,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         setTimeout(() => {
           // observer.next({})
           // observer.next(null)
-          if (this.curLang === 'UZ') {
+          if (this.curLang === 'UZ' || this.categoryCodes.selected === 'ART') {
             console.warn('sortGet error!');
             observer.error('Error');
           } else {

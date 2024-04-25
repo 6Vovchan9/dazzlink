@@ -204,6 +204,28 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
         },
         {
             "cityTitle": "Ереван",
-        }
+        },
+        {
+            "cityCode": "Dmitrov",
+            "cityTitle": "Дмитров",
+            "placeList": [
+                {
+                    "id": "-NgTNTZzxh9cram2eEd2",
+                    "categoryCode": "PARKS",
+                    "title": "Magic city",
+                    // "subtitle": "Узбекская кухня",
+                    "subcategory": "Парк",
+                    // "priceRange": 23,
+                    "rating": 4.5,
+                    "address": "ул. Ислама Магомаева, 15",
+                    "imageList": [
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
+                        }
+                    ]
+                }
+            ]
+        },
     ]
 }

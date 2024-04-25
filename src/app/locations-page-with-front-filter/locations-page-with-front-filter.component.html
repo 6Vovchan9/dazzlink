@@ -58,19 +58,21 @@
                                     </div>
                                     <div class="filterBar__controls">
                                         <!-- <button class="btn" (click)="isSorting = !isSorting">toggle</button> -->
-                                        <div *ngIf="filterBarGroup" class="filterBar__item" [class.withSkeletonLoader]="isLoading">
-                                            <!-- Сортировка -->
-                                            <!-- (ngModelChange)="onChangeSort($event)" -->
-                                            <app-dropdown-field
-                                                [formControl]="filterBarGroup.get('sort')"
-                                                [options]="sortFieldOptions"
-                                                [showArrowIcon]="false"
-                                                [highlightHead]="false"
-                                                [dropdownHead]="dropdownHeadForSort"
-                                                optionLabel="value">
-                                            </app-dropdown-field>
-                                            <div class="skeletonLoader skeletonLoader--shortHeight"></div>
-                                        </div>
+                                        @if (filterBarGroup) {
+                                            <div class="filterBar__item" [class.withSkeletonLoader]="isLoading">
+                                                <!-- Сортировка -->
+                                                <!-- (ngModelChange)="onChangeSort($event)" -->
+                                                <app-dropdown-field
+                                                    [formControl]="filterBarGroup.get('sort')"
+                                                    [options]="sortFieldOptions"
+                                                    [showArrowIcon]="false"
+                                                    [highlightHead]="false"
+                                                    [dropdownHead]="dropdownHeadForSort"
+                                                    optionLabel="value">
+                                                </app-dropdown-field>
+                                                <div class="skeletonLoader skeletonLoader--shortHeight"></div>
+                                            </div>
+                                        }
                                         <div class="filterBar__item" [class.withSkeletonLoader]="isLoading">
                                             <!-- Фильтрация -->
                                             <button class="filterButton"
