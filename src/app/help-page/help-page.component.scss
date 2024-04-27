@@ -19,6 +19,11 @@
 
 .inlineAnchorNav {
     overflow: scroll;
+
+    // &::-webkit-scrollbar {
+    //     display: none;
+    // }
+    
     &:after {
         content: '';
         position: absolute;
