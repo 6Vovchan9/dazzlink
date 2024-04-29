@@ -63,7 +63,7 @@
             </ng-container> -->
 
             <!-- Новый вариант -->
-            <ng-container *ngIf="articlesList; else loadingTemplate">
+            <ng-container *ngIf="!isLoading; else loadingTemplate">
                 <ng-container *ngIf="errorInGetAllArticles; else successGetAllArticles">
                     <div class="errorMessage">
                         <div class="errorMessage__icon"></div>
@@ -79,7 +79,7 @@
                 </ng-container>
                 <ng-template #successGetAllArticles>
 
-                    @if (articlesList.length) {
+                    @if (articlesList?.length) {
                         <ul class="pageContent__articles">
                             @for (post of articlesList; track trackPost; let lastIndex = $last) {
                                 @if (lastIndex) {
@@ -98,9 +98,11 @@
                                 }
                             }
                         </ul>
-                        <!-- <div class="pageContent__loadMore">
-                            <app-progress-spinner></app-progress-spinner>
-                        </div> -->
+                        @if (showLoadMoreSpinner) {
+                            <div class="pageContent__loadMore">
+                                <app-progress-spinner></app-progress-spinner>
+                            </div>
+                        }
                     } @else {
                         <ng-container *ngTemplateOutlet="empty"></ng-container> 
                     }

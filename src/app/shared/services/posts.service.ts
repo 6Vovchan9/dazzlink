@@ -116,8 +116,18 @@ export class PostsService {
             )
     }
 
-    public getAllProd(): Observable<Post[]> {
-        return this.http.get(`${environment.prodArticleUrl}/publication`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
+    public getAllProd(options?): Observable<Post[]> {
+        let customQueryParams = {};
+        if (options?.id) {
+            customQueryParams = options
+        }
+        return this.http.get(
+            `${environment.prodArticleUrl}/publication`,
+            {
+                headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() },
+                params: customQueryParams
+            }
+        )
             .pipe(
                 map((resp: RovraggeRespWrapper) => {
                     return resp.data;

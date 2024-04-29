@@ -18,7 +18,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('lastPostItem', { read: ElementRef }) lastPostList: QueryList<ElementRef>;
 
   public posts$: Observable<Post[]>;
-  public articlesList: Post[];
+  public articlesList: Post[] = [];
   public searchStr = '';
   public isLoading = true;
   private lSub: Subscription;
@@ -26,6 +26,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private curLang: string;
   public errorInGetAllArticles = false;
   private observer: IntersectionObserver;
+  public showLoadMoreSpinner = false;
 
   constructor(
     private postsService: PostsService,
@@ -35,14 +36,14 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.lSub = this.pagesService.currentLanguage.subscribe(
-      lang => {
-        this.curLang = lang;
-        if (!this.isLoading) {
-          this.getAllArticles();
-        }
-      }
-    );
+    // this.lSub = this.pagesService.currentLanguage.subscribe(
+    //   lang => {
+    //     this.curLang = lang;
+    //     if (!this.isLoading) {
+    //       this.getAllArticles();
+    //     }
+    //   }
+    // );
 
     this.getAllArticles();
     // this.intersectionObserver();
@@ -51,7 +52,6 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     // this.lastPostList.changes.subscribe(
     //   d => {
-    //     console.log(d);
     //     if (d.last && this.observer) this.observer.observe(d.last.nativeElement);
     //   }
     // );
@@ -67,9 +67,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     return post.id;
   }
 
-  private getAllArticles(withError = false): void {
-    this.isLoading = true;
-
+  private getAllArticles(options?: { id: string, direction: 'EARLIER' | 'LATER' }, withError = false): void {
     if (false) {
       this.pSub = new Observable((observer: Observer<Array<Post>>) => {
         console.warn('locationsGet пошел');
@@ -137,16 +135,18 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
         // )
         .subscribe({
           next: value => {
+            value.forEach(post => {
+              this.articlesList.push(post);
+            })
             this.isLoading = false;
-            this.articlesList = value || [];
           },
           error: err => {
             this.isLoading = false;
             this.errorInGetAllArticles = true;
-            this.articlesList = [];
           }
         })
     } else {
+
       // Старый вариант
       // this.posts$ = this.postsService.getAllProd()
       //   .pipe(
@@ -161,24 +161,25 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       //     })
       //   )
 
-      this.pSub = this.postsService.getAllProd()
-        .subscribe({
-          next: value => {
-            this.isLoading = false;
-            this.articlesList = value || [];
-          },
-          error: err => {
-            this.isLoading = false;
-            this.errorInGetAllArticles = true;
-            this.articlesList = [];
-          }
-        })
+      this.pSub = this.postsService.getAllProd(options)
+      .subscribe({
+        next: value => {
+          value.forEach(post => {
+            this.articlesList.push(post);
+          })
+          this.isLoading = false;
+        },
+        error: () => {
+          this.isLoading = false;
+          this.errorInGetAllArticles = true;
+        }
+      })
     }
   }
 
   private reloadArticles(): void {
     this.errorInGetAllArticles = false;
-    this.articlesList = null;
+    this.isLoading = true;
     this.getAllArticles();
   }
 
@@ -214,9 +215,9 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.observer = new IntersectionObserver(
       ([entry], observer) => {
           if (entry.isIntersecting) {
-            console.log(entry.target);
             observer.unobserve(entry.target);
-            console.log('Scroll more!');
+            console.log('load more articles...');
+            this.showLoadMoreSpinner = true;
           }
       },
       optionsForObserver
