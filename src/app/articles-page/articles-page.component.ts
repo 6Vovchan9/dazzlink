@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Optional, QueryList, ViewChildren } from '@angular/core';
 import { EMPTY, Observable, Observer, Subscription, of, throwError } from 'rxjs';
 import { catchError, delay, tap } from 'rxjs/operators';
 import { Post } from '@app/shared/interfaces';
@@ -13,14 +13,19 @@ import { langArr } from '@app/shared/constants/languages.constants';
   templateUrl: './articles-page.component.html',
   styleUrls: ['./articles-page.component.scss']
 })
-export class ArticlesPageComponent implements OnInit, OnDestroy {
+export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @ViewChildren('lastPostItem', { read: ElementRef }) lastPostList: QueryList<ElementRef>;
 
   public posts$: Observable<Post[]>;
+  public articlesList: Post[];
   public searchStr = '';
   public isLoading = true;
   private lSub: Subscription;
+  private pSub: Subscription;
   private curLang: string;
   public errorInGetAllArticles = false;
+  private observer: IntersectionObserver;
 
   constructor(
     private postsService: PostsService,
@@ -30,7 +35,6 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    // console.log('---ArticlesPageComponent init---');
     this.lSub = this.pagesService.currentLanguage.subscribe(
       lang => {
         this.curLang = lang;
@@ -41,6 +45,16 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
     );
 
     this.getAllArticles();
+    // this.intersectionObserver();
+  }
+
+  ngAfterViewInit() {
+    // this.lastPostList.changes.subscribe(
+    //   d => {
+    //     console.log(d);
+    //     if (d.last && this.observer) this.observer.observe(d.last.nativeElement);
+    //   }
+    // );
   }
 
   public get webview(): boolean {
@@ -53,59 +67,118 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
     return post.id;
   }
 
-  private getAllArticles(): void {
+  private getAllArticles(withError = false): void {
     this.isLoading = true;
 
     if (false) {
-      this.posts$ = new Observable((observer: Observer<any>) => {
+      this.pSub = new Observable((observer: Observer<Array<Post>>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {
-          console.warn('locationsGet error :(');
-          // observer.next({});
-          // observer.next(null);
-          // observer.next([]);
-          observer.error('Error');
-        })
-      }).pipe(
-        tap(val => {
-          console.log('3', val);
-          this.isLoading = false;
-        }),
-        catchError(err => {
-          console.log('4');
-          this.isLoading = false;
-          this.errorInGetAllArticles = true;
-          return of([]);
-        })
-      )
-    } else {
-      // this.posts$ = this.postsService.getAll()
-      // this.posts$ = this.postsService.getAllRovragge()
-      this.posts$ = this.postsService.getAllProd()
-        .pipe(
-          tap(val => {
-            // console.log(val);
+          if (withError) {
+            console.warn('locationsGet error :(');
+            observer.error('Error');
+            // observer.next([]);
+            // observer.next({});
+            // observer.next(null);
+          } else {
+            console.warn('locationsGet ok :)');
+            observer.next([
+              {
+                "id": "6d65891f-624f-48cb-9a1d-7059ad3bc9ff",
+                "title": "Статья 1",
+                "imageUrl": "https://static.dazzlink.asia/article/new/article_19.jpg",
+                "viewCount": 22,
+                "published": new Date('2024-02-12T11:08:04.31')
+              },
+              {
+                "id": "a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e",
+                "title": "Статья 2",
+                "imageUrl": "https://static.dazzlink.asia/article/new/article_6.jpg",
+                "viewCount": 12,
+                "published": new Date('2024-02-11T11:08:04.31')
+              },
+              {
+                "id": "a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e",
+                "title": "Статья 3",
+                "imageUrl": "https://static.dazzlink.asia/article/new/article_6.jpg",
+                "viewCount": 12,
+                "published": new Date('2024-02-11T12:08:04.31')
+              },
+              {
+                "id": "a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e",
+                "title": "Статья 4",
+                "imageUrl": "https://static.dazzlink.asia/article/new/article_6.jpg",
+                "viewCount": 12,
+                "published": new Date('2024-02-11T11:09:04.31')
+              },
+              {
+                "id": "a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e",
+                "title": "Статья 5",
+                "imageUrl": "https://static.dazzlink.asia/article/new/article_6.jpg",
+                "viewCount": 12,
+                "published": new Date('2024-02-13T11:08:04.31')
+              },
+              {
+                "id": "a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e",
+                "title": "Статья 6",
+                "imageUrl": "https://static.dazzlink.asia/article/new/article_6.jpg",
+                "viewCount": 12,
+                "published": new Date('2024-02-14T11:08:04.31')
+              }
+            ]);
+          }
+        }, 2000)
+      })
+        // .pipe(
+        //   catchError(err => {
+        //     this.errorInGetAllArticles = true;
+        //     return of([]);
+        //   })
+        // )
+        .subscribe({
+          next: value => {
             this.isLoading = false;
-          }),
-          catchError(err => {
+            this.articlesList = value || [];
+          },
+          error: err => {
             this.isLoading = false;
             this.errorInGetAllArticles = true;
-            return of([
-              // {
-              //   id: 'ferb54grv',
-              //   title: 'title',
-              //   // imageUrl: null,
-              //   viewCount: 22,
-              //   published: new Date(),
-              // }
-            ]);
-          })
-        )
+            this.articlesList = [];
+          }
+        })
+    } else {
+      // Старый вариант
+      // this.posts$ = this.postsService.getAllProd()
+      //   .pipe(
+      //     tap(val => {
+      //       console.log(val);
+      //       this.isLoading = false;
+      //     }),
+      //     catchError(err => {
+      //       this.isLoading = false;
+      //       this.errorInGetAllArticles = true;
+      //       return of([]);
+      //     })
+      //   )
+
+      this.pSub = this.postsService.getAllProd()
+        .subscribe({
+          next: value => {
+            this.isLoading = false;
+            this.articlesList = value || [];
+          },
+          error: err => {
+            this.isLoading = false;
+            this.errorInGetAllArticles = true;
+            this.articlesList = [];
+          }
+        })
     }
   }
 
   private reloadArticles(): void {
     this.errorInGetAllArticles = false;
+    this.articlesList = null;
     this.getAllArticles();
   }
 
@@ -130,8 +203,30 @@ export class ArticlesPageComponent implements OnInit, OnDestroy {
     return langArr[key][this.curLang];
   }
 
+  private intersectionObserver() {
+
+    const optionsForObserver = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1
+    };
+
+    this.observer = new IntersectionObserver(
+      ([entry], observer) => {
+          if (entry.isIntersecting) {
+            console.log(entry.target);
+            observer.unobserve(entry.target);
+            console.log('Scroll more!');
+          }
+      },
+      optionsForObserver
+    );
+  }
+
   public ngOnDestroy(): void {
     this.lSub?.unsubscribe();
+    this.pSub?.unsubscribe();
+    this.observer?.disconnect();
   }
 
 }

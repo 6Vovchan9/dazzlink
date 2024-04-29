@@ -84,6 +84,10 @@
         flex-direction: column;
         row-gap: 48px;
 
+        // .lastPostItem {
+        //     background-color: red;
+        // }
+
         // .pageContent__itemOfArticle {
         //     &--viewed {
         //         opacity: .3;
@@ -99,6 +103,12 @@
         // }
     }
 
+    .pageContent__loadMore {
+        margin-top: 32px;
+        position: relative;
+        height: 50px;
+    }
+
     @media #{$notMobile} {
         .pageContent__articles {
             flex-wrap: wrap;
@@ -111,6 +121,10 @@
                     margin-right: 24px;
                 }
             }
+        }
+
+        .pageContent__loadMore {
+            margin-top: 48px;
         }
     }
 }
