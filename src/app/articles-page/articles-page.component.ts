@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { PagesService } from '@app/shared/services/pages.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
+import { MOCK_ARTICLES } from '@app/shared/mock/articles';
 
 @Component({
   selector: 'app-articles-page',
@@ -52,6 +53,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     // this.lastPostList.changes.subscribe(
     //   d => {
+    //     console.log(d);
     //     if (d.last && this.observer) this.observer.observe(d.last.nativeElement);
     //   }
     // );
@@ -80,50 +82,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
             // observer.next(null);
           } else {
             console.warn('locationsGet ok :)');
-            observer.next([
-              {
-                "id": "6d65891f-624f-48cb-9a1d-7059ad3bc9ff",
-                "title": "Статья 1",
-                "imageUrl": "https://static.dazzlink.asia/article/new/article_19.jpg",
-                "viewCount": 22,
-                "published": new Date('2024-02-12T11:08:04.31')
-              },
-              {
-                "id": "a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e",
-                "title": "Статья 2",
-                "imageUrl": "https://static.dazzlink.asia/article/new/article_6.jpg",
-                "viewCount": 12,
-                "published": new Date('2024-02-11T11:08:04.31')
-              },
-              {
-                "id": "a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e",
-                "title": "Статья 3",
-                "imageUrl": "https://static.dazzlink.asia/article/new/article_6.jpg",
-                "viewCount": 12,
-                "published": new Date('2024-02-11T12:08:04.31')
-              },
-              {
-                "id": "a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e",
-                "title": "Статья 4",
-                "imageUrl": "https://static.dazzlink.asia/article/new/article_6.jpg",
-                "viewCount": 12,
-                "published": new Date('2024-02-11T11:09:04.31')
-              },
-              {
-                "id": "a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e",
-                "title": "Статья 5",
-                "imageUrl": "https://static.dazzlink.asia/article/new/article_6.jpg",
-                "viewCount": 12,
-                "published": new Date('2024-02-13T11:08:04.31')
-              },
-              {
-                "id": "a3f799d2-cb68-44b1-8fa6-3dbd6e554f0e",
-                "title": "Статья 6",
-                "imageUrl": "https://static.dazzlink.asia/article/new/article_6.jpg",
-                "viewCount": 12,
-                "published": new Date('2024-02-14T11:08:04.31')
-              }
-            ]);
+            observer.next(MOCK_ARTICLES);
           }
         }, 2000)
       })
@@ -162,18 +121,21 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       //   )
 
       this.pSub = this.postsService.getAllProd(options)
-      .subscribe({
-        next: value => {
-          value.forEach(post => {
-            this.articlesList.push(post);
-          })
-          this.isLoading = false;
-        },
-        error: () => {
-          this.isLoading = false;
-          this.errorInGetAllArticles = true;
-        }
-      })
+        // .pipe(
+        //   delay(2000)
+        // )
+        .subscribe({
+          next: value => {
+            value.forEach(post => {
+              this.articlesList.push(post);
+            })
+            this.isLoading = false;
+          },
+          error: () => {
+            this.isLoading = false;
+            this.errorInGetAllArticles = true;
+          }
+        })
     }
   }
 
@@ -201,7 +163,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public getContent(key: string): string {
-    return langArr[key][this.curLang];
+    return langArr[key][this.curLang || 'RU'];
   }
 
   private intersectionObserver() {
@@ -213,6 +175,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     };
 
     this.observer = new IntersectionObserver(
+      // callback может сработать неожиданно раньше, при первом переходе на страницу, изза того что вначале картинки статей не загружены и соотв высота карточек будет маленькой, поэтому надлюдаемый элемент может вызвать callback
       ([entry], observer) => {
           if (entry.isIntersecting) {
             observer.unobserve(entry.target);

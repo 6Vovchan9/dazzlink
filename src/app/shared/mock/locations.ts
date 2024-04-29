@@ -94,7 +94,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
             ]
         }
     ]
-}
+};
 
 export const MOCK_CATEGORIES_FOR_SKELETON: Array<ILocationCategories> = [
     {
@@ -228,4 +228,4 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
             ]
         },
     ]
-}
+};
