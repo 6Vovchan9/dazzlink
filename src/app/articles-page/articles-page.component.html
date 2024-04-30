@@ -44,13 +44,16 @@
                         </div>
                     </div>
                 </div>
+                <!-- <button (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles" class="implementError">
+                    implementError (now: {{implementErrorInGetAllArticles}})
+                </button> -->
             </div>
         </aside>
         <main class="pageContent">
 
             <!-- Старый вариант -->
             <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
-                <ng-container *ngIf="errorInGetAllArticles; else successGetAllArticles">
+                <ng-container *ngIf="errorAfterGetAllArticles; else successGetAllArticles">
                     Есть проблема
                 </ng-container>
                 <ng-template #successGetAllArticles>
@@ -64,7 +67,7 @@
 
             <!-- Новый вариант -->
             <ng-container *ngIf="!isLoading; else loadingTemplate">
-                <ng-container *ngIf="errorInGetAllArticles; else successGetAllArticles">
+                <ng-container *ngIf="errorAfterGetAllArticles; else successGetAllArticles">
                     <div class="errorMessage">
                         <div class="errorMessage__icon"></div>
                         <div class="errorMessage__title">
@@ -81,10 +84,11 @@
 
                     @if (articlesList?.length) {
                         <ul class="pageContent__articles">
-                            @for (post of articlesList; track trackPost; let lastIndex = $last) {
+                            @for (post of articlesList; track trackPost; let lastIndex = $last, index = $index) {
                                 @if (lastIndex) {
                                     <li #lastPostItem class="pageContent__itemOfArticle lastPostItem" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
                                         <a [routerLink]="['/post', post.id]" class="pageContent__articleLink">
+                                            <!-- {{index + 1}} -->
                                             <app-post [postData]="post"></app-post>
                                         </a>
                                     </li>
@@ -92,6 +96,7 @@
                                     <li class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
                                         <!-- <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post> -->
                                         <a [routerLink]="['/post', post.id]" class="pageContent__articleLink">
+                                            <!-- {{index + 1}} -->
                                             <app-post [postData]="post"></app-post>
                                         </a>
                                     </li>

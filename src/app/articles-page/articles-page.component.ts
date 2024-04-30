@@ -25,7 +25,8 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private lSub: Subscription;
   private pSub: Subscription;
   private curLang: string;
-  public errorInGetAllArticles = false;
+  public errorAfterGetAllArticles = false;
+  public implementErrorInGetAllArticles = false;
   private observer: IntersectionObserver;
   public showLoadMoreSpinner = false;
 
@@ -47,16 +48,16 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // );
 
     this.getAllArticles();
-    // this.intersectionObserver();
+    this.intersectionObserver();
   }
 
   ngAfterViewInit() {
-    // this.lastPostList.changes.subscribe(
-    //   d => {
-    //     console.log(d);
-    //     if (d.last && this.observer) this.observer.observe(d.last.nativeElement);
-    //   }
-    // );
+    this.lastPostList.changes.subscribe(
+      d => {
+        // console.log(d);
+        if (d.last && this.observer) this.observer.observe(d.last.nativeElement);
+      }
+    );
   }
 
   public get webview(): boolean {
@@ -74,7 +75,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.pSub = new Observable((observer: Observer<Array<Post>>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {
-          if (withError) {
+          if (withError || this.implementErrorInGetAllArticles) {
             console.warn('locationsGet error :(');
             observer.error('Error');
             // observer.next([]);
@@ -88,7 +89,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       })
         // .pipe(
         //   catchError(err => {
-        //     this.errorInGetAllArticles = true;
+        //     this.errorAfterGetAllArticles = true;
         //     return of([]);
         //   })
         // )
@@ -96,12 +97,14 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
           next: value => {
             value.forEach(post => {
               this.articlesList.push(post);
-            })
+            });
+            this.showLoadMoreSpinner = false;
             this.isLoading = false;
           },
           error: err => {
+            this.errorAfterGetAllArticles = true;
             this.isLoading = false;
-            this.errorInGetAllArticles = true;
+            this.articlesList = []; // Это надо сделать на тот случай когда мы уже получили некоторое кол-во статей и при запросе очередной пачки статей случилась ошибка и чтобы если вдруг после "Перезагрузить" из баннера сервак раздуплится то надо очистить старые посты 
           }
         })
     } else {
@@ -115,7 +118,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       //     }),
       //     catchError(err => {
       //       this.isLoading = false;
-      //       this.errorInGetAllArticles = true;
+      //       this.errorAfterGetAllArticles = true;
       //       return of([]);
       //     })
       //   )
@@ -128,19 +131,21 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
           next: value => {
             value.forEach(post => {
               this.articlesList.push(post);
-            })
+            });
+            this.showLoadMoreSpinner = false;
             this.isLoading = false;
           },
           error: () => {
+            this.errorAfterGetAllArticles = true;
             this.isLoading = false;
-            this.errorInGetAllArticles = true;
+            this.articlesList = []; // Это надо сделать на тот случай когда мы уже получили некоторое кол-во статей и при запросе очередной пачки статей случилась ошибка и чтобы если вдруг после "Перезагрузить" из баннера сервак раздуплится то надо очистить старые посты 
           }
         })
     }
   }
 
   private reloadArticles(): void {
-    this.errorInGetAllArticles = false;
+    this.errorAfterGetAllArticles = false;
     this.isLoading = true;
     this.getAllArticles();
   }
@@ -181,6 +186,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
             observer.unobserve(entry.target);
             console.log('load more articles...');
             this.showLoadMoreSpinner = true;
+            this.getAllArticles({ id: this.articlesList[this.articlesList.length - 1].id, direction: 'EARLIER' });
           }
       },
       optionsForObserver
