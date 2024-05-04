@@ -26,7 +26,9 @@
             <!-- <ng-container *ngIf="!isLoading; else loadingTemplate"> -->
                 <!-- <ng-container *ngIf="allLocations; else errorInGetAllLocations"> -->
                     <!-- <ng-container *ngIf="allLocations.placeCount; else empty"> -->
-                        <div class="pageContent__allAboutLocations">
+                        
+                        <!-- && allLocations чтобы не показывать gradient когда отображается баннер #errorInGetAllLocations -->
+                        <div class="pageContent__allAboutLocations" [class.pageContent__allAboutLocations--withGradientEffect]="isLoading && allLocations">
 
                             <div class="stickyBar" [class.stickyBar--withLoading]="isLoading">
 
@@ -41,7 +43,7 @@
                                                     [class.categoryCodes__btn--active]="item.active"
                                                     (click)="onChangeCurCategory(item)"
                                                 >
-                                                    {{item.title}}
+                                                    {{item.title || 'Категория'}}
                                                 </button>
                                             </li>
                                         }
@@ -146,7 +148,7 @@
                             <!-- </ng-container> -->
                         </div>
                         <!-- && allLocations чтобы не показывать gradient когда отображается баннер #errorInGetAllLocations -->
-                        <div *ngIf="isLoading && allLocations" class="gradientForLocationLoading"></div>
+                        <!-- <div *ngIf="isLoading && allLocations" class="gradientForLocationLoading"></div> -->
                     <!-- </ng-container> -->
                 <!-- </ng-container> -->
             <!-- </ng-container> -->

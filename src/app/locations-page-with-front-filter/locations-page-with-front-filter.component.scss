@@ -99,6 +99,12 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     flex: 2;
     margin-bottom: 32px;
 
+    .pageContent__allAboutLocations {
+        &--withGradientEffect {
+            mask-image: linear-gradient(0deg, transparent, #000 400px);
+        }
+    }
+
     // .pageContent__allAboutLocations {
     //     position: relative;
     //     padding-top: 76px;
