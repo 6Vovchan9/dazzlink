@@ -15,7 +15,7 @@
         <div class="placeDetails">
             <div class="placeDetails__main">
                 <!-- Название -->
-                <div class="placeDetails__title">{{placeData?.displayName || placeData?.title || 'Название заведения'}}</div>
+                <div class="placeDetails__title">{{(placeData?.displayName || placeData?.title || 'Название заведения') | slice:0:30}}</div>
                 <!-- Рейтинг -->
                 <!-- [ngStyle]="{
                     color: placeData?.rating < 4 ? '#D70015'
