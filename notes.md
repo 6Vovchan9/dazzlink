@@ -9,6 +9,10 @@ ng new dazzlink -> удаляем ранее созданный бандл, ес
 
 Чтоб протестировать собранное приложение (запустить файл index.html из папки docs) глобально должен быть установлен пакет npm install -g http-server далее удаляем ранее созданный бандл, если есть (/dist или /docs) -> собираем проект npm run build -> переходим в папку где лежит файл index.html (cd Desktop/myProject/dist/myProject/) и запускаем локальный сервер http-server -p 4200
 
+## "overflow: hidden" у body
+
+Из-за того что body не растягивается под ширину контента, а занимает максимум высоту окна, при свайпе на мобиле присутствует неприятный эффект при свайпе в крайних точках, если не менять layout то данную проблему можно решить добавление "overflow: hidden" у body, но тогда мы лишимся возможности обновлять страницу свайпом вниз
+
 ## firebase hosting
 
 Глобально должен быть установлен пакет npm install -g firebase-tools, далее firebase login -> firebase init -> удаляем ранее созданный бандл, если есть (/dist или /docs) -> собираем проект ng build --output-path docs -> firebase deploy (эта инструкция есть на https://firebase.google.com и у Владилен Минин на ютубе видео от 5.12.23)
@@ -27,6 +31,8 @@ For a description of the Bot API, see this page: https://core.telegram.org/bots/
 Выяснил, что при переходе на 16 версию на старый устройствах ios (например версия ПО 14.7.1) сайт не открывается (отображается белый экран), в результате анализа пришел к выводу, что такая проблема возникает
 1) при переходе es2020 -> ES2022 в файле tsconfig.json
 2) при использовании кастомных NgModel-ей, а именно при регистрации сервиса таким образом providers: [{provide: NG_VALUE_ACCESSOR, ...}] (например AccoTriggerComponent, DropdownFieldModule, RadiobuttonFieldModule)
+
+UPD: Такая фигня наблюдается только в dev mode (при открытии страницы через http://192.168.1.137:4200), при деплое на хостинг страница норм открывается даже на старых устройствах
 
 ## IntersectionObserver
 

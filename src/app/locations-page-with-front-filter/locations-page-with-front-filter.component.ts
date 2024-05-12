@@ -388,6 +388,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     // Строки ниже это для сброса всего связанного с фильтрацией
     this.amountAllSelectedCities = [];
     this.selectedCitiesMap = {};
+    this.showScroll();
     this.showFilterControls = false;
     this.filterFieldOptions = null;
 
@@ -810,6 +811,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   public onCloseFilterOptionsInMobile(): void {
+    this.showScroll();
     if (true) {
       this.onFilterFromMobile();
     } else {
@@ -854,6 +856,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     console.log('Before:', arrBefore);
     console.log('After:',  arrAfter);
 
+    this.showScroll();
     this.showFilterControls = false;
 
     if (arrBefore.length === arrAfter.length && this.isArraysEqual(arrBefore, arrAfter)) {
@@ -879,6 +882,12 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   public onShowHideFilterControls() {
     this.showFilterControls = !this.showFilterControls;
+    const isOpen = this.showFilterControls;
+    if (isOpen) {
+      this.hideScroll(); // для компа это не имеет значения а для телефона это важно (подробности см. в notes.md)
+    } else {
+      this.showScroll();
+    }
 
     this.amountAllSelectedCitiesBefore = [...this.amountAllSelectedCities];
   }
@@ -979,6 +988,14 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     });
 
     // document.getElementById('pageWrap').scrollTop = 0;
+  }
+
+  private hideScroll(): void {
+    document.body.classList.add('no-scroll');
+  }
+
+  private showScroll(): void {
+    document.body.classList.remove('no-scroll');
   }
 
   private subscriptionList(): void {
