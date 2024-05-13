@@ -70,7 +70,8 @@
                                                     [showArrowIcon]="false"
                                                     [highlightHead]="false"
                                                     [dropdownHead]="dropdownHeadForSort"
-                                                    optionLabel="value">
+                                                    optionLabel="value"
+                                                    (toggle)="sortDropdownState($event)">
                                                 </app-dropdown-field>
                                                 <div class="skeletonLoader skeletonLoader--shortHeight"></div>
                                             </div>

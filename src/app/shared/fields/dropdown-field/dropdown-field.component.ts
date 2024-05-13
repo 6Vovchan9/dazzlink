@@ -49,6 +49,8 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   public dropdownHead: string;
   @Output()
   public clickByItemDesc = new EventEmitter<string>();
+  @Output()
+  public toggle = new EventEmitter<boolean>();
 
   public disabledControl = false;
   public selectedItems: any;
@@ -93,7 +95,11 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   public setDisabledState?(isDisabled: boolean): void {
-    if (isDisabled) this.closedState = true;
+    if (isDisabled && !this.closedState) {
+      // console.log('8');
+      this.toggle.emit(false);
+      this.closedState = true;
+    }
     this.disabledControl = isDisabled;
   }
 
@@ -111,6 +117,7 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
           }
           // console.log('1', res);
           this.selectedItems = this.createSelectedItemsForScreen(res);
+          this.toggle.emit(false);
           this.closedState = true; // закрываем выпадающий список
           this.onChange(res);
         }
@@ -147,7 +154,9 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   clickOutside(clickByBackground = false) {
-    if (document.documentElement.clientWidth >= 768 || clickByBackground ) {
+    if (document.documentElement.clientWidth >= 768 && !this.closedState  || clickByBackground ) {
+      // console.log('6');
+      this.toggle.emit(false);
       this.closedState = true;
     }
   }
@@ -155,6 +164,8 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   public toggleState(e): void {
     e.stopPropagation();
     if (!this.disabledControl) {
+      // console.log('7');
+      this.toggle.emit(this.closedState);
       this.closedState = !this.closedState;
     }
   }

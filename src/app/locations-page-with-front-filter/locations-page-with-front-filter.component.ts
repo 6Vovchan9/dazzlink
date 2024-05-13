@@ -969,6 +969,14 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     curCategory.active = true;
   }
 
+  private sortDropdownState(open: boolean): void {
+    if (open) {
+      this.hideScroll('no-scroll1');
+    } else {
+      this.showScroll('no-scroll1');
+    }
+  }
+
   public goToLocationDesc(id: string): void {
     if (this.isSorting) return;
 
@@ -990,12 +998,12 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     // document.getElementById('pageWrap').scrollTop = 0;
   }
 
-  private hideScroll(): void {
-    document.body.classList.add('no-scroll');
+  private hideScroll(className = 'no-scroll'): void {
+    document.body.classList.add(className);
   }
 
-  private showScroll(): void {
-    document.body.classList.remove('no-scroll');
+  private showScroll(className = 'no-scroll'): void {
+    document.body.classList.remove(className);
   }
 
   private subscriptionList(): void {

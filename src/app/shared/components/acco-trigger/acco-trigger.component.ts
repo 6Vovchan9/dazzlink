@@ -15,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class AccoTriggerComponent implements ControlValueAccessor {
 
-  @Input() options: {[key: string]: string};
+  @Input() options: { [key: string]: string };
   @Input() type: 'button' | 'link' = 'button';
 
   public active = false;
