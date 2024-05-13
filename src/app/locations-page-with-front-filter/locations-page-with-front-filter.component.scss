@@ -6,7 +6,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 } // Это все для того чтобы когда контента мало footer все равно был прижат к низу. UPD: теперь эту роль выполняет contentWrapper
 
 .page {
-    font-family: Nunito;
+    font-family: "Nunito";
     font-weight: 600;
     .page__container {
         display: flex;
@@ -415,7 +415,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 }
 
 .filterOptionsBlock {
-    font-family: Nunito;
+    font-family: "Nunito";
     display: flex;
     background-color: var(--color-gray1);
     padding: 24px 20px;
