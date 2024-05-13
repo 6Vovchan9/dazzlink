@@ -115,8 +115,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       const radius = svgCircleElement.getAttribute('r');
 
       const circleLength = 2 * Math.PI * +radius;
-      const percentageProgress = Math.round(scrollTop / (scrollHeight - offsetHeight) * 100);
-
+      let percentageProgress = Math.round(scrollTop / (scrollHeight - offsetHeight) * 100);
+      if (percentageProgress > 100) percentageProgress = 100;
       svgCircleElement.setAttribute('stroke-dasharray', String(circleLength));
       svgCircleElement.setAttribute('stroke-dashoffset', String(circleLength - circleLength * percentageProgress / 100));
     }
@@ -479,6 +479,12 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           (value: Array<{ details: string, value: string }>) => {
             if (value?.length) {
               this.filterBarGroup.get('sort').enable({ emitEvent: false });
+
+              value.map(el => {
+                el.details = el.details.replace(/->/g,'→');
+                return el;
+              });
+              
               this.sortFieldOptions.items = value;
             } else {
               console.log('Список сортировки пришел пустой');
