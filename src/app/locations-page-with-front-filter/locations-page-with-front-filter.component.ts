@@ -976,13 +976,13 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   public sortDropdownState(open: boolean): void {
-    const pageWrap = document.getElementById('pageWrap');
+    // const pageWrap = document.getElementById('pageWrap');
     if (open) {
-      this.hideScroll('no-scroll1');
-      pageWrap.style.overflow = 'hidden';
+      this.hideScroll('noScrollFromSort');
+      // pageWrap.style.overflow = 'hidden';
     } else {
-      this.showScroll('no-scroll1');
-      pageWrap.style.overflow = '';
+      this.showScroll('noScrollFromSort');
+      // pageWrap.style.overflow = '';
     }
   }
 

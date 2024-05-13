@@ -24,8 +24,13 @@ body {
         overflow: hidden;
     }
 
-    &.no-scroll1 {
+    &.noScrollFromSort {
         overflow: hidden;
+        @media #{$mobile} {
+            .pageWrap {
+                overflow: hidden;
+            }
+        }
     }
 }
 
