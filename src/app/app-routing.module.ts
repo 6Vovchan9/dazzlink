@@ -15,13 +15,13 @@ import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.compon
 
 const routes: Routes = [
   {
-    path: '', component: MainLayoutComponent, children: [
+    path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [
       // { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: '', component: HomePageComponent },
       { path: 'agreements', component: AgreementsPageComponent },
       { path: 'articles', component: ArticlesPageComponent },
       // { path: 'locations', component: LocationsPageComponent }, // Фильтрация и сортировка на бэке
-      { path: 'locations', component: LocationsPageWithFrontFilterComponent }, // Фильтрация и сортировка на фронте
+      { path: 'locations', component: LocationsPageWithFrontFilterComponent, title: 'Локации' }, // Фильтрация и сортировка на фронте
       { path: 'team', component: TeamPageComponent },
       { path: 'help', component: HelpPageComponent },
       { path: 'legal-info', component: LegalInfoPageComponent },

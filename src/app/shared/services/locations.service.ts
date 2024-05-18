@@ -20,7 +20,7 @@ import { PagesService } from "@app/shared/services/pages.service";
 export class LocationsService {
 
     constructor(
-        private http: HttpClient,
+        private readonly http: HttpClient,
         private pagesService: PagesService
     ) { }
 

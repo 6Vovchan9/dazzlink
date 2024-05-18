@@ -18,8 +18,8 @@
                 <label for="adminEmail" class="inputControl__label">Email:</label>
                 <input id="adminEmail" placeholder="Введите email" class="inputControl__input" formControlName="email" type="text">
                 <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="controlError">
-                    <div *ngIf="loginForm.get('email')?.errors?.required" class="controlError__item">Введите email</div>
-                    <div *ngIf="loginForm.get('email')?.errors?.email" class="controlError__item">Введите корректный email</div>
+                    <div *ngIf="loginForm.get('email').hasError('required')" class="controlError__item">Введите email</div>
+                    <div *ngIf="loginForm.controls['email']?.errors?.email" class="controlError__item">Введите корректный email</div>
                 </div>
             </div>
         </div>

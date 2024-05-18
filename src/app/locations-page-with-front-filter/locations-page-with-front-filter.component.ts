@@ -43,6 +43,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   private fakeDelayForFilter: any;
   private fakeDelayForSort: any;
   private aboutType: unknown;
+  private readonly readonlyExample = 'Hello'; // с помощью такого модификатора свойство экземпляра класса помечается как “только для чтения”
   public disabledLocationCategories = true;
   public locationCategoriesWithSkeleton = true;
   public showFilterControls = false;
@@ -72,7 +73,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   constructor(
     @Optional() public mobileDetectService: MobileDetectService,
-    private locationsService: LocationsService,
+    private readonly locationsService: LocationsService, // модификатор readonly, примененный к параметрам конструктора, заставляет компилятор расценивать их как поля класса.
     private toastService: ToastService,
     private router: Router,
     private route: ActivatedRoute,

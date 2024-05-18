@@ -95,7 +95,7 @@
                                 } @else {
                                     <li class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
                                         <!-- <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post> -->
-                                        <a [routerLink]="['/post', post.id]" class="pageContent__articleLink">
+                                        <a [routerLink]="['/post', post.id]" target="_self" class="pageContent__articleLink">
                                             <!-- {{index + 1}} -->
                                             <app-post [postData]="post"></app-post>
                                         </a>

@@ -13,7 +13,7 @@ import { LoaderComponent } from "./components/loader/loader.component";
     ],
     imports: [HttpClientModule],
     exports: [
-      HttpClientModule,
+      HttpClientModule, // для http запросов
       SearchPipe,
       ProgressSpinnerComponent,
       LoaderComponent

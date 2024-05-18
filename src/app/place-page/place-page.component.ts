@@ -25,10 +25,10 @@ export class PlacePageComponent {
   public placeEvaluation: 'like' | 'dislike';
   private votingIsLoading = false;
   public additPlaceInfoItems: Array<PlaceAttributeList> = [];
-  public additPlaceInfoData: {[key: string]: PlaceAttributeList} = {};
+  public additPlaceInfoData: { [key: string]: PlaceAttributeList } = {};
   public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];
   public descPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.description, TypeOfPlaceDetails.awards, TypeOfPlaceDetails.infoSource];
-  public locationRatingList: Array<{name: string, value: number}> = [];
+  public locationRatingList: Array<{ name: string, value: number }> = [];
 
   public showSpinnerUnderPhoto = true;
   public amountLoadedPhotos = 0;
