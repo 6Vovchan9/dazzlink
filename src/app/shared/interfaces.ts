@@ -36,6 +36,15 @@ export interface RovraggeRespWrapper {
     data: any
 }
 
+export interface RespArticlesData {
+    content: Array<Post>,
+    size: number,
+    totalElements: number,
+    totalPages: number,
+    last: boolean,
+    first: boolean
+}
+
 export interface RovraggeRespLocationsData {
     placeCount: number;
     cityPlaceList: Array<RespCityPlaceList>

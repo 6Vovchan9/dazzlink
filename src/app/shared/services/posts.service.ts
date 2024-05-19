@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { delay, map, tap } from "rxjs/operators";
 
 import { environment } from "src/environments/environment";
-import { Post, RovraggeRespWrapper } from "../interfaces";
+import { Post, RespArticlesData, RovraggeRespWrapper } from "../interfaces";
 import { PagesService } from "@app/shared/services/pages.service";
 
 @Injectable({ providedIn: 'root' })
@@ -116,7 +116,7 @@ export class PostsService {
             )
     }
 
-    public getAllProd(options?): Observable<Post[]> {
+    public getAllProd(options?): Observable<RespArticlesData> {
         let customQueryParams = {};
         if (options?.id) {
             customQueryParams = options

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Optional, QueryList, ViewChildren } from '@angular/core';
 import { EMPTY, Observable, Observer, Subscription, of, throwError } from 'rxjs';
-import { catchError, delay, tap } from 'rxjs/operators';
-import { Post } from '@app/shared/interfaces';
+import { catchError, delay, map, tap } from 'rxjs/operators';
+import { Post, RespArticlesData } from '@app/shared/interfaces';
 import { PostsService } from '@app/shared/services/posts.service';
 import { Router } from '@angular/router';
 import { PagesService } from '@app/shared/services/pages.service';
@@ -20,6 +20,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public posts$: Observable<Post[]>;
   public articlesList: Post[] = [];
+  public lastPaginationPage = true;
   public searchStr = '';
   public isLoading = true;
   private lSub: Subscription;
@@ -55,7 +56,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lastPostList.changes.subscribe(
       d => {
         // console.log(d);
-        if (d.last && this.observer) this.observer.observe(d.last.nativeElement);
+        if (d.last && this.observer && !this.lastPaginationPage) this.observer.observe(d.last.nativeElement);
       }
     );
   }
@@ -72,7 +73,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private getAllArticles(options?: { id: string, direction: 'EARLIER' | 'LATER' }, withError = false): void {
     if (false) {
-      this.pSub = new Observable((observer: Observer<Array<Post>>) => {
+      this.pSub = new Observable((observer: Observer<RespArticlesData>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {
           if (withError || this.implementErrorInGetAllArticles) {
@@ -93,6 +94,10 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
         //     return of([]);
         //   })
         // )
+        .pipe(
+          tap((resp: RespArticlesData) => this.lastPaginationPage = resp?.last ?? true),
+          map((resp: RespArticlesData): Array<Post> => resp.content || [])
+        )
         .subscribe({
           next: value => {
             value.forEach(post => {
@@ -127,6 +132,10 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
         // .pipe(
         //   delay(2000)
         // )
+        .pipe(
+          tap((resp: RespArticlesData) => this.lastPaginationPage = resp?.last ?? true),
+          map((resp: RespArticlesData): Array<Post> => resp.content || [])
+        )
         .subscribe({
           next: value => {
             value.forEach(post => {
