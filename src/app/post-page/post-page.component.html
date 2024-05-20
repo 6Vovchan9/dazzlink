@@ -50,9 +50,22 @@
                         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} {{buildViewCount(postData.viewCount)}}</div>
                     </div>
                     <div class="postContent__text" [innerHTML]="postData.html"></div>
+
                     <!-- <div class="postContent__text">
                         <ng-container *ngTemplateOutlet="article1"></ng-container>
                     </div> -->
+
+                    <!-- Кнопка наверх -->
+                    <div class="postContent__scrollToTopBtn scrollProgressWrapper">
+                        <div class="scrollProgress"
+                            (click)="scrollToTop()"
+                            [ngClass]="{
+                                'scrollProgress--hidden': scrollToTopBtnOptions.hide,
+                                'scrollProgress--opacity': scrollToTopBtnOptions.opacity
+                            }"
+                        >
+                        </div>
+                    </div>
                     <!-- Как вам статья -->
                     <div class="postContent__feedback feedback">
                         <div class="feedback__text">

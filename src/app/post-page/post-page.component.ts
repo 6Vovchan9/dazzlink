@@ -1,11 +1,11 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { catchError, delay, switchMap } from 'rxjs/operators';
+import { catchError, delay, map, skipWhile, switchMap, takeUntil } from 'rxjs/operators';
 
 import { PostsService } from '@app/shared/services/posts.service';
 import { Post } from '@app/shared/interfaces';
 import { PagesService } from '@app/shared/services/pages.service';
-import { Subscription, of } from 'rxjs';
+import { Subject, Subscription, fromEvent, of } from 'rxjs';
 import { TelegramService } from '@app/shared/services/telegram.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { TelegramService } from '@app/shared/services/telegram.service';
   templateUrl: './post-page.component.html',
   styleUrls: ['./post-page.component.scss']
 })
-export class PostPageComponent implements OnInit, OnDestroy {
+export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public isLoading = true;
   public postData: Post;
@@ -23,6 +23,12 @@ export class PostPageComponent implements OnInit, OnDestroy {
   private eSub: Subscription;
   private vSub: Subscription;
   public votingIsLoading = false;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+  public hideScrollProgress = true;
+  public scrollToTopBtnOptions: { hide: boolean, opacity: boolean } = {
+    hide: true,
+    opacity: false
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -108,6 +114,27 @@ export class PostPageComponent implements OnInit, OnDestroy {
         },
         err => {
           this.isLoading = false;
+        }
+      );
+  }
+
+  ngAfterViewInit() {
+
+    const pageWrap = document.getElementById('pageWrap');
+    fromEvent<Event>(pageWrap, 'scroll')
+      .pipe(
+        takeUntil(this.destroy$),
+        skipWhile(() => this.isLoading),
+        map(e => (e.target as HTMLDivElement))
+      )
+      .subscribe(
+        (el: HTMLDivElement) => {
+          const scrollTop = pageWrap.scrollTop;
+          const scrollHeight = pageWrap.scrollHeight;
+          const offsetHeight = pageWrap.offsetHeight;
+          // console.log(scrollTop, scrollHeight, offsetHeight);
+          this.scrollToTopBtnOptions.hide = scrollTop < offsetHeight;
+          this.scrollToTopBtnOptions.opacity = scrollTop > scrollHeight - offsetHeight * 2; // эти расчёты можно будет подкорректировать
         }
       );
   }
@@ -220,6 +247,14 @@ export class PostPageComponent implements OnInit, OnDestroy {
     const val: { articleId: string } = { articleId: this.articleId };
     curVal.push(val);
     localStorage.setItem('articlesEvaluation', JSON.stringify(curVal));
+  }
+
+  public scrollToTop(): void {
+    document.getElementById('pageWrap')?.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
   }
 
   public buildViewCount(val?: number): string {

@@ -63,20 +63,20 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
-    const pageWrap = document.getElementById('pageWrap');
-    fromEvent<Event>(pageWrap, 'scroll')
-      .pipe(
-        takeUntil(this.destroy$),
-        skipWhile(() => this.isLoading),
-        map(e => (e.target as HTMLDivElement))
-      )
-      .subscribe(
-        (el: HTMLDivElement) => {
-          const scrollTop = pageWrap.scrollTop;
-          const offsetHeight = pageWrap.offsetHeight;
-          this.hideScrollProgress = scrollTop < offsetHeight;
-        }
-      );
+    // const pageWrap = document.getElementById('pageWrap');
+    // fromEvent<Event>(pageWrap, 'scroll')
+    //   .pipe(
+    //     takeUntil(this.destroy$),
+    //     skipWhile(() => this.isLoading),
+    //     map(e => (e.target as HTMLDivElement))
+    //   )
+    //   .subscribe(
+    //     (el: HTMLDivElement) => {
+    //       const scrollTop = pageWrap.scrollTop;
+    //       const offsetHeight = pageWrap.offsetHeight;
+    //       this.hideScrollProgress = scrollTop < offsetHeight;
+    //     }
+    //   );
   }
 
   public get webview(): boolean {
@@ -198,13 +198,13 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     return langArr[key][this.curLang || 'RU'];
   }
 
-  public scrollToTop(): void {
-    document.getElementById('pageWrap')?.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  }
+  // public scrollToTop(): void {
+  //   document.getElementById('pageWrap')?.scrollTo({
+  //     top: 0,
+  //     left: 0,
+  //     behavior: "smooth"
+  //   });
+  // }
 
   private intersectionObserver() {
 

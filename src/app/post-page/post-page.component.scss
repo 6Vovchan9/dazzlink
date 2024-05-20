@@ -180,6 +180,14 @@
     }
 }
 
+.postContent__scrollToTopBtn {
+    margin-left: auto;
+
+    .scrollProgress {
+        right: 0;
+    }
+}
+
 .postDetails {
     display: flex;
     flex-wrap: wrap;
