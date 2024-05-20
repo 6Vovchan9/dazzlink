@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Optional, QueryList, ViewChildren } from '@angular/core';
-import { EMPTY, Observable, Observer, Subscription, of, throwError } from 'rxjs';
-import { catchError, delay, map, tap } from 'rxjs/operators';
+import { EMPTY, Observable, Observer, Subject, Subscription, fromEvent, of, throwError } from 'rxjs';
+import { catchError, delay, map, skipWhile, takeUntil, tap } from 'rxjs/operators';
 import { Post, RespArticlesData } from '@app/shared/interfaces';
 import { PostsService } from '@app/shared/services/posts.service';
 import { Router } from '@angular/router';
@@ -30,6 +30,8 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public implementErrorInGetAllArticles = false;
   private observer: IntersectionObserver;
   public showLoadMoreSpinner = false;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+  public hideScrollProgress = true;
 
   constructor(
     private postsService: PostsService,
@@ -53,12 +55,28 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+
     this.lastPostList.changes.subscribe(
       d => {
         // console.log(d);
         if (d.last && this.observer && !this.lastPaginationPage) this.observer.observe(d.last.nativeElement);
       }
     );
+
+    const pageWrap = document.getElementById('pageWrap');
+    fromEvent<Event>(pageWrap, 'scroll')
+      .pipe(
+        takeUntil(this.destroy$),
+        skipWhile(() => this.isLoading),
+        map(e => (e.target as HTMLDivElement))
+      )
+      .subscribe(
+        (el: HTMLDivElement) => {
+          const scrollTop = pageWrap.scrollTop;
+          const offsetHeight = pageWrap.offsetHeight;
+          this.hideScrollProgress = scrollTop < offsetHeight;
+        }
+      );
   }
 
   public get webview(): boolean {
@@ -180,6 +198,14 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     return langArr[key][this.curLang || 'RU'];
   }
 
+  public scrollToTop(): void {
+    document.getElementById('pageWrap')?.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }
+
   private intersectionObserver() {
 
     const optionsForObserver = {
@@ -206,6 +232,9 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lSub?.unsubscribe();
     this.pSub?.unsubscribe();
     this.observer?.disconnect();
+
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
 }
