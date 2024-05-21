@@ -49,3 +49,9 @@
 .controlError {
     color: red;
 }
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: .3;
+    color: var(--color-white)
+}

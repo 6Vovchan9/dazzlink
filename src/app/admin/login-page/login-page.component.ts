@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AdminData } from 'src/app/shared/interfaces';
-import { AuthService } from '../shared/services/auth.service';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
+import { IAdminData } from '@app/shared/interfaces';
+import { AuthService } from '@app/admin/shared/services/auth.service';
+import { loginAction } from '@app/admin/shared/store/login/actions';
+import { isSubmittingSelector } from '@app/admin/shared/store/login/selectors';
 
 @Component({
   selector: 'app-login-page',
@@ -14,11 +20,13 @@ export class LoginPageComponent implements OnInit {
   public loginForm!: UntypedFormGroup;
   public submitted = false;
   public messageFromQueryParams!: string;
+  public isSubmitting$: Observable<boolean>; // это тоже самое что и submitted только через ngrx
 
   constructor(
     public auth: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -33,31 +41,47 @@ export class LoginPageComponent implements OnInit {
       }
     )
 
+    this.initializeForm();
+    this.initializeValues();
+  }
+
+  private initializeForm(): void {
     this.loginForm  = new UntypedFormGroup({
       email: new UntypedFormControl(null, [Validators.email, Validators.required]),
       password: new UntypedFormControl(null, [Validators.required, Validators.minLength(6)])
     });
   }
 
+  private initializeValues(): void {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+  }
+
   submit() {
     if (this.loginForm?.valid) {
       this.submitted = true;
-      const admin: AdminData = {
+
+      const admin: IAdminData = {
         email: this.loginForm.value.email,
         password: this.loginForm.value.password
       };
 
-      this.auth.login(admin).subscribe(
-        () => {
-          this.submitted = false;
-          this.loginForm.reset();
-          this.router.navigate(
-            ['/admin', 'dashboard'],
-            // {skipLocationChange: true}
-          );
-        },
-        () => this.submitted = false
-      );
+      this.auth.login(admin)
+        // .pipe(
+        //   delay(3000)
+        // )
+        .subscribe(
+          () => {
+            this.submitted = false;
+            this.loginForm.reset();
+            this.router.navigate(
+              ['/admin', 'dashboard'],
+              // {skipLocationChange: true}
+            );
+          },
+          () => this.submitted = false
+        );
+
+      this.store.dispatch(loginAction(admin)); // это тоже самое что и auth.login() только через ngrx
     }
   }
 

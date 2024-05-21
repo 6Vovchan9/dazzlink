@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse} from '@angular/common/http';
-import { AdminData, FbAuthResponse } from "src/app/shared/interfaces";
+import { IAdminData, IFbAuthResponse } from "src/app/shared/interfaces";
 import { Observable, Subject, throwError } from "rxjs";
 import { catchError, delay, tap } from 'rxjs/operators';
 import { environment } from "src/environments/environment";
@@ -21,9 +21,9 @@ export class AuthService {
         return localStorage.getItem('fb-token');
     }
 
-    login(user: AdminData): Observable<any> {
+    login(user: IAdminData): Observable<IFbAuthResponse> {
         user.returnSecureToken = true;
-        return this.http.post<FbAuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
+        return this.http.post<IFbAuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
             .pipe(
                 // delay(2000),
                 tap(this.#setToken),
@@ -58,7 +58,7 @@ export class AuthService {
         return !!this.token;
     }
 
-    #setToken(response: FbAuthResponse | null): void {
+    #setToken(response: IFbAuthResponse | null): void {
         if (response){
             const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
             localStorage.setItem('fb-token', response.idToken);

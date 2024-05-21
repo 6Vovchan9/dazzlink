@@ -38,7 +38,7 @@
         </div>
 
          <div class="loginForm__btns">
-            <button type="submit" class="btn" [disabled]="loginForm?.invalid || submitted">Войти</button>
+            <button type="submit" class="btn" [disabled]="loginForm?.invalid || submitted || (isSubmitting$ | async)">Войти</button>
          </div>
 
     </div>

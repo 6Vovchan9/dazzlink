@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -13,6 +14,7 @@ import { AuthGuard } from './shared/services/auth.guard';
 import { PostResolver } from '../shared/services/post.resolver';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { AlertService } from './shared/services/alert.service';
+import { reducers } from './shared/store/login/reducers';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { AlertService } from './shared/services/alert.service';
           {path: 'post/:id/edit', component: EditPageComponent, canActivate: [AuthGuard], resolve: {data: PostResolver}}
         ]
       }
-    ])
+    ]),
+    StoreModule.forFeature('login', reducers)
   ],
   exports: [
     RouterModule

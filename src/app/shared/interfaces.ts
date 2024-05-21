@@ -1,7 +1,13 @@
-export interface AdminData {
+// Надо перенести этот файл в папку types
+
+export interface IAdminData {
     email: string;
     password: string;
     returnSecureToken?: boolean;
+}
+
+export interface ILoginState {
+    isSubmitting: boolean
 }
 
 export type IVotingService = {
@@ -85,7 +91,7 @@ export interface ILocationCategories {
     subcategoryList?: Array<{ title: string, code: string }>
 }
 
-export interface FbAuthResponse {
+export interface IFbAuthResponse {
     idToken: string;
     expiresIn: string;
 }
