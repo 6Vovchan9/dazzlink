@@ -1,10 +1,13 @@
 import { Action, createReducer, on } from "@ngrx/store";
 
 import { ILoginState } from "@app/shared/interfaces";
-import { loginAction } from "./actions";
+import { loginAction, loginFailureAction, loginSuccessAction } from "./actions";
 
 const initialState: ILoginState = {
-    isSubmitting: false
+    isSubmitting: false,
+    currentAdmin: null,
+    isLoggedIn: null,
+    validationErrors: null
 }
 
 const loginReducer = createReducer(
@@ -13,7 +16,25 @@ const loginReducer = createReducer(
         loginAction,
         (state): ILoginState => ({
             ...state,
-            isSubmitting: true
+            isSubmitting: true,
+            validationErrors: null
+        })
+    ),
+    on(
+        loginSuccessAction,
+        (state, action): ILoginState => ({
+            ...state,
+            isSubmitting: false,
+            isLoggedIn: true,
+            currentAdmin: action
+        })
+    ),
+    on(
+        loginFailureAction,
+        (state, action): ILoginState => ({
+            ...state,
+            isSubmitting: false,
+            validationErrors: action
         })
     )
 )

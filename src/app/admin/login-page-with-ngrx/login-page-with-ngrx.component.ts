@@ -1,25 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { IAdminData } from '@app/shared/interfaces';
+import { IAdminData, IFbAuthError } from '@app/shared/interfaces';
 import { AuthService } from '@app/admin/shared/services/auth.service';
+import { loginAction } from '@app/admin/shared/store/login/actions';
+import { isSubmittingSelector, validationErrorsSelector } from '@app/admin/shared/store/login/selectors';
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  selector: 'app-login-page-with-ngrx',
+  templateUrl: './login-page-with-ngrx.component.html',
+  styleUrls: ['./login-page-with-ngrx.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageWithNgrxComponent implements OnInit {
 
   public loginForm!: UntypedFormGroup;
-  public submitted = false;
   public messageFromQueryParams!: string;
+  public isSubmitting$: Observable<boolean>;
+  public backendErrors$: Observable<IFbAuthError | null>;
 
   constructor(
     public auth: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +41,7 @@ export class LoginPageComponent implements OnInit {
     )
 
     this.initializeForm();
+    this.initializeValues();
   }
 
   private initializeForm(): void {
@@ -44,9 +51,13 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
+  private initializeValues(): void {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
+  }
+
   submit() {
     if (this.loginForm?.valid) {
-      this.submitted = true;
 
       const admin: IAdminData = {
         email: this.loginForm.value.email,
@@ -54,21 +65,7 @@ export class LoginPageComponent implements OnInit {
         returnSecureToken: true
       };
 
-      this.auth.login(admin)
-        // .pipe(
-        //   delay(3000)
-        // )
-        .subscribe(
-          () => {
-            this.submitted = false;
-            this.loginForm.reset();
-            this.router.navigate(
-              ['/admin', 'dashboard'],
-              // {skipLocationChange: true}
-            );
-          },
-          () => this.submitted = false
-        );
+      this.store.dispatch(loginAction(admin));
     }
   }
 

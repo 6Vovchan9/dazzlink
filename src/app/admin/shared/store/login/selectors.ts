@@ -9,3 +9,8 @@ export const isSubmittingSelector = createSelector(
     loginFeatureSelector,
     (loginState: ILoginState) => loginState.isSubmitting
 )
+
+export const validationErrorsSelector = createSelector(
+    loginFeatureSelector,
+    (loginState: ILoginState) => loginState.validationErrors
+)

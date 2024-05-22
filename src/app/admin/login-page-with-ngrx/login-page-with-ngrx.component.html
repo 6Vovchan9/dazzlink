@@ -1,7 +1,7 @@
 <form class="loginForm" [formGroup]="loginForm" (ngSubmit)="submit()">
 
     <div class="loginForm__header">
-        Войти в панель администратора
+        Войти в панель администратора (через ngrx)
     </div>
 
     <div *ngIf="auth.error$ | async as errorMessage" class="loginForm__message loginForm__message--error">
@@ -38,7 +38,7 @@
         </div>
 
          <div class="loginForm__btns">
-            <button type="submit" class="btn" [disabled]="loginForm?.invalid || submitted">Войти</button>
+            <button type="submit" class="btn" [disabled]="loginForm?.invalid || (isSubmitting$ | async)">Войти</button>
          </div>
 
     </div>

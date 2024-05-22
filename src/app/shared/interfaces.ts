@@ -8,6 +8,9 @@ export interface IAdminData {
 
 export interface ILoginState {
     isSubmitting: boolean
+    currentAdmin: IFbAuthResponse | null
+    isLoggedIn: boolean | null
+    validationErrors: IFbAuthError | null
 }
 
 export type IVotingService = {

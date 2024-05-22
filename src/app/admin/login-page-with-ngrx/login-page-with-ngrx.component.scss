@@ -1,0 +1,57 @@
+.loginForm {
+    margin-top: 30px;
+    border: 1px solid black;
+    border-radius: 6px;
+    max-width: 600px;
+    padding: 30px;
+    .loginForm__header {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    .loginForm__message {
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: gray;
+        color: white;
+        font-size: 16px;
+
+        &--error {
+            background-color: brown;
+        }
+    }
+    .loginForm__form {
+        .loginForm__control {
+            margin-bottom: 20px;
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+}
+
+.inputControl {
+
+    display: flex;
+    flex-direction: column;
+
+    .inputControl__label {
+        margin-bottom: 10px;
+    }
+
+    &--invalid {
+        color: red;
+        .inputControl__input {
+            color: red;
+        }
+    }
+}
+
+.controlError {
+    color: red;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: .3;
+    color: var(--color-white)
+}
