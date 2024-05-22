@@ -36,6 +36,7 @@ import { TeamPageComponent } from './team-page/team-page.component';
 import { HelpPageComponent } from './help-page/help-page.component';
 import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -86,7 +87,8 @@ registerLocaleData(localeRu, 'ru');
       // trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       // traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       // connectInZone: true // If set to true, the connection is established within the Angular zone
-    })
+    }),
+    EffectsModule.forRoot([])
   ],
   providers: [ToastService],
   // providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },], // Это хороший итерсептор но он пока не нужен и лучше сейчас его отключить чтоб он не очищал localStorage

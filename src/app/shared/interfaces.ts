@@ -96,6 +96,12 @@ export interface IFbAuthResponse {
     expiresIn: string;
 }
 
+export interface IFbAuthError {
+    code: number,
+    errors: Array<object>,
+    message: string
+}
+
 export type AuthorData = {
     name?: string,
     imageUrl?: string,

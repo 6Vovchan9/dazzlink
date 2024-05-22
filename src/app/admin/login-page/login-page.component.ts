@@ -62,7 +62,8 @@ export class LoginPageComponent implements OnInit {
 
       const admin: IAdminData = {
         email: this.loginForm.value.email,
-        password: this.loginForm.value.password
+        password: this.loginForm.value.password,
+        returnSecureToken: true
       };
 
       this.auth.login(admin)
@@ -81,7 +82,7 @@ export class LoginPageComponent implements OnInit {
           () => this.submitted = false
         );
 
-      this.store.dispatch(loginAction(admin)); // это тоже самое что и auth.login() только через ngrx
+      // this.store.dispatch(loginAction(admin)); // это тоже самое что и auth.login() только через ngrx
     }
   }
 

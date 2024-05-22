@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -15,6 +16,7 @@ import { PostResolver } from '../shared/services/post.resolver';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { AlertService } from './shared/services/alert.service';
 import { reducers } from './shared/store/login/reducers';
+import { LoginEffect } from './shared/store/login/effects';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { reducers } from './shared/store/login/reducers';
         ]
       }
     ]),
-    StoreModule.forFeature('login', reducers)
+    StoreModule.forFeature('login', reducers),
+    EffectsModule.forFeature([LoginEffect])
   ],
   exports: [
     RouterModule
