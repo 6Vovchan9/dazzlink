@@ -5,6 +5,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,8 +37,6 @@ import { ToastComponent } from './shared/components/toast/toast.component';
 import { TeamPageComponent } from './team-page/team-page.component';
 import { HelpPageComponent } from './help-page/help-page.component';
 import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { EffectsModule } from '@ngrx/effects';
 
 registerLocaleData(localeRu, 'ru');
 

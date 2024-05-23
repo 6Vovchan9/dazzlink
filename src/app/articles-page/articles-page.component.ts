@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Optional, QueryList, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Optional,
+  QueryList,
+  Self,
+  ViewChildren
+} from '@angular/core';
 import { EMPTY, Observable, Observer, Subject, Subscription, fromEvent, of, throwError } from 'rxjs';
 import { catchError, delay, map, skipWhile, takeUntil, tap } from 'rxjs/operators';
 import { Post, RespArticlesData } from '@app/shared/interfaces';
@@ -8,11 +18,13 @@ import { PagesService } from '@app/shared/services/pages.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { MOCK_ARTICLES } from '@app/shared/mock/articles';
+import { PersistanceService } from '@app/admin/shared/services/persistance.service';
 
 @Component({
   selector: 'app-articles-page',
   templateUrl: './articles-page.component.html',
-  styleUrls: ['./articles-page.component.scss']
+  styleUrls: ['./articles-page.component.scss'],
+  providers: [PersistanceService]
 })
 export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -36,6 +48,9 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private postsService: PostsService,
     private pagesService: PagesService,
+    @Self() private persistanceService: PersistanceService, // Такой декоратор требует чтоб этот сервис был зарегистрирован локально, прям в декораторе этого компонента.
+    // У декоратора @SkipSelf противоположный эффект, он tells Angular not to look for the injector in the local injector, but start from the Parent
+    // Есть еще декоратор @Host и для него сервис должен регистрироваться либо в текущем компоненте либо в родительском компоненте при помощи свойсва декоратора компонента "viewProviders"
     @Optional() public mobileDetectService: MobileDetectService,  // Если вдруг для этого сервиса не определен провайдер, чтоб мы не получили ошибку при обращении к нему в таком случае определяем его как опциональный
     private router: Router
   ) { }
