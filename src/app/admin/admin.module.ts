@@ -18,6 +18,7 @@ import { AlertService } from './shared/services/alert.service';
 import { reducers } from './shared/store/login/reducers';
 import { LoginEffect } from './shared/store/login/effects';
 import { LoginPageWithNgrxComponent } from './login-page-with-ngrx/login-page-with-ngrx.component';
+import { PersistanceService } from './shared/services/persistance.service';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,8 @@ import { LoginPageWithNgrxComponent } from './login-page-with-ngrx/login-page-wi
       {
         path: '', component: AdminLayoutComponent, children: [
           {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
-          {path: 'login', component: LoginPageComponent},
-          // {path: 'login', component: LoginPageWithNgrxComponent},
+          // {path: 'login', component: LoginPageComponent},
+          {path: 'login', component: LoginPageWithNgrxComponent},
           {path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard]},
           {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard]},
           {path: 'post/:id/edit', component: EditPageComponent, canActivate: [AuthGuard], resolve: {data: PostResolver}}
@@ -54,7 +55,8 @@ import { LoginPageWithNgrxComponent } from './login-page-with-ngrx/login-page-wi
   ],
   providers: [
     AuthGuard,
-    AlertService
+    AlertService,
+    PersistanceService
   ]
 })
 export class AdminModule { }

@@ -22,12 +22,17 @@ export class AuthService {
     }
 
     login(user: IAdminData): Observable<IFbAuthResponse> {
+        user.returnSecureToken = true;
         return this.http.post<IFbAuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
             .pipe(
                 // delay(2000),
                 tap(this.#setToken),
                 catchError(this.handleError.bind(this))
             )
+    }
+
+    loginForNgrx(user: IAdminData): Observable<IFbAuthResponse> {
+        return this.http.post<IFbAuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
     }
 
     logout() {

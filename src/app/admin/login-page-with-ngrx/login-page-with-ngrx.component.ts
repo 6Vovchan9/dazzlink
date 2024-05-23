@@ -56,6 +56,19 @@ export class LoginPageWithNgrxComponent implements OnInit {
     this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
   }
 
+  public operateErrorMessage(errData: IFbAuthError): string {
+    switch (errData.message?.toUpperCase()) {
+      case 'INVALID_EMAIL':
+        return 'Неверный email';
+      case 'INVALID_PASSWORD':
+        return 'Неверный пароль';
+      case 'EMAIL_NOT_FOUND':
+        return 'Такого email нет';
+      default:
+        return 'Неизвестная ошибка';
+    }
+  }
+
   submit() {
     if (this.loginForm?.valid) {
 

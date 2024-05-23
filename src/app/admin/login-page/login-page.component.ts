@@ -50,8 +50,7 @@ export class LoginPageComponent implements OnInit {
 
       const admin: IAdminData = {
         email: this.loginForm.value.email,
-        password: this.loginForm.value.password,
-        returnSecureToken: true
+        password: this.loginForm.value.password
       };
 
       this.auth.login(admin)

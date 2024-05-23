@@ -12,5 +12,7 @@ export const isSubmittingSelector = createSelector(
 
 export const validationErrorsSelector = createSelector(
     loginFeatureSelector,
-    (loginState: ILoginState) => loginState.validationErrors
+    (loginState: ILoginState) => {
+        return loginState.validationErrors;
+    }
 )

@@ -10,7 +10,7 @@ import { AlertService } from '../../services/alert.service';
 })
 export class AlertComponent implements OnInit, OnDestroy {
 
-  @Input() delay = 5000;
+  @Input('delay') delayProps = 5000; // Чтоб отличать внутренние свойства от входных добавляем приставку props
   public alertData: IAlert | null;
   aSub: Subscription;
 
@@ -24,7 +24,7 @@ export class AlertComponent implements OnInit, OnDestroy {
         const timeout = setTimeout(() => {
           clearTimeout(timeout);
           this.alertData = null;
-        }, this.delay);
+        }, this.delayProps);
       }
     )
   }

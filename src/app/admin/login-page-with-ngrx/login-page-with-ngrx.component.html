@@ -4,8 +4,8 @@
         Войти в панель администратора (через ngrx)
     </div>
 
-    <div *ngIf="auth.error$ | async as errorMessage" class="loginForm__message loginForm__message--error">
-        {{errorMessage}}
+    <div *ngIf="backendErrors$ | async as errorMessage" class="loginForm__message loginForm__message--error">
+        {{operateErrorMessage(errorMessage)}}
     </div>
     <div *ngIf="messageFromQueryParams" class="loginForm__message">
         {{messageFromQueryParams}}
