@@ -11,7 +11,7 @@ import { CreatePageComponent } from './create-page/create-page.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { SharedModule } from '../shared/shared.module';
-import { AuthGuard } from './shared/services/auth.guard';
+import { authGuard } from './shared/services/auth.guard';
 import { PostResolver } from '../shared/services/post.resolver';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { AlertService } from './shared/services/alert.service';
@@ -38,12 +38,12 @@ import { PersistanceService } from './shared/services/persistance.service';
     RouterModule.forChild([
       {
         path: '', component: AdminLayoutComponent, children: [
-          {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
-          // {path: 'login', component: LoginPageComponent},
-          {path: 'login', component: LoginPageWithNgrxComponent},
-          {path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard]},
-          {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard]},
-          {path: 'post/:id/edit', component: EditPageComponent, canActivate: [AuthGuard], resolve: {data: PostResolver}}
+          { path: '', redirectTo: '/admin/login', pathMatch: 'full' },
+          { path: 'login', component: LoginPageComponent },
+          // { path: 'login', component: LoginPageWithNgrxComponent },
+          { path: 'dashboard', component: DashboardPageComponent, canActivate: [authGuard] },
+          { path: 'create', component: CreatePageComponent, canActivate: [authGuard] },
+          { path: 'post/:id/edit', component: EditPageComponent, canActivate: [authGuard], resolve: { data: PostResolver } }
         ]
       }
     ]),
@@ -54,7 +54,7 @@ import { PersistanceService } from './shared/services/persistance.service';
     RouterModule
   ],
   providers: [
-    AuthGuard,
+    // AuthGuard,
     AlertService,
     PersistanceService
   ]
