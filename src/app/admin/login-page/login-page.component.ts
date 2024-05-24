@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { IAdminData } from '@app/shared/interfaces';
 import { AuthService } from '@app/admin/shared/services/auth.service';
+import { advanceForbiddenEmailValidator, asyncEmailValidator, forbiddenEmailValidator } from '@app/admin/shared/validators/login.validator';
 
 @Component({
   selector: 'app-login-page',
@@ -38,9 +39,12 @@ export class LoginPageComponent implements OnInit {
   }
 
   private initializeForm(): void {
-    this.loginForm  = new UntypedFormGroup({
-      email: new UntypedFormControl(null, [Validators.email, Validators.required]),
-      password: new UntypedFormControl(null, [Validators.required, Validators.minLength(6)])
+    this.loginForm = new UntypedFormGroup({
+      email: new UntypedFormControl(null, {
+        validators: [Validators.email, Validators.required, forbiddenEmailValidator, advanceForbiddenEmailValidator(['ivan@mail.ru'])],
+        asyncValidators: [asyncEmailValidator]
+      }),
+      password: new UntypedFormControl(null, { validators: [Validators.required, Validators.minLength(6)] })
     });
   }
 

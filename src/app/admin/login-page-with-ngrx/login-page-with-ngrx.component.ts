@@ -45,9 +45,11 @@ export class LoginPageWithNgrxComponent implements OnInit {
   }
 
   private initializeForm(): void {
-    this.loginForm  = new UntypedFormGroup({
-      email: new UntypedFormControl(null, [Validators.email, Validators.required]),
-      password: new UntypedFormControl(null, [Validators.required, Validators.minLength(6)])
+    this.loginForm = new UntypedFormGroup({
+      email: new UntypedFormControl(null, {
+        validators: [Validators.email, Validators.required]
+      }),
+      password: new UntypedFormControl(null, { validators: [Validators.required, Validators.minLength(6)] })
     });
   }
 
