@@ -1,4 +1,4 @@
-// Чтоб запустить этот файл: 1) tsc helper 2) node helper
+// Чтоб запустить этот файл: 1) cd src/app/shared/helpers 2) tsc helper.ts 3) node helper
 
 let num1 = 123_456_789;
 let num2 = 2e7;
@@ -6,16 +6,16 @@ let num3 = 4e-4;
 
 // ---//--- Пример 1: ---//---
 
-type objType1 = {
+type TObjType1 = {
     one: string,
     two: number
 }
 
-type objType2 = {
+type TObjType2 = {
     three: boolean
 }
 
-type objCommonType = objType1 & objType2;
+type objCommonType = TObjType1 & TObjType2;
 
 // ---//--- Пример 2: ---//---
 
@@ -145,7 +145,7 @@ type ValidationResult = {
     [key in keyof typeof formData1]: boolean;
 }
 
-declare function validate<T>(data: T): ValidationResult; // c помощью ключевого слова declare в программу на TS подключается определение глобальной переменной.
+declare function validate<T>(data: T): ValidationResult; // c помощью ключевого слова declare в программу на TS подключается определение глобальной переменной (подробности как этим пользоваться надо загуглить).
 
 const r = validate(formData1);
 
@@ -158,3 +158,13 @@ const formData2 = {
 }
 
 declare function validate<T>(data: T): { [key in keyof T]: boolean };
+
+// ---//--- Пример 12: ---//---
+
+type TExample12 = {
+    birthday?: string;
+    createAt?: string;
+    adminRole: boolean
+}
+
+const adminStatus: TExample12['adminRole'] = true;
