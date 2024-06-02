@@ -1,3 +1,5 @@
+if (true) {
+
 // ---//--- Пример 1: ---//---
 interface IGeneric<R = string> {
     field: R
@@ -74,3 +76,4 @@ function patchField<
 >(obj: H, field: V, newVal: S) { }
 
 patchField({f: 3}, 'f', 4);
+}
