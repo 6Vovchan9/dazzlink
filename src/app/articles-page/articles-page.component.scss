@@ -10,17 +10,14 @@
     .page__container {
         display: flex;
         flex-direction: column;
-
-        margin-top: 20px;
+        margin-top: 24px;
         margin-bottom: 32px;
     }
 
     @media #{$notMobile} {
-
         .page__container {
             flex-direction: row;
-
-            margin-top: 34px;
+            margin-top: 48px;
             margin-bottom: 48px;
         }
     }
@@ -30,7 +27,7 @@
     // margin-right: 8%;
     flex: 1;
     // max-width: 360px;
-    margin-bottom: 72px;
+    margin-bottom: 32px;
 
     @media #{$notMobile} {
         margin-right: 0px;

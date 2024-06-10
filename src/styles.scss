@@ -100,12 +100,7 @@ button {
     .linkToApp__item {
         cursor: pointer;
         .linkToApp__img {
-            // display: block;
-            max-height: 44px;
-    
-            @media #{$notMobile} {
-                max-height: 48px;
-            }
+            max-height: 48px;
         }
     }
 }
@@ -165,7 +160,7 @@ button {
 
 .downloadApp {
     cursor: pointer;
-    padding: 24px;
+    padding: 24px 24px 24px 32px;
     background-color: var(--color-gray1);
     color: var(--color-black1);
     border-radius: 24px;
