@@ -3,13 +3,13 @@
 .page {
 
     .page__container {
-        margin-top: 20px;
+        margin-top: 24px;
         margin-bottom: 32px;
     }
 
     @media #{$notMobile} {
         .page__container {
-            margin-top: 34px;
+            margin-top: 48px;
             margin-bottom: 48px;
         }
     }
@@ -167,30 +167,44 @@
 }
 
 .mainPicture {
-    .mainPicture__block {
-        overflow: hidden;
-        border-radius: 32px;
-        position: relative;
-        z-index: 10;
-        .mainPicture__image {
-            max-width: 100%;
-        }
+    display: block;
+    overflow: hidden;
+    border-radius: 32px;
+
+    .mainPicture__img {
+        width: 100%;
     }
-    &--preview {
-        .mainPicture__block {
-            .mainPicture__image {
-                width: 100%;
-                filter: blur(3px);
-                cursor: wait;
-            }
-        }
-    }
+
     @media #{$notMobile} {
-        .mainPicture__block {
-            border-radius: 48px;
-        }
+        border-radius: 48px;
     }
 }
+
+// .mainPicture {
+//     .mainPicture__block {
+//         overflow: hidden;
+//         border-radius: 32px;
+//         position: relative;
+//         z-index: 10;
+//         .mainPicture__image {
+//             max-width: 100%;
+//         }
+//     }
+//     &--preview {
+//         .mainPicture__block {
+//             .mainPicture__image {
+//                 width: 100%;
+//                 filter: blur(3px);
+//                 cursor: wait;
+//             }
+//         }
+//     }
+//     @media #{$notMobile} {
+//         .mainPicture__block {
+//             border-radius: 48px;
+//         }
+//     }
+// }
 
 // Стили для progressive image:
 // -start-

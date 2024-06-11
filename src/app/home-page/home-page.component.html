@@ -19,28 +19,14 @@
                 <img src="assets/images/mockupSmall.png" alt="mockup">
             </picture>
         </section> -->
+
         <picture class="mainPicture">
+            <source media="(max-width: 767px)" srcset="assets/images/home-page/mainPicForMobile.png" />
+            <img src="assets/images/home-page/mainPic.png" class="mainPicture__img" alt="mainPicture" />
+        </picture>
+
+        <!-- <picture class="mainPicture">
             <div class="mainPicture__block">
-
-                <!-- <img class="mainPicture__image" src="assets/images/home-page/mainPic.png" alt="mainPicture"> -->
-
-                <!-- <youtube-player
-                    videoId="zmg_jOwa9Fc"
-                    [width]="660"
-                    [height]="370"
-                    [playerVars]="{
-                        controls: 0,
-                        disablekb: 0,
-                        showinfo: 1,
-                        rel: 0,
-                        autoplay: 1
-                    }"
-                ></youtube-player> -->
-
-                <!-- <a href="assets/images/home-page/mainPic.png" class="progressive replace">
-                    <img src="assets/images/home-page/smallMainPic.png" class="preview" alt="image" />
-                </a> -->
-
                 <a href="assets/images/home-page/mainPicForMobile.png"
                     class="progressive replace"
                     data-srcset="assets/images/home-page/mainPicForMobile.png 767w, assets/images/home-page/mainPic.png"
@@ -53,15 +39,14 @@
                         alt="previewImage"
                     />
                 </a>
-
             </div>
-        </picture>
+        </picture> -->
 
-        <picture *ngIf="false" class="mainPicture mainPicture--preview">
+        <!-- <picture *ngIf="false" class="mainPicture mainPicture--preview">
             <div class="mainPicture__block">
                 <img class="mainPicture__image" src="assets/images/home-page/smallMainPic.png" alt="smallMainPicture">
             </div>
-        </picture>
+        </picture> -->
 
         <!-- <app-progressive-image scrolledElName="pageWrap" fullImageSrc="assets/images/home-page/mainPic.png" tinyImageSrc="assets/images/home-page/smallMainPic.png"></app-progressive-image> -->
 
