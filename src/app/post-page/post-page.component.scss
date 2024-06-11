@@ -6,8 +6,8 @@
 
 .postPage {
     font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 24px;
+    margin-bottom: 32px;
 
     .postPage__container {
         display: flex;
@@ -15,7 +15,7 @@
     }
 
     @media #{$notMobile} {
-        margin-top: 34px;
+        margin-top: 48px;
         margin-bottom: 48px;
 
         .postPage__container {

@@ -3,8 +3,8 @@
 .page {
 
     .page__container {
-        margin-top: 20px;
-        margin-bottom: 50px;
+        margin-top: 24px;
+        margin-bottom: 32px;
         .page__moduleTitle {
             display: none;
         }
@@ -12,8 +12,8 @@
 
     @media #{$notMobile} {
         .page__container {
-            margin-top: 34px;
-            margin-bottom: 140px;
+            margin-top: 48px;
+            margin-bottom: 92px;
             .page__moduleTitle {
                 display: block;
             }

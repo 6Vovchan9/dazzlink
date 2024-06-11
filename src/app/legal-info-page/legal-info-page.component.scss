@@ -2,12 +2,12 @@
 
 .page {
     .page__container {
-        margin-top: 20px;
+        margin-top: 24px;
         margin-bottom: 32px;
     }
     @media #{$notMobile} {
         .page__container {
-            margin-top: 34px;
+            margin-top: 48px;
             margin-bottom: 48px;
         }
     }
