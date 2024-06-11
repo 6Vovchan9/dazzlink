@@ -178,6 +178,13 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                 }
             }
         }
+        &--last {
+            margin-bottom: 0px;
+        }
+    }
+
+    .pageContent__toAnotherLocations {
+        margin-top: 32px;
     }
 
     @media #{$notMobile} {
@@ -205,6 +212,9 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                     // }
                 }
             }
+        }
+        .pageContent__toAnotherLocations {
+            margin-top: 48px;
         }
     }
 

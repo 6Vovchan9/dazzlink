@@ -97,9 +97,9 @@
                             <ng-container *ngIf="allLocations; else errorInGetAllLocations">
                                 <ng-container *ngIf="allLocations.placeCount; else empty">
                                     <!-- Список локаций -->
-                                    @for (block of filteredLocations; track block.cityCode) {
+                                    @for (block of filteredLocations; track block.cityCode; let lastIndex = $last) {
                                         @if (block.placeList?.length) {
-                                            <div class="pageContent__locationsBlock">
+                                            <div class="pageContent__locationsBlock" [class.pageContent__locationsBlock--last]="lastIndex">
                                                 <div class="pageContent__locationsCity">
                                                     <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting || isLoading">{{block.cityTitle}}</span>
                                                 </div>
