@@ -67,6 +67,7 @@ img {
 }
 
 button {
+    font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
     color: #000;
     &[disabled] {
         color: rgb(0 0 0 / 20%);
