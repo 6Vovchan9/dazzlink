@@ -3,6 +3,7 @@
 .helpPage {
     .helpPage__container {
         display: flex;
+        margin-top: 12px;
         margin-bottom: 32px;
 
         .helpPage__anchorNav {
@@ -11,8 +12,8 @@
     }
     @media #{$notMobile} {
         .helpPage__container {
-            margin-top: 34px;
-            margin-bottom: 140px;
+            margin-top: 48px;
+            margin-bottom: 92px;
         }
     }
 }
@@ -140,7 +141,6 @@
 }
 
 .stickyMenuWrapper {
-    padding-top: 16px;
     .updatePageInfo {
         color: var(--color-text-gray);
         line-height: 24px;
