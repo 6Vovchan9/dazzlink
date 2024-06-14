@@ -17,7 +17,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private route: ActivatedRoute = inject(ActivatedRoute);
   public updatePageInfo: Date = new Date("2024-01-21");
-  public rootMargin: number;
+  public rootMarginBottom: number;
   
   public curSection: 'phones' | 'support' | 'questions' = 'phones';
   private observer: IntersectionObserver;
@@ -102,10 +102,10 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private intersectionObserver() {
 
     const clientH = document.documentElement.clientHeight;
-    const marginTop = 154;
-    const rootMarginH1 = Math.trunc(clientH / 2) - 4;
-    const rootMarginH2 = clientH - marginTop - 4;
-    this.rootMargin = rootMarginH2;
+    const rootMarginT = 154;
+    // const rootMarginH1 = Math.trunc(clientH / 2) - 4;
+    const rootMarginB = clientH - rootMarginT - 4;
+    this.rootMarginBottom = rootMarginB;
 
     // console.log(clientH, rootMarginH1, rootMarginH2);
 
@@ -113,7 +113,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
       root: null,
       // rootMargin: '0px',
       // rootMargin: `-${rootMarginH1}px 0px -${rootMarginH1}px 0px`,
-      rootMargin: `-${marginTop}px 0px -${rootMarginH2}px 0px`,
+      rootMargin: `-${rootMarginT}px 0px -${rootMarginB}px 0px`,
       threshold: 0
     };
 
