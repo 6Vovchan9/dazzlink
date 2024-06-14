@@ -151,75 +151,32 @@
                     </div>
                 </a>
             </div>
-            <div class="questionsBlock" #section>
-                <span id="questions" class="anchoroffset"></span>
-                <h3 class="questionsBlock__title moduleTitle">Популярные вопросы</h3>
-                <ul class="questionsBlock__list">
-                    <li class="questionsBlock__item">
-                        <div class="questionsBlock__question">
-                            Какое фото использовать?
-                        </div>
-                        <div class="questionsBlock__answer">
-                            Загружай фото только с собой!
-                            Не добавляй фото с друзьями, потому что все пришли посмотреть на тебя,
-                            а не на них. Фото с солнцезащитными очками тоже не подойдут,
-                            так как будут скрывать твое лицо.
-                        </div>
-                    </li>
-                    <li class="questionsBlock__item">
-                        <div class="questionsBlock__question">
-                            Сколько в день дается бесплатных лайков?
-                        </div>
-                        <div class="questionsBlock__answer">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate a consequuntur ipsum distinctio natus ea
-                            voluptatibus rerum, molestiae iste blanditiis ratione autem quis perspiciatis quos sed enim voluptatum voluptas
-                            quisquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur natus quidem, soluta voluptatum
-                            porro, fugit omnis nesciunt impedit nisi totam, fuga dolore tempore non quaerat quam!
-                            Sed repellat soluta architecto!
-                        </div>
-                    </li>
-                    <li class="questionsBlock__item">
-                        <div class="questionsBlock__question">
-                            Когда появится солнце?
-                        </div>
-                        <div class="questionsBlock__answer">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate a consequuntur ipsum distinctio natus ea
-                            voluptatibus rerum, molestiae iste blanditiis ratione autem quis perspiciatis quos sed enim voluptatum voluptas
-                            quisquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur natus quidem, soluta voluptatum
-                            porro, fugit omnis nesciunt impedit nisi totam, fuga dolore tempore non quaerat quam!
-                            Sed repellat soluta architecto! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Omnis, quae repellat delectus fugit et magni nemo, blanditiis maxime commodi corporis,
-                            quod error iste repellendus placeat ab architecto fuga modi beatae!
-                        </div>
-                    </li>
-                    <li class="questionsBlock__item">
-                        <div class="questionsBlock__question">
-                            Надо ли менять паспорт в 30 лет?
-                        </div>
-                        <div class="questionsBlock__answer">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem tempora quos voluptatem.
-                            Aperiam, voluptatem? Corrupti commodi tenetur odit quis perspiciatis excepturi explicabo molestias quia reiciendis,
-                            fugit mollitia suscipit, nesciunt cupiditate!
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate a consequuntur ipsum distinctio natus ea
-                            voluptatibus rerum, molestiae iste blanditiis ratione autem quis perspiciatis quos sed enim voluptatum voluptas
-                            quisquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur natus quidem, soluta voluptatum
-                            porro, fugit omnis nesciunt impedit nisi totam, fuga dolore tempore non quaerat quam!
-                            Sed repellat soluta architecto!
-                        </div>
-                    </li>
-                    <li class="questionsBlock__item">
-                        <div class="questionsBlock__question">
-                            Что взять с собой на зимнюю рыбалку?
-                        </div>
-                        <div class="questionsBlock__answer">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Debitis alias distinctio illo fugiat magni ducimus nulla,
-                            non doloribus velit rem consequuntur est. Adipisci placeat consequatur velit provident,
-                            obcaecati dolorem facere.
-                        </div>
-                    </li>
-                </ul>
-            </div>
+
+            @if (questionsForRender?.length) {
+                <div class="questionsBlock" #section>
+                    <span id="questions" class="anchoroffset"></span>
+                    <h3 class="questionsBlock__title moduleTitle">Популярные вопросы</h3>
+                    <ul class="questionsBlock__list">
+                        @for(q of questionsForRender; track $index) {
+                            <li class="questionsBlock__item">
+                                <div class="questionsBlock__head">
+                                    <div class="questionsBlock__question">
+                                        {{q.question}}
+                                    </div>
+                                    <div [class.questionsBlock__toggle--hidden]="!q.active" class="questionsBlock__toggle" (click)="q.active = !q.active">
+                                        <div class="questionsBlock__toggleIcon"></div>
+                                    </div>
+                                </div>
+                                @if (q.active) {
+                                    <div class="questionsBlock__answer">
+                                        {{q.answer}}
+                                    </div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
         </main>
     </div>
 </main>

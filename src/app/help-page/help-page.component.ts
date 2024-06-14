@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
+import { questions } from './constants/questions.constant';
+import { IQuestions } from './types/question.types';
+
 @Component({
   selector: 'app-help-page',
   templateUrl: './help-page.component.html',
@@ -23,6 +26,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
     support: 'supportTab',
     questions: 'questionTab'
   };
+  public questionsForRender: Array<IQuestions>;
 
   private resizeObservable$: Observable<Event>;
   private resizeSubscription: Subscription;
@@ -31,6 +35,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
 
+    this.prepareQuestions();
     this.aboutWindowResize();
 
     // this.route.fragment.subscribe(data => {
@@ -46,6 +51,12 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
       // console.log(el.nativeElement);
       this.observer.observe(el.nativeElement);
     });
+  }
+
+  private prepareQuestions() {
+    // const questionsFromConst = questions;
+    this.questionsForRender = questions.map(q => ({ active: false, ...q }));
+    // console.log(this.questionsForRender, questionsFromConst);
   }
 
   private aboutWindowResize(): void {
