@@ -21,8 +21,9 @@
     }
 
     .post__title {
-        font-size: 24px;
-        font-weight: 500;
+        font-size: 28px;
+        line-height: 32px;
+        font-weight: 700;
     }
 
     &:hover {
@@ -39,6 +40,9 @@
 }
 
 .postDetails {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
     margin-bottom: 4px;
     display: flex;
     flex-wrap: wrap;
