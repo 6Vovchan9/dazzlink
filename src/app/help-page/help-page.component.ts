@@ -55,7 +55,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private prepareQuestions() {
     // const questionsFromConst = questions;
-    this.questionsForRender = questions.map(q => ({ active: false, ...q }));
+    this.questionsForRender = questions.map(q => ({ active: true, ...q }));
     // console.log(this.questionsForRender, questionsFromConst);
   }
 
