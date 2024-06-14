@@ -144,6 +144,7 @@
     .updatePageInfo {
         color: var(--color-text-gray);
         line-height: 24px;
+        font-weight: 700;
     }
 
     @media #{$mobile} {

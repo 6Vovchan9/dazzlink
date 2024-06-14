@@ -22,6 +22,13 @@
             flex-direction: row;
         }
     }
+
+    @media #{$mobile} {
+        .postPage__title {
+            font-size: 24px;
+            line-height: 32px;
+        }
+    }
 }
 
 .authorCard {
@@ -117,16 +124,6 @@
 
     .postTitle__details {
         margin-bottom: 12px;
-    }
-
-    .postTitle__moduleTitle {
-        font-weight: 900;
-        font-size: 32px;
-        line-height: 40px;
-        @media #{$notMobile} {
-            font-size: 40px;
-            line-height: 44px;
-        }
     }
 
     @media #{$notMobile} {

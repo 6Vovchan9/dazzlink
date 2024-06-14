@@ -83,10 +83,10 @@
     position: relative;
     .placeDetails__main {
         display: flex;
+        line-height: 24px;
         column-gap: 10px;
         justify-content: space-between;
         .placeDetails__title {
-            line-height: 24px;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;

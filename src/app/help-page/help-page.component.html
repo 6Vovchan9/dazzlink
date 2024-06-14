@@ -2,7 +2,7 @@
     <div class="container helpPage__container">
         <aside class="sidebar">
             <div class="aboutPage">
-                <h2 class="moduleTitle moduleTitle--main">Помощь</h2>
+                <h1 class="moduleTitle">Помощь</h1>
                 <div class="helpPage__anchorNav anchorNav">
                     <ul class="anchorNav__list">
                         <li class="anchorNav__item">
@@ -86,9 +86,9 @@
             </button> -->
             <div class="phonesBlock" #section>
                 <span id="phones" class="anchoroffset"></span>
-                <h3 class="phonesBlock__title moduleTitle">Телефоны доверия</h3>
+                <h2 class="phonesBlock__title moduleTitle">Телефоны доверия</h2>
                 <div class="phonesBlock__area">
-                    <h4 class="phonesBlock__country moduleTitle moduleTitle--small">Узбекистан</h4>
+                    <h3 class="phonesBlock__country moduleTitle moduleTitle--small">Узбекистан</h3>
                     <ul class="phonesBlock__phones">
                         <li class="phonesBlock__phoneItem">
                             <a class="phonesBlock__val" href="tel:1259">
@@ -112,7 +112,7 @@
                     </ul>
                 </div>
                 <div class="phonesBlock__area">
-                    <h4 class="phonesBlock__country moduleTitle moduleTitle--small">Казахстан</h4>
+                    <h3 class="phonesBlock__country moduleTitle moduleTitle--small">Казахстан</h3>
                     <ul class="phonesBlock__phones">
                         <li class="phonesBlock__phoneItem">
                             <a class="phonesBlock__val" href="tel:111">
@@ -141,7 +141,7 @@
             </div>
             <div class="supportBlock" #section>
                 <span id="support" class="anchoroffset"></span>
-                <h3 class="supportBlock__title moduleTitle">Поддержка сервиса</h3>
+                <h2 class="supportBlock__title moduleTitle">Поддержка сервиса</h2>
                 <a href="mailto:support@dazzlink.asia" class="connectWithUsBtn connectWithUsBtn--gray">
                     <div class="connectWithUsBtn__head">
                         Нужна помощь? 
@@ -155,7 +155,7 @@
             @if (questionsForRender?.length) {
                 <div class="questionsBlock" #section>
                     <span id="questions" class="anchoroffset"></span>
-                    <h3 class="questionsBlock__title moduleTitle">Популярные вопросы</h3>
+                    <h2 class="questionsBlock__title moduleTitle">Популярные вопросы</h2>
                     <ul class="questionsBlock__list">
                         @for(q of questionsForRender; track $index) {
                             <li class="questionsBlock__item">

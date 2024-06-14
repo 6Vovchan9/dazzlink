@@ -23,6 +23,13 @@
             flex-direction: row;
         }
     }
+
+    @media #{$mobile} {
+        .placePage__title {
+            font-size: 24px;
+            line-height: 32px;
+        }
+    }
 }
 
 .pageContent {
@@ -64,6 +71,7 @@
         display: flex;
         flex-wrap: wrap;
         color: var(--color-text-gray);
+        font-weight: 700;
         line-height: 24px;
         cursor: default;
         .placeMainInfo__anotherItem {

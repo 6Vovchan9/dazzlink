@@ -58,8 +58,19 @@ ul li {
 }
 
 h1, h2, h3, h4, h5, h6 {
+    font-weight: 900;
     margin: 0;
-    font-weight: normal;
+}
+
+h1 {
+    font-size: 40px;
+    line-height: 44px;
+}
+
+.moduleTitle {
+    &--small {
+        font-size: 24px;
+    }
 }
 
 img {
@@ -133,29 +144,6 @@ button {
 
     @media #{$notMobile} {
         font-size: 18px;
-    }
-}
-
-.moduleTitle {
-    font-weight: 700;
-    font-size: 32px;
-
-    &--main {
-        font-size: 40px;
-    }
-
-    &--small {
-        font-size: 24px;
-    }
-
-    &--scalable {
-        font-size: 24px;
-    }
-
-    @media #{$notMobile} {
-        &--scalable {
-            font-size: 40px;
-        }
     }
 }
 
