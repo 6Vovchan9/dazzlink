@@ -1,13 +1,17 @@
 @import "variables";
 
 .page {
-
+    font-weight: 600;
     .page__container {
         margin-top: 24px;
         margin-bottom: 32px;
         .page__moduleTitle {
             display: none;
         }
+    }
+
+    .page__sectionTitle {
+        margin-bottom: 24px;
     }
 
     @media #{$notMobile} {
@@ -80,6 +84,13 @@
         .aboutUsMew__columns {
             flex-direction: row;
         }
+        .aboutUsMew__item {
+            .aboutUsMew__card {
+                &--secondary {
+                    padding-bottom: 72px;
+                }
+            }
+        }
     }
 }
 
@@ -90,6 +101,7 @@
     background-color: var(--color-gray1);
     border-radius: 24px;
     .aboutUsCard__desc {
+        line-height: 24px;
         margin-top: 8px;
     }
     .aboutUsCard__map {
@@ -125,23 +137,26 @@
 // }
 
 .connectWithUs {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 32px;
-    background: linear-gradient(264deg, #A47ED9 0%, #332E87 100%);
     margin-top: 48px;
-    column-gap: 24px;
-    row-gap: 8px;
+    .connectWithUs__btns{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 24px;
+        background: linear-gradient(264deg, #A47ED9 0%, #332E87 100%);
+        column-gap: 24px;
+        row-gap: 8px;
 
-    .connectWithUs__item {
-        flex: 1;
+        .connectWithUs__item {
+            flex: 1;
+        }
     }
-
     @media #{$notMobile} {
-        padding: 24px;
-        flex-direction: row;
         margin-top: 96px;
+        .connectWithUs__btns {
+            padding: 24px;
+            flex-direction: row;
+        }
     }
 }
 
@@ -150,14 +165,14 @@
     font-size: 24px;
 
     .ourTeam__desc {
-        margin-top: 12px;
         max-width: 560px;
+        line-height: 32px;
     }
 
     .ourTeam__list {
         display: flex;
         flex-direction: column;
-        margin-top: 48px;
+        margin-top: 24px;
         row-gap: 48px;
         .ourTeam__item {
             &--withDetails {
@@ -187,7 +202,8 @@
     @media #{$notMobile} {
         margin-top: 96px;
         .ourTeam__list {
-            row-gap: 72px;
+            row-gap: 64px;
+            margin-top: 48px;
             flex-direction: row;
             flex-wrap: wrap;
             .ourTeam__item {
@@ -215,11 +231,12 @@
     }
     .personCard__data {
         margin: 16px 8px 0px;
+        line-height: 32px;
         .personCard__firstRow {
             display: flex;
             justify-content: space-between;
             .personCard__name {
-                font-weight: 700;
+                font-weight: 900;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
