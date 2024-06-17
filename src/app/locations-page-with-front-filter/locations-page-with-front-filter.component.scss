@@ -7,7 +7,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
 .page {
     // font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
-    font-weight: 600;
     .page__container {
         display: flex;
         flex-direction: column;
@@ -336,6 +335,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         align-items: center;
         margin-right: -16px;
         .filterBar__item {
+            font-weight: 700;
             position: relative;
             // margin-right: 8px;
             // &:last-child {
@@ -359,6 +359,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 .filterButton {
     height: 40px; // пришлось прибегнуть к такому решению потому что у кнопки есть какойто свой padding, от которого хз как избавиться
     font-size: 16px;
+    font-weight: 700;
     padding: 0px 16px;
     display: block;
     border: none;
