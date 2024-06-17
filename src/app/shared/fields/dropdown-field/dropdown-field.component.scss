@@ -14,7 +14,6 @@ $color-main-blue: #5532EB;
 .dropdownControl {
     // font-size: 18px;
     // font-weight: 600;
-    line-height: 22px;
     position: relative;
     user-select: none;
     .dropdownControl__head {
@@ -26,6 +25,7 @@ $color-main-blue: #5532EB;
         padding: 8px 16px;
         border-radius: 12px;
         min-height: 38px;
+        font-weight: 700;
 
         .dropdownControl__values {
             text-overflow: ellipsis;

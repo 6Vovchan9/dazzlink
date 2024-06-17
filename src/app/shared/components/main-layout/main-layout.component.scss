@@ -227,7 +227,6 @@
             }
 
             .header__menu {
-                line-height: 24px;
                 font-size: 16px;
                 display: none;
                 @media #{$notMobile} {
@@ -505,7 +504,7 @@
 }
 
 .company {
-    opacity: .6;
+    color: var(--color-text-gray);
     font-size: 14px;
 
     @media #{$notMobile} {

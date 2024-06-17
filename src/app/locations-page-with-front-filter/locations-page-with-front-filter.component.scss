@@ -321,8 +321,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     // filter: blur(4px); // фильтр накладывается на сам элемент
     // background: filter(url(path/to/img.jpg), blur(5px)); // есть еще такой вариант
 
-    line-height: 24px;
-
     .filterBar__length {
         color: var(--color-text-gray);
         font-weight: 700;
@@ -335,7 +333,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         align-items: center;
         margin-right: -16px;
         .filterBar__item {
-            font-weight: 700;
             position: relative;
             // margin-right: 8px;
             // &:last-child {
@@ -359,6 +356,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 .filterButton {
     height: 40px; // пришлось прибегнуть к такому решению потому что у кнопки есть какойто свой padding, от которого хз как избавиться
     font-size: 16px;
+    line-height: 24px;
     font-weight: 700;
     padding: 0px 16px;
     display: block;
@@ -503,7 +501,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             overflow: scroll;
             margin-top: 12px;
             .filterOptionsBlock__country {
-                line-height: 24px;
                 margin-top: 24px;
 
                 .filterOptionsBlock__countryName {
@@ -677,6 +674,9 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
 .goToAnotherLocations {
     display: flex;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
     column-gap: 20px;
     justify-content: space-between;
     background-color: var(--color-gray1);
@@ -688,9 +688,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     text-align: start;
     .goToAnotherLocations__text {
         flex: 1;
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 24px;
     }
     .goToAnotherLocations__icon {
         margin: 6px 2px 0 0;

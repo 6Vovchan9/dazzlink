@@ -12,7 +12,7 @@ html, body {
 html {
     font-size: 16px;
     font-weight: 600;
-    line-height: 1.42;
+    line-height: 1.5;
 }
 
 body {
@@ -167,7 +167,6 @@ button {
     .downloadApp__title {
         flex: 1;
         font-weight: 700;
-        line-height: 24px;
     }
 
     .downloadApp__icon {
@@ -332,7 +331,6 @@ button {
     background-color: var(--color-gray1);
     padding: 24px 28px;
     border-radius: 20px;
-    line-height: 24px;
     font-weight: 700;
 
     .feedback__text {
@@ -487,13 +485,14 @@ button {
         background-image: url('/assets/icons/grayTriangleIcon.svg');
     }
     .errorMessage__title {
-        font-weight: 700;
+        font-weight: 900;
     }
     .errorMessage__btn {
         position: relative;
         cursor: pointer;
         margin-top: 16px;
         font-size: 16px;
+        font-weight: 700;
         line-height: 24px;
         padding: 16px 32px;
         border-radius: 16px;
@@ -541,7 +540,6 @@ button {
 .connectWithUsBtn {
     font-size: 16px;
     font-weight: 900;
-    line-height: 24px;
     display: block;
     padding: 24px;
     border-radius: 12px;

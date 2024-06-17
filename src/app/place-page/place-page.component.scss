@@ -71,7 +71,6 @@
         flex-wrap: wrap;
         color: var(--color-text-gray);
         font-weight: 700;
-        line-height: 24px;
         cursor: default;
         .placeMainInfo__anotherItem {
             position: relative;
@@ -109,7 +108,6 @@
     margin-top: 32px;
     .additPlaceInfo__item {
         margin-top: 32px;
-        line-height: 24px;
         .additPlaceInfo__title {
             display: flex;
             color: var(--color-text-gray);
@@ -165,7 +163,6 @@
 }
 
 .descPlaceInfo {
-    line-height: 24px;
     .descPlaceInfo__item {
         display: flex;
         flex-direction: column;
