@@ -15,6 +15,14 @@
     }
 }
 
+.mainVideo {
+    border-radius: 28px;
+    width: 100%;
+    @media #{$notMobile} {
+        border-radius: 36px;
+    }
+}
+
 .aboutApp {
 
     display: flex;

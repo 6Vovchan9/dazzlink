@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, Optional } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
 import { Observable, Subscription, fromEvent, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
@@ -20,7 +20,9 @@ type IOpportunityMenu = {
   styleUrls: ['./home-page.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomePageComponent implements OnInit, OnDestroy {
+export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @ViewChild('advertisingVideo') advertisingVideo: ElementRef;
 
   private curLang: string;
   private lSub: Subscription;
@@ -93,6 +95,27 @@ export class HomePageComponent implements OnInit, OnDestroy {
     )
 
     this.aboutProgressiveImage();
+  }
+
+  ngAfterViewInit(): void {
+    this.ensureVideoPlays();
+  }
+
+  private ensureVideoPlays(): void {
+    const video = this.advertisingVideo?.nativeElement;
+
+    if (video) {
+      video.muted = true;
+      const videoPromise = video.play();
+
+      if (videoPromise) {
+        videoPromise.then(() => {
+          console.log('Видео запущено :)');
+        }).catch(error => {
+          console.log('Ошибка при воспроизв. видео :(');
+        });
+      }
+    }
   }
 
   private aboutProgressiveImage(): void {
