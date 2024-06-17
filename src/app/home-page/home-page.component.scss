@@ -15,11 +15,24 @@
     }
 }
 
+.example {
+    width: 600px;
+    height: 600px;
+    background: url('src/assets/images/home-page/mainPic.png') center center no-repeat;
+    background-size: cover;
+    margin-bottom: 30px;
+    border-radius: 72px;
+    box-shadow: inset 0 0 15px 15px rgba(255, 255, 255, 01);
+}
+
 .mainVideo {
+    display: block;
     border-radius: 28px;
     width: 100%;
+    margin-bottom: 24px;
     @media #{$notMobile} {
         border-radius: 36px;
+        margin-bottom: 48px;
     }
 }
 
