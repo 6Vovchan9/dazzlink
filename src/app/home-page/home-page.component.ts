@@ -24,6 +24,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('advertisingVideo') advertisingVideo: ElementRef;
 
+  public showVideoPoster = true;
   private curLang: string;
   private lSub: Subscription;
   private pageWrapScrollSub: Subscription;
@@ -105,12 +106,25 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     const video = this.advertisingVideo?.nativeElement;
 
     if (video) {
-      video.muted = true;
+      // console.dir(video);
+      video.addEventListener('ended', () => {
+        console.log('video ended!');
+        this.showVideoPoster = true;
+      });
+    }
+  }
+
+  public onVideoPlay(): void {
+    const video = this.advertisingVideo?.nativeElement;
+
+    if (video) {
+      // video.muted = true;
       const videoPromise = video.play();
 
       if (videoPromise) {
         videoPromise.then(() => {
           console.log('Видео запущено :)');
+          this.showVideoPoster = false;
         }).catch(error => {
           console.log('Ошибка при воспроизв. видео :(');
         });
@@ -225,7 +239,12 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     return langArr[key][this.curLang];
   }
 
+  private removeAllListeners(): void {
+
+  }
+
   public ngOnDestroy(): void {
+    this.removeAllListeners()
     this.pageWrapScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
   }

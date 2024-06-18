@@ -22,14 +22,19 @@
 
         <!-- <div class="example"></div> -->
 
-        <video #advertisingVideo
-            class="mainVideo"
-            loop playsinline
-            poster="assets/images/home-page/mainPic.png"
-        >
-            <source src="https://static.dazzlink.asia/landing/advertising.mp4" type="video/mp4">
-            Ваш браузер не поддерживает встроенные видео.
-        </video>
+        <div class="mainVideo">
+            <video #advertisingVideo
+                class="mainVideo__video"
+                playsinline controls
+            >
+                <source src="https://static.dazzlink.asia/landing/advertising.mp4" type="video/mp4">
+                Ваш браузер не поддерживает встроенные видео.
+            </video>
+            <div class="mainVideo__customPoster"
+                [class.mainVideo__customPoster--hidden]="!showVideoPoster"
+                (click)="onVideoPlay()"
+            ></div>
+        </div>
 
         <picture class="mainPicture">
             <source media="(max-width: 767px)" srcset="assets/images/home-page/mainPicForMobile.png" />
