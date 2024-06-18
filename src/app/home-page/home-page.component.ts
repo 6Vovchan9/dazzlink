@@ -25,6 +25,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('advertisingVideo') advertisingVideo: ElementRef;
 
   public showVideoPoster = true;
+  private name: string;
   private curLang: string;
   private lSub: Subscription;
   private pageWrapScrollSub: Subscription;
@@ -100,17 +101,32 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.ensureVideoPlays();
+    setTimeout(() => this.forRemovePauseListener(), 10000);
+  }
+
+  private onEndedCallback = (): void => {
+    // console.log('video ended!');
+    this.showVideoPoster = true;
+  }
+
+  private onPausedCallback = (): void => {
+    // console.log('video paused!');
+    this.name = 'Ivan';
+  }
+
+  private forRemovePauseListener(): void {
+    // console.log(this.name);
+    const video = this.advertisingVideo?.nativeElement;
+    if (video) {
+      video.removeEventListener('pause', this.onPausedCallback);
+    }
   }
 
   private ensureVideoPlays(): void {
     const video = this.advertisingVideo?.nativeElement;
-
     if (video) {
-      // console.dir(video);
-      video.addEventListener('ended', () => {
-        console.log('video ended!');
-        this.showVideoPoster = true;
-      });
+      video.addEventListener('ended', this.onEndedCallback);
+      video.addEventListener('pause', this.onPausedCallback);
     }
   }
 
@@ -240,7 +256,11 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private removeAllListeners(): void {
-
+    const video = this.advertisingVideo?.nativeElement;
+    if (video) {
+      // console.log('Удаляем слушатель окончания видео');
+      video.removeEventListener('ended', this.onEndedCallback);
+    }
   }
 
   public ngOnDestroy(): void {
