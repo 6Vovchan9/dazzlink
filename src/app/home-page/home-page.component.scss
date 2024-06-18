@@ -33,6 +33,9 @@
     .mainVideo__video {
         display: block;
         width: 100%;
+        height: min(calc(56.2vw - 22px), 675px); // Можно было и без высоты, но высота блока с видео при рендеринге немного скачет, а при заданной высоте такого не происходит
+        object-position: center center;
+        object-fit: cover;
     }
     .mainVideo__customPoster {
         cursor: pointer;
