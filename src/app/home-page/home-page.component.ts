@@ -14,12 +14,14 @@ import {
 } from '@angular/core';
 import { Observable, Subscription, fromEvent, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
 
 import { langArr } from '@app/shared/constants/languages.constants';
 import { PagesService } from '@app/shared/services/pages.service';
 import { Router } from '@angular/router';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { GoogleTranslationService } from '@app/shared/services/google-translation.service';
+import { AccoTriggerComponent } from '@app/shared/components/acco-trigger/acco-trigger.component';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -31,6 +33,8 @@ type IOpportunityMenu = {
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
+  standalone: true,
+  imports: [AccoTriggerComponent, FormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -287,6 +291,11 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
       video.removeEventListener('ended', this.onEndedCallback);
     }
   }
+
+  // public get titleForDownloadBtn(): string {
+  //   // console.log('Обновляем контент на home-page');
+  //   return 'приложение';
+  // }
 
   public ngOnDestroy(): void {
     this.removeAllListeners()

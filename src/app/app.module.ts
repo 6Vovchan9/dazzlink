@@ -11,7 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
-import { HomePageComponent } from './home-page/home-page.component';
+// import { HomePageComponent } from './home-page/home-page.component';
 import { AgreementsPageComponent } from './agreements-page/agreements-page.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
@@ -22,7 +22,7 @@ import { PostComponent } from './shared/components/post/post.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { RadiobuttonFieldModule } from './shared/fields/radiobutton-new-field/radiobutton-field.module';
 import { DropdownFieldModule } from './shared/fields/dropdown-field/dropdown-field.module';
-import { AccoTriggerComponent } from './shared/components/acco-trigger/acco-trigger.component';
+// import { AccoTriggerComponent } from './shared/components/acco-trigger/acco-trigger.component';
 import { PostPageComponent } from './post-page/post-page.component';
 import { GoBackBtnComponent } from './shared/components/go-back-btn/go-back-btn.component';
 // import { YouTubePlayerModule } from '@angular/youtube-player';
@@ -45,7 +45,7 @@ registerLocaleData(localeRu, 'ru');
     AppComponent,
     MainLayoutComponent,
 
-    HomePageComponent,
+    // HomePageComponent,
     AgreementsPageComponent,
     ArticlesPageComponent,
     PostPageComponent,
@@ -62,7 +62,7 @@ registerLocaleData(localeRu, 'ru');
     PostComponent,
     LocationItemComponent,
     ModalComponent,
-    AccoTriggerComponent,
+    // AccoTriggerComponent,
     GoBackBtnComponent,
     ProgressiveImageComponent,
     CheckboxNewFieldComponent

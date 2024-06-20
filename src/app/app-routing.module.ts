@@ -17,7 +17,13 @@ const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [
       // { path: '', redirectTo: '/', pathMatch: 'full' },
-      { path: '', component: HomePageComponent },
+      {
+        path: '',
+        loadComponent: () =>
+          import("./home-page/home-page.component").then(
+            m => m.HomePageComponent
+          )
+      },
       { path: 'agreements', component: AgreementsPageComponent },
       { path: 'articles', component: ArticlesPageComponent },
       // { path: 'locations', component: LocationsPageComponent }, // Фильтрация и сортировка на бэке

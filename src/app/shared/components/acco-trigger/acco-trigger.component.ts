@@ -12,6 +12,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true,
     }
   ],
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccoTriggerComponent implements ControlValueAccessor {
@@ -42,6 +43,11 @@ export class AccoTriggerComponent implements ControlValueAccessor {
   public registerOnTouched(fn: any): void {
     this.onTouch = fn;
   }
+
+  // public get name(): string {
+  //   console.log('Обновляем контент на acco-trigger');
+  //   return 'Ivan';
+  // }
 
   public setDisabledState?(isDisabled: boolean): void { }
 
