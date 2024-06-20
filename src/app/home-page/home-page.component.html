@@ -31,7 +31,7 @@
                 Ваш браузер не поддерживает встроенные видео.
             </video>
             <div class="mainVideo__customPoster"
-                [class.mainVideo__customPoster--hidden]="!showVideoPoster"
+                [class.mainVideo__customPoster--hidden]="!showVideoPoster()"
                 (click)="onVideoPlay()"
             ></div>
         </div>

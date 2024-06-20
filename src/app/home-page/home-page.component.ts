@@ -1,4 +1,17 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  Optional,
+  ViewChild,
+  effect,
+  signal
+} from '@angular/core';
 import { Observable, Subscription, fromEvent, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
@@ -24,7 +37,14 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('advertisingVideo') advertisingVideo: ElementRef;
 
-  public showVideoPoster = true;
+  public showVideoPoster = signal<boolean>(true);
+  private posterChangeEffect = effect(() => {
+    if (this.showVideoPoster()) {
+      console.log('Показываем постер');
+    } else {
+      console.log('Скрываем постер');
+    }
+  });
   private name: string;
   private curLang: string;
   private lSub: Subscription;
@@ -101,12 +121,12 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.ensureVideoPlays();
-    setTimeout(() => this.forRemovePauseListener(), 10000);
+    setTimeout(() => this.forRemovePauseListener(), 10_000);
   }
 
   private onEndedCallback = (): void => {
     // console.log('video ended!');
-    this.showVideoPoster = true;
+    this.showVideoPoster.set(true);
   }
 
   private onPausedCallback = (): void => {
@@ -140,7 +160,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
       if (videoPromise) {
         videoPromise.then(() => {
           console.log('Видео запущено :)');
-          this.showVideoPoster = false;
+          this.showVideoPoster.set(false);
         }).catch(error => {
           console.log('Ошибка при воспроизв. видео :(');
         });
@@ -254,6 +274,11 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   public getContent(key: string): string {
     return langArr[key][this.curLang];
   }
+
+  // public get titleForDownloadBtn(): string {
+  //   // console.log('Обновляем контент на home-page');
+  //   return 'приложение';
+  // }
 
   private removeAllListeners(): void {
     const video = this.advertisingVideo?.nativeElement;

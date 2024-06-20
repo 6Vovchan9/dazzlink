@@ -148,7 +148,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   public onResetAllFiltersOnMobile(): void {
-
     // сбрасываем фильтрацию:
     this.filterFieldOptions.forEach(country => {
       country.cityList.forEach(city => delete city.selected);
@@ -156,7 +155,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     });
     this.amountAllSelectedCities = [];
     this.selectedCitiesMap = {};
-
   }
 
   private createForm(): void {
