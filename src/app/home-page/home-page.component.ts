@@ -31,7 +31,7 @@ type IOpportunityMenu = {
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -95,7 +95,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     private pagesService: PagesService,
     @Optional() public mobileDetectService: MobileDetectService,
     private router: Router,
-    private translateService: GoogleTranslationService
+    // private translateService: GoogleTranslationService
     // private cd: ChangeDetectorRef
   ) { }
 
@@ -116,7 +116,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     )
 
-    this.aboutProgressiveImage();
+    // this.aboutProgressiveImage();
   }
 
   ngAfterViewInit(): void {
