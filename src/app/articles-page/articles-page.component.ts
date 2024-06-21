@@ -35,7 +35,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('lastPostItem', { read: ElementRef }) lastPostList: QueryList<ElementRef>;
 
   public posts$: Observable<Post[]>;
-  public articlesList: Post[] = [];
+  public articlesList = signal<Post[]>([]);
   public lastPaginationPage = true;
   public searchStr = '';
   public isLoading = signal<boolean>(true);
@@ -138,16 +138,20 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
         )
         .subscribe({
           next: value => {
-            value.forEach(post => {
-              this.articlesList.push(post);
-            });
+
+            // value.forEach(post => {
+            //   // this.articlesList.push(post);
+            // });
+            this.articlesList.update(prevArticles => [...prevArticles, ...value]);
+
             this.showLoadMoreSpinner.set(false);
             this.isLoading.set(false);
           },
           error: err => {
             this.errorAfterGetAllArticles.set(true);
             this.isLoading.set(false);
-            this.articlesList = []; // Это надо сделать на тот случай когда мы уже получили некоторое кол-во статей и при запросе очередной пачки статей случилась ошибка и чтобы если вдруг после "Перезагрузить" из баннера сервак раздуплится то надо очистить старые посты 
+            // this.articlesList = []; // Это надо сделать на тот случай когда мы уже получили некоторое кол-во статей и при запросе очередной пачки статей случилась ошибка и чтобы если вдруг после "Перезагрузить" из баннера сервак раздуплится то надо очистить старые посты 
+            this.articlesList.set([]);
           }
         })
     } else {
@@ -177,9 +181,12 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
         .subscribe({
           next: value => {
             // console.log('1');
-            value.forEach(post => {
-              this.articlesList.push(post);
-            });
+
+            // value.forEach(post => {
+            //   // this.articlesList.push(post);
+            // });
+            this.articlesList.update(prevArticles => [...prevArticles, ...value]);
+
             // console.log('2');
             this.showLoadMoreSpinner.set(false);
             this.isLoading.set(false);
@@ -189,7 +196,9 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
           error: () => {
             this.errorAfterGetAllArticles.set(true);
             this.isLoading.set(false);
-            this.articlesList = []; // Это надо сделать на тот случай когда мы уже получили некоторое кол-во статей и при запросе очередной пачки статей случилась ошибка и чтобы если вдруг после "Перезагрузить" из баннера сервак раздуплится то надо очистить старые посты 
+
+            // this.articlesList = []; // Это надо сделать на тот случай когда мы уже получили некоторое кол-во статей и при запросе очередной пачки статей случилась ошибка и чтобы если вдруг после "Перезагрузить" из баннера сервак раздуплится то надо очистить старые посты
+            this.articlesList.set([]);
           }
         })
     }
@@ -230,10 +239,10 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   //   });
   // }
 
-  public get titleForDownloadBtn(): string {
-    console.log('Обновляем контент на articles-page');
-    return 'Hello';
-  }
+  // public get titleForDownloadBtn(): string {
+  //   console.log('Обновляем контент на articles-page');
+  //   return 'Hello';
+  // }
 
   private intersectionObserver() {
 
@@ -250,7 +259,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
             observer.unobserve(entry.target);
             console.log('load more articles...');
             this.showLoadMoreSpinner.set(true);
-            this.getAllArticles({ id: this.articlesList[this.articlesList.length - 1].id, direction: 'EARLIER' });
+            this.getAllArticles({ id: this.articlesList()[this.articlesList().length - 1].id, direction: 'EARLIER' });
           }
       },
       optionsForObserver

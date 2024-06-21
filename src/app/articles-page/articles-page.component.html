@@ -17,6 +17,7 @@
         <aside class="sidebar" [class.hiddenInMobile]="webview">
             <div class="aboutPage">
                 <h1 class="moduleTitle">Медиа</h1>
+                <!-- <button (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles">{{titleForDownloadBtn}}</button> -->
                 <div class="aboutPage__text">
                     {{getContent('articles-aboutPage-text')}}
                 </div>
@@ -82,9 +83,9 @@
                 </ng-container>
                 <ng-template #successGetAllArticles>
 
-                    @if (articlesList?.length) {
+                    @if (articlesList()?.length) {
                         <ul class="pageContent__articles">
-                            @for (post of articlesList; track trackPost; let lastIndex = $last, index = $index) {
+                            @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
                                 @if (lastIndex) {
                                     <li #lastPostItem class="pageContent__itemOfArticle lastPostItem" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
                                         <a [routerLink]="['/post', post.id]" class="pageContent__articleLink">
