@@ -41,7 +41,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('advertisingVideo') advertisingVideo: ElementRef;
 
-  public showVideoPoster = signal<boolean>(true);
+  public showVideoPoster = signal<boolean>(true); // если бы не сигнал то при OnPush стратегии пришлось бы запускать detectChanges при изм значения этого свойства
   private posterChangeEffect = effect(() => {
     if (this.showVideoPoster()) {
       console.log('Показываем постер');

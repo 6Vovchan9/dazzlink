@@ -53,7 +53,7 @@
 
             <!-- Старый вариант -->
             <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
-                <ng-container *ngIf="errorAfterGetAllArticles; else successGetAllArticles">
+                <ng-container *ngIf="errorAfterGetAllArticles(); else successGetAllArticles">
                     Есть проблема
                 </ng-container>
                 <ng-template #successGetAllArticles>
@@ -66,8 +66,8 @@
             </ng-container> -->
 
             <!-- Новый вариант -->
-            <ng-container *ngIf="!isLoading; else loadingTemplate">
-                <ng-container *ngIf="errorAfterGetAllArticles; else successGetAllArticles">
+            <ng-container *ngIf="!isLoading(); else loadingTemplate">
+                <ng-container *ngIf="errorAfterGetAllArticles(); else successGetAllArticles">
                     <div class="errorMessage">
                         <div class="errorMessage__icon"></div>
                         <div class="errorMessage__title">
@@ -103,7 +103,7 @@
                                 }
                             }
                         </ul>
-                        @if (showLoadMoreSpinner) {
+                        @if (showLoadMoreSpinner()) {
                             <div class="pageContent__loadMore">
                                 <app-progress-spinner></app-progress-spinner>
                             </div>
@@ -140,7 +140,7 @@
     </div>
 </main>
 
-<!-- <app-loader *ngIf="isLoading"></app-loader> -->
+<!-- <app-loader *ngIf="isLoading()"></app-loader> -->
 
 <ng-template #empty>
     <!-- <p>Список статей пуст</p> -->
