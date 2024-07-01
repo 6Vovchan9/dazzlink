@@ -1,4 +1,4 @@
-<main *ngIf="!isLoading" class="postPage">
+<main *ngIf="!isLoading()" class="postPage">
     <div class="container postPage__container">
         <ng-container *ngIf="postData; else errorTemplate">
             <aside class="sidebar">
@@ -70,14 +70,14 @@
                     <div class="postContent__feedback feedback">
                         <div class="feedback__text">
                             <span>Как вам статья?</span>
-                            <div *ngIf="votingIsLoading" class="feedback__spinner">
+                            <div *ngIf="votingIsLoading()" class="feedback__spinner">
                                 <img src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
                             </div>
                         </div>
                         <div class="feedback__values"
                             [ngClass]="{
                                 'feedback__values--disabled': articleEvaluation,
-                                'feedback__values--loading': votingIsLoading
+                                'feedback__values--loading': votingIsLoading()
                             }"
                         >
 
@@ -160,7 +160,7 @@
     <p>Что-то пошло не так!<br>Уже исправляем</p>
 </ng-template>
 
-<app-loader *ngIf="isLoading"></app-loader>
+<app-loader *ngIf="isLoading()"></app-loader>
 
 <ng-template #article0>
     <p class="articleParagraph">

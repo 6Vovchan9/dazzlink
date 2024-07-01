@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { catchError, delay, map, skipWhile, switchMap, takeUntil } from 'rxjs/operators';
 
@@ -11,18 +11,19 @@ import { TelegramService } from '@app/shared/services/telegram.service';
 @Component({
   selector: 'app-post-page',
   templateUrl: './post-page.component.html',
-  styleUrls: ['./post-page.component.scss']
+  styleUrls: ['./post-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  public isLoading = true;
+  public isLoading = signal<boolean>(true);
   public postData: Post;
   public articleEvaluation: 'like' | 'dislike';
   private articleId: string;
   private lSub: Subscription;
   private eSub: Subscription;
   private vSub: Subscription;
-  public votingIsLoading = false;
+  public votingIsLoading = signal<boolean>(false);
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
   public scrollToTopBtnOptions: { hide: boolean, opacity: boolean } = {
@@ -35,7 +36,8 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private postsService: PostsService,
     private pagesService: PagesService,
     private router: Router,
-    private tgService: TelegramService
+    private tgService: TelegramService,
+    private cd: ChangeDetectorRef
   ) {
     this.goBackByTg = this.goBackByTg.bind(this);
   }
@@ -46,14 +48,14 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.lSub = this.pagesService.currentLanguage.subscribe(
       lang => {
-        if (!this.isLoading) {
+        if (!this.isLoading()) {
           // console.log(lang);
-          this.isLoading = true;
+          this.isLoading.set(true);
           this.postsService.getById(this.articleId)
             .subscribe(
               (post: Post) => {
                 this.postData = post;
-                this.isLoading = false;
+                this.isLoading.set(false);
               }
             );
         }
@@ -71,7 +73,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         ),
         catchError(err => {
-          this.isLoading = false;
+          this.isLoading.set(false);
           return of(
             null
             // {
@@ -107,13 +109,13 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
           if (post) {
             this.getEvaluation();
             this.postData = post;
-            this.isLoading = false;
+            this.isLoading.set(false);
           } else {
             this.goToAllArticles();
           }
         },
         err => {
-          this.isLoading = false;
+          this.isLoading.set(false);
         }
       );
   }
@@ -124,7 +126,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     fromEvent<Event>(pageWrap, 'scroll')
       .pipe(
         takeUntil(this.destroy$),
-        skipWhile(() => this.isLoading),
+        skipWhile(() => this.isLoading()),
         map(e => (e.target as HTMLDivElement))
       )
       .subscribe(
@@ -133,8 +135,20 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
           const scrollHeight = pageWrap.scrollHeight;
           const offsetHeight = pageWrap.offsetHeight;
           // console.log(scrollTop, scrollHeight, offsetHeight);
+          const prevState = this.scrollToTopBtnOptions.hide;
+          const prevOpacity = this.scrollToTopBtnOptions.opacity;
           this.scrollToTopBtnOptions.hide = scrollTop < offsetHeight;
           this.scrollToTopBtnOptions.opacity = scrollTop > scrollHeight - offsetHeight * 2; // эти расчёты можно будет подкорректировать
+          const futureState = this.scrollToTopBtnOptions.hide;
+          const futureOpacity = this.scrollToTopBtnOptions.opacity;
+
+          if (prevState !== futureState) {
+            // console.log('Изменилась видимость кнопки');
+            this.cd.detectChanges();
+          } else if (prevOpacity !== futureOpacity) {
+            // console.log('Изменилась прозрачность кнопки');
+            this.cd.detectChanges();
+          }
         }
       );
   }
@@ -194,9 +208,9 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //   return;
     // }
 
-    if (!this.articleEvaluation && !this.votingIsLoading) {
+    if (!this.articleEvaluation && !this.votingIsLoading()) {
       console.log(`Фиксируем ваш ${val}`);
-      this.votingIsLoading = true;
+      this.votingIsLoading.set(true);
       // this.vSub = this.postsService.setArticleVoting(this.articleId, val)
       this.vSub = this.postsService.setArticleVotingProd(this.articleId, val)
         // .pipe(
@@ -206,13 +220,13 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
           resp => {
             this.postData['likeCount'] = resp['likeCount'];
             this.postData['dislikeCount'] = resp['dislikeCount'];
-            this.votingIsLoading = false;
+            this.votingIsLoading.set(false); // несмотря на то что этот сигнал делает detectChanges при OnPush стратегии, новое значение у articleEvaluation ниже также учитывается при перерендеринге страницы
             this.articleEvaluation = val;
             this.setArticleEvaluationToSSWithChoice(val);
             console.log(`Зафиксировали ваш выбор!`, this.articleEvaluation);
           },
           () => {
-            this.votingIsLoading = false;
+            this.votingIsLoading.set(false);
           }
         );
       // Тут есть момент как можно обойти LS и наделать много лайков (нужно лайкнуть и быстро обновить страницу, нужно успеть перед тем как сервер ответит),
@@ -257,6 +271,11 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  public get titleForDownloadBtn(): string {
+    console.log('Обновляем контент на post-page');
+    return 'Hello';
+  }
+
   public buildViewCount(val?: number): string {
     const name =
       `${val}`.endsWith('1') && +val !== 11 ? ' просмотр' :
@@ -272,6 +291,9 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lSub?.unsubscribe();
     this.eSub?.unsubscribe();
     // this.vSub?.unsubscribe();
+
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
 }
