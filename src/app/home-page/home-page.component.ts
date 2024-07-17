@@ -41,14 +41,6 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('advertisingVideo') advertisingVideo: ElementRef;
 
-  public showVideoPoster = signal<boolean>(true); // если бы не сигнал то при OnPush стратегии пришлось бы запускать detectChanges при изм значения этого свойства
-  private posterChangeEffect = effect(() => {
-    if (this.showVideoPoster()) {
-      console.log('Показываем постер');
-    } else {
-      console.log('Скрываем постер');
-    }
-  });
   private name: string;
   private curLang: string;
   private lSub: Subscription;
@@ -123,54 +115,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.aboutProgressiveImage();
   }
 
-  ngAfterViewInit(): void {
-    this.ensureVideoPlays();
-    setTimeout(() => this.forRemovePauseListener(), 10_000);
-  }
-
-  private onEndedCallback = (): void => {
-    // console.log('video ended!');
-    this.showVideoPoster.set(true);
-  }
-
-  private onPausedCallback = (): void => {
-    // console.log('video paused!');
-    this.name = 'Ivan';
-  }
-
-  private forRemovePauseListener(): void {
-    // console.log(this.name);
-    const video = this.advertisingVideo?.nativeElement;
-    if (video) {
-      video.removeEventListener('pause', this.onPausedCallback);
-    }
-  }
-
-  private ensureVideoPlays(): void {
-    const video = this.advertisingVideo?.nativeElement;
-    if (video) {
-      video.addEventListener('ended', this.onEndedCallback);
-      video.addEventListener('pause', this.onPausedCallback);
-    }
-  }
-
-  public onVideoPlay(): void {
-    const video = this.advertisingVideo?.nativeElement;
-
-    if (video) {
-      // video.muted = true;
-      const videoPromise = video.play();
-
-      if (videoPromise) {
-        videoPromise.then(() => {
-          console.log('Видео запущено :)');
-          this.showVideoPoster.set(false);
-        }).catch(error => {
-          console.log('Ошибка при воспроизв. видео :(');
-        });
-      }
-    }
-  }
+  ngAfterViewInit(): void { }
 
   private aboutProgressiveImage(): void {
     if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) {
@@ -270,7 +215,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   public onAccoTriggerClick(path: Array<string>): void {
     this.router.navigate(
       path,
-      { queryParams: { category: 'food' } }
+      // { queryParams: { category: 'food' } }
       // {skipLocationChange: true}
     );
   }
@@ -284,21 +229,12 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   //   return 'приложение';
   // }
 
-  private removeAllListeners(): void {
-    const video = this.advertisingVideo?.nativeElement;
-    if (video) {
-      // console.log('Удаляем слушатель окончания видео');
-      video.removeEventListener('ended', this.onEndedCallback);
-    }
-  }
-
   // public get titleForDownloadBtn(): string {
   //   // console.log('Обновляем контент на home-page');
   //   return 'приложение';
   // }
 
   public ngOnDestroy(): void {
-    this.removeAllListeners()
     this.pageWrapScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
   }
