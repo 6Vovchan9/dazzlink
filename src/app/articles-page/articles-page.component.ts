@@ -171,10 +171,8 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       //   )
 
       this.pSub = this.postsService.getAllProd(options)
-        // .pipe(
-        //   delay(2000)
-        // )
         .pipe(
+          // delay(2000),
           tap((resp: RespArticlesData) => this.lastPaginationPage = resp?.last ?? true),
           map((resp: RespArticlesData): Array<Post> => resp.content || [])
         )

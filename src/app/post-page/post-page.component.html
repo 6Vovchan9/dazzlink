@@ -160,7 +160,10 @@
     <p>Что-то пошло не так!<br>Уже исправляем</p>
 </ng-template>
 
-<app-loader *ngIf="isLoading()"></app-loader>
+<div *ngIf="isLoading()" class="loaderInPostPage">
+    <app-progress-spinner></app-progress-spinner>
+</div>
+<!-- <app-loader *ngIf="isLoading()"></app-loader> -->
 
 <ng-template #article0>
     <p class="articleParagraph">
