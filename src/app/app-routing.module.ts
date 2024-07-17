@@ -25,13 +25,13 @@ const routes: Routes = [
           )
       },
       { path: 'agreements', component: AgreementsPageComponent },
-      { path: 'articles', component: ArticlesPageComponent },
+      { path: 'media', component: ArticlesPageComponent },
       // { path: 'locations', component: LocationsPageComponent }, // Фильтрация и сортировка на бэке
       { path: 'locations', component: LocationsPageWithFrontFilterComponent, title: 'Локации' }, // Фильтрация и сортировка на фронте
       { path: 'team', component: TeamPageComponent },
       { path: 'help', component: HelpPageComponent },
       { path: 'legal-info', component: LegalInfoPageComponent },
-      { path: 'post/:id', component: PostPageComponent },
+      { path: 'media/:id', component: PostPageComponent },
       { path: 'place/:id', component: PlacePageComponent },
       // { path: '**', redirectTo: '/' }
     ]

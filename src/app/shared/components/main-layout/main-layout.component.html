@@ -148,7 +148,7 @@
                         <a class="menu__link" (click)="goToAnotherPage('/')" routerLink="/">Приложение</a>
                     </li>
                     <li class="menu__item" routerLinkActive="menu__item--active">
-                        <a class="menu__link" (click)="goToAnotherPage('/articles')" routerLink="/articles">Медиа</a>
+                        <a class="menu__link" (click)="goToAnotherPage('/media')" routerLink="/media">Медиа</a>
                     </li>
                     <li class="menu__item" routerLinkActive="menu__item--active" [routerLinkActiveOptions]="routerLinkActiveOptions">
                         <a class="menu__link" (click)="goToAnotherPage()" routerLink="/locations">Локации</a>
@@ -253,7 +253,7 @@
                             <a class="menu__link" routerLink="/">Приложение</a>
                         </li>
                         <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/articles">Медиа</a>
+                            <a class="menu__link" routerLink="/media">Медиа</a>
                         </li>
                         <li class="menu__item" routerLinkActive="menu__item--active" [routerLinkActiveOptions]="routerLinkActiveOptions">
                             <a class="menu__link" routerLink="/locations" [queryParams]="{ category: categoryParam }">Локации</a>

@@ -199,7 +199,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public goToAllArticles(): void {
-    this.router.navigate(['/articles']);
+    this.router.navigate(['/media']);
   }
 
   public onVoting(val: 'like' | 'dislike'): void {
