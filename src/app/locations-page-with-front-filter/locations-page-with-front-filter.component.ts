@@ -10,15 +10,31 @@ import {
   signal
 } from '@angular/core';
 import { Observable, Observer, Subject, Subscription, fromEvent, of, throwError } from 'rxjs';
-import { catchError, debounceTime, delay, filter, map, skip, skipWhile, takeUntil, tap } from 'rxjs/operators';
+import {
+  catchError,
+  throttleTime,
+  delay,
+  filter,
+  map,
+  skip,
+  skipWhile,
+  takeUntil,
+  tap
+} from 'rxjs/operators';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
+import {
+  CountryFilterItem,
+  ILocationCategories,
+  Place,
+  RespCityPlaceList,
+  RovraggeRespLocationsData
+} from '@app/shared/interfaces';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { LocationsService } from '@app/shared/services/locations.service';
-import { CountryFilterItem, ILocationCategories, Place, RespCityPlaceList, RovraggeRespLocationsData } from '@app/shared/interfaces';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastService } from '@app/shared/services/toast.service';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MOCK_CATEGORIES_FOR_SKELETON, MOCK_LOCATIONS, MOCK_LOCATIONS_FOR_SKELETON } from '@app/shared/mock/locations';
@@ -128,7 +144,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       const scrollTop = pageWrap.scrollTop;
       const scrollHeight = pageWrap.scrollHeight;
       const offsetHeight = pageWrap.offsetHeight;
+      const prevState = this.hideScrollProgress;
       this.hideScrollProgress = scrollTop < offsetHeight;
+      const futureState = this.hideScrollProgress;
       const radius = svgCircleElement.getAttribute('r');
 
       const circleLength = 2 * Math.PI * +radius;
@@ -136,6 +154,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       if (percentageProgress > 100) percentageProgress = 100;
       svgCircleElement.setAttribute('stroke-dasharray', String(circleLength));
       svgCircleElement.setAttribute('stroke-dashoffset', String(circleLength - circleLength * percentageProgress / 100));
+      if (!this.hideScrollProgress) { // для отображения прогрессбара внутри кнопки
+        this.cd.detectChanges();
+      } else if (prevState !== futureState) { // для того чтобы показать/скрыть кнопку
+        this.cd.detectChanges();
+      }
     }
   }
 
@@ -216,7 +239,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     } else {
       this.filteredLocations = this.allLocations.cityPlaceList;
     }
-  
+
     console.log(`Успешно отфильтровали!`);
     this.toastService.success('Отфильтровано');
     this.isSorting.set(false);
