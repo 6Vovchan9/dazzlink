@@ -115,7 +115,7 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
     "placeCount": 5,
     "cityPlaceList": [
         {
-            "cityCode": "Tashkent",
+            "cityCode": "TASHKENT",
             "cityTitle": "Ташкент",
             "placeList": [
                 {

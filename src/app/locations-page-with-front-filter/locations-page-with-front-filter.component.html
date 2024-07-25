@@ -5,7 +5,7 @@
         </aside>
         <aside class="sidebar">
 
-            @if (!showFilterControls || !filterFieldOptions?.length) {
+            @if (!showFilterControls() || !filterFieldOptions?.length) {
                 <!-- Инф о странице -->
                 <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
             } @else {
@@ -23,23 +23,23 @@
 
         </aside>
         <main class="pageContent">
-            <!-- <ng-container *ngIf="!isLoading; else loadingTemplate"> -->
+            <!-- <ng-container *ngIf="!isLoading(); else loadingTemplate"> -->
                 <!-- <ng-container *ngIf="allLocations; else errorInGetAllLocations"> -->
                     <!-- <ng-container *ngIf="allLocations.placeCount; else empty"> -->
                         
                         <!-- && allLocations чтобы не показывать gradient когда отображается баннер #errorInGetAllLocations -->
-                        <div class="pageContent__allAboutLocations" [class.pageContent__allAboutLocations--withGradientEffect]="isLoading && allLocations">
+                        <div class="pageContent__allAboutLocations" [class.pageContent__allAboutLocations--withGradientEffect]="isLoading() && allLocations">
 
-                            <div class="stickyBar" [class.stickyBar--withLoading]="isLoading">
+                            <div class="stickyBar" [class.stickyBar--withLoading]="isLoading()">
 
                                 <!-- Разновидность локаций -->
-                                <div class="categoryCodes" [class.categoryCodes--withSkeleton]="locationCategoriesWithSkeleton">
+                                <div class="categoryCodes" [class.categoryCodes--withSkeleton]="locationCategoriesWithSkeleton()">
                                     <ul class="categoryCodes__list">
                                         @for (item of categoryCodes.list; track $index) {
                                             <li class="categoryCodes__item">
                                                 <button type="button"
                                                     class="categoryCodes__btn"
-                                                    [disabled]="disabledLocationCategories"
+                                                    [disabled]="disabledLocationCategories()"
                                                     [class.categoryCodes__btn--active]="item.active"
                                                     (click)="onChangeCurCategory(item)"
                                                 >
@@ -53,15 +53,15 @@
 
                                 <!-- Фильтр бар -->
                                 <div *ngIf="allLocations?.placeCount" class="filterBar">
-                                    <div class="filterBar__length" [class.withSkeletonLoader]="isLoading">
+                                    <div class="filterBar__length" [class.withSkeletonLoader]="isLoading()">
                                         <!-- Доступно {{allLocations.placeCount}} мест -->
                                         {{getAmountOfAllSelectedCities()}}
                                         <div class="skeletonLoader skeletonLoader--shortHeight"></div>
                                     </div>
                                     <div class="filterBar__controls">
-                                        <!-- <button class="btn" (click)="isSorting = !isSorting">toggle</button> -->
+                                        <!-- <button class="btn" (click)="isSorting() = !isSorting()">toggle</button> -->
                                         @if (filterBarGroup) {
-                                            <div class="filterBar__item" [class.withSkeletonLoader]="isLoading">
+                                            <div class="filterBar__item" [class.withSkeletonLoader]="isLoading()">
                                                 <!-- Сортировка -->
                                                 <!-- (ngModelChange)="onChangeSort($event)" -->
                                                 <app-dropdown-field
@@ -76,7 +76,7 @@
                                                 <div class="skeletonLoader skeletonLoader--shortHeight"></div>
                                             </div>
                                         }
-                                        <div class="filterBar__item" [class.withSkeletonLoader]="isLoading">
+                                        <div class="filterBar__item" [class.withSkeletonLoader]="isLoading()">
                                             <!-- Фильтрация -->
                                             <button class="filterButton"
                                                 [disabled]="!filterFieldOptions?.length"
@@ -93,63 +93,67 @@
                                 </div>
                             </div>
 
-                            <!-- <ng-container *ngIf="!isLoading; else loadingTemplate"> -->
+                            <!-- <ng-container *ngIf="!isLoading(); else loadingTemplate"> -->
                             <ng-container *ngIf="allLocations; else errorInGetAllLocations">
                                 <ng-container *ngIf="allLocations.placeCount; else empty">
-                                    <!-- Список локаций -->
-                                    @for (block of filteredLocations; track block.cityCode; let lastIndex = $last) {
-                                        @if (block.placeList?.length) {
-                                            <div class="pageContent__locationsBlock" [class.pageContent__locationsBlock--last]="lastIndex">
-                                                <div class="pageContent__locationsCity">
-                                                    <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting || isLoading">{{block.cityTitle}}</span>
-                                                </div>
-                                                <ul class="pageContent__locationsList">
-                                                    @for (location of block.placeList; track location.id) {
-                                                        <li class="pageContent__locationsItem">
-                                                            <!-- <app-location-item [isLoading]="isSorting"
-                                                                (click)="goToLocationDesc(location.id)"
-                                                                [placeData]="location"
-                                                            ></app-location-item> -->
-                                                            <a [routerLink]="['/place', location.id || 'id']"
-                                                                target="_blank"
-                                                                class="pageContent__locationLink"
-                                                                [class.pageContent__locationLink--disabled]="isSorting || isLoading"
-                                                            >
-                                                                <app-location-item
-                                                                    [isLoading]="isSorting || isLoading"
+                                    @if (filteredLocations?.length) {
+                                        <!-- Список локаций -->
+                                        @for (block of filteredLocations; track block.cityCode; let lastIndex = $last) {
+                                            @if (block.placeList?.length) {
+                                                <div class="pageContent__locationsBlock" [class.pageContent__locationsBlock--last]="lastIndex">
+                                                    <div class="pageContent__locationsCity">
+                                                        <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting() || isLoading()">{{block.cityTitle}}</span>
+                                                    </div>
+                                                    <ul class="pageContent__locationsList">
+                                                        @for (location of block.placeList; track location.id) {
+                                                            <li class="pageContent__locationsItem">
+                                                                <!-- <app-location-item [isLoading]="isSorting()"
+                                                                    (click)="goToLocationDesc(location.id)"
                                                                     [placeData]="location"
+                                                                ></app-location-item> -->
+                                                                <a [routerLink]="['/place', location.id || 'id']"
+                                                                    target="_blank"
+                                                                    class="pageContent__locationLink"
+                                                                    [class.pageContent__locationLink--disabled]="isSorting() || isLoading()"
                                                                 >
-                                                                </app-location-item>
-                                                            </a>
-                                                        </li>
-                                                    }
-                                                </ul>
-                                            </div>
+                                                                    <app-location-item
+                                                                        [isLoading]="isSorting() || isLoading()"
+                                                                        [placeData]="location"
+                                                                    >
+                                                                    </app-location-item>
+                                                                </a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
                                         }
-                                    }
-                                    <!-- Кнопка наверх -->
-                                    <div class="pageContent__scrollToTopBtn scrollProgressWrapper">
-                                        <div class="scrollProgress" (click)="scrollToTop()" [class.scrollProgress--hidden]="hideScrollProgress">
-                                            <svg class="scrollProgress__svg" viewBox="-10 -10 300 300">
-                                                <circle #progressCircle class="scrollProgress__circle" r="124" cx="140" cy="140" fill="none" stroke="white" stroke-width="20"></circle>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <!-- Кнопка другие локации -->
-                                    <div *ngIf="!isLoading" class="pageContent__toAnotherLocations">
-                                        <button class="goToAnotherLocations" type="button" (click)="goToAnotherLocations()">
-                                            <div class="goToAnotherLocations__text">
-                                                Другие локации для выбранного города доступны в приложении
+                                        <!-- Кнопка наверх -->
+                                        <div class="pageContent__scrollToTopBtn scrollProgressWrapper">
+                                            <div class="scrollProgress" (click)="scrollToTop()" [class.scrollProgress--hidden]="hideScrollProgress">
+                                                <svg class="scrollProgress__svg" viewBox="-10 -10 300 300">
+                                                    <circle #progressCircle class="scrollProgress__circle" r="124" cx="140" cy="140" fill="none" stroke="white" stroke-width="20"></circle>
+                                                </svg>
                                             </div>
-                                            <div class="goToAnotherLocations__icon"></div>
-                                        </button>
-                                    </div>
+                                        </div>
+                                        <!-- Кнопка другие локации -->
+                                        <div *ngIf="!isLoading()" class="pageContent__toAnotherLocations">
+                                            <button class="goToAnotherLocations" type="button" (click)="goToAnotherLocations()">
+                                                <div class="goToAnotherLocations__text">
+                                                    Другие локации для выбранного города доступны в приложении
+                                                </div>
+                                                <div class="goToAnotherLocations__icon"></div>
+                                            </button>
+                                        </div>
+                                    } @else {
+                                        Упс :(<br>Какие-то проблемы с сортировкой.<br>Напишите нам об этом.
+                                    }
                                 </ng-container>
                             </ng-container>
                             <!-- </ng-container> -->
                         </div>
                         <!-- && allLocations чтобы не показывать gradient когда отображается баннер #errorInGetAllLocations -->
-                        <!-- <div *ngIf="isLoading && allLocations" class="gradientForLocationLoading"></div> -->
+                        <!-- <div *ngIf="isLoading() && allLocations" class="gradientForLocationLoading"></div> -->
                     <!-- </ng-container> -->
                 <!-- </ng-container> -->
             <!-- </ng-container> -->
@@ -160,13 +164,13 @@
     </div> -->
 </main>
 
-<div *ngIf="showFilterControls && filterFieldOptions?.length" class="filterOptionsForMobile">
+<div *ngIf="showFilterControls() && filterFieldOptions?.length" class="filterOptionsForMobile">
     <div class="filterOptionsForMobile__content" (click)="onCloseFilterOptionsInMobile()">
         <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
     </div>
 </div>
 
-<!-- <app-loader *ngIf="isLoading"></app-loader> -->
+<!-- <app-loader *ngIf="isLoading()"></app-loader> -->
 
 <ng-template #empty>
     <!-- <p>Список локаций пуст</p> -->
@@ -188,6 +192,7 @@
 <ng-template #aboutPageContent>
     <div class="aboutPage">
         <h1 class="moduleTitle">Локации</h1>
+        <!-- {{getSomething}} -->
         <div class="aboutPage__text">
             Подборка мест для романтических свиданий и ещё какие-то слова чтобы добить до трех строк и было красиво
         </div>
@@ -274,7 +279,7 @@
             Не смогли показать локации, попробуйте<br>
             перезагрузить страницу или зайдите позже
         </div>
-        <button class="errorMessage__btn" [disabled]="isLoading" [class.errorMessage__btn--isLoading]="isLoading" (click)="retryGetAllLocations()">
+        <button class="errorMessage__btn" [disabled]="isLoading()" [class.errorMessage__btn--isLoading]="isLoading()" (click)="retryGetAllLocations()">
             Перезагрузить
             <img class="errorMessage__btnSpinner" src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
         </button>

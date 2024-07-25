@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  Optional,
+  ViewChild,
+  signal
+} from '@angular/core';
 import { Observable, Observer, Subject, Subscription, fromEvent, of, throwError } from 'rxjs';
 import { catchError, debounceTime, delay, filter, map, skip, skipWhile, takeUntil, tap } from 'rxjs/operators';
 
@@ -16,7 +26,8 @@ import { MOCK_CATEGORIES_FOR_SKELETON, MOCK_LOCATIONS, MOCK_LOCATIONS_FOR_SKELET
 @Component({
   selector: 'app-locations-page-with-front-filter',
   templateUrl: './locations-page-with-front-filter.component.html',
-  styleUrls: ['./locations-page-with-front-filter.component.scss']
+  styleUrls: ['./locations-page-with-front-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewInit {
 
@@ -24,8 +35,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   public allLocations: RovraggeRespLocationsData = MOCK_LOCATIONS_FOR_SKELETON;
   public filteredLocations: Array<RespCityPlaceList>;
-  public isLoading = true;
-  public isSorting = false;
+  public isLoading = signal<boolean>(true);
+  public isSorting = signal(false);
   protected categoryCodes: { selected?: string, list: Array<ILocationCategories> } = {
     list: MOCK_CATEGORIES_FOR_SKELETON
   };
@@ -44,10 +55,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   private fakeDelayForSort: any;
   private aboutType: unknown;
   private readonly readonlyExample = 'Hello'; // с помощью такого модификатора свойство экземпляра класса помечается как “только для чтения”
-  public disabledLocationCategories = true;
-  public locationCategoriesWithSkeleton = true;
-  public showFilterControls = false;
-  public errorAfterSort = false;
+  public disabledLocationCategories = signal<boolean>(true);
+  public locationCategoriesWithSkeleton = signal(true);
+  public showFilterControls = signal(false);
   public errorInGetAllLocations = false;
   private lastSuccessSortVal: string = null;
   private locationsUpdating = false;
@@ -78,6 +88,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     private router: Router,
     private route: ActivatedRoute,
     public modalService: GlobalModalService,
+    private cd: ChangeDetectorRef
   ) {
     this.filteredLocations = this.allLocations.cityPlaceList;
   }
@@ -87,6 +98,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.getCategories();
   }
 
+  public get getSomething(): string {
+    console.log('getSomething');
+    return 'Контент';
+  }
+
   ngAfterViewInit(): void {
     // this.operatePageWrapScroll();
 
@@ -94,7 +110,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     fromEvent<Event>(pageWrap, 'scroll')
       .pipe(
         takeUntil(this.destroy$),
-        skipWhile(() => this.isLoading),
+        skipWhile(() => this.isLoading()),
         map(e => (e.target as HTMLDivElement))
       )
       .subscribe(
@@ -135,14 +151,15 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.selectedCitiesMap = {};
 
     this.filterBarGroup.get('sort').disable({ emitEvent: false }); // Блокируем сортировку
-    this.isSorting = true; // Включаем скелетон
+    this.isSorting.set(true); // Включаем скелетон
 
     setTimeout(() => {
       this.filteredLocations = this.allLocations.cityPlaceList;
       console.log(`Успешно отфильтровали!`);
       this.toastService.success('Отфильтровано');
-      this.isSorting = false;
+      this.isSorting.set(false);
       if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false });
+      this.cd.detectChanges(); // Не случалась перерисовка страницы на моках поэтому пришлось прибегнуть к detectChanges
     }, 1600);
 
   }
@@ -202,8 +219,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   
     console.log(`Успешно отфильтровали!`);
     this.toastService.success('Отфильтровано');
-    this.isSorting = false;
+    this.isSorting.set(false);
     if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false });
+    this.cd.detectChanges(); // Эта команда нужна для перерисовки страницы на моках, я не разобрался почему она не перерисовывалась (но это точно из-за пустого filteredLocations)
   }
 
   private sortLocationsOnFront(): void {
@@ -243,7 +261,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.toastService.success('Отсортировано');
     this.filterBarGroup.get('sort').enable({ emitEvent: false });
     this.setIconForSortDropdown(sortControlVal);
-    this.isSorting = false;
+    this.isSorting.set(false);
   }
 
   private getCategories(): void {
@@ -320,7 +338,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             }
 
             this.categoryCodes.list = value;
-            this.disabledLocationCategories = this.locationCategoriesWithSkeleton = false;
+            this.disabledLocationCategories.set(false);
+            this.locationCategoriesWithSkeleton.set(false);
             
             this.getAllOptionsAfterCategories();
           },
@@ -328,7 +347,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             let selectedMockCategory = this.categoryCodes.list[0];
             selectedMockCategory.active = true;
             this.categoryCodes.selected = selectedMockCategory.code;
-            this.locationCategoriesWithSkeleton = false;
+            this.locationCategoriesWithSkeleton.set(false);
             this.getAllOptionsAfterCategories();
           }
         });
@@ -361,15 +380,15 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             }
 
             this.categoryCodes.list = value;
-            this.disabledLocationCategories = this.locationCategoriesWithSkeleton = false;
-            
+            this.disabledLocationCategories.set(false);
+            this.locationCategoriesWithSkeleton.set(false);
             this.getAllOptionsAfterCategories();
           },
           () => {
             let selectedMockCategory = this.categoryCodes.list[0];
             selectedMockCategory.active = true;
             this.categoryCodes.selected = selectedMockCategory.code;
-            this.locationCategoriesWithSkeleton = false;
+            this.locationCategoriesWithSkeleton.set(false);
             this.getAllOptionsAfterCategories();
           }
         );
@@ -388,7 +407,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.amountAllSelectedCities = [];
     this.selectedCitiesMap = {};
     this.showScroll();
-    this.showFilterControls = false;
+    this.showFilterControls.set(false);
     this.filterFieldOptions = null;
 
     // Ниже 4 строки это для сброса всего связанного с FormControl-ом сортировки
@@ -405,15 +424,15 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private getSort(): void {
-    if (false) {
+    if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('sortGet пошел');
         setTimeout(() => {
-          // observer.next({})
-          // observer.next(null)
           if (this.curLang === 'UZ' || this.categoryCodes.selected === 'ART') {
             console.warn('sortGet error!');
             observer.error('Error');
+            // observer.next({})
+            // observer.next(null)
           } else {
             console.warn('sortGet ок!');
             observer.next(
@@ -448,6 +467,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             if (value?.length) {
               this.filterBarGroup.get('sort').enable({ emitEvent: false });
               this.sortFieldOptions.items = value;
+              this.cd.detectChanges();
             } else {
               console.log('Список сортировки пришел пустой');
             }
@@ -478,13 +498,12 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           (value: Array<{ details: string, value: string }>) => {
             if (value?.length) {
               this.filterBarGroup.get('sort').enable({ emitEvent: false });
-
               value.map(el => {
                 el.details = el.details.replace(/->/g,'→');
                 return el;
               });
-              
               this.sortFieldOptions.items = value;
+              this.cd.detectChanges();
             } else {
               console.log('Список сортировки пришел пустой');
             }
@@ -497,15 +516,15 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private getFilters(): void {
-    if (false) {
+    if (true) {
       const stream$ = new Observable((observer: Observer<Array<CountryFilterItem>>) => {
         console.warn('filterGet пошел');
         setTimeout(() => {
-          // observer.next({})
-          // observer.next(null)
-          if (this.curLang === 'KZ') {
+          if (this.curLang === 'KZ' || this.categoryCodes.selected === 'ART') {
             console.warn('filterGet error!');
             observer.error('Error');
+            // observer.next({})
+            // observer.next(null)
           } else {
             console.warn('filterGet ок!');
             observer.next([
@@ -623,6 +642,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         .subscribe(
           (value: Array<CountryFilterItem>) => {
             this.filterFieldOptions = value?.filter(el => el.cityList?.length);
+            this.cd.detectChanges();
           },
           () => {
             console.error('Ошибка при получении фильтрации');
@@ -634,6 +654,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         .subscribe(
           (value: Array<CountryFilterItem>) => {
             this.filterFieldOptions = value?.filter(el => el.cityList?.length);
+            this.cd.detectChanges();
           },
           () => {
             console.error('Ошибка при получении фильтрации');
@@ -661,17 +682,18 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     }
   }
 
+  // todo надо проверить что будет если придет пустой моковый список локаций
   private getAllLocations(): void {
-    this.isLoading = true;
-    if (false) {
+    this.isLoading.set(true);
+    if (true) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {
           if (this.errorInGetAllLocations) {
             console.warn('locationsGet что-то пошло не так :(');
             // observer.next({});
-            observer.next(null);
-            // observer.error('Error');
+            // observer.next(null);
+            observer.error('Error');
             // observer.next({
             //   placeCount: 0,
             //   cityPlaceList: []
@@ -689,11 +711,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           value => {
             this.allLocations = value;
             this.filteredLocations = value?.cityPlaceList;
-            this.isLoading = false;
+            this.isLoading.set(false);
           },
           () => {
             this.allLocations = this.filteredLocations = null;
-            this.isLoading = false;
+            this.isLoading.set(false);
           }
         );
 
@@ -707,11 +729,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             // console.log(locationsForYmap);
             this.allLocations = value;
             this.filteredLocations = value?.cityPlaceList;
-            this.isLoading = false;
+            this.isLoading.set(false);
           },
           error: () => {
             this.allLocations = this.filteredLocations = null;
-            this.isLoading = false;
+            this.isLoading.set(false);
           }
         });
     }
@@ -732,7 +754,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             this.lastSuccessSortVal = sortVal;
             this.filterBarGroup.get('sort').enable({ emitEvent: false });
             this.setIconForSortDropdown(sortVal);
-            this.isSorting = false;
+            this.isSorting.set(false);
           },
           () => {
             this.locationsUpdating = false;
@@ -742,7 +764,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             this.filterBarGroup.get('sort').setValue(this.lastSuccessSortVal, { emitEvent: false });
             // this.filterBarGroup.get('sort').reset(null, { emitEvent: false }); // или тут можно будет установить последнее успешное значение сортировки
             this.setIconForSortDropdown(this.lastSuccessSortVal);
-            this.isSorting = false;
+            this.isSorting.set(false);
             // Нужно будет как ниб показать сообщ о том что не удалось отсортировать локации
           }
         );
@@ -761,7 +783,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             console.log(`Успешно отфильтровали!`);
             this.toastService.success('Отфильтровано');
             this.allLocations = value;
-            this.isSorting = false;
+            this.isSorting.set(false);
             if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false }); // Эти 2 подстраховки на случай когда начали соритровать и сразу принялись фильтровать
             if (this.filterBarGroup.get('sort').value) this.setIconForSortDropdown(this.filterBarGroup.get('sort').value);
           },
@@ -769,7 +791,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             this.locationsUpdating = false;
             console.error('Ошибка при фильтрации, сбрасываем фильтрацию/сортировку и запрашиваем чистый список локаций');
             this.toastService.warning('Ошибка фильтрации, попробуйте еще раз');
-            this.isSorting = false;
+            this.isSorting.set(false);
             this.afterFilterAndSortError();
             // Нужно будет как ниб показать сообщ о том что не удалось отфильтровать локации
           }
@@ -786,7 +808,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       delete country.selectedСities;
     });
     this.amountAllSelectedCities = [];
-    this.showFilterControls = false;
+    this.showFilterControls.set(false);
 
     // сбрасываем сортировку:
     if (this.sortFieldOptions.items.length) this.filterBarGroup.get('sort').enable({ emitEvent: false });
@@ -810,7 +832,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   public onChangeSort(sortValue: string): void {
-    this.isSorting = true;
+    this.isSorting.set(true);
     this.filterBarGroup.get('sort').disable({ emitEvent: false });
     this.fakeDelayForSort = setTimeout(() => this.sortLocationsOnFront(), 1600);
   }
@@ -827,7 +849,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         });
         this.amountAllSelectedCities = [];
       }
-      this.showFilterControls = false;
+      this.showFilterControls.set(false);
     }
   }
 
@@ -862,13 +884,13 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     console.log('After:',  arrAfter);
 
     this.showScroll();
-    this.showFilterControls = false;
+    this.showFilterControls.set(false);
 
     if (arrBefore.length === arrAfter.length && this.isArraysEqual(arrBefore, arrAfter)) {
       console.log('He фильтруем города, выбор не изменился!');
     } else {
       console.log('Делаем фильтрацию городов...');
-      this.isSorting = true;
+      this.isSorting.set(true);
       this.filterBarGroup.get('sort').disable({ emitEvent: false });
       this.fakeDelayForFilter = setTimeout(() => this.filterLocationsOnFront(), 1600);
     }
@@ -886,7 +908,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   public onShowHideFilterControls() {
-    this.showFilterControls = !this.showFilterControls;
+    this.showFilterControls.set(!this.showFilterControls());
     const isOpen = this.showFilterControls;
     if (isOpen) {
       this.hideScroll(); // для компа это не имеет значения а для телефона это важно (подробности см. в notes.md)
@@ -925,7 +947,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       this.filterBarGroup.get('sort').disable({ emitEvent: false });
       if (this.locationsUpdating) { // Если фильтрация в данный момент идет тогда запускаем новую без задержки
         console.log('Делаем фильтрацию...');
-        this.isSorting = true;
+        this.isSorting.set(true);
         // this.filterBarGroup.get('sort').disable({ emitEvent: false });
         this.fakeDelayForFilter = setTimeout(() => this.filterLocationsOnFront(), 1600);
       } else {
@@ -936,7 +958,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         this.debounceTimeForFilter = setTimeout(() => {
           this.debounceTimeForFilter = null;
           console.log('Делаем фильтрацию...');
-          this.isSorting = true;
+          this.isSorting.set(true);
           this.filterBarGroup.get('sort').disable({ emitEvent: false }); // Если это убрать то контрол раздизейблится если запустить сортировку и быстро запустить фильтрацию
           this.fakeDelayForFilter = setTimeout(() => this.filterLocationsOnFront(), 1600);
         }, 1500);
@@ -986,7 +1008,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   public goToLocationDesc(id: string): void {
-    if (this.isSorting) return;
+    if (this.isSorting()) return;
 
     console.log('Идем к подробностям выбранной локации')
     this.router.navigate(['/place', id]).then(
