@@ -447,7 +447,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private getSort(): void {
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('sortGet пошел');
         setTimeout(() => {
@@ -539,7 +539,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private getFilters(): void {
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<Array<CountryFilterItem>>) => {
         console.warn('filterGet пошел');
         setTimeout(() => {
@@ -708,7 +708,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   // todo надо проверить что будет если придет пустой моковый список локаций
   private getAllLocations(): void {
     this.isLoading.set(true);
-    if (true) {
+    if (false) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {
