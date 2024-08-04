@@ -5,7 +5,7 @@ export const environment: Environment = {
   apiKey: 'AIzaSyCgmx_4eLW1JXVz-8qB8KMdbavDpYtKGSA',
   fbDbUrl: 'https://dazzlink-e643b-default-rtdb.firebaseio.com',
   rovraggeUrl: 'https://rovragge.ru/dating/api/article-content',
-  prodArticleUrl: 'https://stage-api.dazzlink.asia/article-content',
+  articleUrl: 'https://api.dazzlink.asia/article-content',
   rovraggePlacesUrl: 'https://rovragge.ru/dating/api/meeting-places',
   prodPlacesUrl: 'https://stage-api.dazzlink.asia/meeting-places'
 };

@@ -3,7 +3,7 @@ export interface Environment {
     production: boolean;
     fbDbUrl: string;
     rovraggeUrl?: string;
-    prodArticleUrl?: string;
     rovraggePlacesUrl?: string;
     prodPlacesUrl?: string;
+    articleUrl?: string;
 }
