@@ -10,5 +10,11 @@
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
+    },
+    "/meeting-places": {
+        "target": "https://testapi.dazzlink.asia/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
     }
 }

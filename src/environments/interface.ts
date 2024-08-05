@@ -4,6 +4,6 @@ export interface Environment {
     fbDbUrl: string;
     rovraggeUrl?: string;
     rovraggePlacesUrl?: string;
-    prodPlacesUrl?: string;
+    placeUrl?: string;
     articleUrl?: string;
 }

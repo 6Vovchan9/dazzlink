@@ -43,7 +43,7 @@ export class LocationsService {
 
         // 'x-source-channel': dazzlink-android'
         return this.http.get(
-            `${environment.prodPlacesUrl}/place`,
+            `${environment.placeUrl}/place`,
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
@@ -60,7 +60,7 @@ export class LocationsService {
     }
 
     public getById(id: string): Observable<any> {
-        return this.http.get<Post>(`${environment.prodPlacesUrl}/place/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
+        return this.http.get<Post>(`${environment.placeUrl}/place/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
             .pipe(
                 map((resp: { [key: string]: any }) => resp.data)
             )
@@ -68,7 +68,7 @@ export class LocationsService {
 
     public getCategoryOptions(): Observable<Array<ILocationCategories>> {
         return this.http.get(
-            `${environment.prodPlacesUrl}/place/category`,
+            `${environment.placeUrl}/place/category`,
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
@@ -85,7 +85,7 @@ export class LocationsService {
         const customQueryParams = { categoryCode };
 
         return this.http.get(
-            `${environment.prodPlacesUrl}/place/filter/city`,
+            `${environment.placeUrl}/place/filter/city`,
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
@@ -102,7 +102,7 @@ export class LocationsService {
         const customQueryParams = { categoryCode };
 
         return this.http.get(
-            `${environment.prodPlacesUrl}/place/sort`,
+            `${environment.placeUrl}/place/sort`,
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
@@ -115,7 +115,7 @@ export class LocationsService {
     }
 
     public setPlaceVotingProd(id: string, choice: 'like' | 'dislike'): Observable<IVotingService> {
-        return this.http.patch<RovraggeRespWrapper>(`${environment.prodPlacesUrl}/place/${id}/${choice}`, null)
+        return this.http.patch<RovraggeRespWrapper>(`${environment.placeUrl}/place/${id}/${choice}`, null)
             .pipe(
                 map((resp: { [key: string]: any }) => resp.data)
             )
