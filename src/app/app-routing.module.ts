@@ -31,7 +31,7 @@ const routes: Routes = [
       { path: 'team', component: TeamPageComponent },
       { path: 'help', component: HelpPageComponent },
       { path: 'legal-info', component: LegalInfoPageComponent },
-      { path: 'media/:id', component: PostPageComponent },
+      { path: 'media/:title', component: PostPageComponent },
       { path: 'place/:id', component: PlacePageComponent },
       // { path: '**', redirectTo: '/' }
     ]

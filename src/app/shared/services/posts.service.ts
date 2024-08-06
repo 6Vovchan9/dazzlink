@@ -45,7 +45,7 @@ export class PostsService {
             )
     }
 
-    public getByIdProd(id: string): Observable<Post> {
+    public getPost(id: string): Observable<Post> {
         return this.http.get<Post>(`${environment.articleUrl}/publication/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
             .pipe(
                 map((resp: { [key: string]: any }) => resp.data)

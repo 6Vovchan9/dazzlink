@@ -88,7 +88,7 @@
                             @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
                                 @if (lastIndex) {
                                     <li #lastPostItem class="pageContent__itemOfArticle lastPostItem" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
-                                        <a [routerLink]="['/media', post.id]" class="pageContent__articleLink">
+                                        <a [routerLink]="['/media', post.pageName]" class="pageContent__articleLink">
                                             <!-- {{index + 1}} -->
                                             <app-post [postData]="post"></app-post>
                                         </a>
@@ -96,7 +96,7 @@
                                 } @else {
                                     <li class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
                                         <!-- <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post> -->
-                                        <a [routerLink]="['/media', post.id]" target="_self" class="pageContent__articleLink">
+                                        <a [routerLink]="['/media', post.pageName]" target="_self" class="pageContent__articleLink">
                                             <!-- {{index + 1}} -->
                                             <app-post [postData]="post"></app-post>
                                         </a>

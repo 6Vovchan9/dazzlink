@@ -19,7 +19,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public isLoading = signal<boolean>(true);
   public postData: Post;
   public articleEvaluation: 'like' | 'dislike';
-  private articleId: string;
+  private pageName: string;
   private lSub: Subscription;
   private eSub: Subscription;
   private vSub: Subscription;
@@ -51,7 +51,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
         if (!this.isLoading()) {
           // console.log(lang);
           this.isLoading.set(true);
-          this.postsService.getById(this.articleId)
+          this.postsService.getById(this.pageName)
             .subscribe(
               (post: Post) => {
                 this.postData = post;
@@ -66,10 +66,10 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(
         switchMap(
           (params: Params) => {
-            this.articleId = params['id'];
-            // return this.postsService.getById(params['id']);
-            // return this.postsService.getByIdRovragge(params['id']);
-            return this.postsService.getByIdProd(params['id']);
+            this.pageName = params['title'];
+            // return this.postsService.getById(params['title']);
+            // return this.postsService.getByIdRovragge(params['title']);
+            return this.postsService.getPost(params['title']);
           }
         ),
         catchError(err => {
@@ -107,8 +107,8 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(
         (post: Post) => {
           if (post) {
-            this.getEvaluation();
             this.postData = post;
+            this.getEvaluation();
             this.isLoading.set(false);
           } else {
             this.goToAllArticles();
@@ -175,18 +175,18 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private getEvaluation() {
     const articlesRating = JSON.parse(localStorage.getItem('articlesEvaluation')) || [];
     // if (articlesRating?.length) {
-      const aboutThisArticle = articlesRating.find(about => about.articleId === this.articleId);
+      const aboutThisArticle = articlesRating.find(about => about.articleId === this.postData.id);
       if (aboutThisArticle) {
-        console.log(`Статья "${this.articleId}" уже была просмотрена Вами ранее!`);
+        console.log(`Статья "${this.postData.id}" уже была просмотрена Вами ранее!`);
         this.articleEvaluation = aboutThisArticle.choice;
       } else {
-        console.log(`Фиксируем просмотр статьи "${this.articleId}"!`);
+        console.log(`Фиксируем просмотр статьи "${this.postData.id}"...`);
         // this.eSub = this.postsService.setArticleEvaluation(this.articleId)
-        this.eSub = this.postsService.setArticleEvaluationProd(this.articleId)
+        this.eSub = this.postsService.setArticleEvaluationProd(this.postData.id)
           .subscribe(
             () => {
               this.setArticleEvaluationToSS();
-              console.log(`Зафиксировали просмотр статьи "${this.articleId}"!`);
+              console.log(`Зафиксировали просмотр статьи "${this.postData.id}"`);
             }
           );
         // setTimeout(() => {
@@ -209,10 +209,10 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // }
 
     if (!this.articleEvaluation && !this.votingIsLoading()) {
-      console.log(`Фиксируем ваш ${val}`);
+      console.log(`Фиксируем Ваш ${val}...`);
       this.votingIsLoading.set(true);
       // this.vSub = this.postsService.setArticleVoting(this.articleId, val)
-      this.vSub = this.postsService.setArticleVotingProd(this.articleId, val)
+      this.vSub = this.postsService.setArticleVotingProd(this.postData.id, val)
         // .pipe(
         //   delay(5000)
         // )
@@ -223,7 +223,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.votingIsLoading.set(false); // несмотря на то что этот сигнал делает detectChanges при OnPush стратегии, новое значение у articleEvaluation ниже также учитывается при перерендеринге страницы
             this.articleEvaluation = val;
             this.setArticleEvaluationToSSWithChoice(val);
-            console.log(`Зафиксировали ваш выбор!`, this.articleEvaluation);
+            console.log(`Зафиксировали Ваш ${this.articleEvaluation}`);
           },
           () => {
             this.votingIsLoading.set(false);
@@ -241,13 +241,13 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private setArticleEvaluationToSSWithChoice(choice?: 'like' | 'dislike'): void {
     const curVal = JSON.parse(localStorage.getItem('articlesEvaluation')) || [];
 
-    const aboutThisArticle = curVal.find(about => about.articleId === this.articleId);
+    const aboutThisArticle = curVal.find(about => about.articleId === this.postData.id);
     // Возможно id-шник статьи уже есть в LS потому что она была ранее просмотрена, теперь для этой записи надо установить признак like/dislike
     if (aboutThisArticle) {
       aboutThisArticle.choice = choice;
       localStorage.setItem('articlesEvaluation', JSON.stringify(curVal));
     } else {
-      const val: { articleId: string, choice?: string } = { articleId: this.articleId };
+      const val: { articleId: string, choice?: string } = { articleId: this.postData.id };
       if (choice) {
         val.choice = choice;
       }
@@ -258,7 +258,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private setArticleEvaluationToSS(): void {
     const curVal = JSON.parse(localStorage.getItem('articlesEvaluation')) || [];
-    const val: { articleId: string } = { articleId: this.articleId };
+    const val: { articleId: string } = { articleId: this.postData.id };
     curVal.push(val);
     localStorage.setItem('articlesEvaluation', JSON.stringify(curVal));
   }
