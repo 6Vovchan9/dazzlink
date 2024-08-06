@@ -35,7 +35,7 @@
                                 <!-- Разновидность локаций -->
                                 <div class="categoryCodes" [class.categoryCodes--withSkeleton]="locationCategoriesWithSkeleton()">
                                     <ul class="categoryCodes__list">
-                                        @for (item of categoryCodes.list; track $index) {
+                                        @for (item of categoryCodes.list; let index = $index; track index) {
                                             <li class="categoryCodes__item">
                                                 <button type="button"
                                                     class="categoryCodes__btn"
@@ -43,7 +43,7 @@
                                                     [class.categoryCodes__btn--active]="item.active"
                                                     (click)="onChangeCurCategory(item)"
                                                 >
-                                                    {{item.title || 'Категория'}}
+                                                    {{item.title || item.code || 'Категория' + ' ' + (index + 1)}}
                                                 </button>
                                             </li>
                                         }
