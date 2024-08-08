@@ -45,8 +45,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- <button (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles" class="implementError">
-                    implementError (now: {{implementErrorInGetAllArticles}})
+                <!-- <button style="margin-top: 20px;" (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles" class="implementError">
+                    error: {{implementErrorInGetAllArticles}}
                 </button> -->
             </div>
         </aside>
@@ -66,8 +66,8 @@
                 </ng-template>
             </ng-container> -->
 
-            <!-- Новый вариант -->
-            <ng-container *ngIf="!isLoading(); else loadingTemplate">
+            <!-- Старый вариант -->
+            <!-- <ng-container *ngIf="!isLoading(); else loadingTemplate">
                 <ng-container *ngIf="errorAfterGetAllArticles(); else successGetAllArticles">
                     <div class="errorMessage">
                         <div class="errorMessage__icon"></div>
@@ -82,12 +82,65 @@
                     </div>
                 </ng-container>
                 <ng-template #successGetAllArticles>
-
                     @if (articlesList()?.length) {
                         <ul class="pageContent__articles">
                             @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
                                 @if (lastIndex) {
                                     <li #lastPostItem class="pageContent__itemOfArticle lastPostItem" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
+                                        <a [routerLink]="['/media', post.pageName]" class="pageContent__articleLink">
+                                            <app-post [postData]="post"></app-post>
+                                        </a>
+                                    </li>
+                                } @else {
+                                    <li class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
+                                        <a [routerLink]="['/media', post.pageName]" target="_self" class="pageContent__articleLink">
+                                            <app-post [postData]="post"></app-post>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                        @if (showLoadMoreSpinner()) {
+                            <div class="pageContent__loadMore">
+                                <app-progress-spinner></app-progress-spinner>
+                            </div>
+                        }
+                    } @else {
+                        <ng-container *ngTemplateOutlet="empty"></ng-container> 
+                    }
+                </ng-template>
+            </ng-container> -->
+
+            <!-- Новый вариант -->
+            @if (errorAfterGetAllArticles()) {
+                <div class="errorMessage">
+                    <div class="errorMessage__icon"></div>
+                    <div class="errorMessage__title">
+                        Есть проблема
+                    </div>
+                    <div class="errorMessage__text">
+                        Не смогли показать статьи, попробуйте<br>
+                        перезагрузить страницу или зайдите позже
+                    </div>
+                    <button class="errorMessage__btn"
+                        (click)="reloadArticles()"
+                        [disabled]="isLoading()"
+                        [class.errorMessage__btn--isLoading]="isLoading()"
+                    >
+                        Перезагрузить
+                        <img class="errorMessage__btnSpinner" src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
+                    </button>
+                </div>
+            } @else {
+                @if (isLoading()) {
+                    <ng-container *ngTemplateOutlet="loadingTemplate"></ng-container> 
+                } @else {
+                    @if (articlesList()?.length) {
+                        <ul class="pageContent__articles">
+                            @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
+                                @if (lastIndex) {
+                                    <li #lastPostItem class="pageContent__itemOfArticle lastPostItem"
+                                        [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
                                         <a [routerLink]="['/media', post.pageName]" class="pageContent__articleLink">
                                             <!-- {{index + 1}} -->
                                             <app-post [postData]="post"></app-post>
@@ -118,11 +171,10 @@
                             </div>
                         </div> -->
                     } @else {
-                        <ng-container *ngTemplateOutlet="empty"></ng-container> 
+                        <ng-container *ngTemplateOutlet="empty"></ng-container>
                     }
-
-                </ng-template>
-            </ng-container>
+                }
+            }
 
             <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
                 <ng-container *ngIf="postList.length; else empty">

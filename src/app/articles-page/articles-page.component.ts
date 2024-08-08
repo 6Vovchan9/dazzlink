@@ -146,6 +146,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.articlesList.update(prevArticles => [...prevArticles, ...value]);
 
             this.showLoadMoreSpinner.set(false);
+            this.errorAfterGetAllArticles.set(false);
             this.isLoading.set(false);
           },
           error: err => {
@@ -188,6 +189,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
             // console.log('2');
             this.showLoadMoreSpinner.set(false);
+            this.errorAfterGetAllArticles.set(false); // Это нужно когда была ошибка и потом помог перезапрос статей
             this.isLoading.set(false);
             // console.log('3');
             // this.cd.detectChanges();
@@ -204,7 +206,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private reloadArticles(): void {
-    this.errorAfterGetAllArticles.set(false);
+    // this.errorAfterGetAllArticles.set(false);
     this.isLoading.set(true);
     this.getAllArticles();
   }
