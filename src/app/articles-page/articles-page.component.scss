@@ -104,6 +104,10 @@
         //         margin-right: 24px;
         //     }
         // }
+
+        &--withGradientEffect {
+            mask-image: linear-gradient(0deg, transparent, #000 400px);
+        }
     }
 
     .pageContent__loadMore {

@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 import { PagesService } from '@app/shared/services/pages.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
-import { MOCK_ARTICLES } from '@app/shared/mock/articles';
+import { MOCK_ARTICLES, MOCK_ARTICLES_FOR_SKELETON } from '@app/shared/mock/articles';
 import { PersistanceService } from '@app/admin/shared/services/persistance.service';
 
 @Component({
@@ -36,6 +36,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public posts$: Observable<Post[]>;
   public articlesList = signal<Post[]>([]);
+  public mockArticlesList = MOCK_ARTICLES_FOR_SKELETON;
   public lastPaginationPage = true;
   public searchStr = '';
   public isLoading = signal<boolean>(true);

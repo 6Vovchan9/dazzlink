@@ -158,5 +158,16 @@
     </div>
 </ng-template>
 <ng-template #loadingTemplate>
-    <p>Идет загрузка статей...</p>
+    <ul class="pageContent__articles pageContent__articles--withGradientEffect">
+        @for (mockPost of mockArticlesList; track mockPost.id) {
+            <li class="pageContent__itemOfArticle">
+                <a class="pageContent__articleLink">
+                    <app-post
+                        [postData]="mockPost"
+                        [isLoading]="true"
+                    ></app-post>
+                </a>
+            </li>
+        }
+    </ul>
 </ng-template>

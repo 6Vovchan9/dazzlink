@@ -1,7 +1,7 @@
 <!-- <p>Статья "{{postData.id}}" на тему "{{postData.title}}"" works!</p>
 <img [src]="postData.imageUrl" alt=""> -->
 
-<div class="post">
+<div class="post" [class.post--withSkeleton]="isLoading">
     <div class="post__img">
         <ng-container *ngIf="postData.imageUrl; else defaultPostImg">
             <img [src]="postData.imageUrl" loading="lazy" alt="Картинка статьи">
@@ -14,6 +14,7 @@
     <div class="post__title">
         {{postData.title}}
     </div>
+    <div class="skeletonLoader"></div>
 </div>
 
 <ng-template #defaultPostImg>

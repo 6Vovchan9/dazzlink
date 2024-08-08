@@ -10,6 +10,7 @@ import { Post } from '../../interfaces';
 export class PostComponent implements OnInit {
 
   @Input() postData: Post;
+  @Input({ required: true }) isLoading = false;
 
   constructor() { }
 
