@@ -156,12 +156,31 @@
                                     </li>
                                 }
                             }
+                            <!-- Это карточки статей покрытые скелетоном выступающие в роли спиннера когда запрашиваем очередную пачку статей (1 для мобилы и 2 для desktop) -->
+                            @if (showLoadMoreSpinner()) {
+                                <li class="pageContent__itemOfArticle">
+                                    <a class="pageContent__articleLink">
+                                        <app-post
+                                            [postData]="mockArticlesList[0]"
+                                            [isLoading]="true"
+                                        ></app-post>
+                                    </a>
+                                </li>
+                                <li class="pageContent__itemOfArticle hideInMobile">
+                                    <a class="pageContent__articleLink">
+                                        <app-post
+                                            [postData]="mockArticlesList[0]"
+                                            [isLoading]="true"
+                                        ></app-post>
+                                    </a>
+                                </li>
+                            }
                         </ul>
-                        @if (showLoadMoreSpinner()) {
+                        <!-- @if (showLoadMoreSpinner()) {
                             <div class="pageContent__loadMore">
                                 <app-progress-spinner></app-progress-spinner>
                             </div>
-                        }
+                        } -->
                         <!-- Кнопка наверх -->
                         <!-- <div class="pageContent__scrollToTopBtn scrollProgressWrapper">
                             <div class="scrollProgress"

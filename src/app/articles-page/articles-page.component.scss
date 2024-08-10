@@ -134,6 +134,16 @@
             margin-top: 48px;
         }
     }
+
+    @media #{$mobile} {
+        .pageContent__articles {
+            .pageContent__itemOfArticle {
+                &.hideInMobile {
+                    display: none;
+                }
+            }
+        }
+    }
 }
 
 .pageContent__scrollToTopBtn {
