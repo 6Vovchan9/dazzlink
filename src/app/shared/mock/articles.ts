@@ -37,7 +37,7 @@ export const MOCK_ARTICLES: RespArticlesData = {
         {
             "id": "6d65891f-624f-48cb-9a1d-7059ad3bc9ff",
             "title": "Статья 1",
-            "imageUrl": "https://static.dazzlink.asia/article/new/article_1.jpg",
+            "imageUrl": "https://static.dazzlink.asia/article/new/aricle_1.jpg",
             "viewCount": 22,
             "published": new Date('2024-02-12T11:08:04.31')
         },
