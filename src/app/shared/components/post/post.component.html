@@ -2,11 +2,23 @@
 <img [src]="postData.imageUrl" alt=""> -->
 
 <div class="post" [class.post--withSkeleton]="isLoading">
-    <div class="post__img">
-        <ng-container *ngIf="postData.imageUrl; else defaultPostImg">
-            <img [src]="postData.imageUrl" loading="lazy" alt="Картинка статьи">
+    <div class="post__img" [ngClass]="{
+        'post__img--empty': !postData.imageUrl,
+        'post__img--load':   postData.imageUrl && state() === imageStateTypes.Load,
+        'post__img--error':  postData.imageUrl && state() === imageStateTypes.Error
+    }">
+        <!-- <ng-container *ngIf="postData.imageUrl; else defaultPostImg"> -->
+        <ng-container *ngIf="postData.imageUrl">
+            <img
+                [src]="postData.imageUrl"
+                loading="lazy"
+                alt="Картинка статьи"
+                (load)="onImageLoad()"
+                (error)="onImageError()"
+            >
         </ng-container>
     </div>
+    <!-- {{!postData.imageUrl ? 'empty' : postData.imageUrl && state() === imageStateTypes.Load ? 'load' : postData.imageUrl && state() === imageStateTypes.Error ? 'error' : ''}} -->
     <div class="post__details postDetails">
         <div class="postDetails__info">{{postData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}</div>
         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} {{buildViewCount(postData.viewCount)}}</div>
@@ -18,5 +30,6 @@
 </div>
 
 <ng-template #defaultPostImg>
+    <!-- <div style="margin: 20px;">Картинка отсутствует :(</div> -->
     <img src="assets/images/postImg.png" alt="Картинка статьи">
 </ng-template>

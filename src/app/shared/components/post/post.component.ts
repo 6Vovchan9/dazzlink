@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Post } from '../../interfaces';
+import { ChangeDetectionStrategy, Component, Input, OnInit, signal } from '@angular/core';
+import { Post } from '@app/shared/interfaces';
+import { ImageStateTypes } from '@app/shared/types/imgState.interface';
 
 @Component({
   selector: 'app-post',
@@ -11,8 +12,21 @@ export class PostComponent implements OnInit {
 
   @Input() postData: Post;
   @Input({ required: true }) isLoading = false;
+  public state = signal<ImageStateTypes>(ImageStateTypes.Load);
 
   constructor() { }
+
+  get imageStateTypes() {
+    return ImageStateTypes;
+  }
+
+  public onImageLoad() {
+    this.state.set(this.imageStateTypes.Success);
+  }
+
+  public onImageError() {
+    this.state.set(this.imageStateTypes.Error);
+  }
 
   ngOnInit(): void { }
 

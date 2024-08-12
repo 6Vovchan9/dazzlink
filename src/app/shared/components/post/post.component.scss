@@ -15,6 +15,13 @@
         // max-width: 360px;
         overflow: hidden;
         aspect-ratio: .78;
+        
+        filter: blur(0);
+        transition: filter 400ms cubic-bezier(0.47, 0, 0.745, 0.715);
+
+        &--load {
+            filter: blur(6px);
+        }
 
         img {
             height: 100%;
