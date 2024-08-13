@@ -39,7 +39,7 @@
             675px
         ); // Можно было и без высоты, но высота блока с видео при рендеринге немного скачет, а при заданной высоте такого не происходит
         object-position: center center;
-        object-fit: cover;
+        // object-fit: cover;
     }
     .mainVideo__customPoster {
         opacity: 1;

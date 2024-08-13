@@ -155,7 +155,6 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     if (video) {
       // video.muted = true;
       const videoPromise = video.play();
-      console.log(videoPromise);
       if (videoPromise) {
         videoPromise
           .then(() => {
