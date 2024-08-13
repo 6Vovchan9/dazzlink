@@ -22,6 +22,7 @@ import { Router } from '@angular/router';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { GoogleTranslationService } from '@app/shared/services/google-translation.service';
 import { AccoTriggerComponent } from '@app/shared/components/acco-trigger/acco-trigger.component';
+import { NgClass } from '@angular/common';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -34,7 +35,7 @@ type IOpportunityMenu = {
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
   standalone: true,
-  imports: [AccoTriggerComponent, FormsModule],
+  imports: [AccoTriggerComponent, FormsModule, NgClass],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -87,6 +88,17 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     },
   };
 
+  public posterImgLoad = signal<boolean>(false);
+  public videoLoad = signal<boolean>(false);
+  public showVideoPoster = signal<boolean>(true); // если бы не сигнал то при OnPush стратегии пришлось бы запускать detectChanges при изм значения этого свойства
+  private posterChangeEffect = effect(() => {
+    if (this.showVideoPoster()) {
+      console.log("Показываем постер");
+    } else {
+      console.log("Скрываем постер");
+    }
+  });
+
   constructor(
     private pagesService: PagesService,
     @Optional() public mobileDetectService: MobileDetectService,
@@ -115,7 +127,51 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.aboutProgressiveImage();
   }
 
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {
+    this.ensureVideoPlays();
+  }
+
+  private onVideoEndedCallback = (): void => {
+    // console.log('video ended!');
+    this.showVideoPoster.set(true);
+  };
+
+  private onVideoLoadCallback = (): void => {
+    // console.log('loadedmetadata');
+    this.videoLoad.set(true);
+  };
+
+  private ensureVideoPlays(): void {
+    const video = this.advertisingVideo?.nativeElement;
+    if (video) {
+      video.addEventListener("ended", this.onVideoEndedCallback);
+      video.addEventListener("loadedmetadata", this.onVideoLoadCallback);
+    }
+  }
+
+  public onVideoPlay(): void {
+    const video = this.advertisingVideo?.nativeElement;
+
+    if (video) {
+      // video.muted = true;
+      const videoPromise = video.play();
+      console.log(videoPromise);
+      if (videoPromise) {
+        videoPromise
+          .then(() => {
+            console.log("Видео запущено :)");
+            this.showVideoPoster.set(false);
+          })
+          .catch(() => {
+            console.log("Ошибка при воспроизв. видео :(");
+          });
+      }
+    }
+  }
+
+  public onloadCustomPoster(): void {
+    this.posterImgLoad.set(true);
+  }
 
   private aboutProgressiveImage(): void {
     if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) {
@@ -234,9 +290,19 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   //   return 'приложение';
   // }
 
+  private removeAllListeners(): void {
+    const video = this.advertisingVideo?.nativeElement;
+    if (video) {
+      // console.log('Удаляем слушатель окончания видео');
+      video.removeEventListener("ended", this.onVideoEndedCallback);
+      video.removeEventListener("loadedmetadata", this.onVideoLoadCallback);
+    }
+  }
+
   public ngOnDestroy(): void {
     this.pageWrapScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
+    this.removeAllListeners();
   }
 
 }

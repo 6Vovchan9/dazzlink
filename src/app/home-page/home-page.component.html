@@ -1,5 +1,6 @@
 <main class="page">
     <div class="container page__container">
+
         <!-- <section class="aboutApp">
             <h1 class="moduleTitle">Dazzlink App</h1>
             <div class="aboutApp__slogan">
@@ -22,10 +23,37 @@
 
         <!-- <div class="example"></div> -->
 
-        <picture class="mainPicture">
+        <div
+            class="mainVideo"
+            [ngClass]="{
+                'mainVideo--afterLoadPosterImg': posterImgLoad(),
+                'mainVideo--afterLoadVideo': videoLoad()
+            }"
+        >
+            <!-- Todo: нужно будет добавить событие (error) на видео когда не удастся его загрузить чтоб на баннере не показывался значок "play" и курсор был не pointer. Только у него слабая поддержка браузеров поэтому скорее всего придется прибегнуть к событию canplay -->
+            <video #advertisingVideo class="mainVideo__video" playsinline controls>
+                <source src="https://static.dazzlink.asia/landing/advertising.mp4" type="video/mp4" />
+                Ваш браузер не поддерживает встроенные видео.
+            </video>
+            <div
+                class="mainVideo__customPoster"
+                (click)="onVideoPlay()"
+                [class.mainVideo__customPoster--hidden]="!showVideoPoster()"
+            >
+                <img
+                    class="mainVideo__posterImg"
+                    (load)="onloadCustomPoster()"
+                    src="assets/images/home-page/bannerForVideo.png"
+                    alt="poster"
+                />
+                <div class="playIcon"></div>
+            </div>
+        </div>
+
+        <!-- <picture class="mainPicture">
             <source media="(max-width: 767px)" srcset="assets/images/home-page/mainPicForMobile.png" />
             <img src="assets/images/home-page/mainPic.png" class="mainPicture__img" alt="mainPicture" />
-        </picture>
+        </picture> -->
 
         <!-- <picture class="mainPicture">
             <div class="mainPicture__block">
