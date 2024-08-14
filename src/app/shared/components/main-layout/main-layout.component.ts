@@ -4,7 +4,7 @@ import { ActivatedRoute, IsActiveMatchOptions, NavigationEnd, Router } from '@an
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { AbsractExample } from '@app/shared/abstract.class';
+import { AbsractExample } from '@app/shared/helpers/classes/abstract.class';
 import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { MainLayoutOptions } from '@app/shared/interfaces';

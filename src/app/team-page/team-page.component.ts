@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { AbsractExample } from '@app/shared/abstract.class';
+import { AbsractExample } from '@app/shared/helpers/classes/abstract.class';
 import { ourTeamList } from '@app/shared/constants/ourTeam.constants';
 import { IAboutPersonalData } from '@app/shared/interfaces';
 
