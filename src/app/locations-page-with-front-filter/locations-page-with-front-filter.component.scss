@@ -235,7 +235,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         column-gap: 12px;
         .categoryCodes__item {
             .categoryCodes__btn {
-                color: var(--color-black1);
+                color: var(--color-black1, #000);
                 font-size: 16px;
                 line-height: 24px;
                 font-weight: 700;
@@ -243,7 +243,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                 border-radius: 12px;
                 border: 0px;
                 cursor: pointer;
-                background-color: var(--color-gray1);
+                background-color: var(--color-gray1, #f2f3f4);
                 text-wrap: nowrap;
 
                 &--active {

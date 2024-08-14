@@ -110,19 +110,6 @@ button {
     padding: 0 20px;
 }
 
-.linkToApp {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 16px;
-    row-gap: 16px;
-    .linkToApp__item {
-        cursor: pointer;
-        .linkToApp__img {
-            max-height: 48px;
-        }
-    }
-}
-
 .btn {
     cursor: pointer;
     padding: 12px 24px;
@@ -164,8 +151,14 @@ button {
     justify-content: space-between;
     font-size: 16px;
 
+    font-family: "Nunito";
+    text-align: left;
+    border: none;
+    width: 100%;
+
     .downloadApp__title {
         flex: 1;
+        line-height: 24px;
         font-weight: 700;
     }
 

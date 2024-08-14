@@ -36,7 +36,7 @@ export class MobileDetectService {
             if (/hms/.test(uAgent) && !/gms/.test(uAgent)) {
                 return 'assets/images/store/linkAppGallery.svg';
             }
-            return 'assets/images/store/linkAndroidLite.svg';
+            return 'assets/images/store/linkAndroid.svg';
         } else {
             return 'assets/images/store/linkAppGallery.svg';
         }

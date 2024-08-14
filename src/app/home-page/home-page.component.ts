@@ -22,7 +22,7 @@ import { Router } from '@angular/router';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { GoogleTranslationService } from '@app/shared/services/google-translation.service';
 import { AccoTriggerComponent } from '@app/shared/components/acco-trigger/acco-trigger.component';
-import { NgClass } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -35,7 +35,12 @@ type IOpportunityMenu = {
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
   standalone: true,
-  imports: [AccoTriggerComponent, FormsModule, NgClass],
+  imports: [
+    AccoTriggerComponent,
+    FormsModule,
+    NgClass,
+    NgTemplateOutlet
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {

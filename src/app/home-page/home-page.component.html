@@ -12,7 +12,7 @@
         >
             <!-- Todo: нужно будет добавить событие (error) на видео когда не удастся его загрузить чтоб на баннере не показывался значок "play" и курсор был не pointer. Только у него слабая поддержка браузеров поэтому скорее всего придется прибегнуть к событию canplay -->
             <video #advertisingVideo class="mainVideo__video" playsinline controls>
-                <source src="https://static.dazzlink.asia/landing/advertising.mp4" type="video/mp4" />
+                <source src="https://static.dazzlink.asia/landing/advertisingRus.mp4" type="video/mp4" />
                 Ваш браузер не поддерживает встроенные видео.
             </video>
             <div
@@ -61,35 +61,38 @@
         <!-- <app-progressive-image scrolledElName="pageWrap" fullImageSrc="assets/images/home-page/mainPic.png" tinyImageSrc="assets/images/home-page/smallMainPic.png"></app-progressive-image> -->
 
         <div class="aboutAppInfo">
-            <div class="aboutAppInfo__text">
-                <h1 class="moduleTitle">{{getContent('home-aboutAppInfo-title')}}</h1>
-                <div class="aboutAppInfo__cont">
-                    {{getContent('home-aboutAppInfo-cont')}}
-                </div>
-            </div>
-            <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--forDesktop">
-                <div class="linkToApp">
-                    <a href="https://www.apple.com/app-store" target="_blank" class="linkToApp__item">
-                        <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
-                    </a>
-                    <a href="https://play.google.com" target="_blank" class="linkToApp__item">
-                        <img src="assets/images/store/linkAndroidLite.svg" class="linkToApp__img" alt="linkAndroid">
-                    </a>
-                    <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
-                        <img src="assets/images/store/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
-                    </a>
-                </div>
-            </div>
-            <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--forMobile">
-                <div (click)="mobileDetectService?.goToDeviceStore()" class="downloadApp">
-                    <!-- <div class="downloadApp__title">Скачайте<br>{{titleForDownloadBtn}}</div> -->
-                    <div class="downloadApp__title">Скачайте<br>приложение</div>
-                    <div class="downloadApp__icon">
-                        <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
+            <div class="container aboutAppInfo__container">
+                <div class="aboutAppInfo__text">
+                    <h1 class="moduleTitle">Dazzlink: постройте великолепные отношения </h1>
+                    <div class="aboutAppInfo__cont">
+                        Знакомства для тех, кто ищет спутника
+                        на всю жизнь, а не мимолетных встречи.
+                        Доступно в крупных городах Узбекистана
                     </div>
                 </div>
+                <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--forDesktop">
+                    <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
+                </div>
+                @if (mobileDetectService.osDevice) {
+                    <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--forMobile">
+                        <button class="downloadApp"
+                            type="button"
+                            (click)="mobileDetectService?.goToDeviceStore()"
+                        >
+                            <div class="downloadApp__title">Скачайте<br />приложение</div>
+                            <div class="downloadApp__icon">
+                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
+                            </div>
+                        </button>
+                    </div>
+                } @else {
+                    <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--forMobile">
+                        <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
+                    </div>
+                }
             </div>
         </div>
+
         <nav class="navigationMenu">
             <div class="navigationMenu__item">
                 <div (click)="onAccoTriggerClick(['/media'])" class="squareNavBtn">
@@ -220,7 +223,7 @@
                                         <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
                                     </a>
                                     <a href="https://play.google.com" target="_blank" class="linkToApp__item">
-                                        <img src="assets/images/store/linkAndroidLite.svg" class="linkToApp__img" alt="linkAndroid">
+                                        <img src="assets/images/store/linkAndroid.svg" class="linkToApp__img" alt="linkAndroid">
                                     </a>
                                     <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
                                         <img src="assets/images/store/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
@@ -318,3 +321,29 @@
         </section>
     </div>
 </main>
+
+<ng-template #linkToApp>
+    <div class="linkToApp linkToApp--alignRight">
+        <a
+            href="https://www.apple.com/app-store"
+            target="_blank"
+            class="linkToApp__item"
+        >
+            <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="IOS" />
+        </a>
+        <a
+            href="https://play.google.com"
+            target="_blank"
+            class="linkToApp__item"
+        >
+            <img src="assets/images/store/linkAndroid.svg" class="linkToApp__img" alt="Android" />
+        </a>
+        <a
+            href="https://appgallery.huawei.com"
+            target="_blank"
+            class="linkToApp__item"
+        >
+            <img src="assets/images/store/linkAppGallery.svg" class="linkToApp__img" alt="AppGallery" />
+        </a>
+    </div>
+</ng-template>

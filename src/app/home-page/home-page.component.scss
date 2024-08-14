@@ -375,48 +375,49 @@ a.progressive img.preview {
 // -end-
 
 .aboutAppInfo {
-    display: flex;
-    flex-direction: column;
-    margin: 24px 0 72px;
+    margin-bottom: 96px;
     font-size: 24px;
 
-    .aboutAppInfo__text {
-        max-width: 586px;
-        // flex: 1;
+    .aboutAppInfo__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 1100px;
+        padding: 0px;
+    }
 
+    .aboutAppInfo__text {
         .aboutAppInfo__cont {
+            font-size: 24px;
+            line-height: 32px;
             margin-top: 12px;
         }
     }
 
     .aboutAppInfo__infoLinks {
-        margin-top: 24px;
-
         &--forDesktop {
             display: none;
         }
-
         &--forMobile {
+            margin-top: 24px;
             display: block;
         }
     }
 
     @media #{$notMobile} {
-        flex-direction: row;
-        justify-content: space-between;
-        column-gap: 40px;
-        margin: 48px 0 120px;
+        .aboutAppInfo__container {
+            flex-direction: row;
+            justify-content: space-between;
+            column-gap: 40px;
+        }
 
-        // .aboutAppInfo__moduleTitle {
-        //     line-height: 60px;
-        // }
-
-        // .aboutAppInfo__cont {
-        //     font-size: 18px;
-        // }
+        .aboutAppInfo__text {
+            max-width: 600px;
+            .aboutAppInfo__cont {
+                margin-top: 16px;
+            }
+        }
 
         .aboutAppInfo__infoLinks {
-            margin-top: 14px;
             &--forDesktop {
                 display: block;
             }
