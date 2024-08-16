@@ -97,6 +97,31 @@
             </div>
         </div>
 
+        @if (citiesForCarousel()?.length) {
+            <div class="cityCarousel">
+                <ul
+                    class="cityCarousel__list"
+                    [ngStyle]="{
+                        '--card-count': citiesForCarousel().length
+                    }"
+                >
+                    @for (city of citiesForCarousel(); track city.code) {
+                        <li class="cityCarousel__item">
+                            <div class="cityCard">
+                                <app-city-carousel-image [cityInfo]="city"></app-city-carousel-image>
+                                <!-- <img [src]="city.imageList.href" alt="pic">
+                                <img [src]="'assets/images/home-page/bannerForVideo.png'" alt="pic">
+                                {{city.title}} -->
+                                <div class="cityCard__name">
+                                    {{city.title}}
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+
         <nav class="navigationMenu">
             <div class="navigationMenu__item">
                 <div (click)="onAccoTriggerClick(['/media'])" class="squareNavBtn">

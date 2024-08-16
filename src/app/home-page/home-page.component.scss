@@ -1,5 +1,7 @@
 @import "variables";
 
+$carousel-gap: 24;
+
 .page {
 
     .page__container {
@@ -135,6 +137,54 @@
             max-width: 580px;
             font-size: 18px;
         }
+    }
+}
+
+.cityCarousel {
+    display: flex;
+    overflow: hidden;
+    margin: 0 -20px 96px;
+    .cityCarousel__list {
+        display: flex;
+        column-gap: #{$carousel-gap}px;
+        animation: marquee-desktop calc(var(--card-speed, 3s) * var(--card-count, 6)) linear infinite;
+        animation-delay: 1s;
+    }
+    @media #{$notMobile} {
+        margin: 0 0 96px;
+    }
+}
+
+@keyframes marquee-desktop {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(calc(-50% - #{calc($carousel-gap / 2)}px), 0, 0);
+    }
+}
+
+.cityCard {
+    background-color: aquamarine;
+    border-radius: 28px;
+    height: 200px;
+    width: 282px;
+    overflow: hidden;
+    position: relative;
+    .cityCard__name {
+        position: absolute;
+        bottom: 12px;
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: 800;
+        color: white;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 100%;
+
+        padding: 0px 12px 0px 24px;
     }
 }
 

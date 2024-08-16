@@ -1,0 +1,9 @@
+<div class="cityCarouselImage" [class.cityCarouselImage--mainImageLoad]="mainImageLoad()">
+    <img [src]="cityInfo.imageList?.imageBase64" class="cityCarouselImage__image cityCarouselImage__image--thumbHash" alt="pic">
+    <img
+        class="cityCarouselImage__image cityCarouselImage__image--main"    
+        [src]="cityInfo.imageList?.href"
+        (load)="mainImageLoad.set(true)"
+        alt="pic"
+    >
+</div>
