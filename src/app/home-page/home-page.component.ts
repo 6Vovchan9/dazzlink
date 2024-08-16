@@ -61,6 +61,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   private curLang: string;
   private lSub: Subscription;
   private pageWrapScrollSub: Subscription;
+  private cSub: Subscription;
   public appOpportunityMenu: Record<string, IOpportunityMenu> = {
     media: {
       type: 'link',
@@ -151,7 +152,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
   
   private getCitiesForCarousel(): void {
-    this.citiesService.getCities().subscribe({
+    this.cSub = this.citiesService.getCities().subscribe({
       next: value => {
         let cityList: any = value.map(el => el.cityList).flat();
         console.log(cityList);
@@ -364,6 +365,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   public ngOnDestroy(): void {
     this.pageWrapScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
+    this.cSub?.unsubscribe();
     this.removeAllListeners();
   }
 
