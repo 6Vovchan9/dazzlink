@@ -171,6 +171,7 @@ $carousel-gap: 24;
     width: 282px;
     overflow: hidden;
     position: relative;
+    z-index: 10;
     .cityCard__name {
         position: absolute;
         bottom: 12px;
