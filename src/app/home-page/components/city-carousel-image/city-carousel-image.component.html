@@ -1,12 +1,14 @@
 <div class="cityCarouselImage" [class.cityCarouselImage--mainImageLoad]="mainImageLoad()">
-    <img
-        class="cityCarouselImage__image cityCarouselImage__image--thumbHash"
-        [src]="cityInfo.imageList?.imageBase64"
-        alt="pic"
-    >
+    @if (imageData.imageBase64) {
+        <img
+            class="cityCarouselImage__image cityCarouselImage__image--thumbHash"
+            [src]="imageData.imageBase64"
+            alt="preview"
+        >
+    }
     <img
         class="cityCarouselImage__image cityCarouselImage__image--main"    
-        [src]="cityInfo.imageList?.href"
+        [src]="imageData.href"
         (load)="mainImageLoad.set(true)"
         alt="pic"
     >

@@ -108,7 +108,9 @@
                     @for (city of citiesForCarousel(); track city.code) {
                         <li class="cityCarousel__item">
                             <div class="cityCard">
-                                <app-city-carousel-image [cityInfo]="city"></app-city-carousel-image>
+                                @if (city.imageList.length) {
+                                    <app-city-carousel-image [imageData]="city.imageList[0]"></app-city-carousel-image>
+                                }
                                 <!-- <img [src]="city.imageList.href" alt="pic">
                                 <img [src]="'assets/images/home-page/bannerForVideo.png'" alt="pic">
                                 {{city.title}} -->

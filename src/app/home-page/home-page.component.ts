@@ -157,21 +157,31 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
         let cityList: any = value.map(el => el.cityList).flat();
         console.log(cityList);
 
-        cityList = cityList.map(el => {
-            el.imageList = {
-            type: 'link',
-            href: 'https://static.dazzlink.asia/prog_place/CARAVAN_41_69/image1.jpeg',
-            imageReference: [35, 73, 6, 22, 130, 9, 150, 72, 90, 116, 120, 176, 168, 73, 197, 54, 138, 86, 71, 113, 127, 4 , 247]
-          }
-          return el;
-        }); // надо будет удалить
+        // cityList = cityList.map(el => {
+        //   el.imageList = [
+        //     {
+        //       type: 'link',
+        //       href: 'https://static.dazzlink.asia/prog_place/CARAVAN_41_69/image1.jpeg',
+        //       imageReference: [35, 73, 6, 22, 130, 9, 150, 72, 90, 116, 120, 176, 168, 73, 197, 54, 138, 86, 71, 113, 127, 4, 247]
+        //     }
+        //   ]
+        //   return el;
+        // }); // надо будет удалить
 
-        cityList = cityList.map(el => {
-          if (el.imageList?.imageReference?.length) {
-            el.imageList.imageBase64 = this.thumbHashToDataURL(el.imageList.imageReference);
+        // cityList[1].imageList[0].imageReference = [35, 73, 6, 22, 130, 9, 150, 72, 90, 116, 120, 176, 168, 73, 197, 54, 138, 86, 71, 113, 127, 4, 247];
+
+        cityList.map(el => {
+          if (el.imageList[0]?.imageReference?.length) {
+            el.imageList[0].imageBase64 = this.thumbHashToDataURL(el.imageList[0].imageReference);
           }
-          return el;
         })
+        
+        // cityList = cityList.map(el => {
+        //   if (el.imageList?.imageReference?.length) {
+        //     el.imageList.imageBase64 = this.thumbHashToDataURL(el.imageList.imageReference);
+        //   }
+        //   return el;
+        // })
 
         this.citiesForCarousel.update(prevCities => [...prevCities, ...cityList, ...cityList]);
         console.log(this.citiesForCarousel());

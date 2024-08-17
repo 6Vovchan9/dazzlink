@@ -4,5 +4,5 @@ export interface ICity {
     title: string,
     code: string,
     count: number,
-    imageList?: IImageInfo
+    imageList?: Array<IImageInfo>
 }

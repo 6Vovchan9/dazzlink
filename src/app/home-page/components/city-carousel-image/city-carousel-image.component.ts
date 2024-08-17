@@ -1,7 +1,7 @@
 import { Component, Input, signal } from '@angular/core';
 
 import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
-import { ICity } from '@app/shared/types/cities.interface';
+import { IImageInfo } from '@app/shared/types/image.interface';
 
 @Component({
   selector: 'app-city-carousel-image',
@@ -12,7 +12,7 @@ import { ICity } from '@app/shared/types/cities.interface';
 })
 export class CityCarouselImageComponent extends ThumbHash {
 
-  @Input() cityInfo: ICity;
+  @Input() imageData: IImageInfo;
 
   public mainImageLoad = signal<boolean>(false);
 
