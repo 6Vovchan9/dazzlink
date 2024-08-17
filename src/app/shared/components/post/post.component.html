@@ -2,11 +2,14 @@
 <img [src]="postData.imageUrl" alt=""> -->
 
 <div class="post" [class.post--withSkeleton]="isLoading">
-    <div class="post__img" [ngClass]="{
-        'post__img--empty': !postData.imageUrl,
-        'post__img--load':   postData.imageUrl && state() === imageStateTypes.Load,
-        'post__img--error':  postData.imageUrl && state() === imageStateTypes.Error
-    }">
+    <div
+        class="post__img"
+        [ngClass]="{
+            'post__img--empty': !postData.imageUrl,
+            'post__img--load':   postData.imageUrl && state() === imageStateTypes.Load,
+            'post__img--error':  postData.imageUrl && state() === imageStateTypes.Error
+        }"
+    >
         <!-- <ng-container *ngIf="postData.imageUrl; else defaultPostImg"> -->
         <ng-container *ngIf="postData.imageUrl">
             <img
