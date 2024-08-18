@@ -143,7 +143,7 @@ $carousel-gap: 24;
 .cityCarousel {
     display: flex;
     overflow: hidden;
-    margin: 0 -20px 96px;
+    margin: 0px -20px 96px;
     .cityCarousel__list {
         display: flex;
         column-gap: #{$carousel-gap}px;
@@ -151,7 +151,7 @@ $carousel-gap: 24;
         animation-delay: 1s;
     }
     @media #{$notMobile} {
-        margin: 0 0 96px;
+        margin: 0px 0px 160px;
     }
 }
 
@@ -189,121 +189,157 @@ $carousel-gap: 24;
     }
 }
 
-.appOpportunity {
-    .appOpportunity__head {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        .appOpportunity__desc {
-            max-width: 586px;
-            text-align: center;
-            margin-top: 16px;
-        }
-        .appOpportunity__join {
-            width: 100%;
-            max-width: 328px;
-            margin-top: 16px;
-        }
-    }
+// .appOpportunity {
+//     .appOpportunity__head {
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         .appOpportunity__desc {
+//             max-width: 586px;
+//             text-align: center;
+//             margin-top: 16px;
+//         }
+//         .appOpportunity__join {
+//             width: 100%;
+//             max-width: 328px;
+//             margin-top: 16px;
+//         }
+//     }
 
-    .appOpportunity__menu {
-        // margin-top: 72px;
+//     .appOpportunity__menu {
+//         // margin-top: 72px;
 
-        .appOpportunity__item {
-            margin-bottom: 24px;
-            &:last-child {
-                margin: 0;
-            }
-        }
-    }
+//         .appOpportunity__item {
+//             margin-bottom: 24px;
+//             &:last-child {
+//                 margin: 0;
+//             }
+//         }
+//     }
 
-    @media #{$notMobile} {
-        .appOpportunity__head {
-            .appOpportunity__desc {
-                font-size: 18px;
-            }
-        }
-        // .appOpportunity__menu {
-        //     margin-top: 120px;
-        // }
-    }
-}
+//     @media #{$notMobile} {
+//         .appOpportunity__head {
+//             .appOpportunity__desc {
+//                 font-size: 18px;
+//             }
+//         }
+//         // .appOpportunity__menu {
+//         //     margin-top: 120px;
+//         // }
+//     }
+// }
 
-.menuAcco {
-    .menuAcco__content {
-        margin: 64px 0px;
-        &--hidden {
-            display: none;
-        }
-    }
+// .menuAcco {
+//     .menuAcco__content {
+//         margin: 64px 0px;
+//         &--hidden {
+//             display: none;
+//         }
+//     }
 
-    &:last-child {
-        .menuAcco__content {
-            margin-bottom: 0px;
-        }
-    }
+//     &:last-child {
+//         .menuAcco__content {
+//             margin-bottom: 0px;
+//         }
+//     }
 
-    @media #{$notMobile} {
-        .menuAcco__content {
-            margin: 120px 0px;
-        }
-    }
-}
+//     @media #{$notMobile} {
+//         .menuAcco__content {
+//             margin: 120px 0px;
+//         }
+//     }
+// }
+
+
 
 .appAdv {
     font-size: 24px;
-    margin-top: 72px;
-    display: flex;
-    flex-direction: column;
-    column-gap: 11.7%;
-    .appAdv__image {
-        flex: 1;
-        max-width: 500px;
+    margin-bottom: 96px;
+    .appAdv__list {
+        .appAdv__item {
+            display: flex;
+            margin-top: 96px;
+            flex-direction: column;
+            column-gap: 11.7%;
+            .appAdv__image {
+                flex: 1;
+                max-width: 500px;
 
-        img {
-            max-width: 100%;
-        }
-    }
-    .appAdv__content {
-        margin-top: 24px;
-        flex: 1;
-        .appAdv__text {
-            margin-top: 12px;
-        }
-        .appAdv__links {
-            margin-top: 24px;
-        }
-    }
+                img {
+                    max-width: 100%;
+                }
+            }
+            .appAdv__content {
+                margin-top: 24px;
+                flex: 1;
+                .appAdv__text {
+                    margin-top: 12px;
+                }
+                .appAdv__links {
+                    margin-top: 24px;
+                }
+            }
 
-    &:first-child {
-        margin-top: 0;
-    }
+            &:first-child {
+                margin-top: 0px;
+            }
 
-    &--forDesktop {
-        display: none;
+            &--forDesktop {
+                display: none;
+            }
+
+            @media #{$notMobile} {
+                margin-top: 160px;
+                flex-direction: row;
+                align-items: center;
+                .appAdv__content {
+                    margin-top: 0;
+                    // .appAdv__text {
+                    //     font-size: 18px;
+                    // }
+                }
+
+                &:nth-child(even) {
+                    flex-direction: row-reverse;
+                }
+
+                &--forDesktop {
+                    display: flex;
+                }
+
+                &--forMobile {
+                    display: none;
+                }
+            }
+        }
     }
 
     @media #{$notMobile} {
-        margin-top: 160px;
-        flex-direction: row;
-        align-items: center;
-        .appAdv__content {
-            margin-top: 0;
-            // .appAdv__text {
-            //     font-size: 18px;
-            // }
-        }
+        margin-bottom: 160px;
+        .appAdv__list {
+            .appAdv__item {
+                margin-top: 160px;
+                flex-direction: row;
+                align-items: center;
+                .appAdv__content {
+                    margin-top: 0;
+                    // .appAdv__text {
+                    //     font-size: 18px;
+                    // }
+                }
 
-        &:nth-child(even) {
-            flex-direction: row-reverse;
-        }
+                &:nth-child(even) {
+                    flex-direction: row-reverse;
+                }
 
-        &--forDesktop {
-            display: flex;
-        }
+                &--forDesktop {
+                    display: flex;
+                }
 
-        &--forMobile {
-            display: none;
+                &--forMobile {
+                    display: none;
+                }
+            }
         }
     }
 }
@@ -458,106 +494,106 @@ a.progressive img.preview {
     }
 }
 
-.navigationMenu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // flex-wrap: wrap;
-    column-gap: 48px;
-    row-gap: 48px;
-    margin-bottom: 72px;
-    justify-content: center;
+// .navigationMenu {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     // flex-wrap: wrap;
+//     column-gap: 48px;
+//     row-gap: 48px;
+//     margin-bottom: 72px;
+//     justify-content: center;
 
-    .navigationMenu__item {
-        display: flex;
-        // flex: 1 1 230px;
-    }
+//     .navigationMenu__item {
+//         display: flex;
+//         // flex: 1 1 230px;
+//     }
 
-    @media #{$notMobile} {
-        align-items: flex-start;
-        flex-direction: row;
-        margin-bottom: 120px;
-    }
-}
+//     @media #{$notMobile} {
+//         align-items: flex-start;
+//         flex-direction: row;
+//         margin-bottom: 120px;
+//     }
+// }
 
-.squareNavBtn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--color-gray1);
-    border-radius: 32px;
-    overflow: hidden;
-    cursor: pointer;
+// .squareNavBtn {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     background-color: var(--color-gray1);
+//     border-radius: 32px;
+//     overflow: hidden;
+//     cursor: pointer;
 
-    .squareNavBtn__image {
-        min-height: 180px;
-        // max-width: 368px;
-        border-radius: 32px;
-        overflow: hidden;
-        position: relative;
-        z-index: 10;
-        img {
-            max-width: 100%;
-        }
-    }
+//     .squareNavBtn__image {
+//         min-height: 180px;
+//         // max-width: 368px;
+//         border-radius: 32px;
+//         overflow: hidden;
+//         position: relative;
+//         z-index: 10;
+//         img {
+//             max-width: 100%;
+//         }
+//     }
 
-    .squareNavBtn__title {
-        font-size: 24px;
-        line-height: 32px;
-        padding: 12px 24px 24px;
-        text-align: center;
-    }
+//     .squareNavBtn__title {
+//         font-size: 24px;
+//         line-height: 32px;
+//         padding: 12px 24px 24px;
+//         text-align: center;
+//     }
 
-    @media #{$notMobile} {
-        .squareNavBtn__image {
-            border-radius: 48px;
-        }
-        border-radius: 48px;
-    }
+//     @media #{$notMobile} {
+//         .squareNavBtn__image {
+//             border-radius: 48px;
+//         }
+//         border-radius: 48px;
+//     }
 
-    &:hover {
-        .squareNavBtn__title {
-            color: var(--color-blue1);
-        }
-    }
-}
+//     &:hover {
+//         .squareNavBtn__title {
+//             color: var(--color-blue1);
+//         }
+//     }
+// }
 
-.navTetris {
-    display: flex;
-    flex-direction: column;
-    row-gap: 24px;
-    margin-top: 120px;
+// .navTetris {
+//     display: flex;
+//     flex-direction: column;
+//     row-gap: 24px;
+//     margin-top: 120px;
 
-    .navTetris__row {
-        display: flex;
-        column-gap: 24px;
-        row-gap: 24px;
+//     .navTetris__row {
+//         display: flex;
+//         column-gap: 24px;
+//         row-gap: 24px;
         
-        .navTetris__block {
-            flex: 1;
+//         .navTetris__block {
+//             flex: 1;
 
-            &--size--wide {
-                flex: 2;
-            }
-        }
+//             &--size--wide {
+//                 flex: 2;
+//             }
+//         }
 
-        &--wrap {
-            flex-wrap: wrap;
-        }
+//         &--wrap {
+//             flex-wrap: wrap;
+//         }
 
-        &--nowrap {
-            .navTetris__block {
-                overflow: hidden;
-            }
-        }
-    }
+//         &--nowrap {
+//             .navTetris__block {
+//                 overflow: hidden;
+//             }
+//         }
+//     }
 
-    @media #{$mobile} {
-        margin-top: 72px;
-        row-gap: 24px;
+//     @media #{$mobile} {
+//         margin-top: 72px;
+//         row-gap: 24px;
 
-        .navTetris__row {
-            flex-direction: column;
-        }
-    }
-}
+//         .navTetris__row {
+//             flex-direction: column;
+//         }
+//     }
+// }

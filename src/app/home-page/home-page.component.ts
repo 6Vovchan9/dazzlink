@@ -155,7 +155,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     this.cSub = this.citiesService.getCities().subscribe({
       next: value => {
         let cityList: any = value.map(el => el.cityList).flat();
-        console.log(cityList);
+        // console.log(cityList);
 
         // cityList = cityList.map(el => {
         //   el.imageList = [
@@ -184,7 +184,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
         // })
 
         this.citiesForCarousel.update(prevCities => [...prevCities, ...cityList, ...cityList]);
-        console.log(this.citiesForCarousel());
+        // console.log(this.citiesForCarousel());
       },
       error: err => {
         console.log(err);
