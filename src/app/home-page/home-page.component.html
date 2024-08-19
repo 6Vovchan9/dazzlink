@@ -74,11 +74,11 @@
                         Доступно в крупных городах Узбекистана
                     </div>
                 </div>
-                <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--forDesktop">
+                <div class="aboutAppInfo__infoLinks forDesktop">
                     <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
                 </div>
                 @if (mobileDetectService.osDevice) {
-                    <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--forMobile">
+                    <div class="aboutAppInfo__infoLinks forMobile">
                         <button class="downloadApp"
                             type="button"
                             (click)="mobileDetectService?.goToDeviceStore()"
@@ -90,7 +90,7 @@
                         </button>
                     </div>
                 } @else {
-                    <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--forMobile">
+                    <div class="aboutAppInfo__infoLinks forMobile">
                         <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
                     </div>
                 }
@@ -124,39 +124,6 @@
             </div>
         }
 
-        <!-- <nav class="navigationMenu">
-            <div class="navigationMenu__item">
-                <div (click)="onAccoTriggerClick(['/media'])" class="squareNavBtn">
-                    <div class="squareNavBtn__image">
-                        <img src="assets/images/home-page/linkToArticlesX2.jpg" alt="linkToArticles">
-                    </div>
-                    <div class="squareNavBtn__title">
-                        Медиа про отношения
-                    </div>
-                </div>
-            </div>
-            <div class="navigationMenu__item">
-                <div (click)="onAccoTriggerClick(['/locations'])" class="squareNavBtn">
-                    <div class="squareNavBtn__image">
-                        <img src="assets/images/home-page/linkToLocationX2.jpg" alt="linkToLocation">
-                    </div>
-                    <div class="squareNavBtn__title">
-                        Локации для свиданий
-                    </div>
-                </div>
-            </div>
-            <div class="navigationMenu__item">
-                <div class="squareNavBtn">
-                    <div class="squareNavBtn__image">
-                        <img src="assets/images/home-page/linkToPsychologyX2.jpg" alt="linkToPsychology">
-                    </div>
-                    <div class="squareNavBtn__title">
-                        Психоло&shy;гические тесты
-                    </div>
-                </div>
-            </div>
-        </nav> -->
-
         <section class="appAdv">
             <ul class="appAdv__list">
                 <li class="appAdv__item">
@@ -165,12 +132,12 @@
                     </div>
                     <div class="appAdv__content">
                         <h2 class="moduleTitle">
-                            Знакомься онлайн
+                            Знакомьтесь онлайн
                         </h2>
                         <div class="appAdv__text">
-                            Если ты стремишься встретить новых людей, в Dazzlink ты найдешь все функции, призванные сделать
-                            невозможное возможным.
-                            Знакомиться онлайн — это просто.
+                            Подходите к выбору собеседника осознанно.
+                            Фотографии откроются только после начала общения,
+                            до этого делайте выбор сердцем
                         </div>
                     </div>
                 </li>
@@ -180,11 +147,10 @@
                     </div>
                     <div class="appAdv__content">
                         <h2 class="moduleTitle">
-                            Выходи в оффлайн
+                            Переходите от слов к делу
                         </h2>
                         <div class="appAdv__text">
-                            Если ты стремишься встретить новых людей, то Dazzlink поможет организовать тебе свидание.
-                            Предложит места для встречи, забронирует столик и оформит скидку.
+                            Выбирайте романтические места для свиданий и приглашайте друг друга прямо в приложении.
                         </div>
                     </div>
                 </li>
@@ -194,15 +160,15 @@
                     </div>
                     <div class="appAdv__content">
                         <h2 class="moduleTitle">
-                            Общайся с умом
+                            Изучайте тему отношений
                         </h2>
                         <div class="appAdv__text">
-                            Если ты стремишься встретить новых людей,
-                            в Dazzlink ты найдешь помощь в определении психологической совместимости и осознанном выборе партнера.
+                            Статьи про любовь, отношения, знакомства, свидания, семейную жизнь.
+                            Расскажем, как сохранить счастье на долгие годы
                         </div>
                     </div>
                 </li>
-                <li class="appAdv__item appAdv__item--forDesktop">
+                <li class="appAdv__item">
                     <div class="appAdv__image">
                         <img src="assets/images/appAdv3.png" alt="appAdvantage">
                     </div>
@@ -211,77 +177,41 @@
                             Скачайте приложение
                         </h2>
                         <div class="appAdv__text">
-                            Тысячи людей уже доверили нам свою судьбу,
-                            присоединяйтесь и найдите любовь на всю жизнь
+                            Сотни людей уже доверили нам свою судьбу, присоединяйтесь и вы,
+                            чтобы найти любовь на всю жизнь и создать семью
+
+                            <div class="appAdv__infoLinks forDesktop">
+                                <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
+                            </div>
+                            @if (mobileDetectService.osDevice) {
+                                <div class="appAdv__infoLinks forMobile">
+                                    <button class="downloadApp"
+                                        type="button"
+                                        (click)="mobileDetectService?.goToDeviceStore()"
+                                    >
+                                        <div class="downloadApp__title">Скачайте<br />приложение</div>
+                                        <div class="downloadApp__icon">
+                                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
+                                        </div>
+                                    </button>
+                                </div>
+                            } @else {
+                                <div class="appAdv__infoLinks forMobile">
+                                    <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
+                                </div>
+                            }
                         </div>
-                        <div class="linkToApp appAdv__links">
-                            <a href="https://www.apple.com/app-store" target="_blank" class="linkToApp__item">
-                                <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
-                            </a>
-                            <a href="https://play.google.com" target="_blank" class="linkToApp__item">
-                                <img src="assets/images/store/linkAndroid.svg" class="linkToApp__img" alt="linkAndroid">
-                            </a>
-                            <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
-                                <img src="assets/images/store/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li class="appAdv__item appAdv__item--forMobile">
-                    <div (click)="mobileDetectService?.goToDeviceStore()" class="downloadApp appAdv__download">
-                        <div class="downloadApp__title">Скачайте<br>приложение</div>
-                        <div class="downloadApp__icon">
-                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
-                        </div>
+
                     </div>
                 </li>
             </ul>
         </section>
 
-        <!-- <section class="navTetris">
-            <div class="navTetris__row navTetris__row--wrap">
-                <div class="navTetris__block">
-                    <app-acco-trigger
-                        [options]="{ caption: appOpportunityMenu.tariff.caption }"
-                        type="link"
-                        (click)="onAccoTriggerClick(['/agreements'])"
-                    >
-                    </app-acco-trigger>
-                </div>
-                <div class="navTetris__block navTetris__block--size--wide">
-                    <app-acco-trigger
-                        [options]="{ caption: appOpportunityMenu.linkToQuestions.caption }"
-                        type="link"
-                        (click)="onAccoTriggerClick(['/agreements'])"
-                    >
-                    </app-acco-trigger>
-                </div>
-            </div>
-            <div class="navTetris__row navTetris__row--nowrap">
-                <div class="navTetris__block navTetris__block--size--wide">
-                    <app-acco-trigger
-                        [options]="{ caption: appOpportunityMenu.legalInf.caption }"
-                        type="link"
-                        (click)="onAccoTriggerClick(['/agreements'])"
-                    >
-                    </app-acco-trigger>
-                </div>
-                <div class="navTetris__block">
-                    <app-acco-trigger
-                        [options]="{ caption: appOpportunityMenu.linkToCompany.caption }"
-                        type="link"
-                        (click)="onAccoTriggerClick(['/agreements'])"
-                    >
-                    </app-acco-trigger>
-                </div>
-            </div>
-        </section> -->
-
     </div>
 </main>
 
 <ng-template #linkToApp>
-    <div class="linkToApp linkToApp--alignRight">
+    <div class="linkToApp">
         <a
             href="https://www.apple.com/app-store"
             target="_blank"

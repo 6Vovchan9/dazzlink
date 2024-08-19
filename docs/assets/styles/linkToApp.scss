@@ -10,9 +10,4 @@
             max-height: 48px;
         }
     }
-    @media #{$notMobile} {
-        &--alignRight {
-            justify-content: flex-end;
-        }
-    }
 }

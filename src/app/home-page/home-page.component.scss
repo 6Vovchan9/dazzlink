@@ -189,69 +189,6 @@ $carousel-gap: 24;
     }
 }
 
-// .appOpportunity {
-//     .appOpportunity__head {
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-//         .appOpportunity__desc {
-//             max-width: 586px;
-//             text-align: center;
-//             margin-top: 16px;
-//         }
-//         .appOpportunity__join {
-//             width: 100%;
-//             max-width: 328px;
-//             margin-top: 16px;
-//         }
-//     }
-
-//     .appOpportunity__menu {
-//         // margin-top: 72px;
-
-//         .appOpportunity__item {
-//             margin-bottom: 24px;
-//             &:last-child {
-//                 margin: 0;
-//             }
-//         }
-//     }
-
-//     @media #{$notMobile} {
-//         .appOpportunity__head {
-//             .appOpportunity__desc {
-//                 font-size: 18px;
-//             }
-//         }
-//         // .appOpportunity__menu {
-//         //     margin-top: 120px;
-//         // }
-//     }
-// }
-
-// .menuAcco {
-//     .menuAcco__content {
-//         margin: 64px 0px;
-//         &--hidden {
-//             display: none;
-//         }
-//     }
-
-//     &:last-child {
-//         .menuAcco__content {
-//             margin-bottom: 0px;
-//         }
-//     }
-
-//     @media #{$notMobile} {
-//         .menuAcco__content {
-//             margin: 120px 0px;
-//         }
-//     }
-// }
-
-
-
 .appAdv {
     font-size: 24px;
     margin-bottom: 96px;
@@ -274,6 +211,9 @@ $carousel-gap: 24;
                 flex: 1;
                 .appAdv__text {
                     margin-top: 12px;
+                    .appAdv__infoLinks {
+                        margin-top: 48px;
+                    }
                 }
                 .appAdv__links {
                     margin-top: 24px;
@@ -294,21 +234,13 @@ $carousel-gap: 24;
                 align-items: center;
                 .appAdv__content {
                     margin-top: 0;
-                    // .appAdv__text {
-                    //     font-size: 18px;
-                    // }
+                    .appAdv__text .appAdv__infoLinks {
+                        margin-top: 24px;
+                    }
                 }
 
                 &:nth-child(even) {
                     flex-direction: row-reverse;
-                }
-
-                &--forDesktop {
-                    display: flex;
-                }
-
-                &--forMobile {
-                    display: none;
                 }
             }
         }
@@ -331,14 +263,6 @@ $carousel-gap: 24;
                 &:nth-child(even) {
                     flex-direction: row-reverse;
                 }
-
-                &--forDesktop {
-                    display: flex;
-                }
-
-                &--forMobile {
-                    display: none;
-                }
             }
         }
     }
@@ -358,32 +282,6 @@ $carousel-gap: 24;
     }
 }
 
-// .mainPicture {
-//     .mainPicture__block {
-//         overflow: hidden;
-//         border-radius: 32px;
-//         position: relative;
-//         z-index: 10;
-//         .mainPicture__image {
-//             max-width: 100%;
-//         }
-//     }
-//     &--preview {
-//         .mainPicture__block {
-//             .mainPicture__image {
-//                 width: 100%;
-//                 filter: blur(3px);
-//                 cursor: wait;
-//             }
-//         }
-//     }
-//     @media #{$notMobile} {
-//         .mainPicture__block {
-//             border-radius: 48px;
-//         }
-//     }
-// }
-
 // Стили для progressive image:
 // -start-
 a.progressive {
@@ -396,14 +294,6 @@ a.progressive {
 a.progressive:not(.replace) {
     cursor: default;
 }
-
-// a.progressive img {
-//     display: block;
-//     width: 100%;
-//     max-width: none;
-//     height: auto;
-//     border: 0 none;
-// }
 
 a.progressive img.preview {
     filter: blur(2vw);
@@ -460,13 +350,7 @@ a.progressive img.preview {
     }
 
     .aboutAppInfo__infoLinks {
-        &--forDesktop {
-            display: none;
-        }
-        &--forMobile {
-            margin-top: 24px;
-            display: block;
-        }
+        margin-top: 24px;
     }
 
     @media #{$notMobile} {
@@ -484,116 +368,24 @@ a.progressive img.preview {
         }
 
         .aboutAppInfo__infoLinks {
-            &--forDesktop {
-                display: block;
-            }
-            &--forMobile {
-                display: none;
+            margin-top: 0px;
+            .linkToApp {
+                justify-content: flex-end;
             }
         }
     }
 }
 
-// .navigationMenu {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     // flex-wrap: wrap;
-//     column-gap: 48px;
-//     row-gap: 48px;
-//     margin-bottom: 72px;
-//     justify-content: center;
+.forDesktop {
+    display: none;
+    @media #{$notMobile} {
+        display: block;
+    }
+}
 
-//     .navigationMenu__item {
-//         display: flex;
-//         // flex: 1 1 230px;
-//     }
-
-//     @media #{$notMobile} {
-//         align-items: flex-start;
-//         flex-direction: row;
-//         margin-bottom: 120px;
-//     }
-// }
-
-// .squareNavBtn {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     background-color: var(--color-gray1);
-//     border-radius: 32px;
-//     overflow: hidden;
-//     cursor: pointer;
-
-//     .squareNavBtn__image {
-//         min-height: 180px;
-//         // max-width: 368px;
-//         border-radius: 32px;
-//         overflow: hidden;
-//         position: relative;
-//         z-index: 10;
-//         img {
-//             max-width: 100%;
-//         }
-//     }
-
-//     .squareNavBtn__title {
-//         font-size: 24px;
-//         line-height: 32px;
-//         padding: 12px 24px 24px;
-//         text-align: center;
-//     }
-
-//     @media #{$notMobile} {
-//         .squareNavBtn__image {
-//             border-radius: 48px;
-//         }
-//         border-radius: 48px;
-//     }
-
-//     &:hover {
-//         .squareNavBtn__title {
-//             color: var(--color-blue1);
-//         }
-//     }
-// }
-
-// .navTetris {
-//     display: flex;
-//     flex-direction: column;
-//     row-gap: 24px;
-//     margin-top: 120px;
-
-//     .navTetris__row {
-//         display: flex;
-//         column-gap: 24px;
-//         row-gap: 24px;
-        
-//         .navTetris__block {
-//             flex: 1;
-
-//             &--size--wide {
-//                 flex: 2;
-//             }
-//         }
-
-//         &--wrap {
-//             flex-wrap: wrap;
-//         }
-
-//         &--nowrap {
-//             .navTetris__block {
-//                 overflow: hidden;
-//             }
-//         }
-//     }
-
-//     @media #{$mobile} {
-//         margin-top: 72px;
-//         row-gap: 24px;
-
-//         .navTetris__row {
-//             flex-direction: column;
-//         }
-//     }
-// }
+.forMobile {
+    display: block;
+    @media #{$notMobile} {
+        display: none;
+    }
+}
