@@ -268,6 +268,23 @@ $carousel-gap: 24;
     }
 }
 
+.partners {
+    .partners__list {
+        display: flex;
+        flex-direction: column;
+        column-gap: 48px;
+        row-gap: 48px;
+        .partners__item {
+            flex: 1;
+        }
+    }
+    @media #{$notMobile} {
+        .partners__list {
+            flex-direction: row;
+        }
+    }
+}
+
 .mainPicture {
     display: block;
     overflow: hidden;
