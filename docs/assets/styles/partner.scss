@@ -1,0 +1,28 @@
+.partner {
+    display: flex;
+    flex-direction: column;
+    .partner__logo {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        border-radius: 28px;
+        padding: 50px;
+        background-color: var(--color-gray1);
+        img {
+            max-width: 100%;
+        }
+    }
+    .partner__name {
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: 600;
+        margin-top: 12px;
+        text-align: center;
+    }
+    @media #{$mobile} {
+        .partner__logo {
+            min-height: 200px;
+        }
+    }
+}
