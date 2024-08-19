@@ -62,47 +62,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   private lSub: Subscription;
   private pageWrapScrollSub: Subscription;
   private cSub: Subscription;
-  public appOpportunityMenu: Record<string, IOpportunityMenu> = {
-    media: {
-      type: 'link',
-      caption: 'Медиа про психологию отношений'
-    },
-    locations: {
-      active: false,
-      type: 'button',
-      caption: 'Подборка локаций для свиданий'
-    },
-    company: {
-      type: 'link',
-      caption: 'Блог о компании и правовая информация'
-    },
-    conditions: {
-      active: false,
-      type: 'button',
-      caption: 'Тарифы и условия'
-    },
-    questions: {
-      active: false,
-      type: 'button',
-      caption: 'Помощь и частые вопросы'
-    },
-    tariff: {
-      type: 'link',
-      caption: 'Тарифы'
-    },
-    linkToQuestions: {
-      type: 'link',
-      caption: 'Помощь и частые вопросы'
-    },
-    legalInf: {
-      type: 'link',
-      caption: 'Правовая информация'
-    },
-    linkToCompany: {
-      type: 'link',
-      caption: 'О компании'
-    },
-  };
+  public appOpportunityMenu: Record<string, IOpportunityMenu> = {};
 
   public posterImgLoad = signal<boolean>(false);
   public videoLoad = signal<boolean>(false);
