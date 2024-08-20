@@ -93,6 +93,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       // { value: 'rating_desc', details: 'По рейтингу' },
     ],
   };
+  public isEmptySortOptions = signal(false);
   public filterFieldOptions: Array<CountryFilterItem>;
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
@@ -490,13 +491,16 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             if (value?.length) {
               this.filterBarGroup.get('sort').enable({ emitEvent: false });
               this.sortFieldOptions.items = value;
+              this.isEmptySortOptions.set(false);
               this.cd.detectChanges();
             } else {
               console.log('Список сортировки пришел пустой');
+              this.isEmptySortOptions.set(true);
             }
           },
           () => {
             console.error('Ошибка при получении сортировки');
+            this.isEmptySortOptions.set(true);
           }
         );
     } else {
@@ -526,13 +530,16 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
                 return el;
               });
               this.sortFieldOptions.items = value;
+              this.isEmptySortOptions.set(false);
               this.cd.detectChanges();
             } else {
               console.log('Список сортировки пришел пустой');
+              this.isEmptySortOptions.set(true);
             }
           },
           () => {
             console.error('Ошибка при получении сортировки');
+            this.isEmptySortOptions.set(true);
           }
         );
     }
@@ -696,11 +703,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   private retryGetAllLocations(): void {
     this.getAllLocations();
     if (!this.sortFieldOptions.items.length) {
-      console.log('Нет параметров сортировки, запросим их снова');
+      console.log('Нет сортировки или нужна новая, запросим ее снова');
       this.getSort();
     }
     if (!this.filterFieldOptions?.length) {
-      console.log('Нет параметров фильтрации, запросим их снова');
+      console.log('Нет фильтрации или нужна новая, запросим ее снова');
       this.getFilters();
     }
   }

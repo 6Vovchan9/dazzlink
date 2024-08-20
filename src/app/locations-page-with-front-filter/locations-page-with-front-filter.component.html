@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="filterBar__controls">
                                         <!-- <button class="btn" (click)="isSorting() = !isSorting()">toggle</button> -->
-                                        @if (filterBarGroup) {
+                                        @if (filterBarGroup && !isEmptySortOptions()) {
                                             <div class="filterBar__item" [class.withSkeletonLoader]="isLoading()">
                                                 <!-- Сортировка -->
                                                 <!-- (ngModelChange)="onChangeSort($event)" -->

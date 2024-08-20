@@ -60,7 +60,7 @@ export class LocationsService {
     }
 
     public getById(id: string): Observable<any> {
-        return this.http.get<Post>(`${environment.placeUrl}/place/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
+        return this.http.get<Post>(`${environment.placeUrl}/place/id/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
             .pipe(
                 map((resp: { [key: string]: any }) => resp.data)
             )
