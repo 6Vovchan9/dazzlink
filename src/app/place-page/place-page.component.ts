@@ -20,7 +20,6 @@ export class PlacePageComponent {
   private vSub: Subscription;
   public locationInfoName = locationInfoMapping;
   public isLoading = true;
-  private placeId: string;
   public placeData: PlaceDetails;
   public placeEvaluation: 'like' | 'dislike';
   private votingIsLoading = false;
@@ -59,7 +58,7 @@ export class PlacePageComponent {
       lang => {
         if (!this.isLoading) {
           this.isLoading = true;
-          this.locationsService.getById(this.placeId)
+          this.locationsService.getById(this.placeData.pageName)
             .subscribe(
               (place: PlaceDetails) => {
                 this.placeData = place;
@@ -74,8 +73,8 @@ export class PlacePageComponent {
       .pipe(
         switchMap(
           (params: Params) => {
-            this.placeId = params['id'];
-            return this.locationsService.getById(params['id']);
+            // return this.locationsService.getById(params['title']);
+            return this.locationsService.getPageName(params['title']);
           }
         ),
         // delay(8000),
@@ -86,6 +85,7 @@ export class PlacePageComponent {
       )
       .subscribe(
         (place: PlaceDetails) => {
+          this.placeData = place;
           if (place) this.getEvaluation();
           // delete place.imageList;
           // place.imageList = null;
@@ -93,7 +93,6 @@ export class PlacePageComponent {
           // place.imageList[0].href = null;
           // place.imageList.splice(3);
           // delete place.rating2GIS;
-          this.placeData = place;
           if (false) {
             place.attributeList = [
               {
@@ -241,7 +240,7 @@ export class PlacePageComponent {
 
   private getEvaluation() {
     const placesRating = JSON.parse(localStorage.getItem('placeEvaluation')) || [];
-    const aboutThisPlace = placesRating.find(about => about.placeId === this.placeId);
+    const aboutThisPlace = placesRating.find(about => about.placeId === this.placeData.id);
     if (aboutThisPlace) {
       this.placeEvaluation = aboutThisPlace.choice;
     }
@@ -465,7 +464,7 @@ export class PlacePageComponent {
     if (!this.placeEvaluation && !this.votingIsLoading) {
       console.log(`Фиксируем ваш ${val}`);
       this.votingIsLoading = true;
-      this.vSub = this.locationsService.setPlaceVotingProd(this.placeId, val)
+      this.vSub = this.locationsService.setPlaceVotingProd(this.placeData.id, val)
         // .pipe(delay(10000))
         .subscribe(
           (resp: IVotingService) => {
@@ -492,13 +491,13 @@ export class PlacePageComponent {
   private setPlaceEvaluationToLS(choice?: 'like' | 'dislike'): void {
     const curVal = JSON.parse(localStorage.getItem('placeEvaluation')) || [];
 
-    const aboutThisPlace = curVal.find(about => about.placeId === this.placeId);
+    const aboutThisPlace = curVal.find(about => about.placeId === this.placeData.id);
     // Возможно id-шник статьи уже есть в LS потому что она была ранее просмотрена, теперь для этой записи надо установить признак like/dislike
     if (aboutThisPlace) {
       aboutThisPlace.choice = choice;
       localStorage.setItem('placeEvaluation', JSON.stringify(curVal));
     } else {
-      const val: { placeId: string, choice?: string } = { placeId: this.placeId };
+      const val: { placeId: string, choice?: string } = { placeId: this.placeData.id };
       if (choice) {
         val.choice = choice;
       }

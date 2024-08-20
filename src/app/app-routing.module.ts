@@ -28,11 +28,11 @@ const routes: Routes = [
       { path: 'media', component: ArticlesPageComponent },
       // { path: 'locations', component: LocationsPageComponent }, // Фильтрация и сортировка на бэке
       { path: 'locations', component: LocationsPageWithFrontFilterComponent, title: 'Локации' }, // Фильтрация и сортировка на фронте
+      { path: 'locations/:title', component: PlacePageComponent },
       { path: 'team', component: TeamPageComponent },
       { path: 'help', component: HelpPageComponent },
       { path: 'legal-info', component: LegalInfoPageComponent },
       { path: 'media/:title', component: PostPageComponent },
-      { path: 'place/:id', component: PlacePageComponent },
       // { path: '**', redirectTo: '/' }
     ]
   },

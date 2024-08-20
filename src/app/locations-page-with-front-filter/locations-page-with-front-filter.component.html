@@ -111,7 +111,7 @@
                                                                     (click)="goToLocationDesc(location.id)"
                                                                     [placeData]="location"
                                                                 ></app-location-item> -->
-                                                                <a [routerLink]="['/place', location.id || 'id']"
+                                                                <a [routerLink]="['/locations', location.pageName || 'pageName']"
                                                                     target="_blank"
                                                                     class="pageContent__locationLink"
                                                                     [class.pageContent__locationLink--disabled]="isSorting() || isLoading()"

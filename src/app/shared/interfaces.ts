@@ -163,6 +163,7 @@ export type PlaceDetails = {
     ratingTripadvisor: number,
     likeCount: number,
     dislikeCount: number,
+    pageName: string,
     imageList?: Array<{
         type?: string,
         href: string

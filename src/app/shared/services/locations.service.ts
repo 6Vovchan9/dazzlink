@@ -66,6 +66,13 @@ export class LocationsService {
             )
     }
 
+    public getPageName(name: string): Observable<any> {
+        return this.http.get<Post>(`${environment.placeUrl}/place/page-name/${name}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
+            .pipe(
+                map((resp: { [key: string]: any }) => resp.data)
+            )
+    }
+
     public getCategoryOptions(): Observable<Array<ILocationCategories>> {
         return this.http.get(
             `${environment.placeUrl}/place/category`,
