@@ -703,5 +703,14 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 .withSkeletonLoader {
     .skeletonLoader {
         display: block;
+        &:after {
+            display: none;
+        }
+    }
+}
+
+.withSimpleSkeleton {
+    &:after {
+        display: none;
     }
 }
