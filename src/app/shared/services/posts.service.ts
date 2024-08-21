@@ -20,22 +20,28 @@ export class PostsService {
     }
 
     getById(id: string): Observable<Post> {
-        return this.http.get<Post>(`${environment.fbDbUrl}/posts/${id}.json`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue() } })
-            .pipe(
-                delay(2000),
-                map((post: Post) => {
-                    // console.log(post);
-                    if (post) {
-                        return {
-                            ...post,
-                            id,
-                            published: new Date(post?.published)
-                        } as Post;
-                    } else {
-                        throw new Error('Post not found');
-                    }
-                })
-            )
+        return this.http.get<Post>(
+            `${environment.fbDbUrl}/posts/${id}.json`,
+            {
+                headers: {
+                    'accept-language': this.pagesService.currentLanguage.getValue()
+                }
+            }
+        ).pipe(
+            delay(2000),
+            map((post: Post) => {
+                // console.log(post);
+                if (post) {
+                    return {
+                        ...post,
+                        id,
+                        published: new Date(post?.published)
+                    } as Post;
+                } else {
+                    throw new Error('Post not found');
+                }
+            })
+        )
     }
 
     public getByIdRovragge(id: string): Observable<Post> {

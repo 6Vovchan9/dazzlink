@@ -1,12 +1,21 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  signal
+} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { catchError, delay, map, skipWhile, switchMap, takeUntil } from 'rxjs/operators';
+import { Subject, Subscription, fromEvent, of } from 'rxjs';
 
 import { PostsService } from '@app/shared/services/posts.service';
 import { Post } from '@app/shared/interfaces';
 import { PagesService } from '@app/shared/services/pages.service';
-import { Subject, Subscription, fromEvent, of } from 'rxjs';
 import { TelegramService } from '@app/shared/services/telegram.service';
+import { ToastService } from '@app/shared/services/toast.service';
 
 @Component({
   selector: 'app-post-page',
@@ -37,7 +46,8 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private pagesService: PagesService,
     private router: Router,
     private tgService: TelegramService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private toastService: ToastService,
   ) {
     this.goBackByTg = this.goBackByTg.bind(this);
   }
@@ -111,7 +121,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.getEvaluation();
             this.isLoading.set(false);
           } else {
-            this.goToAllArticles();
+            this.goToAllArticles(true);
           }
         },
         err => {
@@ -198,8 +208,9 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  public goToAllArticles(): void {
+  public goToAllArticles(withMessage = false): void {
     this.router.navigate(['/media']);
+    if (withMessage) this.toastService.warning('Не удается открыть статью :(');
   }
 
   public onVoting(val: 'like' | 'dislike'): void {

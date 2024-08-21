@@ -58,7 +58,7 @@ export class PlacePageComponent {
       lang => {
         if (!this.isLoading) {
           this.isLoading = true;
-          this.locationsService.getById(this.placeData.pageName)
+          this.locationsService.getByPageName(this.placeData.pageName)
             .subscribe(
               (place: PlaceDetails) => {
                 this.placeData = place;
@@ -74,7 +74,7 @@ export class PlacePageComponent {
         switchMap(
           (params: Params) => {
             // return this.locationsService.getById(params['title']);
-            return this.locationsService.getPageName(params['title']);
+            return this.locationsService.getByPageName(params['title']);
           }
         ),
         // delay(8000),
