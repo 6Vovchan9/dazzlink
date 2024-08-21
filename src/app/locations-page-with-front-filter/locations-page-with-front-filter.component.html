@@ -111,10 +111,9 @@
                                                                     (click)="goToLocationDesc(location.id)"
                                                                     [placeData]="location"
                                                                 ></app-location-item> -->
-                                                                <a [routerLink]="['/locations', location.pageName || 'pageName']"
-                                                                    target="_blank"
+                                                                <a
+                                                                    (click)="goToLocationDesc(location.pageName)"
                                                                     class="pageContent__locationLink"
-                                                                    [class.pageContent__locationLink--disabled]="isSorting() || isLoading()"
                                                                 >
                                                                     <app-location-item
                                                                         [isLoading]="isSorting() || isLoading()"

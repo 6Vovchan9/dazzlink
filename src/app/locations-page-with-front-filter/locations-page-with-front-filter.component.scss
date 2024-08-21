@@ -168,14 +168,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             display: flex;
             flex-direction: column;
             row-gap: 32px;
-
-            .pageContent__locationsItem {
-                .pageContent__locationLink {
-                    &--disabled {
-                        pointer-events: none;
-                    }
-                }
-            }
         }
         &--last {
             margin-bottom: 0px;

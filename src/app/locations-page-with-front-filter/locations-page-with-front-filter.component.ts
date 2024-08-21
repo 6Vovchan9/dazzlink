@@ -1037,15 +1037,18 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     }
   }
 
-  public goToLocationDesc(id: string): void {
-    if (this.isSorting()) return;
+  public goToLocationDesc(pageName: string): void {
+    if (this.isSorting() || this.isLoading()) return;
 
     console.log('Идем к подробностям выбранной локации')
-    this.router.navigate(['/place', id]).then(
-      (success: boolean) => {
-        // console.log(success)
-      }
-    )
+    window.open(`/locations/${pageName || 'pageName'}`);
+
+    // this.router.navigate(['/locations', pageName || 'pageName']).then(
+    //   (success: boolean) => {
+    //     // console.log(success)
+    //   }
+    // )
+
   }
 
   public scrollToTop(): void {
