@@ -47,7 +47,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private tgService: TelegramService,
     private cd: ChangeDetectorRef,
-    private toastService: ToastService,
+    private toastService: ToastService
   ) {
     this.goBackByTg = this.goBackByTg.bind(this);
   }

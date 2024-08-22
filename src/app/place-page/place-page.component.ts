@@ -4,6 +4,7 @@ import { allRatingName, locationInfoMapping } from '@app/shared/constants/all.co
 import { IVotingService, PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
+import { ToastService } from '@app/shared/services/toast.service';
 import { Subscription, of, pipe } from 'rxjs';
 import { catchError, delay, switchMap } from 'rxjs/operators';
 
@@ -41,7 +42,8 @@ export class PlacePageComponent {
     private route: ActivatedRoute,
     private pagesService: PagesService,
     private locationsService: LocationsService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) { }
 
   public get getAdditInfoKeys(): Array<string> {
@@ -220,8 +222,8 @@ export class PlacePageComponent {
           this.prepareAdditPlaceData(place?.attributeList);
           this.isLoading = false;
         },
-        err => {
-          this.isLoading = false;
+        () => {
+          this.goToAllPlaces(true);
         }
       );
   }
@@ -451,13 +453,14 @@ export class PlacePageComponent {
     // console.log(this.additPlaceInfoData);
   }
 
-  public goToAllPlaces(): void {
+  public goToAllPlaces(withMessage = false): void {
     this.router.navigate(
       ['/locations'],
       {
-        queryParams: { category: this.placeData.categoryCode }
+        queryParams: { category: this.placeData?.categoryCode }
       }
     );
+    if (withMessage) this.toastService.warning('Не удается открыть локацию :(');
   }
 
   public onVoting(val: 'like' | 'dislike'): void {
