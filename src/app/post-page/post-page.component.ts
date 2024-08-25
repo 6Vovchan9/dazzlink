@@ -29,6 +29,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public postData: Post;
   public articleEvaluation: 'like' | 'dislike';
   private pageName: string;
+  private postSub: Subscription;
   private lSub: Subscription;
   private eSub: Subscription;
   private vSub: Subscription;
@@ -72,7 +73,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
-    this.route.params
+    this.postSub = this.route.params
       .pipe(
         switchMap(
           (params: Params) => {
@@ -299,6 +300,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.deleteTgBackButton(); // Это для удаления кнопки "Назад" в телеге
+    this.postSub?.unsubscribe();
     this.lSub?.unsubscribe();
     this.eSub?.unsubscribe();
     // this.vSub?.unsubscribe();

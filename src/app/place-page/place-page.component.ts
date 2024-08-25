@@ -18,6 +18,7 @@ export class PlacePageComponent {
   @ViewChild('inputInGalleria') inputInGalleria: ElementRef;
 
   private lSub: Subscription;
+  private placeSub: Subscription;
   private vSub: Subscription;
   public locationInfoName = locationInfoMapping;
   public isLoading = true;
@@ -71,7 +72,7 @@ export class PlacePageComponent {
       }
     );
 
-    this.route.params
+    this.placeSub = this.route.params
       .pipe(
         switchMap(
           (params: Params) => {
@@ -515,5 +516,6 @@ export class PlacePageComponent {
 
   public ngOnDestroy(): void {
     this.lSub?.unsubscribe();
+    this.placeSub?.unsubscribe();
   }
 }
