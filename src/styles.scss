@@ -322,7 +322,7 @@ button {
     row-gap: 14px;
     align-items: center;
     background-color: var(--color-gray1);
-    padding: 24px 28px;
+    padding: 15.5px 28px;
     border-radius: 20px;
     font-weight: 700;
 
@@ -365,6 +365,7 @@ button {
     @media #{$notMobile} {
         flex-direction: row;
         justify-content: space-between;
+        padding: 22.5px 28px;
 
         .feedback__text {
             margin-left: 0px;

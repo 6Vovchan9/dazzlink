@@ -1,297 +1,465 @@
-<main *ngIf="!isLoading" class="placePage">
-    <div class="container placePage__container">
-        <ng-container *ngIf="placeData; else errorTemplate">
+<main class="placePage">
+    <div class="container placePage__container" [class.placePage__container--withGradientEffect]="isLoading">
+        @if (isLoading) {
+            <!-- Моки для скелетона -->
             <aside class="sidebar">
-                <!-- Кнопка назад -->
                 <div class="goBackBtn">
                     <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
                 </div>
-                @if (placeData.imageList?.length) {
-                    <!-- Фотки на мобиле -->
-                    <div class="locationPhotosInMobile"
-                        (touchstart)="onTouchstart($event)"
-                        (touchend)="onTouchend($event)"
-                        (touchmove)="onTouchmove($event)"
-                    >
-                        <img class="locationPhotosInMobile__img"
-                            [src]="placeData.imageList[curPhotoInGalleria]?.href"
-                            alt="Фото"
-                        >
-
-                        <!-- Кнопка чтоб открыть фотогалерею -->
-                        <button class="showGalleryBtn" (click)="openPhotoGalleria(curPhotoInGalleria)">
-                            <div class="showGalleryBtn__icon"></div>
-                        </button>
-
-                        <!-- Пагинация для фоток на мобиле -->
-                        <div class="photoPagination">
-                            <ul class="photoPagination__list">
-                                <li *ngFor="let photo of placeData.imageList; index as i" [class.photoPagination__item--active]="i === curPhotoInGalleria" class="photoPagination__item"></li>
-                            </ul>
-                        </div>
-                    </div>
-                }
+                <div class="locationPhotosInMobile"></div>
                 <div class="placeMainInfo">
-                    <!-- Название -->
-                    <h1 class="moduleTitle placePage__title">{{placeData.title || 'Название заведения'}}</h1>
-                    <!-- $$ · Ресторан · Узбекская, Европейская -->
+                    <h1 class="moduleTitle placePage__title">Lorem, ipsum.</h1>
                     <div class="placeMainInfo__another">
                         <div class="placeMainInfo__anotherItem">
-                            <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
+                            <span>$</span>
+                            <span>$</span>
                         </div>
-                        <span class="placeMainInfo__anotherItem">{{placeData?.subcategory || 'Кафе'}}</span>
-                        <span *ngIf="placeData?.subtitle"
-                            [title]="placeData.subtitle"
-                            class="placeMainInfo__anotherItem"
-                        >
-                            {{placeData.subtitle}}
-                        </span>
+                        <span class="placeMainInfo__anotherItem">Subcategory</span>
+                        <span class="placeMainInfo__anotherItem">Subtitle</span>
                     </div>
-                    <!-- Рейтинг места -->
-                    <div *ngIf="locationRatingList?.length" class="locationRating">
+                    <div class="locationRating">
                         <ul class="locationRating__list">
-                            <li *ngFor="let rating of locationRatingList; index as photoIndex; first as isFirstPhoto"
-                                class="locationRating__item"
-                            >
-                                <div class="locationRating__val"
-                                    [ngStyle]="{
-                                        color: isFirstPhoto ?
-                                            rating.value < 4 ? '#D70015'
-                                            : rating.value <= 4.5 ? '#D78E00'
-                                            : '#248A3D'
-                                        : 'unset'
-                                    }"
-                                >
-                                    {{ (rating.value || 5) | number: '.1-2' }}
-                                </div>
-                                <div class="locationRating__title">
-                                    {{ locationInfoName[rating.name] }}
-                                </div>
+                            <li class="locationRating__item">
+                                <div class="locationRating__val">4.8</div>
+                                <div class="locationRating__title">Яндекс Карты</div>
+                            </li>
+                            <li class="locationRating__item">
+                                <div class="locationRating__val">4</div>
+                                <div class="locationRating__title">2gis</div>
+                            </li>
+                            <li class="locationRating__item">
+                                <div class="locationRating__val">3.8</div>
+                                <div class="locationRating__title">Tripadvisor</div>
+                            </li>
+                            <li class="locationRating__item">
+                                <div class="locationRating__val">3.6</div>
+                                <div class="locationRating__title">Google Maps</div>
                             </li>
                         </ul>
                     </div>
                 </div>
-
-                <!-- Время работы, адрес, контакты -->
-                <div *ngIf="getAdditInfoKeys?.length" class="additPlaceInfo">
-                    <ng-container *ngFor="let key of additPlaceInfoTypes">
-                        <ng-container *ngIf="additPlaceInfoData[key]">
-                            <!-- <ng-container *ngIf="additPlaceInfoData[key].value"> -->
-                                <div class="additPlaceInfo__item" [ngClass]="{
-                                    'additPlaceInfo__item--address': key === 'MAP',
-                                    'additPlaceInfo__item--contacts': key === 'PHONE'
-                                }">
-                                    <div class="additPlaceInfo__title">
-                                        <div class="additPlaceInfo__titleLogo"></div>
-                                        <div class="additPlaceInfo__titleText">
-                                            {{locationInfoName[additPlaceInfoData[key].type]}}
-                                        </div>
-                                    </div>
-                                    <ng-container [ngSwitch]="key">
-                                        <ng-template ngSwitchCase="PHONE">
-                                            <ul class="additPlaceInfo__linkList">
-                                                <li class="additPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
-                                                    <a [href]="phoneItem.href.phone" class="additPlaceInfo__link">{{ phoneItem.value }}</a>
-                                                </li>
-                                                <li class="additPlaceInfo__linkItem" *ngFor="let siteItem of additPlaceInfoData['SITE']?.value">
-                                                    <a [href]="siteItem.href.link" [title]="siteItem.href.link" target="_blank" class="additPlaceInfo__link">{{ siteItem.value }}</a>
-                                                </li>
-                                            </ul>
-                                        </ng-template>
-                                        <ng-template ngSwitchCase="MAP">
-                                            <ul class="additPlaceInfo__linkList">
-                                                <li class="additPlaceInfo__linkItem" *ngFor="let address of additPlaceInfoData[key].value">
-                                                    <a [href]="getAddressCoordinates(address.href)" target="_blank" class="additPlaceInfo__link">{{ address.value }}</a>
-                                                </li>
-                                            </ul>
-                                        </ng-template>
-                                        <ng-template ngSwitchDefault>
-                                            <ul class="additPlaceInfo__linkList">
-                                                <li class="additPlaceInfo__linkItem" *ngFor="let hours of additPlaceInfoData[key].value">
-                                                    <span class="additPlaceInfo__value">{{hours.value}}</span>
-                                                </li>
-                                            </ul>
-                                        </ng-template>
-                                    </ng-container>
-                                </div>
-                            <!-- </ng-container> -->
-                        </ng-container>
-                    </ng-container>
+                <div class="additPlaceInfo">
+                    <div class="additPlaceInfo__item">
+                        <div class="additPlaceInfo__title">
+                            <div class="additPlaceInfo__titleLogo"></div>
+                            <div class="additPlaceInfo__titleText">Lorem, ipsum.</div>
+                        </div>
+                        <ul class="additPlaceInfo__linkList">
+                            <li class="additPlaceInfo__linkItem">
+                                <span class="additPlaceInfo__value">Lorem ipsum dolor sit amet.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="additPlaceInfo__item additPlaceInfo__item--address">
+                        <div class="additPlaceInfo__title">
+                            <div class="additPlaceInfo__titleLogo"></div>
+                            <div class="additPlaceInfo__titleText">Lorem.</div>
+                        </div>
+                        <ul class="additPlaceInfo__linkList">
+                            <li class="additPlaceInfo__linkItem">
+                                <span class="additPlaceInfo__value">Lorem, ipsum dolor.</span>
+                            </li>
+                            <li class="additPlaceInfo__linkItem">
+                                <span class="additPlaceInfo__value">Lorem, ipsum.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="additPlaceInfo__item additPlaceInfo__item--contacts">
+                        <div class="additPlaceInfo__title">
+                            <div class="additPlaceInfo__titleLogo"></div>
+                            <div class="additPlaceInfo__titleText">Loreeem.</div>
+                        </div>
+                        <ul class="additPlaceInfo__linkList">
+                            <li class="additPlaceInfo__linkItem">
+                                <span class="additPlaceInfo__value">Lorem, ipsum hello.</span>
+                            </li>
+                            <li class="additPlaceInfo__linkItem">
+                                <span class="additPlaceInfo__value">Lorem, ipsum how are you.</span>
+                            </li>
+                            <li class="additPlaceInfo__linkItem">
+                                <span class="additPlaceInfo__value">Loreem</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </aside>
             <main class="pageContent">
                 <div class="postContent">
-
-                    <!-- Фотки на desktop -->
-                    <div class="locationPhotos"
-                        [ngClass]="{
-                            'locationPhotos--fivePhoto':  +placeData.imageList?.length === 5,
-                            'locationPhotos--fourPhoto':  +placeData.imageList?.length === 4,
-                            'locationPhotos--threePhoto': +placeData.imageList?.length === 3,
-                            'locationPhotos--twoPhoto':   +placeData.imageList?.length === 2,
-                            'locationPhotos--onePhoto':   +placeData.imageList?.length === 1,
-                        }"
-                    >
-                        @switch(+placeData.imageList?.length) { 
-                            @case (0) {
-                                Нет фотографий места
-                            } @case (1) {
-                                <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
-                            } @case (2) {
-                                <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
-                            } @case (3) {
-                                <div class="locationPhotos__wrap">
-                                    <div class="locationPhotos__major"
-                                        [class.withBlocksSpinner]="showSpinnerUnderPhoto"
-                                        (click)="openPhotoGalleria(0)"
-                                    >
-                                        <img class="locationPhotos__majorImg"
-                                            (load)="isLoadPlacePhoto()"
-                                            [src]="placeData.imageList[0].href"
-                                            alt="Главное фото"
-                                        >
-                                    </div>
-                                    <ul class="locationPhotos__minor">
-                                        <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
-                                            <ng-container *ngIf="!isFirstPhoto">
-                                                <li class="locationPhotos__minorItem"
-                                                    (click)="openPhotoGalleria(photoIndex)"
-                                                    [class.withBlocksSpinner]="showSpinnerUnderPhoto"
-                                                >
-                                                    <img class="locationPhotos__minorImg"
-                                                        (load)="isLoadPlacePhoto()"
-                                                        [src]="placeData.imageList[photoIndex].href"
-                                                        [alt]="photoIndex + 1 + ' фото'"
-                                                    >
-                                                </li>
-                                            </ng-container>
-                                        </ng-container>
-                                    </ul>
-                                </div>
-                            } @case (4) {
-                                <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
-                            } @case (5) {
-                                <div class="locationPhotos__wrap">
-                                    <!-- Главная фотка -->
-                                    <div (click)="openPhotoGalleria(0)" class="locationPhotos__major" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
-                                        <img class="locationPhotos__majorImg"
-                                            (load)="isLoadPlacePhoto()"
-                                            [src]="placeData.imageList[0].href"
-                                            alt="Главное фото"
-                                        >
-                                    </div>
-                                    <ul class="locationPhotos__minor">
-                                        <!-- Второстепенные фото -->
-                                        <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
-                                            <ng-container *ngIf="!isFirstPhoto">
-                                                <li (click)="openPhotoGalleria(photoIndex)" class="locationPhotos__minorItem" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
-                                                    <img class="locationPhotos__minorImg"
-                                                        (load)="isLoadPlacePhoto()"
-                                                        [src]="placeData.imageList[photoIndex].href"
-                                                        [alt]="photoIndex + ' фото'"
-                                                    >
-                                                </li>
-                                            </ng-container>
-                                        </ng-container>
-                                    </ul>
-                                </div>
-                            } @default {
-                                более 5 фоток
-                            }
-                        }
+                    <div class="locationPhotos locationPhotos--onePhoto">
+                        <ul class="locationPhotos__list">
+                            <li class="locationPhotos__item"></li>
+                        </ul>
                     </div>
-
-                    <!-- Пример спиннера -->
-                    <div *ngIf="false" class="exampleForSpinnet">
-                        <img class="exampleForSpinnet__img" src="assets/icons/dotsBounceSpinner.svg" alt="spinner">
-                    </div>
-
-                    <!-- Описание, награды, источники -->
-                    <div *ngIf="getAdditInfoKeys?.length" class="descPlaceInfo">
-                        <ng-container *ngFor="let key of descPlaceInfoTypes">
-                            <ng-container *ngIf="additPlaceInfoData[key]">
-                                <div class="descPlaceInfo__item">
-                                    <div class="descPlaceInfo__title">
-                                        <span>{{locationInfoName[additPlaceInfoData[key].type]}}</span>
-                                    </div>
-
-                                    <!-- <ng-container *ngIf="key === 'INFO_SOURCE'; else descPlaceInfoSimpleValue">
-                                        <ul class="descPlaceInfo__linkList">
-                                            <li class="descPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
-                                                <a [href]="phoneItem" [title]="phoneItem" target="_blank" class="descPlaceInfo__link">{{ phoneItem }}</a>
-                                            </li>
-                                        </ul>
-                                    </ng-container>
-                                    <ng-template #descPlaceInfoSimpleValue> -->
-                                        <ul class="descPlaceInfo__linkList">
-                                            <li class="descPlaceInfo__linkItem" *ngFor="let item of additPlaceInfoData[key].value">
-                                                <div class="descPlaceInfo__value">{{item.value}}</div>
-                                            </li>
-                                        </ul>
-                                    <!-- </ng-template> -->
-                                </div>
-                            </ng-container>
-                        </ng-container>
+                    <div class="descPlaceInfo">
                         <div class="descPlaceInfo__item">
                             <div class="descPlaceInfo__title">
-                                <span>Заметили неточность?</span>
+                                <span>Lorem.</span>
+                            </div>
+                            <ul class="descPlaceInfo__linkList">
+                                <li class="descPlaceInfo__linkItem">
+                                    <div class="descPlaceInfo__value">Lorem ipsum dolor sit amet.</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="descPlaceInfo__item">
+                            <div class="descPlaceInfo__title">
+                                <span>Loreeem.</span>
+                            </div>
+                            <ul class="descPlaceInfo__linkList">
+                                <li class="descPlaceInfo__linkItem">
+                                    <div class="descPlaceInfo__value">Lorem ipsum dolor sit amet consectetur.</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="descPlaceInfo__item">
+                            <div class="descPlaceInfo__title">
+                                <span>Loreeeeem.</span>
+                            </div>
+                            <ul class="descPlaceInfo__linkList">
+                                <li class="descPlaceInfo__linkItem">
+                                    <div class="descPlaceInfo__value">Loreem, ipsum.</div>
+                                </li>
+                                <li class="descPlaceInfo__linkItem">
+                                    <div class="descPlaceInfo__value">Loreeem, ipsum.</div>
+                                </li>
+                                <li class="descPlaceInfo__linkItem">
+                                    <div class="descPlaceInfo__value">Lorem, ipsum.</div>
+                                </li>
+                                <li class="descPlaceInfo__linkItem">
+                                    <div class="descPlaceInfo__value">Loreeeeem, ipsum.</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="descPlaceInfo__item">
+                            <div class="descPlaceInfo__title">
+                                <span>Loreem.</span>
                             </div>
                             <ul class="descPlaceInfo__linkList">
                                 <li class="descPlaceInfo__linkItem">
                                     <div class="descPlaceInfo__value">
-                                        Напишите нам
-                                        <a href="mailto:support@dazzlink.asia">support&#64;dazzlink.asia</a>
+                                        Напишите нам support&#64;dazzlink.asia
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <!-- Как вам локация -->
                     <div class="postContent__feedback feedback">
                         <div class="feedback__text">
                             <span>Как вам локация?</span>
-                            <div *ngIf="votingIsLoading" class="feedback__spinner">
-                                <img src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
-                            </div>
                         </div>
-                        <div class="feedback__values"
-                            [ngClass]="{
-                                'feedback__values--disabled': articleEvaluation,
-                                'feedback__values--loading': votingIsLoading
-                            }"
-                        >
+                        <div class="feedback__values">
 
-                            <div (click)="onVoting('like')"
-                                class="feedbackVal feedbackVal--leftItem feedbackVal--like"
-                                [ngClass]="{
-                                    'feedbackVal--active': placeEvaluation === 'like',
-                                    'feedbackVal--disabled': placeEvaluation
-                                }"
-                            >
-                                <div class="feedbackVal__icon">
-                                    <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
+                                <div class="feedbackVal feedbackVal--leftItem feedbackVal--like">
+                                    <div class="feedbackVal__icon">
+                                        <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
+                                    </div>
+                                    <div class="feedbackVal__amount">12</div>
                                 </div>
-                                <div class="feedbackVal__amount">{{placeData?.likeCount}}</div>
-                            </div>
 
-                            <div (click)="onVoting('dislike')"
-                                class="feedbackVal"
-                                [ngClass]="{
-                                    'feedbackVal--active': placeEvaluation === 'dislike',
-                                    'feedbackVal--disabled': placeEvaluation
-                                }"
-                            >
-                                <div class="feedbackVal__icon">
-                                    <ng-container *ngTemplateOutlet="dislikeFeedbackIcon"></ng-container>
+                                <div class="feedbackVal">
+                                    <div class="feedbackVal__icon">
+                                        <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
+                                    </div>
+                                    <div class="feedbackVal__amount">6</div>
                                 </div>
-                                <div class="feedbackVal__amount">{{placeData?.dislikeCount}}</div>
-                            </div>
 
-                        </div>
+                            </div>
                     </div>
                 </div>
             </main>
-        </ng-container>
+        } @else {
+            <ng-container *ngIf="placeData; else errorTemplate">
+                <aside class="sidebar">
+                    <!-- Кнопка назад -->
+                    <div class="goBackBtn">
+                        <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
+                    </div>
+                    @if (placeData.imageList?.length) {
+                        <!-- Фотки на мобиле -->
+                        <div class="locationPhotosInMobile"
+                            (touchstart)="onTouchstart($event)"
+                            (touchend)="onTouchend($event)"
+                            (touchmove)="onTouchmove($event)"
+                        >
+                            <img class="locationPhotosInMobile__img"
+                                [src]="placeData.imageList[curPhotoInGalleria]?.href"
+                                alt="Фото"
+                            >
+
+                            <!-- Кнопка чтоб открыть фотогалерею -->
+                            <button class="showGalleryBtn" (click)="openPhotoGalleria(curPhotoInGalleria)">
+                                <div class="showGalleryBtn__icon"></div>
+                            </button>
+
+                            <!-- Пагинация для фоток на мобиле -->
+                            <div class="photoPagination">
+                                <ul class="photoPagination__list">
+                                    <li *ngFor="let photo of placeData.imageList; index as i" [class.photoPagination__item--active]="i === curPhotoInGalleria" class="photoPagination__item"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                    <div class="placeMainInfo">
+                        <!-- Название -->
+                        <h1 class="moduleTitle placePage__title">{{placeData.title || 'Название заведения'}}</h1>
+                        <!-- $$ · Ресторан · Узбекская, Европейская -->
+                        <div class="placeMainInfo__another">
+                            <div class="placeMainInfo__anotherItem">
+                                <span *ngFor="let item of operatePriceRange(placeData?.priceRange)">$</span>
+                            </div>
+                            <span class="placeMainInfo__anotherItem">{{placeData?.subcategory || 'Кафе'}}</span>
+                            <span *ngIf="placeData?.subtitle"
+                                [title]="placeData.subtitle"
+                                class="placeMainInfo__anotherItem"
+                            >
+                                {{placeData.subtitle}}
+                            </span>
+                        </div>
+                        <!-- Рейтинг места -->
+                        <div *ngIf="locationRatingList?.length" class="locationRating">
+                            <ul class="locationRating__list">
+                                <li *ngFor="let rating of locationRatingList; index as photoIndex; first as isFirstPhoto"
+                                    class="locationRating__item"
+                                >
+                                    <div class="locationRating__val"
+                                        [ngStyle]="{
+                                            color: isFirstPhoto ?
+                                                rating.value < 4 ? '#D70015'
+                                                : rating.value <= 4.5 ? '#D78E00'
+                                                : '#248A3D'
+                                            : 'unset'
+                                        }"
+                                    >
+                                        {{ (rating.value || 5) | number: '.1-2' }}
+                                    </div>
+                                    <div class="locationRating__title">
+                                        {{ locationInfoName[rating.name] }}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Время работы, адрес, контакты -->
+                    <div *ngIf="getAdditInfoKeys?.length" class="additPlaceInfo">
+                        <ng-container *ngFor="let key of additPlaceInfoTypes">
+                            <ng-container *ngIf="additPlaceInfoData[key]">
+                                <!-- <ng-container *ngIf="additPlaceInfoData[key].value"> -->
+                                    <div class="additPlaceInfo__item" [ngClass]="{
+                                        'additPlaceInfo__item--address': key === 'MAP',
+                                        'additPlaceInfo__item--contacts': key === 'PHONE'
+                                    }">
+                                        <div class="additPlaceInfo__title">
+                                            <div class="additPlaceInfo__titleLogo"></div>
+                                            <div class="additPlaceInfo__titleText">
+                                                {{locationInfoName[additPlaceInfoData[key].type]}}
+                                            </div>
+                                        </div>
+                                        <ng-container [ngSwitch]="key">
+                                            <ng-template ngSwitchCase="PHONE">
+                                                <ul class="additPlaceInfo__linkList">
+                                                    <li class="additPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
+                                                        <a [href]="phoneItem.href.phone" class="additPlaceInfo__link">{{ phoneItem.value }}</a>
+                                                    </li>
+                                                    <li class="additPlaceInfo__linkItem" *ngFor="let siteItem of additPlaceInfoData['SITE']?.value">
+                                                        <a [href]="siteItem.href.link" [title]="siteItem.href.link" target="_blank" class="additPlaceInfo__link">{{ siteItem.value }}</a>
+                                                    </li>
+                                                </ul>
+                                            </ng-template>
+                                            <ng-template ngSwitchCase="MAP">
+                                                <ul class="additPlaceInfo__linkList">
+                                                    <li class="additPlaceInfo__linkItem" *ngFor="let address of additPlaceInfoData[key].value">
+                                                        <a [href]="getAddressCoordinates(address.href)" target="_blank" class="additPlaceInfo__link">{{ address.value }}</a>
+                                                    </li>
+                                                </ul>
+                                            </ng-template>
+                                            <ng-template ngSwitchDefault>
+                                                <ul class="additPlaceInfo__linkList">
+                                                    <li class="additPlaceInfo__linkItem" *ngFor="let hours of additPlaceInfoData[key].value">
+                                                        <span class="additPlaceInfo__value">{{hours.value}}</span>
+                                                    </li>
+                                                </ul>
+                                            </ng-template>
+                                        </ng-container>
+                                    </div>
+                                <!-- </ng-container> -->
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </aside>
+                <main class="pageContent">
+                    <div class="postContent">
+
+                        <!-- Фотки на desktop -->
+                        <div class="locationPhotos"
+                            [ngClass]="{
+                                'locationPhotos--fivePhoto':  +placeData.imageList?.length === 5,
+                                'locationPhotos--fourPhoto':  +placeData.imageList?.length === 4,
+                                'locationPhotos--threePhoto': +placeData.imageList?.length === 3,
+                                'locationPhotos--twoPhoto':   +placeData.imageList?.length === 2,
+                                'locationPhotos--onePhoto':   +placeData.imageList?.length === 1,
+                            }"
+                        >
+                            @switch(+placeData.imageList?.length) { 
+                                @case (0) {
+                                    Нет фотографий места
+                                } @case (1) {
+                                    <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
+                                } @case (2) {
+                                    <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
+                                } @case (3) {
+                                    <div class="locationPhotos__wrap">
+                                        <div class="locationPhotos__major"
+                                            [class.withBlocksSpinner]="showSpinnerUnderPhoto"
+                                            (click)="openPhotoGalleria(0)"
+                                        >
+                                            <img class="locationPhotos__majorImg"
+                                                (load)="isLoadPlacePhoto()"
+                                                [src]="placeData.imageList[0].href"
+                                                alt="Главное фото"
+                                            >
+                                        </div>
+                                        <ul class="locationPhotos__minor">
+                                            <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
+                                                <ng-container *ngIf="!isFirstPhoto">
+                                                    <li class="locationPhotos__minorItem"
+                                                        (click)="openPhotoGalleria(photoIndex)"
+                                                        [class.withBlocksSpinner]="showSpinnerUnderPhoto"
+                                                    >
+                                                        <img class="locationPhotos__minorImg"
+                                                            (load)="isLoadPlacePhoto()"
+                                                            [src]="placeData.imageList[photoIndex].href"
+                                                            [alt]="photoIndex + 1 + ' фото'"
+                                                        >
+                                                    </li>
+                                                </ng-container>
+                                            </ng-container>
+                                        </ul>
+                                    </div>
+                                } @case (4) {
+                                    <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
+                                } @case (5) {
+                                    <div class="locationPhotos__wrap">
+                                        <!-- Главная фотка -->
+                                        <div (click)="openPhotoGalleria(0)" class="locationPhotos__major" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
+                                            <img class="locationPhotos__majorImg"
+                                                (load)="isLoadPlacePhoto()"
+                                                [src]="placeData.imageList[0].href"
+                                                alt="Главное фото"
+                                            >
+                                        </div>
+                                        <ul class="locationPhotos__minor">
+                                            <!-- Второстепенные фото -->
+                                            <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
+                                                <ng-container *ngIf="!isFirstPhoto">
+                                                    <li (click)="openPhotoGalleria(photoIndex)" class="locationPhotos__minorItem" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
+                                                        <img class="locationPhotos__minorImg"
+                                                            (load)="isLoadPlacePhoto()"
+                                                            [src]="placeData.imageList[photoIndex].href"
+                                                            [alt]="photoIndex + ' фото'"
+                                                        >
+                                                    </li>
+                                                </ng-container>
+                                            </ng-container>
+                                        </ul>
+                                    </div>
+                                } @default {
+                                    более 5 фоток
+                                }
+                            }
+                        </div>
+
+                        <!-- Пример спиннера -->
+                        <div *ngIf="false" class="exampleForSpinnet">
+                            <img class="exampleForSpinnet__img" src="assets/icons/dotsBounceSpinner.svg" alt="spinner">
+                        </div>
+
+                        <!-- Описание, награды, источники -->
+                        <div *ngIf="getAdditInfoKeys?.length" class="descPlaceInfo">
+                            <ng-container *ngFor="let key of descPlaceInfoTypes">
+                                <ng-container *ngIf="additPlaceInfoData[key]">
+                                    <div class="descPlaceInfo__item">
+                                        <div class="descPlaceInfo__title">
+                                            <span>{{locationInfoName[additPlaceInfoData[key].type]}}</span>
+                                        </div>
+
+                                        <!-- <ng-container *ngIf="key === 'INFO_SOURCE'; else descPlaceInfoSimpleValue">
+                                            <ul class="descPlaceInfo__linkList">
+                                                <li class="descPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
+                                                    <a [href]="phoneItem" [title]="phoneItem" target="_blank" class="descPlaceInfo__link">{{ phoneItem }}</a>
+                                                </li>
+                                            </ul>
+                                        </ng-container>
+                                        <ng-template #descPlaceInfoSimpleValue> -->
+                                            <ul class="descPlaceInfo__linkList">
+                                                <li class="descPlaceInfo__linkItem" *ngFor="let item of additPlaceInfoData[key].value">
+                                                    <div class="descPlaceInfo__value">{{item.value}}</div>
+                                                </li>
+                                            </ul>
+                                        <!-- </ng-template> -->
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                            <div class="descPlaceInfo__item">
+                                <div class="descPlaceInfo__title">
+                                    <span>Заметили неточность?</span>
+                                </div>
+                                <ul class="descPlaceInfo__linkList">
+                                    <li class="descPlaceInfo__linkItem">
+                                        <div class="descPlaceInfo__value">
+                                            Напишите нам
+                                            <a href="mailto:support@dazzlink.asia">support&#64;dazzlink.asia</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Как вам локация -->
+                        <div class="postContent__feedback feedback">
+                            <div class="feedback__text">
+                                <span>Как вам локация?</span>
+                                <div *ngIf="votingIsLoading" class="feedback__spinner">
+                                    <img src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
+                                </div>
+                            </div>
+                            <div class="feedback__values"
+                                [ngClass]="{
+                                    'feedback__values--loading': votingIsLoading
+                                }"
+                            >
+
+                                <div (click)="onVoting('like')"
+                                    class="feedbackVal feedbackVal--leftItem feedbackVal--like"
+                                    [ngClass]="{
+                                        'feedbackVal--active': placeEvaluation === 'like',
+                                        'feedbackVal--disabled': placeEvaluation
+                                    }"
+                                >
+                                    <div class="feedbackVal__icon">
+                                        <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
+                                    </div>
+                                    <div class="feedbackVal__amount">{{placeData?.likeCount}}</div>
+                                </div>
+
+                                <div (click)="onVoting('dislike')"
+                                    class="feedbackVal"
+                                    [ngClass]="{
+                                        'feedbackVal--active': placeEvaluation === 'dislike',
+                                        'feedbackVal--disabled': placeEvaluation
+                                    }"
+                                >
+                                    <div class="feedbackVal__icon">
+                                        <ng-container *ngTemplateOutlet="dislikeFeedbackIcon"></ng-container>
+                                    </div>
+                                    <div class="feedbackVal__amount">{{placeData?.dislikeCount}}</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </ng-container>
+        }
     </div>
 </main>
 
@@ -378,4 +546,4 @@
     </ul>
 </ng-template>
 
-<app-loader *ngIf="isLoading"></app-loader>
+<!-- <app-loader *ngIf="isLoading"></app-loader> -->

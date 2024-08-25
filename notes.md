@@ -57,9 +57,9 @@ UPD: Такая фигня наблюдается только в dev mode (пр
 Сниппеты — небольшие отрывки веб-страниц, которые поисковики выдают в результатах поиска.
 Sitemap — это файл со ссылками на страницы сайта, который сообщает поисковым системам об актуальной структуре сайта.
 Schema.org предоставляет общедоступный словарь, с помощью которого вебмастера могут размечать страницы, так чтобы они были понятны самым распространенным поисковым системам: Яндексу, Google, Microsoft и Yahoo!.
-Документацию по Google Поиску https://developers.google.com/search/docs?hl=ru
-Яндекс Вебмастер – сервис поисковой оптимизации https://webmaster.yandex.ru/
+Документацию по Google Поиску https://developers.google.com/search/docs?hl=ru.
+Яндекс Вебмастер – сервис поисковой оптимизации https://webmaster.yandex.ru/.
 
 ## Open Graph
 
-Pазметка Open Graph отвечает за привлекательный вид репостов страниц сайта в соцсетях. Подробнее про og тут https://habr.com/ru/companies/click/articles/492258/
+Pазметка Open Graph отвечает за привлекательный вид репостов страниц сайта в соцсетях. Подробнее про og тут https://habr.com/ru/companies/click/articles/492258/. Как обновить отображение ссылки в Telegram, Facebook, Twitter, Вконтакте? Смотри тут https://tilda.cc/ru/answers/a/links-preview-update/

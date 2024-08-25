@@ -23,7 +23,7 @@ export class PlacePageComponent {
   public isLoading = true;
   public placeData: PlaceDetails;
   public placeEvaluation: 'like' | 'dislike';
-  private votingIsLoading = false;
+  public votingIsLoading = false;
   public additPlaceInfoItems: Array<PlaceAttributeList> = [];
   public additPlaceInfoData: { [key: string]: PlaceAttributeList } = {};
   public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];

@@ -1,8 +1,34 @@
 @import "variables";
 
+@mixin gradientEffect($bcColor: #fff) {
+    position: relative;
+    &:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: $bcColor;
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 80%;
+        background-color: #f2f3f4;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 20px;
+    }
+}
+
 :host {
     // flex: 1;
 } // Это все для того чтобы когда контента мало footer все равно был прижат к низу
+
+span {
+    display: inline-block;
+}
 
 .placePage {
     // font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
@@ -27,6 +53,70 @@
         .placePage__title {
             font-size: 24px;
             line-height: 32px;
+        }
+    }
+}
+
+// Стили скелетона 
+.placePage .placePage__container--withGradientEffect {
+    * {
+        cursor: default;
+    }
+    .sidebar {
+        .placeMainInfo {
+            display: flex;
+            flex-direction: column;
+            .placePage__title, .placeMainInfo__another {
+                @include gradientEffect;
+                align-self: flex-start;
+            }
+            .locationRating .locationRating__list {
+                align-items: flex-start;
+                .locationRating__item {
+                    @include gradientEffect;
+                }
+            }
+        }
+        .additPlaceInfo {
+            background-color: unset;
+            .additPlaceInfo__item {
+                display: flex;
+                flex-direction: column;
+                .additPlaceInfo__title {
+                    align-self: flex-start;
+                    @include gradientEffect;
+                }
+                .additPlaceInfo__linkList .additPlaceInfo__linkItem .additPlaceInfo__value {
+                    @include gradientEffect;
+                }
+            }
+        }
+    }
+    .locationPhotos .locationPhotos__list .locationPhotos__item {
+        cursor: default;
+    }
+    .descPlaceInfo {
+        .descPlaceInfo__item {
+            .descPlaceInfo__title span {
+                @include gradientEffect;
+            }
+            .descPlaceInfo__linkList {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                .descPlaceInfo__linkItem {
+                    .descPlaceInfo__value {
+                        // background-color: blueviolet;
+                        @include gradientEffect;
+                    }
+                }
+            }
+        }
+    }
+    .postContent__feedback {
+        color: var(--color-gray1);
+        .feedback__values {
+            @include gradientEffect(#f2f3f4);
         }
     }
 }
@@ -71,7 +161,6 @@
         flex-wrap: wrap;
         color: var(--color-text-gray);
         font-weight: 700;
-        cursor: default;
         .placeMainInfo__anotherItem {
             position: relative;
             padding-left: 13px;
@@ -376,7 +465,7 @@
             flex-direction: column;
             .locationPhotos__major {
                 cursor: pointer;
-                background-color: var(--color-light-gray);
+                background-color: var(--color-gray1);
                 overflow: hidden;
                 border-radius: 20px;
                 // max-height: 420px;
@@ -399,7 +488,7 @@
                 column-gap: 4px;
                 .locationPhotos__minorItem {
                     cursor: pointer;
-                    background-color: var(--color-light-gray);
+                    background-color: var(--color-gray1);
                     flex: 1;
                     overflow: hidden;
                     border-radius: 20px;
@@ -431,7 +520,7 @@
                     padding-right: 0px;
                 }
                 .locationPhotos__image {
-                    background-color: var(--color-light-gray);
+                    background-color: var(--color-gray1);
                     border-radius: 20px;
                     width: 100%;
                     object-fit: cover;
@@ -452,7 +541,7 @@
                 flex: 1;
                 border-radius: 20px;
                 overflow: hidden;
-                background-color: var(--color-light-gray);
+                background-color: var(--color-gray1);
                 cursor: pointer;
                 .locationPhotos__majorImg {
                     width: 100%;
@@ -470,7 +559,7 @@
                     flex: 1;
                     overflow: hidden;
                     border-radius: 20px;
-                    background-color: var(--color-light-gray);
+                    background-color: var(--color-gray1);
                     .locationPhotos__minorImg {
                         width: 100%;
                         object-fit: cover;
@@ -489,7 +578,7 @@
             .locationPhotos__item {
                 cursor: pointer;
                 flex: 1;
-                background-color: var(--color-light-gray);
+                background-color: var(--color-gray1);
                 border-radius: 20px;
                 overflow: hidden;
                 .locationPhotos__image {
@@ -542,6 +631,7 @@
     overflow: hidden;
     height: 300px;
     border-radius: 20px;
+    background-color: var(--color-gray1);
     // aspect-ratio: 1/0.5; не рабоатет на ios
 
     .locationPhotosInMobile__img {
