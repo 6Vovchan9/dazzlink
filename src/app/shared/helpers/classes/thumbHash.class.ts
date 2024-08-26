@@ -246,6 +246,15 @@ export abstract class ThumbHash { // от абстрактного класса 
         return this.rgbaToDataURL(image.w, image.h, image.rgba)
     }
 
+    public base64ToThumbHash(str: string): Uint8Array {
+        const bytes = atob(str);
+        let hash = new Uint8Array(bytes.length)
+        for (let i = 0; i < bytes.length; i++) {
+            hash[i] = bytes.charCodeAt(i);
+        }
+        return hash;
+    }
+
     public async getBinaryThumbHash(href: string): Promise<Uint8Array> {
         const image = new Image;
         image.src = href;

@@ -1,8 +1,8 @@
 <div class="cityCarouselImage" [class.cityCarouselImage--mainImageLoad]="mainImageLoad()">
-    @if (imageData.imageBase64) {
+    @if (imageData.metadata?.imageBase64) {
         <img
             class="cityCarouselImage__image cityCarouselImage__image--thumbHash"
-            [src]="imageData.imageBase64"
+            [src]="imageData.metadata.imageBase64"
             alt="preview"
         >
     }

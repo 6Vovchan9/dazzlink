@@ -7,5 +7,5 @@ export enum TImageState {
 export interface IImageInfo {
     type: string,
     href: string,
-    imageBase64: string // for preview
+    metadata: { imageBase64: string } // for preview
 }
