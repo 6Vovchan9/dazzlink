@@ -57,8 +57,9 @@ span {
     }
 }
 
-// Стили скелетона 
+// Стили скелетона (начало)
 .placePage .placePage__container--withGradientEffect {
+    mask-image: linear-gradient(0deg, transparent, #000 400px);
     * {
         cursor: default;
     }
@@ -120,6 +121,7 @@ span {
         }
     }
 }
+// Стили скелетона (конец)
 
 .pageContent {
     overflow: hidden;

@@ -18,17 +18,13 @@ export class CitiesService {
         private pagesService: PagesService
     ) { }
 
-    public getCities(categoryCode = 'RESTAURANTS'): Observable<Array<CountryFilterItem>> {
-        
-        const customQueryParams = { categoryCode };
-
+    public getCities(): Observable<Array<CountryFilterItem>> {
         return this.http.get(
             `${environment.placeUrl}/place/filter/city`,
             {
                 headers: {
                     'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase(),
-                },
-                params: customQueryParams
+                }
             }
         ).pipe(
             map((resp: RovraggeRespWrapper) => resp.data)

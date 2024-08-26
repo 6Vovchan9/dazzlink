@@ -3,6 +3,7 @@
         <aside class="sidebar">
             <div class="aboutPage">
                 <h1 class="moduleTitle">Помощь</h1>
+                <!-- nav bar десктоп -->
                 <div class="helpPage__anchorNav anchorNav">
                     <ul class="anchorNav__list">
                         <li class="anchorNav__item">
@@ -15,7 +16,8 @@
                             >
                                 Телефоны доверия
                             </a> -->
-                            <a class="anchorLink"
+                            <a
+                                class="anchorLink"
                                 [ngClass]="{'anchorLink--active': curSection === 'phones'}"
                                 routerLink="/help"
                                 (click)="onNavInDesktop('phones')"
@@ -24,12 +26,22 @@
                             </a>
                         </li>
                         <li class="anchorNav__item">
-                            <a [routerLink]="['/help']" class="anchorLink" [ngClass]="{'anchorLink--active': curSection === 'support'}" (click)="onNavInDesktop('support')">
+                            <a
+                                class="anchorLink"
+                                [ngClass]="{'anchorLink--active': curSection === 'support'}"
+                                [routerLink]="['/help']"
+                                (click)="onNavInDesktop('support')"
+                            >
                                 Поддержка сервиса
                             </a>
                         </li>
                         <li class="anchorNav__item">
-                            <a [routerLink]="'/help'" class="anchorLink" [ngClass]="{'anchorLink--active': curSection === 'questions'}" (click)="onNavInDesktop('questions')">
+                            <a
+                                class="anchorLink"
+                                [ngClass]="{'anchorLink--active': curSection === 'questions'}"
+                                [routerLink]="'/help'"
+                                (click)="onNavInDesktop('questions')"
+                            >
                                 Популярные вопросы
                             </a>
                         </li>
@@ -49,12 +61,13 @@
                 <div class="updatePageInfo">
                     Обновлено {{updatePageInfo | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}
                 </div>
+                <!-- nav bar mobile -->
                 <div class="inlineAnchorNav">
                     <ul class="inlineAnchorNav__list">
                         <li class="inlineAnchorNav__item" [id]="sectionDictionary['phones']">
                             <a [routerLink]="['/help']"
                                 (click)="onNavInMobile('phones')"
-                                class="inlineAnchorLink inlineAnchorLink--active"
+                                class="inlineAnchorLink"
                                 [ngClass]="{'inlineAnchorLink--active': curSection === 'phones'}"
                             >
                                 Телефоны&nbsp;доверия
