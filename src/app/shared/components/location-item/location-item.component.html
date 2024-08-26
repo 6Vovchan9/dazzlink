@@ -1,7 +1,8 @@
 <div class="locationItem" [class.locationItem--withSkeleton]="isLoading">
     <div class="locationItem__img">
         <ng-container *ngIf="placeData?.imageList?.length; else defaultPlaceImg">
-            <img [src]="placeData.imageList[0].href" loading="lazy" alt="Фото локации">
+            <!-- <img [src]="placeData.imageList[0].href" loading="lazy" alt="Фото локации"> -->
+            <app-city-carousel-image [imageData]="placeData.imageList[0]"></app-city-carousel-image>
         </ng-container>
     </div>
     <!-- <div class="locationItem__details placeDetails">
@@ -13,6 +14,7 @@
     </div> -->
     <div class="locationItem__info">
         <div class="placeDetails">
+            <!-- {{gt}} -->
             <div class="placeDetails__main">
                 <!-- Название -->
                 <div class="placeDetails__title">{{(placeData?.displayName || placeData?.title || 'Название заведения') | slice:0:30}}</div>

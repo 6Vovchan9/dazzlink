@@ -119,7 +119,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
         cityList.map(el => {
           if (el.imageList[0]?.metadata?.imageReference) {
             const hash = this.base64ToThumbHash(el.imageList[0]?.metadata?.imageReference);
-            el.imageList[0].metadata.imageBase64 = this.thumbHashToDataURL(hash); // если пришел набор байтов
+            el.imageList[0].metadata.imageBase64 = this.thumbHashToDataURL(hash);
           }
         })
 

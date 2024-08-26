@@ -137,7 +137,8 @@ export type Place = {
     rating: number,
     imageList?: Array<{
         type?: string,
-        href: string
+        href: string,
+        metadata?: { imageReference: string, imageBase64: string }
     }>
 }
 

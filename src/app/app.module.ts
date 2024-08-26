@@ -37,6 +37,7 @@ import { ToastComponent } from './shared/components/toast/toast.component';
 import { TeamPageComponent } from './team-page/team-page.component';
 import { HelpPageComponent } from './help-page/help-page.component';
 import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
+import { CityCarouselImageComponent } from './home-page/components/city-carousel-image/city-carousel-image.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -72,6 +73,7 @@ registerLocaleData(localeRu, 'ru');
     AppRoutingModule,
     FormsModule, // для [(ngModel)]
     ReactiveFormsModule, // для [formControl]
+    CityCarouselImageComponent,
     // YouTubePlayerModule,
 
     SharedModule,
