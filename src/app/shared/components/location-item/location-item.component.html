@@ -2,7 +2,7 @@
     <div class="locationItem__img">
         <ng-container *ngIf="placeData?.imageList?.length; else defaultPlaceImg">
             <!-- <img [src]="placeData.imageList[0].href" loading="lazy" alt="Фото локации"> -->
-            <app-city-carousel-image [imageData]="placeData.imageList[0]"></app-city-carousel-image>
+            <app-thumb-hash-image [imageData]="placeData.imageList[0]"></app-thumb-hash-image>
         </ng-container>
     </div>
     <!-- <div class="locationItem__details placeDetails">

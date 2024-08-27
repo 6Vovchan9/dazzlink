@@ -26,7 +26,7 @@ import { AccoTriggerComponent } from '@app/shared/components/acco-trigger/acco-t
 import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
 import { CitiesService } from '@app/shared/services/cities.service';
 import { ICity } from '@app/shared/types/cities.interface';
-import { CityCarouselImageComponent } from './components/city-carousel-image/city-carousel-image.component';
+import { ThumbHashImageComponent } from '@app/shared/components/thumb-hash-image/thumb-hash-image.component';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -45,7 +45,7 @@ type IOpportunityMenu = {
     NgClass,
     NgStyle,
     NgTemplateOutlet,
-    CityCarouselImageComponent
+    ThumbHashImageComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

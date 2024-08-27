@@ -4,13 +4,13 @@ import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
 import { IImageInfo } from '@app/shared/types/image.interface';
 
 @Component({
-  selector: 'app-city-carousel-image',
+  selector: 'app-thumb-hash-image',
   standalone: true,
   imports: [],
-  templateUrl: './city-carousel-image.component.html',
-  styleUrl: './city-carousel-image.component.scss'
+  templateUrl: './thumb-hash-image.component.html',
+  styleUrl: './thumb-hash-image.component.scss'
 })
-export class CityCarouselImageComponent extends ThumbHash {
+export class ThumbHashImageComponent extends ThumbHash {
 
   @Input() imageData: IImageInfo;
 
