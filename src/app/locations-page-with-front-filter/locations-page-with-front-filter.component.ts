@@ -525,10 +525,10 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           (value: Array<{ details: string, value: string }>) => {
             if (value?.length) {
               this.filterBarGroup.get('sort').enable({ emitEvent: false });
-              value.map(el => {
-                el.details = el.details.replace(/->/g,'→');
-                return el;
-              });
+              // value.map(el => {
+              //   el.details = el.details.replace(/->/g,'→');
+              //   return el;
+              // });
               this.sortFieldOptions.items = value;
               this.isEmptySortOptions.set(false);
               this.cd.detectChanges();
