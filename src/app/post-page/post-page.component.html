@@ -1,12 +1,91 @@
-<main *ngIf="!isLoading()" class="postPage">
-    <div class="container postPage__container">
+<main class="postPage">
+    <div class="container postPage__container" [class.postPage__container--withGradientEffect]="isLoading()">
+        @if (isLoading()) {
+            <aside class="sidebar">
+                <div class="goBackBtn">
+                    <app-go-back-btn (click)="goToAllArticles()" text="Все статьи"></app-go-back-btn>
+                </div>
+                <div class="postTitle">
+                    <!-- Дата публикации (мобила) -->
+                    <div class="postTitle__details postDetails">
+                        <div class="postDetails__info">27&nbsp;октября&nbsp;2023</div>
+                        <div class="postDetails__info">58 просмотров</div>
+                    </div>
+                    <!-- Название статьи -->
+                    <div class="moduleTitle postPage__title">
+                        <span>Lorem.</span>
+                        <span>Lorem.</span>
+                    </div>
+                    <!-- Картинка -->
+                    <div class="postTitle__img"></div>
+                </div>
+            </aside>
+            <main class="pageContent">
+                <div class="postContent">
+                    <!-- Дата публикации (комп) -->
+                    <div class="postContent__details postDetails">
+                        <div class="postDetails__info">27&nbsp;октября&nbsp;2023</div>
+                        <div class="postDetails__info">58 просмотров</div>
+                    </div>
+                    <!-- Текст статьи -->
+                    <div class="postContent__text">
+                        <div class="articleParagraph">
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem, ipsum dolor.</span>
+                        </div>
+                        <span class="articleHeader">Lorem, ipsum.</span>
+                        <div class="articleParagraph">
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem ipsum dolor sit.</span>
+                        </div>
+                        <span class="articleHeader">Lorem, ipsum.</span>
+                        <div class="articleParagraph">
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                            <span>Lorem.</span>
+                        </div>
+                    </div>
+                    <!-- Как вам статья -->
+                    <div class="postContent__feedback feedback">
+                        <div class="feedback__text">
+                            <span>Lorem.</span>
+                        </div>
+                        <div class="feedback__values">
+                            <div class="feedbackVal feedbackVal--leftItem feedbackVal--like">
+                                <div class="feedbackVal__icon">
+                                    <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
+                                </div>
+                                <div class="feedbackVal__amount">12</div>
+                            </div>
+                            <div class="feedbackVal">
+                                <div class="feedbackVal__icon">
+                                    <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
+                                </div>
+                                <div class="feedbackVal__amount">6</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        } @else {
         <ng-container *ngIf="postData; else errorTemplate">
             <aside class="sidebar">
                 <div class="goBackBtn">
                     <app-go-back-btn (click)="goToAllArticles()" text="Все статьи"></app-go-back-btn>
                 </div>
                 <div class="postTitle">
-                    <!-- Мобила -->
+                    <!-- Дата публикации (мобила) -->
                     <div class="postTitle__details postDetails">
                         <div class="postDetails__info">{{postData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}</div>
                         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} {{buildViewCount(postData.viewCount)}}</div>
@@ -44,7 +123,7 @@
             </aside>
             <main class="pageContent">
                 <div class="postContent">
-                    <!-- Комп -->
+                    <!-- Дата публикации (комп) -->
                     <div class="postContent__details postDetails">
                         <div class="postDetails__info">{{postData.published | date:'dd MMMM yyyy':'':'ru'}}</div>
                         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} {{buildViewCount(postData.viewCount)}}</div>
@@ -137,6 +216,7 @@
                 </div>
             </main>
         </ng-container>
+        }
     </div>
 </main>
 
@@ -160,9 +240,9 @@
     <p>Что-то пошло не так!<br>Уже исправляем</p>
 </ng-template>
 
-<div *ngIf="isLoading()" class="loaderInPostPage">
+<!-- <div *ngIf="isLoading()" class="loaderInPostPage">
     <app-progress-spinner></app-progress-spinner>
-</div>
+</div> -->
 <!-- <app-loader *ngIf="isLoading()"></app-loader> -->
 
 <ng-template #article0>

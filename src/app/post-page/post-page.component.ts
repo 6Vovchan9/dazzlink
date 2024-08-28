@@ -113,7 +113,8 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
             //   dislikeCount: 5,
             // }
           );
-        })
+        }),
+        // delay(2000)
       )
       .subscribe(
         (post: Post) => {
