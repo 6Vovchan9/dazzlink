@@ -27,6 +27,11 @@ export class PostComponent implements OnInit {
     return TImageState;
   }
 
+  // get ht() {
+  //   console.log(this.postData.title);
+  //   return 'Hello';
+  // }
+
   public onImageLoad() {
     this.state.set(this.imageStateTypes.Success);
   }

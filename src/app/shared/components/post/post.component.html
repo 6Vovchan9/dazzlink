@@ -5,16 +5,17 @@
     <div
         class="post__img"
         [ngClass]="{
-            'post__img--empty': !postData.imageUrl,
-            'post__img--load':   postData.imageUrl && state() === imageStateTypes.Load,
-            'post__img--error':  postData.imageUrl && state() === imageStateTypes.Error
+            'post__img--empty':  !postData.imageUrl,
+            'post__img--load':    postData.imageUrl && state() === imageStateTypes.Load,
+            'post__img--success': postData.imageUrl && state() === imageStateTypes.Success,
+            'post__img--error':   postData.imageUrl && state() === imageStateTypes.Error
         }"
     >
         <!-- <ng-container *ngIf="postData.imageUrl; else defaultPostImg"> -->
         <ng-container *ngIf="postData.imageUrl">
+            <!-- loading="lazy" -->
             <img
                 [src]="postData.imageUrl"
-                loading="lazy"
                 alt="Картинка статьи"
                 (load)="onImageLoad()"
                 (error)="onImageError()"
@@ -26,6 +27,7 @@
         <div class="postDetails__info">{{postData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}</div>
         <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} {{buildViewCount(postData.viewCount)}}</div>
     </div>
+    <!-- {{ht}} -->
     <div class="post__title">
         {{postData.title}}
     </div>
