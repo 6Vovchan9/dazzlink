@@ -67,6 +67,9 @@ span {
         .placeMainInfo {
             display: flex;
             flex-direction: column;
+            .placePage__title {
+                font-weight: 900;
+            }
             .placePage__title, .placeMainInfo__another {
                 @include gradientEffect;
                 align-self: flex-start;
@@ -118,6 +121,12 @@ span {
         color: var(--color-gray1);
         .feedback__values {
             @include gradientEffect(#f2f3f4);
+        }
+    }
+    @media #{$notMobile} {
+        .sidebar .placeMainInfo .placePage__title {
+            font-size: 40px;
+            line-height: 44px;
         }
     }
 }
