@@ -1,9 +1,15 @@
 <main class="page">
     <div class="container page__container">
 
-        <h1 class="page__moduleTitle moduleTitle">Компания</h1>
+        <h1 class="page__moduleTitle moduleTitle">Ваша семейное счастье — наш главный приоритет</h1>
+
+        <picture class="mainPicture">
+            <source media="(max-width: 767px)" srcset="assets/images/team-page/miniMainPic.png" />
+            <img src="assets/images/team-page/mainPic.png" (load)="helloLoad()" class="mainPicture__img" alt="mainPicture" />
+        </picture>
 
         <section class="aboutUsMew">
+            <h2 class="page__sectionTitle moduleTitle">Компания</h2>
             <div class="aboutUsMew__columns">
                 <div class="aboutUsMew__item">
                     <div class="aboutUsMew__card aboutUsCard">

@@ -23,6 +23,10 @@ export class TeamPageComponent extends AbsractExample implements AfterViewInit {
     // this.scrollToTop();
   }
 
+  public helloLoad(): void {
+    console.log('helloLoad');
+  }
+
   requiredMethod(): number {
     return Math.PI * Math.pow(this.radius, 2);
   }
