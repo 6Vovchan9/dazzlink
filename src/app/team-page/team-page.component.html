@@ -3,10 +3,14 @@
 
         <h1 class="page__moduleTitle moduleTitle">Ваша семейное счастье — наш главный приоритет</h1>
 
-        <picture class="mainPicture">
-            <source media="(max-width: 767px)" srcset="assets/images/team-page/miniMainPic.png" />
-            <img src="assets/images/team-page/mainPic.png" (load)="helloLoad()" class="mainPicture__img" alt="mainPicture" />
-        </picture>
+        <div class="mainPicture" [class.mainPicture--load]="mainPicLoad()">
+            <img [src]="mainPicBase64" class="mainPicture__preview" alt="preview">
+            <img [src]="miniMainPicBase64" class="mainPicture__previewMini" alt="preview">
+            <picture class="mainPicture__picture">
+                <source media="(max-width: 767px)" srcset="assets/images/team-page/miniMainPic.png" />
+                <img src="assets/images/team-page/mainPic.png" (load)="setMainPicLoad()" class="mainPicture__img" alt="mainPicture" />
+            </picture>
+        </div>
 
         <section class="aboutUsMew">
             <h2 class="page__sectionTitle moduleTitle">Компания</h2>

@@ -22,22 +22,58 @@
 }
 
 .mainPicture {
-    display: block;
+    position: relative;
     overflow: hidden;
-    border-radius: 24px;
     margin-top: 48px;
+    border-radius: 24px;
 
-    .mainPicture__img {
+    .mainPicture__picture {
+        display: block;
+        .mainPicture__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center bottom;
+            position: relative;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+    }
+
+    .mainPicture__preview, .mainPicture__previewMini {
+        display: none;
+        top: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: center bottom;
+        position: absolute;
+    }
+
+    &--load {
+        .mainPicture__picture .mainPicture__img {
+            opacity: 1;
+        }
     }
 
     @media #{$notMobile} {
         border-radius: 32px;
-        height: 480px;
-        // aspect-ratio: 2.5;
+        .mainPicture__picture {
+            height: 480px;
+            // aspect-ratio: 2.5;
+        }
+        .mainPicture__preview {
+            display: block;
+        }
+    }
+
+    @media #{$mobile} {
+        .mainPicture__picture {
+            aspect-ratio: 1; // это не обязательно но нужн для того чтобы не было прыжков при первой загрузки страницы
+        }
+        .mainPicture__previewMini {
+            display: block;
+        }
     }
 }
 

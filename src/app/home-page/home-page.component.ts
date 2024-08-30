@@ -132,7 +132,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
 
   // private async aboutThumbHash() {
-  //   const originalURL = 'assets/images/restaurant(1.8mb).jpg';
+  //   const originalURL = 'assets/images/team-page/mainPic.png';
   //   const binaryThumbHash = await this.getBinaryThumbHash(originalURL);
   //   console.log(binaryThumbHash); // [35, 73, 6, 22, 130, 9, 150, 72, 90, 116, 120, 176, 168, 73, 197, 54, 138, 86, 71, 113, 127, 4 , 247]
 
@@ -141,7 +141,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   //   console.log(placeholderURL);
   //   console.log(this.thumbHashDemoImg);
   //   this.thumbHashDemoImg.nativeElement.style.background = `center / cover url(${placeholderURL})`;
-  //   setTimeout(() => this.thumbHashDemoImg.nativeElement.src = originalURL, 500);
+  //   setTimeout(() => this.thumbHashDemoImg.nativeElement.src = originalURL, 2000);
   // }
 
   private onVideoEndedCallback = (): void => {
