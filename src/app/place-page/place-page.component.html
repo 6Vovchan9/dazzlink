@@ -307,11 +307,9 @@
                                 } @case (3) {
                                     <div class="locationPhotos__wrap">
                                         <div class="locationPhotos__major"
-                                            [class.withBlocksSpinner]="showSpinnerUnderPhoto"
                                             (click)="openPhotoGalleria(0)"
                                         >
                                             <img class="locationPhotos__majorImg"
-                                                (load)="isLoadPlacePhoto()"
                                                 [src]="placeData.imageList[0].href"
                                                 alt="Главное фото"
                                             >
@@ -321,10 +319,8 @@
                                                 <ng-container *ngIf="!isFirstPhoto">
                                                     <li class="locationPhotos__minorItem"
                                                         (click)="openPhotoGalleria(photoIndex)"
-                                                        [class.withBlocksSpinner]="showSpinnerUnderPhoto"
                                                     >
                                                         <img class="locationPhotos__minorImg"
-                                                            (load)="isLoadPlacePhoto()"
                                                             [src]="placeData.imageList[photoIndex].href"
                                                             [alt]="photoIndex + 1 + ' фото'"
                                                         >
@@ -338,9 +334,8 @@
                                 } @case (5) {
                                     <div class="locationPhotos__wrap">
                                         <!-- Главная фотка -->
-                                        <div (click)="openPhotoGalleria(0)" class="locationPhotos__major" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
+                                        <div class="locationPhotos__major" (click)="openPhotoGalleria(0)">
                                             <img class="locationPhotos__majorImg"
-                                                (load)="isLoadPlacePhoto()"
                                                 [src]="placeData.imageList[0].href"
                                                 alt="Главное фото"
                                             >
@@ -349,9 +344,8 @@
                                             <!-- Второстепенные фото -->
                                             <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
                                                 <ng-container *ngIf="!isFirstPhoto">
-                                                    <li (click)="openPhotoGalleria(photoIndex)" class="locationPhotos__minorItem" [class.withBlocksSpinner]="showSpinnerUnderPhoto">
+                                                    <li class="locationPhotos__minorItem" (click)="openPhotoGalleria(photoIndex)">
                                                         <img class="locationPhotos__minorImg"
-                                                            (load)="isLoadPlacePhoto()"
                                                             [src]="placeData.imageList[photoIndex].href"
                                                             [alt]="photoIndex + ' фото'"
                                                         >
@@ -527,6 +521,22 @@
     <p>Что-то пошло не так!<br>Уже исправляем</p>
 </ng-template>
 
+<!-- <ng-template #locationPhotosListTemplate>
+    <ul class="locationPhotos__list">
+        <li *ngFor="let imgData of placeData.imageList; index as photoIndex"
+            class="locationPhotos__item"
+            (click)="openPhotoGalleria(photoIndex)"
+        >
+            <img class="locationPhotos__image"
+                [class.withBlocksSpinner]="showSpinnerUnderPhoto"
+                (load)="isLoadPlacePhoto()"
+                [src]="imgData.href"
+                [alt]=" photoIndex + 1 + ' фото' "
+            >
+        </li>
+    </ul>
+</ng-template> -->
+
 <ng-template #locationPhotosListTemplate>
     <ul class="locationPhotos__list">
         <li *ngFor="let imgData of placeData.imageList; index as photoIndex"
@@ -534,8 +544,6 @@
             (click)="openPhotoGalleria(photoIndex)"
         >
             <img class="locationPhotos__image"
-                (load)="isLoadPlacePhoto()"
-                [class.withBlocksSpinner]="showSpinnerUnderPhoto"
                 [src]="imgData.href"
                 [alt]=" photoIndex + 1 + ' фото' "
             >

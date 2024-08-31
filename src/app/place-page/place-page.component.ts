@@ -31,8 +31,8 @@ export class PlacePageComponent {
   public descPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.description, TypeOfPlaceDetails.awards, TypeOfPlaceDetails.infoSource];
   public locationRatingList: Array<{ name: string, value: number }> = [];
 
-  public showSpinnerUnderPhoto = true;
-  public amountLoadedPhotos = 0;
+  // public showSpinnerUnderPhoto = true;
+  // public amountLoadedPhotos = 0;
 
   public curPhotoInGalleria = 0;
   public showPhotoGalleria = false;
@@ -307,13 +307,13 @@ export class PlacePageComponent {
     if (!mobileWidth) this.switchPhotoInGalleria('next');
   }
 
-  public isLoadPlacePhoto(): void {
-    this.amountLoadedPhotos += 1;
-    const amountAllPlacePhoto = +this.placeData.imageList.length;
-    if (this.amountLoadedPhotos === amountAllPlacePhoto) {
-      this.showSpinnerUnderPhoto = false;
-    }
-  }
+  // public isLoadPlacePhoto(): void {
+  //   this.amountLoadedPhotos += 1;
+  //   const amountAllPlacePhoto = +this.placeData.imageList.length;
+  //   if (this.amountLoadedPhotos === amountAllPlacePhoto) {
+  //     this.showSpinnerUnderPhoto = false;
+  //   }
+  // }
 
   public openPhotoGalleria(imgNum: number): void {
     this.curPhotoInGalleria = imgNum;
