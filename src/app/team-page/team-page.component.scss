@@ -216,8 +216,26 @@
     font-size: 24px;
 
     .ourTeam__desc {
-        max-width: 560px;
         line-height: 32px;
+
+        p {
+            flex: 1;
+        }
+
+        &--forDesktop {
+            display: none;
+            @media #{$notMobile} {
+                display: flex;
+                column-gap: 80px;
+            }
+        }
+
+        &--forMobile {
+            display: block;
+            @media #{$notMobile} {
+                display: none;
+            }
+        }
     }
 
     .ourTeam__list {

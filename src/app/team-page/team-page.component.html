@@ -13,7 +13,7 @@
         </div>
 
         <section class="aboutUsMew">
-            <h2 class="page__sectionTitle moduleTitle">Компания</h2>
+            <h2 class="page__sectionTitle moduleTitle">Философия</h2>
             <div class="aboutUsMew__columns">
                 <div class="aboutUsMew__item">
                     <div class="aboutUsMew__card aboutUsCard">
@@ -121,9 +121,20 @@
             <h2 class="page__sectionTitle moduleTitle">
                 Команда
             </h2>
-            <div class="ourTeam__desc">
-                Разносторонняя команда экспертов в области искусственного интеллекта и машинного обучения,
-                науки о данных, наук об обучении
+            <div class="ourTeam__desc ourTeam__desc--forDesktop">
+                <p>
+                    Сердце платформы — талантливые профессионалы, объединенные общей идеей создать лучший опыт знакомств в цифровом
+                    пространстве.
+                </p>
+                <p>
+                    Мы сочетаем инновационные технологии
+                    с глубоким пониманием человеческих природы, чтобы ваши отношения были значимыми
+                    и незабываемыми.
+                </p>
+            </div>
+            <div class="ourTeam__desc ourTeam__desc--forMobile">
+                Разносторонняя команда экспертов в области искусственного интеллекта и машинного обучения, науки о данных, наук об
+                обучении
             </div>
             <ul class="ourTeam__list">
                 @for (worker of ourPersonal; track $index; let count = $count) {

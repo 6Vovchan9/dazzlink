@@ -4,7 +4,7 @@ export const ourTeamList: Array<IAboutPersonalData> = [
     {
         name: 'Амаль',
         position: 'Co-founder, CEO',
-        photo: '',
+        photo: 'assets/images/team-page/photo/founder.jpeg',
         details: {
             vita: `
                 <div class="aboutPersonParagraph">
@@ -24,22 +24,22 @@ export const ourTeamList: Array<IAboutPersonalData> = [
     {
         name: 'Малика',
         position: 'Co-founder, Head of Finance',
-        photo: 'https://store.rosbank.ru/static/images/dbo/range_rover.png'
+        photo: 'assets/images/team-page/photo/financier.jpeg'
     },
     {
         name: 'Алексей',
         position: 'Head of Product and Design',
-        photo: ''
+        photo: 'assets/images/team-page/photo/productOwner.jpeg'
     },
     {
         name: 'Никита',
-        position: 'Head of Software Engineering',
-        photo: ''
+        position: 'Head of Software Engineering and IOS',
+        photo: 'assets/images/team-page/photo/ios.jpeg'
     },
     {
         name: 'Антон',
         position: 'Head of Architecture and Analytics',
-        photo: ''
+        photo: 'assets/images/team-page/photo/architect.jpeg'
     },
     {
         name: 'Александр',
@@ -59,21 +59,21 @@ export const ourTeamList: Array<IAboutPersonalData> = [
     {
         name: 'Владимир',
         position: 'Frontend Engineer',
-        photo: 'assets/images/chineseMan.jpeg'
+        photo: 'assets/images/team-page/photo/frontend.jpeg'
     },
     {
         name: 'Андрей',
         position: 'Backend Engineer',
-        photo: ''
+        photo: 'assets/images/team-page/photo/backend.jpeg'
     },
     {
         name: 'Полина',
         position: 'Graphic Designer',
-        photo: ''
+        photo: 'assets/images/team-page/photo/graphicDesigner.jpeg'
     },
     {
         name: 'Игорь',
         position: 'Product Designer',
-        photo: ''
+        photo: 'assets/images/team-page/photo/productDesigner.jpeg'
     }
 ]
