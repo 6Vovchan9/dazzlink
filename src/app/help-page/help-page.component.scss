@@ -4,7 +4,7 @@
     .helpPage__container {
         display: flex;
         margin-top: 12px;
-        margin-bottom: 32px;
+        margin-bottom: 48px;
 
         .helpPage__anchorNav {
             margin-top: 24px;
@@ -16,7 +16,7 @@
     @media #{$notMobile} {
         .helpPage__container {
             margin-top: 48px;
-            margin-bottom: 92px;
+            margin-bottom: 96px;
         }
     }
 }

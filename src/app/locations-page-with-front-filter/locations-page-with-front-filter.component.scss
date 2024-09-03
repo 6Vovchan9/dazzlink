@@ -18,7 +18,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         .page__container {
             flex-direction: row;
             padding: 0 $spacingVal;
-            margin-top: 40px;
+            margin-top: 48px;
             // margin-bottom: 140px;
         }
     }
@@ -95,7 +95,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 .pageContent {
     position: relative;
     flex: 2;
-    margin-bottom: 32px;
+    margin-bottom: 48px;
 
     .pageContent__allAboutLocations {
         &--withGradientEffect {
