@@ -2,66 +2,39 @@ import { IQuestionsContent } from "../types/question.types";
 
 export const questions: Array<IQuestionsContent> = [
     {
-        question: 'Какое фото использовать?',
+        question: 'В чем особенность отображения фото?',
         answer: `
-            Загружай фото только с собой!
-            Не добавляй фото с друзьями, потому что все пришли посмотреть на тебя,
-            а не на них. Фото с солнцезащитными очками тоже не подойдут,
-            так как будут скрывать твое лицо.
+            Фотографии в профилях специально показываются другим пользователям заблюрено. Шансы у всех людей равны, и внешность не становится камнем преткновения с первых минут общения. Во время общения в чате, алгоритм приложения предложит поделиться актуальными фото без блюра. При обоюдном согласии фото станут доступны собеседникам.
         `
     },
     {
-        question: 'Сколько в день дается бесплатных лайков?',
+        question: 'Какое фото добавить в профиль?',
         answer: `
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate a consequuntur ipsum distinctio natus ea
-            voluptatibus rerum, molestiae iste blanditiis ratione autem quis perspiciatis quos sed enim voluptatum voluptas
-            quisquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur natus quidem, soluta voluptatum
-            porro, fugit omnis nesciunt impedit nisi totam, fuga dolore tempore non quaerat quam!
-            Sed repellat soluta architecto!
+            Добавляйте фото только с собой. Не загружайте фото с друзьями, потому что собеседнику хочется увидеть именно вас, а не ваших друзей или родственников. Фото со спины или прикрытым лицом также не подойдут. Лучшие фото — это портретные снимки с вами.
         `
     },
     {
-        question: 'Когда появится солнце?',
+        question: 'В чем особенность описания профиля?',
         answer: `
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate a consequuntur ipsum distinctio natus ea
-        voluptatibus rerum, molestiae iste blanditiis ratione autem quis perspiciatis quos sed enim voluptatum voluptas
-        quisquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur natus quidem, soluta voluptatum
-        porro, fugit omnis nesciunt impedit nisi totam, fuga dolore tempore non quaerat quam!
-        Sed repellat soluta architecto! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Omnis, quae repellat delectus fugit et magni nemo, blanditiis maxime commodi corporis,
-        quod error iste repellendus placeat ab architecto fuga modi beatae!
+            Биография, цели, достижения, интересы все это — играет одну из ключевых ролей. Так как основной задачей является создать симпатию основываясь на внутреннем мире человека, уделяйте этим секциям приложения больше времени.
         `
     },
     {
-        question: 'Надо ли менять паспорт в 30 лет?',
+        question: 'Что добавить в описание профиля?',
         answer: `
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem tempora quos voluptatem.
-            Aperiam, voluptatem? Corrupti commodi tenetur odit quis perspiciatis excepturi explicabo molestias quia reiciendis,
-            fugit mollitia suscipit, nesciunt cupiditate!
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate a consequuntur ipsum distinctio natus ea
-            voluptatibus rerum, molestiae iste blanditiis ratione autem quis perspiciatis quos sed enim voluptatum voluptas
-            quisquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur natus quidem, soluta voluptatum
-            porro, fugit omnis nesciunt impedit nisi totam, fuga dolore tempore non quaerat quam!
-            Sed repellat soluta architecto!
+            Краткий и содержательный текст, который описывает вас, как человека. Если не получается составить лаконичный текст, то попробуйте сделать список своих качеств или уникальных отличительных черт или увлечений, но при этом соблюдайте этичность.
         `
     },
     {
-        question: 'Подойдет бампер от f10 на g30?',
+        question: 'Как мы относямся к оскорблениям и неуважению?',
         answer: `
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam id consectetur nemo repudiandae sint
-            impedit eveniet consequuntur rerum laudantium accusamus placeat exercitationem nobis labore sapiente et, unde,
-            mollitia fuga recusandae soluta eaque aperiam atque aspernatur illum. Quibusdam quasi pariatur quis consequatur
-            ratione, temporibus dolore nostrum veritatis, animi atque iste rerum perferendis at earum illum accusamus, impedit
-            ducimus eveniet? Velit eum aliquid earum ducimus et!
+            Dazzlink категорически не приемлет неуважительного отношения. Профили, на которые пожалуютсяпользователи за использование ненормативной лексики, откровенных фото, грубых текстов — будут заблокированы.
         `
     },
     {
-        question: 'Что взять с собой на зимнюю рыбалку?',
+        question: 'Как разблокировать свой профиль?',
         answer: `
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Debitis alias distinctio illo fugiat magni ducimus nulla,
-            non doloribus velit rem consequuntur est. Adipisci placeat consequatur velit provident,
-            obcaecati dolorem facere.
+            Единственный способ разблокировать профиль — написать на почту support@dazzlink.asia. После тщательного изучения, команда модераторов свяжется с вами. Если блокировка была выдана безосновательно, ваш профиль будет восстановлен.
         `
     }
 ]
