@@ -3,7 +3,7 @@
 .page {
     .page__container {
         margin-top: 24px;
-        margin-bottom: 32px;
+        margin-bottom: 48px;
         .page__moduleTitle {
             max-width: 532px;
         }
@@ -16,7 +16,7 @@
     @media #{$notMobile} {
         .page__container {
             margin-top: 48px;
-            margin-bottom: 92px;
+            margin-bottom: 96px;
         }
     }
 }
@@ -150,7 +150,7 @@
 .aboutUsCard {
     display: flex;
     flex-direction: column;
-    padding: 32px 20px;
+    padding: 20px 24px;
     background-color: var(--color-gray1);
     border-radius: 24px;
     .aboutUsCard__desc {
@@ -216,32 +216,20 @@
     font-size: 24px;
 
     .ourTeam__desc {
+        display: flex;
+        flex-direction: column;
+        row-gap: 24px;
         line-height: 32px;
 
         p {
             flex: 1;
-        }
-
-        &--forDesktop {
-            display: none;
-            @media #{$notMobile} {
-                display: flex;
-                column-gap: 80px;
-            }
-        }
-
-        &--forMobile {
-            display: block;
-            @media #{$notMobile} {
-                display: none;
-            }
         }
     }
 
     .ourTeam__list {
         display: flex;
         flex-direction: column;
-        margin-top: 24px;
+        margin-top: 48px;
         row-gap: 48px;
         .ourTeam__item {
             &--withDetails {
@@ -269,9 +257,12 @@
     }
 
     @media #{$notMobile} {
+        .ourTeam__desc {
+            column-gap: 80px;
+            flex-direction: row;
+        }
         .ourTeam__list {
             row-gap: 64px;
-            margin-top: 48px;
             flex-direction: row;
             flex-wrap: wrap;
             .ourTeam__item {

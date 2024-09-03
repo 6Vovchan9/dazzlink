@@ -44,17 +44,17 @@ export const ourTeamList: Array<IAboutPersonalData> = [
     {
         name: 'Александр',
         position: 'Head of Platform',
-        photo: ''
+        photo: 'assets/images/team-page/photo/platform.jpeg'
     },
     {
         name: 'Станислав',
         position: 'Head of QA',
-        photo: '',
+        photo: 'assets/images/team-page/photo/qa.jpeg',
     },
     {
         name: 'Роман',
         position: 'Android Engineer',
-        photo: ''
+        photo: 'assets/images/team-page/photo/android.jpeg'
     },
     {
         name: 'Владимир',
@@ -71,9 +71,9 @@ export const ourTeamList: Array<IAboutPersonalData> = [
         position: 'Graphic Designer',
         photo: 'assets/images/team-page/photo/graphicDesigner.jpeg'
     },
-    {
-        name: 'Игорь',
-        position: 'Product Designer',
-        photo: 'assets/images/team-page/photo/productDesigner.jpeg'
-    }
+    // {
+    //     name: 'Игорь',
+    //     position: 'Product Designer',
+    //     photo: 'assets/images/team-page/photo/productDesigner.jpeg'
+    // }
 ]
