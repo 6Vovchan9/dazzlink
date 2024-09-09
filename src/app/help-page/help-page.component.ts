@@ -85,8 +85,8 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public onNavInMobile(sectionName): void {
     // this.curSection = sectionName;
 
-    // Нельзя 2 подряд behavior: 'smooth' поэтому ниже придется обойтись без него:
-    document.getElementById(this.sectionDictionary[sectionName]).scrollIntoView({ block: 'nearest', inline: 'center' });
+    // Нельзя 2 подряд behavior: 'smooth' поэтому ниже придется обойтись без него. Позже выяснилось что проблема набл только в браузере в режиме "Emulated Devices", поэтому возвращаем эту настройку:
+    document.getElementById(this.sectionDictionary[sectionName]).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     this.jumpToSection(sectionName);
   }
 
@@ -117,17 +117,22 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
       threshold: 0
     };
 
-    this.observer = new IntersectionObserver((entries) => {
-      // console.log(entries);
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // console.log(entry.target);
-          const sectionName = entry.target.firstChild['id'];
-          this.curSection = sectionName;
-          // this.inlineScrollInTabBar(sectionName);
-        }
-      });
-    }, optionsForObserver);
+    this.observer = new IntersectionObserver(
+      entries => {
+        // console.log(entries);
+        entries.forEach(
+          entry => {
+            if (entry.isIntersecting) {
+              // console.log(entry.target);
+              const sectionName = entry.target.firstChild['id'];
+              this.curSection = sectionName;
+              // this.inlineScrollInTabBar(sectionName);
+            }
+          }
+        );
+      },
+      optionsForObserver
+    );
   }
 
   private inlineScrollInTabBar(sectionName): void {

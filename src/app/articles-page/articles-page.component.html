@@ -139,8 +139,10 @@
                         <ul class="pageContent__articles">
                             @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
                                 @if (lastIndex) {
-                                    <li #lastPostItem class="pageContent__itemOfArticle lastPostItem"
-                                        [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
+                                    <li #lastPostItem
+                                        class="pageContent__itemOfArticle lastPostItem"
+                                        [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)"
+                                    >
                                         <a [routerLink]="['/media', post.pageName]" class="pageContent__articleLink">
                                             <!-- {{index + 1}} -->
                                             <app-post [postData]="post"></app-post>
