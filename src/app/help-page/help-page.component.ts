@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+  inject
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -14,6 +24,7 @@ import { IQuestions } from './types/question.types';
 export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChildren('section', { read: ElementRef }) sectionsRef: QueryList<ElementRef>;
+  @ViewChild('inlineAnchorNav') inlineAnchorNav: ElementRef;
 
   private route: ActivatedRoute = inject(ActivatedRoute);
   public updatePageInfo: Date = new Date("2024-01-21");
@@ -126,7 +137,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
               // console.log(entry.target);
               const sectionName = entry.target.firstChild['id'];
               this.curSection = sectionName;
-              // this.inlineScrollInTabBar(sectionName);
+              // this.inlineScrollInTabBar();
             }
           }
         );
@@ -135,8 +146,20 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  private inlineScrollInTabBar(sectionName): void {
-    document.getElementById(this.sectionDictionary[sectionName]).scrollIntoView({ block: 'nearest', inline: 'center' });
+  private inlineScrollInTabBar(): void {
+    console.log('горизонтально скроллим nav bar');
+    const curItem = document.getElementById(this.sectionDictionary[this.curSection]);
+    let previousItem: any = curItem.previousSibling;
+    const wrapper = this.inlineAnchorNav.nativeElement;
+    let width = 0;
+
+    while (previousItem) {
+      width += previousItem.clientWidth + 24 - wrapper.clientWidth/2 + curItem.clientWidth/2; // 24 - это column-gap у inlineAnchorNav__list
+      previousItem = previousItem.previousSibling;
+    }
+    wrapper.scrollLeft = width;
+    
+    // curItem.scrollIntoView({ block: 'nearest', inline: 'center' });
   }
 
   ngOnDestroy(): void {

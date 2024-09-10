@@ -62,7 +62,7 @@
                     Обновлено {{updatePageInfo | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}
                 </div>
                 <!-- nav bar mobile -->
-                <div class="inlineAnchorNav">
+                <div #inlineAnchorNav class="inlineAnchorNav">
                     <ul class="inlineAnchorNav__list">
                         <li class="inlineAnchorNav__item" [id]="sectionDictionary['phones']">
                             <a [routerLink]="['/help']"
@@ -97,6 +97,7 @@
             <!-- <button (click)="clickByMyBtn2()">
                 My2
             </button> -->
+            <!-- Телефоны доверия -->
             <div class="phonesBlock" #section>
                 <span id="phones" class="anchoroffset"></span>
                 <h2 class="helpPage__sectionTitle moduleTitle">Телефоны доверия</h2>
@@ -152,6 +153,7 @@
                     </ul>
                 </div>
             </div>
+            <!-- Поддержка сервиса -->
             <div class="supportBlock" #section>
                 <span id="support" class="anchoroffset"></span>
                 <h2 class="helpPage__sectionTitle moduleTitle">Поддержка сервиса</h2>
@@ -164,7 +166,7 @@
                     </div>
                 </a>
             </div>
-
+            <!-- Популярные вопросы -->
             @if (questionsForRender?.length) {
                 <div class="questionsBlock" #section>
                     <span id="questions" class="anchoroffset"></span>
