@@ -65,7 +65,7 @@
                 <div #inlineAnchorNav class="inlineAnchorNav">
                     <ul class="inlineAnchorNav__list">
                         <li class="inlineAnchorNav__item" [id]="sectionDictionary['phones']">
-                            <a [routerLink]="['/help']"
+                            <a
                                 (click)="onNavInMobile('phones')"
                                 class="inlineAnchorLink"
                                 [ngClass]="{'inlineAnchorLink--active': curSection === 'phones'}"
@@ -74,7 +74,7 @@
                             </a>
                         </li>
                         <li class="inlineAnchorNav__item" [id]="sectionDictionary['support']">
-                            <a [routerLink]="['/help']"
+                            <a
                                 (click)="onNavInMobile('support')"
                                 class="inlineAnchorLink"
                                 [ngClass]="{'inlineAnchorLink--active': curSection === 'support'}"
@@ -83,7 +83,7 @@
                             </a>
                         </li>
                         <li class="inlineAnchorNav__item" [id]="sectionDictionary['questions']">
-                            <a [routerLink]="['/help']"
+                            <a
                                 (click)="onNavInMobile('questions')"
                                 class="inlineAnchorLink"
                                 [ngClass]="{'inlineAnchorLink--active': curSection === 'questions'}"
