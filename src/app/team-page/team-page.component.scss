@@ -356,22 +356,29 @@
         .personDescModal__container {
             padding: 64px 20px;
             .personDescModal__wrapper {
+                flex: 1;
+                justify-content: space-between;
                 flex-direction: row;
                 .personDescModal__content {
                     // margin-right: 160px;
+                    flex: 1;
+                    max-width: 920px;
+                    justify-content: space-between;
                     flex-direction: row-reverse;
                     .personDescModal__vita {
                         flex: 2;
                         margin-right: 8%;
                         overflow: scroll;
+                        max-width: 560px;
                     }
                     .personDescModal__info {
                         flex: 1;
                         min-width: 200px;
+                        max-width: 264px;
                     }
                 }
                 .personDescModal__closeBtn {
-                    padding-left: 15%;
+                    padding-left: 10%;
                     padding-bottom: 50px;
                     cursor: pointer;
                     align-self: flex-start;
