@@ -344,7 +344,7 @@
             .personDescModal__content {
                 display: flex;
                 flex-direction: column;
-                row-gap: 32px;
+                // row-gap: 32px;
                 .personDescModal__vita {
                     font-size: 20px;
                     line-height: 28px;
@@ -395,6 +395,7 @@
                 overflow: scroll;
                 .personDescModal__info {
                     padding-top: 20px;
+                    margin-bottom: 48px;
                 }
             }
             .personDescModal__closeBtn {
