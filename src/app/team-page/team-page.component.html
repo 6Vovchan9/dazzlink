@@ -174,7 +174,7 @@
                         <div class="personCard__data">
                             <div class="personCard__firstRow">
                                 <div class="personCard__name">
-                                    {{chosenPersonData.name}}
+                                    {{(chosenPersonData.name + ' ' + (chosenPersonData.surname ? chosenPersonData.surname : '')).trim()}}
                                 </div>
                             </div>
                             <div class="personCard__position">

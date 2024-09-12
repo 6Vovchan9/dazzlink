@@ -33,8 +33,30 @@ export const ourTeamList: Array<IAboutPersonalData> = [
     },
     {
         name: 'Никита',
+        surname: 'Арутюнов',
         position: 'Head of Software Engineering and iOS',
-        photo: 'assets/images/team-page/photo/ios.jpeg'
+        photo: 'assets/images/team-page/photo/ios.jpeg',
+        details: {
+            vita: `
+                <div class="aboutPersonParagraph">
+                    Талантливый Software Engineer и Serial Founder, родившийся и выросший в Ташкенте. 
+                </div>
+                <div class="aboutPersonParagraph">
+                    С детства стремясь к созданию инновационных продуктов, Никита овладел глубокими познаниями в Mobile, Web, DevOps, Data Science и Pentest.
+                    Он также успешно прошел обучение в Yandex GoTo, Университете Дизайна и Технологии и во Всемирной школе программирования l’Ecole 42.
+                </div>
+                <div class="aboutPersonParagraph">
+                    Его путь к успеху отмечен выдающимися достижениями, включая победы в хакатонах, таких как AngelHack,
+                    и руководство разработкой iOS-версии VK Bug Tracker. 
+                </div>
+                <div class="aboutPersonParagraph">
+                    Этот опыт положил начало его карьере серийного предпринимателя и технического директора в стартапах Rocket Foods, Pushka, SKIDOZ, FREEZONE и многих других.  
+                </div>
+                <div class="aboutPersonParagraph">
+                    Участие в акселерационных программах глобальных инкубаторов, таких как 500 Startups, подчеркивает его конкурентоспособность как инженера и технического лидера.
+                </div>
+            ` 
+        }
     },
     {
         name: 'Антон',
