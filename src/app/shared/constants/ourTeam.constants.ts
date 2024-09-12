@@ -23,22 +23,22 @@ export const ourTeamList: Array<IAboutPersonalData> = [
     },
     {
         name: 'Малика',
-        position: 'Co-founder, Head of Finance',
+        position: 'Co-founder, Head of Finance',
         photo: 'assets/images/team-page/photo/financier.jpeg'
     },
     {
         name: 'Алексей',
-        position: 'Head of Product and Design',
+        position: 'Head of Product and Design',
         photo: 'assets/images/team-page/photo/productOwner.jpeg'
     },
     {
         name: 'Никита',
-        position: 'Head of Software Engineering and IOS',
+        position: 'Head of Software Engineering and iOS',
         photo: 'assets/images/team-page/photo/ios.jpeg'
     },
     {
         name: 'Антон',
-        position: 'Head of Architecture and Analytics',
+        position: 'Head of Architecture and Analytics',
         photo: 'assets/images/team-page/photo/architect.jpeg'
     },
     {

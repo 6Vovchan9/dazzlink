@@ -63,3 +63,7 @@ Schema.org предоставляет общедоступный словарь,
 ## Open Graph
 
 Pазметка Open Graph отвечает за привлекательный вид репостов страниц сайта в соцсетях. Подробнее про og тут https://habr.com/ru/companies/click/articles/492258/. Как обновить отображение ссылки в Telegram, Facebook, Twitter, Вконтакте? Смотри тут https://tilda.cc/ru/answers/a/links-preview-update/
+
+## Google аналитика
+
+На самом деле script с гугл аналитикой можно было не подключать в index.html, можно было связать аналитику с проектом через gtm
