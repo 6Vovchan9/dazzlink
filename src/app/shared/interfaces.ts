@@ -168,7 +168,8 @@ export type PlaceDetails = {
     pageName: string,
     imageList?: Array<{
         type?: string,
-        href: string
+        href: string,
+        metadata?: any
     }>,
     attributeList: Array<PlaceAttributeList>
 }

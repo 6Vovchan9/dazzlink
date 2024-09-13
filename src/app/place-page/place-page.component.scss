@@ -637,6 +637,7 @@ span {
 
 .locationPhotosInMobile {
     position: relative;
+    z-index: 10;
     margin-top: 24px;
     display: flex;
     overflow: hidden;
@@ -645,11 +646,17 @@ span {
     background-color: var(--color-gray1);
     // aspect-ratio: 1/0.5; не рабоатет на ios
 
-    .locationPhotosInMobile__img {
-        width: 100%;
-        object-fit: cover;
-        // object-position: right bottom;
+    .locationPhotosInMobile__imgWrap {
+        display: none;
+        &--visible {
+            display: block;
+        }
     }
+
+    // .locationPhotosInMobile__img {
+    //     width: 100%;
+    //     object-fit: cover;
+    // }
 
     @media #{$notMobile} {
         display: none;

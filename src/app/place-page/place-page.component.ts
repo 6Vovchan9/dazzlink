@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { allRatingName, locationInfoMapping } from '@app/shared/constants/all.constants';
+import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
 import { IVotingService, PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
@@ -13,7 +14,7 @@ import { catchError, delay, switchMap } from 'rxjs/operators';
   templateUrl: './place-page.component.html',
   styleUrls: ['./place-page.component.scss']
 })
-export class PlacePageComponent {
+export class PlacePageComponent extends ThumbHash {
 
   @ViewChild('inputInGalleria') inputInGalleria: ElementRef;
 
@@ -45,7 +46,7 @@ export class PlacePageComponent {
     private locationsService: LocationsService,
     private router: Router,
     private toastService: ToastService
-  ) { }
+  ) { super() }
 
   public get getAdditInfoKeys(): Array<string> {
     return Object.keys(this.additPlaceInfoData);
@@ -88,6 +89,7 @@ export class PlacePageComponent {
       )
       .subscribe(
         (place: PlaceDetails) => {
+          this.prepareImageBase64(place.imageList);
           this.placeData = place;
           if (place) this.getEvaluation();
           // delete place.imageList;
@@ -227,6 +229,18 @@ export class PlacePageComponent {
           this.goToAllPlaces(true);
         }
       );
+  }
+
+  private prepareImageBase64(imageList: any) {
+    if (imageList.length) {
+      imageList.map(imgData => {
+        if (imgData.metadata?.imageReference) {
+          const hash = this.base64ToThumbHash(imgData.metadata.imageReference);
+          imgData.metadata.imageBase64 = this.thumbHashToDataURL(hash);
+        }
+        return imgData;
+      })
+    }
   }
 
   public getAddressCoordinates(href: { coordinates: { lat: number, lon: number }, yandexOrgId: number }): string {

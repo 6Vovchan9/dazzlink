@@ -179,10 +179,20 @@
                             (touchend)="onTouchend($event)"
                             (touchmove)="onTouchmove($event)"
                         >
-                            <img class="locationPhotosInMobile__img"
+                            <!-- <img class="locationPhotosInMobile__img"
                                 [src]="placeData.imageList[curPhotoInGalleria]?.href"
                                 alt="Фото"
-                            >
+                            > -->
+
+                            @for(imgData of placeData.imageList; track $index) {
+                                <div class="locationPhotosInMobile__imgWrap"
+                                    [ngClass]="{
+                                        'locationPhotosInMobile__imgWrap--visible': curPhotoInGalleria === $index
+                                    }"
+                                >
+                                    <app-thumb-hash-image [imageData]="imgData"></app-thumb-hash-image>
+                                </div>
+                            }
 
                             <!-- Кнопка чтоб открыть фотогалерею -->
                             <button class="showGalleryBtn" (click)="openPhotoGalleria(curPhotoInGalleria)">
