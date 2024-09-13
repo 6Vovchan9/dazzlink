@@ -340,7 +340,7 @@
             display: flex;
             overflow: hidden;
             flex-direction: column-reverse;
-            row-gap: 20px;
+            // row-gap: 20px;
             .personDescModal__content {
                 display: flex;
                 flex-direction: column;
@@ -410,6 +410,14 @@
     &:before {
         width: 64px;
         height: 64px;
+    }
+}
+
+@media #{$mobile} {
+    .closeButtonInWindow {
+        .iconForCloseInModal {
+            margin-bottom: 20px;
+        }
     }
 }
 
