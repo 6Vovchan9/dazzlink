@@ -1,4 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
+import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { allRatingName, locationInfoMapping } from '@app/shared/constants/all.constants';
 import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
@@ -6,19 +7,21 @@ import { IVotingService, PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } 
 import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
 import { ToastService } from '@app/shared/services/toast.service';
-import { Subscription, of, pipe } from 'rxjs';
-import { catchError, delay, switchMap } from 'rxjs/operators';
+import { Subscription, fromEvent, of, pipe } from 'rxjs';
+import { catchError, debounceTime, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-place-page',
   templateUrl: './place-page.component.html',
   styleUrls: ['./place-page.component.scss']
 })
-export class PlacePageComponent extends ThumbHash {
+export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
 
   @ViewChild('inputInGalleria') inputInGalleria: ElementRef;
+  @ViewChild('scrollSnappingCarousel') carouselEl: ElementRef;
 
   private lSub: Subscription;
+  private carouselScrollSub: Subscription;
   private placeSub: Subscription;
   private vSub: Subscription;
   public locationInfoName = locationInfoMapping;
@@ -231,8 +234,39 @@ export class PlacePageComponent extends ThumbHash {
       );
   }
 
+  public ngDoCheck(): void {
+    if (!this.carouselScrollSub && !this.isLoading) {
+      if (this.placeData.imageList?.length > 1) {
+        this.addEventListenerToCarousel();
+      }
+    }
+  }
+
+  private addEventListenerToCarousel() {
+    // console.log('Подписываемся на скролл карусели');
+    const carousel = this.carouselEl?.nativeElement;
+    if (carousel) {
+    this.carouselScrollSub = fromEvent(carousel, 'scroll')
+      .pipe(
+        debounceTime(50),
+        distinctUntilChanged()
+      )
+      .subscribe(
+        this.operateCarouselScroll.bind(this, carousel)
+      )
+    }
+  }
+
+  private operateCarouselScroll(carousel) {
+    const carouselWidth = carousel.scrollWidth;
+    const carouselScrollLeft = carousel.scrollLeft;
+    const imageAmount = this.placeData.imageList?.length || 1;
+    const divisor = carouselWidth / imageAmount;
+    this.curPhotoInGalleria = Math.trunc(carouselScrollLeft / divisor);
+  }
+
   private prepareImageBase64(imageList: any) {
-    if (imageList.length) {
+    if (imageList?.length) {
       imageList.map(imgData => {
         if (imgData.metadata?.imageReference) {
           const hash = this.base64ToThumbHash(imgData.metadata.imageReference);
@@ -292,18 +326,18 @@ export class PlacePageComponent extends ThumbHash {
         if (xAbs > yAbs) {
           if (finalPoint.pageX < this.initSwipePoint.pageX) {
             /*СВАЙП ВЛЕВО*/
-            console.log('свайп влево');
+            // console.log('свайп влево');
             this.switchPhotoInGalleria('next');
           } else {
             /*СВАЙП ВПРАВО*/
-            console.log('свайп вправо');
+            // console.log('свайп вправо');
             this.switchPhotoInGalleria('prev');
           }
         } else {
           if (finalPoint.pageY < this.initSwipePoint.pageY) {
-            console.log('свайп вверх');
+            // console.log('свайп вверх');
           } else {
-            console.log('свайп вниз');
+            // console.log('свайп вниз');
             this.closePhotoGalleria()
           }
         }
@@ -530,6 +564,7 @@ export class PlacePageComponent extends ThumbHash {
 
   public ngOnDestroy(): void {
     this.lSub?.unsubscribe();
+    this.carouselScrollSub?.unsubscribe();
     this.placeSub?.unsubscribe();
   }
 }

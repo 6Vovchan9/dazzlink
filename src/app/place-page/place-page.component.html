@@ -6,7 +6,7 @@
                 <div class="goBackBtn">
                     <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
                 </div>
-                <div class="locationPhotosInMobile"></div>
+                <div class="locationPhotosInMobile1"></div>
                 <div class="placeMainInfo">
                     <div class="moduleTitle placePage__title">Lorem, ipsum.</div>
                     <div class="placeMainInfo__another">
@@ -172,40 +172,76 @@
                     <div class="goBackBtn">
                         <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
                     </div>
-                    @if (placeData.imageList?.length) {
-                        <!-- Фотки на мобиле -->
-                        <div class="locationPhotosInMobile"
-                            (touchstart)="onTouchstart($event)"
-                            (touchend)="onTouchend($event)"
-                            (touchmove)="onTouchmove($event)"
-                        >
-                            <!-- <img class="locationPhotosInMobile__img"
-                                [src]="placeData.imageList[curPhotoInGalleria]?.href"
-                                alt="Фото"
-                            > -->
+                    @if (false) {
+                        @if (placeData.imageList?.length) {
+                            <!-- Фотки на мобиле -->
+                            <div class="locationPhotosInMobile1"
+                                (touchstart)="onTouchstart($event)"
+                                (touchend)="onTouchend($event)"
+                                (touchmove)="onTouchmove($event)"
+                            >
+                                <!-- <img class="locationPhotosInMobile1__img"
+                                    [src]="placeData.imageList[curPhotoInGalleria]?.href"
+                                    alt="Фото"
+                                > -->
 
-                            @for(imgData of placeData.imageList; track $index) {
-                                <div class="locationPhotosInMobile__imgWrap"
-                                    [ngClass]="{
-                                        'locationPhotosInMobile__imgWrap--visible': curPhotoInGalleria === $index
-                                    }"
-                                >
-                                    <app-thumb-hash-image [imageData]="imgData"></app-thumb-hash-image>
+                                @for(imgData of placeData.imageList; track $index) {
+                                    <div class="locationPhotosInMobile1__imgWrap"
+                                        [ngClass]="{
+                                            'locationPhotosInMobile1__imgWrap--visible': curPhotoInGalleria === $index
+                                        }"
+                                    >
+                                        <app-thumb-hash-image [imageData]="imgData"></app-thumb-hash-image>
+                                    </div>
+                                }
+
+                                <!-- Кнопка чтоб открыть фотогалерею -->
+                                <button class="showGalleryBtn" (click)="openPhotoGalleria(curPhotoInGalleria)">
+                                    <div class="showGalleryBtn__icon"></div>
+                                </button>
+
+                                <!-- Пагинация для фоток на мобиле -->
+                                <div class="photoPagination">
+                                    <ul class="photoPagination__list">
+                                        <li *ngFor="let photo of placeData.imageList; index as i" [class.photoPagination__item--active]="i === curPhotoInGalleria" class="photoPagination__item"></li>
+                                    </ul>
                                 </div>
-                            }
-
-                            <!-- Кнопка чтоб открыть фотогалерею -->
-                            <button class="showGalleryBtn" (click)="openPhotoGalleria(curPhotoInGalleria)">
-                                <div class="showGalleryBtn__icon"></div>
-                            </button>
-
-                            <!-- Пагинация для фоток на мобиле -->
-                            <div class="photoPagination">
-                                <ul class="photoPagination__list">
-                                    <li *ngFor="let photo of placeData.imageList; index as i" [class.photoPagination__item--active]="i === curPhotoInGalleria" class="photoPagination__item"></li>
-                                </ul>
                             </div>
-                        </div>
+                        }
+                    } @else {
+                        <!-- Фотки на мобиле -->
+                        @if (placeData.imageList?.length) {
+                            <div class="locationPhotosInMobile2">
+                                <div #scrollSnappingCarousel class="carousel">
+                                    @for (imgData of placeData.imageList; track $index) {
+                                        <div class="carousel__item">
+                                            <div class="carousel__wrap">
+                                                <img [src]="imgData.href" class="carousel__img" alt="Фотка">
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                                <!-- Кнопка чтоб открыть фотогалерею -->
+                                <button class="showGalleryBtn" (click)="openPhotoGalleria(curPhotoInGalleria)">
+                                    <div class="showGalleryBtn__icon"></div>
+                                </button>
+
+                                <!-- Пагинация для фоток на мобиле -->
+                                @if (placeData.imageList.length > 1) {
+                                    <div class="photoPagination">
+                                        <ul class="photoPagination__list">
+                                            <li
+                                                *ngFor="let photo of placeData.imageList; index as i"
+                                                class="photoPagination__item"
+                                                [class.photoPagination__item--active]="i === curPhotoInGalleria"
+                                            ></li>
+                                        </ul>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        <!-- End Фотки на мобиле -->
                     }
                     <div class="placeMainInfo">
                         <!-- Название -->
