@@ -393,9 +393,13 @@
         .personDescModal__container .personDescModal__wrapper {
             .personDescModal__content {
                 overflow: scroll;
+                padding-right: var(--paddingForScrollbar, 0px);
                 .personDescModal__info {
                     padding-top: 20px;
                     margin-bottom: 48px;
+                }
+                .personDescModal__vita {
+                    margin: 0px 8px;
                 }
             }
             .personDescModal__closeBtn {

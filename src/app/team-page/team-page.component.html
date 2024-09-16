@@ -162,10 +162,15 @@
     </div>
 </main>
 
+<!-- Модалка с биографией о команде -->
 <div *ngIf="chosenPersonData?.details?.vita" class="personDescModal">
     <div class="container personDescModal__container">
         <div class="personDescModal__wrapper">
-            <div class="personDescModal__content">
+            <div class="personDescModal__content"
+                [ngStyle]="{
+                    '--paddingForScrollbar': paddingForScrollbar
+                }"
+            >
                 <div class="personDescModal__info">
                     <div class="personCard">
                         <div class="personCard__photo">

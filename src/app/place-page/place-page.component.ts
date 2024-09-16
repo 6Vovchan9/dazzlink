@@ -48,7 +48,8 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
     private pagesService: PagesService,
     private locationsService: LocationsService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private vc: ViewportScroller
   ) { super() }
 
   public get getAdditInfoKeys(): Array<string> {
