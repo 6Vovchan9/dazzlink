@@ -84,82 +84,80 @@
                 </div>
             </aside>
             <main class="pageContent">
-                <div class="postContent">
-                    <div class="locationPhotos locationPhotos--onePhoto">
-                        <ul class="locationPhotos__list">
-                            <li class="locationPhotos__item"></li>
-                        </ul>
-                    </div>
-                    <div class="descPlaceInfo">
-                        <div class="descPlaceInfo__item">
-                            <div class="descPlaceInfo__title">
-                                <span>Lorem.</span>
-                            </div>
-                            <ul class="descPlaceInfo__linkList">
-                                <li class="descPlaceInfo__linkItem">
-                                    <div class="descPlaceInfo__value">Lorem ipsum dolor sit amet.</div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="descPlaceInfo__item">
-                            <div class="descPlaceInfo__title">
-                                <span>Loreeem.</span>
-                            </div>
-                            <ul class="descPlaceInfo__linkList">
-                                <li class="descPlaceInfo__linkItem">
-                                    <div class="descPlaceInfo__value">Lorem ipsum dolor sit amet consectetur.</div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="descPlaceInfo__item">
-                            <div class="descPlaceInfo__title">
-                                <span>Loreeeeem.</span>
-                            </div>
-                            <ul class="descPlaceInfo__linkList">
-                                <li class="descPlaceInfo__linkItem">
-                                    <div class="descPlaceInfo__value">Loreem, ipsum.</div>
-                                </li>
-                                <li class="descPlaceInfo__linkItem">
-                                    <div class="descPlaceInfo__value">Loreeem, ipsum.</div>
-                                </li>
-                                <li class="descPlaceInfo__linkItem">
-                                    <div class="descPlaceInfo__value">Lorem, ipsum.</div>
-                                </li>
-                                <li class="descPlaceInfo__linkItem">
-                                    <div class="descPlaceInfo__value">Loreeeeem, ipsum.</div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="descPlaceInfo__item">
-                            <div class="descPlaceInfo__title">
-                                <span>Loreem.</span>
-                            </div>
-                            <ul class="descPlaceInfo__linkList">
-                                <li class="descPlaceInfo__linkItem">
-                                    <div class="descPlaceInfo__value">
-                                        Lorem ipsum dolor sit amet consectetur.
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="postContent__feedback feedback">
-                        <div class="feedback__text">
+                <div class="locationPhotos locationPhotos--onePhoto">
+                    <ul class="locationPhotos__list">
+                        <li class="locationPhotos__item"></li>
+                    </ul>
+                </div>
+                <div class="descPlaceInfo">
+                    <div class="descPlaceInfo__item">
+                        <div class="descPlaceInfo__title">
                             <span>Lorem.</span>
                         </div>
-                        <div class="feedback__values">
-                            <div class="feedbackVal feedbackVal--leftItem feedbackVal--like">
-                                <div class="feedbackVal__icon">
-                                    <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
+                        <ul class="descPlaceInfo__linkList">
+                            <li class="descPlaceInfo__linkItem">
+                                <div class="descPlaceInfo__value">Lorem ipsum dolor sit amet.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="descPlaceInfo__item">
+                        <div class="descPlaceInfo__title">
+                            <span>Loreeem.</span>
+                        </div>
+                        <ul class="descPlaceInfo__linkList">
+                            <li class="descPlaceInfo__linkItem">
+                                <div class="descPlaceInfo__value">Lorem ipsum dolor sit amet consectetur.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="descPlaceInfo__item">
+                        <div class="descPlaceInfo__title">
+                            <span>Loreeeeem.</span>
+                        </div>
+                        <ul class="descPlaceInfo__linkList">
+                            <li class="descPlaceInfo__linkItem">
+                                <div class="descPlaceInfo__value">Loreem, ipsum.</div>
+                            </li>
+                            <li class="descPlaceInfo__linkItem">
+                                <div class="descPlaceInfo__value">Loreeem, ipsum.</div>
+                            </li>
+                            <li class="descPlaceInfo__linkItem">
+                                <div class="descPlaceInfo__value">Lorem, ipsum.</div>
+                            </li>
+                            <li class="descPlaceInfo__linkItem">
+                                <div class="descPlaceInfo__value">Loreeeeem, ipsum.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="descPlaceInfo__item">
+                        <div class="descPlaceInfo__title">
+                            <span>Loreem.</span>
+                        </div>
+                        <ul class="descPlaceInfo__linkList">
+                            <li class="descPlaceInfo__linkItem">
+                                <div class="descPlaceInfo__value">
+                                    Lorem ipsum dolor sit amet consectetur.
                                 </div>
-                                <div class="feedbackVal__amount">12</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pageContent__feedback feedback">
+                    <div class="feedback__text">
+                        <span>Lorem.</span>
+                    </div>
+                    <div class="feedback__values">
+                        <div class="feedbackVal feedbackVal--leftItem feedbackVal--like">
+                            <div class="feedbackVal__icon">
+                                <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
                             </div>
-                            <div class="feedbackVal">
-                                <div class="feedbackVal__icon">
-                                    <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
-                                </div>
-                                <div class="feedbackVal__amount">6</div>
+                            <div class="feedbackVal__amount">12</div>
+                        </div>
+                        <div class="feedbackVal">
+                            <div class="feedbackVal__icon">
+                                <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
                             </div>
+                            <div class="feedbackVal__amount">6</div>
                         </div>
                     </div>
                 </div>
@@ -331,167 +329,163 @@
                     </div>
                 </aside>
                 <main class="pageContent">
-                    <div class="postContent">
+                    <!-- Фотки на desktop -->
+                    <div class="locationPhotos"
+                        [ngClass]="{
+                            'locationPhotos--fivePhoto':  +placeData.imageList?.length === 5,
+                            'locationPhotos--fourPhoto':  +placeData.imageList?.length === 4,
+                            'locationPhotos--threePhoto': +placeData.imageList?.length === 3,
+                            'locationPhotos--twoPhoto':   +placeData.imageList?.length === 2,
+                            'locationPhotos--onePhoto':   +placeData.imageList?.length === 1,
+                        }"
+                    >
+                        @switch(+placeData.imageList?.length) { 
+                            @case (0) {
+                                Нет фотографий места
+                            } @case (1) {
+                                <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
+                            } @case (2) {
+                                <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
+                            } @case (3) {
+                                <div class="locationPhotos__wrap">
+                                    <div class="locationPhotos__major"
+                                        (click)="openPhotoGalleria(0)"
+                                    >
+                                        <img class="locationPhotos__majorImg"
+                                            [src]="placeData.imageList[0].href"
+                                            alt="Главное фото"
+                                        >
+                                    </div>
+                                    <ul class="locationPhotos__minor">
+                                        <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
+                                            <ng-container *ngIf="!isFirstPhoto">
+                                                <li class="locationPhotos__minorItem"
+                                                    (click)="openPhotoGalleria(photoIndex)"
+                                                >
+                                                    <img class="locationPhotos__minorImg"
+                                                        [src]="placeData.imageList[photoIndex].href"
+                                                        [alt]="photoIndex + 1 + ' фото'"
+                                                    >
+                                                </li>
+                                            </ng-container>
+                                        </ng-container>
+                                    </ul>
+                                </div>
+                            } @case (4) {
+                                <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
+                            } @case (5) {
+                                <!-- Главная фотка -->
+                                <div class="locationPhotos__major" (click)="openPhotoGalleria(0)">
+                                    <img class="locationPhotos__majorImg"
+                                        [src]="placeData.imageList[0].href"
+                                        alt="Главное фото"
+                                    >
+                                </div>
+                                <ul class="locationPhotos__minor">
+                                    <!-- Второстепенные фото -->
+                                    <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
+                                        <ng-container *ngIf="!isFirstPhoto">
+                                            <li class="locationPhotos__minorItem" (click)="openPhotoGalleria(photoIndex)">
+                                                <img class="locationPhotos__minorImg"
+                                                    [src]="placeData.imageList[photoIndex].href"
+                                                    [alt]="photoIndex + ' фото'"
+                                                >
+                                            </li>
+                                        </ng-container>
+                                    </ng-container>
+                                </ul>
+                            } @default {
+                                более 5 фоток
+                            }
+                        }
+                    </div>
 
-                        <!-- Фотки на desktop -->
-                        <div class="locationPhotos"
+                    <!-- Пример спиннера -->
+                    <div *ngIf="false" class="exampleForSpinnet">
+                        <img class="exampleForSpinnet__img" src="assets/icons/dotsBounceSpinner.svg" alt="spinner">
+                    </div>
+
+                    <!-- Описание, награды, источники -->
+                    <div *ngIf="getAdditInfoKeys?.length" class="descPlaceInfo">
+                        <ng-container *ngFor="let key of descPlaceInfoTypes">
+                            <ng-container *ngIf="additPlaceInfoData[key]">
+                                <div class="descPlaceInfo__item">
+                                    <div class="descPlaceInfo__title">
+                                        <span>{{locationInfoName[additPlaceInfoData[key].type]}}</span>
+                                    </div>
+
+                                    <!-- <ng-container *ngIf="key === 'INFO_SOURCE'; else descPlaceInfoSimpleValue">
+                                        <ul class="descPlaceInfo__linkList">
+                                            <li class="descPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
+                                                <a [href]="phoneItem" [title]="phoneItem" target="_blank" class="descPlaceInfo__link">{{ phoneItem }}</a>
+                                            </li>
+                                        </ul>
+                                    </ng-container>
+                                    <ng-template #descPlaceInfoSimpleValue> -->
+                                        <ul class="descPlaceInfo__linkList">
+                                            <li class="descPlaceInfo__linkItem" *ngFor="let item of additPlaceInfoData[key].value">
+                                                <div class="descPlaceInfo__value">{{item.value}}</div>
+                                            </li>
+                                        </ul>
+                                    <!-- </ng-template> -->
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                        <div class="descPlaceInfo__item">
+                            <div class="descPlaceInfo__title">
+                                <span>Заметили неточность?</span>
+                            </div>
+                            <ul class="descPlaceInfo__linkList">
+                                <li class="descPlaceInfo__linkItem">
+                                    <div class="descPlaceInfo__value">
+                                        Напишите нам
+                                        <a href="mailto:support@dazzlink.asia">support&#64;dazzlink.asia</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Как вам локация -->
+                    <div class="pageContent__feedback feedback">
+                        <div class="feedback__text">
+                            <span>Как вам локация?</span>
+                            <div *ngIf="votingIsLoading" class="feedback__spinner">
+                                <img src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
+                            </div>
+                        </div>
+                        <div class="feedback__values"
                             [ngClass]="{
-                                'locationPhotos--fivePhoto':  +placeData.imageList?.length === 5,
-                                'locationPhotos--fourPhoto':  +placeData.imageList?.length === 4,
-                                'locationPhotos--threePhoto': +placeData.imageList?.length === 3,
-                                'locationPhotos--twoPhoto':   +placeData.imageList?.length === 2,
-                                'locationPhotos--onePhoto':   +placeData.imageList?.length === 1,
+                                'feedback__values--loading': votingIsLoading
                             }"
                         >
-                            @switch(+placeData.imageList?.length) { 
-                                @case (0) {
-                                    Нет фотографий места
-                                } @case (1) {
-                                    <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
-                                } @case (2) {
-                                    <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
-                                } @case (3) {
-                                    <div class="locationPhotos__wrap">
-                                        <div class="locationPhotos__major"
-                                            (click)="openPhotoGalleria(0)"
-                                        >
-                                            <img class="locationPhotos__majorImg"
-                                                [src]="placeData.imageList[0].href"
-                                                alt="Главное фото"
-                                            >
-                                        </div>
-                                        <ul class="locationPhotos__minor">
-                                            <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
-                                                <ng-container *ngIf="!isFirstPhoto">
-                                                    <li class="locationPhotos__minorItem"
-                                                        (click)="openPhotoGalleria(photoIndex)"
-                                                    >
-                                                        <img class="locationPhotos__minorImg"
-                                                            [src]="placeData.imageList[photoIndex].href"
-                                                            [alt]="photoIndex + 1 + ' фото'"
-                                                        >
-                                                    </li>
-                                                </ng-container>
-                                            </ng-container>
-                                        </ul>
-                                    </div>
-                                } @case (4) {
-                                    <ng-container *ngTemplateOutlet="locationPhotosListTemplate"></ng-container>
-                                } @case (5) {
-                                    <div class="locationPhotos__wrap">
-                                        <!-- Главная фотка -->
-                                        <div class="locationPhotos__major" (click)="openPhotoGalleria(0)">
-                                            <img class="locationPhotos__majorImg"
-                                                [src]="placeData.imageList[0].href"
-                                                alt="Главное фото"
-                                            >
-                                        </div>
-                                        <ul class="locationPhotos__minor">
-                                            <!-- Второстепенные фото -->
-                                            <ng-container *ngFor="let imgData of placeData.imageList; index as photoIndex; first as isFirstPhoto">
-                                                <ng-container *ngIf="!isFirstPhoto">
-                                                    <li class="locationPhotos__minorItem" (click)="openPhotoGalleria(photoIndex)">
-                                                        <img class="locationPhotos__minorImg"
-                                                            [src]="placeData.imageList[photoIndex].href"
-                                                            [alt]="photoIndex + ' фото'"
-                                                        >
-                                                    </li>
-                                                </ng-container>
-                                            </ng-container>
-                                        </ul>
-                                    </div>
-                                } @default {
-                                    более 5 фоток
-                                }
-                            }
-                        </div>
 
-                        <!-- Пример спиннера -->
-                        <div *ngIf="false" class="exampleForSpinnet">
-                            <img class="exampleForSpinnet__img" src="assets/icons/dotsBounceSpinner.svg" alt="spinner">
-                        </div>
-
-                        <!-- Описание, награды, источники -->
-                        <div *ngIf="getAdditInfoKeys?.length" class="descPlaceInfo">
-                            <ng-container *ngFor="let key of descPlaceInfoTypes">
-                                <ng-container *ngIf="additPlaceInfoData[key]">
-                                    <div class="descPlaceInfo__item">
-                                        <div class="descPlaceInfo__title">
-                                            <span>{{locationInfoName[additPlaceInfoData[key].type]}}</span>
-                                        </div>
-
-                                        <!-- <ng-container *ngIf="key === 'INFO_SOURCE'; else descPlaceInfoSimpleValue">
-                                            <ul class="descPlaceInfo__linkList">
-                                                <li class="descPlaceInfo__linkItem" *ngFor="let phoneItem of additPlaceInfoData[key].value">
-                                                    <a [href]="phoneItem" [title]="phoneItem" target="_blank" class="descPlaceInfo__link">{{ phoneItem }}</a>
-                                                </li>
-                                            </ul>
-                                        </ng-container>
-                                        <ng-template #descPlaceInfoSimpleValue> -->
-                                            <ul class="descPlaceInfo__linkList">
-                                                <li class="descPlaceInfo__linkItem" *ngFor="let item of additPlaceInfoData[key].value">
-                                                    <div class="descPlaceInfo__value">{{item.value}}</div>
-                                                </li>
-                                            </ul>
-                                        <!-- </ng-template> -->
-                                    </div>
-                                </ng-container>
-                            </ng-container>
-                            <div class="descPlaceInfo__item">
-                                <div class="descPlaceInfo__title">
-                                    <span>Заметили неточность?</span>
-                                </div>
-                                <ul class="descPlaceInfo__linkList">
-                                    <li class="descPlaceInfo__linkItem">
-                                        <div class="descPlaceInfo__value">
-                                            Напишите нам
-                                            <a href="mailto:support@dazzlink.asia">support&#64;dazzlink.asia</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Как вам локация -->
-                        <div class="postContent__feedback feedback">
-                            <div class="feedback__text">
-                                <span>Как вам локация?</span>
-                                <div *ngIf="votingIsLoading" class="feedback__spinner">
-                                    <img src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
-                                </div>
-                            </div>
-                            <div class="feedback__values"
+                            <div (click)="onVoting('like')"
+                                class="feedbackVal feedbackVal--leftItem feedbackVal--like"
                                 [ngClass]="{
-                                    'feedback__values--loading': votingIsLoading
+                                    'feedbackVal--active': placeEvaluation === 'like',
+                                    'feedbackVal--disabled': placeEvaluation
                                 }"
                             >
-
-                                <div (click)="onVoting('like')"
-                                    class="feedbackVal feedbackVal--leftItem feedbackVal--like"
-                                    [ngClass]="{
-                                        'feedbackVal--active': placeEvaluation === 'like',
-                                        'feedbackVal--disabled': placeEvaluation
-                                    }"
-                                >
-                                    <div class="feedbackVal__icon">
-                                        <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
-                                    </div>
-                                    <div class="feedbackVal__amount">{{placeData?.likeCount}}</div>
+                                <div class="feedbackVal__icon">
+                                    <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
                                 </div>
-
-                                <div (click)="onVoting('dislike')"
-                                    class="feedbackVal"
-                                    [ngClass]="{
-                                        'feedbackVal--active': placeEvaluation === 'dislike',
-                                        'feedbackVal--disabled': placeEvaluation
-                                    }"
-                                >
-                                    <div class="feedbackVal__icon">
-                                        <ng-container *ngTemplateOutlet="dislikeFeedbackIcon"></ng-container>
-                                    </div>
-                                    <div class="feedbackVal__amount">{{placeData?.dislikeCount}}</div>
-                                </div>
-
+                                <div class="feedbackVal__amount">{{placeData?.likeCount}}</div>
                             </div>
+
+                            <div (click)="onVoting('dislike')"
+                                class="feedbackVal"
+                                [ngClass]="{
+                                    'feedbackVal--active': placeEvaluation === 'dislike',
+                                    'feedbackVal--disabled': placeEvaluation
+                                }"
+                            >
+                                <div class="feedbackVal__icon">
+                                    <ng-container *ngTemplateOutlet="dislikeFeedbackIcon"></ng-container>
+                                </div>
+                                <div class="feedbackVal__amount">{{placeData?.dislikeCount}}</div>
+                            </div>
+
                         </div>
                     </div>
                 </main>

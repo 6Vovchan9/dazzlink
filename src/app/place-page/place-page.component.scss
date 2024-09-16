@@ -117,7 +117,7 @@ span {
             }
         }
     }
-    .postContent__feedback {
+    .pageContent__feedback {
         color: var(--color-gray1);
         .feedback__values {
             @include gradientEffect(#f2f3f4);
@@ -136,14 +136,8 @@ span {
     overflow: hidden;
     flex: 2;
 
-    .postContent {
-        .postContent__feedback {
-            margin-top: 32px;
-        }
-    }
-
-    @media #{$notMobile} {
-
+    .pageContent__feedback {
+        margin-top: 32px;
     }
 }
 
@@ -153,7 +147,6 @@ span {
     margin-bottom: 32px;
 
     @media #{$notMobile} {
-        margin-right: 0px;
         max-width: 360px;
         margin-right: 8%;
         margin-bottom: 0px;
@@ -471,44 +464,41 @@ span {
 
     &--fivePhoto {
         display: flex;
-        .locationPhotos__wrap {
+        flex-direction: column;
+        .locationPhotos__major {
+            cursor: pointer;
+            background-color: var(--color-gray1);
+            overflow: hidden;
+            border-radius: 20px;
+            // max-height: 420px;
+            aspect-ratio: 1 / 0.57; // Из расчета размеров фотки из дизайна 560х320
+            .locationPhotos__majorImg {
+                /* object-fit: contain; */
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+                // object-position: right bottom;
+                // object-position: right top;
+                // object-position: 50% 50%;
+                object-position: center center; // default
+            }
+        }
+        .locationPhotos__minor {
+            margin-top: 4px;
             display: flex;
-            flex-direction: column;
-            .locationPhotos__major {
+            align-items: flex-start;
+            column-gap: 4px;
+            .locationPhotos__minorItem {
                 cursor: pointer;
                 background-color: var(--color-gray1);
+                flex: 1;
                 overflow: hidden;
                 border-radius: 20px;
-                // max-height: 420px;
-                aspect-ratio: 1/0.57; // Из расчета размеров фотки из дизайна 560х320
-                .locationPhotos__majorImg {
-                    /* object-fit: contain; */
+                aspect-ratio: 1 / 0.55;
+                .locationPhotos__minorImg {
                     object-fit: cover;
                     height: 100%;
                     width: 100%;
-                    // object-position: right bottom;
-                    // object-position: right top;
-                    // object-position: 50% 50%;
-                    object-position: center center; // default
-                }
-            }
-            .locationPhotos__minor {
-                margin-top: 4px;
-                display: flex;
-                align-items: flex-start;
-                column-gap: 4px;
-                .locationPhotos__minorItem {
-                    cursor: pointer;
-                    background-color: var(--color-gray1);
-                    flex: 1;
-                    overflow: hidden;
-                    border-radius: 20px;
-                    aspect-ratio: 1/0.55;
-                    .locationPhotos__minorImg {
-                        object-fit: cover;
-                        height: 100%;
-                        width: 100%;
-                    }
                 }
             }
         }
@@ -547,7 +537,7 @@ span {
             display: flex;
             column-gap: 4px;
             // height: 400px;
-            aspect-ratio: 1/0.57;
+            aspect-ratio: 1 / 0.57;
             .locationPhotos__major {
                 flex: 1;
                 border-radius: 20px;
@@ -585,7 +575,7 @@ span {
         .locationPhotos__list {
             display: flex;
             column-gap: 4px;
-            aspect-ratio: 1/0.57;
+            aspect-ratio: 1 / 0.57;
             .locationPhotos__item {
                 cursor: pointer;
                 flex: 1;
@@ -644,7 +634,7 @@ span {
     height: 300px;
     border-radius: 20px;
     background-color: var(--color-gray1);
-    // aspect-ratio: 1/0.5; не рабоатет на ios
+    // aspect-ratio: 1 / 0.5; не рабоатет на ios
 
     .locationPhotosInMobile1__imgWrap {
         display: none;
