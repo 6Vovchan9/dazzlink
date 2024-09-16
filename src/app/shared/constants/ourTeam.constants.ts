@@ -3,6 +3,7 @@ import { IAboutPersonalData } from "../interfaces";
 export const ourTeamList: Array<IAboutPersonalData> = [
     {
         name: 'Амаль',
+        queryParamName: 'Amal`_Yunusov',
         position: 'Co-founder, CEO',
         photo: 'assets/images/team-page/photo/founder.jpeg',
         details: {
@@ -34,6 +35,7 @@ export const ourTeamList: Array<IAboutPersonalData> = [
     {
         name: 'Никита',
         surname: 'Арутюнов',
+        queryParamName: 'Nikita_Arutyunov',
         position: 'Head of Software Engineering and iOS',
         photo: 'assets/images/team-page/photo/ios.jpeg',
         details: {

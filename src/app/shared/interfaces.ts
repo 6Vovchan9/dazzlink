@@ -30,6 +30,7 @@ export interface MainLayoutOptions {
 export interface IAboutPersonalData {
     name: string,
     surname?: string,
+    queryParamName?: string,
     position: string,
     photo?: string,
     details?: {

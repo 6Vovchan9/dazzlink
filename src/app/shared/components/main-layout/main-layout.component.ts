@@ -1,6 +1,6 @@
 import { Component, DoCheck, ElementRef, OnDestroy, OnInit, Optional, ViewChild, inject } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
+import { IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -82,8 +82,10 @@ export class MainLayoutComponent extends AbsractExample implements OnInit, DoChe
   }
 
   private scrollToTop(): void {
-    this.rSub = this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
+    this.rSub = this.router.events
+    .pipe(
+      filter(event => event instanceof NavigationEnd),
+      filter((event: NavigationEnd) => !event.url.includes('/team')) // Todo: такая фигня изза того что страница "О команде" скроллится наверх при открытии/закрытии модалки. Надо в будущем переверстать layout
     ).subscribe(
       val => {
         this.pageWrapEl.nativeElement.scrollTo({

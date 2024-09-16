@@ -3,6 +3,7 @@ import { AbsractExample } from '@app/shared/helpers/classes/abstract.class';
 import { ourTeamList } from '@app/shared/constants/ourTeam.constants';
 import { IAboutPersonalData } from '@app/shared/interfaces';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-team-page',
@@ -23,6 +24,8 @@ export class TeamPageComponent extends AbsractExample implements AfterViewInit {
 
   constructor(
     public mobileDetectService: MobileDetectService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     super();
     if (mobileDetectService.osDevice?.toLowerCase() === 'ios') {
@@ -30,9 +33,15 @@ export class TeamPageComponent extends AbsractExample implements AfterViewInit {
     }
   }
 
+  ngOnInit() {
+    if (this.route.snapshot.queryParams.name) {
+      this.findPersonFromQueryParam(this.route.snapshot.queryParams.name);
+    }
+  }
+
   ngAfterViewInit(): void {
     // console.log(this.getName());
-    // this.scrollToTop();
+    this.scrollToTop();
   }
 
   public setMainPicLoad(): void {
@@ -62,13 +71,35 @@ export class TeamPageComponent extends AbsractExample implements AfterViewInit {
     });
   }
 
+  private findPersonFromQueryParam(name: string) {
+    const person = this.ourPersonal.find(el => el.queryParamName?.toLowerCase() === name.toLowerCase());
+    if (person) {
+      this.openPersonDescModal(person);
+    }
+  }
+
   public openPersonDescModal(persona: IAboutPersonalData): void {
+    if (persona.queryParamName) {
+      this.setNameQueryParam(persona.queryParamName);
+    }
     this.chosenPersonData = persona;
     this.hideScroll();
   }
 
   public closePersonDescModal(): void {
+    this.setNameQueryParam(null);
     this.chosenPersonData = null;
     this.showScroll();
+  }
+
+  private setNameQueryParam(name: string) {
+    this.router.navigate(
+      [],
+      {
+        queryParams: { name },
+        replaceUrl: true,
+        queryParamsHandling: 'merge'
+      }
+    );
   }
 }
