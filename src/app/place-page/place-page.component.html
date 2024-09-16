@@ -172,9 +172,9 @@
                     <div class="goBackBtn">
                         <app-go-back-btn (click)="goToAllPlaces()" text="Все локации"></app-go-back-btn>
                     </div>
+                    <!-- Фотки на мобиле -->
                     @if (false) {
                         @if (placeData.imageList?.length) {
-                            <!-- Фотки на мобиле -->
                             <div class="locationPhotosInMobile1"
                                 (touchstart)="onTouchstart($event)"
                                 (touchend)="onTouchend($event)"
@@ -209,14 +209,14 @@
                             </div>
                         }
                     } @else {
-                        <!-- Фотки на мобиле -->
                         @if (placeData.imageList?.length) {
                             <div class="locationPhotosInMobile2">
                                 <div #scrollSnappingCarousel class="carousel">
                                     @for (imgData of placeData.imageList; track $index) {
                                         <div class="carousel__item">
                                             <div class="carousel__wrap">
-                                                <img [src]="imgData.href" class="carousel__img" alt="Фотка">
+                                                <!-- <img [src]="imgData.href" class="carousel__img" alt="Фотка"> -->
+                                                <app-thumb-hash-image [imageData]="imgData"></app-thumb-hash-image>
                                             </div>
                                         </div>
                                     }
@@ -241,7 +241,6 @@
                                 }
                             </div>
                         }
-                        <!-- End Фотки на мобиле -->
                     }
                     <div class="placeMainInfo">
                         <!-- Название -->
