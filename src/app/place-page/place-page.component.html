@@ -496,11 +496,17 @@
 
     <!-- Фотки в галаерее -->
     <div class="photoGalleria__photoWrap">
-        <img class="photoGalleria__photoImg"
-            (click)="clickByPhotoInGallery(); $event.stopPropagation(); inputInGalleria.focus()"
-            [src]="placeData.imageList[curPhotoInGalleria].href"
-            [alt]="curPhotoInGalleria + ' фото'"
-        >
+        @for(imgData of placeData.imageList; track $index) {
+            <img
+                class="photoGalleria__photo"
+                [ngClass]="{
+                    'photoGalleria__photo--visible': curPhotoInGalleria === $index
+                }"
+                (click)="clickByPhotoInGallery(); $event.stopPropagation(); inputInGalleria.focus()"
+                [src]="imgData.href"
+                [alt]="curPhotoInGalleria + ' фото'"
+            >
+        }
     </div>
 
     <!-- input для того чтобы можно было переключать фотки стрелками на клаве -->
