@@ -9,9 +9,7 @@ import { headerHeightInDesktop } from '@app/shared/constants/all.constants';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { MainLayoutOptions } from '@app/shared/interfaces';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
-import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { PagesService } from '@app/shared/services/pages.service';
-import { TelegramService } from '@app/shared/services/telegram.service';
 import { VisitsService } from '@app/shared/services/visits.service';
 
 @Component({
@@ -54,14 +52,11 @@ export class MainLayoutComponent extends AbsractExample implements OnInit, DoChe
   };
   private rSub: Subscription;
 
-  private tgService = inject(TelegramService);
-
   constructor(
     private visitsService: VisitsService,
     private pagesService: PagesService,
     public modalService: GlobalModalService,
-    private router: Router,
-    @Optional() public mobileDetectService: MobileDetectService,
+    private router: Router
   ) { super() }
 
   requiredMethod(): number {
@@ -172,17 +167,6 @@ export class MainLayoutComponent extends AbsractExample implements OnInit, DoChe
   public closeNavPopup(): void {
     this.showNavModal = false;
     this.showScroll();
-  }
-
-  public openQRModal(): void {
-    this.modalService.open({ component: 'mainLayoutComponent' }); // на аргумент можно не обращать внимание
-  }
-
-  private clickByCompanyBlock(): void {
-    if (this.tgService.mainTgButton) {
-      this.tgService.mainTgButton.setText('MainButton');
-      this.tgService.mainTgButton.show();
-    }
   }
 
   ngOnDestroy(): void {
