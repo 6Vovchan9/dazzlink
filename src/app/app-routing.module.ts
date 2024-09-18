@@ -15,26 +15,31 @@ import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.compon
 
 const routes: Routes = [
   {
-    path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [
-      // { path: '', redirectTo: '/', pathMatch: 'full' },
-      {
-        path: '',
-        loadComponent: () =>
-          import("./home-page/home-page.component").then(
-            m => m.HomePageComponent
-          )
-      },
-      { path: 'agreements', component: AgreementsPageComponent },
-      { path: 'media', component: ArticlesPageComponent },
-      // { path: 'locations', component: LocationsPageComponent }, // Фильтрация и сортировка на бэке
-      { path: 'locations', component: LocationsPageWithFrontFilterComponent, title: 'Локации' }, // Фильтрация и сортировка на фронте
-      { path: 'locations/:title', component: PlacePageComponent },
-      { path: 'team', component: TeamPageComponent },
-      { path: 'help', component: HelpPageComponent },
-      { path: 'legal-info', component: LegalInfoPageComponent },
-      { path: 'media/:title', component: PostPageComponent },
-      // { path: '**', redirectTo: '/' }
-    ]
+    path: '',
+    loadComponent: () =>
+      import("./home-page/home-page.component").then(
+        m => m.HomePageComponent
+      ),
+    // path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [
+    //   // { path: '', redirectTo: '/', pathMatch: 'full' },
+    //   {
+    //     path: '',
+    //     loadComponent: () =>
+    //       import("./home-page/home-page.component").then(
+    //         m => m.HomePageComponent
+    //       )
+    //   },
+    //   { path: 'agreements', component: AgreementsPageComponent },
+    //   { path: 'media', component: ArticlesPageComponent },
+    //   // { path: 'locations', component: LocationsPageComponent }, // Фильтрация и сортировка на бэке
+    //   { path: 'locations', component: LocationsPageWithFrontFilterComponent, title: 'Локации' }, // Фильтрация и сортировка на фронте
+    //   { path: 'locations/:title', component: PlacePageComponent },
+    //   { path: 'team', component: TeamPageComponent },
+    //   { path: 'help', component: HelpPageComponent },
+    //   { path: 'legal-info', component: LegalInfoPageComponent },
+    //   { path: 'media/:title', component: PostPageComponent },
+    //   // { path: '**', redirectTo: '/' }
+    // ]
   },
   {
     path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)

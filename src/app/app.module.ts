@@ -58,7 +58,6 @@ registerLocaleData(localeRu, 'ru');
     LegalInfoPageComponent,
 
     ToastComponent,
-    FooterComponent,
     PostComponent,
     LocationItemComponent,
     ModalComponent,
@@ -74,6 +73,7 @@ registerLocaleData(localeRu, 'ru');
     ReactiveFormsModule, // для [formControl]
     ThumbHashImageComponent,
     HeaderComponent,
+    FooterComponent,
     // YouTubePlayerModule,
 
     SharedModule,

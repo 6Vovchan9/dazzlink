@@ -13,10 +13,10 @@ import {
   signal
 } from '@angular/core';
 import { Observable, Subscription, fromEvent, of } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 
 import { langArr } from '@app/shared/constants/languages.constants';
 import { PagesService } from '@app/shared/services/pages.service';
@@ -27,6 +27,8 @@ import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
 import { CitiesService } from '@app/shared/services/cities.service';
 import { ICity } from '@app/shared/types/cities.interface';
 import { ThumbHashImageComponent } from '@app/shared/components/thumb-hash-image/thumb-hash-image.component';
+import { HeaderComponent } from '@app/shared/components/header/header.component';
+import { FooterComponent } from '@app/shared/components/footer/footer.component';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -45,7 +47,9 @@ type IOpportunityMenu = {
     NgClass,
     NgStyle,
     NgTemplateOutlet,
-    ThumbHashImageComponent
+    ThumbHashImageComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -62,6 +66,9 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   private curLang: string;
   private lSub: Subscription;
   private pageWrapScrollSub: Subscription;
+  private pageScrollSub: Subscription;
+  private prewScrollTop = 0;
+  public hideHeader = signal(true);
   private cSub: Subscription;
   public appOpportunityMenu: Record<string, IOpportunityMenu> = {};
 
@@ -80,9 +87,10 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     private pagesService: PagesService,
     @Optional() public mobileDetectService: MobileDetectService,
     private router: Router,
-    private citiesService: CitiesService
-    // private translateService: GoogleTranslationService
+    private citiesService: CitiesService,
+    private vc: ViewportScroller
     // private cd: ChangeDetectorRef
+    // private translateService: GoogleTranslationService
   ) { super() }
 
   // @HostListener('window:load', [])
@@ -110,6 +118,41 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
 
   ngAfterViewInit(): void {
     this.ensureVideoPlays();
+    this.addEventListenerToPage();
+  }
+
+  public get productName(): string {
+    // console.log('getProductName');
+    return 'Dazzlink';
+  }
+
+  private addEventListenerToPage(): void {
+    this.pageScrollSub = fromEvent(window, 'scroll')
+      .subscribe({
+        next: () => {
+          this.operatePageScroll();
+        }
+      });
+  }
+
+  private operatePageScroll() {
+    const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
+    if (curScrollTop > this.prewScrollTop || curScrollTop < 100) {
+      if (curScrollTop < 100) {
+        if (curScrollTop === 0) {
+          // console.log('Скрываем header');
+          this.hideHeader.set(true);
+        }
+      } else {
+        // console.log('Скрываем header');
+        this.hideHeader.set(true);
+      }
+    } else {
+      // console.log('Показываем header');
+      this.hideHeader.set(false);
+    }
+    this.prewScrollTop = curScrollTop;
+    // this.cd.detectChanges();
   }
   
   private getCitiesForCarousel(): void {
@@ -314,6 +357,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
 
   public ngOnDestroy(): void {
     this.pageWrapScrollSub?.unsubscribe();
+    this.pageScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
     this.cSub?.unsubscribe();
     this.removeAllListeners();

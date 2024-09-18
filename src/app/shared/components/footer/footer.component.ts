@@ -8,6 +8,8 @@ import { TelegramService } from '@app/shared/services/telegram.service';
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
+  standalone: true,
+  imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
@@ -36,7 +38,7 @@ export class FooterComponent {
   }
 
   public openQRModal(): void {
-    this.modalService.open({ component: 'mainLayoutComponent' }); // на аргумент можно не обращать внимание
+    this.modalService.open({ component: 'appComponent', modalName: 'qrModal' }); // на аргумент можно не обращать внимание
   }
 
 }

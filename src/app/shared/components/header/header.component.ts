@@ -21,8 +21,6 @@ export class HeaderComponent extends AbsractExample {
 
   public showNavModal = false;
 
-  @Input() hidden = false;
-
   requiredMethod(): number {
     return Math.PI * Math.pow(this.radius, 2);
   }

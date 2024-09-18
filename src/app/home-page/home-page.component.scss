@@ -2,17 +2,39 @@
 
 $carousel-gap: 24;
 
-.page {
+.homePage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    .homePage__header {
+        position: sticky;
+        top: -64px;
+        z-index: 100;
+        transition: .6s;
 
-    .page__container {
-        margin-top: 24px;
-        margin-bottom: 48px;
+        &--visible {
+            top: 0;
+        }
     }
-
+    .homePage__main {
+        flex: 1;
+        .homePage__container {
+            margin-top: 24px;
+            margin-bottom: 48px;
+        }
+    }
     @media #{$notMobile} {
-        .page__container {
-            margin-top: 48px;
-            margin-bottom: 96px;
+        .homePage__header {
+            top: -80px;
+            &--visible {
+                top: 0;
+            }
+        }
+        .homePage__main {
+            .homePage__container {
+                margin-top: 48px;
+                margin-bottom: 96px;
+            }
         }
     }
 }

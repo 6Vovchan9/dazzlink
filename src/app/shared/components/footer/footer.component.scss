@@ -2,6 +2,9 @@
 
 .footer {
     font-weight: 700;
+    .footer__container {
+        padding-bottom: 20px;
+    }
     .footer__content {
         display: flex;
         min-height: 104px;
@@ -11,7 +14,6 @@
         border-radius: 24px;
         background-color: var(--color-black2);
         color: var(--color-white);
-        margin-bottom: 20px;
         row-gap: 16px;
         column-gap: 24px;
         .footer__col {
@@ -41,7 +43,6 @@
         .footer__content {
             align-items: stretch;
             border-radius: 24px 24px 0 0;
-            margin: 0;
             padding: 20px;
             flex-direction: column;
             .footer__col {
