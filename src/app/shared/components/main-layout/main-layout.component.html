@@ -9,94 +9,22 @@
     }"
 >
 
-    <header *ngIf="!webview" class="header" [class.header--hidden]="scrollDown">
-        <ng-container *ngTemplateOutlet="headerContent"></ng-container>
-        <div class="shadow"></div>
-    </header>
-
-    <!-- Алерт -->
-    <app-toast [delay]="3000"></app-toast>
+    @if (!webview) {
+        <app-header></app-header>
+    }
 
     <!-- Осн контент -->
     <div class="contentWrapper" [class.contentWrapper--noMargin]="webview">
         <router-outlet></router-outlet>
     </div>
-
-    <app-footer *ngIf="!webview"></app-footer>
+    
+    @if (!webview) {
+        <app-footer></app-footer>
+    }
 </div>
 
-<!-- Модалка с навигацией для мобилы -->
-<div *ngIf="showNavModal" class="navigationModal">
-    <div class="navigationModal__header">
-        <div class="headerInModal">
-            <div class="headerInModal__col">
-                <a routerLink="/" (click)="goToAnotherPage()" class="logo">
-                    <img src="assets/images/fullLogo.svg" class="logo__image" alt="logotip">
-                </a>
-            </div>
-            <div class="headerInModal__col">
-                <div (click)="closeNavPopup()" class="closeButtonInWindow">
-                    <div class="iconForCloseInModal"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="navigationModal__contentWrap">
-        <div class="navigationModal__content">
-            <nav class="menu navigationModal__menu menu--fd--column">
-                <ul class="menu__list">
-                    <li class="menu__item" [routerLinkActiveOptions]="{ exact:true }" routerLinkActive="menu__item--active">
-                        <a class="menu__link" (click)="goToAnotherPage('/')" routerLink="/">Приложение</a>
-                    </li>
-                    <li class="menu__item" routerLinkActive="menu__item--active">
-                        <a class="menu__link" (click)="goToAnotherPage('/media')" routerLink="/media">Медиа</a>
-                    </li>
-                    <li class="menu__item" routerLinkActive="menu__item--active" [routerLinkActiveOptions]="routerLinkActiveOptions">
-                        <a class="menu__link" (click)="goToAnotherPage()" routerLink="/locations">Локации</a>
-                    </li>
-                    <li class="menu__item" routerLinkActive="menu__item--active">
-                        <a class="menu__link" (click)="goToAnotherPage()" routerLink="/team">Компания</a>
-                    </li>
-                    <!-- <li class="menu__item">
-                        <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
-                    </li> -->
-                </ul>
-            </nav>
-        </div>
-    </div>
-    <!-- <div class="navigationModal__footer">
-        <div class="footerInModal">
-            <div class="footerInModal__col">
-                <div class="socialNetworks socialNetworks--textColor--black">
-                    <ul class="socialNetworks__list">
-                        <li class="socialNetworks__item">
-                            <a href="https://instagram.com/dazzlink.asia" target="_blank" class="socialNetworks__link">Instagram</a>
-                        </li>
-                        <li class="socialNetworks__item">
-                            <a href="https://facebook.com" target="_blank" class="socialNetworks__link">Facebook</a>
-                        </li>
-                        <li class="socialNetworks__item">
-                            <a href="https://linkedin.com" target="_blank" class="socialNetworks__link">LinkedIn</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footerInModal__col">
-                <div class="footerInModal__lang">
-                    <app-dropdown-field
-                        [formControl]="myForm.get('language')"
-                        [options]="langFieldOptions"
-                        (ngModelChange)="onChangeLang($event, true)"
-                        [multiple]="false"
-                        [listOnTop]="true"
-                        optionLabel="value"
-                        arrowIcon="assets/icons/planetForLang.svg">
-                    </app-dropdown-field>
-                </div>
-            </div>
-        </div>
-    </div> -->
-</div>
+<!-- Алерт -->
+<app-toast [delay]="3000"></app-toast>
 
 <!-- Модалка с QR-код -->
 <ng-container *ngIf="modalService?.modalData$ | async as modalData">
@@ -138,59 +66,6 @@
         </div>
     </ng-container>
 </ng-container>
-
-<ng-template #headerContent>
-    <div class="container header__container">
-        <div class="header__col">
-            <a routerLink="/" class="logo">
-                <img src="assets/images/fullLogo.svg" class="logo__image" alt="logotip">
-            </a>
-        </div>
-        <div class="header__col header__col--alignRight">
-            <div class="header__menu">
-                <nav class="menu">
-                    <ul class="menu__list">
-                        <li class="menu__item" [routerLinkActiveOptions]="{ exact:true }" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/">Приложение</a>
-                        </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/media">Медиа</a>
-                        </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active" [routerLinkActiveOptions]="routerLinkActiveOptions">
-                            <a class="menu__link" routerLink="/locations" [queryParams]="{ category: categoryParam }">Локации</a>
-                        </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/team">Компания</a>
-                        </li>
-                        <!-- <li class="menu__item">
-                            <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
-                        </li> -->
-                        <!-- <li class="menu__item">
-                            <button (click)="getAmountOfUserVisits()">
-                                Кол-во визитов
-                            </button>
-                        </li> -->
-                    </ul>
-                </nav>
-            </div>
-            <!-- <div class="languageInHeader">
-                <app-dropdown-field
-                    [formControl]="myForm.get('language')"
-                    (ngModelChange)="onChangeLang($event)"
-                    [options]="langFieldOptions"
-                    [multiple]="false"
-                    optionLabel="value">
-                </app-dropdown-field>
-            </div> -->
-            <!-- <button (click)="openNavPopup()" class="hamburger">
-                <div class="hamburger__line"></div>
-            </button> -->
-            <button (click)="openNavPopup()" class="hamburger2">
-                <div class="hamburger2__line"></div>
-            </button>
-        </div>
-    </div>
-</ng-template>
 
 <!-- пока есть 4 варианта поведения у header:
     

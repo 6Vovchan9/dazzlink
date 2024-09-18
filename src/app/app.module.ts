@@ -57,7 +57,6 @@ registerLocaleData(localeRu, 'ru');
     HelpPageComponent,
     LegalInfoPageComponent,
 
-    HeaderComponent,
     ToastComponent,
     FooterComponent,
     PostComponent,
@@ -74,6 +73,7 @@ registerLocaleData(localeRu, 'ru');
     FormsModule, // для [(ngModel)]
     ReactiveFormsModule, // для [formControl]
     ThumbHashImageComponent,
+    HeaderComponent,
     // YouTubePlayerModule,
 
     SharedModule,
