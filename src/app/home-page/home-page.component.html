@@ -1,5 +1,11 @@
 <div class="homePage">
-    <div class="homePage__header" [class.homePage__header--visible]="!hideHeader()">
+    <div #headerEl
+        class="homePage__header"
+        [class.homePage__header--visible]="!hideHeader()"
+        [ngStyle]="{
+            '--header-height': -(headerEl.clientHeight || 0) + 'px'
+        }"
+    >
         <app-header></app-header>
     </div>
     <main class="homePage__main">

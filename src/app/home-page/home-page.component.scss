@@ -8,12 +8,12 @@ $carousel-gap: 24;
     min-height: 100%;
     .homePage__header {
         position: sticky;
-        top: -64px;
+        top: var(--header-height, -64px);
         z-index: 100;
         transition: .6s;
 
         &--visible {
-            top: 0;
+            top: 0px;
         }
     }
     .homePage__main {
@@ -25,9 +25,9 @@ $carousel-gap: 24;
     }
     @media #{$notMobile} {
         .homePage__header {
-            top: -80px;
+            top: var(--header-height, -80px);
             &--visible {
-                top: 0;
+                top: 0px;
             }
         }
         .homePage__main {
