@@ -72,6 +72,7 @@ export class MainLayoutComponent extends AbsractExample implements OnInit, DoChe
   }
 
   ngOnInit(): void {
+    // console.log('main layout component init');
     this.createForm();
     this.scrollToTop();
   }

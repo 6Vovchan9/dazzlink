@@ -1,6 +1,8 @@
 @import "variables";
 
 $carousel-gap: 24;
+$shadowHeightInDesktop: 34px;
+$shadowHeightInMobile: 20px;
 
 .homePage {
     display: flex;
@@ -8,9 +10,17 @@ $carousel-gap: 24;
     min-height: 100%;
     .homePage__header {
         position: sticky;
-        top: var(--header-height, -64px);
+        top: calc(var(--header-height) - $shadowHeightInMobile);
         z-index: 100;
         transition: .6s;
+
+        .homePage__shadow {
+            // display: none;
+            position: absolute;
+            height: $shadowHeightInMobile;
+            width: 100%;
+            background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+        }
 
         &--visible {
             top: 0px;
@@ -25,7 +35,10 @@ $carousel-gap: 24;
     }
     @media #{$notMobile} {
         .homePage__header {
-            top: var(--header-height, -80px);
+            top: calc(var(--header-height) - $shadowHeightInDesktop);
+            .homePage__shadow {
+                height: $shadowHeightInDesktop;
+            }
             &--visible {
                 top: 0px;
             }

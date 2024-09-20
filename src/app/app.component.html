@@ -1,6 +1,8 @@
 
 <router-outlet></router-outlet>
 
+<app-toast [delay]="3000"></app-toast>
+
 <!-- <ng-container *ngIf="modalService" Проверка изза того что в некоторых компонентах (как например в appList) мы при открытии страницы (в методе "ngOnInit") сразу пытаемся
     вызвать модалку пробросив ее значение в сервис "modalService" который еще типо не успел появиться>  -->
     <ng-container *ngIf="modalService?.modalData$ | async as modalData">
