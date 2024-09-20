@@ -21,7 +21,7 @@
             </div>
             <div class="footer__col footer__col--forDesktop">
                 <div class="footer__btns">
-                    <button (click)="openQRModal()" class="btnInFooter" type="button">Скачать приложение</button>
+                    <button (click)="showQrCodeModal = !showQrCodeModal" class="btnInFooter" type="button">Скачать приложение</button>
                     <a class="btnInFooter" routerLink="/help">Помощь</a>
                     <a class="btnInFooter" routerLink="/legal-info">Правовая информация</a>
                     <a href="https://instagram.com/dazzlink.asia" target="_blank" class="btnInFooter">Instagram</a>
@@ -34,3 +34,5 @@
         </div>
     </div>
 </footer>
+
+<app-qr-code-modal [(show)]="showQrCodeModal"></app-qr-code-modal>

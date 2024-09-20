@@ -122,7 +122,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
 
   public get productName(): string {
-    // console.log('getProductName');
+    // console.log('home page render!');
     return 'Dazzlink';
   }
 

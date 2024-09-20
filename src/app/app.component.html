@@ -4,53 +4,13 @@
 <!-- <ng-container *ngIf="modalService" Проверка изза того что в некоторых компонентах (как например в appList) мы при открытии страницы (в методе "ngOnInit") сразу пытаемся
     вызвать модалку пробросив ее значение в сервис "modalService" который еще типо не успел появиться>  -->
     <ng-container *ngIf="modalService?.modalData$ | async as modalData">
-      @if (modalData.component === 'appComponent') {
-        @if (true) {
-          @if (modalData.modalName === 'qrModal') {
-            <div class="qrModal">
-              <div class="container qrModal__container">
-                  <div class="qrModal__content">
-                      <div class="qrContent">
-                          <div class="qrContent__content">
-                              <div class="qrContent__logo">
-                                  <img src="assets/images/logo.svg" class="qrContent__logoIcon" alt="logotip">
-                                  <div class="qrContent__logoText">
-                                      <img src="assets/images/logoText.svg" alt="logotip">
-                                  </div>
-                              </div>
-                              <div class="qrContent__qr">
-                                  <img src="assets/images/qrCode.svg" class="qrContent__qrImage" alt="qr">
-                              </div>
-                              <div class="qrContent__message">
-                                  Наведите камеру на QR-код, чтоб скачать приложение
-                              </div>
-                          </div>
-                      </div>
-                      <div class="qrModal__desc">
-                          <div class="qrModal__title">
-                              Постройте великолепные отношения
-                          </div>
-                          <div class="qrModal__text">
-                              Погрузитесь в мир Dazzlink — узнавайте новое, знакомьтесь и посещайте места
-                          </div>
-                      </div>
-                      <div class="qrModal__closeButtonWrap" (click)="closeModal()">
-                          <div class="qrModal__closeButton closeButtonInWindow">
-                              <div class="iconForCloseInModal"></div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          }
-        } @else {
-          <app-modal (buttonClick)="buttonInModalClick($event)">
-              <!-- {{modalData}} -->
-              <ng-container *ngIf="modalData.modalName === 'requirementForCarModal'">
-                <div style="margin-top: 30px;" class="additContentForPopup">additional content</div>
-              </ng-container>
-          </app-modal>
+        @if (modalData.component === 'appComponent') {
+            <app-modal (buttonClick)="buttonInModalClick($event)">
+                <!-- {{modalData}} -->
+                <ng-container *ngIf="modalData.modalName === 'requirementForCarModal'">
+                    <div style="margin-top: 30px;" class="additContentForPopup">additional content</div>
+                </ng-container>
+            </app-modal>
         }
-      }
-  </ng-container>
+    </ng-container>
 <!-- </ng-container> -->

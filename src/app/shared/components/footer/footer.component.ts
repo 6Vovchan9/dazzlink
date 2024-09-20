@@ -3,23 +3,26 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, Optional } from '@a
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
+import { QrCodeModalComponent } from '../qr-code-modal/qr-code-modal.component';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   standalone: true,
-  imports: [],
+  imports: [QrCodeModalComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
+
+  public showQrCodeModal = false;
 
   public get curYear() {
     return new Date().getFullYear();
   }
 
   public get helpBtnName(): string {
-    // console.log('get btn name');
+    // console.log('footer component render!');
     return 'Помощь';
   }
 
@@ -35,10 +38,6 @@ export class FooterComponent {
       this.tgService.mainTgButton.setText('MainButton');
       this.tgService.mainTgButton.show();
     }
-  }
-
-  public openQRModal(): void {
-    this.modalService.open({ component: 'appComponent', modalName: 'qrModal' }); // на аргумент можно не обращать внимание
   }
 
 }

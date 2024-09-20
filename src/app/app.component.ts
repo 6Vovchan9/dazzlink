@@ -27,9 +27,4 @@ export class AppComponent implements OnInit {
     }
     this[modalDesc.methodName]();
   }
-
-  public closeModal(): void {
-    console.log('вызвали метод closeModal');
-    this.modalService.close();
-  }
 }
