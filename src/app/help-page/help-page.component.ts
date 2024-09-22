@@ -96,18 +96,22 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public onNavInMobile(sectionName): void {
     // this.curSection = sectionName;
 
-    // Нельзя 2 подряд behavior: 'smooth' поэтому ниже придется обойтись без него. Позже выяснилось что проблема набл только в браузере в режиме "Emulated Devices", поэтому возвращаем эту настройку:
+    // Нельзя 2 подряд behavior: 'smooth' поэтому ниже придется обойтись без него. Позже выяснилось что проблема набл только в браузере в режиме "Emulated Devices", поэтому возвращаем эту настройку. Еще позже выяснилось что на свежей версии андроида случаются конфликты анимаций скроллов, поэтому надо быть осторожней с опцией behavior: 'smooth'
     // document.getElementById(this.sectionDictionary[sectionName]).scrollIntoView({ block: 'nearest', inline: 'center' });
     this.jumpToSection(sectionName);
   }
 
   public onNavInDesktop(sectionName): void {
     // this.curSection = sectionName;
-    this.jumpToSection(sectionName);
+    this.jumpToSectionInDesktop(sectionName);
   }
 
   private jumpToSection(section): void {
     document.getElementById(section).scrollIntoView({ block: 'start' });
+  }
+
+  private jumpToSectionInDesktop(section): void {
+    document.getElementById(section).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   private intersectionObserver() {
