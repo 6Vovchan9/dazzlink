@@ -97,7 +97,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.curSection = sectionName;
 
     // Нельзя 2 подряд behavior: 'smooth' поэтому ниже придется обойтись без него. Позже выяснилось что проблема набл только в браузере в режиме "Emulated Devices", поэтому возвращаем эту настройку:
-    document.getElementById(this.sectionDictionary[sectionName]).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    // document.getElementById(this.sectionDictionary[sectionName]).scrollIntoView({ block: 'nearest', inline: 'center' });
     this.jumpToSection(sectionName);
   }
 
@@ -107,7 +107,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private jumpToSection(section): void {
-    document.getElementById(section).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById(section).scrollIntoView({ block: 'start' });
   }
 
   private intersectionObserver() {
@@ -137,7 +137,8 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
               // console.log(entry.target);
               const sectionName = entry.target.firstChild['id'];
               this.curSection = sectionName;
-              // this.inlineScrollInTabBar();
+
+              this.inlineScrollInTabBar();
             }
           }
         );

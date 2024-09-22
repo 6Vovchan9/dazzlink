@@ -266,6 +266,15 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
     this.curPhotoInGalleria = Math.trunc(carouselScrollLeft / divisor);
   }
 
+  private setScrollSnappingCarousel(): void {
+    const carousel = this.carouselEl?.nativeElement;
+    const carouselWidth = carousel.scrollWidth;
+    const imageAmount = this.placeData.imageList?.length || 1;
+    const divisor = carouselWidth / imageAmount;
+    const carouselScrollLeft = this.curPhotoInGalleria * divisor;
+    carousel.scrollLeft = carouselScrollLeft;
+  }
+
   private prepareImageBase64(imageList: any) {
     if (imageList?.length) {
       imageList.map(imgData => {
@@ -372,6 +381,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
   }
 
   public closePhotoGalleria(): void {
+    this.setScrollSnappingCarousel();
     this.showPhotoGalleria = false;
     this.showScroll();
   }
