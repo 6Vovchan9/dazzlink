@@ -14,8 +14,8 @@ $shadowHeightInMobile: 20px;
         z-index: 100;
         transition: .6s;
 
-        .homePage__shadow {
-            // display: none;
+        &:after {
+            content: '';
             position: absolute;
             height: $shadowHeightInMobile;
             width: 100%;
@@ -36,7 +36,7 @@ $shadowHeightInMobile: 20px;
     @media #{$notMobile} {
         .homePage__header {
             top: calc(var(--header-height) - $shadowHeightInDesktop);
-            .homePage__shadow {
+            &:after {
                 height: $shadowHeightInDesktop;
             }
             &--visible {

@@ -1,3 +1,4 @@
+<div class="articlesPage">
 <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
     <ng-container *ngIf="postList.length; else empty">
         <div class="posts">
@@ -11,9 +12,17 @@
         </div>
     </ng-container>
 </ng-container> -->
-
-<main class="page">
-    <div class="container page__container">
+<div #headerEl
+    class="articlesPage__header"
+    [class.articlesPage__header--visible]="!hideHeader()"
+    [ngStyle]="{
+        '--header-height': -(headerEl.clientHeight || 0) + 'px'
+    }"
+>
+    <app-header></app-header>
+</div>
+<main class="articlesPage__main">
+    <div class="container articlesPage__container">
         <aside class="sidebar" [class.hiddenInMobile]="webview">
             <div class="aboutPage">
                 <h1 class="moduleTitle">Медиа</h1>
@@ -213,6 +222,8 @@
         </main>
     </div>
 </main>
+<app-footer></app-footer>
+</div>
 
 <!-- <app-loader *ngIf="isLoading()"></app-loader> -->
 

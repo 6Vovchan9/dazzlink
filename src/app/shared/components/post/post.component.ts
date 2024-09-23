@@ -1,3 +1,4 @@
+import { DatePipe, NgClass, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,6 +14,8 @@ import { TImageState } from '@app/shared/types/image.interface';
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
+  standalone: true,
+  imports: [NgClass, DatePipe, NgIf],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent implements OnInit {

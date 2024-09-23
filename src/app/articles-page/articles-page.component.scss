@@ -4,20 +4,56 @@
     // flex: 1;
 } // Это все для того чтобы когда контента мало footer все равно был прижат к низу. UPD: теперь эту роль выполняет contentWrapper
 
-.page {
-    // font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
-    .page__container {
-        display: flex;
-        flex-direction: column;
-        margin-top: 24px;
-        margin-bottom: 48px;
-    }
+$shadowHeightInDesktop: 34px;
+$shadowHeightInMobile: 20px;
 
-    @media #{$notMobile} {
-        .page__container {
-            flex-direction: row;
-            margin-top: 48px;
+.articlesPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    .articlesPage__header {
+        position: sticky;
+        top: calc(var(--header-height) - $shadowHeightInMobile);
+        z-index: 100;
+        transition: .6s;
+
+        &:after {
+            content: '';
+            position: absolute;
+            height: $shadowHeightInMobile;
+            width: 100%;
+            background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+        }
+
+        &--visible {
+            top: 0px;
+        }
+    }
+    .articlesPage__main {
+        flex: 1;
+        .articlesPage__container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 24px;
             margin-bottom: 48px;
+        }
+    }
+    @media #{$notMobile} {
+        .articlesPage__header {
+            top: calc(var(--header-height) - $shadowHeightInDesktop);
+            &:after {
+                height: $shadowHeightInDesktop;
+            }
+            &--visible {
+                top: 0px;
+            }
+        }
+        .articlesPage__main {
+            .articlesPage__container {
+                flex-direction: row;
+                margin-top: 48px;
+                margin-bottom: 48px;
+            }
         }
     }
 }

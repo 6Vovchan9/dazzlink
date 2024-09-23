@@ -12,22 +12,49 @@ import {
   ViewChildren,
   signal
 } from '@angular/core';
-import { EMPTY, Observable, Observer, Subject, Subscription, fromEvent, of, throwError } from 'rxjs';
-import { catchError, delay, map, skipWhile, takeUntil, tap } from 'rxjs/operators';
+import { NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
+import { Router } from '@angular/router';
+import {
+  EMPTY,
+  Observable,
+  Observer,
+  Subject,
+  Subscription,
+  fromEvent, of,
+  throwError
+} from 'rxjs';
+import {
+  catchError,
+  delay, map,
+  skipWhile,
+  takeUntil, tap
+} from 'rxjs/operators';
+
 import { Post, RespArticlesData } from '@app/shared/interfaces';
 import { PostsService } from '@app/shared/services/posts.service';
-import { Router } from '@angular/router';
 import { PagesService } from '@app/shared/services/pages.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
 import { MOCK_ARTICLES, MOCK_ARTICLES_FOR_SKELETON } from '@app/shared/mock/articles';
 import { PersistanceService } from '@app/admin/shared/services/persistance.service';
+import { PostComponent } from '@app/shared/components/post/post.component';
+import { HeaderComponent } from '@app/shared/components/header/header.component';
+import { FooterComponent } from '@app/shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-articles-page',
   templateUrl: './articles-page.component.html',
   styleUrls: ['./articles-page.component.scss'],
   providers: [PersistanceService],
+  standalone: true,
+  imports: [
+    NgTemplateOutlet,
+    NgTemplateOutlet,
+    NgStyle,
+    PostComponent,
+    HeaderComponent,
+    FooterComponent
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -42,6 +69,9 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public isLoading = signal<boolean>(true);
   private lSub: Subscription;
   private pSub: Subscription;
+  private pageScrollSub: Subscription;
+  private prewScrollTop = 0;
+  public hideHeader = signal(true);
   private curLang: string;
   public errorAfterGetAllArticles = signal(false);
   public implementErrorInGetAllArticles = false;
@@ -52,12 +82,13 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private postsService: PostsService,
-    private pagesService: PagesService,
+    // private pagesService: PagesService,
     @Self() private persistanceService: PersistanceService, // Такой декоратор требует чтоб этот сервис был зарегистрирован локально, прям в декораторе этого компонента.
     // У декоратора @SkipSelf противоположный эффект, он tells Angular not to look for the injector in the local injector, but start from the Parent
     // Есть еще декоратор @Host и для него сервис должен регистрироваться либо в текущем компоненте либо в родительском компоненте при помощи свойсва декоратора компонента "viewProviders"
     @Optional() public mobileDetectService: MobileDetectService,  // Если вдруг для этого сервиса не определен провайдер, чтоб мы не получили ошибку при обращении к нему в таком случае определяем его как опциональный
     private router: Router,
+    private vc: ViewportScroller,
     private cd: ChangeDetectorRef
   ) { }
 
@@ -83,7 +114,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
         if (d.last && this.observer && !this.lastPaginationPage) this.observer.observe(d.last.nativeElement);
       }
     );
-
+    this.addEventListenerToPage();
     // const pageWrap = document.getElementById('pageWrap');
     // fromEvent<Event>(pageWrap, 'scroll')
     //   .pipe(
@@ -104,6 +135,35 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     const result = navigator.userAgent.includes('Dazzlink');
     // return true;
     return result;
+  }
+
+  private addEventListenerToPage(): void {
+    this.pageScrollSub = fromEvent(window, 'scroll')
+      .subscribe({
+        next: () => {
+          this.operatePageScroll();
+        }
+      });
+  }
+
+  private operatePageScroll() {
+    const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
+    if (curScrollTop > this.prewScrollTop || curScrollTop < 100) {
+      if (curScrollTop < 100) {
+        if (curScrollTop === 0) {
+          // console.log('Скрываем header');
+          this.hideHeader.set(true);
+        }
+      } else {
+        // console.log('Скрываем header');
+        this.hideHeader.set(true);
+      }
+    } else {
+      // console.log('Показываем header');
+      this.hideHeader.set(false);
+    }
+    this.prewScrollTop = curScrollTop;
+    // this.cd.detectChanges();
   }
 
   public trackPost(index: number, post: Post): string {
@@ -268,6 +328,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.pageScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
     this.pSub?.unsubscribe();
     this.observer?.disconnect();

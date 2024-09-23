@@ -17,8 +17,6 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './shared/auth.interceptor';
-import { ArticlesPageComponent } from './articles-page/articles-page.component';
-import { PostComponent } from './shared/components/post/post.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { RadiobuttonFieldModule } from './shared/fields/radiobutton-new-field/radiobutton-field.module';
 import { DropdownFieldModule } from './shared/fields/dropdown-field/dropdown-field.module';
@@ -48,7 +46,6 @@ registerLocaleData(localeRu, 'ru');
 
     // HomePageComponent,
     AgreementsPageComponent,
-    ArticlesPageComponent,
     PostPageComponent,
     PlacePageComponent,
     // LocationsPageComponent, // Фильтрация и сортировка на бэке
@@ -58,7 +55,6 @@ registerLocaleData(localeRu, 'ru');
     LegalInfoPageComponent,
 
     ToastComponent,
-    PostComponent,
     LocationItemComponent,
     ModalComponent,
     // AccoTriggerComponent,
