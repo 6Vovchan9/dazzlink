@@ -25,9 +25,13 @@ import {
 } from 'rxjs';
 import {
   catchError,
+  debounceTime,
   delay, map,
+  distinctUntilChanged,
   skipWhile,
-  takeUntil, tap
+  takeUntil, tap,
+  throttleTime,
+  auditTime
 } from 'rxjs/operators';
 
 import { Post, RespArticlesData } from '@app/shared/interfaces';
@@ -139,6 +143,9 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private addEventListenerToPage(): void {
     this.pageScrollSub = fromEvent(window, 'scroll')
+      .pipe(
+        auditTime(200)
+      )
       .subscribe({
         next: () => {
           this.operatePageScroll();
@@ -148,6 +155,8 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private operatePageScroll() {
     const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
+    // console.log('cur:', curScrollTop);
+    // console.log('prev:', this.prewScrollTop);
     if (curScrollTop > this.prewScrollTop || curScrollTop < 100) {
       if (curScrollTop < 100) {
         if (curScrollTop === 0) {

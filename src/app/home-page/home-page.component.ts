@@ -13,7 +13,7 @@ import {
   signal
 } from '@angular/core';
 import { Observable, Subscription, fromEvent, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import { auditTime, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgClass, NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
@@ -128,6 +128,9 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
 
   private addEventListenerToPage(): void {
     this.pageScrollSub = fromEvent(window, 'scroll')
+      .pipe(
+        auditTime(200)
+      )
       .subscribe({
         next: () => {
           this.operatePageScroll();
@@ -137,6 +140,8 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
 
   private operatePageScroll() {
     const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
+    // console.log('cur:', curScrollTop);
+    // console.log('prev:', this.prewScrollTop);
     if (curScrollTop > this.prewScrollTop || curScrollTop < 100) {
       if (curScrollTop < 100) {
         if (curScrollTop === 0) {

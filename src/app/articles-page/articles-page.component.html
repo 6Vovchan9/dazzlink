@@ -1,83 +1,127 @@
 <div class="articlesPage">
-<!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
-    <ng-container *ngIf="postList.length; else empty">
-        <div class="posts">
-            <div class="posts__filter">
-                <input type="text" placeholder="Фильтр постов..." [(ngModel)]="searchStr">
-            </div>
-            <div *ngFor="let post of postList | search:searchStr; let idx = index" class="posts__item">
-                №{{idx + 1}}
-                <app-post [postData]="post"></app-post>
-            </div>
-        </div>
-    </ng-container>
-</ng-container> -->
-<div #headerEl
-    class="articlesPage__header"
-    [class.articlesPage__header--visible]="!hideHeader()"
-    [ngStyle]="{
-        '--header-height': -(headerEl.clientHeight || 0) + 'px'
-    }"
->
-    <app-header></app-header>
-</div>
-<main class="articlesPage__main">
-    <div class="container articlesPage__container">
-        <aside class="sidebar" [class.hiddenInMobile]="webview">
-            <div class="aboutPage">
-                <h1 class="moduleTitle">Медиа</h1>
-                <!-- <button (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles">{{titleForDownloadBtn}}</button> -->
-                <div class="aboutPage__text">
-                    {{getContent('articles-aboutPage-text')}}
+    <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
+        <ng-container *ngIf="postList.length; else empty">
+            <div class="posts">
+                <div class="posts__filter">
+                    <input type="text" placeholder="Фильтр постов..." [(ngModel)]="searchStr">
                 </div>
-                <!-- <button (click)="mobileDetectService.goToDeviceStore()" *ngIf="!webview" class="btn aboutPage__btn">
-                    Скачать приложение
-                </button> -->
-                <div class="aboutPage__links aboutPage__links--forDesktop">
-                    <div class="linkToApp">
-                        <a href="https://www.apple.com/app-store" target="_blank" class="linkToApp__item">
-                            <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
-                        </a>
-                        <a href="https://play.google.com" target="_blank" class="linkToApp__item">
-                            <img src="assets/images/store/linkAndroid.svg" class="linkToApp__img" alt="linkAndroid">
-                        </a>
-                        <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
-                            <img src="assets/images/store/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
-                        </a>
+                <div *ngFor="let post of postList | search:searchStr; let idx = index" class="posts__item">
+                    №{{idx + 1}}
+                    <app-post [postData]="post"></app-post>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container> -->
+    <div #headerEl
+        class="articlesPage__header"
+        [class.articlesPage__header--visible]="!hideHeader()"
+        [ngStyle]="{
+            '--header-height': -(headerEl.clientHeight || 0) + 'px'
+        }"
+    >
+        <app-header></app-header>
+    </div>
+    <main class="articlesPage__main">
+        <div class="container articlesPage__container">
+            <aside class="sidebar" [class.hiddenInMobile]="webview">
+                <div class="aboutPage">
+                    <h1 class="moduleTitle">Медиа</h1>
+                    <!-- <button (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles">{{titleForDownloadBtn}}</button> -->
+                    <div class="aboutPage__text">
+                        {{getContent('articles-aboutPage-text')}}
                     </div>
-                </div>
-                <div class="aboutPage__links aboutPage__links--forMobile">
-                    <div (click)="mobileDetectService?.goToDeviceStore()" class="downloadApp">
-                        <div class="downloadApp__title">Скачайте<br>приложение</div>
-                        <div class="downloadApp__icon">
-                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
+                    <!-- <button (click)="mobileDetectService.goToDeviceStore()" *ngIf="!webview" class="btn aboutPage__btn">
+                        Скачать приложение
+                    </button> -->
+                    <div class="aboutPage__links aboutPage__links--forDesktop">
+                        <div class="linkToApp">
+                            <a href="https://www.apple.com/app-store" target="_blank" class="linkToApp__item">
+                                <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
+                            </a>
+                            <a href="https://play.google.com" target="_blank" class="linkToApp__item">
+                                <img src="assets/images/store/linkAndroid.svg" class="linkToApp__img" alt="linkAndroid">
+                            </a>
+                            <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
+                                <img src="assets/images/store/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
+                            </a>
                         </div>
                     </div>
+                    <div class="aboutPage__links aboutPage__links--forMobile">
+                        <div (click)="mobileDetectService?.goToDeviceStore()" class="downloadApp">
+                            <div class="downloadApp__title">Скачайте<br>приложение</div>
+                            <div class="downloadApp__icon">
+                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button style="margin-top: 20px;" (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles" class="implementError">
+                        error: {{implementErrorInGetAllArticles}}
+                    </button> -->
                 </div>
-                <!-- <button style="margin-top: 20px;" (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles" class="implementError">
-                    error: {{implementErrorInGetAllArticles}}
-                </button> -->
-            </div>
-        </aside>
-        <main class="pageContent">
+            </aside>
+            <main class="pageContent">
 
-            <!-- Старый вариант -->
-            <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
-                <ng-container *ngIf="errorAfterGetAllArticles(); else successGetAllArticles">
-                    Есть проблема
-                </ng-container>
-                <ng-template #successGetAllArticles>
-                    @if (postList.length) {
-                        Статьи
-                    } @else {
-                        <ng-container *ngTemplateOutlet="empty"></ng-container> 
-                    }
-                </ng-template>
-            </ng-container> -->
+                <!-- Старый вариант -->
+                <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
+                    <ng-container *ngIf="errorAfterGetAllArticles(); else successGetAllArticles">
+                        Есть проблема
+                    </ng-container>
+                    <ng-template #successGetAllArticles>
+                        @if (postList.length) {
+                            Статьи
+                        } @else {
+                            <ng-container *ngTemplateOutlet="empty"></ng-container> 
+                        }
+                    </ng-template>
+                </ng-container> -->
 
-            <!-- Старый вариант -->
-            <!-- <ng-container *ngIf="!isLoading(); else loadingTemplate">
-                <ng-container *ngIf="errorAfterGetAllArticles(); else successGetAllArticles">
+                <!-- Старый вариант -->
+                <!-- <ng-container *ngIf="!isLoading(); else loadingTemplate">
+                    <ng-container *ngIf="errorAfterGetAllArticles(); else successGetAllArticles">
+                        <div class="errorMessage">
+                            <div class="errorMessage__icon"></div>
+                            <div class="errorMessage__title">
+                                Есть проблема
+                            </div>
+                            <div class="errorMessage__text">
+                                Не смогли показать статьи, попробуйте<br>
+                                перезагрузить страницу или зайдите позже
+                            </div>
+                            <button class="errorMessage__btn" (click)="reloadArticles()">Перезагрузить</button>
+                        </div>
+                    </ng-container>
+                    <ng-template #successGetAllArticles>
+                        @if (articlesList()?.length) {
+                            <ul class="pageContent__articles">
+                                @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
+                                    @if (lastIndex) {
+                                        <li #lastPostItem class="pageContent__itemOfArticle lastPostItem" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
+                                            <a [routerLink]="['/media', post.pageName]" class="pageContent__articleLink">
+                                                <app-post [postData]="post"></app-post>
+                                            </a>
+                                        </li>
+                                    } @else {
+                                        <li class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
+                                            <a [routerLink]="['/media', post.pageName]" target="_self" class="pageContent__articleLink">
+                                                <app-post [postData]="post"></app-post>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                            @if (showLoadMoreSpinner()) {
+                                <div class="pageContent__loadMore">
+                                    <app-progress-spinner></app-progress-spinner>
+                                </div>
+                            }
+                        } @else {
+                            <ng-container *ngTemplateOutlet="empty"></ng-container> 
+                        }
+                    </ng-template>
+                </ng-container> -->
+
+                <!-- Новый вариант -->
+                @if (errorAfterGetAllArticles()) {
                     <div class="errorMessage">
                         <div class="errorMessage__icon"></div>
                         <div class="errorMessage__title">
@@ -87,142 +131,98 @@
                             Не смогли показать статьи, попробуйте<br>
                             перезагрузить страницу или зайдите позже
                         </div>
-                        <button class="errorMessage__btn" (click)="reloadArticles()">Перезагрузить</button>
+                        <button class="errorMessage__btn"
+                            (click)="reloadArticles()"
+                            [disabled]="isLoading()"
+                            [class.errorMessage__btn--isLoading]="isLoading()"
+                        >
+                            Перезагрузить
+                            <img class="errorMessage__btnSpinner" src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
+                        </button>
                     </div>
-                </ng-container>
-                <ng-template #successGetAllArticles>
-                    @if (articlesList()?.length) {
-                        <ul class="pageContent__articles">
-                            @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
-                                @if (lastIndex) {
-                                    <li #lastPostItem class="pageContent__itemOfArticle lastPostItem" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
-                                        <a [routerLink]="['/media', post.pageName]" class="pageContent__articleLink">
-                                            <app-post [postData]="post"></app-post>
-                                        </a>
-                                    </li>
-                                } @else {
-                                    <li class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
-                                        <a [routerLink]="['/media', post.pageName]" target="_self" class="pageContent__articleLink">
-                                            <app-post [postData]="post"></app-post>
-                                        </a>
-                                    </li>
-                                }
-                            }
-                        </ul>
-                        @if (showLoadMoreSpinner()) {
-                            <div class="pageContent__loadMore">
-                                <app-progress-spinner></app-progress-spinner>
-                            </div>
-                        }
-                    } @else {
-                        <ng-container *ngTemplateOutlet="empty"></ng-container> 
-                    }
-                </ng-template>
-            </ng-container> -->
-
-            <!-- Новый вариант -->
-            @if (errorAfterGetAllArticles()) {
-                <div class="errorMessage">
-                    <div class="errorMessage__icon"></div>
-                    <div class="errorMessage__title">
-                        Есть проблема
-                    </div>
-                    <div class="errorMessage__text">
-                        Не смогли показать статьи, попробуйте<br>
-                        перезагрузить страницу или зайдите позже
-                    </div>
-                    <button class="errorMessage__btn"
-                        (click)="reloadArticles()"
-                        [disabled]="isLoading()"
-                        [class.errorMessage__btn--isLoading]="isLoading()"
-                    >
-                        Перезагрузить
-                        <img class="errorMessage__btnSpinner" src="assets/icons/barsRotateFadeSpinner.svg" alt="spinner">
-                    </button>
-                </div>
-            } @else {
-                @if (isLoading()) {
-                    <ng-container *ngTemplateOutlet="loadingTemplate"></ng-container> 
                 } @else {
-                    @if (articlesList()?.length) {
-                        <ul class="pageContent__articles">
-                            @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
-                                @if (lastIndex) {
-                                    <li #lastPostItem
-                                        class="pageContent__itemOfArticle lastPostItem"
-                                        [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)"
-                                    >
-                                        <a [routerLink]="['/media', post.pageName]" class="pageContent__articleLink">
-                                            <!-- {{index + 1}} -->
-                                            <app-post [postData]="post"></app-post>
+                    @if (isLoading()) {
+                        <ng-container *ngTemplateOutlet="loadingTemplate"></ng-container> 
+                    } @else {
+                        @if (articlesList()?.length) {
+                            <ul class="pageContent__articles">
+                                @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
+                                    @if (lastIndex) {
+                                        <li #lastPostItem
+                                            class="pageContent__itemOfArticle lastPostItem"
+                                            [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)"
+                                        >
+                                            <a [routerLink]="['/media', post.pageName]" class="pageContent__articleLink">
+                                                <!-- {{index + 1}} -->
+                                                <app-post [postData]="post"></app-post>
+                                            </a>
+                                        </li>
+                                    } @else {
+                                        <li class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
+                                            <!-- <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post> -->
+                                            <a [routerLink]="['/media', post.pageName]" target="_self" class="pageContent__articleLink">
+                                                <!-- {{index + 1}} -->
+                                                <app-post [postData]="post"></app-post>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                                <!-- Это карточки статей покрытые скелетоном выступающие в роли спиннера когда запрашиваем очередную пачку статей (1 для мобилы и 2 для desktop) -->
+                                @if (showLoadMoreSpinner()) {
+                                    <li class="pageContent__itemOfArticle">
+                                        <a class="pageContent__articleLink">
+                                            <app-post
+                                                [postData]="mockArticlesList[0]"
+                                                [isLoading]="true"
+                                            ></app-post>
                                         </a>
                                     </li>
-                                } @else {
-                                    <li class="pageContent__itemOfArticle" [class.pageContent__itemOfArticle--viewed]="checkViewedOrNot(post.id)">
-                                        <!-- <app-post (click)="goToPostPage(post.id)" [postData]="post"></app-post> -->
-                                        <a [routerLink]="['/media', post.pageName]" target="_self" class="pageContent__articleLink">
-                                            <!-- {{index + 1}} -->
-                                            <app-post [postData]="post"></app-post>
+                                    <li class="pageContent__itemOfArticle hideInMobile">
+                                        <a class="pageContent__articleLink">
+                                            <app-post
+                                                [postData]="mockArticlesList[0]"
+                                                [isLoading]="true"
+                                            ></app-post>
                                         </a>
                                     </li>
                                 }
-                            }
-                            <!-- Это карточки статей покрытые скелетоном выступающие в роли спиннера когда запрашиваем очередную пачку статей (1 для мобилы и 2 для desktop) -->
-                            @if (showLoadMoreSpinner()) {
-                                <li class="pageContent__itemOfArticle">
-                                    <a class="pageContent__articleLink">
-                                        <app-post
-                                            [postData]="mockArticlesList[0]"
-                                            [isLoading]="true"
-                                        ></app-post>
-                                    </a>
-                                </li>
-                                <li class="pageContent__itemOfArticle hideInMobile">
-                                    <a class="pageContent__articleLink">
-                                        <app-post
-                                            [postData]="mockArticlesList[0]"
-                                            [isLoading]="true"
-                                        ></app-post>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                        <!-- @if (showLoadMoreSpinner()) {
-                            <div class="pageContent__loadMore">
-                                <app-progress-spinner></app-progress-spinner>
-                            </div>
-                        } -->
-                        <!-- Кнопка наверх -->
-                        <!-- <div class="pageContent__scrollToTopBtn scrollProgressWrapper">
-                            <div class="scrollProgress"
-                                (click)="scrollToTop()"
-                                [class.scrollProgress--hidden]="hideScrollProgress"
-                            >
-                            </div>
-                        </div> -->
-                    } @else {
-                        <ng-container *ngTemplateOutlet="empty"></ng-container>
+                            </ul>
+                            <!-- @if (showLoadMoreSpinner()) {
+                                <div class="pageContent__loadMore">
+                                    <app-progress-spinner></app-progress-spinner>
+                                </div>
+                            } -->
+                            <!-- Кнопка наверх -->
+                            <!-- <div class="pageContent__scrollToTopBtn scrollProgressWrapper">
+                                <div class="scrollProgress"
+                                    (click)="scrollToTop()"
+                                    [class.scrollProgress--hidden]="hideScrollProgress"
+                                >
+                                </div>
+                            </div> -->
+                        } @else {
+                            <ng-container *ngTemplateOutlet="empty"></ng-container>
+                        }
                     }
                 }
-            }
 
-            <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
-                <ng-container *ngIf="postList.length; else empty">
-                    <div class="posts">
-                        <div class="posts__filter">
-                            <input type="text" placeholder="Фильтр постов..." [(ngModel)]="searchStr">
+                <!-- <ng-container *ngIf="posts$ | async as postList; else loadingTemplate">
+                    <ng-container *ngIf="postList.length; else empty">
+                        <div class="posts">
+                            <div class="posts__filter">
+                                <input type="text" placeholder="Фильтр постов..." [(ngModel)]="searchStr">
+                            </div>
+                            <div *ngFor="let post of postList | search:searchStr; let idx = index" class="posts__item">
+                                №{{idx + 1}}
+                                <app-post [postData]="post"></app-post>
+                            </div>
                         </div>
-                        <div *ngFor="let post of postList | search:searchStr; let idx = index" class="posts__item">
-                            №{{idx + 1}}
-                            <app-post [postData]="post"></app-post>
-                        </div>
-                    </div>
-                </ng-container>
-            </ng-container> -->
-        </main>
-    </div>
-</main>
-<app-footer></app-footer>
+                    </ng-container>
+                </ng-container> -->
+            </main>
+        </div>
+    </main>
+    <app-footer></app-footer>
 </div>
 
 <!-- <app-loader *ngIf="isLoading()"></app-loader> -->
