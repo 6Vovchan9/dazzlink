@@ -393,6 +393,7 @@
         .personDescModal__container .personDescModal__wrapper {
             .personDescModal__content {
                 overflow: scroll;
+                // overscroll-behavior: contain;
                 padding-right: var(--paddingForScrollbar, 0px);
                 .personDescModal__info {
                     padding-top: 20px;

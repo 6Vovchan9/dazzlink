@@ -660,6 +660,7 @@ span {
     height: 300px;
     overflow: scroll;
     scroll-snap-type: x mandatory;
+    // -webkit-overflow-scrolling: touch; // хз зачем но это решает проблему со скроллом на iphone в safari
 }
 
 .carousel__item {
