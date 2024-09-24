@@ -4,6 +4,22 @@ $carousel-gap: 24;
 $shadowHeightInDesktop: 34px;
 $shadowHeightInMobile: 20px;
 
+.overscrollBlock {
+    position: fixed;
+    z-index: 100;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 300px;
+    padding: 20px;
+    border: 2px solid;
+    border-radius: 10px;
+    background-color: coral;
+    overscroll-behavior-y: contain;
+    overflow-y: auto;
+}
+// 011426
+
 .homePage {
     display: flex;
     flex-direction: column;
