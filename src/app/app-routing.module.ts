@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AgreementsPageComponent } from './agreements-page/agreements-page.component';
 import { ArticlesPageComponent } from './articles-page/articles-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
+// import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { PostPageComponent } from './post-page/post-page.component';
 // import { LocationsPageComponent } from './locations-page/locations-page.component';
 import { LocationsPageWithFrontFilterComponent } from './locations-page-with-front-filter/locations-page-with-front-filter.component';
@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'media',
     loadComponent: () => import("./articles-page/articles-page.component").then(m => m.ArticlesPageComponent)
+  },
+  {
+    path: 'media/:title',
+    loadComponent: () => import("./post-page/post-page.component").then(m => m.PostPageComponent)
   },
   // {
   //   path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [
@@ -52,7 +56,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
+    preloadingStrategy: PreloadAllModules,
+    scrollPositionRestoration: 'enabled'
   })],
   exports: [RouterModule]
 })

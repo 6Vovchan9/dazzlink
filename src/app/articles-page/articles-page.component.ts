@@ -13,7 +13,7 @@ import {
   signal
 } from '@angular/core';
 import { NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   EMPTY,
   Observable,
@@ -53,7 +53,7 @@ import { FooterComponent } from '@app/shared/components/footer/footer.component'
   standalone: true,
   imports: [
     NgTemplateOutlet,
-    NgTemplateOutlet,
+    RouterLink,
     NgStyle,
     PostComponent,
     HeaderComponent,

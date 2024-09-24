@@ -100,15 +100,15 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
 
   public ngOnInit(): void {
 
-    this.lSub = this.pagesService.currentLanguage.pipe(
-      tap(lang => this.curLang = lang),
-      // switchMap(lang => this.translateService.translate(lang, ['Семья начинается с нас']))
-    ).subscribe(
-      resp => {
-        // console.log(resp);
-        // this.cd.detectChanges();
-      }
-    )
+    // this.lSub = this.pagesService.currentLanguage.pipe(
+    //   tap(lang => this.curLang = lang),
+    //   // switchMap(lang => this.translateService.translate(lang, ['Семья начинается с нас']))
+    // ).subscribe(
+    //   resp => {
+    //     // console.log(resp);
+    //     // this.cd.detectChanges();
+    //   }
+    // )
 
     this.getCitiesForCarousel();
 

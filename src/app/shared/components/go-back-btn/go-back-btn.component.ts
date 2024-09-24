@@ -1,16 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-go-back-btn',
   templateUrl: './go-back-btn.component.html',
-  styleUrls: ['./go-back-btn.component.scss']
+  styleUrls: ['./go-back-btn.component.scss'],
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GoBackBtnComponent implements OnInit {
-
+export class GoBackBtnComponent {
   @Input() public text = 'Назад';
-
-  constructor() { }
-
-  ngOnInit(): void { }
-
 }
