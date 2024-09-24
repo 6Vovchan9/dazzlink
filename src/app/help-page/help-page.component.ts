@@ -96,17 +96,21 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public onNavInMobile(sectionName): void {
     // this.curSection = sectionName;
 
-    // Нельзя 2 подряд behavior: 'smooth' поэтому ниже придется обойтись без него. Позже выяснилось что проблема набл только в браузере в режиме "Emulated Devices", поэтому возвращаем эту настройку:
-    document.getElementById(this.sectionDictionary[sectionName]).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    // Нельзя 2 подряд behavior: 'smooth' поэтому ниже придется обойтись без него. Позже выяснилось что проблема набл только в браузере в режиме "Emulated Devices", поэтому возвращаем эту настройку. Еще позже выяснилось что на свежей версии андроида случаются конфликты анимаций скроллов, поэтому надо быть осторожней с опцией behavior: 'smooth'
+    // document.getElementById(this.sectionDictionary[sectionName]).scrollIntoView({ block: 'nearest', inline: 'center' });
     this.jumpToSection(sectionName);
   }
 
   public onNavInDesktop(sectionName): void {
     // this.curSection = sectionName;
-    this.jumpToSection(sectionName);
+    this.jumpToSectionInDesktop(sectionName);
   }
 
   private jumpToSection(section): void {
+    document.getElementById(section).scrollIntoView({ block: 'start' });
+  }
+
+  private jumpToSectionInDesktop(section): void {
     document.getElementById(section).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -137,7 +141,8 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
               // console.log(entry.target);
               const sectionName = entry.target.firstChild['id'];
               this.curSection = sectionName;
-              // this.inlineScrollInTabBar();
+
+              this.inlineScrollInTabBar();
             }
           }
         );
@@ -147,19 +152,22 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private inlineScrollInTabBar(): void {
-    console.log('горизонтально скроллим nav bar');
-    const curItem = document.getElementById(this.sectionDictionary[this.curSection]);
-    let previousItem: any = curItem.previousSibling;
-    const wrapper = this.inlineAnchorNav.nativeElement;
-    let width = 0;
+    if (window.innerWidth < 768) {
+      const wrapper = this.inlineAnchorNav.nativeElement;
+      if (wrapper.clientWidth < wrapper.scrollWidth) {
+        console.log("горизонтально скроллим nav bar");
+        const curItem = document.getElementById(this.sectionDictionary[this.curSection]);
+        let previousItem: any = curItem.previousSibling;
+        let width = 0;
+        while (previousItem) {
+          width += previousItem.clientWidth + 24 - wrapper.clientWidth / 2 + curItem.clientWidth / 2; // 24 - это column-gap у inlineAnchorNav__list
+          previousItem = previousItem.previousSibling;
+        }
+        wrapper.scrollLeft = width;
 
-    while (previousItem) {
-      width += previousItem.clientWidth + 24 - wrapper.clientWidth/2 + curItem.clientWidth/2; // 24 - это column-gap у inlineAnchorNav__list
-      previousItem = previousItem.previousSibling;
+        // curItem.scrollIntoView({ block: 'nearest', inline: 'center' });
+      }
     }
-    wrapper.scrollLeft = width;
-    
-    // curItem.scrollIntoView({ block: 'nearest', inline: 'center' });
   }
 
   ngOnDestroy(): void {
