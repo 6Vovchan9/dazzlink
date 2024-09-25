@@ -12,18 +12,20 @@
             </div>
         </ng-container>
     </ng-container> -->
-    <div #headerEl
-        class="articlesPage__header"
-        [class.articlesPage__header--visible]="!hideHeader()"
-        [ngStyle]="{
-            '--header-height': -(headerEl.clientHeight || 0) + 'px'
-        }"
-    >
-        <app-header></app-header>
-    </div>
+    @if (!appWebview) {
+        <div #headerEl
+            class="articlesPage__header"
+            [class.articlesPage__header--visible]="!hideHeader()"
+            [ngStyle]="{
+                '--header-height': -(headerEl.clientHeight || 0) + 'px'
+            }"
+        >
+            <app-header></app-header>
+        </div>
+    }
     <main class="articlesPage__main">
         <div class="container articlesPage__container">
-            <aside class="sidebar" [class.hiddenInMobile]="webview">
+            <aside class="sidebar" [class.hiddenInMobile]="appWebview">
                 <div class="aboutPage">
                     <h1 class="moduleTitle">Медиа</h1>
                     <!-- <button (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles">{{titleForDownloadBtn}}</button> -->
@@ -33,19 +35,21 @@
                     <!-- <button (click)="mobileDetectService.goToDeviceStore()" *ngIf="!webview" class="btn aboutPage__btn">
                         Скачать приложение
                     </button> -->
-                    <div class="aboutPage__links aboutPage__links--forDesktop">
-                        <div class="linkToApp">
-                            <a href="https://www.apple.com/app-store" target="_blank" class="linkToApp__item">
-                                <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
-                            </a>
-                            <a href="https://play.google.com" target="_blank" class="linkToApp__item">
-                                <img src="assets/images/store/linkAndroid.svg" class="linkToApp__img" alt="linkAndroid">
-                            </a>
-                            <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
-                                <img src="assets/images/store/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
-                            </a>
+                    @if (!appWebview) {
+                        <div class="aboutPage__links aboutPage__links--forDesktop">
+                            <div class="linkToApp">
+                                <a href="https://www.apple.com/app-store" target="_blank" class="linkToApp__item">
+                                    <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="linkIOS">
+                                </a>
+                                <a href="https://play.google.com" target="_blank" class="linkToApp__item">
+                                    <img src="assets/images/store/linkAndroid.svg" class="linkToApp__img" alt="linkAndroid">
+                                </a>
+                                <a href="https://appgallery.huawei.com" target="_blank" class="linkToApp__item">
+                                    <img src="assets/images/store/linkAppGallery.svg" class="linkToApp__img" alt="linkAppGallery">
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div class="aboutPage__links aboutPage__links--forMobile">
                         <div (click)="mobileDetectService?.goToDeviceStore()" class="downloadApp">
                             <div class="downloadApp__title">Скачайте<br>приложение</div>
@@ -222,7 +226,9 @@
             </main>
         </div>
     </main>
-    <app-footer></app-footer>
+    @if (!appWebview) {
+        <app-footer></app-footer>
+    }
 </div>
 
 <!-- <app-loader *ngIf="isLoading()"></app-loader> -->

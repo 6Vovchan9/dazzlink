@@ -135,7 +135,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //   );
   }
 
-  public get webview(): boolean {
+  public get appWebview(): boolean {
     const result = navigator.userAgent.includes('Dazzlink');
     // return true;
     return result;
