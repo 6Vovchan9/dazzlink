@@ -142,15 +142,17 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private addEventListenerToPage(): void {
-    this.pageScrollSub = fromEvent(window, 'scroll')
-      .pipe(
-        auditTime(200)
-      )
-      .subscribe({
-        next: () => {
-          this.operatePageScroll();
-        }
-      });
+    if (!this.appWebview) {
+      this.pageScrollSub = fromEvent(window, 'scroll')
+        .pipe(
+          auditTime(200)
+        )
+        .subscribe({
+          next: () => {
+            this.operatePageScroll();
+          }
+        });
+    }
   }
 
   private operatePageScroll() {
