@@ -24,8 +24,6 @@ export class PostComponent implements OnInit {
   @Input({ required: true }) isLoading = false;
   public state = signal<TImageState>(TImageState.Load);
 
-  constructor() { }
-
   get imageStateTypes() {
     return TImageState;
   }

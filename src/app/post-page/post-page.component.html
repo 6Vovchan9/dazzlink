@@ -87,8 +87,12 @@
                 <div class="postTitle">
                     <!-- Дата публикации (мобила) -->
                     <div class="postTitle__details postDetails">
-                        <div class="postDetails__info">{{postData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}</div>
-                        <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} {{buildViewCount(postData.viewCount)}}</div>
+                        <div class="postDetails__info">
+                            {{postData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}
+                        </div>
+                        <div *ngIf="postData.viewCount" class="postDetails__info">
+                            {{postData.viewCount}} {{buildViewCount(postData.viewCount)}}
+                        </div>
                     </div>
                     <h1 class="moduleTitle postPage__title">{{postData.title}}</h1>
                     <div class="postTitle__img">

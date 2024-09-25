@@ -16,11 +16,21 @@ import { Post } from '@app/shared/interfaces';
 import { PagesService } from '@app/shared/services/pages.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { ToastService } from '@app/shared/services/toast.service';
+import { DatePipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { GoBackBtnComponent } from '@app/shared/components/go-back-btn/go-back-btn.component';
 
 @Component({
   selector: 'app-post-page',
   templateUrl: './post-page.component.html',
   styleUrls: ['./post-page.component.scss'],
+  standalone: true,
+  imports: [
+    GoBackBtnComponent,
+    NgTemplateOutlet,
+    NgClass,
+    DatePipe,
+    NgIf
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -57,21 +67,20 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.setTgBackButton(); // Это для появления кнопки "Назад" в телеге
 
-    this.lSub = this.pagesService.currentLanguage.subscribe(
-      lang => {
-        if (!this.isLoading()) {
-          // console.log(lang);
-          this.isLoading.set(true);
-          this.postsService.getById(this.pageName)
-            .subscribe(
-              (post: Post) => {
-                this.postData = post;
-                this.isLoading.set(false);
-              }
-            );
-        }
-      }
-    );
+    // this.lSub = this.pagesService.currentLanguage.subscribe(
+    //   lang => {
+    //     if (!this.isLoading()) {
+    //       this.isLoading.set(true);
+    //       this.postsService.getById(this.pageName)
+    //         .subscribe(
+    //           (post: Post) => {
+    //             this.postData = post;
+    //             this.isLoading.set(false);
+    //           }
+    //         );
+    //     }
+    //   }
+    // );
 
     this.postSub = this.route.params
       .pipe(
@@ -84,7 +93,6 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         ),
         catchError(err => {
-          this.isLoading.set(false);
           return of(
             null
             // {
@@ -123,6 +131,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.getEvaluation();
             this.isLoading.set(false);
           } else {
+            this.isLoading.set(false);
             this.goToAllArticles(true);
           }
         },
@@ -135,34 +144,36 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
 
     const pageWrap = document.getElementById('pageWrap');
-    fromEvent<Event>(pageWrap, 'scroll')
-      .pipe(
-        takeUntil(this.destroy$),
-        skipWhile(() => this.isLoading()),
-        map(e => (e.target as HTMLDivElement))
-      )
-      .subscribe(
-        (el: HTMLDivElement) => {
-          const scrollTop = pageWrap.scrollTop;
-          const scrollHeight = pageWrap.scrollHeight;
-          const offsetHeight = pageWrap.offsetHeight;
-          // console.log(scrollTop, scrollHeight, offsetHeight);
-          const prevState = this.scrollToTopBtnOptions.hide;
-          const prevOpacity = this.scrollToTopBtnOptions.opacity;
-          this.scrollToTopBtnOptions.hide = scrollTop < offsetHeight;
-          this.scrollToTopBtnOptions.opacity = scrollTop > scrollHeight - offsetHeight * 2; // эти расчёты можно будет подкорректировать
-          const futureState = this.scrollToTopBtnOptions.hide;
-          const futureOpacity = this.scrollToTopBtnOptions.opacity;
+    if (pageWrap) {
+      fromEvent<Event>(pageWrap, 'scroll')
+        .pipe(
+          takeUntil(this.destroy$),
+          skipWhile(() => this.isLoading()),
+          map(e => (e.target as HTMLDivElement))
+        )
+        .subscribe(
+          (el: HTMLDivElement) => {
+            const scrollTop = pageWrap.scrollTop;
+            const scrollHeight = pageWrap.scrollHeight;
+            const offsetHeight = pageWrap.offsetHeight;
+            // console.log(scrollTop, scrollHeight, offsetHeight);
+            const prevState = this.scrollToTopBtnOptions.hide;
+            const prevOpacity = this.scrollToTopBtnOptions.opacity;
+            this.scrollToTopBtnOptions.hide = scrollTop < offsetHeight;
+            this.scrollToTopBtnOptions.opacity = scrollTop > scrollHeight - offsetHeight * 2; // эти расчёты можно будет подкорректировать
+            const futureState = this.scrollToTopBtnOptions.hide;
+            const futureOpacity = this.scrollToTopBtnOptions.opacity;
 
-          if (prevState !== futureState) {
-            // console.log('Изменилась видимость кнопки');
-            this.cd.detectChanges();
-          } else if (prevOpacity !== futureOpacity) {
-            // console.log('Изменилась прозрачность кнопки');
-            this.cd.detectChanges();
+            if (prevState !== futureState) {
+              // console.log('Изменилась видимость кнопки');
+              this.cd.detectChanges();
+            } else if (prevOpacity !== futureOpacity) {
+              // console.log('Изменилась прозрачность кнопки');
+              this.cd.detectChanges();
+            }
           }
-        }
-      );
+        );
+    }
   }
 
   private setTgBackButton() {

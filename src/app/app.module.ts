@@ -21,8 +21,6 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { RadiobuttonFieldModule } from './shared/fields/radiobutton-new-field/radiobutton-field.module';
 import { DropdownFieldModule } from './shared/fields/dropdown-field/dropdown-field.module';
 // import { AccoTriggerComponent } from './shared/components/acco-trigger/acco-trigger.component';
-import { PostPageComponent } from './post-page/post-page.component';
-import { GoBackBtnComponent } from './shared/components/go-back-btn/go-back-btn.component';
 // import { YouTubePlayerModule } from '@angular/youtube-player';
 import { ProgressiveImageComponent } from './shared/components/progressive-image/progressive-image.component';
 // import { LocationsPageComponent } from './locations-page/locations-page.component';
@@ -46,7 +44,6 @@ registerLocaleData(localeRu, 'ru');
 
     // HomePageComponent,
     AgreementsPageComponent,
-    PostPageComponent,
     PlacePageComponent,
     // LocationsPageComponent, // Фильтрация и сортировка на бэке
     LocationsPageWithFrontFilterComponent, // Фильтрация и сортировка на фронте
@@ -58,7 +55,6 @@ registerLocaleData(localeRu, 'ru');
     LocationItemComponent,
     ModalComponent,
     // AccoTriggerComponent,
-    GoBackBtnComponent,
     ProgressiveImageComponent,
     CheckboxNewFieldComponent
   ],
