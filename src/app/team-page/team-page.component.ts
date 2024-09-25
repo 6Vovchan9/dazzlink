@@ -79,11 +79,13 @@ export class TeamPageComponent extends AbsractExample implements AfterViewInit {
   }
 
   public openPersonDescModal(persona: IAboutPersonalData): void {
-    if (persona.queryParamName) {
-      this.setNameQueryParam(persona.queryParamName);
+    if (persona.details?.vita) {
+      if (persona.queryParamName) {
+        this.setNameQueryParam(persona.queryParamName);
+      }
+      this.chosenPersonData = persona;
+      this.hideScroll();
     }
-    this.chosenPersonData = persona;
-    this.hideScroll();
   }
 
   public closePersonDescModal(): void {

@@ -98,7 +98,7 @@ export class MainLayoutComponent extends AbsractExample implements OnInit, DoChe
     return window.location.pathname.includes('locations')
       || window.location.pathname.includes('help')
       || window.location.pathname.includes('agreements')
-      || true;
+      || window.location.pathname.includes('legal-info');
   }
 
   clickByCloseModal(modalName) {
