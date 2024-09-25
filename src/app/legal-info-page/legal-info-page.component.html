@@ -1,18 +1,23 @@
-<main class="page">
+<div class="page">
     <div class="container page__container">
-        <div class="legalInfoPage">
+        <aside class="sidebar">
             <h1 class="moduleTitle">Правовая информация</h1>
-
-            <div class="legalInfoPage__errorMessage errorMessage">
-                <div class="errorMessage__icon"></div>
-                <div class="errorMessage__title">
-                    Тут пока нет контента
-                </div>
-                <div class="errorMessage__text">
-                    Заходите позже, мы обновляем документы<br>
-                    и редизайним страницу
-                </div>
-            </div>
-        </div>
+        </aside>
+        <main class="legalInfoPage">
+            <ul class="legalInfoPage__docs">
+                <a href="https://static.dazzlink.asia/legal/user-agreement.pdf" target="_blank" class="legalInfoPage__item openLegalDoc">
+                    <div class="openLegalDoc__text">
+                        Пользовательское соглашение
+                    </div>
+                    <div class="openLegalDoc__icon"></div>
+                </a>
+                <a href="https://static.dazzlink.asia/legal/privacy-policy.pdf" target="_blank" class="legalInfoPage__item openLegalDoc">
+                    <div class="openLegalDoc__text">
+                        Политика обработки персональных данных<br/>и конфиденциальности информации
+                    </div>
+                    <div class="openLegalDoc__icon"></div>
+                </a>
+            </ul>
+        </main>
     </div>
-</main>
+</div>
