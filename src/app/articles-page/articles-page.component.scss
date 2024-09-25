@@ -65,7 +65,6 @@ $shadowHeightInMobile: 20px;
     margin-bottom: 32px;
 
     @media #{$notMobile} {
-        margin-right: 0px;
         max-width: 360px;
         margin-right: 8%;
         margin-bottom: 0px;

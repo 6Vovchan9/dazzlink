@@ -16,8 +16,10 @@ import { Post } from '@app/shared/interfaces';
 import { PagesService } from '@app/shared/services/pages.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { ToastService } from '@app/shared/services/toast.service';
-import { DatePipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { DatePipe, NgClass, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { GoBackBtnComponent } from '@app/shared/components/go-back-btn/go-back-btn.component';
+import { HeaderComponent } from '@app/shared/components/header/header.component';
+import { FooterComponent } from '@app/shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-post-page',
@@ -26,8 +28,11 @@ import { GoBackBtnComponent } from '@app/shared/components/go-back-btn/go-back-b
   standalone: true,
   imports: [
     GoBackBtnComponent,
+    HeaderComponent,
+    FooterComponent,
     NgTemplateOutlet,
     NgClass,
+    NgStyle,
     DatePipe,
     NgIf
   ],
@@ -174,6 +179,12 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         );
     }
+  }
+
+  public get appWebview(): boolean {
+    const result = navigator.userAgent.includes('Dazzlink');
+    // return true;
+    return result;
   }
 
   private setTgBackButton() {

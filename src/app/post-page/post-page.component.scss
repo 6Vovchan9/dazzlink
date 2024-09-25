@@ -1,5 +1,8 @@
 @import "variables";
 
+$shadowHeightInDesktop: 34px;
+$shadowHeightInMobile: 20px;
+
 @mixin gradientEffect($bcColor: #fff) {
     position: relative;
     &:before {
@@ -22,33 +25,59 @@
     }
 }
 
-:host {
-    flex: 1;
-} // Это все для того чтобы когда контента мало footer все равно был прижат к низу
-
 .postPage {
-    // font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
-    margin-top: 24px;
-    margin-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    .postPage__header {
+        position: sticky;
+        top: calc(var(--header-height) - $shadowHeightInMobile);
+        z-index: 100;
+        transition: .6s;
 
-    .postPage__container {
-        display: flex;
-        flex-direction: column;
-    }
+        &:after {
+            content: '';
+            position: absolute;
+            height: $shadowHeightInMobile;
+            width: 100%;
+            background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+        }
 
-    @media #{$notMobile} {
-        margin-top: 48px;
-        margin-bottom: 48px;
-
-        .postPage__container {
-            flex-direction: row;
+        &--visible {
+            top: 0px;
         }
     }
-
+    .postPage__main {
+        flex: 1;
+        .postPage__container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 24px;
+            margin-bottom: 48px;
+        }
+    }
+    @media #{$notMobile} {
+        .postPage__header {
+            top: calc(var(--header-height) - $shadowHeightInDesktop);
+            &:after {
+                height: $shadowHeightInDesktop;
+            }
+            &--visible {
+                top: 0px;
+            }
+        }
+        .postPage__main {
+            .postPage__container {
+                flex-direction: row;
+                margin-top: 48px;
+                margin-bottom: 48px;
+            }
+        }
+    }
     @media #{$mobile} {
         .postPage__title {
-            font-size: 24px;
-            line-height: 32px;
+            font-size: 32px;
+            line-height: 40px;
         }
     }
 }
@@ -306,9 +335,10 @@
     }
 }
 
-::ng-deep {
+@include ng-deep {
     .articleParagraph {
         margin-bottom: 24px;
+
         &:last-child {
             margin-bottom: 0px;
         }
@@ -322,14 +352,16 @@
         margin-bottom: 24px;
         margin-top: 64px;
     }
+
     .articleList {
         padding-left: 24px;
 
         .articleListItem {
             margin-top: 12px;
+
             p {
                 margin-top: 4px;
-    
+
                 &:first-child {
                     margin-top: 0px;
                 }

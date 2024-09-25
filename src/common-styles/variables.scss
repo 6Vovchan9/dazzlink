@@ -26,3 +26,9 @@ $desktop: "(min-width: 1281px)";
 
 $headerHeightInDesktop: 80px;
 $headerHeightInMobile: 64px;
+
+@mixin ng-deep {
+    :host ::ng-deep {
+        @content;
+    }
+}
