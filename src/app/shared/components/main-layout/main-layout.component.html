@@ -9,193 +9,22 @@
     }"
 >
 
-    <header *ngIf="!webview" class="header" [class.header--hidden]="scrollDown">
-        <ng-container *ngTemplateOutlet="headerContent"></ng-container>
-        <div class="shadow"></div>
-    </header>
-
-    <!-- Алерт -->
-    <app-toast [delay]="3000"></app-toast>
+    @if (!webview) {
+        <app-header></app-header>
+    }
 
     <!-- Осн контент -->
     <div class="contentWrapper" [class.contentWrapper--noMargin]="webview">
         <router-outlet></router-outlet>
     </div>
-
-    <!-- Новый footer -->
-    <div *ngIf="!webview" class="footerNew">
-        <div class="container footerNew__container">
-            <div class="footerNew__content">
-
-                <!-- <div class="footerNew__col">
-                    <div (click)="mobileDetectService?.goToDeviceStore()" class="downloadApp footerNew__download">
-                        <div class="downloadApp__title">Скачать приложение</div>
-                        <div class="downloadApp__icon">
-                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
-                        </div>
-                    </div>
-                </div>
-                <div class="footerNew__col">
-                    <div class="footerNew__socialNetworksBlock">
-                        <div class="socialNetworks">
-                            <ul class="socialNetworks__list">
-                                <li class="socialNetworks__item">
-                                    <a href="https://instagram.com/dazzlink.asia" target="_blank" class="socialNetworks__link">Instagram</a>
-                                </li>
-                                <li class="socialNetworks__item">
-                                    <a href="https://facebook.com" target="_blank" class="socialNetworks__link">Facebook</a>
-                                </li>
-                                <li class="socialNetworks__item">
-                                    <a href="https://linkedin.com" target="_blank" class="socialNetworks__link">LinkedIn</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="company">ООО&nbsp;«Даззл»&nbsp;{{curYear}}</div>
-                    </div>
-                </div> -->
-            
-                <div class="footerNew__col footerNew__col--forMobile">
-                    <div (click)="mobileDetectService?.goToDeviceStore()" class="footerNew__download downloadApp">
-                        <div class="downloadApp__title">Скачайте<br>приложение</div>
-                        <div class="downloadApp__icon">
-                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
-                        </div>
-                    </div>
-                    <div class="footerNew__links">
-                        <div class="footerNew__nav">
-                            <a class="btnInFooter" routerLink="/help">Помощь</a>
-                            <a class="btnInFooter" routerLink="/legal-info">Правовая информация</a>
-                        </div>
-                        <div class="footerNew__socialNetworks">
-                            <a href="https://instagram.com/dazzlink.asia" target="_blank" class="btnInFooter">Instagram</a>
-                            <a href="https://facebook.com" target="_blank" class="btnInFooter">Facebook</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footerNew__col footerNew__col--forDesktop">
-                    <div class="footerNew__btns">
-                        <button (click)="openQRModal()" class="btnInFooter" type="button">Скачать приложение</button>
-                        <a class="btnInFooter" routerLink="/help">Помощь</a>
-                        <a class="btnInFooter" routerLink="/legal-info">Правовая информация</a>
-                        <a href="https://instagram.com/dazzlink.asia" target="_blank" class="btnInFooter">Instagram</a>
-                        <a href="https://facebook.com" target="_blank" class="btnInFooter">Facebook</a>
-                    </div>
-                </div>
-                <div class="footerNew__col">
-                    <div class="company" (click)="clickByCompanyBlock()">{{curYear}} ©&nbsp;DAZZLINK&nbsp;CO,&nbsp;LLC. Все&nbsp;права&nbsp;защищены</div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-
-    <!-- Старый footer -->
-    <footer *ngIf="!webview && false" class="footer">
-        <div class="container footer__container">
-            <div class="footer__col">
-                <div class="company">ООО&nbsp;«Даззл»&nbsp;{{curYear}}</div>
-            </div>
-            <div class="footer__col footer__col--central">
-                <div class="linkToApp">
-                    <a href="https://apps.apple.com/ru" target="_blank" class="linkToApp__item">
-                        <img src="assets/images/store/linkIOS.png" class="linkToApp__img" alt="linkIOS">
-                    </a>
-                    <a href="https://play.google.com" target="_blank" class="linkToApp__item">
-                        <img src="assets/images/store/linkAndroid.png" class="linkToApp__img" alt="linkAndroid">
-                    </a>
-                </div>
-            </div>
-            <div class="footer__col footer__col--justifyContent--end">
-                <div class="socialNetworks">
-                    <ul class="socialNetworks__list">
-                        <li class="socialNetworks__item">
-                            <a href="https://instagram.com/dazzlink.asia" target="_blank" class="socialNetworks__link">Instagram</a>
-                        </li>
-                        <li class="socialNetworks__item">
-                            <a href="https://facebook.com" target="_blank" class="socialNetworks__link">Facebook</a>
-                        </li>
-                        <li class="socialNetworks__item">
-                            <a href="https://linkedin.com" target="_blank" class="socialNetworks__link">LinkedIn</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+    
+    @if (!webview) {
+        <app-footer></app-footer>
+    }
 </div>
 
-<!-- Модалка с навигацией для мобилы -->
-<div *ngIf="showNavModal" class="navigationModal">
-    <div class="navigationModal__header">
-        <div class="headerInModal">
-            <div class="headerInModal__col">
-                <a routerLink="/" (click)="goToAnotherPage()" class="logo">
-                    <img src="assets/images/fullLogo.svg" class="logo__image" alt="logotip">
-                </a>
-            </div>
-            <div class="headerInModal__col">
-                <div (click)="closeNavPopup()" class="closeButtonInWindow">
-                    <div class="iconForCloseInModal"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="navigationModal__contentWrap">
-        <div class="navigationModal__content">
-            <nav class="menu navigationModal__menu menu--fd--column">
-                <ul class="menu__list">
-                    <li class="menu__item" [routerLinkActiveOptions]="{ exact:true }" routerLinkActive="menu__item--active">
-                        <a class="menu__link" (click)="goToAnotherPage('/')" routerLink="/">Приложение</a>
-                    </li>
-                    <li class="menu__item" routerLinkActive="menu__item--active">
-                        <a class="menu__link" (click)="goToAnotherPage('/media')" routerLink="/media">Медиа</a>
-                    </li>
-                    <li class="menu__item" routerLinkActive="menu__item--active" [routerLinkActiveOptions]="routerLinkActiveOptions">
-                        <a class="menu__link" (click)="goToAnotherPage()" routerLink="/locations">Локации</a>
-                    </li>
-                    <li class="menu__item" routerLinkActive="menu__item--active">
-                        <a class="menu__link" (click)="goToAnotherPage()" routerLink="/team">Компания</a>
-                    </li>
-                    <!-- <li class="menu__item">
-                        <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
-                    </li> -->
-                </ul>
-            </nav>
-        </div>
-    </div>
-    <!-- <div class="navigationModal__footer">
-        <div class="footerInModal">
-            <div class="footerInModal__col">
-                <div class="socialNetworks socialNetworks--textColor--black">
-                    <ul class="socialNetworks__list">
-                        <li class="socialNetworks__item">
-                            <a href="https://instagram.com/dazzlink.asia" target="_blank" class="socialNetworks__link">Instagram</a>
-                        </li>
-                        <li class="socialNetworks__item">
-                            <a href="https://facebook.com" target="_blank" class="socialNetworks__link">Facebook</a>
-                        </li>
-                        <li class="socialNetworks__item">
-                            <a href="https://linkedin.com" target="_blank" class="socialNetworks__link">LinkedIn</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footerInModal__col">
-                <div class="footerInModal__lang">
-                    <app-dropdown-field
-                        [formControl]="myForm.get('language')"
-                        [options]="langFieldOptions"
-                        (ngModelChange)="onChangeLang($event, true)"
-                        [multiple]="false"
-                        [listOnTop]="true"
-                        optionLabel="value"
-                        arrowIcon="assets/icons/planetForLang.svg">
-                    </app-dropdown-field>
-                </div>
-            </div>
-        </div>
-    </div> -->
-</div>
+<!-- Алерт -->
+<app-toast [delay]="3000"></app-toast>
 
 <!-- Модалка с QR-код -->
 <ng-container *ngIf="modalService?.modalData$ | async as modalData">
@@ -237,59 +66,6 @@
         </div>
     </ng-container>
 </ng-container>
-
-<ng-template #headerContent>
-    <div class="container header__container">
-        <div class="header__col">
-            <a routerLink="/" class="logo">
-                <img src="assets/images/fullLogo.svg" class="logo__image" alt="logotip">
-            </a>
-        </div>
-        <div class="header__col header__col--alignRight">
-            <div class="header__menu">
-                <nav class="menu">
-                    <ul class="menu__list">
-                        <li class="menu__item" [routerLinkActiveOptions]="{ exact:true }" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/">Приложение</a>
-                        </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/media">Медиа</a>
-                        </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active" [routerLinkActiveOptions]="routerLinkActiveOptions">
-                            <a class="menu__link" routerLink="/locations" [queryParams]="{ category: categoryParam }">Локации</a>
-                        </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/team">Компания</a>
-                        </li>
-                        <!-- <li class="menu__item">
-                            <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
-                        </li> -->
-                        <!-- <li class="menu__item">
-                            <button (click)="getAmountOfUserVisits()">
-                                Кол-во визитов
-                            </button>
-                        </li> -->
-                    </ul>
-                </nav>
-            </div>
-            <!-- <div class="languageInHeader">
-                <app-dropdown-field
-                    [formControl]="myForm.get('language')"
-                    (ngModelChange)="onChangeLang($event)"
-                    [options]="langFieldOptions"
-                    [multiple]="false"
-                    optionLabel="value">
-                </app-dropdown-field>
-            </div> -->
-            <!-- <button (click)="openNavPopup()" class="hamburger">
-                <div class="hamburger__line"></div>
-            </button> -->
-            <button (click)="openNavPopup()" class="hamburger2">
-                <div class="hamburger2__line"></div>
-            </button>
-        </div>
-    </div>
-</ng-template>
 
 <!-- пока есть 4 варианта поведения у header:
     

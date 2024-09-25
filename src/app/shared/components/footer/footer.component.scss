@@ -1,0 +1,96 @@
+@import "variables";
+
+.footer {
+    font-weight: 700;
+    .footer__container {
+        padding-bottom: 20px;
+    }
+    .footer__content {
+        display: flex;
+        min-height: 104px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 40px 24px 32px;
+        border-radius: 24px;
+        background-color: var(--color-black2);
+        color: var(--color-white);
+        row-gap: 16px;
+        column-gap: 24px;
+        .footer__col {
+            .footer__btns {
+                display: flex;
+                align-items: center;
+                column-gap: 16px;
+            }
+            .footer__socialNetworksBlock {
+                margin-right: 16px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                row-gap: 8px;
+            }
+
+            &--forMobile {
+                display: none;
+            }
+        }
+    }
+
+    @media #{$mobile} {
+        .footer__container {
+            padding: 0;
+        }
+        .footer__content {
+            align-items: stretch;
+            border-radius: 24px 24px 0 0;
+            padding: 20px;
+            flex-direction: column;
+            .footer__col {
+                display: block;
+                .footer__socialNetworksBlock {
+                    margin: 0;
+                    row-gap: 12px;
+                    align-items: center;
+                }
+                .footer__links {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 16px -8px 0px;
+                    .footer__nav, .footer__socialNetworks {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        row-gap: 8px;
+                    }
+                    .footer__socialNetworks {
+                        align-items: flex-end;
+                    }
+                }
+                &--forDesktop {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.company {
+    color: var(--color-text-gray);
+    font-size: 14px;
+
+    @media #{$notMobile} {
+        text-align: right;
+    }
+}
+
+.btnInFooter {
+    cursor: pointer;
+    display: block;
+    border: none;
+    background-color: transparent;
+    color: var(--color-white);
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px;
+    text-align: center;
+}

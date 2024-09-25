@@ -1,237 +1,273 @@
-<main class="page">
-    <div class="container page__container">
+<div class="homePage">
+    <div #headerEl
+        class="homePage__header"
+        [class.homePage__header--visible]="!hideHeader()"
+        [ngStyle]="{
+            '--header-height': -(headerEl.clientHeight || 0) + 'px'
+        }"
+    >
+        <app-header></app-header>
+    </div>
+    <main class="homePage__main">
+        <div class="container homePage__container">
 
-        <!-- <div class="example"></div> -->
+            <!-- <div class="example"></div> -->
 
-        <div
-            class="mainVideo"
-            [ngClass]="{
-                'mainVideo--afterLoadPosterImg': posterImgLoad(),
-                'mainVideo--afterLoadVideo': videoLoad()
-            }"
-        >
-            <!-- Todo: нужно будет добавить событие (error) на видео когда не удастся его загрузить чтоб на баннере не показывался значок "play" и курсор был не pointer. Только у него слабая поддержка браузеров поэтому скорее всего придется прибегнуть к событию canplay -->
-            <video #advertisingVideo class="mainVideo__video" playsinline controls>
-                <source src="https://static.dazzlink.asia/landing/advertisingRus.mp4" type="video/mp4" />
-                Ваш браузер не поддерживает встроенные видео.
-            </video>
             <div
-                class="mainVideo__customPoster"
-                (click)="onVideoPlay()"
-                [class.mainVideo__customPoster--hidden]="!showVideoPoster()"
+                class="mainVideo"
+                [ngClass]="{
+                    'mainVideo--afterLoadPosterImg': posterImgLoad(),
+                    'mainVideo--afterLoadVideo': videoLoad()
+                }"
             >
-                <img
-                    class="mainVideo__posterImg"
-                    (load)="onloadCustomPoster()"
-                    src="assets/images/home-page/bannerForVideo.png"
-                    alt="poster"
-                />
-                <div class="playIcon"></div>
-            </div>
-        </div>
-
-        <!-- <picture class="mainPicture">
-            <source media="(max-width: 767px)" srcset="assets/images/home-page/mainPicForMobile.png" />
-            <img src="assets/images/home-page/mainPic.png" class="mainPicture__img" alt="mainPicture" />
-        </picture> -->
-
-        <!-- <picture class="mainPicture">
-            <div class="mainPicture__block">
-                <a href="assets/images/home-page/mainPicForMobile.png"
-                    class="progressive replace"
-                    data-srcset="assets/images/home-page/mainPicForMobile.png 767w, assets/images/home-page/mainPic.png"
-                    data-sizes="100vw"
+                <!-- Todo: нужно будет добавить событие (error) на видео когда не удастся его загрузить чтоб на баннере не показывался значок "play" и курсор был не pointer. Только у него слабая поддержка браузеров поэтому скорее всего придется прибегнуть к событию canplay -->
+                <video #advertisingVideo class="mainVideo__video" playsinline controls>
+                    <source src="https://static.dazzlink.asia/landing/advertisingRus.mp4" type="video/mp4" />
+                    Ваш браузер не поддерживает встроенные видео.
+                </video>
+                <div
+                    class="mainVideo__customPoster"
+                    (click)="onVideoPlay()"
+                    [class.mainVideo__customPoster--hidden]="!showVideoPoster()"
                 >
-                    <img src="assets/images/home-page/smallMainPicForMobile.png"
-                        srcset="assets/images/home-page/smallMainPicForMobile.png 767w, assets/images/home-page/smallMainPic.png"
-                        sizes="100vw"
-                        class="preview"
-                        alt="previewImage"
+                    <img
+                        class="mainVideo__posterImg"
+                        (load)="onloadCustomPoster()"
+                        src="assets/images/home-page/bannerForVideo.png"
+                        alt="poster"
                     />
-                </a>
-            </div>
-        </picture> -->
-
-        <!-- <picture *ngIf="false" class="mainPicture mainPicture--preview">
-            <div class="mainPicture__block">
-                <img class="mainPicture__image" src="assets/images/home-page/smallMainPic.png" alt="smallMainPicture">
-            </div>
-        </picture> -->
-
-        <!-- <app-progressive-image scrolledElName="pageWrap" fullImageSrc="assets/images/home-page/mainPic.png" tinyImageSrc="assets/images/home-page/smallMainPic.png"></app-progressive-image> -->
-
-        <!-- <img [src]="base64ForImg" alt="img"> -->
-
-        <!-- <img #thumbHashDemo width="300" height="200"> -->
-
-        <div class="aboutAppInfo">
-            <div class="container aboutAppInfo__container">
-                <div class="aboutAppInfo__text">
-                    <h1 class="moduleTitle">Dazzlink: постройте великолепные отношения </h1>
-                    <div class="aboutAppInfo__cont">
-                        Знакомства для тех, кто ищет спутника
-                        на всю жизнь, а не мимолетных встречи.
-                        Доступно в крупных городах Узбекистана
-                    </div>
+                    <div class="playIcon"></div>
                 </div>
-                <div class="aboutAppInfo__infoLinks forDesktop">
-                    <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
+            </div>
+
+            <!-- <picture class="mainPicture">
+                <source media="(max-width: 767px)" srcset="assets/images/home-page/mainPicForMobile.png" />
+                <img src="assets/images/home-page/mainPic.png" class="mainPicture__img" alt="mainPicture" />
+            </picture> -->
+
+            <!-- <picture class="mainPicture">
+                <div class="mainPicture__block">
+                    <a href="assets/images/home-page/mainPicForMobile.png"
+                        class="progressive replace"
+                        data-srcset="assets/images/home-page/mainPicForMobile.png 767w, assets/images/home-page/mainPic.png"
+                        data-sizes="100vw"
+                    >
+                        <img src="assets/images/home-page/smallMainPicForMobile.png"
+                            srcset="assets/images/home-page/smallMainPicForMobile.png 767w, assets/images/home-page/smallMainPic.png"
+                            sizes="100vw"
+                            class="preview"
+                            alt="previewImage"
+                        />
+                    </a>
                 </div>
-                @if (mobileDetectService.osDevice) {
-                    <div class="aboutAppInfo__infoLinks forMobile">
-                        <button class="downloadApp"
-                            type="button"
-                            (click)="mobileDetectService?.goToDeviceStore()"
-                        >
-                            <div class="downloadApp__title">Скачайте<br />приложение</div>
-                            <div class="downloadApp__icon">
-                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
-                            </div>
-                        </button>
+            </picture> -->
+
+            <!-- <picture *ngIf="false" class="mainPicture mainPicture--preview">
+                <div class="mainPicture__block">
+                    <img class="mainPicture__image" src="assets/images/home-page/smallMainPic.png" alt="smallMainPicture">
+                </div>
+            </picture> -->
+
+            <!-- <app-progressive-image scrolledElName="pageWrap" fullImageSrc="assets/images/home-page/mainPic.png" tinyImageSrc="assets/images/home-page/smallMainPic.png"></app-progressive-image> -->
+
+            <!-- <img [src]="base64ForImg" alt="img"> -->
+
+            <!-- <img #thumbHashDemo width="300" height="200"> -->
+
+            <div class="aboutAppInfo">
+                <div class="container aboutAppInfo__container">
+                    <div class="aboutAppInfo__text">
+                        <h1 class="moduleTitle">{{productName}}: постройте великолепные отношения </h1>
+                        <div class="aboutAppInfo__cont">
+                            Знакомства для тех, кто ищет спутника
+                            на всю жизнь, а не мимолетных встречи.
+                            Доступно в крупных городах Узбекистана
+                        </div>
                     </div>
-                } @else {
-                    <div class="aboutAppInfo__infoLinks forMobile">
+                    <div class="aboutAppInfo__infoLinks forDesktop">
                         <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
                     </div>
-                }
-            </div>
-        </div>
-
-        @if (citiesForCarousel()?.length) {
-            <div class="cityCarousel">
-                <ul
-                    class="cityCarousel__list"
-                    [ngStyle]="{
-                        '--card-count': citiesForCarousel().length
-                    }"
-                >
-                    @for (city of citiesForCarousel(); track city.code) {
-                        <li class="cityCarousel__item">
-                            <div class="cityCard">
-                                @if (city.imageList.length) {
-                                    <app-thumb-hash-image [imageData]="city.imageList[0]"></app-thumb-hash-image>
-                                }
-                                <!-- <img [src]="city.imageList.href" alt="pic">
-                                <img [src]="'assets/images/home-page/bannerForVideo.png'" alt="pic">
-                                {{city.title}} -->
-                                <div class="cityCard__name">
-                                    {{city.title}}
+                    @if (mobileDetectService.osDevice) {
+                        <div class="aboutAppInfo__infoLinks forMobile">
+                            <button class="downloadApp"
+                                type="button"
+                                (click)="mobileDetectService?.goToDeviceStore()"
+                            >
+                                <div class="downloadApp__title">Скачайте<br />приложение</div>
+                                <div class="downloadApp__icon">
+                                    <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
                                 </div>
-                            </div>
-                        </li>
+                            </button>
+                        </div>
+                    } @else {
+                        <div class="aboutAppInfo__infoLinks forMobile">
+                            <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
+                        </div>
                     }
-                </ul>
+                </div>
             </div>
-        }
 
-        <section class="appAdv">
-            <ul class="appAdv__list">
-                <li class="appAdv__item">
-                    <div class="appAdv__image">
-                        <img src="assets/images/home-page/appAdv1.png" alt="appAdvantage">
-                    </div>
-                    <div class="appAdv__content">
-                        <h2 class="moduleTitle">
-                            Знакомьтесь онлайн
-                        </h2>
-                        <div class="appAdv__text">
-                            Подходите к выбору собеседника осознанно.
-                            Фотографии откроются только после начала общения,
-                            до этого делайте выбор сердцем
-                        </div>
-                    </div>
-                </li>
-                <li class="appAdv__item">
-                    <div class="appAdv__image">
-                        <img src="assets/images/home-page/appAdv2.png" alt="appAdvantage">
-                    </div>
-                    <div class="appAdv__content">
-                        <h2 class="moduleTitle">
-                            Переходите от слов к делу
-                        </h2>
-                        <div class="appAdv__text">
-                            Выбирайте романтические места для свиданий и приглашайте друг друга прямо в приложении.
-                        </div>
-                    </div>
-                </li>
-                <li class="appAdv__item">
-                    <div class="appAdv__image">
-                        <img src="assets/images/home-page/appAdv3.png" alt="appAdvantage">
-                    </div>
-                    <div class="appAdv__content">
-                        <h2 class="moduleTitle">
-                            Изучайте тему отношений
-                        </h2>
-                        <div class="appAdv__text">
-                            Статьи про любовь, отношения, знакомства, свидания, семейную жизнь.
-                            Расскажем, как сохранить счастье на долгие годы
-                        </div>
-                    </div>
-                </li>
-                <li class="appAdv__item">
-                    <div class="appAdv__image">
-                        <img src="assets/images/home-page/appAdv4.png" alt="appAdvantage">
-                    </div>
-                    <div class="appAdv__content">
-                        <h2 class="moduleTitle">
-                            Скачайте приложение
-                        </h2>
-                        <div class="appAdv__text">
-                            Сотни людей уже доверили нам свою судьбу, присоединяйтесь и вы,
-                            чтобы найти любовь на всю жизнь и создать семью
-
-                            <div class="appAdv__infoLinks forDesktop">
-                                <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
-                            </div>
-                            @if (mobileDetectService.osDevice) {
-                                <div class="appAdv__infoLinks forMobile">
-                                    <button class="downloadApp"
-                                        type="button"
-                                        (click)="mobileDetectService?.goToDeviceStore()"
-                                    >
-                                        <div class="downloadApp__title">Скачайте<br />приложение</div>
-                                        <div class="downloadApp__icon">
-                                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
-                                        </div>
-                                    </button>
+            @if (citiesForCarousel()?.length) {
+                <div class="cityCarousel">
+                    <ul
+                        class="cityCarousel__list"
+                        [ngStyle]="{
+                            '--card-count': citiesForCarousel().length
+                        }"
+                    >
+                        @for (city of citiesForCarousel(); track city.code) {
+                            <li class="cityCarousel__item">
+                                <div class="cityCard">
+                                    @if (city.imageList.length) {
+                                        <app-thumb-hash-image [imageData]="city.imageList[0]"></app-thumb-hash-image>
+                                    }
+                                    <!-- <img [src]="city.imageList.href" alt="pic">
+                                    <img [src]="'assets/images/home-page/bannerForVideo.png'" alt="pic">
+                                    {{city.title}} -->
+                                    <div class="cityCard__name">
+                                        {{city.title}}
+                                    </div>
                                 </div>
-                            } @else {
-                                <div class="appAdv__infoLinks forMobile">
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <section class="appAdv">
+                <ul class="appAdv__list">
+                    <li class="appAdv__item">
+                        <div class="appAdv__image">
+                            <img src="assets/images/home-page/appAdv1.png" alt="appAdvantage">
+                        </div>
+                        <div class="appAdv__content">
+                            <h2 class="moduleTitle">
+                                Знакомьтесь онлайн
+                            </h2>
+                            <div class="appAdv__text">
+                                Подходите к выбору собеседника осознанно.
+                                Фотографии откроются только после начала общения,
+                                до этого делайте выбор сердцем
+                            </div>
+                        </div>
+                    </li>
+                    <li class="appAdv__item">
+                        <div class="appAdv__image">
+                            <img src="assets/images/home-page/appAdv2.png" alt="appAdvantage">
+                        </div>
+                        <div class="appAdv__content">
+                            <h2 class="moduleTitle">
+                                Переходите от слов к делу
+                            </h2>
+                            <div class="appAdv__text">
+                                Выбирайте романтические места для свиданий и приглашайте друг друга прямо в приложении.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="appAdv__item">
+                        <div class="appAdv__image">
+                            <img src="assets/images/home-page/appAdv3.png" alt="appAdvantage">
+                        </div>
+                        <div class="appAdv__content">
+                            <h2 class="moduleTitle">
+                                Изучайте тему отношений
+                            </h2>
+                            <div class="appAdv__text">
+                                Статьи про любовь, отношения, знакомства, свидания, семейную жизнь.
+                                Расскажем, как сохранить счастье на долгие годы
+                            </div>
+                        </div>
+                    </li>
+                    <li class="appAdv__item">
+                        <div class="appAdv__image">
+                            <img src="assets/images/home-page/appAdv4.png" alt="appAdvantage">
+                        </div>
+                        <div class="appAdv__content">
+                            <h2 class="moduleTitle">
+                                Скачайте приложение
+                            </h2>
+                            <div class="appAdv__text">
+                                Сотни людей уже доверили нам свою судьбу, присоединяйтесь и вы,
+                                чтобы найти любовь на всю жизнь и создать семью
+
+                                <div class="appAdv__infoLinks forDesktop">
                                     <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
                                 </div>
-                            }
+                                @if (mobileDetectService.osDevice) {
+                                    <div class="appAdv__infoLinks forMobile">
+                                        <button class="downloadApp"
+                                            type="button"
+                                            (click)="mobileDetectService?.goToDeviceStore()"
+                                        >
+                                            <div class="downloadApp__title">Скачайте<br />приложение</div>
+                                            <div class="downloadApp__icon">
+                                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
+                                            </div>
+                                        </button>
+                                    </div>
+                                } @else {
+                                    <div class="appAdv__infoLinks forMobile">
+                                        <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
+                                    </div>
+                                }
+                            </div>
+
                         </div>
+                    </li>
+                </ul>
+            </section>
 
-                    </div>
-                </li>
-            </ul>
-        </section>
+            <section class="partners">
+                <ul class="partners__list">
+                    <li class="partners__item partner">
+                        <div class="partner__logo">
+                            <img src="assets/images/home-page/partners/itPark.png" alt="partner">
+                        </div>
+                        <div class="partner__name">Резидент IT Park</div>
+                    </li>
+                    <li class="partners__item partner">
+                        <div class="partner__logo">
+                            <img src="assets/images/home-page/partners/proData.png" alt="partner">
+                        </div>
+                        <div class="partner__name">Партнер pro-data.tech</div>
+                    </li>
+                    <li class="partners__item partner">
+                        <div class="partner__logo">
+                            <img src="assets/images/home-page/partners/atmos.png" alt="partner">
+                        </div>
+                        <div class="partner__name">Партнер atmos.uz</div>
+                    </li>
+                </ul>
+            </section>
 
-        <section class="partners">
-            <ul class="partners__list">
-                <li class="partners__item partner">
-                    <div class="partner__logo">
-                        <img src="assets/images/home-page/partners/itPark.png" alt="partner">
-                    </div>
-                    <div class="partner__name">Резидент IT Park</div>
-                </li>
-                <li class="partners__item partner">
-                    <div class="partner__logo">
-                        <img src="assets/images/home-page/partners/proData.png" alt="partner">
-                    </div>
-                    <div class="partner__name">Партнер pro-data.tech</div>
-                </li>
-                <li class="partners__item partner">
-                    <div class="partner__logo">
-                        <img src="assets/images/home-page/partners/atmos.png" alt="partner">
-                    </div>
-                    <div class="partner__name">Партнер atmos.uz</div>
-                </li>
-            </ul>
-        </section>
+        </div>
+    </main>
+    <app-footer></app-footer>
+</div>
 
-    </div>
-</main>
+<div class="overscrollBlock">
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero sunt voluptatem non explicabo accusamus enim, quae
+    voluptatum reprehenderit dignissimos velit nulla recusandae necessitatibus veniam impedit aliquam? Necessitatibus
+    rerum deleniti quis ad praesentium molestias voluptatibus itaque, odio ea minus ullam ex vel, nostrum sapiente aut
+    saepe, quo consequatur excepturi fugit repellendus non. Eum, quaerat! Reiciendis perferendis eveniet voluptatum
+    saepe fugiat, debitis natus fuga, aliquid facilis quo illum esse repudiandae ullam magni odio quaerat earum harum
+    ipsum. Unde odit, tempora vero voluptates dicta ut corporis, minima, eos doloribus culpa voluptatibus sed iusto
+    nesciunt voluptatum quaerat. Culpa distinctio impedit doloremque molestiae sequi, incidunt cum minima expedita
+    temporibus in aliquam ad eum saepe odit, quisquam quia quam voluptas debitis beatae consectetur necessitatibus quis
+    qui voluptates! Quis culpa quae, ea facilis maxime cumque distinctio illum sint, officia minima nobis ab neque iste
+    porro vitae temporibus? Ratione ipsum cumque pariatur sed dignissimos tempore, beatae eligendi, sint doloremque
+    libero recusandae maiores sunt debitis id in quas delectus architecto porro quam ea ut earum provident itaque!
+    Impedit in suscipit non molestiae, totam natus dignissimos autem blanditiis atque mollitia exercitationem doloribus
+    fuga vitae, deleniti laudantium sapiente dolorum? Consectetur tempora aspernatur quis non, repellendus adipisci
+    incidunt reprehenderit dolorem quas, aliquid dolor corrupti aperiam voluptatibus dignissimos. Pariatur nobis rem
+    voluptates laborum eligendi. Quas molestias veritatis autem, repellendus natus perspiciatis minima. Recusandae saepe
+    enim vero. Quibusdam provident excepturi dolorem. Porro nostrum vitae voluptatum reprehenderit, officia ab assumenda
+    necessitatibus odit eaque perspiciatis iste fuga, molestiae saepe laboriosam veritatis, error ipsum iure doloremque
+    delectus eius! Totam suscipit, quod impedit quis magni doloribus ab dolor quisquam perferendis enim similique omnis
+    deserunt reiciendis architecto possimus, ipsum sapiente eum! Porro rerum recusandae ipsum sint quaerat. Expedita
+    nostrum deleniti debitis aspernatur quaerat officiis soluta maiores eos distinctio, cum dolor, vitae velit. Nemo
+    itaque eos error perspiciatis sapiente enim.
+</div>
 
 <ng-template #linkToApp>
     <div class="linkToApp">

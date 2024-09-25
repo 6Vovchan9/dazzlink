@@ -247,14 +247,14 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
     // console.log('Подписываемся на скролл карусели');
     const carousel = this.carouselEl?.nativeElement;
     if (carousel) {
-    this.carouselScrollSub = fromEvent(carousel, 'scroll')
-      .pipe(
-        debounceTime(50),
-        distinctUntilChanged()
-      )
-      .subscribe(
-        this.operateCarouselScroll.bind(this, carousel)
-      )
+      this.carouselScrollSub = fromEvent(carousel, 'scroll')
+        .pipe(
+          debounceTime(50),
+          distinctUntilChanged()
+        )
+        .subscribe(
+          this.operateCarouselScroll.bind(this, carousel)
+        )
     }
   }
 
