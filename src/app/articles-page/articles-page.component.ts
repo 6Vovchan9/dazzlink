@@ -31,7 +31,8 @@ import {
   skipWhile,
   takeUntil, tap,
   throttleTime,
-  auditTime
+  auditTime,
+  filter
 } from 'rxjs/operators';
 
 import { Post, RespArticlesData } from '@app/shared/interfaces';
@@ -145,6 +146,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.appWebview) {
       this.pageScrollSub = fromEvent(window, 'scroll')
         .pipe(
+          filter(() => !this.isLoading()),
           auditTime(200)
         )
         .subscribe({
