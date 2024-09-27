@@ -75,7 +75,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private lSub: Subscription;
   private pSub: Subscription;
   private pageScrollSub: Subscription;
-  private prewScrollTop = 0;
+  private prevScrollTop = 0;
   public hideHeader = signal(true);
   private curLang: string;
   public errorAfterGetAllArticles = signal(false);
@@ -84,6 +84,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public showLoadMoreSpinner = signal(false);
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
+  // public debugPageScroll: {[key: string]: number} = {};
 
   constructor(
     private postsService: PostsService,
@@ -160,8 +161,13 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private operatePageScroll() {
     const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
     // console.log('cur:', curScrollTop);
-    // console.log('prev:', this.prewScrollTop);
-    if (curScrollTop > this.prewScrollTop || curScrollTop < 100) {
+    // console.log('prev:', this.prevScrollTop);
+
+    // this.debugPageScroll.prevScroll = this.prevScrollTop;
+    // this.debugPageScroll.curScroll = curScrollTop;
+    // this.cd.detectChanges();
+
+    if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
       if (curScrollTop < 100) {
         if (curScrollTop === 0) {
           // console.log('Скрываем header');
@@ -175,7 +181,8 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       // console.log('Показываем header');
       this.hideHeader.set(false);
     }
-    this.prewScrollTop = curScrollTop;
+    
+    this.prevScrollTop = curScrollTop;
     // this.cd.detectChanges();
   }
 
