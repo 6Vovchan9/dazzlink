@@ -2,7 +2,7 @@
     @if (!appWebview) {
         <div #headerEl
             class="postPage__header"
-            [class.postPage__header--visible]="false"
+            [class.postPage__header--visible]="!hideHeader()"
             [ngStyle]="{
                 '--header-height': -(headerEl.clientHeight || 0) + 'px'
             }"
@@ -97,6 +97,7 @@
                     <aside class="sidebar">
                         <div class="goBackBtn">
                             <app-go-back-btn (click)="goToAllArticles()" text="Все статьи"></app-go-back-btn>
+                            <!-- {{templateRender}} -->
                         </div>
                         <div class="postTitle">
                             <!-- Дата публикации (мобила) -->
@@ -155,7 +156,7 @@
                             <!-- Кнопка наверх -->
                             <div class="postContent__scrollToTopBtn scrollProgressWrapper">
                                 <div class="scrollProgress"
-                                    (click)="scrollToTop()"
+                                    (click)="vc.scrollToPosition([0, 0])"
                                     [ngClass]="{
                                         'scrollProgress--hidden': scrollToTopBtnOptions.hide,
                                         'scrollProgress--opacity': scrollToTopBtnOptions.opacity

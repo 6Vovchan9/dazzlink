@@ -133,12 +133,12 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
       )
       .subscribe({
         next: () => {
-          this.operatePageScroll();
+          this.operateHeaderState();
         }
       });
   }
 
-  private operatePageScroll() {
+  private operateHeaderState() {
     const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
     // console.log('cur:', curScrollTop);
     // console.log('prev:', this.prewScrollTop);

@@ -3,20 +3,29 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Inject,
   OnDestroy,
   OnInit,
   signal
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { catchError, delay, map, skipWhile, switchMap, takeUntil } from 'rxjs/operators';
+import { auditTime, catchError, skipWhile, switchMap } from 'rxjs/operators';
 import { Subject, Subscription, fromEvent, of } from 'rxjs';
+import {
+  DatePipe,
+  DOCUMENT,
+  NgClass,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
+  ViewportScroller
+} from '@angular/common';
 
 import { PostsService } from '@app/shared/services/posts.service';
 import { Post } from '@app/shared/interfaces';
 import { PagesService } from '@app/shared/services/pages.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { ToastService } from '@app/shared/services/toast.service';
-import { DatePipe, NgClass, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { GoBackBtnComponent } from '@app/shared/components/go-back-btn/go-back-btn.component';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
@@ -48,6 +57,9 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private lSub: Subscription;
   private eSub: Subscription;
   private vSub: Subscription;
+  private pageScrollSub: Subscription;
+  private prewScrollTop = 0;
+  public hideHeader = signal(true);
   public votingIsLoading = signal<boolean>(false);
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
@@ -63,7 +75,9 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private tgService: TelegramService,
     private cd: ChangeDetectorRef,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private vc: ViewportScroller,
+    @Inject(DOCUMENT) private readonly documentRef: Document
   ) {
     this.goBackByTg = this.goBackByTg.bind(this);
   }
@@ -140,46 +154,80 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.goToAllArticles(true);
           }
         },
-        err => {
+        () => {
           this.isLoading.set(false);
         }
       );
   }
 
   ngAfterViewInit() {
+    this.addEventListenerToPage();
+  }
 
-    const pageWrap = document.getElementById('pageWrap');
-    if (pageWrap) {
-      fromEvent<Event>(pageWrap, 'scroll')
-        .pipe(
-          takeUntil(this.destroy$),
-          skipWhile(() => this.isLoading()),
-          map(e => (e.target as HTMLDivElement))
-        )
-        .subscribe(
-          (el: HTMLDivElement) => {
-            const scrollTop = pageWrap.scrollTop;
-            const scrollHeight = pageWrap.scrollHeight;
-            const offsetHeight = pageWrap.offsetHeight;
-            // console.log(scrollTop, scrollHeight, offsetHeight);
-            const prevState = this.scrollToTopBtnOptions.hide;
-            const prevOpacity = this.scrollToTopBtnOptions.opacity;
-            this.scrollToTopBtnOptions.hide = scrollTop < offsetHeight;
-            this.scrollToTopBtnOptions.opacity = scrollTop > scrollHeight - offsetHeight * 2; // эти расчёты можно будет подкорректировать
-            const futureState = this.scrollToTopBtnOptions.hide;
-            const futureOpacity = this.scrollToTopBtnOptions.opacity;
+  private addEventListenerToPage(): void {
+    this.pageScrollSub = fromEvent(window, 'scroll')
+      .pipe(
+        skipWhile(() => this.isLoading()),
+        auditTime(200)
+      )
+      .subscribe({
+        next: () => {
+          this.operateHeaderState();
+          this.operateScrollToTopBtnState();
+        }
+      });
+  }
 
-            if (prevState !== futureState) {
-              // console.log('Изменилась видимость кнопки');
-              this.cd.detectChanges();
-            } else if (prevOpacity !== futureOpacity) {
-              // console.log('Изменилась прозрачность кнопки');
-              this.cd.detectChanges();
-            }
-          }
-        );
+  private operateHeaderState() {
+    const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
+    // console.log('cur:', curScrollTop);
+    // console.log('prev:', this.prewScrollTop);
+    if (curScrollTop > this.prewScrollTop || curScrollTop < 100) {
+      if (curScrollTop < 100) {
+        if (curScrollTop === 0) {
+          // console.log('Скрываем header');
+          this.hideHeader.set(true);
+        }
+      } else {
+        // console.log('Скрываем header');
+        this.hideHeader.set(true);
+      }
+    } else {
+      // console.log('Показываем header');
+      this.hideHeader.set(false);
+    }
+    this.prewScrollTop = curScrollTop;
+    // this.cd.detectChanges();
+  }
+
+  private operateScrollToTopBtnState(): void {
+
+    const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
+    const bodyEl: HTMLBodyElement = this.documentRef.activeElement as HTMLBodyElement;
+
+    const scrollHeight = bodyEl.scrollHeight;
+    const offsetHeight = bodyEl.offsetHeight;
+    // console.log(curScrollTop, scrollHeight, offsetHeight);
+    const prevState = this.scrollToTopBtnOptions.hide;
+    const prevOpacity = this.scrollToTopBtnOptions.opacity;
+    this.scrollToTopBtnOptions.hide = curScrollTop < offsetHeight;
+    this.scrollToTopBtnOptions.opacity = curScrollTop > scrollHeight - offsetHeight * 2; // эти расчёты можно будет подкорректировать
+    const futureState = this.scrollToTopBtnOptions.hide;
+    const futureOpacity = this.scrollToTopBtnOptions.opacity;
+
+    if (prevState !== futureState) {
+      // console.log('Изменилась видимость кнопки');
+      this.cd.detectChanges();
+    } else if (prevOpacity !== futureOpacity) {
+      // console.log('Изменилась прозрачность кнопки');
+      this.cd.detectChanges();
     }
   }
+
+  // public get templateRender(): string {
+  //   console.log('post page render');
+  //   return 'Hello';
+  // }
 
   public get appWebview(): boolean {
     const result = navigator.userAgent.includes('Dazzlink');
@@ -298,14 +346,6 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     localStorage.setItem('articlesEvaluation', JSON.stringify(curVal));
   }
 
-  public scrollToTop(): void {
-    document.getElementById('pageWrap')?.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  }
-
   public get titleForDownloadBtn(): string {
     console.log('Обновляем контент на post-page');
     return 'Hello';
@@ -326,6 +366,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.postSub?.unsubscribe();
     this.lSub?.unsubscribe();
     this.eSub?.unsubscribe();
+    this.pageScrollSub?.unsubscribe();
     // this.vSub?.unsubscribe();
 
     this.destroy$.next(true);
