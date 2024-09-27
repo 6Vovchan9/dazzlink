@@ -34,6 +34,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
   public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];
   public descPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.description, TypeOfPlaceDetails.awards, TypeOfPlaceDetails.infoSource];
   public locationRatingList: Array<{ name: string, value: number }> = [];
+  // public debugCarouselScrollObj: {[key: string]: number } = {};
 
   // public showSpinnerUnderPhoto = true;
   // public amountLoadedPhotos = 0;
@@ -264,6 +265,12 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
     const imageAmount = this.placeData.imageList?.length || 1;
     const divisor = carouselWidth / imageAmount;
     this.curPhotoInGalleria = Math.trunc(carouselScrollLeft / divisor);
+
+    // this.debugCarouselScrollObj.carouselWidth = carouselWidth;
+    // this.debugCarouselScrollObj.carouselScrollLeft = carouselScrollLeft;
+    // this.debugCarouselScrollObj.imageAmount = imageAmount;
+    // this.debugCarouselScrollObj.divisor = divisor;
+    // this.debugCarouselScrollObj.curPhotoInGalleria = this.curPhotoInGalleria;
   }
 
   private setScrollSnappingCarousel(): void {
