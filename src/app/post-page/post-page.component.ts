@@ -165,7 +165,8 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private addEventListenerToPage(): void {
-    this.pageScrollSub = fromEvent(window, 'scroll')
+    const myWindow = this.documentRef.defaultView; // defaultView - свойство которое возвращает окно, связанное с текущим документом. Это аналогия встроенного в браузер глобального объекта window
+    this.pageScrollSub = fromEvent(myWindow, 'scroll')
       .pipe(
         skipWhile(() => this.isLoading()),
         auditTime(200)
@@ -230,7 +231,8 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   // }
 
   public get appWebview(): boolean {
-    const result = navigator.userAgent.includes('Dazzlink');
+    const myNavigator = this.documentRef.defaultView.navigator; // почему нежелательно просто обратиться к navigator.userAgent читай в notes.md
+    const result = myNavigator.userAgent.includes('Dazzlink');
     // return true;
     return result;
   }
