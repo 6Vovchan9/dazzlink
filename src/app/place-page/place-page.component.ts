@@ -8,7 +8,7 @@ import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
 import { ToastService } from '@app/shared/services/toast.service';
 import { Subscription, fromEvent, of, pipe } from 'rxjs';
-import { catchError, debounceTime, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { auditTime, catchError, debounceTime, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-place-page',
@@ -34,7 +34,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
   public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];
   public descPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.description, TypeOfPlaceDetails.awards, TypeOfPlaceDetails.infoSource];
   public locationRatingList: Array<{ name: string, value: number }> = [];
-  // public debugCarouselScrollObj: {[key: string]: number } = {};
+  // public debugCarouselScrollObj: { [key: string]: number } = {};
 
   // public showSpinnerUnderPhoto = true;
   // public amountLoadedPhotos = 0;
@@ -60,6 +60,11 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
   get curPageScale(): number {
     return window.visualViewport.scale; // масштаб страницы
   }
+
+  // public get gtr(): string {
+  //   console.log('place page render');
+  //   return 'Hello'
+  // }
 
   ngOnInit(): void {
 
@@ -248,14 +253,14 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
     // console.log('Подписываемся на скролл карусели');
     const carousel = this.carouselEl?.nativeElement;
     if (carousel) {
-    this.carouselScrollSub = fromEvent(carousel, 'scroll')
-      .pipe(
-        debounceTime(50),
-        distinctUntilChanged()
-      )
-      .subscribe(
-        this.operateCarouselScroll.bind(this, carousel)
-      )
+      this.carouselScrollSub = fromEvent(carousel, 'scroll')
+        .pipe(
+          auditTime(150),
+          distinctUntilChanged()
+        )
+        .subscribe(
+          this.operateCarouselScroll.bind(this, carousel)
+        )
     }
   }
 
@@ -264,7 +269,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
     const carouselScrollLeft = carousel.scrollLeft;
     const imageAmount = this.placeData.imageList?.length || 1;
     const divisor = carouselWidth / imageAmount;
-    this.curPhotoInGalleria = Math.trunc(carouselScrollLeft / divisor);
+    this.curPhotoInGalleria = Math.round(carouselScrollLeft / divisor);
 
     // this.debugCarouselScrollObj.carouselWidth = carouselWidth;
     // this.debugCarouselScrollObj.carouselScrollLeft = carouselScrollLeft;
