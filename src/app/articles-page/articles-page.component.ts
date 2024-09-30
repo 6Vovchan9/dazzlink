@@ -22,6 +22,7 @@ import { MobileDetectService } from '@app/shared/services/mobile-detect.service'
 import { langArr } from '@app/shared/constants/languages.constants';
 import { MOCK_ARTICLES, MOCK_ARTICLES_FOR_SKELETON } from '@app/shared/mock/articles';
 import { PersistanceService } from '@app/admin/shared/services/persistance.service';
+import { GlobalModalService } from '@app/shared/services/global-modal.service';
 
 @Component({
   selector: 'app-articles-page',
@@ -58,6 +59,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // Есть еще декоратор @Host и для него сервис должен регистрироваться либо в текущем компоненте либо в родительском компоненте при помощи свойсва декоратора компонента "viewProviders"
     @Optional() public mobileDetectService: MobileDetectService,  // Если вдруг для этого сервиса не определен провайдер, чтоб мы не получили ошибку при обращении к нему в таком случае определяем его как опциональный
     private router: Router,
+    private modalService: GlobalModalService,
     private cd: ChangeDetectorRef
   ) { }
 
@@ -244,6 +246,14 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   //   console.log('Обновляем контент на articles-page');
   //   return 'Hello';
   // }
+
+  public qrModalOrTelegram(): void {
+    if (this.mobileDetectService?.osDevice) {
+      this.mobileDetectService.goToTelegramChannel();
+    } else {
+      this.modalService.open({ component: 'mainLayoutComponent', modalName: 'qrForTelegram' });
+    }
+  }
 
   private intersectionObserver() {
 

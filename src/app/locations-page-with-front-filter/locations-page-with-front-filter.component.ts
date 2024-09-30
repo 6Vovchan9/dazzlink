@@ -853,7 +853,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     if (this.mobileDetectService.mobileOrTabletDevice) {
       this.mobileDetectService?.goToDeviceStore();
     } else {
-      this.modalService.open({ component: 'mainLayoutComponent' }); // на аргумент можно не обращать внимание
+      this.modalService.open({ component: 'mainLayoutComponent', modalName: 'qrForTelegram' });
     }
   }
 
