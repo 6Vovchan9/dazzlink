@@ -1061,6 +1061,14 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     // document.getElementById('pageWrap').scrollTop = 0;
   }
 
+  public qrModalOrTelegram(): void {
+    if (this.mobileDetectService?.osDevice) {
+      this.mobileDetectService.goToTelegramChannel();
+    } else {
+      this.modalService.open({ component: 'mainLayoutComponent', modalName: 'qrForTelegram' });
+    }
+  }
+
   private hideScroll(className = 'no-scroll'): void {
     document.body.classList.add(className);
   }
