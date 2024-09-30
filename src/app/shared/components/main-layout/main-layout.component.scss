@@ -74,7 +74,16 @@
     }
 
     @media #{$mobile} {
-        display: none;
+        .qrModal__container {
+            padding: 24px 20px;
+        }
+        .qrModal__content {
+            padding: 0px;
+            padding-top: 30px;
+            .qrModal__desc {
+                display: none;
+            }
+        }
     }
 }
 
@@ -116,6 +125,10 @@
         font-size: 14px;
         text-align: center;
         color: var(--color-text-gray);
+    }
+    
+    @media #{$mobile} {
+        padding: 32px 64px 48px;
     }
 }
 
