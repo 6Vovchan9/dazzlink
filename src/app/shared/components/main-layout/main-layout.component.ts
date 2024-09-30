@@ -179,7 +179,7 @@ export class MainLayoutComponent extends AbsractExample implements OnInit, DoChe
     if (this.mobileDetectService?.osDevice) {
       this.mobileDetectService.goToTelegramChannel();
     } else {
-      this.modalService.open({ component: 'mainLayoutComponent' });
+      this.modalService.open({ component: 'mainLayoutComponent', modalName: 'qrForTelegram' });
     }
   }
 

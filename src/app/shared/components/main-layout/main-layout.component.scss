@@ -73,6 +73,16 @@
         }
     }
 
+    &--forTelegram {
+        .qrModal__content .qrModal__desc {
+            max-width: 800px;
+            .qrModal__text {
+                max-width: 660px;
+                margin: 0 auto;
+            }
+        }
+    }
+
     @media #{$mobile} {
         .qrModal__container {
             padding: 24px 20px;
@@ -90,7 +100,7 @@
 .qrContent {
     border: 6px solid rgba(100, 100, 100, 1);
     border-radius: 44px;
-    width: 340px;
+    max-width: 340px;
     padding: 32px 64px 100px;
     position: relative;
 
@@ -117,8 +127,11 @@
     }
     .qrContent__qr {
         margin-bottom: 24px;
+        aspect-ratio: 1;
         .qrContent__qrImage {
-            max-width: 100%;
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
         }
     }
     .qrContent__message {
