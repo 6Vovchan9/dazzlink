@@ -401,6 +401,12 @@ a.progressive img.preview {
         }
     }
 
+    .aboutAppInfo__btn {
+        position: relative;
+        align-self: flex-start;
+        margin-top: 24px;
+    }
+
     .aboutAppInfo__infoLinks {
         margin-top: 24px;
     }
@@ -417,6 +423,10 @@ a.progressive img.preview {
             .aboutAppInfo__cont {
                 margin-top: 16px;
             }
+        }
+
+        .aboutAppInfo__btn {
+            margin-top: 0px;
         }
 
         .aboutAppInfo__infoLinks {

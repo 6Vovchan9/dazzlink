@@ -74,25 +74,32 @@
                         Доступно в крупных городах Узбекистана
                     </div>
                 </div>
-                <div class="aboutAppInfo__infoLinks forDesktop">
-                    <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
-                </div>
-                @if (mobileDetectService.osDevice) {
-                    <div class="aboutAppInfo__infoLinks forMobile">
-                        <button class="downloadApp"
-                            type="button"
-                            (click)="mobileDetectService?.goToDeviceStore()"
-                        >
-                            <div class="downloadApp__title">Скачайте<br />приложение</div>
-                            <div class="downloadApp__icon">
-                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
-                            </div>
-                        </button>
-                    </div>
+                @if (true) {
+                    <button class="aboutAppInfo__btn blueBtn blueBtn--withPresentIcon">
+                        <img src="assets/icons/present.svg" alt="p">
+                        Получить подарок
+                    </button>
                 } @else {
-                    <div class="aboutAppInfo__infoLinks forMobile">
+                    <div class="aboutAppInfo__infoLinks forDesktop">
                         <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
                     </div>
+                    @if (mobileDetectService.osDevice) {
+                        <div class="aboutAppInfo__infoLinks forMobile">
+                            <button class="downloadApp"
+                                type="button"
+                                (click)="mobileDetectService?.goToDeviceStore()"
+                            >
+                                <div class="downloadApp__title">Скачайте<br />приложение</div>
+                                <div class="downloadApp__icon">
+                                    <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
+                                </div>
+                            </button>
+                        </div>
+                    } @else {
+                        <div class="aboutAppInfo__infoLinks forMobile">
+                            <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
+                        </div>
+                    }
                 }
             </div>
         </div>
