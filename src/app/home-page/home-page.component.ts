@@ -27,6 +27,7 @@ import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
 import { CitiesService } from '@app/shared/services/cities.service';
 import { ICity } from '@app/shared/types/cities.interface';
 import { ThumbHashImageComponent } from '@app/shared/components/thumb-hash-image/thumb-hash-image.component';
+import { GlobalModalService } from '@app/shared/services/global-modal.service';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -80,7 +81,8 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     private pagesService: PagesService,
     @Optional() public mobileDetectService: MobileDetectService,
     private router: Router,
-    private citiesService: CitiesService
+    private citiesService: CitiesService,
+    private modalService: GlobalModalService
     // private translateService: GoogleTranslationService
     // private cd: ChangeDetectorRef
   ) { super() }
@@ -309,6 +311,14 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
       // console.log('Удаляем слушатель окончания видео');
       video.removeEventListener("ended", this.onVideoEndedCallback);
       video.removeEventListener("loadedmetadata", this.onVideoLoadCallback);
+    }
+  }
+
+  public qrModalOrTelegram(): void {
+    if (this.mobileDetectService?.osDevice) {
+      this.mobileDetectService.goToTelegramChannel();
+    } else {
+      this.modalService.open({ component: 'mainLayoutComponent' });
     }
   }
 

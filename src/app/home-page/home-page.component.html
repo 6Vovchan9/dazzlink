@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 @if (true) {
-                    <button class="aboutAppInfo__btn blueBtn blueBtn--withPresentIcon">
+                    <button (click)="qrModalOrTelegram()" class="aboutAppInfo__btn blueBtn blueBtn--withPresentIcon">
                         <img src="assets/icons/present.svg" alt="p">
                         Получить подарок
                     </button>
@@ -186,7 +186,7 @@
                             Запуск приложения в конце 2024. Хотите узнать о нем первыми и получить подарок от команды Dazzlink? 
 
                             @if (true) {
-                                <button class="appAdv__btn blueBtn blueBtn--withPresentIcon">
+                                <button (click)="qrModalOrTelegram()" class="appAdv__btn blueBtn blueBtn--withPresentIcon">
                                     <img src="assets/icons/present.svg" alt="p">
                                     Получить подарок
                                 </button>
