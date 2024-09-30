@@ -175,6 +175,14 @@ export class MainLayoutComponent extends AbsractExample implements OnInit, DoChe
     this.showScroll();
   }
 
+  public qrModalOrTelegram(): void {
+    if (this.mobileDetectService?.osDevice) {
+      this.mobileDetectService.goToTelegramChannel();
+    } else {
+      this.modalService.open({ component: 'mainLayoutComponent' });
+    }
+  }
+
   public openQRModal(): void {
     this.modalService.open({ component: 'mainLayoutComponent' }); // на аргумент можно не обращать внимание
   }

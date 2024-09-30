@@ -26,4 +26,15 @@
             margin-top: 1px;
         }
     }
+    &--white {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        background-color: #fff;
+        color: #4A4AC6;
+        &:hover, &:active {
+            background-color: #fff;
+        }
+    }
 }

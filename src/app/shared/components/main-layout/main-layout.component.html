@@ -55,12 +55,22 @@
                 </div> -->
             
                 <div class="footerNew__col footerNew__col--forMobile">
-                    <div (click)="mobileDetectService?.goToDeviceStore()" class="footerNew__download downloadApp">
-                        <div class="downloadApp__title">Скачайте<br>приложение</div>
-                        <div class="downloadApp__icon">
-                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
+                    @if (true) {
+                        <button
+                            class="blueBtn blueBtn--white blueBtn--withPresentIcon"
+                            (click)="qrModalOrTelegram()"
+                        >
+                            <img src="assets/icons/presentBlue.svg" alt="p">
+                            Получить подарок
+                        </button>
+                    } @else {
+                        <div (click)="mobileDetectService?.goToDeviceStore()" class="footerNew__download downloadApp">
+                            <div class="downloadApp__title">Скачайте<br>приложение</div>
+                            <div class="downloadApp__icon">
+                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div class="footerNew__links">
                         <div class="footerNew__nav">
                             <a class="btnInFooter" routerLink="/help">Помощь</a>
@@ -74,7 +84,11 @@
                 </div>
                 <div class="footerNew__col footerNew__col--forDesktop">
                     <div class="footerNew__btns">
-                        <button (click)="openQRModal()" class="btnInFooter" type="button">Скачать приложение</button>
+                        @if (true) {
+                            <button (click)="qrModalOrTelegram()" class="btnInFooter" type="button">Получить подарок</button>
+                        } @else {
+                            <button (click)="openQRModal()" class="btnInFooter" type="button">Скачать приложение</button>
+                        }
                         <a class="btnInFooter" routerLink="/help">Помощь</a>
                         <a class="btnInFooter" routerLink="/legal-info">Правовая информация</a>
                         <a href="https://instagram.com/dazzlink.asia" target="_blank" class="btnInFooter">Instagram</a>
