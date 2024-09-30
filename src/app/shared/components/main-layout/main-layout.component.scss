@@ -110,19 +110,13 @@
     }
 
     .qrContent__logo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        height: 64px;
         margin-bottom: 32px;
         .qrContent__logoIcon {
-            height: 32px;
-        }
-        .qrContent__logoText {
-            overflow: hidden;
-            margin-top: 8px;
-            img {
-                margin-left: -50px;
-            }
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center center;
         }
     }
     .qrContent__qr {

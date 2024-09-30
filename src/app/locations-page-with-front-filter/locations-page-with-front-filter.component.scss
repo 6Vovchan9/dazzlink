@@ -82,7 +82,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     @media #{$notMobile} {
         position: sticky;
         margin-bottom: 20px;
-        margin-top: 8px;
+        // margin-top: 8px;
         top: 0px;
         .aboutPage__links {
             &--forDesktop {
