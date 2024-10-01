@@ -9,17 +9,28 @@ import {
   ViewChildren,
   inject
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { DatePipe, NgClass, ViewportScroller } from '@angular/common';
 
 import { questions } from './constants/questions.constant';
 import { IQuestions } from './types/question.types';
+import { HeaderComponent } from '@app/shared/components/header/header.component';
+import { FooterComponent } from '@app/shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-help-page',
   templateUrl: './help-page.component.html',
-  styleUrls: ['./help-page.component.scss']
+  styleUrls: ['./help-page.component.scss'],
+  standalone: true,
+  imports: [
+    NgClass,
+    DatePipe,
+    RouterLink,
+    HeaderComponent,
+    FooterComponent
+  ]
 })
 export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -42,7 +53,9 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private resizeObservable$: Observable<Event>;
   private resizeSubscription: Subscription;
 
-  constructor() { }
+  constructor(
+    private vc: ViewportScroller
+  ) { }
 
   ngOnInit(): void {
 
@@ -107,11 +120,13 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private jumpToSection(section): void {
-    document.getElementById(section).scrollIntoView({ block: 'start' });
+    document.getElementById(section)?.scrollIntoView({ block: 'start' });
+    // this.vc.scrollToAnchor(section);
   }
 
   private jumpToSectionInDesktop(section): void {
-    document.getElementById(section).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // this.vc.scrollToAnchor(section);
   }
 
   private intersectionObserver() {

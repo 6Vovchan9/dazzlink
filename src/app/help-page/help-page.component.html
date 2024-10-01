@@ -1,4 +1,5 @@
-<main class="helpPage">
+<app-header></app-header>
+<div class="helpPage">
     <div class="container helpPage__container">
         <aside class="sidebar">
             <div class="aboutPage">
@@ -19,7 +20,6 @@
                             <a
                                 class="anchorLink"
                                 [ngClass]="{'anchorLink--active': curSection === 'phones'}"
-                                routerLink="/help"
                                 (click)="onNavInDesktop('phones')"
                             >
                                 Телефоны доверия
@@ -29,7 +29,6 @@
                             <a
                                 class="anchorLink"
                                 [ngClass]="{'anchorLink--active': curSection === 'support'}"
-                                [routerLink]="['/help']"
                                 (click)="onNavInDesktop('support')"
                             >
                                 Поддержка сервиса
@@ -39,7 +38,6 @@
                             <a
                                 class="anchorLink"
                                 [ngClass]="{'anchorLink--active': curSection === 'questions'}"
-                                [routerLink]="'/help'"
                                 (click)="onNavInDesktop('questions')"
                             >
                                 Популярные вопросы
@@ -194,7 +192,8 @@
             }
         </main>
     </div>
-</main>
+</div>
+<app-footer></app-footer>
 
 <!-- <div class="rootMargin" [ngStyle]="{paddingBottom: rootMarginBottom + 'px'}">
     <div class="rootMargin__block"></div>

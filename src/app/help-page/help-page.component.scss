@@ -1,6 +1,13 @@
 @import "variables";
 
+:host {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .helpPage {
+    flex: 1;
     .helpPage__container {
         display: flex;
         margin-top: 12px;
@@ -95,6 +102,7 @@
 
 .anchorLink {
     display: block;
+    cursor: pointer;
     padding: 4px 10px;
     position: relative;
 

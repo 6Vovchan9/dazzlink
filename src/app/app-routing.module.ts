@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'media/:title',
     loadComponent: () => import("./post-page/post-page.component").then(m => m.PostPageComponent)
   },
+  {
+    path: 'help',
+    loadComponent: () => import("./help-page/help-page.component").then(m => m.HelpPageComponent)
+  },
   // {
   //   path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [
   //     // { path: '', redirectTo: '/', pathMatch: 'full' },

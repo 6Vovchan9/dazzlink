@@ -34,7 +34,7 @@ export class HeaderComponent extends AbsractExample {
 
   public openNavPopup(): void {
     this.showNavModal = true;
-    this.hideScroll();
+    this.hideScroll(); // следует иметь в виду, что, когда навигация короткая (и, следовательно, не прокручивается как тут), а пользователь пытается прокрутить ее, тело страницы будет прокручиваться, даже если установлено свойство overscroll-behavior-y: contain, поэтому придется прибегнуть к такому решению
   }
 
   public closeNavPopup(): void {
