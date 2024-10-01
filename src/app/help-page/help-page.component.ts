@@ -120,13 +120,13 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private jumpToSection(section): void {
-    document.getElementById(section)?.scrollIntoView({ block: 'start' });
-    // this.vc.scrollToAnchor(section);
+    // document.getElementById(section)?.scrollIntoView({ block: 'start' });
+    this.vc.scrollToAnchor(section);
   }
 
   private jumpToSectionInDesktop(section): void {
-    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // this.vc.scrollToAnchor(section);
+    // document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    this.vc.scrollToAnchor(section);
   }
 
   private intersectionObserver() {
