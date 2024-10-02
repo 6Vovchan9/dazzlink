@@ -91,17 +91,18 @@
     margin-top: 20px;
     // margin-bottom: -78px;
     .QRCode__screen {
-        border: 6px solid rgba(100, 100, 100, 1);
-        border-radius: 44px;
-        max-width: 340px;
-        padding: 32px 64px 100px;
+        border: 6px solid #a8a8a8;
+        border-bottom: none;
+        border-radius: 44px 44px 0px 0px;
+        max-width: 352px;
+        padding: 32px 52px 50px;
         position: relative;
         .QRCode__content {
             position: relative;
             z-index: 10;
             .QRCode__logo {
                 height: 64px;
-                margin-bottom: 32px;
+                margin-bottom: 20px;
                 .QRCode__logoIcon {
                     width: 100%;
                     height: 100%;
@@ -110,7 +111,7 @@
                 }
             }
             .QRCode__qr {
-                margin-bottom: 24px;
+                padding: 12px;
                 aspect-ratio: 1;
                 .QRCode__qrImage {
                     object-fit: contain;
@@ -119,35 +120,37 @@
                 }
             }
             .QRCode__message {
-                font-size: 14px;
+                font-size: 16px;
                 text-align: center;
                 color: var(--color-text-gray);
             }
         }
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% + 12px);
+            height: 100px;
+            background-color: white;
+            mask-image: linear-gradient(0deg, #000, transparent);
+        }
     }
     .QRCode__desc {
-        position: relative;
-        bottom: 78px;
-        background-color: var(--color-white);
         max-width: 800px;
         text-align: center;
         .QRCode__title {
             font-size: 32px;
-            font-weight: 700;
+            line-height: 40px;
+            font-weight: 800;
         }
         .QRCode__text {
-            margin: 0 auto;
+            margin: 8px auto 0px;
             max-width: 660px;
             font-size: 24px;
-        }
-        &:before {
-            content: '';
-            position: absolute;
-            bottom: 100%;
-            left: 0px;
-            height: 86px;
-            width: 100%;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+            line-height: 32px;
+            font-weight: 600;
         }
     }
     @media #{$notMobile} {
