@@ -18,7 +18,18 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // console.log(navigator.userAgent);
     this.tgService.ready(); // Это для телеги
+    // const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // console.log(isDarkMode ? 'Тёмный режим включен.' : 'Тёмный режим выключен.');
+
+    // const schemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    // schemeQuery.addEventListener('change', this.updateScheme);
   }
+
+  // private updateScheme(event): void {
+  //   const newScheme = event.matches ? "тёмная" : "светлая";
+  //   console.log(`Цветовая схема системы обновлена на ${newScheme}.`);
+  //   // Время адаптировать интерфейс 🌓
+  // } // воспроизвести можно в хроме в dev tools во вкладке "Rendering"
 
   buttonInModalClick(modalDesc) {
     if (!this[modalDesc.methodName]) {
