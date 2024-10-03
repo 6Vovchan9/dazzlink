@@ -84,7 +84,6 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public showLoadMoreSpinner = signal(false);
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
-  // public debugPageScroll: {[key: string]: number} = {};
 
   constructor(
     private postsService: PostsService,
@@ -95,7 +94,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     @Optional() public mobileDetectService: MobileDetectService,  // Если вдруг для этого сервиса не определен провайдер, чтоб мы не получили ошибку при обращении к нему в таком случае определяем его как опциональный
     private router: Router,
     private vc: ViewportScroller,
-    private cd: ChangeDetectorRef
+    // private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -162,10 +161,6 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
     // console.log('cur:', curScrollTop);
     // console.log('prev:', this.prevScrollTop);
-
-    // this.debugPageScroll.prevScroll = this.prevScrollTop;
-    // this.debugPageScroll.curScroll = curScrollTop;
-    // this.cd.detectChanges();
 
     if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
       if (curScrollTop < 100) {

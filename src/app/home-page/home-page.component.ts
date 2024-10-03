@@ -5,6 +5,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  Inject,
   OnDestroy,
   OnInit,
   Optional,
@@ -16,7 +17,7 @@ import { Observable, Subscription, fromEvent, of } from 'rxjs';
 import { auditTime, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgClass, NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
+import { DOCUMENT, NgClass, NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 
 import { langArr } from '@app/shared/constants/languages.constants';
 import { PagesService } from '@app/shared/services/pages.service';
@@ -67,10 +68,11 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   private lSub: Subscription;
   private pageWrapScrollSub: Subscription;
   private pageScrollSub: Subscription;
-  private prewScrollTop = 0;
+  public prevScrollTop = 0;
   public hideHeader = signal(true);
   private cSub: Subscription;
   public appOpportunityMenu: Record<string, IOpportunityMenu> = {};
+  // public debugPageScroll: {[key: string]: number} = {};
 
   public posterImgLoad = signal<boolean>(false);
   public videoLoad = signal<boolean>(false);
@@ -88,7 +90,8 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     @Optional() public mobileDetectService: MobileDetectService,
     private router: Router,
     private citiesService: CitiesService,
-    private vc: ViewportScroller
+    private vc: ViewportScroller,
+    // @Inject(DOCUMENT) private readonly documentRef: Document,
     // private cd: ChangeDetectorRef
     // private translateService: GoogleTranslationService
   ) { super() }
@@ -141,8 +144,20 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   private operateHeaderState() {
     const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
     // console.log('cur:', curScrollTop);
-    // console.log('prev:', this.prewScrollTop);
-    if (curScrollTop > this.prewScrollTop || curScrollTop < 100) {
+    // console.log('prev:', this.prevScrollTop);
+
+    // this.debugPageScroll.prevScroll = this.prevScrollTop;
+    // this.debugPageScroll.curScroll = curScrollTop;
+
+    // const bodyEl: HTMLBodyElement = this.documentRef.activeElement as HTMLBodyElement;
+    // const scrollHeight = bodyEl.scrollHeight;
+    // const offsetHeight = bodyEl.offsetHeight;
+    // const maxScroll = scrollHeight - offsetHeight;
+    // this.debugPageScroll.maxScroll = maxScroll;
+
+    // this.cd.detectChanges();
+
+    if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
       if (curScrollTop < 100) {
         if (curScrollTop === 0) {
           // console.log('Скрываем header');
@@ -156,7 +171,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
       // console.log('Показываем header');
       this.hideHeader.set(false);
     }
-    this.prewScrollTop = curScrollTop;
+    this.prevScrollTop = curScrollTop;
     // this.cd.detectChanges();
   }
   
