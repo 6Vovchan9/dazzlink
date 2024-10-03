@@ -67,7 +67,7 @@ export class MobileDetectService {
     }
 
     public goToTelegramChannel(): void {
-        this.myWindow.location.href = 'https://t.me/DazzlinkBot';
+        this.myWindow.location.href = 'https://t.me/DazzlinkBot?start=source-website_platform-mobile';
     }
     
 }

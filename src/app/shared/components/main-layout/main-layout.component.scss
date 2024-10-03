@@ -151,6 +151,12 @@
             font-size: 24px;
             line-height: 32px;
             font-weight: 600;
+            .QRCode__link {
+                color: #4A4AC6;
+                &:hover {
+                    color: #333;
+                }
+            }
         }
     }
     @media #{$notMobile} {
