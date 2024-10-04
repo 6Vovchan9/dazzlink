@@ -353,13 +353,9 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     .filterBar__controls {
         display: flex;
         align-items: center;
-        margin-right: -16px;
+        // margin-right: -16px;
         .filterBar__item {
             position: relative;
-            // margin-right: 8px;
-            // &:last-child {
-            //     margin-right: unset;
-            // }
             &.withSkeletonLoader {
                 overflow: hidden;
             }
@@ -367,30 +363,50 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
     }
 
-    .filterBar__skeleton {
+    .filterBar__sortSkeleton {
         &:before {
-            width: calc(100% - 24px);
-            left: 8px;
+            width: calc(100% - 8px);
+        }
+    }
+
+    // .filterBar__skeleton {
+    //     &:before {
+    //         width: calc(100% - 8px);
+    //         left: 8px;
+    //     }
+    // }
+
+    @media #{$notMobile} {
+        .filterBar__controls .filterBar__item {
+            margin-right: 2px;
+            &:last-child {
+                margin-right: 0px;
+            }
         }
     }
 }
 
 .filterButton {
-    height: 40px; // пришлось прибегнуть к такому решению потому что у кнопки есть какойто свой padding, от которого хз как избавиться
+    // height: 40px; // пришлось прибегнуть к такому решению потому что у кнопки есть какойто свой padding, от которого хз как избавиться
     font-size: 16px;
     line-height: 24px;
     font-weight: 700;
-    padding: 0px 16px;
+    padding: 8px 0px 8px 16px;
+
     display: block;
     border: none;
     background-color: unset;
-    border-radius: 12px;
+    // border-radius: 12px;
     cursor: pointer;
 
     &[disabled] {
         cursor: not-allowed;
         color: inherit;
         opacity: .3;
+    }
+
+    @media #{$mobile} {
+        padding: 8px;
     }
 }
 

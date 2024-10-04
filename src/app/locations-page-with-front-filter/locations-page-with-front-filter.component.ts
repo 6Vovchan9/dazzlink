@@ -506,7 +506,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     } else {
       this.sSub = this.locationsService.getSortOptions(this.categoryCodes.selected)
         .pipe(
-          // delay(4000),
+          // delay(2000),
           map((resp: Array<{ title?: string, code?: string, details?: string, value?: string }>) => {
             if (resp?.length) {
               resp = resp.filter(el => el && Object.keys(el).length);
