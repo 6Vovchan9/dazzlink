@@ -258,11 +258,13 @@
             </div>
             <ul class="filterOptionsBlock__allCountries">
                 <li *ngFor="let country of filterFieldOptions" class="filterOptionsBlock__country">
-                    <div class="filterOptionsBlock__countryName"
-                        [class.filterOptionsBlock__countryName--selected]="country['selectedСities']?.length"
-                    >
-                        {{country.countryTitle + (country['selectedСities']?.length ? ': ' + country['selectedСities']?.length : '')}}
-                    </div>
+                    @if (filterFieldOptions.length > 1) {
+                        <div class="filterOptionsBlock__countryName"
+                            [class.filterOptionsBlock__countryName--selected]="country['selectedСities']?.length"
+                        >
+                            {{country.countryTitle + (country['selectedСities']?.length ? ': ' + country['selectedСities']?.length : '')}}
+                        </div>
+                    }
                     <ul class="filterOptionsBlock__allCities">
                         <li *ngFor="let city of country.cityList" (click)="onSelectCity(country, city)" class="filterOptionsBlock__city">
                             <div class="cityForFilter" [class.disabled]="!+city.count">
