@@ -150,7 +150,17 @@ export const ourTeamList: Array<IAboutPersonalData> = [
         name: 'Роман',
         queryParamName: 'Roman',
         position: 'Android Engineer',
-        photo: 'assets/images/team-page/photo/android.jpeg'
+        photo: 'assets/images/team-page/photo/android.jpeg',
+        details: {
+            vita: `
+                <div class="aboutPersonParagraph">
+                    Талантливый Android-разработчик из Татарстана.
+                </div>
+                <div class="aboutPersonParagraph">
+                    Начал программировать в 16 лет, увлёкшись созданием модов для Minecraft. Уже более 3 лет занимается мобильной разработкой, успел поучаствовать в буткемпе от VK, а также пройти стажировку в EPAM. 
+                </div>
+            ` 
+        }
     },
     {
         name: 'Владимир',
