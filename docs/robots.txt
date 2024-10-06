@@ -1,1 +1,9 @@
+user-agent: *
+disallow: /admin
+disallow: /agreements
+
+user-agent: Googlebot-Image
+disallow: /assets/images/team-page
+disallow: /assets/images/home-page
+
 Sitemap: https://www.dazzlink.asia/sitemap.xml
