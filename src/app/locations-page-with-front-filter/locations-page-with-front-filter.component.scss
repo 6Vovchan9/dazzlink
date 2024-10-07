@@ -1,25 +1,33 @@
 @import "variables";
+
 $spacingVal: 20px; // важно соблюдать эту зависимость чтоб не появился горизонт скролл изза отрицательного margin у "pageContent__locationsList"
+$shadowHeightInDesktop: 34px;
+$shadowHeightInMobile: 20px;
 
 :host {
     // flex: 1;
 } // Это все для того чтобы когда контента мало footer все равно был прижат к низу. UPD: теперь эту роль выполняет contentWrapper
 
-.page {
-    // font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
-    .page__container {
-        display: flex;
-        flex-direction: column;
-        margin-top: 24px;
-        // margin-bottom: 50px;
+.locationsPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    .locationsPage__main {
+        flex: 1;
+        .locationsPage__container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 24px;
+            margin-bottom: 48px;
+        }
     }
-
     @media #{$notMobile} {
-        .page__container {
-            flex-direction: row;
-            padding: 0 $spacingVal;
-            margin-top: 48px;
-            // margin-bottom: 140px;
+        .locationsPage__main {
+            .locationsPage__container {
+                flex-direction: row;
+                padding: 0 $spacingVal;
+                margin-top: 40px;
+            }
         }
     }
 }
@@ -49,12 +57,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         &--forMobile {
             display: none;
         }
-    }
-}
-
-.hiddenInMobile {
-    @media #{$mobile} {
-        display: none;
     }
 }
 
@@ -95,7 +97,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 .pageContent {
     position: relative;
     flex: 2;
-    margin-bottom: 48px;
 
     .pageContent__allAboutLocations {
         &--withGradientEffect {
@@ -179,7 +180,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     }
 
     @media #{$notMobile} {
-        margin-bottom: 48px;
         .pageContent__locationsBlock {
             .pageContent__locationsList {
                 flex-wrap: wrap;
@@ -361,20 +361,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         cursor: not-allowed;
         color: inherit;
         opacity: .3;
-    }
-
-    &.forDesktop {
-        display: none;
-        @media #{$notMobile} {
-            display: block;
-        }
-    }
-    
-    &.forMobile {
-        display: block;
-        @media #{$notMobile} {
-            display: none;
-        }
     }
 }
 

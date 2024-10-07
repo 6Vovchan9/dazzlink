@@ -41,6 +41,8 @@ import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MOCK_CATEGORIES_FOR_SKELETON, MOCK_LOCATIONS, MOCK_LOCATIONS_FOR_SKELETON } from '@app/shared/mock/locations';
 import { LocationItemComponent } from '@app/shared/components/location-item/location-item.component';
 import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-field.module';
+import { HeaderComponent } from '@app/shared/components/header/header.component';
+import { FooterComponent } from '@app/shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -50,9 +52,12 @@ import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-
   imports: [
     NgTemplateOutlet,
     NgIf, NgFor,
+    ReactiveFormsModule,
+
     LocationItemComponent,
     DropdownFieldModule,
-    ReactiveFormsModule
+    HeaderComponent,
+    FooterComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -223,11 +228,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           this.onChangeSort(val);
         }
       );
-  }
-
-  public get webview(): boolean {
-    const result = navigator.userAgent.includes('Dazzlink');
-    return result;
   }
 
   private sortLocationsOnBackend() {
@@ -881,7 +881,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   public onCloseFilterOptionsInMobile(): void {
-    this.showScroll();
+    this.showScroll('noScrollInMobile');
     if (true) {
       this.onFilterFromMobile();
     } else {
@@ -926,7 +926,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     console.log('Before:', arrBefore);
     console.log('After:',  arrAfter);
 
-    this.showScroll();
+    this.showScroll('noScrollInMobile');
     this.showFilterControls.set(false);
 
     if (arrBefore.length === arrAfter.length && this.isArraysEqual(arrBefore, arrAfter)) {
@@ -950,15 +950,13 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     return res;
   }
 
-  public onShowHideFilterControls(fromMobile: boolean) {
+  public onShowHideFilterControls() {
     this.showFilterControls.set(!this.showFilterControls());
-    if (fromMobile) {
-      const isOpen = this.showFilterControls();
-      if (isOpen) {
-        this.hideScroll(); // для компа это не имеет значения а для телефона это важно (подробности см. в notes.md). Upd: после рефакторинга уже имеет значение
-      } else {
-        this.showScroll();
-      }
+    const isOpen = this.showFilterControls();
+    if (isOpen) {
+      this.hideScroll('noScrollInMobile'); // для компа это не имеет значения а для телефона это важно (подробности см. в notes.md). Upd: после рефакторинга уже имеет значение
+    } else {
+      this.showScroll('noScrollInMobile');
     }
 
     this.amountAllSelectedCitiesBefore = [...this.amountAllSelectedCities];
@@ -1044,10 +1042,10 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public sortDropdownState(open: boolean): void {
     // const pageWrap = document.getElementById('pageWrap');
     if (open) {
-      this.hideScroll('noScrollFromSort');
+      this.hideScroll('noScrollInMobile');
       // pageWrap.style.overflow = 'hidden';
     } else {
-      this.showScroll('noScrollFromSort');
+      this.showScroll('noScrollInMobile');
       // pageWrap.style.overflow = '';
     }
   }
