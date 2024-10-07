@@ -362,6 +362,20 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
         color: inherit;
         opacity: .3;
     }
+
+    &.forDesktop {
+        display: none;
+        @media #{$notMobile} {
+            display: block;
+        }
+    }
+    
+    &.forMobile {
+        display: block;
+        @media #{$notMobile} {
+            display: none;
+        }
+    }
 }
 
 ::ng-deep {

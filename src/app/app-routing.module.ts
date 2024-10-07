@@ -2,15 +2,8 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { AgreementsPageComponent } from './agreements-page/agreements-page.component';
-import { ArticlesPageComponent } from './articles-page/articles-page.component';
-import { HomePageComponent } from './home-page/home-page.component';
-// import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
-import { PostPageComponent } from './post-page/post-page.component';
-// import { LocationsPageComponent } from './locations-page/locations-page.component';
-import { LocationsPageWithFrontFilterComponent } from './locations-page-with-front-filter/locations-page-with-front-filter.component';
 import { PlacePageComponent } from './place-page/place-page.component';
 import { TeamPageComponent } from './team-page/team-page.component';
-import { HelpPageComponent } from './help-page/help-page.component';
 import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
 
 const routes: Routes = [
@@ -29,6 +22,10 @@ const routes: Routes = [
   {
     path: 'help',
     loadComponent: () => import("./help-page/help-page.component").then(m => m.HelpPageComponent)
+  },
+  {
+    path: 'locations',
+    loadComponent: () => import("./locations-page-with-front-filter/locations-page-with-front-filter.component").then(m => m.LocationsPageWithFrontFilterComponent)
   },
   // {
   //   path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [

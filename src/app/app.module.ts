@@ -19,13 +19,13 @@ import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { RadiobuttonFieldModule } from './shared/fields/radiobutton-new-field/radiobutton-field.module';
-import { DropdownFieldModule } from './shared/fields/dropdown-field/dropdown-field.module';
+// import { DropdownFieldModule } from './shared/fields/dropdown-field/dropdown-field.module';
 // import { AccoTriggerComponent } from './shared/components/acco-trigger/acco-trigger.component';
 // import { YouTubePlayerModule } from '@angular/youtube-player';
 import { ProgressiveImageComponent } from './shared/components/progressive-image/progressive-image.component';
 // import { LocationsPageComponent } from './locations-page/locations-page.component';
-import { LocationsPageWithFrontFilterComponent } from './locations-page-with-front-filter/locations-page-with-front-filter.component';
-import { LocationItemComponent } from './shared/components/location-item/location-item.component';
+// import { LocationsPageWithFrontFilterComponent } from './locations-page-with-front-filter/locations-page-with-front-filter.component';
+// import { LocationItemComponent } from './shared/components/location-item/location-item.component';
 import { CheckboxNewFieldComponent } from './shared/fields/checkbox-new-field/checkbox-new-field.component';
 import { PlacePageComponent } from './place-page/place-page.component';
 import { ToastService } from './shared/services/toast.service';
@@ -45,12 +45,12 @@ registerLocaleData(localeRu, 'ru');
     AgreementsPageComponent,
     PlacePageComponent,
     // LocationsPageComponent, // Фильтрация и сортировка на бэке
-    LocationsPageWithFrontFilterComponent, // Фильтрация и сортировка на фронте
+    // LocationsPageWithFrontFilterComponent, // Фильтрация и сортировка на фронте
     TeamPageComponent,
     LegalInfoPageComponent,
 
     ToastComponent,
-    LocationItemComponent,
+    // LocationItemComponent,
     ModalComponent,
     // AccoTriggerComponent,
     ProgressiveImageComponent,
@@ -69,7 +69,7 @@ registerLocaleData(localeRu, 'ru');
     SharedModule,
 
     RadiobuttonFieldModule,
-    DropdownFieldModule,
+    // DropdownFieldModule,
 
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({

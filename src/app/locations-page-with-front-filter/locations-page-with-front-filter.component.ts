@@ -21,8 +21,9 @@ import {
   takeUntil,
   tap
 } from 'rxjs/operators';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 
 import {
   CountryFilterItem,
@@ -38,11 +39,21 @@ import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-fiel
 import { ToastService } from '@app/shared/services/toast.service';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MOCK_CATEGORIES_FOR_SKELETON, MOCK_LOCATIONS, MOCK_LOCATIONS_FOR_SKELETON } from '@app/shared/mock/locations';
+import { LocationItemComponent } from '@app/shared/components/location-item/location-item.component';
+import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-field.module';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
   templateUrl: './locations-page-with-front-filter.component.html',
   styleUrls: ['./locations-page-with-front-filter.component.scss'],
+  standalone: true,
+  imports: [
+    NgTemplateOutlet,
+    NgIf, NgFor,
+    LocationItemComponent,
+    DropdownFieldModule,
+    ReactiveFormsModule
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewInit {
@@ -124,17 +135,19 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     // this.operatePageWrapScroll();
 
     const pageWrap = document.getElementById('pageWrap');
-    fromEvent<Event>(pageWrap, 'scroll')
-      .pipe(
-        takeUntil(this.destroy$),
-        skipWhile(() => this.isLoading()),
-        map(e => (e.target as HTMLDivElement))
-      )
-      .subscribe(
-        (el: HTMLDivElement) => {
-          this.operatePageWrapScroll();
-        }
-      );
+    if (pageWrap) {
+      fromEvent<Event>(pageWrap, 'scroll')
+        .pipe(
+          takeUntil(this.destroy$),
+          skipWhile(() => this.isLoading()),
+          map(e => (e.target as HTMLDivElement))
+        )
+        .subscribe(
+          (el: HTMLDivElement) => {
+            this.operatePageWrapScroll();
+          }
+        );
+    }
   }
 
   private operatePageWrapScroll(): void {
@@ -937,13 +950,15 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     return res;
   }
 
-  public onShowHideFilterControls() {
+  public onShowHideFilterControls(fromMobile: boolean) {
     this.showFilterControls.set(!this.showFilterControls());
-    const isOpen = this.showFilterControls;
-    if (isOpen) {
-      this.hideScroll(); // для компа это не имеет значения а для телефона это важно (подробности см. в notes.md)
-    } else {
-      this.showScroll();
+    if (fromMobile) {
+      const isOpen = this.showFilterControls();
+      if (isOpen) {
+        this.hideScroll(); // для компа это не имеет значения а для телефона это важно (подробности см. в notes.md). Upd: после рефакторинга уже имеет значение
+      } else {
+        this.showScroll();
+      }
     }
 
     this.amountAllSelectedCitiesBefore = [...this.amountAllSelectedCities];

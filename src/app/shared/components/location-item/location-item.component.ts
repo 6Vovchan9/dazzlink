@@ -1,3 +1,4 @@
+import { DecimalPipe, NgFor, NgIf, SlicePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,11 +8,20 @@ import {
 
 import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
 import { Place } from '@app/shared/interfaces';
+import { ThumbHashImageComponent } from '../thumb-hash-image/thumb-hash-image.component';
 
 @Component({
   selector: 'app-location-item',
   templateUrl: './location-item.component.html',
   styleUrls: ['./location-item.component.scss'],
+  standalone: true,
+  imports: [
+    ThumbHashImageComponent,
+    SlicePipe,
+    DecimalPipe,
+    NgIf,
+    NgFor
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationItemComponent extends ThumbHash implements OnInit {

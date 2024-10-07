@@ -20,6 +20,8 @@ export type DropdownItem = {
   selector: 'app-dropdown-field',
   templateUrl: './dropdown-field.component.html',
   styleUrls: ['./dropdown-field.component.scss'],
+  // standalone: true,
+  // imports: [NgClass, NgIf, NgFor, ClickOutsideDirective],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

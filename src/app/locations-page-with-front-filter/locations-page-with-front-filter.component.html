@@ -52,45 +52,59 @@
                                 </div>
 
                                 <!-- Фильтр бар -->
-                                <div *ngIf="allLocations?.placeCount" class="filterBar">
-                                    <div class="filterBar__length" [class.withSkeletonLoader]="isLoading()">
-                                        <!-- Доступно {{allLocations.placeCount}} мест -->
-                                        {{getAmountOfAllSelectedCities()}}
-                                        <div class="skeletonLoader skeletonLoader--shortHeight"></div>
-                                    </div>
-                                    <div class="filterBar__controls">
-                                        <!-- <button class="btn" (click)="isSorting() = !isSorting()">toggle</button> -->
-                                        @if (filterBarGroup && !isEmptySortOptions()) {
-                                            <div class="filterBar__item" [class.withSkeletonLoader]="isLoading()">
-                                                <!-- Сортировка -->
-                                                <!-- (ngModelChange)="onChangeSort($event)" -->
-                                                <app-dropdown-field
-                                                    [formControl]="filterBarGroup.get('sort')"
-                                                    [options]="sortFieldOptions"
-                                                    [showArrowIcon]="false"
-                                                    [highlightHead]="false"
-                                                    [dropdownHead]="dropdownHeadForSort"
-                                                    optionLabel="value"
-                                                    (toggle)="sortDropdownState($event)">
-                                                </app-dropdown-field>
-                                                <div class="skeletonLoader skeletonLoader--shortHeight"></div>
-                                            </div>
-                                        }
-                                        <div class="filterBar__item" [class.withSkeletonLoader]="isLoading()">
-                                            <!-- Фильтрация -->
-                                            <button class="filterButton"
-                                                [disabled]="!filterFieldOptions?.length"
-                                                (click)="onShowHideFilterControls()"
-                                            >
-                                                <div class="headInSortDropdown">
-                                                    <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities.length"></div>
-                                                    <div class="headInSortDropdown__text">Фильтр</div>
+                                @if (allLocations?.placeCount) {
+                                    <div class="filterBar">
+                                        <div class="filterBar__length" [class.withSkeletonLoader]="isLoading()">
+                                            <!-- Доступно {{allLocations.placeCount}} мест -->
+                                            {{getAmountOfAllSelectedCities()}}
+                                            <div class="skeletonLoader skeletonLoader--shortHeight"></div>
+                                        </div>
+                                        <div class="filterBar__controls">
+                                            <!-- <button class="btn" (click)="isSorting() = !isSorting()">toggle</button> -->
+                                            @if (filterBarGroup && !isEmptySortOptions()) {
+                                                <div class="filterBar__item" [class.withSkeletonLoader]="isLoading()">
+                                                    <!-- Сортировка -->
+                                                    <!-- (ngModelChange)="onChangeSort($event)" -->
+                                                    <app-dropdown-field
+                                                        [formControl]="filterBarGroup.get('sort')"
+                                                        [options]="sortFieldOptions"
+                                                        [showArrowIcon]="false"
+                                                        [highlightHead]="false"
+                                                        [dropdownHead]="dropdownHeadForSort"
+                                                        optionLabel="value"
+                                                        (toggle)="sortDropdownState($event)">
+                                                    </app-dropdown-field>
+                                                    <div class="skeletonLoader skeletonLoader--shortHeight"></div>
                                                 </div>
-                                            </button>
-                                            <div class="skeletonLoader skeletonLoader--shortHeight filterBar__skeleton"></div>
+                                            }
+                                            <div class="filterBar__item" [class.withSkeletonLoader]="isLoading()">
+                                                <!-- Фильтрация -->
+
+                                                <button class="filterButton forDesktop"
+                                                    [disabled]="!filterFieldOptions?.length"
+                                                    (click)="onShowHideFilterControls()"
+                                                >
+                                                    <div class="headInSortDropdown">
+                                                        <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities.length"></div>
+                                                        <div class="headInSortDropdown__text">Фильтр</div>
+                                                    </div>
+                                                </button>
+                                                
+                                                <button class="filterButton forMobile"
+                                                    [disabled]="!filterFieldOptions?.length"
+                                                    (click)="onShowHideFilterControls(true)"
+                                                >
+                                                    <div class="headInSortDropdown">
+                                                        <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities.length"></div>
+                                                        <div class="headInSortDropdown__text">Фильтр</div>
+                                                    </div>
+                                                </button>
+                                                
+                                                <div class="skeletonLoader skeletonLoader--shortHeight filterBar__skeleton"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             </div>
 
                             <!-- <ng-container *ngIf="!isLoading(); else loadingTemplate"> -->
