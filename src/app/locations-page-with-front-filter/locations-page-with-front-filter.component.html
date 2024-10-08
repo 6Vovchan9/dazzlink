@@ -135,9 +135,17 @@
                                             }
                                             <!-- Кнопка наверх -->
                                             <div class="pageContent__scrollToTopBtn scrollProgressWrapper">
-                                                <div class="scrollProgress" (click)="scrollToTop()" [class.scrollProgress--hidden]="hideScrollProgress">
+                                                <div class="scrollProgress"
+                                                    (click)="vc.scrollToPosition([0, 0])"
+                                                    [class.scrollProgress--hidden]="hideScrollProgress"
+                                                >
                                                     <svg class="scrollProgress__svg" viewBox="-10 -10 300 300">
-                                                        <circle #progressCircle class="scrollProgress__circle" r="124" cx="140" cy="140" fill="none" stroke="white" stroke-width="20"></circle>
+                                                        <circle #progressCircle
+                                                            class="scrollProgress__circle"
+                                                            r="124" cx="140" cy="140"
+                                                            fill="none" stroke="white"
+                                                            stroke-width="20"
+                                                        ></circle>
                                                     </svg>
                                                 </div>
                                             </div>
@@ -176,6 +184,24 @@
         <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
     </div>
 </div>
+
+<!-- <div class="myBlockAboutScroll">
+    <div class="myBlockAboutScroll__item">
+        scrollHeight: {{myBlockAboutScroll.scrollHeight || '...'}}
+    </div>
+    <div class="myBlockAboutScroll__item">
+        offsetHeight: {{myBlockAboutScroll.offsetHeight || '...'}}
+    </div>
+    <div class="myBlockAboutScroll__item">
+        clientHeight: {{myBlockAboutScroll.clientHeight || '...'}}
+    </div>
+    <div class="myBlockAboutScroll__item">
+        innerHeight: {{myBlockAboutScroll.innerHeight || '...'}}
+    </div>
+    <div class="myBlockAboutScroll__item">
+        scrollTop: {{myBlockAboutScroll.scrollTop || '...'}}
+    </div>
+</div> -->
 
 <!-- <app-loader *ngIf="isLoading()"></app-loader> -->
 

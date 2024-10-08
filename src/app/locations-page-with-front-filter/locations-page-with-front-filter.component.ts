@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  Inject,
   OnInit,
   Optional,
   ViewChild,
@@ -19,11 +20,12 @@ import {
   skip,
   skipWhile,
   takeUntil,
-  tap
+  tap,
+  auditTime
 } from 'rxjs/operators';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT, NgFor, NgIf, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 
 import {
   CountryFilterItem,
@@ -113,6 +115,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public filterFieldOptions: Array<CountryFilterItem>;
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
+  private pageScrollSub: Subscription;
+  // public myBlockAboutScroll: { [key: string]: number } = {};
 
   constructor(
     @Optional() public mobileDetectService: MobileDetectService,
@@ -121,6 +125,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     private router: Router,
     private route: ActivatedRoute,
     public modalService: GlobalModalService,
+    @Inject(DOCUMENT) private readonly documentRef: Document,
+    private vc: ViewportScroller,
     private cd: ChangeDetectorRef
   ) {
     this.filteredLocations = this.allLocations.cityPlaceList;
@@ -137,39 +143,41 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   ngAfterViewInit(): void {
-    // this.operatePageWrapScroll();
-
-    const pageWrap = document.getElementById('pageWrap');
-    if (pageWrap) {
-      fromEvent<Event>(pageWrap, 'scroll')
-        .pipe(
-          takeUntil(this.destroy$),
-          skipWhile(() => this.isLoading()),
-          map(e => (e.target as HTMLDivElement))
-        )
-        .subscribe(
-          (el: HTMLDivElement) => {
-            this.operatePageWrapScroll();
-          }
-        );
-    }
+    this.addEventListenerToPage();
   }
 
-  private operatePageWrapScroll(): void {
-    const pageWrap = document.getElementById('pageWrap');
-    const svgCircleElement = this.progressCircle?.nativeElement as SVGCircleElement;
+  private addEventListenerToPage(): void {
+    const myWindow = this.documentRef.defaultView; // defaultView - свойство которое возвращает окно, связанное с текущим документом. Это аналогия встроенного в браузер глобального объекта window
+    this.pageScrollSub = fromEvent(myWindow, 'scroll')
+      .pipe(
+        skipWhile(() => this.isLoading()),
+        auditTime(200)
+      )
+      .subscribe({
+        next: () => {
+          this.operateScrollToTopBtnState();
+        }
+      });
+  }
 
+  private operateScrollToTopBtnState(): void {
+    const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
+    const bodyEl: HTMLBodyElement = this.documentRef.activeElement as HTMLBodyElement;
+    const myWindow: Window = this.documentRef.defaultView;
+    const svgCircleElement = this.progressCircle?.nativeElement as SVGCircleElement;
     if (svgCircleElement) {
-      const scrollTop = pageWrap.scrollTop;
-      const scrollHeight = pageWrap.scrollHeight;
-      const offsetHeight = pageWrap.offsetHeight;
+      const scrollHeight = bodyEl.scrollHeight;
+      const offsetHeight = bodyEl.offsetHeight;
+      const clientHeight = bodyEl.clientHeight;
+      const innerHeight  = myWindow.innerHeight; // тут учитывается видна/скрыта адресная строка
       const prevState = this.hideScrollProgress;
-      this.hideScrollProgress = scrollTop < offsetHeight;
+      this.hideScrollProgress = curScrollTop < innerHeight;
       const futureState = this.hideScrollProgress;
       const radius = svgCircleElement.getAttribute('r');
+      // this.myBlockAboutScroll = { scrollHeight, offsetHeight, clientHeight, innerHeight, scrollTop: curScrollTop }
 
       const circleLength = 2 * Math.PI * +radius;
-      let percentageProgress = Math.round(scrollTop / (scrollHeight - offsetHeight) * 100);
+      let percentageProgress = Math.round(curScrollTop / (scrollHeight - innerHeight) * 100);
       if (percentageProgress > 100) percentageProgress = 100;
       svgCircleElement.setAttribute('stroke-dasharray', String(circleLength));
       svgCircleElement.setAttribute('stroke-dashoffset', String(circleLength - circleLength * percentageProgress / 100));
@@ -1064,16 +1072,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   }
 
-  public scrollToTop(): void {
-    document.getElementById('pageWrap')?.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-
-    // document.getElementById('pageWrap').scrollTop = 0;
-  }
-
   private hideScroll(className = 'no-scroll'): void {
     document.body.classList.add(className);
   }
@@ -1096,6 +1094,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public ngOnDestroy(): void {
     this.subscriptionList();
 
+    this.pageScrollSub?.unsubscribe();
     this.destroy$.next(true);
     this.destroy$.complete();
   }
