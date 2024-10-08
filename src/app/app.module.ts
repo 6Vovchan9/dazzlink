@@ -31,7 +31,7 @@ import { CheckboxNewFieldComponent } from './shared/fields/checkbox-new-field/ch
 import { ToastService } from './shared/services/toast.service';
 import { ToastComponent } from './shared/components/toast/toast.component';
 // import { TeamPageComponent } from './team-page/team-page.component';
-import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
+// import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
 import { ThumbHashImageComponent } from './shared/components/thumb-hash-image/thumb-hash-image.component';
 
 registerLocaleData(localeRu, 'ru');
@@ -47,7 +47,7 @@ registerLocaleData(localeRu, 'ru');
     // LocationsPageComponent, // Фильтрация и сортировка на бэке
     // LocationsPageWithFrontFilterComponent, // Фильтрация и сортировка на фронте
     // TeamPageComponent,
-    LegalInfoPageComponent,
+    // LegalInfoPageComponent,
 
     ToastComponent,
     // LocationItemComponent,

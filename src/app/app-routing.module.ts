@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'team',
     loadComponent: () => import("./team-page/team-page.component").then(m => m.TeamPageComponent)
   },
+  {
+    path: 'legal-info',
+    loadComponent: () => import("./legal-info-page/legal-info-page.component").then(m => m.LegalInfoPageComponent)
+  },
   // {
   //   path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [
   //     // { path: '', redirectTo: '/', pathMatch: 'full' },
