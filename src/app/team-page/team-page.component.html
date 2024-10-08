@@ -1,7 +1,8 @@
-<main class="page">
-    <div class="container page__container">
+<app-header></app-header>
+<main class="teamPage">
+    <div class="container teamPage__container">
 
-        <h1 class="page__moduleTitle moduleTitle">Ваша семейное счастье — наш главный приоритет</h1>
+        <h1 class="teamPage__moduleTitle">Ваша семейное счастье — наш главный приоритет</h1>
 
         <div class="mainPicture" [class.mainPicture--load]="mainPicLoad()">
             <img [src]="mainPicBase64" class="mainPicture__preview" alt="preview">
@@ -13,11 +14,11 @@
         </div>
 
         <section class="aboutUsMew">
-            <h2 class="page__sectionTitle moduleTitle">Философия</h2>
+            <h2 class="teamPage__sectionTitle">Философия</h2>
             <div class="aboutUsMew__columns">
                 <div class="aboutUsMew__item">
                     <div class="aboutUsMew__card aboutUsCard">
-                        <h3 class="moduleTitle">Кто мы</h3>
+                        <h3>Кто мы</h3>
                         <div class="aboutUsCard__desc">
                             Dazzlink — цифровая платформа, стремительно развивающаяся в Центральной Азии,
                             доступная на территории Узбекистана. Мы создаем сервисы для&nbsp;развития&nbsp;здоровых
@@ -30,7 +31,7 @@
                     <div class="aboutUsMew__rows">
                         <div class="aboutUsMew__item">
                             <div class="aboutUsMew__card aboutUsMew__card--secondary aboutUsCard">
-                                <h3 class="moduleTitle">Миссия</h3>
+                                <h3>Миссия</h3>
                                 <div class="aboutUsCard__desc">
                                     Мы стремимся развеять стереотип о построении отношений в&nbsp;онлайн-пространстве
                                     и обеспечить благоприятную среду для общения между людьми со&nbsp;схожими ценностями.
@@ -41,7 +42,7 @@
                         </div>
                         <div class="aboutUsMew__item">
                             <div class="aboutUsMew__card aboutUsMew__card--secondary aboutUsCard">
-                                <h3 class="moduleTitle">Видение</h3>
+                                <h3>Видение</h3>
                                 <div class="aboutUsCard__desc">
                                     Мы считаем, что долгосрочной целью любовных отношений является семья.
                                     Наше видение заключается в том, чтобы стимулировать развитие безопасности и доверия,
@@ -56,7 +57,7 @@
         
         <!-- <div class="aboutUs">
             <div class="aboutUs__text">
-                <h1 class="moduleTitle">Компания</h1>
+                <h1>Компания</h1>
                 <div class="aboutUs__desc">
                     Dazzlink — мобильное приложение
                     для тех кто бла бла бал бла бла бал
@@ -70,7 +71,7 @@
 
         <!-- <div class="missionAndVision">
             <div class="missionAndVision__item">
-                <h3 class="moduleTitle missionAndVision__head">
+                <h3 class="missionAndVision__head">
                     Миссия
                 </h3>
                 <div class="missionAndVision__text">
@@ -79,7 +80,7 @@
                 </div>
             </div>
             <div class="missionAndVision__item">
-                <h3 class="moduleTitle missionAndVision__head">
+                <h3 class="missionAndVision__head">
                     Видение
                 </h3>
                 <div class="missionAndVision__text">
@@ -90,7 +91,7 @@
         </div> -->
 
         <section class="connectWithUs">
-            <h2 class="page__sectionTitle moduleTitle">
+            <h2 class="teamPage__sectionTitle">
                 Контакты
             </h2>
             <div class="connectWithUs__btns">
@@ -118,7 +119,7 @@
         </section>
 
         <section class="ourTeam">
-            <h2 class="page__sectionTitle moduleTitle">
+            <h2 class="teamPage__sectionTitle">
                 Команда
             </h2>
             <div class="ourTeam__desc">
@@ -161,6 +162,7 @@
         </section>
     </div>
 </main>
+<app-footer></app-footer>
 
 <!-- Модалка с биографией о команде -->
 <div *ngIf="chosenPersonData?.details?.vita" class="personDescModal">

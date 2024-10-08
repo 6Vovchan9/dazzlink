@@ -1,14 +1,26 @@
 import { AfterViewInit, Component, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgIf, NgStyle, ViewportScroller } from '@angular/common';
+
 import { AbsractExample } from '@app/shared/helpers/classes/abstract.class';
 import { ourTeamList } from '@app/shared/constants/ourTeam.constants';
 import { IAboutPersonalData } from '@app/shared/interfaces';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderComponent } from '@app/shared/components/header/header.component';
+import { FooterComponent } from '@app/shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-team-page',
   templateUrl: './team-page.component.html',
-  styleUrls: ['./team-page.component.scss']
+  styleUrls: ['./team-page.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgStyle,
+
+    HeaderComponent,
+    FooterComponent
+  ]
 })
 export class TeamPageComponent extends AbsractExample implements AfterViewInit {
 
@@ -25,7 +37,8 @@ export class TeamPageComponent extends AbsractExample implements AfterViewInit {
   constructor(
     public mobileDetectService: MobileDetectService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private vc: ViewportScroller
   ) {
     super();
     if (mobileDetectService.osDevice?.toLowerCase() === 'ios') {
@@ -41,7 +54,7 @@ export class TeamPageComponent extends AbsractExample implements AfterViewInit {
 
   ngAfterViewInit(): void {
     // console.log(this.getName());
-    this.scrollToTop();
+    this.vc.scrollToPosition([0, 0]);
   }
 
   public setMainPicLoad(): void {

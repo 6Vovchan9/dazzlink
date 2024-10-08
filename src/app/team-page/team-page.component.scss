@@ -1,20 +1,25 @@
 @import "variables";
 
-.page {
-    .page__container {
+:host {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.teamPage {
+    flex: 1;
+    .teamPage__container {
         margin-top: 24px;
         margin-bottom: 48px;
-        .page__moduleTitle {
+        .teamPage__moduleTitle {
             max-width: 532px;
         }
     }
-
-    .page__sectionTitle {
+    .teamPage__sectionTitle {
         margin-bottom: 24px;
     }
-
     @media #{$notMobile} {
-        .page__container {
+        .teamPage__container {
             margin-top: 48px;
             margin-bottom: 96px;
         }
@@ -336,6 +341,7 @@
         display: flex;
         padding: 20px;
         max-height: 100%;
+        // background-color: bisque;
         .personDescModal__wrapper {
             display: flex;
             overflow: hidden;
@@ -344,6 +350,7 @@
             .personDescModal__content {
                 display: flex;
                 flex-direction: column;
+                // background-color: aquamarine;
                 // row-gap: 32px;
                 .personDescModal__vita {
                     font-size: 20px;

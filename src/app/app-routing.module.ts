@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'locations/:title',
     loadComponent: () => import("./place-page/place-page.component").then(m => m.PlacePageComponent)
   },
+  {
+    path: 'team',
+    loadComponent: () => import("./team-page/team-page.component").then(m => m.TeamPageComponent)
+  },
   // {
   //   path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [
   //     // { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -62,7 +66,16 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     preloadingStrategy: PreloadAllModules,
-    scrollPositionRestoration: 'enabled'
+    // scrollPositionRestoration: 'enabled'
+    get scrollPositionRestoration() {
+      const params: any = new URLSearchParams(window.location.search);
+      const pathname = window.location.pathname;
+      // if (params.get('name')) {
+      if (pathname.startsWith('/team')) {
+        return 'disabled' as const;
+      }
+      return 'enabled' as const;
+    }
   })],
   exports: [RouterModule]
 })
