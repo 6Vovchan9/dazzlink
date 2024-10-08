@@ -3,7 +3,6 @@
 
 html, body {
     scroll-behavior: smooth;
-    height: 100%;
     font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -13,22 +12,28 @@ html {
     font-size: 16px;
     font-weight: 600;
     line-height: 1.5;
+    &.noScroll {
+        overflow: hidden;
+    }
+    &.noScrollInMobile {
+        @media #{$mobile} {
+            overflow: hidden;
+        }
+    }
+    &.noScrollFull {
+        height: 100%;
+        overflow-y: auto;
+        body {
+            height: 100%;
+            overflow-y: hidden;
+        }
+    }
 }
 
 body {
     margin: 0;
     color: var(--color-black1);
     // background-color: var(--tg-theme-bg-color); // переменная доступная благодаря script из index.html нужна для того чтобы регулировать стили приложения в завис от темы (светлая/темная) telegram
-
-    &.no-scroll {
-        overflow: hidden;
-    }
-
-    &.noScrollInMobile {
-        @media #{$mobile} {
-            overflow: hidden;
-        }
-    }
 }
 
 * {

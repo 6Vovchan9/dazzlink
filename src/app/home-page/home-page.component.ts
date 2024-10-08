@@ -90,7 +90,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     @Optional() public mobileDetectService: MobileDetectService,
     private router: Router,
     private citiesService: CitiesService,
-    private vc: ViewportScroller,
+    private vc: ViewportScroller
     // @Inject(DOCUMENT) private readonly documentRef: Document,
     // private cd: ChangeDetectorRef
     // private translateService: GoogleTranslationService

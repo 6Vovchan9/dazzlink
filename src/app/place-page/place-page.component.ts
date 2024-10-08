@@ -448,11 +448,11 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
   }
 
   hideScroll() {
-    document.body.classList.add('no-scroll');
+    document.documentElement.classList.add('noScroll');
   }
 
   showScroll() {
-    document.body.classList.remove('no-scroll');
+    document.documentElement.classList.remove('noScroll');
   }
 
   private prepareLocationRating(): void {

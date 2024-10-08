@@ -14,10 +14,10 @@ export abstract class AbsractExample { // от абстрактного клас
     }
 
     public hideScroll(): void {
-        document.body.classList.add('no-scroll');
+        document.documentElement.classList.add('noScroll');
     }
 
     protected showScroll(): void {
-        document.body.classList.remove('no-scroll');
+        document.documentElement.classList.remove('noScroll');
     } // метод к которому мы имеем доступ внутри этого класса и внутри наследника, но не у экземпляра этого класса
 }
