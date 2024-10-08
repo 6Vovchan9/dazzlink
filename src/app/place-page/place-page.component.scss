@@ -23,32 +23,25 @@
 }
 
 :host {
-    // flex: 1;
-} // Это все для того чтобы когда контента мало footer все равно был прижат к низу
-
-span {
-    display: inline-block;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .placePage {
-    // font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
-    margin-top: 24px;
-    margin-bottom: 48px;
-
+    flex: 1;
     .placePage__container {
         display: flex;
         flex-direction: column;
-    }
-
-    @media #{$notMobile} {
-        margin-top: 48px;
+        margin-top: 24px;
         margin-bottom: 48px;
-
+    }
+    @media #{$notMobile} {
         .placePage__container {
             flex-direction: row;
+            margin-top: 48px;
         }
     }
-
     @media #{$mobile} {
         .placePage__title {
             font-size: 24px;
@@ -56,6 +49,36 @@ span {
         }
     }
 }
+
+span {
+    display: inline-block;
+}
+
+// .placePage {
+//     margin-top: 24px;
+//     margin-bottom: 48px;
+
+//     .placePage__container {
+//         display: flex;
+//         flex-direction: column;
+//     }
+
+//     @media #{$notMobile} {
+//         margin-top: 48px;
+//         margin-bottom: 48px;
+
+//         .placePage__container {
+//             flex-direction: row;
+//         }
+//     }
+
+//     @media #{$mobile} {
+//         .placePage__title {
+//             font-size: 24px;
+//             line-height: 32px;
+//         }
+//     }
+// }
 
 // Стили скелетона (начало)
 .placePage .placePage__container--withGradientEffect {

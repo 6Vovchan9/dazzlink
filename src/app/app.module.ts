@@ -27,7 +27,7 @@ import { ProgressiveImageComponent } from './shared/components/progressive-image
 // import { LocationsPageWithFrontFilterComponent } from './locations-page-with-front-filter/locations-page-with-front-filter.component';
 // import { LocationItemComponent } from './shared/components/location-item/location-item.component';
 import { CheckboxNewFieldComponent } from './shared/fields/checkbox-new-field/checkbox-new-field.component';
-import { PlacePageComponent } from './place-page/place-page.component';
+// import { PlacePageComponent } from './place-page/place-page.component';
 import { ToastService } from './shared/services/toast.service';
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { TeamPageComponent } from './team-page/team-page.component';
@@ -43,7 +43,7 @@ registerLocaleData(localeRu, 'ru');
 
     // HomePageComponent,
     AgreementsPageComponent,
-    PlacePageComponent,
+    // PlacePageComponent,
     // LocationsPageComponent, // Фильтрация и сортировка на бэке
     // LocationsPageWithFrontFilterComponent, // Фильтрация и сортировка на фронте
     TeamPageComponent,

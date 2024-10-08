@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'locations',
     loadComponent: () => import("./locations-page-with-front-filter/locations-page-with-front-filter.component").then(m => m.LocationsPageWithFrontFilterComponent)
   },
+  {
+    path: 'locations/:title',
+    loadComponent: () => import("./place-page/place-page.component").then(m => m.PlacePageComponent)
+  },
   // {
   //   path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [
   //     // { path: '', redirectTo: '/', pathMatch: 'full' },

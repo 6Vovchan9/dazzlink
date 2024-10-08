@@ -1,4 +1,5 @@
-<main class="placePage">
+<app-header></app-header>
+<div class="placePage">
     <div class="container placePage__container" [class.placePage__container--withGradientEffect]="isLoading">
         @if (isLoading) {
             <!-- Моки для скелетона -->
@@ -183,7 +184,7 @@
                                     alt="Фото"
                                 > -->
 
-                                @for(imgData of placeData.imageList; track $index) {
+                                @for (imgData of placeData.imageList; track $index) {
                                     <div class="locationPhotosInMobile1__imgWrap"
                                         [ngClass]="{
                                             'locationPhotosInMobile1__imgWrap--visible': curPhotoInGalleria === $index
@@ -484,7 +485,8 @@
             </ng-container>
         }
     </div>
-</main>
+</div>
+<app-footer></app-footer>
 
 <div class="photoGalleria"
     *ngIf="showPhotoGalleria"

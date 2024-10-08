@@ -1,19 +1,50 @@
-import { ViewportScroller } from '@angular/common';
+import {
+  DecimalPipe,
+  NgClass,
+  NgFor, NgIf,
+  NgStyle,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+  NgTemplateOutlet,
+  ViewportScroller
+} from '@angular/common';
 import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription, fromEvent, of, pipe } from 'rxjs';
+import { catchError, debounceTime, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
 import { allRatingName, locationInfoMapping } from '@app/shared/constants/all.constants';
 import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
 import { IVotingService, PlaceAttributeList, PlaceDetails, TypeOfPlaceDetails } from '@app/shared/interfaces';
 import { LocationsService } from '@app/shared/services/locations.service';
 import { PagesService } from '@app/shared/services/pages.service';
 import { ToastService } from '@app/shared/services/toast.service';
-import { Subscription, fromEvent, of, pipe } from 'rxjs';
-import { catchError, debounceTime, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { ThumbHashImageComponent } from '@app/shared/components/thumb-hash-image/thumb-hash-image.component';
+import { HeaderComponent } from '@app/shared/components/header/header.component';
+import { FooterComponent } from '@app/shared/components/footer/footer.component';
+import { GoBackBtnComponent } from '@app/shared/components/go-back-btn/go-back-btn.component';
 
 @Component({
   selector: 'app-place-page',
   templateUrl: './place-page.component.html',
-  styleUrls: ['./place-page.component.scss']
+  styleUrls: ['./place-page.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf, NgFor,
+    NgTemplateOutlet,
+    DecimalPipe,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+    NgClass,
+    NgStyle,
+
+    HeaderComponent,
+    ThumbHashImageComponent,
+    GoBackBtnComponent,
+    FooterComponent
+  ]
 })
 export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
 
@@ -62,20 +93,20 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
 
   ngOnInit(): void {
 
-    this.lSub = this.pagesService.currentLanguage.subscribe(
-      lang => {
-        if (!this.isLoading) {
-          this.isLoading = true;
-          this.locationsService.getByPageName(this.placeData.pageName)
-            .subscribe(
-              (place: PlaceDetails) => {
-                this.placeData = place;
-                this.isLoading = false;
-              }
-            );
-        }
-      }
-    );
+    // this.lSub = this.pagesService.currentLanguage.subscribe(
+    //   lang => {
+    //     if (!this.isLoading) {
+    //       this.isLoading = true;
+    //       this.locationsService.getByPageName(this.placeData.pageName)
+    //         .subscribe(
+    //           (place: PlaceDetails) => {
+    //             this.placeData = place;
+    //             this.isLoading = false;
+    //           }
+    //         );
+    //     }
+    //   }
+    // );
 
     this.placeSub = this.route.params
       .pipe(
