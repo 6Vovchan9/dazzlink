@@ -502,7 +502,8 @@ $shadowHeightInMobile: 20px;
         }
 
         .filterOptionsBlock__allCountries {
-            overflow: scroll;
+            overflow-y: auto;
+            overscroll-behavior-y: contain;
             margin-top: 12px;
             .filterOptionsBlock__country {
                 margin-top: 24px;

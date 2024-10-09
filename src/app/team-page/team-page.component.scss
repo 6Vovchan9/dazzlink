@@ -399,7 +399,8 @@
     @media #{$mobile} {
         .personDescModal__container .personDescModal__wrapper {
             .personDescModal__content {
-                overflow: scroll;
+                overflow-y: auto;
+                overscroll-behavior-y: contain; // это для того чтобы не появлялась адресная строка при скролле контента, но это свойство не работает на старых устройствах и в ситуации когда мало контента и нет скролла
                 // overscroll-behavior: contain;
                 padding-right: var(--paddingForScrollbar, 0px);
                 .personDescModal__info {
