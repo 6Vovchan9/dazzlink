@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     @if (true) {
-                        <button class="aboutAppInfo__btn blueBtn blueBtn--withPresentIcon">
+                        <button (click)="qrModalOrTelegram()" class="aboutAppInfo__btn blueBtn blueBtn--withPresentIcon">
                             <img src="assets/icons/present.svg" alt="p">
                             Получить подарок
                         </button>
@@ -167,7 +167,7 @@
                                 Переходите от слов к делу
                             </h2>
                             <div class="appAdv__text">
-                                Выбирайте романтические места для свиданий и приглашайте друг друга прямо в приложении.
+                                Находите идеальные романтические места для свиданий и приглашайте друг друга. Сделайте каждый момент по-настоящему особенным
                             </div>
                         </div>
                     </li>
@@ -180,8 +180,7 @@
                                 Изучайте тему отношений
                             </h2>
                             <div class="appAdv__text">
-                                Статьи про любовь, отношения, знакомства, свидания, семейную жизнь.
-                                Расскажем, как сохранить счастье на долгие годы
+                                Откройте секреты счастья на долгие годы: читайте статьи о любви, отношениях, знакомствах, свиданиях и семейной жизни
                             </div>
                         </div>
                     </li>
@@ -191,31 +190,37 @@
                         </div>
                         <div class="appAdv__content">
                             <h2 class="moduleTitle">
-                                Скачайте приложение
+                                Будьте первыми
                             </h2>
                             <div class="appAdv__text">
-                                Сотни людей уже доверили нам свою судьбу, присоединяйтесь и вы,
-                                чтобы найти любовь на всю жизнь и создать семью
+                                Запуск приложения в конце 2024. Хотите узнать о нем первыми и получить подарок от команды Dazzlink? 
 
-                                <div class="appAdv__infoLinks forDesktop">
-                                    <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
-                                </div>
-                                @if (mobileDetectService.osDevice) {
-                                    <div class="appAdv__infoLinks forMobile">
-                                        <button class="downloadApp"
-                                            type="button"
-                                            (click)="mobileDetectService?.goToDeviceStore()"
-                                        >
-                                            <div class="downloadApp__title">Скачайте<br />приложение</div>
-                                            <div class="downloadApp__icon">
-                                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
-                                            </div>
-                                        </button>
-                                    </div>
+                                @if (true) {
+                                    <button (click)="qrModalOrTelegram()" class="appAdv__btn blueBtn blueBtn--withPresentIcon">
+                                        <img src="assets/icons/present.svg" alt="p">
+                                        Получить подарок
+                                    </button>
                                 } @else {
-                                    <div class="appAdv__infoLinks forMobile">
+                                    <div class="appAdv__infoLinks forDesktop">
                                         <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
                                     </div>
+                                    @if (mobileDetectService.osDevice) {
+                                        <div class="appAdv__infoLinks forMobile">
+                                            <button class="downloadApp"
+                                                type="button"
+                                                (click)="mobileDetectService?.goToDeviceStore()"
+                                            >
+                                                <div class="downloadApp__title">Скачайте<br />приложение</div>
+                                                <div class="downloadApp__icon">
+                                                    <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
+                                                </div>
+                                            </button>
+                                        </div>
+                                    } @else {
+                                        <div class="appAdv__infoLinks forMobile">
+                                            <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
+                                        </div>
+                                    }
                                 }
                             </div>
 

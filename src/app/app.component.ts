@@ -27,4 +27,8 @@ export class AppComponent implements OnInit {
     }
     this[modalDesc.methodName]();
   }
+
+  public clickByCloseModal(): void {
+    this.modalService.close();
+  }
 }
