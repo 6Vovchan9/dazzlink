@@ -12,7 +12,7 @@ import {
 import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, fromEvent, of, pipe } from 'rxjs';
-import { catchError, debounceTime, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { auditTime, catchError, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 import { allRatingName, locationInfoMapping } from '@app/shared/constants/all.constants';
 import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
@@ -280,7 +280,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
     if (carousel) {
       this.carouselScrollSub = fromEvent(carousel, 'scroll')
         .pipe(
-          debounceTime(50),
+          auditTime(150),
           distinctUntilChanged()
         )
         .subscribe(
@@ -294,7 +294,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
     const carouselScrollLeft = carousel.scrollLeft;
     const imageAmount = this.placeData.imageList?.length || 1;
     const divisor = carouselWidth / imageAmount;
-    this.curPhotoInGalleria = Math.trunc(carouselScrollLeft / divisor);
+    this.curPhotoInGalleria = Math.round(carouselScrollLeft / divisor);
   }
 
   private setScrollSnappingCarousel(): void {

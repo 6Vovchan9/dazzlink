@@ -1,0 +1,28 @@
+.blueBtn {
+    background-color: #4A4AC6;
+    padding: 14px 28px;
+    cursor: pointer;
+    border: none;
+    border-radius: 16px;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 800;
+    color: #fff;
+    &:focus {}
+    &:hover {
+        background-color: #333;
+    }
+    &:active {
+        background-color: #000;
+    }
+    &--withPresentIcon {
+        text-align: left;
+        img {
+            width: 26px;
+            height: 26px;
+            float: left;
+            margin-right: 14px;
+            margin-top: 1px;
+        }
+    }
+}

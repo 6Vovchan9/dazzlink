@@ -30,7 +30,7 @@ export const langArr: {[key: string]: {[key: string]: string}} = {
         'UZ': `Qo'shilish`
     },
     'articles-aboutPage-text': {
-        'RU': 'Статьи о любви, отношениях, знакомствах, свиданиях и семейной жизни. Советы по сохранению счастья и решению семейных трудностей',
+        'RU': 'Статьи о любви, отношениях, знакомствах, свиданиях и семейной жизни. Советы по сохранению счастья и решению семейных трудностей',
         'EN': `Articles about love, relationship psychology, dating, dating, family life. We'll tell you how to maintain happiness for many years and cope with difficult situations in the family.`,
         'KZ': 'Махаббат, қарым-қатынас психологиясы, танысу, танысу, отбасылық өмір туралы мақалалар. Біз сізге бақытты ұзақ жылдар бойы қалай сақтау керектігін және отбасындағы қиын жағдайларды қалай жеңуге болатынын айтамыз.',
         'UZ': `Sevgi, munosabatlar psixologiyasi, tanishish, tanishish, oilaviy hayot haqida maqolalar. Sizga ko'p yillar davomida baxtni qanday saqlab qolish va oiladagi qiyin vaziyatlarni engish kerakligini aytamiz.`,
