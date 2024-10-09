@@ -100,9 +100,9 @@
             <!-- Телефоны доверия -->
             <div class="phonesBlock" #section>
                 <span id="phones" class="anchoroffset"></span>
-                <h2 class="helpPage__sectionTitle moduleTitle">Телефоны доверия</h2>
+                <h2 class="helpPage__sectionTitle">Телефоны доверия</h2>
                 <div class="phonesBlock__area">
-                    <h3 class="phonesBlock__country moduleTitle">Узбекистан</h3>
+                    <!-- <h3 class="phonesBlock__country">Узбекистан</h3> -->
                     <ul class="phonesBlock__phones">
                         <li class="phonesBlock__phoneItem">
                             <a class="phonesBlock__val" href="tel:1259">
@@ -112,7 +112,7 @@
                                 Горячая линия МВД Узбекистана по борьбе с насилием против женщин.
                             </div>
                             <div class="phonesBlock__source">
-                                Источник информации <a href="https://uznews.uz/" class="phonesBlock__sourceLink" target="_blank">uznews.uz</a>
+                                Источник информации <a href="https://uznews.uz/posts/64916" class="phonesBlock__sourceLink" target="_blank">uznews.uz</a>
                             </div>
                         </li>
                         <li class="phonesBlock__phoneItem">
@@ -125,8 +125,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="phonesBlock__area">
-                    <h3 class="phonesBlock__country moduleTitle">Казахстан</h3>
+                <!-- <div class="phonesBlock__area">
+                    <h3 class="phonesBlock__country">Казахстан</h3>
                     <ul class="phonesBlock__phones">
                         <li class="phonesBlock__phoneItem">
                             <a class="phonesBlock__val" href="tel:111">
@@ -136,7 +136,7 @@
                                 Единый государственный контакт-центр «111 – AMANAT» для жертв бытового насилия и буллинга.
                             </div>
                             <div class="phonesBlock__source">
-                                Источник информации <a href="https://tengrinews.kz/" class="phonesBlock__sourceLink" target="_blank">tengrinews.kz</a>
+                                Источник информации <a href="https://tengrinews.kz/kazakhstan_news/partii-rasskazali-sozdanii-edinogo-kontakt-tsentra-111-513855/" class="phonesBlock__sourceLink" target="_blank">tengrinews.kz</a>
                             </div>
                         </li>
                         <li class="phonesBlock__phoneItem">
@@ -147,16 +147,16 @@
                                 Национальная телефонная линия доверия для детей и молодёжи, также помогает женщинам и семьям.
                             </div>
                             <div class="phonesBlock__source">
-                                Источник информации <a href="https://tengrinews.kz/" class="phonesBlock__sourceLink" target="_blank">tengrinews.kz</a>
+                                Источник информации <a href="https://tengrinews.kz/article/ya-seychas-zastrelyu-kakimi-sluchayami-stalkivayutsya-slujbe-1900/" class="phonesBlock__sourceLink" target="_blank">tengrinews.kz</a>
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
             <!-- Поддержка сервиса -->
             <div class="supportBlock" #section>
                 <span id="support" class="anchoroffset"></span>
-                <h2 class="helpPage__sectionTitle moduleTitle">Поддержка сервиса</h2>
+                <h2 class="helpPage__sectionTitle">Поддержка сервиса</h2>
                 <a href="mailto:support@dazzlink.asia" class="connectWithUsBtn connectWithUsBtn--gray">
                     <div class="connectWithUsBtn__head">
                         Нужна помощь? 
@@ -170,7 +170,7 @@
             @if (questionsForRender?.length) {
                 <div class="questionsBlock" #section>
                     <span id="questions" class="anchoroffset"></span>
-                    <h2 class="helpPage__sectionTitle moduleTitle">Популярные вопросы</h2>
+                    <h2 class="helpPage__sectionTitle">Популярные вопросы</h2>
                     <ul class="questionsBlock__list">
                         @for(q of questionsForRender; track $index) {
                             <li class="questionsBlock__item">
