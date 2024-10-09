@@ -1016,7 +1016,7 @@ export class LocationsPageComponent implements OnInit {
     if (this.mobileDetectService.mobileOrTabletDevice) {
       this.mobileDetectService?.goToDeviceStore();
     } else {
-      this.modalService.open({ component: 'mainLayoutComponent' }); // на аргумент можно не обращать внимание
+      this.modalService.open({ component: 'appComponent' }); // на аргумент можно не обращать внимание
     }
   }
 
