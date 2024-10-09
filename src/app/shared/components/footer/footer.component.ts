@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, Optional } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit, Optional, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
@@ -16,7 +16,14 @@ import { QrCodeModalComponent } from '@app/shared/components/qr-code-modal/qr-co
 })
 export class FooterComponent {
 
-  public showQrCodeModal = false;
+  public showQrCodeModal = signal(false);
+  private qrModalChangeEffect = effect(() => {
+    if (this.showQrCodeModal()) {
+      this.modalService.hideScroll();
+    } else {
+      this.modalService.showScroll();
+    }
+  });
 
   public get curYear() {
     return new Date().getFullYear();
@@ -38,6 +45,14 @@ export class FooterComponent {
     if (this.tgService.mainTgButton) {
       this.tgService.mainTgButton.setText('MainButton');
       this.tgService.mainTgButton.show();
+    }
+  }
+
+  public qrModalOrTelegram(): void {
+    if (this.mobileDetectService?.osDevice) {
+      this.mobileDetectService.goToTelegramChannel();
+    } else {
+      this.modalService.open({ component: 'appComponent', modalName: 'qrForTelegram' });
     }
   }
 
