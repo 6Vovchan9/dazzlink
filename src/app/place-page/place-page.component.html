@@ -263,15 +263,14 @@
                                 <li *ngFor="let rating of locationRatingList; index as photoIndex; first as isFirstPhoto"
                                     class="locationRating__item"
                                 >
-                                    <div class="locationRating__val"
-                                        [ngStyle]="{
-                                            color: isFirstPhoto ?
-                                                rating.value < 4 ? '#D70015'
-                                                : rating.value <= 4.5 ? '#D78E00'
-                                                : '#248A3D'
-                                            : 'unset'
-                                        }"
-                                    >
+                                    <!-- [ngStyle]="{
+                                        color: isFirstPhoto ?
+                                            rating.value < 4 ? '#D70015'
+                                            : rating.value <= 4.5 ? '#D78E00'
+                                            : '#248A3D'
+                                        : 'unset'
+                                    }" -->
+                                    <div class="locationRating__val">
                                         {{ (rating.value || 5) | number: '.1-2' }}
                                     </div>
                                     <div class="locationRating__title">
