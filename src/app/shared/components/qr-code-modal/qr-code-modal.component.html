@@ -1,35 +1,8 @@
-<div class="qrModal" [class.qrModal--show]="show">
-    <div class="container qrModal__container">
-        <div class="qrModal__content">
-            <div class="qrContent">
-                <div class="qrContent__content">
-                    <div class="qrContent__logo">
-                        <img src="assets/images/logo.svg" class="qrContent__logoIcon" alt="logotip">
-                        <div class="qrContent__logoText">
-                            <img src="assets/images/logoText.svg" alt="logotip">
-                        </div>
-                    </div>
-                    <div class="qrContent__qr">
-                        <img src="assets/images/qrCode.svg" class="qrContent__qrImage" alt="qr">
-                    </div>
-                    <div class="qrContent__message">
-                        Наведите камеру на QR-код, чтоб скачать {{productName}}
-                    </div>
-                </div>
-            </div>
-            <div class="qrModal__desc">
-                <div class="qrModal__title">
-                    Постройте великолепные отношения
-                </div>
-                <div class="qrModal__text">
-                    Погрузитесь в мир Dazzlink — узнавайте новое, знакомьтесь и посещайте места
-                </div>
-            </div>
-            <div class="qrModal__closeButtonWrap" (click)="closeModal()">
-                <div class="qrModal__closeButton closeButtonInWindow">
-                    <div class="iconForCloseInModal"></div>
-                </div>
-            </div>
+<div class="qrModalOld" [class.qrModalOld--show]="show">
+    <div class="qrModalOld__content">
+        <button type="button" (click)="closeModal()" class="qrModalOld__close">Закрыть</button>
+        <div class="qrModalOld__qrBlock">
+            <img src="assets/images/qrCode.svg" class="qrModalOld__qrImage" alt="qr">
         </div>
     </div>
 </div>

@@ -1,0 +1,140 @@
+@import "variables";
+
+.qrModal {
+    position: fixed;
+    background-color: var(--color-white);
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 110;
+    .qrModal__container {
+        height: 100%;
+        padding: 64px 20px;
+    }
+
+    .qrModal__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0px 120px;
+        position: relative;
+
+        .qrModal__desc {
+            position: relative;
+            bottom: 78px;
+            background-color: var(--color-white);
+            max-width: 640px;
+            text-align: center;
+
+            &:before {
+                content: '';
+                position: absolute;
+                bottom: 100%;
+                left: 0px;
+                height: 86px;
+                width: 100%;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+            }
+
+            .qrModal__title {
+                font-size: 32px;
+                font-weight: 700;
+            }
+            .qrModal__text {
+                font-size: 24px;
+            }
+        }
+
+        .qrModal__closeButtonWrap {
+            position: absolute;
+            cursor: pointer;
+            padding: 0px 0px 40px 40px;
+            top: 0;
+            right: 0;
+            .qrModal__closeButton {
+                margin-left: 76px;
+                &:after {
+                    content: "Закрыть";
+                    position: absolute;
+                    right: 100%;
+                    top: 0;
+                    font-size: 16px;
+                    transform: translateX(-4px);
+                }
+            }
+        }
+    }
+
+    &--forTelegram {
+        .qrModal__content .qrModal__desc {
+            max-width: 800px;
+            .qrModal__text {
+                max-width: 660px;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    @media #{$mobile} {
+        .qrModal__container {
+            padding: 24px 20px;
+        }
+        .qrModal__content {
+            padding: 0px;
+            padding-top: 30px;
+            .qrModal__desc {
+                display: none;
+            }
+        }
+    }
+}
+
+.qrContent {
+    border: 6px solid rgba(100, 100, 100, 1);
+    border-radius: 44px;
+    max-width: 340px;
+    padding: 32px 64px 100px;
+    position: relative;
+
+    .qrContent__content {
+        position: relative;
+        z-index: 10;
+    }
+
+    .qrContent__logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 32px;
+        .qrContent__logoIcon {
+            height: 32px;
+        }
+        .qrContent__logoText {
+            overflow: hidden;
+            margin-top: 8px;
+            img {
+                margin-left: -50px;
+            }
+        }
+    }
+    .qrContent__qr {
+        margin-bottom: 24px;
+        aspect-ratio: 1;
+        .qrContent__qrImage {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .qrContent__message {
+        font-size: 14px;
+        text-align: center;
+        color: var(--color-text-gray);
+    }
+    
+    @media #{$mobile} {
+        padding: 32px 64px 48px;
+    }
+}

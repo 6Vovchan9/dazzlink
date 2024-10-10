@@ -40,12 +40,13 @@
                         </button>
                     } @else {
                         <button class="btnInFooter"
-                            (click)="showQrCodeModal.set(!showQrCodeModal())"
+                            (click)="openQRModal()"
                             type="button"
                         >
                             Скачать приложение
                         </button>
                     }
+                    <!-- <button class="btnInFooter" type="button" (click)="showQrCodeModal.set(!showQrCodeModal())">My</button> -->
                     <a class="btnInFooter" routerLink="/help">Помощь</a>
                     <a class="btnInFooter" routerLink="/legal-info">Правовая информация</a>
                     <a href="https://instagram.com/dazzlink.asia" target="_blank" class="btnInFooter">Instagram</a>

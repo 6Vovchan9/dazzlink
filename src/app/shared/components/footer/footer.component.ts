@@ -11,7 +11,10 @@ import { QrCodeModalComponent } from '@app/shared/components/qr-code-modal/qr-co
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   standalone: true,
-  imports: [QrCodeModalComponent, RouterLink],
+  imports: [
+    QrCodeModalComponent,
+    RouterLink
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
@@ -46,6 +49,10 @@ export class FooterComponent {
       this.tgService.mainTgButton.setText('MainButton');
       this.tgService.mainTgButton.show();
     }
+  }
+
+  public openQRModal(): void {
+    this.modalService.open({ component: 'appComponent', modalName: 'qrModal' });
   }
 
   public qrModalOrTelegram(): void {
