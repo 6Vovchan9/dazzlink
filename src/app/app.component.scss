@@ -97,26 +97,18 @@
     max-width: 340px;
     padding: 32px 64px 100px;
     position: relative;
-
     .qrContent__content {
         position: relative;
         z-index: 10;
     }
-
     .qrContent__logo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        height: 64px;
         margin-bottom: 32px;
         .qrContent__logoIcon {
-            height: 32px;
-        }
-        .qrContent__logoText {
-            overflow: hidden;
-            margin-top: 8px;
-            img {
-                margin-left: -50px;
-            }
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center center;
         }
     }
     .qrContent__qr {
@@ -133,7 +125,6 @@
         text-align: center;
         color: var(--color-text-gray);
     }
-    
     @media #{$mobile} {
         padding: 32px 64px 48px;
     }
