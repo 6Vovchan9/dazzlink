@@ -106,7 +106,12 @@
                                             <!-- Список локаций -->
                                             @for (block of filteredLocations; track block.cityCode; let lastIndex = $last) {
                                                 @if (block.placeList?.length) {
-                                                    <div class="pageContent__locationsBlock" [class.pageContent__locationsBlock--last]="lastIndex">
+                                                    <div class="pageContent__locationsBlock"
+                                                        [ngClass]="{
+                                                            'pageContent__locationsBlock--last': lastIndex,
+                                                            'pageContent__locationsBlock--haveMoreLocations': block.cityPlaceCount > 9 && !isLoading() && !isSorting()
+                                                        }"
+                                                    >
                                                         <div class="pageContent__locationsCity">
                                                             <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting() || isLoading()">{{block.cityTitle}}</span>
                                                         </div>
@@ -130,6 +135,15 @@
                                                                 </li>
                                                             }
                                                         </ul>
+                                                        <!-- Кнопка другие локации -->
+                                                        <button class="pageContent__toAnotherPrivate goToAnotherLocations" type="button" (click)="qrModalOrTelegram()">
+                                                            <div class="goToAnotherLocations__text">
+                                                                Еще больше локаций для этого города доступно в приложении.
+                                                                <br />
+                                                                Станьте одними из первых пользователей!
+                                                            </div>
+                                                            <div class="goToAnotherLocations__icon"></div>
+                                                        </button>
                                                     </div>
                                                 }
                                             }
@@ -150,7 +164,7 @@
                                                 </div>
                                             </div>
                                             <!-- Кнопка другие локации -->
-                                            <div *ngIf="!isLoading()" class="pageContent__toAnotherLocations">
+                                            <!-- <div *ngIf="!isLoading()" class="pageContent__toAnotherGeneral">
                                                 @if (true) {
                                                     <button class="goToAnotherLocations" type="button" (click)="qrModalOrTelegram()">
                                                         <div class="goToAnotherLocations__text">
@@ -166,7 +180,7 @@
                                                         <div class="goToAnotherLocations__icon"></div>
                                                     </button>
                                                 }
-                                            </div>
+                                            </div> -->
                                         } @else {
                                             Упс :(<br>Какие-то проблемы с сортировкой.<br>Напишите нам об этом.
                                         }

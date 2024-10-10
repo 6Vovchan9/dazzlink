@@ -25,7 +25,7 @@ import {
 } from 'rxjs/operators';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DOCUMENT, NgFor, NgIf, NgTemplateOutlet, ViewportScroller } from '@angular/common';
+import { DOCUMENT, NgClass, NgFor, NgIf, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 
 import {
   CountryFilterItem,
@@ -55,6 +55,7 @@ import { FooterComponent } from '@app/shared/components/footer/footer.component'
     NgTemplateOutlet,
     NgIf, NgFor,
     ReactiveFormsModule,
+    NgClass,
 
     LocationItemComponent,
     DropdownFieldModule,

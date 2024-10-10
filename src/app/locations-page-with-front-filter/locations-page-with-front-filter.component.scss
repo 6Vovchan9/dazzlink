@@ -176,9 +176,36 @@ $shadowHeightInMobile: 20px;
         &--last {
             margin-bottom: 0px;
         }
+        &--haveMoreLocations {
+            position: relative;
+            &:after {
+                content: '';
+                position: absolute;
+                z-index: 10;
+                bottom: 0px;
+                width: 100%;
+                height: 314px;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) -26.12%, #FFFFFF 67.95%);
+                pointer-events: none;
+            }
+            .pageContent__toAnotherPrivate {
+                display: flex;
+            }
+        }
     }
 
-    .pageContent__toAnotherLocations {
+    .pageContent__toAnotherPrivate {
+        display: none;
+        position: absolute;
+        z-index: 20;
+        bottom: 0px;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+        padding: 16px 24px;
+    }
+
+    .pageContent__toAnotherGeneral {
         margin-top: 32px;
     }
 
@@ -207,7 +234,7 @@ $shadowHeightInMobile: 20px;
                 }
             }
         }
-        .pageContent__toAnotherLocations {
+        .pageContent__toAnotherGeneral {
             margin-top: 48px;
         }
     }
@@ -694,6 +721,7 @@ $shadowHeightInMobile: 20px;
     border: none;
     width: 100%;
     text-align: start;
+    color: #333;
     .goToAnotherLocations__text {
         flex: 1;
     }
