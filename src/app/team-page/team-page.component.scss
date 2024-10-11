@@ -414,22 +414,11 @@
             .personDescModal__closeBtn {
                 display: flex;
                 justify-content: flex-end;
+                background-color: #A47ED9;
+                .iconForCloseInModal {
+                    margin-bottom: 20px;
+                }
             }
-        }
-    }
-}
-
-.closeButtonInWindow {
-    &:before {
-        width: 64px;
-        height: 64px;
-    }
-}
-
-@media #{$mobile} {
-    .closeButtonInWindow {
-        .iconForCloseInModal {
-            margin-bottom: 20px;
         }
     }
 }
