@@ -29,7 +29,7 @@ const routes: Routes = [
       // { path: 'locations', component: LocationsPageComponent }, // Фильтрация и сортировка на бэке
       { path: 'locations', component: LocationsPageWithFrontFilterComponent, title: 'Локации' }, // Фильтрация и сортировка на фронте
       { path: 'locations/:title', component: PlacePageComponent },
-      { path: 'team', component: TeamPageComponent },
+      { path: 'company', component: TeamPageComponent },
       { path: 'help', component: HelpPageComponent },
       { path: 'legal-info', component: LegalInfoPageComponent },
       { path: 'media/:title', component: PostPageComponent },

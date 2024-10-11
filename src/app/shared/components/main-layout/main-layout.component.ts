@@ -85,7 +85,7 @@ export class MainLayoutComponent extends AbsractExample implements OnInit, DoChe
     this.rSub = this.router.events
     .pipe(
       filter(event => event instanceof NavigationEnd),
-      filter((event: NavigationEnd) => !event.url.includes('/team')) // Todo: такая фигня изза того что страница "О команде" скроллится наверх при открытии/закрытии модалки. Надо в будущем переверстать layout
+      filter((event: NavigationEnd) => !event.url.includes('/company')) // Todo: такая фигня изза того что страница "О команде" скроллится наверх при открытии/закрытии модалки. Надо в будущем переверстать layout
     ).subscribe(
       val => {
         this.pageWrapEl.nativeElement.scrollTo({
