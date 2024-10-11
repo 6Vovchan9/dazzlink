@@ -353,13 +353,9 @@ $shadowHeightInMobile: 20px;
     .filterBar__controls {
         display: flex;
         align-items: center;
-        margin-right: -16px;
+        // margin-right: -16px;
         .filterBar__item {
             position: relative;
-            // margin-right: 8px;
-            // &:last-child {
-            //     margin-right: unset;
-            // }
             &.withSkeletonLoader {
                 overflow: hidden;
             }
@@ -367,10 +363,25 @@ $shadowHeightInMobile: 20px;
 
     }
 
-    .filterBar__skeleton {
+    .filterBar__sortSkeleton {
         &:before {
-            width: calc(100% - 24px);
-            left: 8px;
+            width: calc(100% - 8px);
+        }
+    }
+
+    // .filterBar__skeleton {
+    //     &:before {
+    //         width: calc(100% - 8px);
+    //         left: 8px;
+    //     }
+    // }
+
+    @media #{$notMobile} {
+        .filterBar__controls .filterBar__item {
+            margin-right: 2px;
+            &:last-child {
+                margin-right: 0px;
+            }
         }
     }
 }
@@ -380,17 +391,21 @@ $shadowHeightInMobile: 20px;
     font-size: 16px;
     line-height: 24px;
     font-weight: 700;
-    padding: 0px 16px;
+    padding: 0px 0px 0px 16px;
     display: block;
     border: none;
     background-color: unset;
-    border-radius: 12px;
+    // border-radius: 12px;
     cursor: pointer;
 
     &[disabled] {
         cursor: not-allowed;
         color: inherit;
         opacity: .3;
+    }
+
+    @media #{$mobile} {
+        padding: 0px 8px;
     }
 }
 
