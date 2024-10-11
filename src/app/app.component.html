@@ -12,34 +12,38 @@
                     <div style="margin-top: 30px;">additional content</div>
                 </app-modal>
             } @else if (modalData.modalName === 'qrForTelegram') {
-                <div class="qrModal qrModal--forTelegram">
-                    <div class="container qrModal__container">
-                        <div class="qrModal__content">
-                            <div class="qrContent">
-                                <div class="qrContent__content">
-                                    <div class="qrContent__logo">
-                                        <img src="assets/images/fullLogoRow.svg" class="qrContent__logoIcon" alt="logotip">
+                <div class="modal">
+                    <div class="container modal__container">
+                        <div class="modal__wrapper">
+                            <div class="modal__content">
+                                <div class="QRCode">
+                                    <div class="QRCode__screen">
+                                        <div class="QRCode__content">
+                                            <div class="QRCode__logo">
+                                                <img src="assets/images/fullLogoRow.svg" class="QRCode__logoIcon" alt="logotip">
+                                            </div>
+                                            <div class="QRCode__qr">
+                                                <img src="assets/images/qrCode.svg" class="QRCode__qrImage" alt="qr">
+                                            </div>
+                                            <div class="QRCode__message">
+                                                Наведите камеру на QR-код, чтоб перейти в Telegram-бот
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="qrContent__qr">
-                                        <img src="assets/images/qrCode.svg" class="qrContent__qrImage" alt="qr">
-                                    </div>
-                                    <div class="qrContent__message">
-                                        Наведите камеру на QR-код, чтоб перейти в Telegram-бот
+                                    <div class="QRCode__desc">
+                                        <div class="QRCode__title">
+                                            Присоединяйтесь первыми и получите подарок
+                                        </div>
+                                        <div class="QRCode__text">
+                                            Запуск приложения в конце 2024. Хотите узнать о нем
+                                            первыми и получить подарок от команды Dazzlink? 
+                                            Тогда сканируйте QR и переходите в Telegram-бот
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="qrModal__desc">
-                                <div class="qrModal__title">
-                                    Присоединяйтесь первыми и получите подарок
-                                </div>
-                                <div class="qrModal__text">
-                                    Запуск приложения в конце 2024. Хотите узнать о нем
-                                    первыми и получить подарок от команды Dazzlink? 
-                                    Тогда сканируйте QR и переходите в Telegram-бот
-                                </div>
-                            </div>
-                            <div class="qrModal__closeButtonWrap" (click)="clickByCloseModal()">
-                                <div class="qrModal__closeButton closeButtonInWindow">
+                            <div class="modal__closeBtn" (click)="clickByCloseModal()">
+                                <div class="closeButtonInWindow">
                                     <div class="iconForCloseInModal"></div>
                                 </div>
                             </div>
