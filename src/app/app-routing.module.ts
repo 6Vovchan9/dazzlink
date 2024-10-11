@@ -32,7 +32,7 @@ const routes: Routes = [
     loadComponent: () => import("./place-page/place-page.component").then(m => m.PlacePageComponent)
   },
   {
-    path: 'team',
+    path: 'company',
     loadComponent: () => import("./team-page/team-page.component").then(m => m.TeamPageComponent)
   },
   {
@@ -75,7 +75,7 @@ const routes: Routes = [
       const params: any = new URLSearchParams(window.location.search);
       const pathname = window.location.pathname;
       // if (params.get('name')) {
-      if (pathname.startsWith('/team')) {
+      if (pathname.startsWith('/company')) {
         return 'disabled' as const;
       }
       return 'enabled' as const;
