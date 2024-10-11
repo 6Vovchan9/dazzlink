@@ -23,10 +23,7 @@ html {
         }
     }
     &.noScrollFull { // при таком сценарии адресная строка будет сразу видна и возможно обновление страницы свайпом вниз, НО страница будет проскроллена вверз при закрытии модалки
-        // height: 100%;
-        // overflow-y: auto;
         body {
-            // height: 100%;
             overflow: hidden;
         }
     }
@@ -37,6 +34,12 @@ body {
     color: var(--color-black1);
     // background-color: var(--tg-theme-bg-color); // переменная доступная благодаря script из index.html нужна для того чтобы регулировать стили приложения в завис от темы (светлая/темная) telegram
 }
+
+// @media #{$darkTheme} {
+//     body {
+//         color: red;
+//     }
+// }
 
 * {
     box-sizing: border-box;
