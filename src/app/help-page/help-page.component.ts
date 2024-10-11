@@ -38,7 +38,7 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('inlineAnchorNav') inlineAnchorNav: ElementRef;
 
   private route: ActivatedRoute = inject(ActivatedRoute);
-  public updatePageInfo: Date = new Date("2024-01-21");
+  public updatePageInfo: Date = new Date("2024-09-21");
   public rootMarginBottom: number;
   
   public curSection: 'phones' | 'support' | 'questions' = 'phones';
