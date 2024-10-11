@@ -46,21 +46,15 @@
 
     @media #{$mobile} {
         .modal__container .modal__wrapper {
+            justify-content: flex-end;
             .modal__content {
                 // overscroll-behavior: contain;
             }
             .modal__closeBtn {
                 display: flex;
                 justify-content: flex-end;
+                padding-bottom: 20px;
             }
-        }
-    }
-}
-
-@media #{$mobile} {
-    .closeButtonInWindow {
-        .iconForCloseInModal {
-            margin-bottom: 20px;
         }
     }
 }
