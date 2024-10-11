@@ -13,13 +13,13 @@ html {
     font-size: 16px;
     font-weight: 600;
     line-height: 1.5;
-    overflow-y: auto;
+    overflow: auto;
     &.noScroll {
-        overflow-y: hidden;
+        overflow: hidden;
     }
     &.noScrollInMobile {
         @media #{$mobile} {
-            overflow-y: hidden;
+            overflow: hidden;
         }
     }
     &.noScrollFull { // при таком сценарии адресная строка будет сразу видна и возможно обновление страницы свайпом вниз, НО страница будет проскроллена вверз при закрытии модалки
@@ -27,7 +27,7 @@ html {
         // overflow-y: auto;
         body {
             // height: 100%;
-            overflow-y: hidden;
+            overflow: hidden;
         }
     }
 }
