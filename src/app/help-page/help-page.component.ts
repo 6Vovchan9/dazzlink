@@ -77,6 +77,12 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  public get appWebview(): boolean {
+    const result = navigator.userAgent.includes('Dazzlink');
+    // return true;
+    return result;
+  }
+
   private prepareQuestions() {
     // const questionsFromConst = questions;
     this.questionsForRender = questions.map(q => ({ active: true, ...q }));

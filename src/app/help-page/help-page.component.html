@@ -1,4 +1,6 @@
-<app-header></app-header>
+@if (!appWebview) {
+    <app-header></app-header>
+}
 <div class="helpPage">
     <div class="container helpPage__container">
         <aside class="sidebar">
@@ -193,7 +195,9 @@
         </main>
     </div>
 </div>
-<app-footer></app-footer>
+@if (!appWebview) {
+    <app-footer></app-footer>
+}
 
 <!-- <div class="rootMargin" [ngStyle]="{paddingBottom: rootMarginBottom + 'px'}">
     <div class="rootMargin__block"></div>

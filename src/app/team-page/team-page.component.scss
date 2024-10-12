@@ -347,6 +347,7 @@
         // background-color: bisque;
         .personDescModal__wrapper {
             display: flex;
+            flex: 1;
             overflow: hidden;
             flex-direction: column-reverse;
             // row-gap: 20px;
@@ -417,7 +418,6 @@
             .personDescModal__closeBtn {
                 display: flex;
                 justify-content: flex-end;
-                background-color: #A47ED9;
                 .iconForCloseInModal {
                     margin-bottom: 20px;
                 }
