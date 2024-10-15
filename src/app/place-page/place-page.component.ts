@@ -9,7 +9,7 @@ import {
   NgTemplateOutlet,
   ViewportScroller
 } from '@angular/common';
-import { Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, DoCheck, effect, ElementRef, OnInit, viewChild, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, fromEvent, of, pipe } from 'rxjs';
 import { auditTime, catchError, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -46,10 +46,10 @@ import { GoBackBtnComponent } from '@app/shared/components/go-back-btn/go-back-b
     FooterComponent
   ]
 })
-export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
+export class PlacePageComponent extends ThumbHash implements OnInit {
 
   @ViewChild('inputInGalleria') inputInGalleria: ElementRef;
-  @ViewChild('scrollSnappingCarousel') carouselEl: ElementRef;
+  // @ViewChild('scrollSnappingCarousel1') carouselEl1: ElementRef;
 
   private lSub: Subscription;
   private carouselScrollSub: Subscription;
@@ -65,6 +65,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
   public additPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.hours, TypeOfPlaceDetails.map, TypeOfPlaceDetails.phone];
   public descPlaceInfoTypes: Array<TypeOfPlaceDetails> = [TypeOfPlaceDetails.description, TypeOfPlaceDetails.awards, TypeOfPlaceDetails.infoSource];
   public locationRatingList: Array<{ name: string, value: number }> = [];
+  carouselEl2 = viewChild<ElementRef>('scrollSnappingCarousel2');
 
   // public showSpinnerUnderPhoto = true;
   // public amountLoadedPhotos = 0;
@@ -81,7 +82,16 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
     private router: Router,
     private toastService: ToastService,
     private vc: ViewportScroller
-  ) { super() }
+  ) {
+    super();
+    effect(() => {
+      if (this.carouselEl2() && !this.carouselScrollSub && !this.isLoading) {
+        if (this.placeData.imageList?.length > 1) {
+          this.addEventListenerToCarousel2();
+        }
+      }
+    });
+  }
 
   public get getAdditInfoKeys(): Array<string> {
     return Object.keys(this.additPlaceInfoData);
@@ -116,7 +126,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
             return this.locationsService.getByPageName(params['title']);
           }
         ),
-        // delay(8000),
+        // delay(2000),
         // catchError(err => {
         //   this.isLoading = false;
         //   return of(null);
@@ -266,17 +276,32 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
       );
   }
 
-  public ngDoCheck(): void {
-    if (!this.carouselScrollSub && !this.isLoading) {
-      if (this.placeData.imageList?.length > 1) {
-        this.addEventListenerToCarousel();
-      }
-    }
-  }
+  // public ngDoCheck(): void {
+  //   if (!this.carouselScrollSub && !this.isLoading) {
+  //     if (this.placeData.imageList?.length > 1) {
+  //       this.addEventListenerToCarousel1();
+  //     }
+  //   }
+  // }
 
-  private addEventListenerToCarousel() {
+  // private addEventListenerToCarousel1() {
+  //   console.log('Подписываемся на скролл карусели');
+  //   const carousel = this.carouselEl1?.nativeElement;
+  //   if (carousel) {
+  //     this.carouselScrollSub = fromEvent(carousel, 'scroll')
+  //       .pipe(
+  //         auditTime(150),
+  //         distinctUntilChanged()
+  //       )
+  //       .subscribe(
+  //         this.operateCarouselScroll.bind(this, carousel)
+  //       )
+  //   }
+  // }
+
+  private addEventListenerToCarousel2() {
     // console.log('Подписываемся на скролл карусели');
-    const carousel = this.carouselEl?.nativeElement;
+    const carousel = this.carouselEl2()?.nativeElement;
     if (carousel) {
       this.carouselScrollSub = fromEvent(carousel, 'scroll')
         .pipe(
@@ -298,7 +323,8 @@ export class PlacePageComponent extends ThumbHash implements OnInit, DoCheck {
   }
 
   private setScrollSnappingCarousel(): void {
-    const carousel = this.carouselEl?.nativeElement;
+    // const carousel = this.carouselEl1?.nativeElement;
+    const carousel = this.carouselEl2()?.nativeElement;
     const carouselWidth = carousel.scrollWidth;
     const imageAmount = this.placeData.imageList?.length || 1;
     const divisor = carouselWidth / imageAmount;
