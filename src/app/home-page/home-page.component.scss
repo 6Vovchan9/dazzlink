@@ -198,6 +198,7 @@ $shadowHeightInMobile: 20px;
     .cityCarousel__list {
         display: flex;
         column-gap: #{$carousel-gap}px;
+        will-change: transform;
         animation: marquee-desktop calc(var(--card-speed, 3s) * var(--card-count, 6)) linear infinite;
         animation-delay: 1s;
     }

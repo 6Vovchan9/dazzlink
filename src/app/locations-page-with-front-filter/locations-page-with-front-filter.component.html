@@ -103,6 +103,10 @@
                                 <ng-container *ngIf="allLocations; else errorInGetAllLocations">
                                     <ng-container *ngIf="allLocations.placeCount; else empty">
                                         @if (filteredLocations?.length) {
+                                            @if (allLocationsReceived) {
+                                                <!-- это элемент возникает когда мы получили список локаций, его рендеринг означает что все локации выстроились и мы можем скроллить страницу к прошлому положению -->
+                                                <div #restoreScrollPosition class="restoreScrollPosition"></div>
+                                            }
                                             <!-- Список локаций -->
                                             @for (block of filteredLocations; track block.cityCode; let lastIndex = $last) {
                                                 @if (block.placeList?.length) {
@@ -118,8 +122,8 @@
                                                         <ul class="pageContent__locationsList">
                                                             @for (location of block.placeList; track location.id) {
                                                                 <li class="pageContent__locationsItem">
-                                                                    <!-- <app-location-item [isLoading]="isSorting()"
-                                                                        (click)="goToLocationDesc(location.id)"
+                                                                    <!-- <app-location-item [isLoading]="isSorting() || isLoading()"
+                                                                        (click)="goToLocationDesc(location.pageName)"
                                                                         [placeData]="location"
                                                                     ></app-location-item> -->
                                                                     <a

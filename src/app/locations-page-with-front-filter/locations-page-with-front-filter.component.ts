@@ -7,8 +7,12 @@ import {
   Inject,
   OnInit,
   Optional,
+  Signal,
   ViewChild,
-  signal
+  effect,
+  inject,
+  signal,
+  viewChild
 } from '@angular/core';
 import { Observable, Observer, Subject, Subscription, fromEvent, of, throwError } from 'rxjs';
 import {
@@ -24,7 +28,7 @@ import {
   auditTime
 } from 'rxjs/operators';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, Scroll } from '@angular/router';
 import { DOCUMENT, NgClass, NgFor, NgIf, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 
 import {
@@ -45,6 +49,7 @@ import { LocationItemComponent } from '@app/shared/components/location-item/loca
 import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-field.module';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -117,6 +122,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
   private pageScrollSub: Subscription;
+  scrollingRef = viewChild<HTMLElement>('restoreScrollPosition');
+  public allLocationsReceived = false;
   // public myBlockAboutScroll: { [key: string]: number } = {};
 
   constructor(
@@ -130,7 +137,21 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     private vc: ViewportScroller,
     private cd: ChangeDetectorRef
   ) {
+    
     this.filteredLocations = this.allLocations.cityPlaceList;
+
+    // const scrollingPosition: Signal<[number, number] | null> = toSignal(
+    //   inject(Router).events.pipe(
+    //     filter((event): event is Scroll => event instanceof Scroll),
+    //     map((event: Scroll) => event.position),
+    //   ),
+    // );
+
+    // effect(() => {
+    //   if (this.scrollingRef() && scrollingPosition()) {
+    //     this.vc.scrollToPosition(scrollingPosition()!);
+    //   }
+    // });
   }
 
   ngOnInit(): void {
@@ -779,6 +800,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             // console.log(value);
             // let locationsForYmap = value.cityPlaceList.map(el1 => el1.placeList).flat();
             // console.log(locationsForYmap);
+
+            this.allLocationsReceived = true;
+
             this.allLocations = value;
             this.filteredLocations = value?.cityPlaceList;
             this.isLoading.set(false);
@@ -1073,11 +1097,12 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     console.log('Идем к подробностям выбранной локации')
     window.open(`/locations/${pageName || 'pageName'}`);
 
-    // this.router.navigate(['/locations', pageName || 'pageName']).then(
-    //   (success: boolean) => {
-    //     // console.log(success)
-    //   }
-    // )
+    // this.router.navigate(['/locations', pageName || 'pageName'])
+    //   // .then(
+    //   //   (success: boolean) => {
+    //   //     console.log(success)
+    //   //   }
+    //   // )
 
   }
 

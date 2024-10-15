@@ -78,7 +78,7 @@ const routes: Routes = [
       if (pathname.startsWith('/company')) {
         return 'disabled' as const;
       }
-      return 'enabled' as const;
+      return 'top' as const;
     }
   })],
   exports: [RouterModule]

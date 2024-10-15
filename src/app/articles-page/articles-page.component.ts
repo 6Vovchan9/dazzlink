@@ -10,6 +10,7 @@ import {
   QueryList,
   Self,
   ViewChildren,
+  inject,
   signal
 } from '@angular/core';
 import { NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
@@ -85,6 +86,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public showLoadMoreSpinner = signal(false);
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
+  private router = inject(Router);
 
   constructor(
     private postsService: PostsService,
@@ -93,13 +95,13 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // У декоратора @SkipSelf противоположный эффект, он tells Angular not to look for the injector in the local injector, but start from the Parent
     // Есть еще декоратор @Host и для него сервис должен регистрироваться либо в текущем компоненте либо в родительском компоненте при помощи свойсва декоратора компонента "viewProviders"
     @Optional() public mobileDetectService: MobileDetectService,  // Если вдруг для этого сервиса не определен провайдер, чтоб мы не получили ошибку при обращении к нему в таком случае определяем его как опциональный
-    private router: Router,
     private modalService: GlobalModalService,
     private vc: ViewportScroller
     // private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
+
     // this.lSub = this.pagesService.currentLanguage.subscribe(
     //   lang => {
     //     this.curLang = lang;
