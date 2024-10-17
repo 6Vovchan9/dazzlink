@@ -124,7 +124,8 @@ export interface Post {
     likeCount?: number;
     dislikeCount?: number;
     imageUrl?: string;
-    pageName?: string
+    pageName?: string;
+    last?: boolean;
 }
 
 export type Place = {

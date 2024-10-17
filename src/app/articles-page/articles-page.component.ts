@@ -47,6 +47,7 @@ import { PostComponent } from '@app/shared/components/post/post.component';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
+import { openDB } from '@tempfix/idb';
 
 @Component({
   selector: 'app-articles-page',
@@ -77,6 +78,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private lSub: Subscription;
   private pSub: Subscription;
   private pageScrollSub: Subscription;
+  private lastPostSub: Subscription;
   private prevScrollTop = 0;
   public hideHeader = signal(true);
   private curLang: string;
@@ -87,6 +89,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
   private router = inject(Router);
+  private db: any;
 
   constructor(
     private postsService: PostsService,
@@ -111,16 +114,20 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //   }
     // );
 
+    // this.aboutIndexedDB();
+    this.aboutIDB();
+
     this.getAllArticles();
     this.intersectionObserver();
   }
 
   ngAfterViewInit() {
 
-    this.lastPostList.changes.subscribe(
+    this.lastPostSub = this.lastPostList.changes.subscribe(
       d => {
-        // console.log(d);
-        if (d.last && this.observer && !this.lastPaginationPage) this.observer.observe(d.last.nativeElement);
+        if (d.last && this.observer && !this.lastPaginationPage) {
+          this.observer.observe(d.last.nativeElement);
+        }
       }
     );
     this.addEventListenerToPage();
@@ -144,6 +151,115 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     const result = navigator.userAgent.includes('Dazzlink');
     // return true;
     return result;
+  }
+
+  private aboutIndexedDB(): void {
+    let openRequest = indexedDB.open('Articles');
+
+    openRequest.onsuccess = () => {
+      this.db = openRequest.result;
+      this.db.onversionchange = () => {
+        this.db.close();
+        alert("База данных устарела, пожалуйста, перезагрузите страницу.")
+      };
+      console.log(this.db);
+    };
+
+    openRequest.onupgradeneeded = (event) => {
+      this.db = openRequest.result;
+      switch (event.oldVersion) { // существующая (старая) версия базы данных
+        case 0:
+          // версия 0 означает, что на клиенте нет базы данных
+          // выполнить инициализацию
+          console.log('onupgradeneeded 0');
+          break;
+        case 1:
+          // на клиенте версия базы данных 1
+          // обновить
+          console.log('onupgradeneeded 1');
+          break;
+      }
+    };
+
+    openRequest.onblocked = function() {
+
+    }
+    
+    openRequest.onerror = function() {
+      // скорее всего мы пытаемся открыть базу с более низкой версией, чем текущая
+      console.error("Error", openRequest.error);
+    };
+  }
+
+  private deleteDatabase(name: string): void {
+    let deleteRequest = indexedDB.deleteDatabase(name);
+    deleteRequest.onsuccess = () => {
+      console.log('success delete database');
+    }
+    deleteRequest.onerror = () => {
+      console.log('error from delete database');
+    }
+  }
+
+  private async aboutIDB() {
+    this.db = await this.openDatabase();
+    await this.getAllFromIDB();
+  }
+
+  private openDatabase() {
+    return openDB('articlesDb', undefined, {
+      upgrade(db, oldVersion, newVersion, transaction, event) {
+        // This is similar to the upgradeneeded event in plain IndexedDB
+        console.log('Создаем хранилище объекта!');
+        if (!db.objectStoreNames.contains('articles')) { // если хранилище "books" не существует
+          db.createObjectStore('articles', { autoIncrement: true }); // создаём хранилище
+        }
+      },
+      blocked(currentVersion, blockedVersion, event) {
+        // This is similar to the blocked event in plain IndexedDB
+      },
+      blocking(currentVersion, blockedVersion, event) {
+        // This is similar to the versionchange event in plain IndexedDB
+      },
+      terminated() {
+        // This is similar to the close event in plain IndexedDB
+      },
+    });
+  }
+
+  private async getAllFromIDB(): Promise<any> {
+    let tx = this.db.transaction('articles');
+    let articleStore = tx.objectStore('articles');
+    let articles = await articleStore.getAll();
+    if (articles.length) {
+      console.log('Список статей из indexedDB:', articles);
+      const curLastArticle = articles[articles.length  - 1];
+      this.lastPaginationPage = curLastArticle?.last ?? true;
+      this.articlesList.update(prevArticles => [...prevArticles, ...articles]);
+      this.showLoadMoreSpinner.set(false);
+      // this.errorAfterGetAllArticles.set(false); // На всякий случай
+      this.isLoading.set(false);
+    } else {
+      console.log('В БД IndexedDB пока нет статей. Запросим их с бэка');
+      this.getAllArticles();
+    }
+  }
+
+  private addToIDB(articles: Post[]) {
+    if (this.db) {
+      let tx = this.db.transaction("articles", "readwrite");
+      let articleStore = tx.objectStore("articles");
+      console.log("Добавляем новые статьи в IndexedDB");
+      articles[articles.length - 1].last = this.lastPaginationPage;
+      for (let atricle of articles) {
+        articleStore.add(atricle);
+      }
+    }
+  }
+
+  private clearArticlesInIDB() {
+    let tx = this.db.transaction('articles', 'readwrite');
+    tx.objectStore('articles').clear();
   }
 
   private addEventListenerToPage(): void {
@@ -264,6 +380,9 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
             // value.forEach(post => {
             //   // this.articlesList.push(post);
             // });
+
+            this.addToIDB(value);
+
             this.articlesList.update(prevArticles => [...prevArticles, ...value]);
 
             // console.log('2');
@@ -278,13 +397,14 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.isLoading.set(false);
 
             // this.articlesList = []; // Это надо сделать на тот случай когда мы уже получили некоторое кол-во статей и при запросе очередной пачки статей случилась ошибка и чтобы если вдруг после "Перезагрузить" из баннера сервак раздуплится то надо очистить старые посты
+            this.clearArticlesInIDB(); // Также удаляем статьт из IndexedDB
             this.articlesList.set([]);
           }
         })
     }
   }
 
-  private reloadArticles(): void {
+  public reloadArticles(): void {
     // this.errorAfterGetAllArticles.set(false);
     this.isLoading.set(true);
     this.getAllArticles();
@@ -358,6 +478,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.pageScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
     this.pSub?.unsubscribe();
+    this.lastPostSub?.unsubscribe();
     this.observer?.disconnect();
 
     this.destroy$.next(true);

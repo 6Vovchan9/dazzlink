@@ -5,26 +5,32 @@ ng new dazzlink -> удаляем ранее созданный бандл, ес
 
 И далее если хотим увидеть свежие изм в github pages то перед тем как пушить изм надо пересобрать проект при помощи команды "ng build ..."
 
+
 ## http-server
 
 Чтоб протестировать собранное приложение (запустить файл index.html из папки docs) глобально должен быть установлен пакет npm install -g http-server далее удаляем ранее созданный бандл, если есть (/dist или /docs) -> собираем проект npm run build -> переходим в папку где лежит файл index.html (cd Desktop/myProject/dist/myProject/) и запускаем локальный сервер http-server -p 4200
+
 
 ## "overflow: hidden" у body
 
 Из-за того что body не растягивается под ширину контента, а занимает максимум высоту окна, при свайпе на мобиле в крайних точках присутствует неприятный эффект, если не менять layout, то данную проблему можно решить добавление "overflow: hidden" у body, но тогда мы лишимся возможности обновлять страницу свайпом вниз
 
+
 ## firebase hosting
 
 Глобально должен быть установлен пакет npm install -g firebase-tools, далее firebase login -> firebase init -> удаляем ранее созданный бандл, если есть (/dist или /docs) -> собираем проект ng build --output-path docs -> firebase deploy (эта инструкция есть на https://firebase.google.com и у Владилен Минин на ютубе видео от 5.12.23)
+
 
 ## svg-spinners 
 
 множество спиннеров (загрузчиков) тут https://github.com/n3r4zzurr0/svg-spinners
 
+
 ## telegram bot
 
 For a description of the Bot API, see this page: https://core.telegram.org/bots/api и небольшая инструкция у Владилен Минин на ютубе видео от 5.12.23.
 Базовый тг бот: t.me/TgDazzlinkMyBot
+
 
 ## Angular v15 -> v16
 
@@ -33,6 +39,7 @@ For a description of the Bot API, see this page: https://core.telegram.org/bots/
 2) при использовании кастомных NgModel-ей, а именно при регистрации сервиса таким образом providers: [{provide: NG_VALUE_ACCESSOR, ...}] (например AccoTriggerComponent, DropdownFieldModule, RadiobuttonFieldModule)
 
 UPD: Такая фигня наблюдается только в dev mode (при открытии страницы через http://192.168.1.137:4200), при деплое на хостинг страница норм открывается даже на старых устройствах
+
 
 ## IntersectionObserver
 
@@ -44,6 +51,7 @@ UPD: Такая фигня наблюдается только в dev mode (пр
 
 Как это работает у нас...Каждый раз когда верх или низ любой #section касается верха окна .rootMargin (это аналог optionsForObserver который передается 2-м аргументом в конструктор IntersectionObserver) срабатывает колбэк переданный первым первым аргументом
 
+
 ## progressive jpg
 
 Можно реализовать собственный прогрессивный загрузчик изображений как я это сделал в home-page.component по инструкции https://www.internet-technologies.ru/articles/kak-sozdat-sobstvennyy-progressivnyy-zagruzchik-izobrazheniy.html или сделать изображение прогрессивным:
@@ -51,6 +59,7 @@ UPD: Такая фигня наблюдается только в dev mode (пр
 2) устанавливаем утилиту brew install imagemagick
 3) преобразуем конкретный файл в прогрессив convert example.jpg -interlace plane result.jpg
 Проверить является ли jpg прогрессивным можно тут https://www.thewebmaster.com/progressive-jpeg-tester/
+
 
 ## Сниппет
 
@@ -61,13 +70,16 @@ Schema.org предоставляет общедоступный словарь,
 Документацию по Google Поиску https://developers.google.com/search/docs?hl=ru.
 Яндекс Вебмастер – сервис поисковой оптимизации https://webmaster.yandex.ru/.
 
+
 ## Open Graph
 
 Pазметка Open Graph отвечает за привлекательный вид репостов страниц сайта в соцсетях. Подробнее про og тут https://habr.com/ru/companies/click/articles/492258/. Как обновить отображение ссылки в Telegram, Facebook, Twitter, Вконтакте? Смотри тут https://tilda.cc/ru/answers/a/links-preview-update/
 
+
 ## Google аналитика
 
 На самом деле script с гугл аналитикой можно было не подключать в index.html, можно было связать аналитику с проектом через gtm, тоже самое касается скрипта amplitude
+
 
 ## Глобальные объекты в Angular
 
@@ -76,3 +88,9 @@ Pазметка Open Graph отвечает за привлекательный 
 Поэтому к глобальным объектам, таким как window, navigator, document и тд, правильней обращаться через инъекцию токенов, а не напрямую (document.activeElement, document, window или navigator).
 
 https://habr.com/ru/companies/tbank/articles/548510/
+
+
+## IndexedDB
+
+Для работы с IndexedDB я использую библиотеку idb. Вместо обычного пакета npm install idb использую @tempfix/idb потому что на данный момент он ругается на версию typescript (ему вроде требуется 5.2.2), а не 5.4.2 как сейчас. Будем надеяться что в след версии idb эту проблему пофиксят и можно будет установить оригинальный пакет.
+https://github.com/jakearchibald/idb/issues/311
