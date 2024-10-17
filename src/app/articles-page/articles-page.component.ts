@@ -115,9 +115,9 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // );
 
     // this.aboutIndexedDB();
-    this.aboutIDB();
+    this.aboutIDB(); // одним движением можем отключить сохранение в IndexedDB. Это комментируем а метод ниже getAllArticles разблокируем
 
-    this.getAllArticles();
+    // this.getAllArticles();
     this.intersectionObserver();
   }
 
