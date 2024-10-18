@@ -156,7 +156,7 @@
                         <ng-container *ngTemplateOutlet="loadingTemplate"></ng-container> 
                     } @else {
                         @if (articlesList()?.length) {
-                            <ul class="pageContent__articles">
+                            <ul #restoreScrollPosition class="pageContent__articles">
                                 @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
                                     @if (lastIndex) {
                                         <li #lastPostItem

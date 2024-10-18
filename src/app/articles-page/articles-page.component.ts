@@ -9,12 +9,15 @@ import {
   Optional,
   QueryList,
   Self,
+  Signal,
   ViewChildren,
+  effect,
   inject,
-  signal
+  signal,
+  viewChild
 } from '@angular/core';
 import { NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, Scroll } from '@angular/router';
 import {
   EMPTY,
   Observable,
@@ -48,6 +51,7 @@ import { HeaderComponent } from '@app/shared/components/header/header.component'
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { openDB } from '@tempfix/idb';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-articles-page',
@@ -90,6 +94,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public hideScrollProgress = true;
   private router = inject(Router);
   private db: any;
+  scrollingRef = viewChild<HTMLElement>("restoreScrollPosition");
 
   constructor(
     private postsService: PostsService,
@@ -101,7 +106,20 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private modalService: GlobalModalService,
     private vc: ViewportScroller
     // private cd: ChangeDetectorRef
-  ) { }
+  ) {
+    const scrollingPosition: Signal<[number, number] | null> = toSignal(
+      inject(Router).events.pipe(
+        filter((event): event is Scroll => event instanceof Scroll),
+        map((event: Scroll) => event.position),
+      ),
+    );
+
+    effect(() => {
+      if (this.scrollingRef() && scrollingPosition()) {
+        this.vc.scrollToPosition(scrollingPosition()!);
+      }
+    });
+  }
 
   ngOnInit(): void {
 

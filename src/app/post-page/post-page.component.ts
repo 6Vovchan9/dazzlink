@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  inject,
   Inject,
   OnDestroy,
   OnInit,
@@ -18,7 +19,8 @@ import {
   NgIf,
   NgStyle,
   NgTemplateOutlet,
-  ViewportScroller
+  ViewportScroller,
+  Location
 } from '@angular/common';
 
 import { PostsService } from '@app/shared/services/posts.service';
@@ -67,6 +69,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     hide: true,
     opacity: false
   };
+  private myLocation = inject(Location);
 
   constructor(
     private route: ActivatedRoute,
@@ -283,8 +286,12 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public goToAllArticles(withMessage = false): void {
-    this.router.navigate(['/media']);
-    if (withMessage) this.toastService.warning('Не удается открыть статью :(');
+    if (0) {
+      this.myLocation.back();
+    } else {
+      this.router.navigate(['/media']);
+      if (withMessage) this.toastService.warning('Не удается открыть статью :(');
+    }
   }
 
   public onVoting(val: 'like' | 'dislike'): void {
