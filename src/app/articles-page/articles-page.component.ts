@@ -209,8 +209,10 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private clearArticlesInIDB() {
-    let tx = this.db.transaction("articles", "readwrite");
-    tx.objectStore("articles").clear();
+    if (this.db) {
+      let tx = this.db.transaction("articles", "readwrite");
+      tx.objectStore("articles").clear();
+    }
   }
 
   private addEventListenerToPage(): void {
@@ -348,7 +350,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.isLoading.set(false);
 
             // this.articlesList = []; // Это надо сделать на тот случай когда мы уже получили некоторое кол-во статей и при запросе очередной пачки статей случилась ошибка и чтобы если вдруг после "Перезагрузить" из баннера сервак раздуплится то надо очистить старые посты
-            this.clearArticlesInIDB(); // Также удаляем статьт из IndexedDB
+            // this.clearArticlesInIDB(); // Также удаляем статьи из IndexedDB
             this.articlesList.set([]);
           }
         })
@@ -356,9 +358,13 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public reloadArticles(): void {
-    // this.errorAfterGetAllArticles.set(false);
-    this.isLoading.set(true);
-    this.getAllArticles();
+    if (this.db) {
+      this.checkIDBAfterReload();
+    } else {
+      // this.errorAfterGetAllArticles.set(false);
+      this.isLoading.set(true);
+      this.getAllArticles();
+    }
   }
 
   goToPostPage(postId) {
@@ -422,9 +428,9 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       let tx = this.db.transaction("articles", "readonly");
       let articleStore = tx.objectStore("articles");
       let articlesInIDB = await articleStore.getAll();
-      console.log(`Сейчас на странице ${this.articlesList().length} статей, а в IndexedDB ${articlesInIDB.length}`);
       if (articlesInIDB.length > this.articlesList().length) {
-        console.log('в IndexedDB больше статей чем на странице, поэтому выводим статьи из БД, а не запрашиваем с бэка');
+        console.log(`в IndexedDB (${articlesInIDB.length}) больше статей чем на странице (${this.articlesList().length}), поэтому выводим статьи из БД, а не запрашиваем с бэка`);
+        // когда открыли одну вкладку -> получили статьи -> перешли в другую -> запросили вторую пачку статей -> вернулись в первую, проскролили вниз и тоже начали просить еще статьи...
         const curLastArticle = articlesInIDB[articlesInIDB.length  - 1];
         this.lastPaginationPage = curLastArticle?.last ?? true;
         this.articlesList.set(articlesInIDB); 
@@ -434,10 +440,29 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log('в IndexedDB меньше статей чем на странице');
 
       } else {
+        console.log(`На странице и в IndexedDB одинак. кол-во статей, идем за новой пачкой`);
         this.getAllArticles({ id: this.articlesList()[this.articlesList().length - 1].id, direction: 'EARLIER' });
       }
     } else {
       this.getAllArticles({ id: this.articlesList()[this.articlesList().length - 1].id, direction: 'EARLIER' });
+    }
+  }
+
+  private async checkIDBAfterReload() {
+    const tx = this.db.transaction("articles", "readonly");
+    const articleStore = tx.objectStore("articles");
+    const articlesInIDB = await articleStore.getAll();
+    if (articlesInIDB.length) {
+      console.log(`В IndexedDB есть статьи (${articlesInIDB.length}), возьмем оттуда`);
+      const curLastArticle = articlesInIDB[articlesInIDB.length  - 1];
+      this.lastPaginationPage = curLastArticle?.last ?? true;
+      this.articlesList.set(articlesInIDB); 
+      this.showLoadMoreSpinner.set(false);
+      this.errorAfterGetAllArticles.set(false);
+    } else {
+      console.log(`В IndexedDB нет статей, попробуем запросить еще раз с бэка`);
+      this.isLoading.set(true);
+      this.getAllArticles();
     }
   }
 
