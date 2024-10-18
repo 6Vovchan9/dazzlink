@@ -114,7 +114,6 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //   }
     // );
 
-    // this.aboutIndexedDB();
     this.aboutIDB(); // одним движением можем отключить сохранение в IndexedDB. Это комментируем а метод ниже getAllArticles разблокируем
 
     // this.getAllArticles();
@@ -151,54 +150,6 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     const result = navigator.userAgent.includes('Dazzlink');
     // return true;
     return result;
-  }
-
-  private aboutIndexedDB(): void {
-    let openRequest = indexedDB.open('Articles');
-
-    openRequest.onsuccess = () => {
-      this.db = openRequest.result;
-      this.db.onversionchange = () => {
-        this.db.close();
-        alert("База данных устарела, пожалуйста, перезагрузите страницу.")
-      };
-      console.log(this.db);
-    };
-
-    openRequest.onupgradeneeded = (event) => {
-      this.db = openRequest.result;
-      switch (event.oldVersion) { // существующая (старая) версия базы данных
-        case 0:
-          // версия 0 означает, что на клиенте нет базы данных
-          // выполнить инициализацию
-          console.log('onupgradeneeded 0');
-          break;
-        case 1:
-          // на клиенте версия базы данных 1
-          // обновить
-          console.log('onupgradeneeded 1');
-          break;
-      }
-    };
-
-    openRequest.onblocked = function() {
-
-    }
-    
-    openRequest.onerror = function() {
-      // скорее всего мы пытаемся открыть базу с более низкой версией, чем текущая
-      console.error("Error", openRequest.error);
-    };
-  }
-
-  private deleteDatabase(name: string): void {
-    let deleteRequest = indexedDB.deleteDatabase(name);
-    deleteRequest.onsuccess = () => {
-      console.log('success delete database');
-    }
-    deleteRequest.onerror = () => {
-      console.log('error from delete database');
-    }
   }
 
   private async aboutIDB() {
@@ -246,7 +197,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private addToIDB(articles: Post[]) {
-    if (this.db) {
+    if (this.db && articles.length) {
       let tx = this.db.transaction("articles", "readwrite");
       let articleStore = tx.objectStore("articles");
       console.log("Добавляем новые статьи в IndexedDB");
@@ -459,11 +410,35 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
             observer.unobserve(entry.target);
             console.log('load more articles...');
             this.showLoadMoreSpinner.set(true);
-            this.getAllArticles({ id: this.articlesList()[this.articlesList().length - 1].id, direction: 'EARLIER' });
+            this.checkIDB();
           }
       },
       optionsForObserver
     );
+  }
+
+  private async checkIDB() {
+    if (this.db) {
+      let tx = this.db.transaction("articles", "readonly");
+      let articleStore = tx.objectStore("articles");
+      let articlesInIDB = await articleStore.getAll();
+      console.log(`Сейчас на странице ${this.articlesList().length} статей, а в IndexedDB ${articlesInIDB.length}`);
+      if (articlesInIDB.length > this.articlesList().length) {
+        console.log('в IndexedDB больше статей чем на странице, поэтому выводим статьи из БД, а не запрашиваем с бэка');
+        const curLastArticle = articlesInIDB[articlesInIDB.length  - 1];
+        this.lastPaginationPage = curLastArticle?.last ?? true;
+        this.articlesList.set(articlesInIDB); 
+        this.showLoadMoreSpinner.set(false);
+        // Todo: надо будет взять только новые статьи из IndexedDB и положить их в articlesList через update
+      } else if (articlesInIDB.length < this.articlesList().length) {
+        console.log('в IndexedDB меньше статей чем на странице');
+
+      } else {
+        this.getAllArticles({ id: this.articlesList()[this.articlesList().length - 1].id, direction: 'EARLIER' });
+      }
+    } else {
+      this.getAllArticles({ id: this.articlesList()[this.articlesList().length - 1].id, direction: 'EARLIER' });
+    }
   }
 
   public qrModalOrTelegram(): void {

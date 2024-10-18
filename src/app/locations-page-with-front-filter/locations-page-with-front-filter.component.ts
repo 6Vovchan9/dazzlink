@@ -755,7 +755,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     }
   }
 
-  // todo надо проверить что будет если придет пустой моковый список локаций
+  // Todo: надо проверить что будет если придет пустой моковый список локаций
   private getAllLocations(): void {
     this.isLoading.set(true);
     if (false) {
