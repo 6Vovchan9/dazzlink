@@ -203,7 +203,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private async aboutIDB() {
     this.db = await this.openDatabase();
-    await this.getAllFromIDB();
+    this.getAllFromIDB();
   }
 
   private openDatabase() {
@@ -228,11 +228,11 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private async getAllFromIDB(): Promise<any> {
-    let tx = this.db.transaction('articles');
-    let articleStore = tx.objectStore('articles');
+    let tx = this.db.transaction("articles", "readonly");
+    let articleStore = tx.objectStore("articles");
     let articles = await articleStore.getAll();
     if (articles.length) {
-      console.log('Список статей из indexedDB:', articles);
+      console.log("Список статей из indexedDB:", articles);
       const curLastArticle = articles[articles.length  - 1];
       this.lastPaginationPage = curLastArticle?.last ?? true;
       this.articlesList.update(prevArticles => [...prevArticles, ...articles]);
@@ -240,7 +240,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       // this.errorAfterGetAllArticles.set(false); // На всякий случай
       this.isLoading.set(false);
     } else {
-      console.log('В БД IndexedDB пока нет статей. Запросим их с бэка');
+      console.log("В БД IndexedDB пока нет статей. Запросим их с бэка");
       this.getAllArticles();
     }
   }
@@ -258,13 +258,13 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private clearArticlesInIDB() {
-    let tx = this.db.transaction('articles', 'readwrite');
-    tx.objectStore('articles').clear();
+    let tx = this.db.transaction("articles", "readwrite");
+    tx.objectStore("articles").clear();
   }
 
   private addEventListenerToPage(): void {
     if (!this.appWebview) {
-      this.pageScrollSub = fromEvent(window, 'scroll')
+      this.pageScrollSub = fromEvent(window, "scroll")
         .pipe(
           filter(() => !this.isLoading()),
           auditTime(200)
