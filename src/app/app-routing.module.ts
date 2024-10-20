@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { AgreementsPageComponent } from './agreements-page/agreements-page.component';
-import { PlacePageComponent } from './place-page/place-page.component';
-import { TeamPageComponent } from './team-page/team-page.component';
-import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
+// import { AgreementsPageComponent } from './agreements-page/agreements-page.component';
+// import { PlacePageComponent } from './place-page/place-page.component';
+// import { TeamPageComponent } from './team-page/team-page.component';
+// import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
 
 const routes: Routes = [
   {
     path: '',
     loadComponent: () => import("./home-page/home-page.component").then(m => m.HomePageComponent)
+  },
+  {
+    path: 'app',
+    loadComponent: () => import("./redirect/redirect.component").then(m => m.RedirectComponent)
   },
   {
     path: 'media',

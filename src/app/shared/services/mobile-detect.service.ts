@@ -47,22 +47,21 @@ export class MobileDetectService {
         // if (this.osDevice?.toLowerCase()) { // если это планшет или телефон
             console.log('Идем в store');
             if (this.osDevice?.toLowerCase() === 'ios') {
-                // myWindow.location.href = 'https://www.apple.com/app-store';
-                this.myWindow.location.href = 'https://apps.apple.com/ru';
+                // this.myWindow.location.href = 'https://www.apple.com/app-store';
+                this.myWindow.location.href = 'https://apps.apple.com';
             } else if (this.osDevice?.toLowerCase() === 'androidos') {
                 if (/hms/.test(uAgent) && !/gms/.test(uAgent)) {
-                    this.myWindow.open('https://appgallery.huawei.com');
+                    this.myWindow.location.href = 'https://appgallery.huawei.com';
                 } else {
-                    // myWindow.open('https://play.google.com', '_blank');
-                    // myWindow.location.href = 'https://play.google.com';
-                    this.myWindow.open('https://play.google.com');
+                    // this.myWindow.open('https://play.google.com', '_blank');
+                    // this.myWindow.location.href = 'https://play.google.com';
+                    this.myWindow.location.href = 'https://play.google.com';
                 }
             } else {
-                // myWindow.location.href = 'https://appgallery.huawei.com';
-                this.myWindow.open('https://appgallery.huawei.com');
+                this.myWindow.location.href = 'https://appgallery.huawei.com';
             }
         // } else { // если это комп или ноут
-        //     myWindow.open('https://www.apple.com/app-store');
+        //     this.myWindow.open('https://www.apple.com/app-store');
         // }
     }
 
