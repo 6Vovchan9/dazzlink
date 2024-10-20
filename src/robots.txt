@@ -1,6 +1,7 @@
 user-agent: *
 disallow: /admin
 disallow: /agreements
+disallow: /app
 
 user-agent: Googlebot-Image
 disallow: /assets/images/team-page
