@@ -24,13 +24,13 @@ const routes: Routes = [
             m => m.HomePageComponent
           )
       },
-      {
-        path: 'app',
-        loadComponent: () =>
-          import("./redirect/redirect.component").then(
-            m => m.RedirectComponent
-          )
-      },
+      // {
+      //   path: 'app',
+      //   loadComponent: () =>
+      //     import("./redirect/redirect.component").then(
+      //       m => m.RedirectComponent
+      //     )
+      // },
       { path: 'agreements', component: AgreementsPageComponent },
       { path: 'media', component: ArticlesPageComponent },
       // { path: 'locations', component: LocationsPageComponent }, // Фильтрация и сортировка на бэке
