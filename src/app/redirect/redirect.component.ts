@@ -1,8 +1,10 @@
 import {
+  AfterViewInit,
   Component,
   inject,
   OnInit
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
@@ -18,9 +20,13 @@ import { MobileDetectService } from '@app/shared/services/mobile-detect.service'
     FooterComponent
   ]
 })
-export class RedirectComponent implements OnInit {
+export class RedirectComponent implements OnInit, AfterViewInit {
+  private router = inject(Router);
   private mobileDetectService = inject(MobileDetectService);
   ngOnInit(): void {
     this.mobileDetectService.goToDeviceStore();
+  }
+  ngAfterViewInit(): void {
+    this.router.navigateByUrl('/');
   }
 }
