@@ -481,7 +481,8 @@ $shadowHeightInMobile: 20px;
     padding: 24px 20px;
     border-radius: 20px;
     // max-height: 100%;
-    max-height: calc(100vh - 180px);
+    // max-height: calc(100vh - 180px);
+    max-height: calc(100vh - 148px);
     // pointer-events: auto;
 
     .filterOptionsBlock__content {
@@ -610,8 +611,8 @@ $shadowHeightInMobile: 20px;
     @media #{$notMobile} {
         position: sticky;
         top: 20px;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 8px;
+        // margin-bottom: 20px;
     }
 }
 
