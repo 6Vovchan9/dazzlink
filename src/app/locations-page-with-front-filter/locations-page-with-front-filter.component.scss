@@ -549,7 +549,6 @@ $shadowHeightInMobile: 20px;
 
         .filterOptionsBlock__allCountries {
             overflow-y: auto;
-            overscroll-behavior-y: contain;
             margin-top: 12px;
             .filterOptionsBlock__country {
                 margin-top: 24px;
@@ -594,6 +593,9 @@ $shadowHeightInMobile: 20px;
     @media #{$mobile} {
         max-height: 90%;
         border-radius: 20px 20px 0 0;
+        .filterOptionsBlock__allCountries {
+            overscroll-behavior-y: contain;
+        }
         // .filterOptionsBlock__allCountries .filterOptionsBlock__country {
         //     &:last-child {
         //         margin-bottom: 12px;
