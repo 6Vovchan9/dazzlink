@@ -744,14 +744,18 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private retryGetAllLocations(): void {
-    this.getAllLocations();
-    if (!this.sortFieldOptions.items.length) {
-      console.log('Нет сортировки или нужна новая, запросим ее снова');
-      this.getSort();
-    }
-    if (!this.filterFieldOptions?.length) {
-      console.log('Нет фильтрации или нужна новая, запросим ее снова');
-      this.getFilters();
+    if (this.disabledLocationCategories()) {
+      this.getCategories();
+    } else {
+      this.getAllLocations();
+      if (!this.sortFieldOptions.items.length) {
+        console.log('Нет сортировки или нужна новая, запросим ее снова');
+        this.getSort();
+      }
+      if (!this.filterFieldOptions?.length) {
+        console.log('Нет фильтрации или нужна новая, запросим ее снова');
+        this.getFilters();
+      }
     }
   }
 
