@@ -9,7 +9,7 @@
             <div class="header__menu">
                 <nav class="menu">
                     <ul class="menu__list">
-                        <li class="menu__item" [routerLinkActiveOptions]="{ exact:true }" routerLinkActive="menu__item--active">
+                        <li class="menu__item" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="menu__item--active">
                             <a class="menu__link" routerLink="/">Приложение</a>
                         </li>
                         <li class="menu__item" routerLinkActive="menu__item--active">
@@ -71,22 +71,22 @@
         </div>
         <div class="navigationModal__contentWrap">
             <div class="navigationModal__content">
-                <nav class="menu navigationModal__menu menu--fd--column">
-                    <ul class="menu__list">
-                        <li class="menu__item" [routerLinkActiveOptions]="{ exact:true }" routerLinkActive="menu__item--active">
-                            <a class="menu__link" (click)="goToAnotherPage('/')" routerLink="/">Приложение</a>
+                <nav class="menuInNavModal navigationModal__menu">
+                    <ul class="menuInNavModal__list">
+                        <li class="menuInNavModal__item" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="menuInNavModal__item--active">
+                            <a class="menuInNavModal__link" (click)="goToAnotherPage('/')" routerLink="/">Приложение</a>
                         </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" (click)="goToAnotherPage('/media')" routerLink="/media">Медиа</a>
+                        <li class="menuInNavModal__item" routerLinkActive="menuInNavModal__item--active">
+                            <a class="menuInNavModal__link" (click)="goToAnotherPage('/media')" routerLink="/media">Медиа</a>
                         </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active" [routerLinkActiveOptions]="routerLinkActiveOptions">
-                            <a class="menu__link" (click)="goToAnotherPage()" routerLink="/locations">Локации</a>
+                        <li class="menuInNavModal__item" routerLinkActive="menuInNavModal__item--active" [routerLinkActiveOptions]="routerLinkActiveOptions">
+                            <a class="menuInNavModal__link" (click)="goToAnotherPage()" routerLink="/locations">Локации</a>
                         </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" (click)="goToAnotherPage()" routerLink="/company">Компания</a>
+                        <li class="menuInNavModal__item" routerLinkActive="menuInNavModal__item--active">
+                            <a class="menuInNavModal__link" (click)="goToAnotherPage()" routerLink="/company">Компания</a>
                         </li>
-                        <!-- <li class="menu__item">
-                            <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
+                        <!-- <li class="menuInNavModal__item">
+                            <a class="menuInNavModal__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
                         </li> -->
                     </ul>
                 </nav>
@@ -125,4 +125,5 @@
             </div>
         </div> -->
     </div>
+    <div class="backgroundForNavModal" (click)="closeNavPopup()"></div>
 }

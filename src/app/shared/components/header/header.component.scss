@@ -58,8 +58,6 @@
 }
 
 .menu {
-    // line-height: 24px;
-    margin-right: -8px;
     .menu__list {
         display: flex;
         .menu__item {
@@ -99,13 +97,6 @@
                     }
                 }
             }
-        }
-    }
-
-    &--fd--column {
-        .menu__list {
-            flex-direction: column;
-            align-items: flex-start;
         }
     }
 }
@@ -237,7 +228,7 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    background-color: #fff;
+    background-color: #F2F3F4;
 
     z-index: 110;
     top: 50%;
@@ -267,28 +258,16 @@
     }
 
     .navigationModal__contentWrap {
+        flex: 1;
+        overflow-y: auto;
         .navigationModal__content {
             .navigationModal__menu {
                 font-size: 24px;
                 line-height: 32px;
                 font-weight: 700;
-                margin-left: -12px;
                 margin-top: 24px;
-
-                .menu__list {
-                    .menu__item {
-                        .menu__link {
-                            padding: 12px;
-                        }
-                    }
-                }
             }
         }
-    }
-
-    .navigationModal__contentWrap {
-        // background-color: burlywood;
-        flex: 1;
     }
 
     .navigationModal__footer {
@@ -313,5 +292,44 @@
         max-height: unset;
         border-radius: 0px;
         justify-content: center;
+        background-color: #fff;
+    }
+
+    @media #{$notMobile} {
+        border: 2px solid;
+        padding: 30px;
+    }
+}
+
+.backgroundForNavModal {
+    position: fixed;
+    top: 0;
+    backdrop-filter: blur(4px);
+    width: 100%;
+    height: 100%;
+    z-index: 105;
+}
+
+.menuInNavModal {
+    .menuInNavModal__list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        .menuInNavModal__item {
+            .menuInNavModal__link {
+                cursor: pointer;
+                display: block;
+                text-decoration: none;
+                padding: 12px;
+                padding-left: 0px;
+                color: var(--color-black1);
+            }
+            &--active {
+                .menuInNavModal__link {
+                    cursor: default;
+                    color: var(--color-text-gray);
+                }
+            }
+        }
     }
 }
