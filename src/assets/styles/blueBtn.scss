@@ -1,5 +1,6 @@
 .blueBtn {
-    display: block;
+    display: flex;
+    align-items: center;
     background-color: #4A4AC6;
     padding: 14px 28px;
     cursor: pointer;
@@ -17,13 +18,10 @@
         background-color: #000;
     }
     &--withPresentIcon {
-        text-align: left;
         img {
             width: 26px;
             height: 26px;
-            float: left;
             margin-right: 14px;
-            margin-top: 1px;
         }
     }
     &--white {
