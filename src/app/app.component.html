@@ -1,6 +1,10 @@
 
 <router-outlet></router-outlet>
 
+@if (!cookiesAgreementService.hideCookiesAgreement) {
+    <app-cookies-toast></app-cookies-toast>
+}
+
 <app-toast [delay]="3000"></app-toast>
 
 <!-- <ng-container *ngIf="modalService" Проверка изза того что в некоторых компонентах (как например в appList) мы при открытии страницы (в методе "ngOnInit") сразу пытаемся

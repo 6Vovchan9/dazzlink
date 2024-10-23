@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
+import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { TelegramService } from '@app/shared/services/telegram.service';
 export class AppComponent implements OnInit {
 
   private tgService = inject(TelegramService);
+  public cookiesAgreementService = inject(CookiesAgreementService);
 
   constructor(
     public modalService: GlobalModalService
@@ -23,6 +25,8 @@ export class AppComponent implements OnInit {
 
     // const schemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
     // schemeQuery.addEventListener('change', this.updateScheme);
+
+    this.cookiesAgreementService.getCookiesAgreement();
   }
 
   // private updateScheme(event): void {

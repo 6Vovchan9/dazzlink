@@ -33,6 +33,7 @@ import { ToastComponent } from './shared/components/toast/toast.component';
 // import { TeamPageComponent } from './team-page/team-page.component';
 // import { LegalInfoPageComponent } from './legal-info-page/legal-info-page.component';
 import { ThumbHashImageComponent } from './shared/components/thumb-hash-image/thumb-hash-image.component';
+import { CookiesToastComponent } from './shared/components/cookies-toast/cookies-toast.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -64,6 +65,7 @@ registerLocaleData(localeRu, 'ru');
     ThumbHashImageComponent,
     HeaderComponent,
     FooterComponent,
+    CookiesToastComponent,
     // YouTubePlayerModule,
 
     SharedModule,
