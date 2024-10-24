@@ -31,6 +31,7 @@ import { ToastService } from '@app/shared/services/toast.service';
 import { GoBackBtnComponent } from '@app/shared/components/go-back-btn/go-back-btn.component';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
+import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
 
 @Component({
   selector: 'app-post-page',
@@ -70,6 +71,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     opacity: false
   };
   private myLocation = inject(Location);
+  public cookiesAgreementService = inject(CookiesAgreementService);
 
   constructor(
     private route: ActivatedRoute,

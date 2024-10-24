@@ -50,6 +50,7 @@ import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -124,6 +125,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   private pageScrollSub: Subscription;
   scrollingRef = viewChild<HTMLElement>('restoreScrollPosition');
   public allLocationsReceived = false;
+  public cookiesAgreementService = inject(CookiesAgreementService);
   // public myBlockAboutScroll: { [key: string]: number } = {};
 
   constructor(

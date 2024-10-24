@@ -657,9 +657,22 @@ $shadowHeightInMobile: 20px;
 
 .pageContent__scrollToTopBtn {
     // margin-left: auto;
+    bottom: 39.5px;
 
     .scrollProgress {
-        right: 0;
+        right: -8.5px;
+    }
+
+    @media #{$mobile} {
+        &--cookiesAgreementVisible {
+            bottom: 184px;
+        }
+    }
+
+    @media #{$tablet} {
+        &--cookiesAgreementVisible {
+            bottom: 116px;
+        }
     }
 }
 

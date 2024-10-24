@@ -154,7 +154,12 @@
                             </div> -->
 
                             <!-- Кнопка наверх -->
-                            <div class="postContent__scrollToTopBtn scrollProgressWrapper">
+                            <div class="postContent__scrollToTopBtn scrollProgressWrapper"
+                                [ngClass]="{
+                                    'postContent__scrollToTopBtn--cookiesAgreementVisible'
+                                        : !cookiesAgreementService.hideCookiesAgreement
+                                }"
+                            >
                                 <div class="scrollProgress"
                                     (click)="vc.scrollToPosition([0, 0])"
                                     [ngClass]="{

@@ -564,7 +564,7 @@ button {
 .scrollProgressWrapper {
     position: sticky;
     z-index: 20;
-    bottom: 0px;
+    bottom: 30px;
     // top: calc(100% - 30px);
     // transform: translateY(-100%);
     height: 0px;
@@ -578,11 +578,12 @@ button {
     border-radius: 50%;
 
     position: absolute;
+    right: 0;
     bottom: 100%;
     
     width: 48px;
     height: 48px;
-    margin: 0px 20px 30px;
+    // margin: 0px 20px 30px;
     opacity: 1;
     transition: opacity .3s;
 

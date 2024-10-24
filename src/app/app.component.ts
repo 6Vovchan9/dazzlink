@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     // schemeQuery.addEventListener('change', this.updateScheme);
 
     this.cookiesAgreementService.getCookiesAgreement();
+    // this.cookiesAgreementService.removeCookiesAgreement();
   }
 
   // private updateScheme(event): void {
