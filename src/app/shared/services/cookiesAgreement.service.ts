@@ -1,27 +1,27 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 
 @Injectable({ providedIn: 'root' })
 export class CookiesAgreementService {
 
     private cookiesAgreementName = 'cookiesAccepted';
-    private _hideCookiesAgreement = true;
-
-    public get hideCookiesAgreement(): boolean {
-        return this._hideCookiesAgreement;
-    }
+    public hiddenCookiesAgreement = signal(true);
 
     public getCookiesAgreement(): boolean {
-        return this._hideCookiesAgreement = Boolean(this.getFromLS(this.cookiesAgreementName));
+        const value = Boolean(this.getFromLS(this.cookiesAgreementName));
+        this.hiddenCookiesAgreement.set(value);
+        return value;
     }
 
     public setCookiesAgreement(value: any): boolean {
         this.setToLS(this.cookiesAgreementName, value);
-        return this._hideCookiesAgreement = Boolean(value);
+        this.hiddenCookiesAgreement.set(Boolean(value));
+        return Boolean(value);
     }
 
     public removeCookiesAgreement(): boolean {
         localStorage.removeItem(this.cookiesAgreementName);
-        return this._hideCookiesAgreement = false;
+        this.hiddenCookiesAgreement.set(false);
+        return false;
     }
 
     private setToLS(key: string, data: any): void {

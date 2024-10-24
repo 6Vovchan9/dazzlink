@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Inject, OnInit, inject } from '@angular/core';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit {
   public cookiesAgreementService = inject(CookiesAgreementService);
 
   constructor(
-    public modalService: GlobalModalService
+    public modalService: GlobalModalService,
+    @Inject(DOCUMENT) private readonly documentRef: Document
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +28,9 @@ export class AppComponent implements OnInit {
     // const schemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
     // schemeQuery.addEventListener('change', this.updateScheme);
 
-    this.cookiesAgreementService.getCookiesAgreement();
+    setTimeout(() => {
+      this.cookiesAgreementService.getCookiesAgreement();
+    }, 2000);
     // this.cookiesAgreementService.removeCookiesAgreement();
   }
 
@@ -35,6 +39,13 @@ export class AppComponent implements OnInit {
   //   console.log(`Цветовая схема системы обновлена на ${newScheme}.`);
   //   // Время адаптировать интерфейс 🌓
   // } // воспроизвести можно в хроме в dev tools во вкладке "Rendering"
+
+  public get appWebview(): boolean {
+    const myNavigator = this.documentRef.defaultView.navigator; // почему нежелательно просто обратиться к navigator.userAgent читай в notes.md
+    const result = myNavigator.userAgent.includes('Dazzlink');
+    // return true;
+    return result;
+  }
 
   buttonInModalClick(modalDesc) {
     if (!this[modalDesc.methodName]) {
