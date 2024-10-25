@@ -6,11 +6,11 @@
     pointer-events: none;
 
     .cookiesToast__container {
-        pointer-events: all;
         margin: 0 auto;
         max-width: calc(736px + 40px);
         padding: 0 20px;
         .cookiesToast__content {
+            pointer-events: all;
             display: flex;
             flex-direction: column;
             align-items: flex-start;

@@ -1,18 +1,23 @@
-import { Component, Inject, OnInit, inject } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, inject } from '@angular/core';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
 import { DOCUMENT } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, pairwise } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   private tgService = inject(TelegramService);
   public cookiesAgreementService = inject(CookiesAgreementService);
+  private routerSub: Subscription;
+  private router = inject(Router);
 
   constructor(
     public modalService: GlobalModalService,
@@ -32,6 +37,8 @@ export class AppComponent implements OnInit {
       this.cookiesAgreementService.getCookiesAgreement();
     }, 2000);
     // this.cookiesAgreementService.removeCookiesAgreement();
+
+    // this.checkRouterEvents();
   }
 
   // private updateScheme(event): void {
@@ -47,6 +54,22 @@ export class AppComponent implements OnInit {
     return result;
   }
 
+  private checkRouterEvents(): void {
+    this.routerSub = this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        // pairwise()
+      ).subscribe(
+        previous => {
+          console.log(previous);
+        }
+        // ([previous, current]: [NavigationEnd, NavigationEnd]) => {
+        //   console.log(previous.url);
+        //   console.log(current.url);
+        // }
+      )
+  }
+
   buttonInModalClick(modalDesc) {
     if (!this[modalDesc.methodName]) {
       console.log(`В компоненте "${modalDesc.componentName}" нет метода "${modalDesc.methodName}"`);
@@ -57,5 +80,9 @@ export class AppComponent implements OnInit {
 
   public clickByCloseModal(): void {
     this.modalService.close();
+  }
+
+  ngOnDestroy(): void {
+    this.routerSub?.unsubscribe();
   }
 }
