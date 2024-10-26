@@ -309,7 +309,7 @@ $shadowHeightInMobile: 20px;
 
 .stickyBar {
     position: sticky;
-    z-index: 30;
+    z-index: 80;
     top: 0;
     margin-bottom: 20px;
     background-color: var(--color-white);
@@ -320,6 +320,7 @@ $shadowHeightInMobile: 20px;
     }
 
     @media #{$notMobile} {
+        z-index: 25;
         padding: 8px 0px;
     }
 

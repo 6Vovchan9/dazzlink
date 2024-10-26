@@ -60,6 +60,7 @@
 .menu {
     .menu__list {
         display: flex;
+        column-gap: 24px;
         .menu__item {
             background-color: transparent;
             border-radius: 12px;
