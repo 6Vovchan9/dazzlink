@@ -17,14 +17,14 @@
                                 [queryParams]="{page: 1}"
                                 (click)="onNavInDesktop('phones')"
                             >
-                                Телефоны доверия
+                                Телефоны и организации
                             </a> -->
                             <a
                                 class="anchorLink"
                                 [ngClass]="{'anchorLink--active': curSection === 'phones'}"
                                 (click)="onNavInDesktop('phones')"
                             >
-                                Телефоны доверия
+                                Телефоны и организации
                             </a>
                         </li>
                         <li class="anchorNav__item">
@@ -70,7 +70,7 @@
                                 class="inlineAnchorLink"
                                 [ngClass]="{'inlineAnchorLink--active': curSection === 'phones'}"
                             >
-                                Телефоны&nbsp;доверия
+                                Телефоны&nbsp;и&nbsp;организации
                             </a>
                         </li>
                         <li class="inlineAnchorNav__item" [id]="sectionDictionary['support']">
@@ -100,7 +100,7 @@
             <!-- Телефоны доверия -->
             <div class="phonesBlock" #section>
                 <span id="phones" class="anchoroffset"></span>
-                <h2 class="helpPage__sectionTitle">Телефоны доверия</h2>
+                <h2 class="helpPage__sectionTitle">Телефоны доверия и&nbsp;организации</h2>
                 <div class="phonesBlock__area">
                     <!-- <h3 class="phonesBlock__country">Узбекистан</h3> -->
                     <ul class="phonesBlock__phones">
@@ -109,10 +109,21 @@
                                 Номер: 1259
                             </a>
                             <div class="phonesBlock__desc">
-                                Горячая линия МВД Узбекистана по борьбе с насилием против женщин.
+                                Горячая линия МВД Узбекистана по&nbsp;борьбе с&nbsp;насилием против женщин.
                             </div>
                             <div class="phonesBlock__source">
                                 Источник информации <a href="https://uznews.uz/posts/64916" class="phonesBlock__sourceLink" target="_blank">uznews.uz</a>
+                            </div>
+                        </li>
+                        <li class="phonesBlock__phoneItem">
+                            <a class="phonesBlock__val" href="tel:1146">
+                                Номер: 1146
+                            </a>
+                            <div class="phonesBlock__desc">
+                                Горячая линия Национального агентства социальной защиты.
+                            </div>
+                            <div class="phonesBlock__source">
+                                Источник информации <a href="https://nova24.uz/uzbekistan/v-ryade-regionov-uzbekistana-zarabotali-komnaty-pervichnoj-pomoshhi-dlya-zhertv-nasiliya" class="phonesBlock__sourceLink" target="_blank">nova24.uz</a>
                             </div>
                         </li>
                         <li class="phonesBlock__phoneItem">
@@ -121,6 +132,20 @@
                             </a>
                             <div class="phonesBlock__desc">
                                 Отдел по вопросам женщин МВД Узбекистана (по всей республике).
+                            </div>
+                            <div class="phonesBlock__source">
+                                Источник информации <a href="https://uznews.uz/posts/64916" class="phonesBlock__sourceLink" target="_blank">uznews.uz</a>
+                            </div>
+                        </li>
+                        <li class="phonesBlock__phoneItem">
+                            <a class="phonesBlock__val">
+                                Центры «Инсон»
+                            </a>
+                            <div class="phonesBlock__desc">
+                                Бесплатная психологическая и юридическая помощь.
+                            </div>
+                            <div class="phonesBlock__source">
+                                Источник информации <a href="https://podrobno.uz/cat/obchestvo/v-stolitse-startovala-rabota-rayonnykh-tsentrov-sotsialnykh-uslug-inson" class="phonesBlock__sourceLink" target="_blank">podrobno.uz</a>
                             </div>
                         </li>
                     </ul>
@@ -170,7 +195,7 @@
             @if (questionsForRender?.length) {
                 <div class="questionsBlock" #section>
                     <span id="questions" class="anchoroffset"></span>
-                    <h2 class="helpPage__sectionTitle">Популярные вопросы</h2>
+                    <h2 class="helpPage__sectionTitle">Популярные вопросы о&nbsp;Dazzlink</h2>
                     <ul class="questionsBlock__list">
                         @for(q of questionsForRender; track $index) {
                             <li class="questionsBlock__item">

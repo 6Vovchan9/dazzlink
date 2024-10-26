@@ -181,13 +181,12 @@
         .phonesBlock__phones {
             display: flex;
             flex-direction: column;
-            column-gap: 28px;
             row-gap: 24px;
 
             .phonesBlock__phoneItem {
                 .phonesBlock__val {
                     display: block;
-                    font-weight: 700;
+                    font-weight: 900;
                     margin-bottom: 4px;
                 }
 
@@ -214,6 +213,15 @@
             padding: 48px;
             .phonesBlock__phones {
                 flex-direction: row;
+                flex-wrap: wrap;
+                row-gap: 48px;
+                .phonesBlock__phoneItem {
+                    width: calc(50% - 14px);
+                    margin-right: 28px;
+                    &:nth-child(2n) {
+                        margin-right: 0px;
+                    }
+                }
             }
         }
     }
