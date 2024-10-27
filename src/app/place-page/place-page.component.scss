@@ -373,7 +373,7 @@ span {
     padding: 5px;
     border: none;
     border-radius: 50%;
-    background-color: var(--color-gray1);
+    background-color: #333;
     cursor: pointer;
 }
 
@@ -389,7 +389,7 @@ span {
             width: 2px;
             height: 12px;
             border-radius: 1px;
-            background-color: var(--color-black);
+            background-color: #f2f3f4;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -402,7 +402,7 @@ span {
             width: 2px;
             height: 12px;
             border-radius: 1px;
-            background-color: var(--color-black);
+            background-color: #f2f3f4;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -422,7 +422,7 @@ span {
             left: 50%;
             transform: translate(-70%, -50%) rotate(45deg);
             border: 2px solid;
-            border-color: var(--color-black);
+            border-color: #f2f3f4;
             border-bottom-width: 0px;
             border-left-width: 0px;
         }
@@ -439,7 +439,7 @@ span {
             left: 50%;
             transform: translate(-30%, -50%) rotate(-45deg);
             border: 2px solid;
-            border-color: var(--color-black);
+            border-color: #f2f3f4;
             border-bottom-width: 0px;
             border-right-width: 0px;
         }
