@@ -1,11 +1,13 @@
 import { Component, Inject, OnDestroy, OnInit, inject } from '@angular/core';
-import { GlobalModalService } from '@app/shared/services/global-modal.service';
-import { TelegramService } from '@app/shared/services/telegram.service';
-import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
 import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, pairwise } from 'rxjs/operators';
+import { filter, pairwise, tap } from 'rxjs/operators';
+
+import { GlobalModalService } from '@app/shared/services/global-modal.service';
+import { TelegramService } from '@app/shared/services/telegram.service';
+import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
+import { PagesService } from '@app/shared/services/pages.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public cookiesAgreementService = inject(CookiesAgreementService);
   private routerSub: Subscription;
   private router = inject(Router);
+  private pagesService = inject(PagesService);
 
   constructor(
     public modalService: GlobalModalService,
@@ -38,7 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }, 2000);
     // this.cookiesAgreementService.removeCookiesAgreement();
 
-    // this.checkRouterEvents();
+    this.checkRouterEvents();
   }
 
   // private updateScheme(event): void {
@@ -58,15 +61,16 @@ export class AppComponent implements OnInit, OnDestroy {
     this.routerSub = this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
-        // pairwise()
+        pairwise()
       ).subscribe(
-        previous => {
-          console.log(previous);
-        }
-        // ([previous, current]: [NavigationEnd, NavigationEnd]) => {
-        //   console.log(previous.url);
-        //   console.log(current.url);
+        // previous => {
+        //   console.log(previous);
         // }
+        ([previous, current]: [NavigationEnd, NavigationEnd]) => {
+          // console.log('appComponent:', previous.url);
+          this.pagesService.prevPage.set(previous.url);
+          // console.log('appComponent:', current.url);
+        }
       )
   }
 

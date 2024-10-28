@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
 @Injectable({
@@ -7,6 +7,7 @@ import { BehaviorSubject } from "rxjs";
 export class PagesService {
 
     public currentLanguage = new BehaviorSubject<string>('RU');
+    public prevPage = signal<string>(null);
 
     constructor() {
         const currentLanguageFromSStorage = sessionStorage.getItem('currentLanguage');

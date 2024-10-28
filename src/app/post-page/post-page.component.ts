@@ -288,9 +288,11 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public goToAllArticles(withMessage = false): void {
-    if (0) {
-      this.myLocation.back();
+    if (1 && this.pagesService.prevPage() && this.pagesService.prevPage() === '/media') {
+      // console.log('Идем на шаг назад');
+      this.myLocation.back(); // Такой способ навигации назад нужен для того чтобы при навигации проскроллить страницу "Медиа" к карточке текущей статьи
     } else {
+      // console.log('Идем конкретно на страницу "Медиа"');
       this.router.navigate(['/media']);
       if (withMessage) this.toastService.warning('Не удается открыть статью :(');
     }

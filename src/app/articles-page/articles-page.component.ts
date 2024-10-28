@@ -95,6 +95,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private router = inject(Router);
   private db: any;
   scrollingRef = viewChild<HTMLElement>("restoreScrollPosition");
+  private pagesService = inject(PagesService);
 
   constructor(
     private postsService: PostsService,
@@ -131,8 +132,8 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //     }
     //   }
     // );
-
-    if (false) {
+    if (true) {
+      console.log('Пришли на "Медиа" страницу из:', this.pagesService.prevPage());
       this.aboutIDB(); // используем IndexedDB, берем статьи из БД браузера если они там есть
     } else {
       this.getAllArticles(); // не используем IndexedDB, загружаем их всегда с бэка
@@ -174,6 +175,13 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private async aboutIDB() {
     this.db = await this.openDatabase();
+
+    if (this.pagesService.prevPage() && !this.pagesService.prevPage().includes('media/')) {
+      // Очищаем БД браузера если пришли на эту страницу не из конкретной статьи
+      this.clearArticlesInIDB();
+      console.log('Очищаем накопившиеся в БД браузера статьи, если они там есть...');
+    }
+
     this.getAllFromIDB();
   }
 
@@ -211,7 +219,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       // this.errorAfterGetAllArticles.set(false); // На всякий случай
       this.isLoading.set(false);
     } else {
-      console.log("В БД IndexedDB пока нет статей. Запросим их с бэка");
+      console.log("В БД IndexedDB пока нет статей. Запросим их с бэка...");
       this.getAllArticles();
     }
   }
@@ -220,7 +228,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.db && articles.length) {
       let tx = this.db.transaction("articles", "readwrite");
       let articleStore = tx.objectStore("articles");
-      console.log("Добавляем новые статьи в IndexedDB");
+      console.log("Добавляем новые статьи в IndexedDB...");
       articles[articles.length - 1].last = this.lastPaginationPage;
       for (let atricle of articles) {
         articleStore.add(atricle);
