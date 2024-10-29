@@ -178,7 +178,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private async aboutIDB() {
     this.db = await this.openDatabase();
 
-    if (this.pagesService.prevPage() && !this.pagesService.prevPage().includes('media/')) {
+    if ((this.pagesService.prevPage() || this.appWebview) && !this.pagesService.prevPage()?.includes('media/')) {
       // Очищаем БД браузера если пришли на эту страницу не из конкретной статьи
       this.clearArticlesInIDB();
       console.log('Очищаем накопившиеся в БД браузера статьи, если они там есть...');
