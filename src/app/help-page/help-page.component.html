@@ -1,7 +1,7 @@
 @if (!appWebview) {
     <app-header></app-header>
 }
-<div class="helpPage helpPage--webview">
+<div class="helpPage" [ngClass]="{ 'helpPage--webview': appWebview }">
     <div class="container helpPage__container">
         <aside class="sidebar">
             <div class="aboutPage">
@@ -11,7 +11,7 @@
                     <ul class="anchorNav__list">
                         <li class="anchorNav__item">
                             <!-- <a class="anchorLink"
-                                [ngClass]="{'anchorLink--active': curSection === 'phones'}"
+                                [ngClass]="{ 'anchorLink--active': curSection === 'phones' }"
                                 routerLink="/help"
                                 fragment="phones"
                                 [queryParams]="{page: 1}"
@@ -21,7 +21,7 @@
                             </a> -->
                             <a
                                 class="anchorLink"
-                                [ngClass]="{'anchorLink--active': curSection === 'phones'}"
+                                [ngClass]="{ 'anchorLink--active': curSection === 'phones' }"
                                 (click)="onNavInDesktop('phones')"
                             >
                                 Телефоны и организации
@@ -30,7 +30,7 @@
                         <li class="anchorNav__item">
                             <a
                                 class="anchorLink"
-                                [ngClass]="{'anchorLink--active': curSection === 'support'}"
+                                [ngClass]="{ 'anchorLink--active': curSection === 'support' }"
                                 (click)="onNavInDesktop('support')"
                             >
                                 Поддержка сервиса
@@ -39,7 +39,7 @@
                         <li class="anchorNav__item">
                             <a
                                 class="anchorLink"
-                                [ngClass]="{'anchorLink--active': curSection === 'questions'}"
+                                [ngClass]="{ 'anchorLink--active': curSection === 'questions' }"
                                 (click)="onNavInDesktop('questions')"
                             >
                                 Популярные вопросы
@@ -68,7 +68,7 @@
                             <a
                                 (click)="onNavInMobile('phones')"
                                 class="inlineAnchorLink"
-                                [ngClass]="{'inlineAnchorLink--active': curSection === 'phones'}"
+                                [ngClass]="{ 'inlineAnchorLink--active': curSection === 'phones' }"
                             >
                                 Телефоны&nbsp;и&nbsp;организации
                             </a>
@@ -77,7 +77,7 @@
                             <a
                                 (click)="onNavInMobile('support')"
                                 class="inlineAnchorLink"
-                                [ngClass]="{'inlineAnchorLink--active': curSection === 'support'}"
+                                [ngClass]="{ 'inlineAnchorLink--active': curSection === 'support' }"
                             >
                                 Поддержка&nbsp;сервиса
                             </a>
@@ -86,7 +86,7 @@
                             <a
                                 (click)="onNavInMobile('questions')"
                                 class="inlineAnchorLink"
-                                [ngClass]="{'inlineAnchorLink--active': curSection === 'questions'}"
+                                [ngClass]="{ 'inlineAnchorLink--active': curSection === 'questions' }"
                             >
                                 Популярные&nbsp;вопросы
                             </a>
