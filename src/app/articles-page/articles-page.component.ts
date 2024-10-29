@@ -108,6 +108,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private vc: ViewportScroller
     // private cd: ChangeDetectorRef
   ) {
+
     const scrollingPosition: Signal<[number, number] | null> = toSignal(
       inject(Router).events.pipe(
         filter((event): event is Scroll => event instanceof Scroll),
@@ -116,10 +117,11 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     effect(() => {
-      if (this.scrollingRef() && scrollingPosition()) {
+      if (this.scrollingRef() && scrollingPosition() && this.pagesService.prevPage().includes('media/')) {
         this.vc.scrollToPosition(scrollingPosition()!);
       }
     });
+
   }
 
   ngOnInit(): void {
