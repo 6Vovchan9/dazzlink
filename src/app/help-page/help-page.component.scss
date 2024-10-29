@@ -229,6 +229,25 @@
 
 .supportBlock {
     margin-top: 48px;
+
+    .supportBlock__btns {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 24px;
+        background: linear-gradient(264deg, #A47ED9 0%, #332E87 100%);
+        column-gap: 24px;
+        row-gap: 8px;
+        .supportBlock__item {
+            flex: 1;
+        }
+    }
+    @media #{$notMobile} {
+        .supportBlock__btns {
+            padding: 24px;
+            flex-direction: row;
+        }
+    }
 }
 
 .questionsBlock {
