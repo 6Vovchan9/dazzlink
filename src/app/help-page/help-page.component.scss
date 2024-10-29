@@ -20,6 +20,11 @@
     .helpPage__sectionTitle {
         margin-bottom: 24px;
     }
+    &--webview {
+        .helpPage__container {
+            margin-top: 0px;
+        }
+    }
     @media #{$notMobile} {
         .helpPage__container {
             margin-top: 48px;
