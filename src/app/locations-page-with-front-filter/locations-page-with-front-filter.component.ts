@@ -297,7 +297,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
     const sortControlVal = this.filterBarGroup?.get('sort')?.value;
 
-    if (sortControlVal === 'price_asc') {
+    let sorted = false;
+    if (sortControlVal === 'PRICE_ASC') {
       console.log('Сортируем от меньшего к большему');
       this.allLocations.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
@@ -306,7 +307,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           })
         }
       });
-    } else if (sortControlVal === 'price_desc') {
+      sorted = true;
+    } else if (sortControlVal === 'PRICE_DESC') {
       console.log('Сортируем от большего к меньшему');
       this.allLocations.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
@@ -315,7 +317,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           })
         }
       });
-    } else if (sortControlVal === 'rating_desc') {
+      sorted = true;
+    } else if (sortControlVal === 'RATING_DESC') {
       console.log('Сортируем по рейтингу');
       this.allLocations.cityPlaceList.forEach(el => {
         if (el.placeList?.length) {
@@ -324,13 +327,25 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           })
         }
       });
+      sorted = true;
     }
 
-    console.log(`Успешно отсортировали (${sortControlVal})!`);
-    this.toastService.success('Отсортировано');
+    if (sorted) {
+      console.log(`Успешно отсортировали (${sortControlVal})!`);
+      this.toastService.success('Отсортировано');
+      this.setIconForSortDropdown(sortControlVal);
+    } else {
+      this.toastService.warning('Ошибка сортировки :(');
+      this.setIconForSortDropdown(null);
+      this.sortFieldOptions.items.map((item) => {
+        delete item.selected;
+        return item;
+      });
+    }
+
     this.filterBarGroup.get('sort').enable({ emitEvent: false });
-    this.setIconForSortDropdown(sortControlVal);
     this.isSorting.set(false);
+
   }
 
   private getCategories(): void {
