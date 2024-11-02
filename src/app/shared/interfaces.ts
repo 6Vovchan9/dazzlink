@@ -126,6 +126,7 @@ export interface Post {
     imageUrl?: string;
     pageName?: string;
     last?: boolean;
+    readingTime?: number
 }
 
 export type Place = {

@@ -23,6 +23,7 @@
                         <!-- Дата публикации (мобила) -->
                         <div class="postTitle__details postDetails">
                             <div class="postDetails__info">27&nbsp;октября&nbsp;2023</div>
+                            <div class="postDetails__info">2 мин</div>
                             <div class="postDetails__info">58 просмотров</div>
                         </div>
                         <!-- Название статьи -->
@@ -39,6 +40,7 @@
                         <!-- Дата публикации (комп) -->
                         <div class="postContent__details postDetails">
                             <div class="postDetails__info">27&nbsp;октября&nbsp;2023</div>
+                            <div class="postDetails__info">2 мин</div>
                             <div class="postDetails__info">58 просмотров</div>
                         </div>
                         <!-- Текст статьи -->
@@ -105,6 +107,9 @@
                                 <div class="postDetails__info">
                                     {{postData.published | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}
                                 </div>
+                                <div class="postDetails__info">
+                                    {{postData.readingTime}} мин
+                                </div>
                                 <div *ngIf="postData.viewCount" class="postDetails__info">
                                     {{postData.viewCount}} {{buildViewCount(postData.viewCount)}}
                                 </div>
@@ -145,7 +150,12 @@
                             <!-- Дата публикации (комп) -->
                             <div class="postContent__details postDetails">
                                 <div class="postDetails__info">{{postData.published | date:'dd MMMM yyyy':'':'ru'}}</div>
-                                <div *ngIf="postData.viewCount" class="postDetails__info">{{postData.viewCount}} {{buildViewCount(postData.viewCount)}}</div>
+                                <div class="postDetails__info">{{postData.readingTime}} мин</div>
+                                <div *ngIf="postData.viewCount"
+                                    class="postDetails__info"
+                                >
+                                    {{postData.viewCount}} {{buildViewCount(postData.viewCount)}}
+                                </div>
                             </div>
                             <div class="postContent__text" [innerHTML]="postData.html"></div>
 
