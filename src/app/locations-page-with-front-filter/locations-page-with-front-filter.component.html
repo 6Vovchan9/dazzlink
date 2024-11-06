@@ -72,9 +72,17 @@
                                                             [options]="sortFieldOptions"
                                                             [showArrowIcon]="false"
                                                             [highlightHead]="false"
-                                                            [dropdownHead]="dropdownHeadForSort"
                                                             optionLabel="value"
-                                                            (toggle)="sortDropdownState($event)">
+                                                            (toggle)="sortDropdownState($event)"
+                                                        >
+                                                            <ng-template #headContent>
+                                                                <div class="headInSortDropdown">
+                                                                    <div class="headInSortDropdown__icon sortIcon"
+                                                                        [ngClass]="{'sortIcon--selected': dropdownHeadForSortSelected}"
+                                                                    ></div>
+                                                                    <div class="headInSortDropdown__text">Сортировка</div>
+                                                                </div>
+                                                            </ng-template>
                                                         </app-dropdown-field>
                                                         <div class="skeletonLoader skeletonLoader--shortHeight filterBar__sortSkeleton"></div>
                                                     </div>
@@ -87,7 +95,9 @@
                                                         (click)="onShowHideFilterControls()"
                                                     >
                                                         <div class="headInSortDropdown">
-                                                            <div class="headInSortDropdown__icon filterIcon" [class.filterIcon--selected]="amountAllSelectedCities.length"></div>
+                                                            <div class="headInSortDropdown__icon filterIcon"
+                                                                [ngClass]="{'filterIcon--selected': amountAllSelectedCities.length}"
+                                                            ></div>
                                                             <div class="headInSortDropdown__text">Фильтр</div>
                                                         </div>
                                                     </button>

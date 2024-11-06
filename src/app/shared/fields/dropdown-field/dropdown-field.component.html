@@ -18,17 +18,23 @@
 >
     <div (click)="toggleState($event)" class="dropdownControl__head">
 
-        <div class="dropdownControl__values" [innerHTML]="dropdownHead || selectedItems || 'Не выбрано'"></div>
+        @if (headContent) {
+            <ng-container *ngTemplateOutlet="headContent"></ng-container>
+        } @else {
 
-        <ng-container *ngIf="showArrowIcon">
-            <div class="dropdownControl__customIcon"
-                *ngIf="arrowIcon; else defaultIcon"
-                [ngStyle]="{ backgroundImage: generateIconPath(arrowIcon) }">
-            </div>
-            <ng-template #defaultIcon>
-                <div class="dropdownControl__icon"></div>
-            </ng-template>
-        </ng-container>
+            <div class="dropdownControl__values" [innerHTML]="dropdownHead || selectedItems || 'Не выбрано'"></div>
+
+            <ng-container *ngIf="showArrowIcon">
+                <div class="dropdownControl__customIcon"
+                    *ngIf="arrowIcon; else defaultIcon"
+                    [ngStyle]="{ backgroundImage: generateIconPath(arrowIcon) }">
+                </div>
+                <ng-template #defaultIcon>
+                    <div class="dropdownControl__icon"></div>
+                </ng-template>
+            </ng-container>
+    
+        }
 
     </div>
 

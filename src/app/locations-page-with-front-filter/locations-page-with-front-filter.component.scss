@@ -422,44 +422,62 @@ $shadowHeightInMobile: 20px;
 //     z-index: 1000;
 // }
 
-::ng-deep {
-    .headInSortDropdown {
-        display: flex;
-        align-items: center;
-        .headInSortDropdown__icon {
-            width: 24px;
-            height: 24px;
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center center;
-            // background-image: url('/assets/icons/sortIconActive.svg');
+.headInSortDropdown {
+    display: flex;
+    align-items: center;
+    .headInSortDropdown__icon {
+        width: 24px;
+        height: 24px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        // background-image: url('/assets/icons/sortIconActive.svg');
 
-            &.filterIcon {
-                background-image: url('/assets/icons/filterIconActive.svg');
+        &.filterIcon {
+            background-image: url('/assets/icons/filterIconActive.svg');
 
-                &--selected {
-                    background-image: url('/assets/icons/filterIconSelected.svg');
+            &--selected {
+                position: relative;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background-color: #D70015;
+                    right: 0px;
+                    top: 0px;
                 }
-            }
-
-            &.sortIcon {
-                background-image: url('/assets/icons/sortIconActive.svg');
-
-                &--selected {
-                    background-image: url('/assets/icons/sortIconSelected.svg');
-                }
-            }
+            } 
         }
 
+        &.sortIcon {
+            background-image: url('/assets/icons/sortIconActive.svg');
+
+            &--selected {
+                position: relative;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background-color: #D70015;
+                    right: 0px;
+                    top: 0px;
+                }
+            } 
+        }
+    }
+
+    .headInSortDropdown__text {
+        display: none;
+        margin-left: 5px;
+    }
+
+    @media #{$notMobile} {
         .headInSortDropdown__text {
-            display: none;
-            margin-left: 5px;
-        }
-
-        @media #{$notMobile} {
-            .headInSortDropdown__text {
-                display: block;
-            }
+            display: block;
         }
     }
 }
@@ -627,7 +645,7 @@ $shadowHeightInMobile: 20px;
         background-color: rgba(51, 51, 51, 0.72);
         z-index: 110;
         width: 100%;
-        height: 100%;
+        height: 100dvh;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;

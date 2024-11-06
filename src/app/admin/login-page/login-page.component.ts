@@ -13,7 +13,7 @@ import { advanceForbiddenEmailValidator, asyncEmailValidator, forbiddenEmailVali
 })
 export class LoginPageComponent implements OnInit {
 
-  public loginForm!: UntypedFormGroup;
+  public loginForm!: UntypedFormGroup; // "!:" таким образом я уверяю typescript что это свойство точно будет передано
   public submitted = false;
   public messageFromQueryParams!: string;
 

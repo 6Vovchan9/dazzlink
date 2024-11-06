@@ -102,12 +102,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public errorInGetAllLocations = false;
   private lastSuccessSortVal: string = null;
   private locationsUpdating = false;
-  public dropdownHeadForSort = `
-    <div class="headInSortDropdown">
-      <div class="headInSortDropdown__icon sortIcon"></div>
-      <div class="headInSortDropdown__text">Сортировка</div>
-    </div>
-  `;
+  public dropdownHeadForSortSelected = false;
   public sortFieldOptions: DropdownOptions = {
     disabled: false,
     id: "sort",
@@ -960,19 +955,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   private setIconForSortDropdown(sortValue: string): void {
     if (sortValue) {
-      this.dropdownHeadForSort = `
-        <div class="headInSortDropdown">
-          <div class="headInSortDropdown__icon sortIcon sortIcon--selected"></div>
-          <div class="headInSortDropdown__text">Сортировка</div>
-        </div>
-      `;
+      this.dropdownHeadForSortSelected = true;
     } else {
-      this.dropdownHeadForSort = `
-        <div class="headInSortDropdown">
-          <div class="headInSortDropdown__icon sortIcon"></div>
-          <div class="headInSortDropdown__text">Сортировка</div>
-        </div>
-      `;
+      this.dropdownHeadForSortSelected = false;
     }
   }
 
