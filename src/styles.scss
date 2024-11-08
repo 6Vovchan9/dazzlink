@@ -548,10 +548,6 @@ button {
         color: var(--color-text-gray);
     }
 
-    &--gray {
-        background-color: var(--color-gray1);
-    }
-
     @media #{$notMobile} {
         font-size: 24px;
         line-height: 32px;

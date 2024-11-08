@@ -5,6 +5,7 @@ import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { QrCodeModalComponent } from '@app/shared/components/qr-code-modal/qr-code-modal.component';
+import { SvgIconComponent } from "@app/shared/components/svg-icon/svg-icon.component";
 
 @Component({
   selector: 'app-footer',
@@ -13,8 +14,9 @@ import { QrCodeModalComponent } from '@app/shared/components/qr-code-modal/qr-co
   standalone: true,
   imports: [
     QrCodeModalComponent,
-    RouterLink
-  ],
+    RouterLink,
+    SvgIconComponent
+],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {

@@ -4,11 +4,11 @@
             <div class="footer__col footer__col--forMobile">
                 @if (true) {
                     <button
-                        class="blueBtn blueBtn--white blueBtn--withPresentIcon"
+                        class="blueBtn blueBtn--white"
                         (click)="qrModalOrTelegram()"
                     >
-                        <img src="assets/icons/presentBlue.svg" alt="p">
-                        Получить подарок
+                        <svg class="surpriseIcon" icon="presentBlue"></svg>
+                        <span>Получить подарок</span>
                     </button>
                 } @else {
                     <div (click)="mobileDetectService?.goToDeviceStore()" class="footer__download downloadApp">
