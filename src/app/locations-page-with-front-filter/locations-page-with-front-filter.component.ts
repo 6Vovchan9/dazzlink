@@ -130,7 +130,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     private router: Router,
     private route: ActivatedRoute,
     public modalService: GlobalModalService,
-    @Inject(DOCUMENT) private readonly documentRef: Document,
+    @Inject(DOCUMENT) private readonly myDocument: Document,
     private vc: ViewportScroller,
     private cd: ChangeDetectorRef
   ) {
@@ -166,7 +166,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private addEventListenerToPage(): void {
-    const myWindow = this.documentRef.defaultView; // defaultView - свойство которое возвращает окно, связанное с текущим документом. Это аналогия встроенного в браузер глобального объекта window
+    const myWindow = this.myDocument.defaultView; // defaultView - свойство которое возвращает окно, связанное с текущим документом. Это аналогия встроенного в браузер глобального объекта window
     this.pageScrollSub = fromEvent(myWindow, 'scroll')
       .pipe(
         skipWhile(() => this.isLoading()),
@@ -181,22 +181,22 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   private operateScrollToTopBtnState(): void {
     const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
-    const bodyEl: HTMLBodyElement = this.documentRef.activeElement as HTMLBodyElement;
-    const myWindow: Window = this.documentRef.defaultView;
+    // const myBody: HTMLBodyElement = this.myDocument.activeElement as HTMLBodyElement;
+    const myHtml: HTMLHtmlElement = this.myDocument.documentElement as HTMLHtmlElement;
+    const myWindow: Window = this.myDocument.defaultView;
     const svgCircleElement = this.progressCircle?.nativeElement as SVGCircleElement;
     if (svgCircleElement) {
-      const scrollHeight = bodyEl.scrollHeight;
-      const offsetHeight = bodyEl.offsetHeight;
-      const clientHeight = bodyEl.clientHeight;
-      const innerHeight  = myWindow.innerHeight; // тут учитывается видна/скрыта адресная строка
+      const pageHeight = Math.max(myHtml.scrollHeight, myHtml.offsetHeight, myHtml.clientHeight);  // высота всей страницы
+      const innerHeight = myWindow.innerHeight; // высота окна (тут учитывается видна/скрыта адресная строка)
       const prevState = this.hideScrollProgress;
       this.hideScrollProgress = curScrollTop < innerHeight;
       const futureState = this.hideScrollProgress;
       const radius = svgCircleElement.getAttribute('r');
-      // this.myBlockAboutScroll = { scrollHeight, offsetHeight, clientHeight, innerHeight, scrollTop: curScrollTop }
+
+      // this.myBlockAboutScroll = { pageHeight, innerHeight, scrollTop: curScrollTop }
 
       const circleLength = 2 * Math.PI * +radius;
-      let percentageProgress = Math.round(curScrollTop / (scrollHeight - innerHeight) * 100);
+      let percentageProgress = Math.round(curScrollTop / (pageHeight - innerHeight) * 100);
       if (percentageProgress > 100) percentageProgress = 100;
       svgCircleElement.setAttribute('stroke-dasharray', String(circleLength));
       svgCircleElement.setAttribute('stroke-dashoffset', String(circleLength - circleLength * percentageProgress / 100));

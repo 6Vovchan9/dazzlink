@@ -82,7 +82,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private toastService: ToastService,
     private vc: ViewportScroller,
-    @Inject(DOCUMENT) private readonly documentRef: Document
+    @Inject(DOCUMENT) private readonly myDocument: Document
   ) {
     this.goBackByTg = this.goBackByTg.bind(this);
   }
@@ -170,7 +170,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private addEventListenerToPage(): void {
-    const myWindow = this.documentRef.defaultView; // defaultView - свойство которое возвращает окно, связанное с текущим документом. Это аналогия встроенного в браузер глобального объекта window
+    const myWindow = this.myDocument.defaultView; // defaultView - свойство которое возвращает окно, связанное с текущим документом. Это аналогия встроенного в браузер глобального объекта window
     this.pageScrollSub = fromEvent(myWindow, 'scroll')
       .pipe(
         skipWhile(() => this.isLoading()),
@@ -209,15 +209,19 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private operateScrollToTopBtnState(): void {
 
     const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
-    const bodyEl: HTMLBodyElement = this.documentRef.activeElement as HTMLBodyElement;
 
-    const scrollHeight = bodyEl.scrollHeight;
-    const offsetHeight = bodyEl.offsetHeight;
-    // console.log(curScrollTop, scrollHeight, offsetHeight);
+    // const myBody: HTMLBodyElement = this.myDocument.activeElement   as HTMLBodyElement;
+    const myHtml: HTMLHtmlElement = this.myDocument.documentElement as HTMLHtmlElement;
+
+    const pageHeight = Math.max(myHtml.scrollHeight, myHtml.offsetHeight, myHtml.clientHeight); // высота всей страницы
+    const windowHeight = myHtml.clientHeight; // высота окна
+
+    // console.log(curScrollTop, pageHeight, windowHeight);
+
     const prevState = this.scrollToTopBtnOptions.hide;
     const prevOpacity = this.scrollToTopBtnOptions.opacity;
-    this.scrollToTopBtnOptions.hide = curScrollTop < offsetHeight;
-    this.scrollToTopBtnOptions.opacity = curScrollTop > scrollHeight - offsetHeight * 2; // эти расчёты можно будет подкорректировать
+    this.scrollToTopBtnOptions.hide = curScrollTop < windowHeight;
+    this.scrollToTopBtnOptions.opacity = curScrollTop > pageHeight - windowHeight * 2; // эти расчёты можно будет подкорректировать
     const futureState = this.scrollToTopBtnOptions.hide;
     const futureOpacity = this.scrollToTopBtnOptions.opacity;
 
@@ -236,7 +240,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   // }
 
   public get appWebview(): boolean {
-    const myNavigator = this.documentRef.defaultView.navigator; // почему нежелательно просто обратиться к navigator.userAgent читай в notes.md
+    const myNavigator = this.myDocument.defaultView.navigator; // почему нежелательно просто обратиться к navigator.userAgent читай в notes.md
     const result = myNavigator.userAgent.includes('Dazzlink');
     // return true;
     return result;

@@ -4,14 +4,10 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 $shadowHeightInDesktop: 34px;
 $shadowHeightInMobile: 20px;
 
-:host {
-    // flex: 1;
-} // Это все для того чтобы когда контента мало footer все равно был прижат к низу. UPD: теперь эту роль выполняет contentWrapper
-
 .locationsPage {
     display: flex;
     flex-direction: column;
-    min-height: 100%;
+    min-height: 100svh;
     .locationsPage__main {
         flex: 1;
         .locationsPage__container {
