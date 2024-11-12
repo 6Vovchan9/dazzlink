@@ -1,9 +1,5 @@
 @import "variables";
 
-:host {
-    // flex: 1;
-} // Это все для того чтобы когда контента мало footer все равно был прижат к низу. UPD: теперь эту роль выполняет contentWrapper
-
 $shadowHeightInDesktop: 34px;
 $shadowHeightInMobile: 20px;
 
@@ -106,6 +102,12 @@ $shadowHeightInMobile: 20px;
     }
 
     @media #{$notMobile} {
+        position: sticky;
+        top: 0px;
+        transition: .6s;
+        &--headerVisible {
+            top: calc(80px + 48px); // 80 - высота header-а, 48 - margin у .articlesPage__container
+        }
         .aboutPage__links {
             &--forDesktop {
                 display: block;

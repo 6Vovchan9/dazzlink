@@ -26,7 +26,9 @@
     <main class="articlesPage__main">
         <div class="container articlesPage__container">
             <aside class="sidebar" [class.hiddenInMobile]="appWebview">
-                <div class="aboutPage">
+                <div class="aboutPage"
+                    [class.aboutPage--headerVisible]="!hideHeader()"
+                >
                     <h1 class="moduleTitle">Медиа</h1>
                     <!-- <button (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles">{{implementErrorInGetAllArticles}}</button> -->
                     <div class="aboutPage__text">
