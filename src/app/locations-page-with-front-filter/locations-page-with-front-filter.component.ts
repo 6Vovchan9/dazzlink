@@ -200,8 +200,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       if (percentageProgress > 100) percentageProgress = 100;
       svgCircleElement.setAttribute('stroke-dasharray', String(circleLength));
       svgCircleElement.setAttribute('stroke-dashoffset', String(circleLength - circleLength * percentageProgress / 100));
-      if (!this.hideScrollProgress) { // для отображения прогрессбара внутри кнопки
+      if (!this.hideScrollProgress && false) { // для отображения прогрессбара внутри кнопки
         this.cd.detectChanges();
+        // UPD: для того чтобы обновить прогрессбар внутри кнопки не нужно запускать обнаружение изменений, оно и так обновляется
       } else if (prevState !== futureState) { // для того чтобы показать/скрыть кнопку
         this.cd.detectChanges();
       }
