@@ -42,7 +42,7 @@
                         <!-- <ng-container *ngIf="allLocations.placeCount; else empty"> -->
                             
                             <!-- && allLocations чтобы не показывать gradient когда отображается баннер #errorInGetAllLocations -->
-                            <div class="pageContent__allAboutLocations" [class.pageContent__allAboutLocations--withGradientEffect]="isLoading() && allLocations">
+                            <div class="pageContent__allAboutLocations" [class.pageContent__allAboutLocations--withGradientEffect]="isLoading() && allLocations?.cityPlaceList?.length">
 
                                 <div class="stickyBar"
                                     [ngClass]="{
