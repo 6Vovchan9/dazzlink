@@ -35,6 +35,47 @@ $shadowHeightInMobile: 20px;
 //     }
 // }
 
+@media (min-height: 667px) {
+    .locationsPage.locationsPage--headerSticky {
+        .locationsPage__header {
+            position: sticky;
+            top: calc(-1px * var(--header-height, 64));
+            z-index: 100;
+            transition: .6s;
+        }
+    }
+    .locationsPage.locationsPage--headerSticky.locationsPage--headerVisible {
+        .locationsPage__header {
+            top: 0px;
+        }
+        .stickyBar {
+            top: calc(1px * var(--header-height, 64));
+        }
+    }
+
+    @media #{$notMobile} {
+        .locationsPage.locationsPage--headerSticky {
+            .locationsPage__header {
+                top: calc(-1px * var(--header-height, 80));
+            }
+        }
+        .locationsPage.locationsPage--headerSticky.locationsPage--headerVisible {
+            .locationsPage__header {
+                top: 0px;
+            }
+            .aboutPage {
+                top: calc(1px * var(--header-height, 80) + 8px);
+            }
+            .filterOptionsBlock {
+                top: calc(1px * var(--header-height, 80) + 8px);
+            }
+            .stickyBar {
+                top: calc(1px * var(--header-height, 80));
+            }
+        }
+    }
+}
+
 .sidebar {
     display: none;
     flex: 1;
@@ -79,9 +120,9 @@ $shadowHeightInMobile: 20px;
 
     @media #{$notMobile} {
         position: sticky;
-        margin-bottom: 20px;
         margin-top: 8px;
-        top: 0px;
+        top: 8px;
+        transition: .6s;
         .aboutPage__links {
             &--forDesktop {
                 display: block;
@@ -306,13 +347,14 @@ $shadowHeightInMobile: 20px;
 .stickyBar {
     position: sticky;
     z-index: 80;
-    top: 0;
+    top: 0px;
     margin-bottom: 20px;
     background-color: var(--color-white);
     padding: 8px 0px 4px;
-
-    &--withLoading {
-        position: relative;
+    transition: .6s;
+    
+    &--static {
+        position: static;
     }
 
     @media #{$notMobile} {
@@ -627,7 +669,8 @@ $shadowHeightInMobile: 20px;
 
     @media #{$notMobile} {
         position: sticky;
-        top: 20px;
+        top: 8px;
+        transition: .6s;
         margin-top: 8px;
         // margin-bottom: 20px;
     }

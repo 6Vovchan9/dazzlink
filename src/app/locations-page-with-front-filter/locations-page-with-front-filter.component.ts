@@ -29,7 +29,7 @@ import {
 } from 'rxjs/operators';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router, Scroll } from '@angular/router';
-import { DOCUMENT, NgClass, NgFor, NgIf, NgTemplateOutlet, ViewportScroller } from '@angular/common';
+import { DOCUMENT, NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 
 import {
   CountryFilterItem,
@@ -61,7 +61,7 @@ import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.s
     NgTemplateOutlet,
     NgIf, NgFor,
     ReactiveFormsModule,
-    NgClass,
+    NgClass, NgStyle,
 
     LocationItemComponent,
     DropdownFieldModule,
@@ -117,6 +117,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public filterFieldOptions: Array<CountryFilterItem>;
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
+  private prevScrollTop = 0;
+  public hideHeader = signal(true);
   private pageScrollSub: Subscription;
   scrollingRef = viewChild<HTMLElement>('restoreScrollPosition');
   public allLocationsReceived = false;
@@ -174,9 +176,34 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       )
       .subscribe({
         next: () => {
+          this.operateHeaderState();
           this.operateScrollToTopBtnState();
         }
       });
+  }
+
+  private operateHeaderState() {
+    const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
+    // console.log('cur:', curScrollTop);
+    // console.log('prev:', this.prevScrollTop);
+
+    if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
+      if (curScrollTop < 100) {
+        if (curScrollTop === 0) {
+          // console.log('Скрываем header');
+          this.hideHeader.set(true);
+        }
+      } else {
+        // console.log('Скрываем header');
+        this.hideHeader.set(true);
+      }
+    } else {
+      // console.log('Показываем header');
+      this.hideHeader.set(false);
+    }
+
+    this.prevScrollTop = curScrollTop;
+    // this.cd.detectChanges();
   }
 
   private operateScrollToTopBtnState(): void {
@@ -775,7 +802,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   // Todo: надо проверить что будет если придет пустой моковый список локаций
   private getAllLocations(): void {
     this.isLoading.set(true);
-    if (false) {
+    if (0) {
       const stream$ = new Observable((observer: Observer<any>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {

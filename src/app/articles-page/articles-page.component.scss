@@ -6,7 +6,7 @@ $shadowHeightInMobile: 20px;
 .articlesPage {
     display: flex;
     flex-direction: column;
-    min-height: 100%;
+    min-height: 100svh;
     .articlesPage__header {
         position: sticky;
         top: calc(var(--header-height) - $shadowHeightInMobile);
