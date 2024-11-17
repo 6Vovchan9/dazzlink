@@ -153,8 +153,9 @@
                                                                         [placeData]="location"
                                                                     ></app-location-item> -->
                                                                     <a
-                                                                        (click)="goToLocationDesc(location.pageName)"
                                                                         class="pageContent__locationLink"
+                                                                        [routerLink]="['/locations', location.pageName]"
+                                                                        queryParamsHandling="merge"
                                                                     >
                                                                         <app-location-item
                                                                             [isLoading]="isSorting() || isLoading()"

@@ -9,14 +9,21 @@
             <div class="header__menu">
                 <nav class="menu">
                     <ul class="menu__list">
-                        <li class="menu__item" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="menu__item--active">
+                        <li class="menu__item"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            routerLinkActive="menu__item--active"
+                        >
                             <a class="menu__link" routerLink="/">Приложение</a>
                         </li>
                         <li class="menu__item" routerLinkActive="menu__item--active">
                             <a class="menu__link" routerLink="/media">Медиа</a>
                         </li>
-                        <li class="menu__item" routerLinkActive="menu__item--active" [routerLinkActiveOptions]="routerLinkActiveOptions">
-                            <a class="menu__link" routerLink="/locations" [queryParams]="{ category: null }">Локации</a>
+                        <li class="menu__item"
+                            routerLinkActive="menu__item--active"
+                            [routerLinkActiveOptions]="routerLinkActiveOptions"
+                            #rla="routerLinkActive"
+                        >
+                            <a class="menu__link" routerLink="/locations" queryParamsHandling="merge">Локации</a>
                         </li>
                         <li class="menu__item" routerLinkActive="menu__item--active">
                             <a class="menu__link" routerLink="/company">Компания</a>

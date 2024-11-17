@@ -75,6 +75,7 @@
             &--active {
                 .menu__link {
                     color: var(--color-text-gray);
+                    pointer-events: none;
                 }
             }
             // &--active {

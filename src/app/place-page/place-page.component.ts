@@ -574,7 +574,8 @@ export class PlacePageComponent extends ThumbHash implements OnInit {
     this.router.navigate(
       ['/locations'],
       {
-        queryParams: { category: this.placeData?.categoryCode }
+        queryParams: { category: this.placeData?.categoryCode.toLowerCase() },
+        queryParamsHandling: 'merge'
       }
     );
     if (withMessage) this.toastService.warning('Не удается открыть локацию :(');

@@ -28,7 +28,7 @@ import {
   auditTime
 } from 'rxjs/operators';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute, Params, Router, Scroll } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterLink, Scroll } from '@angular/router';
 import { DOCUMENT, NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 
 import {
@@ -62,6 +62,7 @@ import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.s
     NgIf, NgFor,
     ReactiveFormsModule,
     NgClass, NgStyle,
+    RouterLink,
 
     LocationItemComponent,
     DropdownFieldModule,
@@ -309,6 +310,29 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       this.filteredLocations = this.allLocations.cityPlaceList;
     }
 
+    if (this.amountAllSelectedCities.length) {
+
+      const qParams = encodeURIComponent(this.amountAllSelectedCities.join(',').toLowerCase());
+
+      this.router.navigate(
+        [],
+        {
+          queryParams: { country: qParams },
+          replaceUrl: true,
+          queryParamsHandling: 'merge'
+        }
+      );
+    } else {
+      this.router.navigate(
+        [],
+        {
+          queryParams: { country: null },
+          replaceUrl: true,
+          queryParamsHandling: 'merge'
+        }
+      );
+    }
+
     console.log(`Успешно отфильтровали!`);
     this.toastService.success('Отфильтровано');
     this.isSorting.set(false);
@@ -354,6 +378,15 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     }
 
     if (sorted) {
+      const sortQParam = encodeURIComponent(sortControlVal.toLowerCase());
+      this.router.navigate(
+        [],
+        {
+          queryParams: { sorting: sortQParam },
+          replaceUrl: true,
+          queryParamsHandling: 'merge'
+        }
+      );
       console.log(`Успешно отсортировали (${sortControlVal})!`);
       this.toastService.success('Отсортировано');
       this.setIconForSortDropdown(sortControlVal);
@@ -433,7 +466,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             this.categoryCodes.selected = value[0].code;
 
             if (queryParams.category) {
-              let detectedEl = value.find(item => item.code === queryParams.category);
+              let detectedEl = value.find(item => item.code.toLowerCase() === queryParams.category.toLowerCase());
               if (detectedEl) {
                 detectedEl.active = true;
                 this.categoryCodes.selected = detectedEl.code;
@@ -475,7 +508,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             this.categoryCodes.selected = value[0].code;
 
             if (queryParams.category) {
-              let detectedEl = value.find(item => item.code === queryParams.category);
+              let detectedEl = value.find(item => item.code.toLowerCase() === queryParams.category.toLowerCase());
               if (detectedEl) {
                 detectedEl.active = true;
                 this.categoryCodes.selected = detectedEl.code;
@@ -1090,14 +1123,16 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   public onChangeCurCategory(categoryItem: ILocationCategories): void {
 
+    if (this.categoryCodes.selected.toLowerCase() === categoryItem.code.toLowerCase()) return;
+
     this.router.navigate(
       [],
       {
-        queryParams: { category: categoryItem.code },
-        replaceUrl: true
-        // queryParamsHandling: 'merge'
+        queryParams: { category: categoryItem.code.toLowerCase(), country: null, sorting: null },
+        replaceUrl: true,
+        queryParamsHandling: 'merge'
       }
-    )
+    );
     
     this.setActiveCategory(categoryItem);
     this.afterChangeCategory();
