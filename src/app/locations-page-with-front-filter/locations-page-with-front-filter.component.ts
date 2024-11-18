@@ -14,7 +14,16 @@ import {
   signal,
   viewChild
 } from '@angular/core';
-import { Observable, Observer, Subject, Subscription, fromEvent, of, throwError } from 'rxjs';
+import {
+  Observable,
+  Observer,
+  Subject,
+  Subscription,
+  forkJoin,
+  fromEvent,
+  of,
+  throwError
+} from 'rxjs';
 import {
   catchError,
   throttleTime,
@@ -29,7 +38,16 @@ import {
 } from 'rxjs/operators';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterLink, Scroll } from '@angular/router';
-import { DOCUMENT, NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
+import {
+  DOCUMENT,
+  NgClass,
+  NgFor,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
+  ViewportScroller
+} from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import {
   CountryFilterItem,
@@ -44,12 +62,15 @@ import { LocationsService } from '@app/shared/services/locations.service';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { ToastService } from '@app/shared/services/toast.service';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
-import { MOCK_CATEGORIES_FOR_SKELETON, MOCK_LOCATIONS, MOCK_LOCATIONS_FOR_SKELETON } from '@app/shared/mock/locations';
+import {
+  MOCK_CATEGORIES_FOR_SKELETON,
+  MOCK_LOCATIONS,
+  MOCK_LOCATIONS_FOR_SKELETON
+} from '@app/shared/mock/locations';
 import { LocationItemComponent } from '@app/shared/components/location-item/location-item.component';
 import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-field.module';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
 
 @Component({
@@ -87,6 +108,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   private locationsAfterSortSub: Subscription;
   private fSub: Subscription;
   private sSub: Subscription;
+  private allOptionsSub: Subscription;
   private curLang: string;
   public filterBarGroup: UntypedFormGroup;
   private selectedCitiesMap: Record<string, 'chosen'> = {};
@@ -253,6 +275,14 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
     setTimeout(() => {
       this.filteredLocations = this.allLocations.cityPlaceList;
+      this.router.navigate(
+        [],
+        {
+          queryParams: { country: null },
+          replaceUrl: true,
+          queryParamsHandling: 'merge'
+        }
+      );
       console.log(`Успешно отфильтровали!`);
       this.toastService.success('Отфильтровано');
       this.isSorting.set(false);
@@ -343,39 +373,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   private sortLocationsOnFront(): void {
 
     const sortControlVal = this.filterBarGroup?.get('sort')?.value;
-
-    let sorted = false;
-    if (sortControlVal === 'PRICE_ASC') {
-      console.log('Сортируем от меньшего к большему');
-      this.allLocations.cityPlaceList.forEach(el => {
-        if (el.placeList?.length) {
-          el.placeList.sort((a, b) => {
-            return a.priceRange - b.priceRange;
-          })
-        }
-      });
-      sorted = true;
-    } else if (sortControlVal === 'PRICE_DESC') {
-      console.log('Сортируем от большего к меньшему');
-      this.allLocations.cityPlaceList.forEach(el => {
-        if (el.placeList?.length) {
-          el.placeList.sort((a, b) => {
-            return b.priceRange - a.priceRange;
-          })
-        }
-      });
-      sorted = true;
-    } else if (sortControlVal === 'RATING_DESC') {
-      console.log('Сортируем по рейтингу');
-      this.allLocations.cityPlaceList.forEach(el => {
-        if (el.placeList?.length) {
-          el.placeList.sort((a, b) => {
-            return b.rating - a.rating;
-          })
-        }
-      });
-      sorted = true;
-    }
+    const sorted = this.sortingMethod(sortControlVal, this.allLocations.cityPlaceList);
 
     if (sorted) {
       const sortQParam = encodeURIComponent(sortControlVal.toLowerCase());
@@ -402,6 +400,42 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.filterBarGroup.get('sort').enable({ emitEvent: false });
     this.isSorting.set(false);
 
+  }
+
+  private sortingMethod(sortVal: string, listForSort: any[]): boolean {
+    let sorted = false;
+    if (sortVal === 'PRICE_ASC') {
+      console.log('Сортируем от меньшего к большему');
+      listForSort.forEach(el => {
+        if (el.placeList?.length) {
+          el.placeList.sort((a, b) => {
+            return a.priceRange - b.priceRange;
+          })
+        }
+      });
+      sorted = true;
+    } else if (sortVal === 'PRICE_DESC') {
+      console.log('Сортируем от большего к меньшему');
+      listForSort.forEach(el => {
+        if (el.placeList?.length) {
+          el.placeList.sort((a, b) => {
+            return b.priceRange - a.priceRange;
+          })
+        }
+      });
+      sorted = true;
+    } else if (sortVal === 'RATING_DESC') {
+      console.log('Сортируем по рейтингу');
+      listForSort.forEach(el => {
+        if (el.placeList?.length) {
+          el.placeList.sort((a, b) => {
+            return b.rating - a.rating;
+          })
+        }
+      });
+      sorted = true;
+    }
+    return sorted;
   }
 
   private getCategories(): void {
@@ -536,9 +570,170 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private getAllOptionsAfterCategories(): void {
-    this.getSort();
-    this.getFilters();
-    this.getAllLocations();
+    const queryParams = this.route.snapshot.queryParams;
+    if (queryParams.sorting && queryParams.country) { // если есть сортировка и фильтрация в query params
+      this.allOptionsSub = forkJoin({
+        sort: this.getSortOptionsWrapper().pipe(catchError(() => of(null))),
+        filter: this.locationsService.getFilterOptions(this.categoryCodes.selected).pipe(catchError(() => of(null))),
+        data: this.locationsService.getAllLocations(null, null, this.categoryCodes.selected).pipe(catchError(() => of('error')))
+      }).subscribe({
+        next: value => console.log(value)
+        // error: err => console.log(err)
+        // complete: () => console.log('This is how it ends!'),
+      });
+    } else if (queryParams.sorting) { // если есть только сортировка в query params
+      this.getFilters();
+      this.allOptionsSub = forkJoin({
+        sort: this.getSortOptionsWrapper().pipe(catchError(() => of(null))),
+        data: this.locationsService.getAllLocations(null, null, this.categoryCodes.selected).pipe(catchError(() => of('error')))
+      })
+        // .pipe(catchError(error => of('error')))
+        .subscribe({
+          next: value => this.onlySortInParams(value)
+        });
+    } else if (queryParams.country) { // если есть только фильтрация в query params
+      this.getSort();
+      this.allOptionsSub = forkJoin({
+        filter: this.locationsService.getFilterOptions(this.categoryCodes.selected).pipe(catchError(() => of(null))),
+        data: this.locationsService.getAllLocations(null, null, this.categoryCodes.selected).pipe(catchError(() => of('error')))
+      }).subscribe({
+        next: value => this.onlyFilterInParams(value)
+      });
+    } else {
+      this.getSort();
+      this.getFilters();
+      this.getAllLocations();
+    }
+  }
+
+  private sortAndFilterInParams(resp: { sort: any, filter: any, data: any }) {
+    console.log(resp);
+  }
+
+  private onlySortInParams(resp: { sort: any, data: any }) {
+    if (resp.sort?.length) {
+
+      if (resp.data === 'error') {
+        // кейс когда сортировка ок, а локации с ошибкой
+
+        this.filterBarGroup.get('sort').enable({ emitEvent: false });
+        this.sortFieldOptions.items = resp.sort;
+        this.isEmptySortOptions.set(false);
+
+        this.allLocations = this.filteredLocations = null;
+        this.isLoading.set(false);
+      } else {
+        // кейс когда и сортировка ок и локации ок
+
+        const queryParams = this.route.snapshot.queryParams;
+        const sortingValFromQParams = queryParams.sorting;
+        const sortingMatch = resp.sort.find(sortItem => sortItem.value.toLowerCase() === sortingValFromQParams.toLowerCase());
+
+        if (sortingMatch) {
+
+          // для сортировки:
+          this.filterBarGroup.get('sort').setValue(sortingMatch.value, { emitEvent: false });
+          sortingMatch.selected = true;
+          this.setIconForSortDropdown(sortingMatch.value);
+
+          // для локаций:
+          this.sortingMethod(sortingMatch.value, resp.data.cityPlaceList);
+        }
+
+        // для сортировки:
+        this.filterBarGroup.get('sort').enable({ emitEvent: false });
+        this.sortFieldOptions.items = resp.sort;
+        this.isEmptySortOptions.set(false);
+
+        // для локаций:
+        this.allLocationsReceived = true;
+        this.allLocations = resp.data;
+        this.filteredLocations = resp.data?.cityPlaceList;
+        this.isLoading.set(false);
+        
+      }
+
+    } else {
+
+      if (resp.data === 'error') {
+        // кейс когда и сортировка с ошибкой и локации с ошибкой
+        this.allLocations = this.filteredLocations = null;
+        this.isLoading.set(false);
+      } else {
+        // кейс когда сортировка с ошибкой, а локации ок
+        this.allLocationsReceived = true;
+        this.allLocations = resp.data;
+        this.filteredLocations = resp.data?.cityPlaceList;
+        this.isLoading.set(false);
+      }
+
+      console.error('Ошибка при получении сортировки или список сортировки пришел пустой');
+      this.isEmptySortOptions.set(true);
+    }
+  }
+
+  private onlyFilterInParams(resp: { filter: Array<CountryFilterItem>, data: any }) {
+    if (resp.filter?.length) {
+      if (resp.data === 'error') {
+        // кейс когда фильтрация ок, а локации с ошибкой
+
+        // для фильтрации:
+        this.filterFieldOptions = resp.filter?.filter(el => el.cityList?.length);
+
+        // для локаций:
+        this.allLocations = this.filteredLocations = null;
+        this.isLoading.set(false);
+      } else {
+        // кейс когда и фильтрация ок и локации ок
+
+        const queryParams = this.route.snapshot.queryParams;
+        const filterValFromQParams: string = queryParams.country;
+        const decodeFilterValFromQParams = decodeURIComponent(filterValFromQParams);
+        const splitFilterValFromQParams = decodeFilterValFromQParams.split(','); // пункты фильтрации (города) из queryParams
+
+        let filterFromResp = resp.filter?.filter(el => el.cityList?.length);
+        let fullMatch = true; // полное совпадение городов из queryParams и response фильтрации, точнне все города из queryParams были найдены в респонсе
+
+        splitFilterValFromQParams.forEach((valFromQParams: string) => {
+          outer: for (let country of filterFromResp) {
+            for (let city of country.cityList) {
+              console.log(valFromQParams, country, city);
+              if (city.code.toLowerCase() === valFromQParams.toLowerCase()) {
+                this.setSelectedCity(country, city);
+                break outer;
+              }
+            }
+          }
+        });
+
+        // для фильтрации:
+        this.filterFieldOptions = filterFromResp;
+
+        // для локаций:
+        this.allLocationsReceived = true;
+        this.allLocations = resp.data;
+        if (this.amountAllSelectedCities.length) { // если что-то нафильтровали выше
+          this.filteredLocations = this.allLocations.cityPlaceList.filter(city => {
+            return city.cityCode in this.selectedCitiesMap;
+          });
+        } else {
+          this.filteredLocations = this.allLocations.cityPlaceList;
+        }
+        this.isLoading.set(false);
+      }
+    } else {
+      if (resp.data === 'error') {
+        // кейс когда и фильтрация с ошибкой и локации с ошибкой
+        this.allLocations = this.filteredLocations = null;
+        this.isLoading.set(false);
+      } else {
+        // кейс когда фильтрация с ошибкой, а локации ок
+        this.allLocationsReceived = true;
+        this.allLocations = resp.data;
+        this.filteredLocations = resp.data?.cityPlaceList;
+        this.isLoading.set(false);
+      }
+    }
   }
 
   private afterChangeCategory(): void {
@@ -620,23 +815,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           }
         );
     } else {
-      this.sSub = this.locationsService.getSortOptions(this.categoryCodes.selected)
-        .pipe(
-          // delay(4000),
-          map((resp: Array<{ title?: string, code?: string, details?: string, value?: string }>) => {
-            if (resp?.length) {
-              resp = resp.filter(el => el && Object.keys(el).length);
-              resp = resp.map(el => {
-                const res = {
-                  details: el.title || el.code,
-                  value: el.code
-                }
-                return res;
-              })
-            }
-            return resp;
-          })
-        )
+      this.sSub = this.getSortOptionsWrapper()
         .subscribe(
           (value: Array<{ details: string, value: string }>) => {
             if (value?.length) {
@@ -659,6 +838,28 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           }
         );
     }
+  }
+
+  private getSortOptionsWrapper(): Observable<Array<{ details: string, value: string }>> {
+    return this.locationsService.getSortOptions(this.categoryCodes.selected)
+      .pipe(
+        // delay(4000),
+        // tap((val) => console.log(val)),
+        // map(() => []),
+        map((resp: Array<{ title?: string, code?: string, details?: string, value?: string }>): any => {
+          if (resp?.length) {
+            resp = resp.filter(el => el && Object.keys(el).length);
+            resp = resp.map(el => {
+              const res = {
+                details: el.title || el.code,
+                value: el.code
+              }
+              return res;
+            })
+          }
+          return resp;
+        })
+      )
   }
 
   private getFilters(): void {
@@ -1085,11 +1286,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       delete this.selectedCitiesMap[linkToCity.code];
     } else {
       console.log('Выбрали еще какой-то город');
-      linkToCity.selected = true;
-      if (!linkToCountry.selectedСities?.length) { linkToCountry.selectedСities = [] };
-      linkToCountry.selectedСities.push(linkToCity.code);
-      this.amountAllSelectedCities.push(linkToCity.code);
-      this.selectedCitiesMap[linkToCity.code] = 'chosen';
+      this.setSelectedCity(linkToCountry, linkToCity);
     }
 
     const mobileWidth = document.documentElement.clientWidth < 768;
@@ -1115,6 +1312,14 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         }, 1500);
       }
     }
+  }
+
+  private setSelectedCity(linkToCountry: CountryFilterItem, linkToCity: any): void {
+    linkToCity.selected = true;
+    if (!linkToCountry.selectedСities?.length) { linkToCountry.selectedСities = [] };
+    linkToCountry.selectedСities.push(linkToCity.code);
+    this.amountAllSelectedCities.push(linkToCity.code);
+    this.selectedCitiesMap[linkToCity.code] = 'chosen';
   }
 
   public getAmountOfAllSelectedCities(): string {
@@ -1189,6 +1394,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.locationsAfterSortSub?.unsubscribe();
     this.fSub?.unsubscribe();
     this.sSub?.unsubscribe();
+    this.allOptionsSub?.unsubscribe();
     clearTimeout(this.debounceTimeForFilter);
     clearTimeout(this.fakeDelayForFilter);
     clearTimeout(this.fakeDelayForSort);

@@ -154,7 +154,9 @@
                                                                     ></app-location-item> -->
                                                                     <a
                                                                         class="pageContent__locationLink"
-                                                                        [routerLink]="['/locations', location.pageName]"
+                                                                        [routerLink]="
+                                                                            (this.isSorting() || this.isLoading()) ? null : ['/locations', location.pageName]
+                                                                        "
                                                                         queryParamsHandling="merge"
                                                                     >
                                                                         <app-location-item
