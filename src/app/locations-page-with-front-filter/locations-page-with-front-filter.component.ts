@@ -163,18 +163,18 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     
     this.filteredLocations = this.allLocations.cityPlaceList;
 
-    // const scrollingPosition: Signal<[number, number] | null> = toSignal(
-    //   inject(Router).events.pipe(
-    //     filter((event): event is Scroll => event instanceof Scroll),
-    //     map((event: Scroll) => event.position),
-    //   ),
-    // );
+    const scrollingPosition: Signal<[number, number] | null> = toSignal(
+      inject(Router).events.pipe(
+        filter((event): event is Scroll => event instanceof Scroll),
+        map((event: Scroll) => event.position),
+      ),
+    );
 
-    // effect(() => {
-    //   if (this.scrollingRef() && scrollingPosition()) {
-    //     this.vc.scrollToPosition(scrollingPosition()!);
-    //   }
-    // });
+    effect(() => {
+      if (this.scrollingRef() && scrollingPosition()) {
+        this.vc.scrollToPosition(scrollingPosition()!);
+      }
+    });
   }
 
   ngOnInit(): void {

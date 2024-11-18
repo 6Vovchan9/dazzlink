@@ -7,9 +7,10 @@ import {
   NgSwitchCase,
   NgSwitchDefault,
   NgTemplateOutlet,
-  ViewportScroller
+  ViewportScroller,
+  Location
 } from '@angular/common';
-import { Component, DoCheck, effect, ElementRef, OnInit, viewChild, ViewChild } from '@angular/core';
+import { Component, DoCheck, effect, ElementRef, inject, OnInit, viewChild, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, fromEvent, of, pipe } from 'rxjs';
 import { auditTime, catchError, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -74,6 +75,8 @@ export class PlacePageComponent extends ThumbHash implements OnInit {
   public showPhotoGalleria = false;
 
   private initSwipePoint: Touch;
+
+  private myLocation = inject(Location);
 
   constructor(
     private route: ActivatedRoute,
@@ -571,14 +574,20 @@ export class PlacePageComponent extends ThumbHash implements OnInit {
   }
 
   public goToAllPlaces(withMessage = false): void {
-    this.router.navigate(
-      ['/locations'],
-      {
-        queryParams: { category: this.placeData?.categoryCode.toLowerCase() },
-        queryParamsHandling: 'merge'
-      }
-    );
-    if (withMessage) this.toastService.warning('Не удается открыть локацию :(');
+    if (1 && this.pagesService.prevPage() && this.pagesService.prevPage().startsWith('/locations')) {
+      // console.log('Идем на шаг назад');
+      this.myLocation.back(); // Такой способ навигации назад нужен для того чтобы при навигации проскроллить страницу "Локации" к карточке текущего места
+    } else {
+      // console.log('Идем конкретно на страницу "Локации"');
+      this.router.navigate(
+        ['/locations'],
+        {
+          queryParams: { category: this.placeData?.categoryCode.toLowerCase() },
+          queryParamsHandling: 'merge'
+        }
+      );
+      if (withMessage) this.toastService.warning('Не удается открыть локацию :(');
+    }
   }
 
   public onVoting(val: 'like' | 'dislike'): void {
