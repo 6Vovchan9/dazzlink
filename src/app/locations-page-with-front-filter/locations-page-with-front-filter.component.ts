@@ -146,6 +146,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   scrollingRef = viewChild<HTMLElement>('restoreScrollPosition');
   public allLocationsReceived = false;
   public cookiesAgreementService = inject(CookiesAgreementService);
+  private needScrollAfterRedirect = true;
   // public myBlockAboutScroll: { [key: string]: number } = {};
 
   constructor(
@@ -577,7 +578,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         filter: this.locationsService.getFilterOptions(this.categoryCodes.selected).pipe(catchError(() => of(null))),
         data: this.locationsService.getAllLocations(null, null, this.categoryCodes.selected).pipe(catchError(() => of('error')))
       }).subscribe({
-        next: value => console.log(value)
+        next: value => this.sortAndFilterInParams(value)
         // error: err => console.log(err)
         // complete: () => console.log('This is how it ends!'),
       });
@@ -606,8 +607,107 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     }
   }
 
-  private sortAndFilterInParams(resp: { sort: any, filter: any, data: any }) {
-    console.log(resp);
+  private sortAndFilterInParams(resp: { sort: any, filter: Array<CountryFilterItem>, data: any }) {
+    // сначала проверяем сортировку:
+    if (resp.sort?.length) {
+      if (resp.data === 'error') {
+        // кейс когда сортировка ок, а локации с ошибкой
+        this.filterBarGroup.get('sort').enable({ emitEvent: false });
+        this.sortFieldOptions.items = resp.sort;
+        this.isEmptySortOptions.set(false);
+      } else {
+        // кейс когда и сортировка ок и локации ок
+        const queryParams = this.route.snapshot.queryParams;
+        const sortingValFromQParams = queryParams.sorting;
+        const sortingMatch = resp.sort.find(sortItem => sortItem.value.toLowerCase() === sortingValFromQParams.toLowerCase());
+
+        if (sortingMatch) {
+          // для сортировки:
+          this.filterBarGroup.get('sort').setValue(sortingMatch.value, { emitEvent: false });
+          sortingMatch.selected = true;
+          this.setIconForSortDropdown(sortingMatch.value);
+
+          // для локаций:
+          this.sortingMethod(sortingMatch.value, resp.data.cityPlaceList);
+        }
+
+        // для сортировки:
+        this.filterBarGroup.get('sort').enable({ emitEvent: false });
+        this.sortFieldOptions.items = resp.sort;
+        this.isEmptySortOptions.set(false);
+      }
+    } else {
+      console.error('Ошибка при получении сортировки или список сортировки пришел пустой');
+      this.isEmptySortOptions.set(true);
+    }
+    // теперь проверяем фильтрацию:
+    if (resp.filter?.length) {
+      if (resp.data === 'error') {
+        // кейс когда фильтрация ок, а локации с ошибкой
+
+        // для фильтрации:
+        this.filterFieldOptions = resp.filter?.filter(el => el.cityList?.length);
+
+        // для локаций:
+        this.allLocations = this.filteredLocations = null;
+        this.isLoading.set(false);
+      } else {
+        // кейс когда и фильтрация ок и локации ок
+
+        const queryParams = this.route.snapshot.queryParams;
+        const filterValFromQParams: string = queryParams.country;
+        const decodeFilterValFromQParams = decodeURIComponent(filterValFromQParams);
+        const splitFilterValFromQParams = decodeFilterValFromQParams.split(','); // пункты фильтрации (города) из queryParams
+
+        let filterFromResp = resp.filter?.filter(el => el.cityList?.length);
+
+        splitFilterValFromQParams.forEach((valFromQParams: string) => {
+          let match = false;
+          outer: for (let country of filterFromResp) {
+            for (let city of country.cityList) {
+              if (city.code.toLowerCase() === valFromQParams.toLowerCase()) {
+                this.setSelectedCity(country, city);
+                match = true;
+                break outer;
+              }
+            }
+          }
+
+          if (!match) {
+            console.log(`Мэтча не случилось для "${valFromQParams}" из queryParams`);
+            // это значит что не случилось полного совпадения городов из queryParams и response фильтрации, точнне не все города из queryParams были найдены в респонсе
+            this.needScrollAfterRedirect = false;
+          }
+        });
+
+        // для фильтрации:
+        this.filterFieldOptions = filterFromResp;
+
+        // для локаций:
+        this.allLocationsReceived = true;
+        this.allLocations = resp.data;
+        if (this.amountAllSelectedCities.length) { // если что-то нафильтровали выше
+          this.filteredLocations = this.allLocations.cityPlaceList.filter(city => {
+            return city.cityCode in this.selectedCitiesMap;
+          });
+        } else {
+          this.filteredLocations = this.allLocations.cityPlaceList;
+        }
+        this.isLoading.set(false);
+      }
+    } else {
+      if (resp.data === 'error') {
+        // кейс когда и фильтрация с ошибкой и локации с ошибкой
+        this.allLocations = this.filteredLocations = null;
+        this.isLoading.set(false);
+      } else {
+        // кейс когда фильтрация с ошибкой, а локации ок
+        this.allLocationsReceived = true;
+        this.allLocations = resp.data;
+        this.filteredLocations = resp.data?.cityPlaceList;
+        this.isLoading.set(false);
+      }
+    }
   }
 
   private onlySortInParams(resp: { sort: any, data: any }) {
@@ -692,17 +792,23 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         const splitFilterValFromQParams = decodeFilterValFromQParams.split(','); // пункты фильтрации (города) из queryParams
 
         let filterFromResp = resp.filter?.filter(el => el.cityList?.length);
-        let fullMatch = true; // полное совпадение городов из queryParams и response фильтрации, точнне все города из queryParams были найдены в респонсе
 
         splitFilterValFromQParams.forEach((valFromQParams: string) => {
+          let match = false;
           outer: for (let country of filterFromResp) {
             for (let city of country.cityList) {
-              console.log(valFromQParams, country, city);
               if (city.code.toLowerCase() === valFromQParams.toLowerCase()) {
                 this.setSelectedCity(country, city);
+                match = true;
                 break outer;
               }
             }
+          }
+
+          if (!match) {
+            console.log(`Мэтча не случилось для "${valFromQParams}" из queryParams`);
+            // это значит что не случилось полного совпадения городов из queryParams и response фильтрации, точнне не все города из queryParams были найдены в респонсе
+            this.needScrollAfterRedirect = false;
           }
         });
 
