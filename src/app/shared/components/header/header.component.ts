@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IsActiveMatchOptions, RouterLink, RouterLinkActive } from '@angular/router';
-import { AbsractExample } from '@app/shared/helpers/classes/abstract.class';
+import { GlobalModalService } from '@app/shared/services/global-modal.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,9 @@ import { AbsractExample } from '@app/shared/helpers/classes/abstract.class';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent extends AbsractExample {
+export class HeaderComponent {
+
+  constructor(private modalService: GlobalModalService) { }
 
   public routerLinkActiveOptions: IsActiveMatchOptions = {
     matrixParams: 'ignored',
@@ -19,27 +21,9 @@ export class HeaderComponent extends AbsractExample {
     paths: 'subset'
   };
 
-  public showNavModal = false;
-
-  requiredMethod(): number {
-    return Math.PI * Math.pow(this.radius, 2);
-  }
-
-  goToAnotherPage(futurePath?: string): void {
-    // const pathnameBeforeNav = location.pathname;
-    // if (pathnameBeforeNav !== futurePath) {
-      this.closeNavPopup();
-    // }
-  }
-
   public openNavPopup(): void {
-    this.showNavModal = true;
-    this.hideScroll(); // следует иметь в виду, что, когда навигация короткая (и, следовательно, не прокручивается как тут), а пользователь пытается прокрутить ее, тело страницы будет прокручиваться, даже если установлено свойство overscroll-behavior-y: contain, поэтому придется прибегнуть к такому решению
-  }
-
-  public closeNavPopup(): void {
-    this.showNavModal = false;
-    this.showScroll();
+    this.modalService.open({ component: 'appComponent', modalName: 'navigationModal' });
+    // this.hideScroll(); // следует иметь в виду, что, когда навигация короткая (и, следовательно, не прокручивается как тут), а пользователь пытается прокрутить ее, тело страницы будет прокручиваться, даже если установлено свойство overscroll-behavior-y: contain, поэтому придется прибегнуть к такому решению
   }
 
 }

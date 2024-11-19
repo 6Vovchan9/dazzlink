@@ -1,8 +1,8 @@
 <header class="header">
     <div class="container header__container">
         <div class="header__col">
-            <a routerLink="/" class="logo">
-                <img src="assets/images/fullLogo.svg" class="logo__image" alt="logotip">
+            <a routerLink="/" class="logoInHeader">
+                <img src="assets/images/fullLogo.svg" class="logoInHeader__image" alt="logotip">
             </a>
         </div>
         <div class="header__col header__col--alignRight">
@@ -58,79 +58,3 @@
     </div>
     <div class="shadow"></div>
 </header>
-
-<!-- Модалка с навигацией для мобилы -->
- @if (showNavModal) {
-    <div class="navigationModal">
-        <div class="navigationModal__header">
-            <div class="headerInModal">
-                <div class="headerInModal__col">
-                    <a routerLink="/" (click)="goToAnotherPage()" class="logo">
-                        <img src="assets/images/fullLogo.svg" class="logo__image" alt="logotip">
-                    </a>
-                </div>
-                <div class="headerInModal__col">
-                    <div (click)="closeNavPopup()" class="closeButtonInWindow">
-                        <div class="iconForCloseInModal"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="navigationModal__contentWrap">
-            <div class="navigationModal__content">
-                <nav class="menuInNavModal navigationModal__menu">
-                    <ul class="menuInNavModal__list">
-                        <li class="menuInNavModal__item" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="menuInNavModal__item--active">
-                            <a class="menuInNavModal__link" (click)="goToAnotherPage('/')" routerLink="/">Приложение</a>
-                        </li>
-                        <li class="menuInNavModal__item" routerLinkActive="menuInNavModal__item--active">
-                            <a class="menuInNavModal__link" (click)="goToAnotherPage('/media')" routerLink="/media">Медиа</a>
-                        </li>
-                        <li class="menuInNavModal__item" routerLinkActive="menuInNavModal__item--active" [routerLinkActiveOptions]="routerLinkActiveOptions">
-                            <a class="menuInNavModal__link" (click)="goToAnotherPage()" routerLink="/locations">Локации</a>
-                        </li>
-                        <li class="menuInNavModal__item" routerLinkActive="menuInNavModal__item--active">
-                            <a class="menuInNavModal__link" (click)="goToAnotherPage()" routerLink="/company">Компания</a>
-                        </li>
-                        <!-- <li class="menuInNavModal__item">
-                            <a class="menuInNavModal__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
-                        </li> -->
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <!-- <div class="navigationModal__footer">
-            <div class="footerInModal">
-                <div class="footerInModal__col">
-                    <div class="socialNetworks socialNetworks--textColor--black">
-                        <ul class="socialNetworks__list">
-                            <li class="socialNetworks__item">
-                                <a href="https://instagram.com/dazzlink.asia" target="_blank" class="socialNetworks__link">Instagram</a>
-                            </li>
-                            <li class="socialNetworks__item">
-                                <a href="https://facebook.com" target="_blank" class="socialNetworks__link">Facebook</a>
-                            </li>
-                            <li class="socialNetworks__item">
-                                <a href="https://linkedin.com" target="_blank" class="socialNetworks__link">LinkedIn</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footerInModal__col">
-                    <div class="footerInModal__lang">
-                        <app-dropdown-field
-                            [formControl]="myForm.get('language')"
-                            [options]="langFieldOptions"
-                            (ngModelChange)="onChangeLang($event, true)"
-                            [multiple]="false"
-                            [listOnTop]="true"
-                            optionLabel="value"
-                            arrowIcon="assets/icons/planetForLang.svg">
-                        </app-dropdown-field>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    </div>
-    <div class="backgroundForNavModal" (click)="closeNavPopup()"></div>
-}

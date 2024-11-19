@@ -615,3 +615,27 @@ button {
         opacity: .5;
     }
 }
+
+.logoInHeader {
+    // width: 126px;
+    height: 24px;
+    display: flex;
+    max-height: 100%;
+    overflow: hidden;
+
+    // background-repeat: no-repeat;
+    // background-size: contain;
+    // background-position: left center;
+    // background-image: url('src/assets/icons/rosbankLogo.svg');
+
+    .logoInHeader__image {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    @media #{$notMobile} {
+        // width: 168px;
+        height: 32px;
+    }
+}

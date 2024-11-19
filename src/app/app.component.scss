@@ -274,3 +274,114 @@
         padding: 32px 64px 48px;
     }
 }
+
+.navigationModal {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    background-color: #F2F3F4;
+
+    z-index: 110;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 80px;
+    width: 100%;
+    min-width: 300px;
+    max-width: 800px;
+    max-height: 90%;
+    // min-height: 542px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    // opacity: .8;
+
+    .navigationModal__header {
+
+        // background-color: aquamarine;
+        margin-bottom: 20px;
+
+        .headerInModal {
+            display: flex;
+            column-gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    .navigationModal__contentWrap {
+        flex: 1;
+        overflow-y: auto;
+        .navigationModal__content {
+            .navigationModal__menu {
+                font-size: 24px;
+                line-height: 32px;
+                font-weight: 700;
+                margin-top: 24px;
+            }
+        }
+    }
+
+    .navigationModal__footer {
+        // background-color: coral;
+        margin-top: 30px;
+
+        .footerInModal {
+            display: flex;
+            column-gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footerInModal__lang {
+            margin-left: -16px;
+        }
+    }
+
+    @media #{$mobile} {
+        padding: 20px;
+        height: 100%;
+        max-height: unset;
+        border-radius: 0px;
+        justify-content: center;
+        background-color: #fff;
+    }
+
+    @media #{$notMobile} {
+        border: 2px solid;
+        padding: 30px;
+    }
+}
+
+.backgroundForNavModal {
+    position: fixed;
+    top: 0;
+    backdrop-filter: blur(4px);
+    width: 100%;
+    height: 100%;
+    z-index: 105;
+}
+
+.menuInNavModal {
+    .menuInNavModal__list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        .menuInNavModal__item {
+            .menuInNavModal__link {
+                cursor: pointer;
+                display: block;
+                text-decoration: none;
+                padding: 12px;
+                padding-left: 0px;
+                color: var(--color-black1);
+            }
+            &--active {
+                .menuInNavModal__link {
+                    cursor: default;
+                    color: var(--color-text-gray);
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+}
