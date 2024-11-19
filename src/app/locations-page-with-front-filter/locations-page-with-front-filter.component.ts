@@ -690,6 +690,10 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           this.filteredLocations = this.allLocations.cityPlaceList.filter(city => {
             return city.cityCode in this.selectedCitiesMap;
           });
+          // const notMobileWidth = document.documentElement.clientWidth >= 768;
+          // if (notMobileWidth) {
+          //   this.showFilterControls.set(true);
+          // }
         } else {
           this.filteredLocations = this.allLocations.cityPlaceList;
         }
@@ -822,6 +826,10 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           this.filteredLocations = this.allLocations.cityPlaceList.filter(city => {
             return city.cityCode in this.selectedCitiesMap;
           });
+          // const notMobileWidth = document.documentElement.clientWidth >= 768;
+          // if (notMobileWidth) {
+          //   this.showFilterControls.set(true);
+          // }
         } else {
           this.filteredLocations = this.allLocations.cityPlaceList;
         }
