@@ -1,0 +1,1 @@
+var e=class{constructor(){this.name="Ivan",this.radius=12}getName(o){return o||this.name}hideScroll(){document.documentElement.classList.add("noScroll")}showScroll(){document.documentElement.classList.remove("noScroll")}};export{e as a};
