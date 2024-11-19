@@ -241,6 +241,7 @@
 </div>
 
 <div *ngIf="showFilterControls() && filterFieldOptions?.length" class="filterOptionsForMobile">
+    <div class="filterOptionsForMobile__background"></div>
     <div class="filterOptionsForMobile__content" (click)="onCloseFilterOptionsInMobile()">
         <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
     </div>

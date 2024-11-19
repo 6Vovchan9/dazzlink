@@ -237,8 +237,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     const myWindow: Window = this.myDocument.defaultView;
     const svgCircleElement = this.progressCircle?.nativeElement as SVGCircleElement;
     if (svgCircleElement) {
-      const pageHeight = Math.max(myHtml.scrollHeight, myHtml.offsetHeight, myHtml.clientHeight);  // высота всей страницы
-      const innerHeight = myWindow.innerHeight; // высота окна (тут учитывается видна/скрыта адресная строка)
+      const pageHeight = Math.max(myHtml.scrollHeight, myHtml.offsetHeight, myHtml.clientHeight);  // высота всей страницы, где document.documentElement.clientHeight - высота видимой части документа за вычетом полосы прокрутки и адресной строки (как будто она видна "svh")
+      const innerHeight = myWindow.innerHeight; // высота окна (тут учитывается видна/скрыта адресная строка и включает в себя полосу прокрутки)
       const prevState = this.hideScrollProgress;
       this.hideScrollProgress = curScrollTop < innerHeight;
       const futureState = this.hideScrollProgress;

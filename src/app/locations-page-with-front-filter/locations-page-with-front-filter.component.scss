@@ -35,7 +35,7 @@ $shadowHeightInMobile: 20px;
 //     }
 // }
 
-@media (min-height: 667px) {
+@media (min-height: 663px) { // 663px - это document.documentElement.clientHeight
     .locationsPage.locationsPage--headerSticky {
         .locationsPage__header {
             position: sticky;
@@ -678,10 +678,20 @@ $shadowHeightInMobile: 20px;
 
 .filterOptionsForMobile {
 
+    .filterOptionsForMobile__background {
+        background-color: rgba(51, 51, 51, 0.72);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+    }
+
     .filterOptionsForMobile__content {
         position: fixed;
         bottom: 0;
-        background-color: rgba(51, 51, 51, 0.72);
+        // background-color: rgba(51, 51, 51, 0.72);
         z-index: 110;
         width: 100%;
         height: 100dvh;
