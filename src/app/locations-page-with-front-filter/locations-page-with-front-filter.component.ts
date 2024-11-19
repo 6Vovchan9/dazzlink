@@ -386,8 +386,10 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           queryParamsHandling: 'merge'
         }
       );
+      const selectedSortDetail = this.sortFieldOptions.items.find(item => item.value.toLowerCase() === sortControlVal.toLowerCase())?.details;
+
       console.log(`Успешно отсортировали (${sortControlVal})!`);
-      this.toastService.success('Отсортировано');
+      this.toastService.success(selectedSortDetail || 'Отсортировано');
       this.setIconForSortDropdown(sortControlVal);
     } else {
       this.toastService.warning('Ошибка сортировки :(');
@@ -1509,6 +1511,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.fSub?.unsubscribe();
     this.sSub?.unsubscribe();
     this.allOptionsSub?.unsubscribe();
+    this.pageScrollSub?.unsubscribe();
     clearTimeout(this.debounceTimeForFilter);
     clearTimeout(this.fakeDelayForFilter);
     clearTimeout(this.fakeDelayForSort);
@@ -1517,9 +1520,10 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public ngOnDestroy(): void {
     this.subscriptionList();
 
-    this.pageScrollSub?.unsubscribe();
     this.destroy$.next(true);
     this.destroy$.complete();
+
+    this.showScroll('noScrollInMobile');
   }
 
 }

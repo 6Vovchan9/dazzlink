@@ -648,7 +648,7 @@ $shadowHeightInMobile: 20px;
     }
 
     @media #{$mobile} {
-        max-height: 90%;
+        max-height: 90svh;
         border-radius: 20px 20px 0 0;
         .filterOptionsBlock__allCountries {
             overscroll-behavior-y: contain;
