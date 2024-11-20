@@ -282,9 +282,6 @@
     background-color: #F2F3F4;
 
     z-index: 110;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     padding: 80px;
     width: 100%;
     min-width: 300px;
@@ -338,8 +335,9 @@
     }
 
     @media #{$mobile} {
+        top: 0px;
         padding: 20px;
-        height: 100%;
+        height: 100svh;
         max-height: unset;
         border-radius: 0px;
         justify-content: center;
@@ -347,6 +345,9 @@
     }
 
     @media #{$notMobile} {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         border: 2px solid;
         padding: 30px;
     }
@@ -355,10 +356,15 @@
 .backgroundForNavModal {
     position: fixed;
     top: 0;
+    left: 0;
     backdrop-filter: blur(4px);
     width: 100%;
-    height: 100%;
+    height: 100lvh;
     z-index: 105;
+
+    @media #{$mobile} {
+        background-color: #fff;
+    }
 }
 
 .menuInNavModal {
