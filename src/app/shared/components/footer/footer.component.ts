@@ -57,6 +57,14 @@ export class FooterComponent {
     this.modalService.open({ component: 'appComponent', modalName: 'qrModal' });
   }
 
+  public openQRModalAdvanced(): void {
+    if (this.mobileDetectService?.osDevice) {
+      this.mobileDetectService?.goToDeviceStore();
+    } else {
+      this.modalService.open({ component: 'appComponent', modalName: 'qrModal' });
+    }
+  }
+
   public qrModalOrTelegram(): void {
     if (this.mobileDetectService?.osDevice) {
       this.mobileDetectService.goToTelegramChannel();
