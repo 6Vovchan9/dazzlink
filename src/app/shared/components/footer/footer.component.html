@@ -2,7 +2,7 @@
     <div class="container footer__container">
         <div class="footer__content">
             <div class="footer__col footer__col--forMobile">
-                @if (true) {
+                @if (1) {
                     <button
                         class="blueBtn blueBtn--white"
                         (click)="qrModalOrTelegram()"
@@ -11,12 +11,27 @@
                         <span>Получить подарок</span>
                     </button>
                 } @else {
-                    <div (click)="mobileDetectService?.goToDeviceStore()" class="footer__download downloadApp">
-                        <div class="downloadApp__title">Скачайте<br>приложение</div>
-                        <div class="downloadApp__icon">
-                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
-                        </div>
-                    </div>
+                    @if (mobileDetectService.osDevice) {
+                        <button class="footer__download downloadApp"
+                            (click)="mobileDetectService?.goToDeviceStore()"
+                            type="button"
+                        >
+                            <div class="downloadApp__title">Скачайте<br />приложение</div>
+                            <div class="downloadApp__icon">
+                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
+                            </div>
+                        </button>
+                    } @else {
+                        <button class="footer__download downloadApp"
+                            (click)="openQRModal()"
+                            type="button"
+                        >
+                            <div class="downloadApp__title">Скачайте<br />приложение</div>
+                            <div class="downloadApp__icon">
+                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
+                            </div>
+                        </button>
+                    }
                 }
                 <div class="footer__links">
                     <div class="footer__nav">
@@ -31,7 +46,7 @@
             </div>
             <div class="footer__col footer__col--forDesktop">
                 <div class="footer__btns">
-                    @if (true) {
+                    @if (1) {
                         <button class="btnInFooter"
                             (click)="qrModalOrTelegram()"
                             type="button"

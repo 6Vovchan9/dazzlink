@@ -84,7 +84,7 @@
                             Доступно в крупных городах Узбекистана
                         </div>
                     </div>
-                    @if (true) {
+                    @if (1) {
                         <button (click)="qrModalOrTelegram()" class="aboutAppInfo__btn blueBtn blueBtn--withPresentIcon">
                             <img src="assets/icons/present.svg" alt="p">
                             Получить подарок
@@ -94,7 +94,7 @@
                             <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
                         </div>
                         @if (mobileDetectService.osDevice) {
-                            <div class="aboutAppInfo__infoLinks forMobile">
+                            <div class="aboutAppInfo__infoLinks aboutAppInfo__infoLinks--downloadApp forMobile">
                                 <button class="downloadApp"
                                     type="button"
                                     (click)="mobileDetectService?.goToDeviceStore()"
@@ -195,7 +195,7 @@
                             <div class="appAdv__text">
                                 Запуск приложения в конце 2024. Хотите узнать о нем первыми и получить подарок от команды Dazzlink? 
 
-                                @if (true) {
+                                @if (1) {
                                     <button (click)="qrModalOrTelegram()" class="appAdv__btn blueBtn blueBtn--withPresentIcon">
                                         <img src="assets/icons/present.svg" alt="p">
                                         Получить подарок
@@ -205,7 +205,7 @@
                                         <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
                                     </div>
                                     @if (mobileDetectService.osDevice) {
-                                        <div class="appAdv__infoLinks forMobile">
+                                        <div class="appAdv__infoLinks appAdv__infoLinks--downloadApp forMobile">
                                             <button class="downloadApp"
                                                 type="button"
                                                 (click)="mobileDetectService?.goToDeviceStore()"

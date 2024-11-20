@@ -299,6 +299,9 @@ $shadowHeightInMobile: 20px;
                     margin-top: 12px;
                     .appAdv__infoLinks {
                         margin-top: 48px;
+                        &--downloadApp {
+                            max-width: 430px;
+                        }
                     }
                 }
                 .appAdv__btn {
@@ -486,6 +489,15 @@ a.progressive img.preview {
             margin-top: 0px;
             .linkToApp {
                 justify-content: flex-end;
+            }
+        }
+    }
+
+    @media #{$mobile} {
+        .aboutAppInfo__infoLinks {
+            &--downloadApp {
+                align-self: stretch;
+                max-width: 430px;
             }
         }
     }
