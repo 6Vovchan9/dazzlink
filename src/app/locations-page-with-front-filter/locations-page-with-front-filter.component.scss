@@ -138,11 +138,11 @@ $shadowHeightInMobile: 20px;
     position: relative;
     flex: 2;
 
-    .pageContent__allAboutLocations {
-        &--withGradientEffect {
-            mask-image: linear-gradient(0deg, transparent, #000 400px);
-        }
-    }
+    // .pageContent__allAboutLocations {
+    //     &--withGradientEffect {
+    //         mask-image: linear-gradient(0deg, transparent, #000 400px);
+    //     }
+    // }
 
     // .pageContent__allAboutLocations {
     //     position: relative;
@@ -212,6 +212,9 @@ $shadowHeightInMobile: 20px;
         }
         &--last {
             margin-bottom: 0px;
+        }
+        &--withGradientEffect {
+            mask-image: linear-gradient(0deg, transparent, #000 386px);
         }
         &--haveMoreLocations {
             position: relative;

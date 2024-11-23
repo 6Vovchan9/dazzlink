@@ -136,9 +136,11 @@
                                             <!-- Список локаций -->
                                             @for (block of filteredLocations; track block.cityCode; let lastIndex = $last) {
                                                 @if (block.placeList?.length) {
+                                                    <!-- && allLocations чтобы не показывать gradient когда отображается баннер #errorInGetAllLocations -->
                                                     <div class="pageContent__locationsBlock"
                                                         [ngClass]="{
                                                             'pageContent__locationsBlock--last': lastIndex,
+                                                            'pageContent__locationsBlock--withGradientEffect': lastIndex && isLoading() && allLocations?.cityPlaceList?.length,
                                                             'pageContent__locationsBlock--haveMoreLocations': block.cityPlaceCount > 9 && !isLoading() && !isSorting()
                                                         }"
                                                     >
