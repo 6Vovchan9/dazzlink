@@ -1511,7 +1511,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.fSub?.unsubscribe();
     this.sSub?.unsubscribe();
     this.allOptionsSub?.unsubscribe();
-    this.pageScrollSub?.unsubscribe();
     clearTimeout(this.debounceTimeForFilter);
     clearTimeout(this.fakeDelayForFilter);
     clearTimeout(this.fakeDelayForSort);
@@ -1519,6 +1518,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   public ngOnDestroy(): void {
     this.subscriptionList();
+
+    this.pageScrollSub?.unsubscribe();
 
     this.destroy$.next(true);
     this.destroy$.complete();
