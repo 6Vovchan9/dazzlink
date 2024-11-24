@@ -75,6 +75,12 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
       // console.log(el.nativeElement);
       this.observer.observe(el.nativeElement);
     });
+    this.scrollToTop();
+  }
+
+  private scrollToTop(): void {
+    this.vc.scrollToPosition([0, 0]);
+    this.setSmoothScroll();
   }
 
   public get appWebview(): boolean {
@@ -191,8 +197,17 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  private setSmoothScroll(): void {
+    document.documentElement.classList.add('globalScrollBehaviorSmooth');
+  }
+
+  private removeSmoothScroll(): void {
+    document.documentElement.classList.remove('globalScrollBehaviorSmooth');
+  }
+
   ngOnDestroy(): void {
     this.resizeSubscription?.unsubscribe();
     this.observer?.disconnect();
+    this.removeSmoothScroll();
   }
 }

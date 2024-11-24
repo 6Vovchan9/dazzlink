@@ -586,8 +586,8 @@ export class PlacePageComponent extends ThumbHash implements OnInit {
           queryParamsHandling: 'merge'
         }
       );
-      if (withMessage) this.toastService.warning('Не удается открыть локацию :(');
     }
+    if (withMessage) this.toastService.warning('Не удается открыть локацию :(');
   }
 
   public onVoting(val: 'like' | 'dislike'): void {

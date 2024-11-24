@@ -79,7 +79,7 @@ const routes: Routes = [
       const params: any = new URLSearchParams(window.location.search);
       const pathname = window.location.pathname;
       // if (params.get('name')) {
-      if (pathname.startsWith('/company')) {
+      if (pathname.startsWith('/company') || pathname.startsWith('/help')) {
         return 'disabled' as const;
       }
       return 'top' as const;
