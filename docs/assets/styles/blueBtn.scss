@@ -10,11 +10,13 @@
     line-height: 28px;
     font-weight: 800;
     color: #fff;
-    &:focus {}
     &:hover {
         background-color: #333;
     }
     &:active {
+        background-color: #000;
+    }
+    &:focus {
         background-color: #000;
     }
     &--withPresentIcon {
@@ -39,5 +41,13 @@
         width: 26px;
         height: 26px;
         margin-right: 14px;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        // Стили для традиционного взаимодействия
+    }
+
+    @media (hover: none), (pointer: coarse) {
+        // Стили специфичные для сенсорного взаимодействия
     }
 }
