@@ -298,8 +298,8 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       // console.log('Идем конкретно на страницу "Медиа"');
       this.router.navigate(['/media']);
-      if (withMessage) this.toastService.warning('Не удается открыть статью :(');
     }
+    if (withMessage) this.toastService.warning('Не удается открыть статью :(');
   }
 
   public onVoting(val: 'like' | 'dislike'): void {
