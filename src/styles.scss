@@ -561,7 +561,7 @@ button {
 
 .scrollProgressWrapper {
     position: sticky;
-    z-index: 20;
+    z-index: 110;
     bottom: 30px;
     // top: calc(100% - 30px);
     // transform: translateY(-100%);
@@ -616,6 +616,15 @@ button {
 
     &--opacity:not(.scrollProgress--hidden) {
         opacity: .5;
+    }
+
+    @media #{$mobile} {
+        &--hiddenFast {
+            pointer-events: none;
+            cursor: default;
+            opacity: 0;
+            transition: opacity 0s;
+        }
     }
 }
 

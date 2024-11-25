@@ -140,6 +140,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public filterFieldOptions: Array<CountryFilterItem>;
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
+  public hideBecauseOpenSort = false;
   private prevScrollTop = 0;
   public hideHeader = signal(true);
   private pageScrollSub: Subscription;
@@ -157,7 +158,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     private route: ActivatedRoute,
     public modalService: GlobalModalService,
     @Inject(DOCUMENT) private readonly myDocument: Document,
-    private vc: ViewportScroller,
+    public vc: ViewportScroller,
     private cd: ChangeDetectorRef
   ) {
     
@@ -1473,9 +1474,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public sortDropdownState(open: boolean): void {
     // const pageWrap = document.getElementById('pageWrap');
     if (open) {
+      this.hideBecauseOpenSort = true;
       this.hideScroll('noScrollInMobile');
       // pageWrap.style.overflow = 'hidden';
     } else {
+      this.hideBecauseOpenSort = false;
       this.showScroll('noScrollInMobile');
       // pageWrap.style.overflow = '';
     }

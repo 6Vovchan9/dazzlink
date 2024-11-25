@@ -191,7 +191,10 @@
                                             >
                                                 <div class="scrollProgress"
                                                     (click)="vc.scrollToPosition([0, 0])"
-                                                    [class.scrollProgress--hidden]="hideScrollProgress"
+                                                    [ngClass]="{
+                                                        'scrollProgress--hidden': hideScrollProgress,
+                                                        'scrollProgress--hiddenFast': hideBecauseOpenSort
+                                                    }"
                                                 >
                                                     <svg class="scrollProgress__svg" viewBox="-10 -10 300 300">
                                                         <circle #progressCircle
