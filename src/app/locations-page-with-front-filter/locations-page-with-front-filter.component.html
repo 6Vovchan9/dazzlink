@@ -46,7 +46,8 @@
 
                                 <div class="stickyBar"
                                     [ngClass]="{
-                                        'stickyBar--static': isLoading() || !allLocations?.cityPlaceList?.length
+                                        'stickyBar--static': isLoading() || !allLocations?.cityPlaceList?.length,
+                                        'stickyBar--staticInHorizontalMobile': !cookiesAgreementService.hiddenCookiesAgreement()
                                     }"
                                 >
 

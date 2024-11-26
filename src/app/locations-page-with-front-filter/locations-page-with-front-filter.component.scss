@@ -365,6 +365,14 @@ $shadowHeightInMobile: 20px;
         padding: 8px 0px;
     }
 
+    @media (max-height: 662px) { // 662px - это document.documentElement.clientHeight
+        @media #{$mobile} {
+            &--staticInHorizontalMobile {
+                position: static;
+            }
+        }
+    }
+
     // &:before {
     //     content: '';
     //     position: absolute;
