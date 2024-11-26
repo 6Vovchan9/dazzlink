@@ -11,27 +11,15 @@
                         <span>Получить подарок</span>
                     </button>
                 } @else {
-                    @if (mobileDetectService.osDevice) {
-                        <button class="footer__download downloadApp"
-                            (click)="mobileDetectService?.goToDeviceStore()"
-                            type="button"
-                        >
-                            <div class="downloadApp__title">Скачайте<br />приложение</div>
-                            <div class="downloadApp__icon">
-                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
-                            </div>
-                        </button>
-                    } @else {
-                        <button class="footer__download downloadApp"
-                            (click)="openQRModal()"
-                            type="button"
-                        >
-                            <div class="downloadApp__title">Скачайте<br />приложение</div>
-                            <div class="downloadApp__icon">
-                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
-                            </div>
-                        </button>
-                    }
+                    <button class="footer__download downloadApp"
+                        (click)="openQRModalAdvanced()"
+                        type="button"
+                    >
+                        <div class="downloadApp__title">Скачайте<br />приложение</div>
+                        <div class="downloadApp__icon">
+                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
+                        </div>
+                    </button>
                 }
                 <div class="footer__links">
                     <div class="footer__nav">
@@ -58,7 +46,7 @@
                             (click)="openQRModalAdvanced()"
                             type="button"
                         >
-                            Скачать приложение
+                            Скачайте приложение
                         </button>
                     }
                     <!-- <button class="btnInFooter" type="button" (click)="showQrCodeModal.set(!showQrCodeModal())">My</button> -->

@@ -61,32 +61,36 @@
                     </div>
                 </div>
             } @else if (modalData.modalName === 'qrModal') {
-                <div class="qrModal">
-                    <div class="container qrModal__container">
-                        <div class="qrModal__content">
-                            <div class="qrContent">
-                                <div class="qrContent__content">
-                                    <div class="qrContent__logo">
-                                        <img src="assets/images/fullLogoRow.svg" class="qrContent__logoIcon" alt="logotip">
+                <div class="modal">
+                    <div class="container modal__container">
+                        <div class="modal__wrapper">
+                            <div class="modal__content">
+                                <div class="QRCode">
+                                    <div class="QRCode__screen">
+                                        <div class="QRCode__content">
+                                            <div class="QRCode__logo">
+                                                <img src="assets/images/fullLogoRow.svg" class="QRCode__logoIcon" alt="logotip">
+                                            </div>
+                                            <div class="QRCode__qr">
+                                                <img src="assets/images/qrCode.png" class="QRCode__qrImage" alt="qr">
+                                            </div>
+                                            <div class="QRCode__message">
+                                                Наведите камеру на QR-код, чтоб скачать приложение
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="qrContent__qr">
-                                        <img src="assets/images/qrCode.png" class="qrContent__qrImage" alt="qr">
-                                    </div>
-                                    <div class="qrContent__message">
-                                        Наведите камеру на QR-код, чтоб скачать приложение
+                                    <div class="QRCode__desc">
+                                        <div class="QRCode__title">
+                                            Постройте великолепные отношения
+                                        </div>
+                                        <div class="QRCode__text">
+                                            Погрузитесь в мир Dazzlink — узнавайте новое, знакомьтесь и посещайте места
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="qrModal__desc">
-                                <div class="qrModal__title">
-                                    Постройте великолепные отношения
-                                </div>
-                                <div class="qrModal__text">
-                                    Погрузитесь в мир Dazzlink — узнавайте новое, знакомьтесь и посещайте места
-                                </div>
-                            </div>
-                            <div class="qrModal__closeButtonWrap" (click)="clickByCloseModal()">
-                                <div class="qrModal__closeButton closeButtonInWindow">
+                            <div class="modal__closeBtn" (click)="clickByCloseModal()">
+                                <div class="closeButtonInWindow">
                                     <div class="iconForCloseInModal"></div>
                                 </div>
                             </div>
