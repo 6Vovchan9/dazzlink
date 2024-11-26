@@ -84,7 +84,7 @@
                             Доступно в крупных городах Узбекистана
                         </div>
                     </div>
-                    @if (1) {
+                    @if (0) {
                         <button (click)="qrModalOrTelegram()" class="aboutAppInfo__btn blueBtn blueBtn--withPresentIcon">
                             <img src="assets/icons/present.svg" alt="p">
                             Получить подарок
@@ -188,19 +188,27 @@
                         <div class="appAdv__image">
                             <img src="assets/images/home-page/appAdv4.png" alt="appAdvantage">
                         </div>
-                        <div class="appAdv__content">
-                            <h2 class="moduleTitle">
-                                Будьте первыми
-                            </h2>
-                            <div class="appAdv__text">
-                                Запуск приложения в конце 2024. Хотите узнать о нем первыми и получить подарок от команды Dazzlink? 
-
-                                @if (1) {
+                        @if (0) {
+                            <div class="appAdv__content">
+                                <h2 class="moduleTitle">
+                                    Будьте первыми
+                                </h2>
+                                <div class="appAdv__text">
+                                    Запуск приложения в конце 2024. Хотите узнать о нем первыми и получить подарок от команды Dazzlink? 
                                     <button (click)="qrModalOrTelegram()" class="appAdv__btn blueBtn blueBtn--withPresentIcon">
                                         <img src="assets/icons/present.svg" alt="p">
                                         Получить подарок
                                     </button>
-                                } @else {
+                                </div>
+                            </div>
+                        } @else {
+                            <div class="appAdv__content">
+                                <h2 class="moduleTitle">
+                                    Скачайте приложение
+                                </h2>
+                                <div class="appAdv__text">
+                                    Сотни людей уже доверили нам свою судьбу, присоединяйтесь и вы, чтобы найти любовь
+                                    на всю жизнь и создать семью
                                     <div class="appAdv__infoLinks forDesktop">
                                         <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
                                     </div>
@@ -221,10 +229,9 @@
                                             <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
                                         </div>
                                     }
-                                }
+                                </div>
                             </div>
-
-                        </div>
+                        }
                     </li>
                 </ul>
             </section>

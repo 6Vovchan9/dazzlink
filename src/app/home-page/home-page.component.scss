@@ -277,7 +277,7 @@ $shadowHeightInMobile: 20px;
 
 .appAdv {
     font-size: 24px;
-    margin-bottom: 96px;
+    margin-bottom: 48px;
     .appAdv__list {
         .appAdv__item {
             display: flex;
@@ -297,8 +297,9 @@ $shadowHeightInMobile: 20px;
                 flex: 1;
                 .appAdv__text {
                     margin-top: 12px;
+                    line-height: 32px;
                     .appAdv__infoLinks {
-                        margin-top: 48px;
+                        margin-top: 24px;
                     }
                 }
                 .appAdv__btn {
@@ -322,10 +323,7 @@ $shadowHeightInMobile: 20px;
                 flex-direction: row;
                 align-items: center;
                 .appAdv__content {
-                    margin-top: 0;
-                    .appAdv__text .appAdv__infoLinks {
-                        margin-top: 24px;
-                    }
+                    margin-top: 0px;
                 }
 
                 &:nth-child(even) {
@@ -342,12 +340,6 @@ $shadowHeightInMobile: 20px;
                 margin-top: 160px;
                 flex-direction: row;
                 align-items: center;
-                .appAdv__content {
-                    margin-top: 0;
-                    // .appAdv__text {
-                    //     font-size: 18px;
-                    // }
-                }
 
                 &:nth-child(even) {
                     flex-direction: row-reverse;
@@ -437,7 +429,7 @@ a.progressive img.preview {
 // -end-
 
 .aboutAppInfo {
-    margin-bottom: 96px;
+    margin-bottom: 48px;
     font-size: 24px;
 
     .aboutAppInfo__container {
@@ -465,6 +457,7 @@ a.progressive img.preview {
     }
 
     @media #{$notMobile} {
+        margin-bottom: 96px;
         .aboutAppInfo__container {
             flex-direction: row;
             justify-content: space-between;

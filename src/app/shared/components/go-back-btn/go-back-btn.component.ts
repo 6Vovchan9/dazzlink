@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, Input, InputSignal, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-go-back-btn',
@@ -8,5 +8,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GoBackBtnComponent {
-  @Input() public text = 'Назад';
+  // @Input() public text = 'Назад';
+  public text: InputSignal<string> = input<string>('Назад');
+  public mockText = 'Back';
 }

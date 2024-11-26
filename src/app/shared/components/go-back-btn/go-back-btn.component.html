@@ -3,5 +3,9 @@
         <div class="arrowInBtn__triangle"></div>
         <div class="arrowInBtn__stick"></div>
     </div>
-    <div class="appGoBackPage__text">{{text}}</div>
+    @if (text(); as text) {
+        <div class="appGoBackPage__text">{{text}}</div>
+    } @else {
+        <div class="appGoBackPage__text">{{mockText}}</div>
+    }
 </div>
