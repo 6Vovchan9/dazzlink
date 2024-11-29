@@ -246,13 +246,16 @@
             &--withDetails {
                 .personCard {
                     cursor: pointer;
-                    &:hover {
-                        .personCard__data {
-                            .personCard__firstRow {
-                                color: var(--color-blue1);
-                                .personCard__goToPersonDesc {
-                                    svg path {
-                                        fill: var(--color-blue1);
+                    @media (hover: hover) and (pointer: fine) {
+                        // Стили для традиционного взаимодействия
+                        &:hover {
+                            .personCard__data {
+                                .personCard__firstRow {
+                                    color: var(--color-blue1);
+                                    .personCard__goToPersonDesc {
+                                        svg path {
+                                            fill: var(--color-blue1);
+                                        }
                                     }
                                 }
                             }
