@@ -26,6 +26,17 @@ html {
             overflow: hidden;
         }
     }
+    &.noScrollMod1 { // еще один вариант модалки он еще нигде не используется в проекте но у него есть свои плюсы, при нем точно будет видна адресная строка и не будет скроллиться фон под модалкой
+        position: fixed;
+        right: 0;
+        left: 0;
+        overflow: hidden;
+        // но тут еще важно сделать чтото типо такого:
+        // let scrollPosition = window.pageYOffset;
+        // установим свойство top у html равное прокрутке
+        // html.style.top = -scrollPosition + "px";
+        // подробности тут https://habr.com/ru/articles/519662/
+    }
     &.globalScrollBehaviorSmooth {
         scroll-behavior: smooth;
     }
