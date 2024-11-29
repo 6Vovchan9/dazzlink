@@ -12,7 +12,7 @@ import {
 } from '@angular/common';
 import { Component, DoCheck, effect, ElementRef, inject, OnInit, viewChild, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription, fromEvent, of, pipe } from 'rxjs';
+import { Subscription, firstValueFrom, fromEvent, of, pipe } from 'rxjs';
 import { auditTime, catchError, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 import { allRatingName, locationInfoMapping } from '@app/shared/constants/all.constants';
@@ -135,8 +135,8 @@ export class PlacePageComponent extends ThumbHash implements OnInit {
         //   return of(null);
         // })
       )
-      .subscribe(
-        (place: PlaceDetails) => {
+      .subscribe({
+        next: (place: PlaceDetails) => {
           this.prepareImageBase64(place.imageList);
           this.placeData = place;
           if (place) this.getEvaluation();
@@ -273,10 +273,16 @@ export class PlacePageComponent extends ThumbHash implements OnInit {
           this.prepareAdditPlaceData(place?.attributeList);
           this.isLoading = false;
         },
-        () => {
+        error: () => {
           this.goToAllPlaces(true);
         }
-      );
+      });
+
+      // this.trainingForRestApi();
+  }
+
+  private trainingForRestApi(): void {
+    firstValueFrom(this.locationsService.getCategoryOptions())
   }
 
   // public ngDoCheck(): void {
