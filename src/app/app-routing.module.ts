@@ -12,10 +12,6 @@ const routes: Routes = [
     loadComponent: () => import("./home-page/home-page.component").then(m => m.HomePageComponent)
   },
   {
-    path: 'app',
-    loadComponent: () => import("./redirect/redirect.component").then(m => m.RedirectComponent)
-  },
-  {
     path: 'media',
     loadComponent: () => import("./articles-page/articles-page.component").then(m => m.ArticlesPageComponent)
   },
@@ -43,6 +39,39 @@ const routes: Routes = [
     path: 'legal-info',
     loadComponent: () => import("./legal-info-page/legal-info-page.component").then(m => m.LegalInfoPageComponent)
   },
+
+  {
+    path: 'app',
+    loadComponent: () => import("./redirect/redirect.component").then(m => m.RedirectComponent)
+  },
+  // {
+  //   path: 'app/locations',
+  //   pathMatch: 'full',
+  //   redirectTo: '/locations',
+  // },
+  // {
+  //   path: 'app/locations/:pageName',
+  //   redirectTo: '/locations/:pageName',
+  // },
+  // {
+  //   path: 'app/media',
+  //   pathMatch: 'full',
+  //   redirectTo: '/media',
+  // },
+  // {
+  //   path: 'app/media/:pageName',
+  //   redirectTo: '/media/:pageName',
+  // },
+  {
+    path: 'app/:pathname1',
+    pathMatch: 'full',
+    redirectTo: '/:pathname1', // в будущем надо будет перейти на 18 версию angular и там в качестве значения свойства redirectTo может быть функция
+  },
+  {
+    path: 'app/:pathname1/:pathname2',
+    redirectTo: '/:pathname1/:pathname2',
+  },
+
   // {
   //   path: '', component: MainLayoutComponent, title: 'Dazzlink', children: [
   //     // { path: '', redirectTo: '/', pathMatch: 'full' },
