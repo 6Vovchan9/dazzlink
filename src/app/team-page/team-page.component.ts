@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIf, NgStyle, ViewportScroller } from '@angular/common';
 
 import { AbsractExample } from '@app/shared/helpers/classes/abstract.class';
@@ -17,6 +17,7 @@ import { FooterComponent } from '@app/shared/components/footer/footer.component'
   imports: [
     NgIf,
     NgStyle,
+    RouterLink,
 
     HeaderComponent,
     FooterComponent
@@ -93,9 +94,9 @@ export class TeamPageComponent extends AbsractExample implements AfterViewInit {
 
   public openPersonDescModal(persona: IAboutPersonalData): void {
     if (persona.details?.vita) {
-      if (persona.queryParamName) {
-        this.setNameQueryParam(persona.queryParamName);
-      }
+      // if (persona.queryParamName) {
+      //   this.setNameQueryParam(persona.queryParamName);
+      // }
       this.chosenPersonData = persona;
       this.hideScroll();
     }

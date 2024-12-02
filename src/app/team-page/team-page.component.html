@@ -136,9 +136,15 @@
             <ul class="ourTeam__list">
                 @for (worker of ourPersonal; track $index; let count = $count) {
                     <li [class.ourTeam__item--withDetails]="worker.details?.vita" class="ourTeam__item">
-                        <div (click)="openPersonDescModal(worker)" class="personCard personCard--demo">
-                            <div class="personCard__photo">
-                                <img [src]="worker.photo || 'assets/images/mockPhoto.jpg'" alt="фотка">
+                        <a class="personCard personCard--demo"
+                            [routerLink]="worker.details?.vita && worker.queryParamName ? '/company' : null"
+                            [queryParams]="{ name: worker.queryParamName }"
+                            queryParamsHandling="merge"
+                            replaceUrl="true"
+                            (click)="openPersonDescModal(worker)"
+                        >
+                            <div class="personCard__photo personCard__photo--page">
+                                <img [src]="worker.photo || 'assets/images/mockPhoto.jpg'" [alt]="worker.name">
                             </div>
                             <div class="personCard__data">
                                 <div class="personCard__firstRow">
@@ -155,7 +161,7 @@
                                     {{worker.position}}
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </li>
                 }
             </ul>
@@ -177,8 +183,11 @@
                 >
                     <div class="personDescModal__info">
                         <div class="personCard">
-                            <div class="personCard__photo">
-                                <img [src]="chosenPersonData.photo || 'assets/images/mockPhoto.jpg'" alt="фотка">
+                            <div class="personCard__photo personCard__photo--modal">
+                                <!-- https://static.dazzlink.asia/article/picture/article_27.png -->
+                                <!-- assets/images/team-page/mainPic.png -->
+                                <!-- assets/images/home-page/partners/atmos.png -->
+                                <img [src]="chosenPersonData.photo || 'assets/images/mockPhoto.jpg'" [alt]="chosenPersonData.name">
                             </div>
                             <div class="personCard__data">
                                 <div class="personCard__firstRow">
