@@ -20,10 +20,10 @@ import { Router } from '@angular/router';
 import { DOCUMENT, NgClass, NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 
 import { langArr } from '@app/shared/constants/languages.constants';
-import { PagesService } from '@app/shared/services/pages.service';
+// import { PagesService } from '@app/shared/services/pages.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
-import { GoogleTranslationService } from '@app/shared/services/google-translation.service';
-import { AccoTriggerComponent } from '@app/shared/components/acco-trigger/acco-trigger.component';
+// import { GoogleTranslationService } from '@app/shared/services/google-translation.service';
+// import { AccoTriggerComponent } from '@app/shared/components/acco-trigger/acco-trigger.component';
 import { ThumbHash } from '@app/shared/helpers/classes/thumbHash.class';
 import { CitiesService } from '@app/shared/services/cities.service';
 import { ICity } from '@app/shared/types/cities.interface';
@@ -44,7 +44,6 @@ type IOpportunityMenu = {
   styleUrls: ['./home-page.component.scss'],
   standalone: true,
   imports: [
-    AccoTriggerComponent,
     FormsModule,
     NgClass,
     NgStyle,
@@ -87,7 +86,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   });
 
   constructor(
-    private pagesService: PagesService,
+    // private pagesService: PagesService,
     @Optional() public mobileDetectService: MobileDetectService,
     private router: Router,
     private citiesService: CitiesService,

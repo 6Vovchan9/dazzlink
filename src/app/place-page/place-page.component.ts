@@ -39,7 +39,6 @@ import { GoBackBtnComponent } from '@app/shared/components/go-back-btn/go-back-b
     NgSwitchCase,
     NgSwitchDefault,
     NgClass,
-    NgStyle,
 
     HeaderComponent,
     ThumbHashImageComponent,

@@ -9,7 +9,7 @@ import {
   ViewChildren,
   inject
 } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { DatePipe, NgClass, ViewportScroller } from '@angular/common';
@@ -27,7 +27,7 @@ import { FooterComponent } from '@app/shared/components/footer/footer.component'
   imports: [
     NgClass,
     DatePipe,
-    RouterLink,
+
     HeaderComponent,
     FooterComponent
   ]

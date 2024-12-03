@@ -1,10 +1,17 @@
+import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { GlobalModalService, ModalData } from '@app/shared/services/global-modal.service';
 import { Subject, Subscription } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+// import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-modal',
+  standalone: true,
+  imports: [
+    NgClass,
+    NgIf, NgFor,
+    NgTemplateOutlet
+  ],
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   // encapsulation: ViewEncapsulation.None,

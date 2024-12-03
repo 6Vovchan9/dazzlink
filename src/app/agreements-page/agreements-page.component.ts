@@ -1,5 +1,6 @@
+import { NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormsModule, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { requirementForCarModal, tooltipForMainVector } from '@app/shared/constants/modal/appComponent.constants';
 import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { FieldOptions } from '@app/shared/fields/radiobutton-new-field/radiobutton-field.component';
@@ -9,6 +10,8 @@ import { TelegramService } from '@app/shared/services/telegram.service';
 @Component({
   selector: 'app-agreements-page',
   templateUrl: './agreements-page.component.html',
+  standalone: true,
+  imports: [NgStyle, FormsModule],
   styleUrls: ['./agreements-page.component.scss']
 })
 export class AgreementsPageComponent implements OnInit {

@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IToast } from '@app/shared/interfaces';
 import { ToastService } from '@app/shared/services/toast.service';
@@ -5,6 +6,8 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-toast',
+  standalone: true,
+  imports: [NgClass],
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss']
 })
