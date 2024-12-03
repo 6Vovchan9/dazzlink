@@ -5,7 +5,7 @@ License: "MIT"
 
 
 --------------------------------------------------------------------------------
-Package: @ngrx/store-devtools
+Package: @ngrx/store
 License: "MIT"
 
 The MIT License (MIT)
@@ -35,7 +35,7 @@ https://github.com/cartant/rxjs-etc by Nicholas Jamieson, MIT licensed. See the
 file header for details.
 
 --------------------------------------------------------------------------------
-Package: @ngrx/store
+Package: @ngrx/store-devtools
 License: "MIT"
 
 The MIT License (MIT)
