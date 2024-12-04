@@ -34,7 +34,7 @@ registerLocaleData(localeRu, 'ru');
 
 @NgModule({
   declarations: [
-    AppComponent,
+    // AppComponent, // Если отказаться от standalone app-component тогда это должно быть включено
     // MainLayoutComponent,
 
     // HomePageComponent,
@@ -78,6 +78,8 @@ registerLocaleData(localeRu, 'ru');
   ],
   providers: [ToastService],
   // providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },], // Это хороший итерсептор но он пока не нужен и лучше сейчас его отключить чтоб он не очищал localStorage
-  bootstrap: [AppComponent]
+  bootstrap: [
+    // AppComponent // Если отказаться от standalone app-component тогда это должно быть включено
+  ]
 })
 export class AppModule { }

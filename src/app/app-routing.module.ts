@@ -103,19 +103,24 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules,
-    // scrollPositionRestoration: 'enabled'
-    get scrollPositionRestoration() {
-      const params: any = new URLSearchParams(window.location.search);
-      const pathname = window.location.pathname;
-      // if (params.get('name')) {
-      if (pathname.startsWith('/company') || pathname.startsWith('/help')) {
-        return 'disabled' as const;
+  imports: [
+    RouterModule.forRoot(
+      routes,
+      {
+        preloadingStrategy: PreloadAllModules,
+        // scrollPositionRestoration: 'enabled'
+        get scrollPositionRestoration() {
+          const params: any = new URLSearchParams(window.location.search);
+          const pathname = window.location.pathname;
+          // if (params.get('name')) {
+          if (pathname.startsWith('/company') || pathname.startsWith('/help')) {
+            return 'disabled' as const;
+          }
+          return 'top' as const;
+        }
       }
-      return 'top' as const;
-    }
-  })],
+    )
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

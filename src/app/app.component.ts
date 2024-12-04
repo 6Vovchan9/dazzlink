@@ -1,16 +1,29 @@
 import { Component, Inject, OnDestroy, OnInit, inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { AsyncPipe, DOCUMENT, NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, pairwise, tap } from 'rxjs/operators';
 
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
 import { PagesService } from '@app/shared/services/pages.service';
+import { ToastComponent } from '@app/shared/components/toast/toast.component';
+import { CookiesToastComponent } from '@app/shared/components/cookies-toast/cookies-toast.component';
+import { ModalComponent } from '@app/shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    AsyncPipe,
+    NgIf,
+
+    ToastComponent,
+    ModalComponent,
+    CookiesToastComponent
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
