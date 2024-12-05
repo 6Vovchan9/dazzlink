@@ -11,17 +11,19 @@ import { registerLocaleData } from "@angular/common";
 import localeRu from '@angular/common/locales/ru';
 // import localeFr from '@angular/common/locales/fr';
 
-// было:
+// было (start):
 // if (environment.production) {
 //   enableProdMode();
 // }
 // platformBrowserDynamic().bootstrapModule(AppModule)
 //   .catch(err => console.error(err));
-  
-// стало:
+// было (end)
+
+// стало (start):
 // registerLocaleData(localeFr, 'fr');
 registerLocaleData(localeRu, 'ru');
 
 bootstrapApplication(AppComponent, appConfig).catch((err) =>
     console.error(err)
 );
+// стало (end)

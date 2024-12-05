@@ -35,6 +35,31 @@ export const appConfig: ApplicationConfig = {
         provideHttpClient(),
         provideRouter(routes, withPreloading(PreloadAllModules), inMemoryScrollingFeature),
 
+        // NgRx так:
+        // importProvidersFrom(
+        //     StoreModule.forRoot({}),
+        //     StoreModule.forFeature('login', reducers),
+        //     // StoreModule.forFeature('basket', basketItemsReducer), // это для примера
+        //     EffectsModule.forRoot([]),
+        //     EffectsModule.forFeature([LoginEffect]),
+        //     // EffectsModule.forFeature(BasketEffects), // это для примера
+        //     StoreDevtoolsModule.instrument({
+        //         maxAge: 25,
+        //         logOnly: false,
+        //     }),
+        // ),
+
+        // NgRx или лучше так:
+        // provideStore({
+        //     login: reducers,
+        //     // basket: basketItemsReducer, // это для примера
+        // }),
+        // provideEffects([
+        //     LoginEffect,
+        //     // BasketEffects // это для примера
+        // ]),
+        // provideStoreDevtools({ maxAge: 25, logOnly: false }),
+
         ToastService
     ],
 };
