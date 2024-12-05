@@ -1306,6 +1306,14 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     }
   }
 
+  public openQRModalAdvanced(): void {
+    if (this.mobileDetectService?.osDevice) {
+      this.mobileDetectService.goToDeviceStore();
+    } else {
+      this.modalService.open({ component: 'appComponent', modalName: 'qrModal' });
+    }
+  }
+
   public getContent(key: string): string {
     return langArr[key][this.curLang];
   }
