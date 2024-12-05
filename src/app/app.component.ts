@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit, inject } from '@angular/core';
 import { AsyncPipe, DOCUMENT, NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter, pairwise, tap } from 'rxjs/operators';
 
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
@@ -17,6 +17,8 @@ import { ModalComponent } from '@app/shared/components/modal/modal.component';
   standalone: true,
   imports: [
     RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
     AsyncPipe,
     NgIf,
 
