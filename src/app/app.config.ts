@@ -1,6 +1,11 @@
 import { ApplicationConfig } from "@angular/core";
 import { provideClientHydration } from "@angular/platform-browser";
-import { provideHttpClient } from "@angular/common/http";
+import {
+    // HTTP_INTERCEPTORS,
+    provideHttpClient,
+    // withInterceptors,
+    // withInterceptorsFromDi
+} from "@angular/common/http";
 import {
     InMemoryScrollingFeature,
     InMemoryScrollingOptions,
@@ -12,6 +17,8 @@ import {
 
 import { routes } from "./app.routes";
 import { ToastService } from "./shared/services/toast.service";
+// import { loggingInterceptor } from "./shared/interceptors/logging.interceptor";
+// import { AuthInterceptor } from "./shared/auth.interceptor";
 
 const scrollConfig: InMemoryScrollingOptions = {
     // anchorScrolling: 'enabled',
@@ -32,8 +39,13 @@ const inMemoryScrollingFeature: InMemoryScrollingFeature = withInMemoryScrolling
 export const appConfig: ApplicationConfig = {
     providers: [
         provideClientHydration(),
-        provideHttpClient(),
         provideRouter(routes, withPreloading(PreloadAllModules), inMemoryScrollingFeature),
+
+        provideHttpClient(
+            // withInterceptors([loggingInterceptor]), // Interceptors: так правильно
+            // withInterceptorsFromDi(), // Interceptors: или можно так но это старый вариант
+        ),
+        // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, // Interceptors: или можно так но это старый вариант
 
         // NgRx так:
         // importProvidersFrom(
