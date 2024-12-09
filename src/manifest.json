@@ -1,0 +1,21 @@
+{
+
+    "short_name": "Cool App",
+  
+    "name": "Cool App - You're going to love it",
+  
+    "prefer_related_applications": true,
+  
+    "related_applications": [
+  
+      {
+  
+        "platform": "play",
+  
+        "id": "ru.ozon.app.android"
+  
+      }
+  
+    ]
+  
+  }
