@@ -55,7 +55,7 @@ export class MobileDetectService {
                 } else {
                     // this.myWindow.open('https://play.google.com', '_blank');
                     // this.myWindow.location.href = 'https://play.google.com';
-                    this.myWindow.location.href = 'https://play.google.com';
+                    this.myWindow.location.href = 'https://play.google.com/store/apps/details?id=asia.dazzlink.dazzlink';
                 }
             } else {
                 this.myWindow.location.href = 'https://appgallery.huawei.com';
