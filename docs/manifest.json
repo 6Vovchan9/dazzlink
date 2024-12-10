@@ -1,8 +1,6 @@
 {
-  "short_name": "Dazzlink",
-  "theme_color": "#005BFF",
-  "background_color": "#005BFF",
-  "name": "Dazzlink: постройте великолепные отношения",
+  "short_name": "Cool App",
+  "name": "Cool App - You're going to love it",
   "icons": [
     {
       "src": "/assets/icons/smartAppBanner/192x192.png",
@@ -34,7 +32,6 @@
     }
   ],
   "prefer_related_applications": true,
-  "minimal-ui": true,
   "related_applications": [
     {
       "platform": "play",
