@@ -33,7 +33,7 @@
     }
   ],
   "prefer_related_applications": true,
-  "display": "minimal-ui",
+  "display": "standalone",
   "related_applications": [
     {
       "platform": "play",
