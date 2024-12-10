@@ -1,6 +1,7 @@
 {
-  "short_name": "Cool App",
-  "name": "Cool App - You're going to love it",
+  "start_url": "/",
+  "short_name": "Dazzlink",
+  "name": "Dazzlink: постройте великолепные отношения",
   "icons": [
     {
       "src": "/assets/icons/smartAppBanner/192x192.png",
@@ -32,6 +33,7 @@
     }
   ],
   "prefer_related_applications": true,
+  "display": "minimal-ui",
   "related_applications": [
     {
       "platform": "play",

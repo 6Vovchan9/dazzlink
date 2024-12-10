@@ -1,7 +1,6 @@
 {
+  "start_url": "/",
   "short_name": "Dazzlink",
-  "theme_color": "#005BFF",
-  "background_color": "#005BFF",
   "name": "Dazzlink: постройте великолепные отношения",
   "icons": [
     {
@@ -34,7 +33,7 @@
     }
   ],
   "prefer_related_applications": true,
-  "minimal-ui": true,
+  "display": "minimal-ui",
   "related_applications": [
     {
       "platform": "play",
