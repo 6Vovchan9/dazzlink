@@ -70,7 +70,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   private pageScrollSub: Subscription;
   public prevScrollTop = 0;
   public hideHeader = signal(true);
-  private cSub: Subscription;
+  #cSub: Subscription; // это аналогично typescript-вому "private", теперь такая же возможность есть в js
   public appOpportunityMenu: Record<string, IOpportunityMenu> = {};
   // public debugPageScroll: {[key: string]: number} = {};
 
@@ -177,7 +177,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
   
   private getCitiesForCarousel(): void {
-    this.cSub = this.citiesService.getCities().subscribe({
+    this.#cSub = this.citiesService.getCities().subscribe({
       next: value => {
         let cityList: any = value.map(el => el.cityList).flat();
 
@@ -388,7 +388,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     this.pageWrapScrollSub?.unsubscribe();
     this.pageScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
-    this.cSub?.unsubscribe();
+    this.#cSub?.unsubscribe();
     this.removeAllListeners();
   }
 

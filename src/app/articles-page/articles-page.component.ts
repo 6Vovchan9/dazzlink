@@ -104,6 +104,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // У декоратора @SkipSelf противоположный эффект, он tells Angular not to look for the injector in the local injector, but start from the Parent
     // Есть еще декоратор @Host и для него сервис должен регистрироваться либо в текущем компоненте либо в родительском компоненте при помощи свойсва декоратора компонента "viewProviders"
     @Optional() public mobileDetectService: MobileDetectService,  // Если вдруг для этого сервиса не определен провайдер, чтоб мы не получили ошибку при обращении к нему в таком случае определяем его как опциональный
+    // но все эти Resolution modifiers использовались таким образом, при помощи декораторов, при старом синтаксисе индектирования, в новом же варианте инжектирования эти Resolution modifiers указываются 2 аргументои в функции "inject(PagesService, { skipSelf: true })"
     private modalService: GlobalModalService,
     private vc: ViewportScroller
     // private cd: ChangeDetectorRef

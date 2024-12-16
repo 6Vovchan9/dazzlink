@@ -1,4 +1,4 @@
-import { ApplicationConfig } from "@angular/core";
+import { APP_INITIALIZER, ApplicationConfig } from "@angular/core";
 import { provideClientHydration } from "@angular/platform-browser";
 import {
     // HTTP_INTERCEPTORS,
@@ -71,6 +71,15 @@ export const appConfig: ApplicationConfig = {
         //     // BasketEffects // это для примера
         // ]),
         // provideStoreDevtools({ maxAge: 25, logOnly: false }),
+
+        {
+            provide: APP_INITIALIZER,
+            useFactory: () => {
+                console.log('App start');
+            },
+            // deps: [],
+            // multi: true
+        },
 
         ToastService
     ],
