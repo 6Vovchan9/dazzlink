@@ -9,6 +9,16 @@ import { ChangeDetectionStrategy, Component, input, Input, InputSignal, OnInit }
 })
 export class GoBackBtnComponent {
   // @Input() public text = 'Назад';
-  public text: InputSignal<string> = input<string>('Назад');
+  public textVal: InputSignal<string> = input('Назад', {
+    alias: 'text',
+    transform: (value: string) => {
+      const example = 1;
+      if (example) {
+        return value;
+      } else {
+        return 'Back';
+      }
+    }
+  });
   public mockText = 'Back';
 }

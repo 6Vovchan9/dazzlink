@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, OnInit, Optional, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit, Optional, signal, WritableSignal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
@@ -16,12 +16,13 @@ import { SvgIconComponent } from "@app/shared/components/svg-icon/svg-icon.compo
     QrCodeModalComponent,
     RouterLink,
     SvgIconComponent
-],
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
 
   public showQrCodeModal = signal(false);
+  public exampleForModel: WritableSignal<number> = signal<number>(3);
   private qrModalChangeEffect = effect(() => {
     if (this.showQrCodeModal()) {
       this.modalService.hideScroll();

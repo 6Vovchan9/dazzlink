@@ -13,10 +13,14 @@
         flex-direction: column;
         max-width: 300px;
         padding: 20px;
-        .qrModalOld__close {
-            align-self: flex-end;
-            cursor: pointer;
+        .qrModalOld__head {
+            display: flex;
+            justify-content: flex-end;
+            column-gap: 10px;
             margin-bottom: 20px;
+            .qrModalOld__close {
+                cursor: pointer;
+            }
         }
         .qrModalOld__qrBlock {
             overflow: hidden;
