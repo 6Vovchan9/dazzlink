@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { delay, map, tap } from "rxjs/operators";
 
@@ -10,10 +10,8 @@ import { PagesService } from "@app/shared/services/pages.service";
 @Injectable({ providedIn: 'root' })
 export class PostsService {
 
-    constructor(
-        private http: HttpClient,
-        private pagesService: PagesService
-    ) { }
+    private http: HttpClient = inject(HttpClient);
+    private pagesService: PagesService = inject(PagesService);
 
     create(post: Post): Observable<Post> {
         return this.http.post<Post>(`${environment.fbDbUrl}/posts.json`, post);

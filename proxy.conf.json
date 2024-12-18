@@ -16,5 +16,14 @@
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
+    },
+    "/redakciya": {
+        "target": "https://boosty.to",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/redakciya": ""
+        }
     }
 }
