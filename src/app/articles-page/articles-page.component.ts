@@ -65,7 +65,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
     NgStyle,
     PostComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    // KeyValuePipe,
+    // JsonPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -96,6 +98,11 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private db: any;
   scrollingRef = viewChild<HTMLElement>("restoreScrollPosition");
   private pagesService = inject(PagesService);
+  // public myObj = {
+  //   name: 'Ivan',
+  //   age: 31,
+  //   student: false
+  // }
 
   constructor(
     private postsService: PostsService,
@@ -504,6 +511,10 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.modalService.open({ component: 'appComponent', modalName: 'qrForTelegram' });
     }
   }
+
+  // keyvaluesort = () => {
+  //   return 0;
+  // }
 
   public ngOnDestroy(): void {
     this.pageScrollSub?.unsubscribe();

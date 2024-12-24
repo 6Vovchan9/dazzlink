@@ -6,6 +6,11 @@ import { IAdminData } from '@app/shared/interfaces';
 import { AuthService } from '@app/admin/shared/services/auth.service';
 import { advanceForbiddenEmailValidator, asyncEmailValidator, forbiddenEmailValidator } from '@app/admin/shared/validators/login.validator';
 
+// enum ReceiverType {
+//   PERSON = 'PERSON',
+//   LEGAL = 'LEGAL'
+// }
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -16,6 +21,13 @@ export class LoginPageComponent implements OnInit {
   public loginForm!: UntypedFormGroup; // "!:" таким образом я уверяю typescript что это свойство точно будет передано
   public submitted = false;
   public messageFromQueryParams!: string;
+
+  // #fb = inject(FormBuilder);
+  // form = this.#fb.group({
+  //   type: this.#fb.nonNullable.control<ReceiverType>(ReceiverType.LEGAL),
+  //   name: this.#fb.nonNullable.control<string>('Lucas'), // у nonNullable есть интересная особенность при this.form.reset() - значение этого контрола после сброса будет "Lucas" а не null
+  //   inn: this.#fb.control<number | null>(null)
+  // });
 
   constructor(
     public auth: AuthService,
@@ -42,13 +54,17 @@ export class LoginPageComponent implements OnInit {
     this.loginForm = new UntypedFormGroup({
       email: new UntypedFormControl(null, {
         validators: [Validators.email, Validators.required, forbiddenEmailValidator, advanceForbiddenEmailValidator(['ivan@mail.ru'])],
-        asyncValidators: [asyncEmailValidator]
+        asyncValidators: [asyncEmailValidator],
+        updateOn: 'change'
       }),
       password: new UntypedFormControl(null, { validators: [Validators.required, Validators.minLength(6)] })
     });
   }
 
   submit() {
+    // console.log(this.loginForm.value);
+    // console.log(this.loginForm.getRawValue());
+
     if (this.loginForm?.valid) {
       this.submitted = true;
 

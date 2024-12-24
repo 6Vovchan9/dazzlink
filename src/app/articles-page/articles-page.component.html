@@ -3,7 +3,7 @@
         <ng-container *ngIf="postList.length; else empty">
             <div class="posts">
                 <div class="posts__filter">
-                    <input type="text" placeholder="Фильтр постов..." [(ngModel)]="searchStr">
+                    <input type="text" placeholder="Фильтр постов..." (ngModelChange)="onChangeFilterPost($event)" [(ngModel)]="searchStr">
                 </div>
                 <div *ngFor="let post of postList | search:searchStr; let idx = index" class="posts__item">
                     №{{idx + 1}}
@@ -67,6 +67,9 @@
                     <!-- <button style="margin-top: 20px;" (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles" class="implementError">
                         error: {{implementErrorInGetAllArticles}}
                     </button> -->
+                    <!-- @for (a of myObj | keyvalue:keyvaluesort; track a) {
+                        {{a | json}}
+                    } -->
                 </div>
             </aside>
             <main class="pageContent">
