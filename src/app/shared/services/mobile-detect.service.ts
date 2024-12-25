@@ -48,17 +48,17 @@ export class MobileDetectService {
             console.log('Идем в store');
             if (this.osDevice?.toLowerCase() === 'ios') {
                 // this.myWindow.location.href = 'https://www.apple.com/app-store';
-                this.myWindow.location.href = 'https://apps.apple.com';
+                // this.myWindow.location.href = 'https://apps.apple.com';
             } else if (this.osDevice?.toLowerCase() === 'androidos') {
                 if (/hms/.test(uAgent) && !/gms/.test(uAgent)) {
-                    this.myWindow.location.href = 'https://appgallery.huawei.com';
+                    this.myWindow.location.href = 'https://appgallery.cloud.huawei.com/ag/n/app/C112028837';
                 } else {
                     // this.myWindow.open('https://play.google.com', '_blank');
                     // this.myWindow.location.href = 'https://play.google.com';
                     this.myWindow.location.href = 'https://play.google.com/store/apps/details?id=asia.dazzlink.dazzlink';
                 }
             } else {
-                this.myWindow.location.href = 'https://appgallery.huawei.com';
+                this.myWindow.location.href = 'https://appgallery.cloud.huawei.com/ag/n/app/C112028837';
             }
         // } else { // если это комп или ноут
         //     this.myWindow.open('https://www.apple.com/app-store');

@@ -84,7 +84,7 @@
                             Доступно в крупных городах Узбекистана
                         </div>
                     </div>
-                    @if (0) {
+                    @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios') {
                         <button (click)="qrModalOrTelegram()" class="aboutAppInfo__btn blueBtn blueBtn--withPresentIcon">
                             <img src="assets/icons/present.svg" alt="p">
                             Получить подарок
@@ -188,7 +188,7 @@
                         <div class="appAdv__image">
                             <img src="assets/images/home-page/appAdv4.png" alt="appAdvantage">
                         </div>
-                        @if (0) {
+                        @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios') {
                             <div class="appAdv__content">
                                 <h2 class="moduleTitle">
                                     Будьте первыми
@@ -306,13 +306,13 @@
 
 <ng-template #linkToApp>
     <div class="linkToApp">
-        <a
+        <!-- <a
             href="https://www.apple.com/app-store"
             target="_blank"
             class="linkToApp__item"
         >
             <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="IOS" />
-        </a>
+        </a> -->
         <a
             href="https://play.google.com/store/apps/details?id=asia.dazzlink.dazzlink"
             target="_blank"
@@ -321,7 +321,7 @@
             <img src="assets/images/store/linkAndroid.svg" class="linkToApp__img" alt="Android" />
         </a>
         <a
-            href="https://appgallery.huawei.com"
+            href="https://appgallery.cloud.huawei.com/ag/n/app/C112028837"
             target="_blank"
             class="linkToApp__item"
         >
