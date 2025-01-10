@@ -1,4 +1,5 @@
-import { Routes } from "@angular/router";
+import { HttpParams } from "@angular/common/http";
+import { Routes, UrlTree } from "@angular/router";
 
 export const routes: Routes = [
     {
@@ -40,11 +41,27 @@ export const routes: Routes = [
     {
         path: 'app/:pathname1',
         pathMatch: 'full',
-        redirectTo: '/:pathname1', // в будущем надо будет перейти на 18 версию angular и там в качестве значения свойства redirectTo может быть функция
+        redirectTo: (redirectData): string | UrlTree => {
+            const res = '/:pathname1' + operateObjectEntries(redirectData?.queryParams);
+            return res;
+        }
     },
     {
         path: 'app/:pathname1/:pathname2',
-        redirectTo: '/:pathname1/:pathname2',
+        redirectTo: '/:pathname1/:pathname2'
     },
     { path: "**", redirectTo: "/" },
 ];
+
+function operateObjectEntries(qParams: { [key: string]: any } | Record<string, any>): string {
+    let res = '';
+    if (qParams && Object.keys(qParams).length) {
+
+        const qParamsReady = new HttpParams({ fromObject: qParams }).toString();
+        // const qParamsEntries = Object.entries(qParams).map(param => param.join('=')).join('&');
+        // console.log(qParamsReady, qParamsEntries);
+
+        res += '?' + qParamsReady;
+    }
+    return res;
+}

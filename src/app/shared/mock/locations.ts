@@ -14,6 +14,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "subcategory": "Ресторан",
                     "rating": 5,
                     "address": "просп. Название",
+                    "id": "59644539-b5fd-4d2d-9541-27a6975599e3"
                 },
                 {
                     "categoryCode": "RESTAURANTS",
@@ -22,6 +23,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "subcategory": "Ресто-бар",
                     "rating": 3.9,
                     "address": "ул. Достык, 16",
+                    "id": "59486539-b5fd-4d2d-9541-27a6975599e3"
                 },
                 {
                     "categoryCode": "RESTAURANTS",
@@ -30,6 +32,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "subcategory": "Кафе",
                     "rating": 4.9,
                     "address": "5-й микрорайон, 16",
+                    "id": "59646539-b5fd-4d2d-9541-27a6993599e3"
                 }
             ]
         },
@@ -44,6 +47,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "subcategory": "Ресторан",
                     "rating": 5.4,
                     "address": "просп. Кабанбай Батыра, 1",
+                    "id": "59646539-b5fd-4g2d-9541-27a6975599e3"
                 },
                 {
                     "categoryCode": "RESTAURANTS",
@@ -52,6 +56,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "subcategory": "Ресто-бар",
                     "rating": 3,
                     "address": "ул. Достык, 16",
+                    "id": "59641539-b5fd-4g2d-9541-27a6975599e3"
                 },
                 {
                     "categoryCode": "RESTAURANTS",
@@ -60,6 +65,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "subcategory": "Кафе",
                     "rating": 4.9,
                     "address": "5-й микрорайон",
+                    "id": "50646539-b5fd-4g2d-9541-27a6975599e3"
                 }
             ]
         },
@@ -74,6 +80,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "subcategory": "Ресторан",
                     "rating": 5.4,
                     "address": "просп. Кабанбай Батыра, 1",
+                    "id": "59646539-b5fd-4g2d-9541-27a6915599e3"
                 },
                 {
                     "categoryCode": "RESTAURANTS",
@@ -82,6 +89,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "subcategory": "Ресто-бар",
                     "rating": 3.9,
                     "address": "ул. Достык, 16",
+                    "id": "59646539-b1fd-4g2d-9541-27a6975599e3"
                 },
                 {
                     "categoryCode": "RESTAURANTS",
@@ -90,6 +98,7 @@ export const MOCK_LOCATIONS_FOR_SKELETON: RovraggeRespLocationsData = {
                     "subcategory": "Кафе",
                     "rating": 4,
                     "address": "5-й микрорайон, 16",
+                    "id": "59646539-b5fd-4g2d-9541-27a6975599e3"
                 }
             ]
         }

@@ -65,7 +65,7 @@ const routes: Routes = [
   {
     path: 'app/:pathname1',
     pathMatch: 'full',
-    redirectTo: '/:pathname1', // в будущем надо будет перейти на 18 версию angular и там в качестве значения свойства redirectTo может быть функция
+    redirectTo: '/:pathname1',
   },
   {
     path: 'app/:pathname1/:pathname2',
