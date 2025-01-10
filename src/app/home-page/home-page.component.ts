@@ -14,10 +14,22 @@ import {
   signal
 } from '@angular/core';
 import { Observable, Subscription, fromEvent, of } from 'rxjs';
-import { auditTime, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import {
+  auditTime,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  tap
+} from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DOCUMENT, NgClass, NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
+import {
+  DOCUMENT,
+  NgClass,
+  NgStyle,
+  NgTemplateOutlet,
+  ViewportScroller
+} from '@angular/common';
 
 import { langArr } from '@app/shared/constants/languages.constants';
 // import { PagesService } from '@app/shared/services/pages.service';
@@ -101,6 +113,10 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   // onWindowLoad() {
   //   console.log('onWindowLoad');
   // }
+
+  public exampleToStore(): void {
+    this.mobileDetectService.goToDeviceStore();
+  }
 
   public ngOnInit(): void {
 
