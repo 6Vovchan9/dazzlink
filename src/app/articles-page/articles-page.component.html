@@ -159,7 +159,7 @@
                     } @else {
                         @if (articlesList()?.length) {
                             <ul #restoreScrollPosition class="pageContent__articles">
-                                @for (post of articlesList(); track trackPost; let lastIndex = $last, index = $index) {
+                                @for (post of articlesList(); track post.id; let lastIndex = $last, index = $index) {
                                     @if (lastIndex) {
                                         <li #lastPostItem
                                             class="pageContent__itemOfArticle lastPostItem"

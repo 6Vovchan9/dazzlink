@@ -130,7 +130,7 @@
                             '--card-count': citiesForCarousel().length
                         }"
                     >
-                        @for (city of citiesForCarousel(); track city.code) {
+                        @for (city of citiesForCarousel(); track $index) {
                             <li class="cityCarousel__item">
                                 <div class="cityCard">
                                     @if (city.imageList.length) {
