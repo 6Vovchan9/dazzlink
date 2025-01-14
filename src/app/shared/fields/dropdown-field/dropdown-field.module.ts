@@ -12,8 +12,7 @@ import { ClickOutsideDirective } from '@app/shared/directives/clickOutside.direc
     CommonModule
   ],
   exports: [
-    DropdownFieldComponent,
-    ClickOutsideDirective
+    DropdownFieldComponent
   ]
 })
 export class DropdownFieldModule { }

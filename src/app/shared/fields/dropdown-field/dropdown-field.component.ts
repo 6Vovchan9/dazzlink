@@ -157,7 +157,7 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  clickOutside(clickByBackground = false) {
+  clickOutside(clickByBackground = false): void {
     if (document.documentElement.clientWidth >= 768 && !this.closedState  || clickByBackground ) {
       // console.log('6');
       this.toggle.emit(false);
