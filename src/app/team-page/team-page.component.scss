@@ -232,60 +232,79 @@
         row-gap: 24px;
         line-height: 32px;
 
-        p {
+        .ourTeam__descItem {
             flex: 1;
+        }
+
+        @media (min-width: 1025px) {
+            column-gap: 6%;
+            flex-direction: row;
+            justify-content: space-between;
+            .ourTeam__descItem {
+                max-width: 560px;
+            }
         }
     }
 
     .ourTeam__list {
-        display: flex;
-        flex-direction: column;
+        // display: flex;
+        // flex-direction: column;
+        // margin-top: 48px;
+        // row-gap: 48px;
+        // .ourTeam__item {
+        //     &--withDetails {
+        //         .personCard {
+        //             cursor: pointer;
+        //             @media (hover: hover) and (pointer: fine) {
+        //                 // Стили для традиционного взаимодействия
+        //                 &:hover {
+        //                     .personCard__data {
+        //                         .personCard__firstRow {
+        //                             color: var(--color-blue1);
+        //                             .personCard__goToPersonDesc {
+        //                                 svg path {
+        //                                     fill: var(--color-blue1);
+        //                                 }
+        //                             }
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+
+        //     &:nth-child(4n) {
+        //         margin-right: 0px;
+        //     }
+        // }
+
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 48px;
         margin-top: 48px;
-        row-gap: 48px;
-        .ourTeam__item {
-            &--withDetails {
-                .personCard {
-                    cursor: pointer;
-                    @media (hover: hover) and (pointer: fine) {
-                        // Стили для традиционного взаимодействия
-                        &:hover {
-                            .personCard__data {
-                                .personCard__firstRow {
-                                    color: var(--color-blue1);
-                                    .personCard__goToPersonDesc {
-                                        svg path {
-                                            fill: var(--color-blue1);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
 
-            &:nth-child(4n) {
-                margin-right: 0px;
-            }
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(3, 1fr);
         }
-    }
 
-    @media #{$notMobile} {
-        .ourTeam__desc {
-            column-gap: 80px;
-            flex-direction: row;
-        }
-        .ourTeam__list {
+        @media (min-width: 1025px) {
+            grid-template-columns: repeat(4, 1fr);
             row-gap: 64px;
-            flex-direction: row;
-            flex-wrap: wrap;
-            .ourTeam__item {
-                margin-right: 48px;
-                flex-basis: calc(25% - 36px);
-                overflow: hidden;
-            }
         }
     }
+
+    // @media #{$notMobile} {
+    //     .ourTeam__list {
+    //         row-gap: 64px;
+    //         flex-direction: row;
+    //         flex-wrap: wrap;
+    //         .ourTeam__item {
+    //             margin-right: 48px;
+    //             flex-basis: calc(25% - 36px);
+    //             overflow: hidden;
+    //         }
+    //     }
+    // }
 }
 
 .personCard {
