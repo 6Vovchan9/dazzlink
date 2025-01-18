@@ -38,16 +38,19 @@ export class AppComponent implements OnInit, OnDestroy {
   private pagesService = inject(PagesService);
 
   constructor(
-    public modalService: GlobalModalService,
+    public modalService: GlobalModalService, // typeScript детает такой синтакс сахар - можем объявлять свойства данного класса прям в конструкторе, то есть нет необх писать constructor(private/public/protected/readonly name: string) { this.name = name } можно просто constructor(private name: string) { }
     @Inject(DOCUMENT) private readonly documentRef: Document
   ) { }
 
   ngOnInit(): void {
     // console.log(navigator.userAgent);
     this.tgService.ready(); // Это для телеги
+
+    // 2-ой способ как перекрасить страницу для темной/светлой темы:
     // const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     // console.log(isDarkMode ? 'Тёмный режим включен.' : 'Тёмный режим выключен.');
 
+    // 2-ой способ как перекрасить страницу для темной/светлой темы:
     // const schemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
     // schemeQuery.addEventListener('change', this.updateScheme);
 
@@ -59,6 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.checkRouterEvents();
   }
 
+  // 2-ой способ как перекрасить страницу для темной/светлой темы:
   // private updateScheme(event): void {
   //   const newScheme = event.matches ? "тёмная" : "светлая";
   //   console.log(`Цветовая схема системы обновлена на ${newScheme}.`);

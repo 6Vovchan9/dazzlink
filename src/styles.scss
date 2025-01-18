@@ -45,9 +45,23 @@ html {
 body {
     margin: 0;
     color: var(--color-black1);
+
+    // 1-ый способ как перекрасить страницу для темной/светлой темы:
+    // color: light-dark(
+    //     var(--color-black3),
+    //     var(--color-light)
+    // );
+
+    // 1-ый способ как перекрасить страницу для темной/светлой темы:
+    // background-color: light-dark(
+    //     var(--color-light),
+    //     var(--color-black3)
+    // );
+
     // background-color: var(--tg-theme-bg-color); // переменная доступная благодаря script из index.html нужна для того чтобы регулировать стили приложения в завис от темы (светлая/темная) telegram
 }
 
+// 2-ой способ как перекрасить страницу для темной/светлой темы:
 // @media #{$darkTheme} {
 //     body {
 //         color: red;

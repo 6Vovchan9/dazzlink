@@ -1,17 +1,26 @@
 :root {
     --color-blue: #5532EB;
     --color-blue1: #4A4AC6;
-    --color-pink: #FF99EC;
+
     --color-black: #000;
     --color-black1: #333;
     --color-black2: #111;
+    --color-black3: #0d0f2f;
+
+
     --color-white: #fff;
+    --color-light: #b4e7d4;
+
     --color-gray: #807d7d;
     --color-gray1: #f2f3f4;
-    --color-red: #e40038;
-    --color-green: green;
     --color-text-gray: #a8a8a8;
     --color-light-gray: #eee;
+
+    --color-red: #e40038;
+    --color-green: green;
+    --color-pink: #FF99EC;
+
+    color-scheme: light dark; // 1-ый способ как перекрасить страницу для темной/светлой темы
 }
 
 $color-main: #5532EB;
@@ -24,7 +33,7 @@ $tablet:    "(min-width: 768px)  and (max-width: 1024px)";
 $laptop:    "(min-width: 1025px) and (max-width: 1280px)";
 $desktop:   "(min-width: 1281px)";
 
-$darkTheme: "(prefers-color-scheme: dark)";
+$darkTheme: "(prefers-color-scheme: dark)"; // 2-ой способ как перекрасить страницу для темной/светлой темы
 
 $headerHeightInDesktop: 80px;
 $headerHeightInMobile: 64px;

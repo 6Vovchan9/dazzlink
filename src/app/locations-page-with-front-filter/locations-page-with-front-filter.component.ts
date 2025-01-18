@@ -152,7 +152,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   constructor(
     @Optional() public mobileDetectService: MobileDetectService,
-    private readonly locationsService: LocationsService, // модификатор readonly, примененный к параметрам конструктора, заставляет компилятор расценивать их как поля класса.
+    private readonly locationsService: LocationsService, // модификатор readonly, примененный к параметрам конструктора, заставляет компилятор расценивать их как поля класса (также как и модификаторы доступа private, public, protected).
     private toastService: ToastService,
     private router: Router,
     private route: ActivatedRoute,
