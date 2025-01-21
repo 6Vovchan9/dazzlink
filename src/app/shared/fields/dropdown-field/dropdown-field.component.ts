@@ -54,6 +54,9 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   @Output()
   public toggle = new EventEmitter<boolean>();
 
+  // при дефолтном { static: false } декоратор получает доступ к шаблону компонента после инициализации представления компонента, т. е. внутри метода ngAfterContentInit/ngAfterViewInit. А при значении true параметра static, доступ к элементам dom дерева или данным дочернего компонента можно получить до того как он полностью инициализирован, но свойство с таким параметром делается статическим, т. е. оно не будет обновляться при возник-ии каких либо изменений в содержимом
+  // след параметр { read: ChildComponent } он грубо говоря явл. 2 этапом фильтрации данных. Если например в шаблоне встретятся 2 одинак template ref var: <p #trv>Параграф</p> <p>Еще один</p> <app-child #trv>Lorem</app-child> то при таком значении параметра в сво-во headContent попадут данные дочернего компонента а не тега "p"
+  // еще один параметр у ContentChild/ContentChildren это { descendants: true } он отвечает за то будут ли включены потомки в поиск по селектору, по умолчанию он true
   @ContentChild('headContent', { static: true }) headContent: TemplateRef<unknown>;
 
   public disabledControl = false;

@@ -73,7 +73,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChildren('lastPostItem', { read: ElementRef }) lastPostList: QueryList<ElementRef>;
+  @ViewChildren('lastPostItem', { read: ElementRef<HTMLLIElement> }) lastPostList: QueryList<ElementRef<HTMLLIElement>>;
 
   public posts$: Observable<Post[]>;
   public articlesList = signal<Post[]>([]);

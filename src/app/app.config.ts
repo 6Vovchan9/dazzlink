@@ -75,7 +75,7 @@ export const appConfig: ApplicationConfig = {
         {
             provide: APP_INITIALIZER,
             useFactory: () => {
-                console.log('App start');
+                console.log('%cApp start', 'color: tomato');
             },
             // deps: [],
             // multi: true
