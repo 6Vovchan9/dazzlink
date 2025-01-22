@@ -339,7 +339,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                 padding: unset;
                 color: var(--color-black1);
 
-                &:before {
+                &::before {
                     content: "";
                     width: 100%;
                     height: 100%;
@@ -485,7 +485,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
             height: 16px;
             border-radius: 4px;
 
-            &:before {
+            &::before {
                 content: '';
                 display: none;
                 width: 12px;
@@ -502,7 +502,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
             &--selected {
                 background-color: #ddd;
-                &:before {
+                &::before {
                     display: block;
                 }
             }

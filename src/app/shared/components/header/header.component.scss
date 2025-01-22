@@ -110,7 +110,7 @@
     background-color: transparent;
     position: relative;
 
-    &:before {
+    &::before {
         content: "";
         display: block;
         height: 50px;
@@ -129,7 +129,7 @@
         border-radius: 2px;
         position: relative;
 
-        &:before {
+        &::before {
             content: '';
             width: 22px;
             background-color: var(--color-black1);
@@ -140,7 +140,7 @@
             bottom: 8px;
         }
 
-        &:after {
+        &::after {
             content: '';
             width: 22px;
             background-color: var(--color-black1);
@@ -175,7 +175,7 @@
         position: absolute;
     }
 
-    &:before {
+    &::before {
         content: '';
         width: 100%;
         background-color: var(--color-black1);
@@ -186,7 +186,7 @@
         bottom: 0px;
     }
 
-    &:after {
+    &::after {
         content: "";
         display: block;
         height: 50px;

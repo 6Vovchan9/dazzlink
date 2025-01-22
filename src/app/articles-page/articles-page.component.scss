@@ -13,7 +13,7 @@ $shadowHeightInMobile: 20px;
         z-index: 100;
         transition: .6s;
 
-        &:after {
+        &::after {
             content: '';
             position: absolute;
             height: $shadowHeightInMobile;
@@ -37,7 +37,7 @@ $shadowHeightInMobile: 20px;
     @media #{$notMobile} {
         .articlesPage__header {
             top: calc(var(--header-height) - $shadowHeightInDesktop);
-            &:after {
+            &::after {
                 height: $shadowHeightInDesktop;
             }
             &--visible {

@@ -62,7 +62,7 @@
 @media #{$notMobile} {
     .closeButtonInWindow {
         margin-left: 76px;
-        &:after {
+        &::after {
             content: "Закрыть";
             position: absolute;
             right: 100%;
@@ -116,7 +116,7 @@
                 color: var(--color-text-gray);
             }
         }
-        &:after {
+        &::after {
             content: "";
             position: absolute;
             bottom: 0;
@@ -183,7 +183,7 @@
             max-width: 640px;
             text-align: center;
 
-            &:before {
+            &::before {
                 content: '';
                 position: absolute;
                 bottom: 100%;
@@ -210,7 +210,7 @@
             right: 0;
             .qrModal__closeButton {
                 margin-left: 76px;
-                &:after {
+                &::after {
                     content: "Закрыть";
                     position: absolute;
                     right: 100%;

@@ -531,7 +531,7 @@
 @media #{$notMobile} {
     .closeButtonInWindow {
         margin-left: 76px;
-        &:after {
+        &::after {
             content: "Закрыть";
             position: absolute;
             right: 100%;

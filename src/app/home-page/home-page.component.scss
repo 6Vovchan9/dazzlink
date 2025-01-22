@@ -29,7 +29,7 @@ $shadowHeightInMobile: 20px;
         z-index: 100;
         transition: .6s;
 
-        &:after {
+        &::after {
             content: '';
             position: absolute;
             height: $shadowHeightInMobile;
@@ -51,7 +51,7 @@ $shadowHeightInMobile: 20px;
     @media #{$notMobile} {
         .homePage__header {
             top: calc(var(--header-height) - $shadowHeightInDesktop);
-            &:after {
+            &::after {
                 height: $shadowHeightInDesktop;
             }
             &--visible {
@@ -133,7 +133,7 @@ $shadowHeightInMobile: 20px;
     @media #{$notMobile} {
         border-radius: 32px;
         margin-bottom: 48px;
-        &:after {
+        &::after {
             width: 60px;
             height: 60px;
         }
@@ -202,7 +202,7 @@ $shadowHeightInMobile: 20px;
         animation: marquee-desktop calc(var(--card-speed, 3s) * var(--card-count, 6)) linear infinite;
         animation-delay: 1s;
     }
-    // &:before {
+    // &::before {
     //     content: '';
     //     position: absolute;
     //     z-index: 1000;
@@ -263,7 +263,7 @@ $shadowHeightInMobile: 20px;
 
         padding: 0px 12px 0px 24px;
     }
-    &:before {
+    &::before {
         content: '';
         position: absolute;
         background: linear-gradient(1deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));

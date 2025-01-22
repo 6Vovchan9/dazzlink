@@ -48,7 +48,7 @@ $color-main-blue: #5532EB;
             position: relative;
             margin-left: 4px;
 
-            &:before {
+            &::before {
                 content: "";
                 position: absolute;
                 width: 6px;
@@ -168,7 +168,7 @@ $color-main-blue: #5532EB;
             color: $color-main-white;
             .dropdownControl__icon {
                 transform: rotate(180deg);
-                &:before {
+                &::before {
                     border-color: $color-main-white;
                 }
             }
@@ -283,7 +283,7 @@ $color-main-blue: #5532EB;
     cursor: pointer;
     transition: .2s;
 
-    &:before {
+    &::before {
         content: "";
         width: 50px;
         height: 46px;
