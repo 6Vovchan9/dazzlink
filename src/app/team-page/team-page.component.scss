@@ -467,7 +467,7 @@
         }
     }
 
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         .personDescModal__container {
             padding: 64px 20px;
             .personDescModal__wrapper {
@@ -502,7 +502,7 @@
         }
     }
 
-    @media #{$mobile} {
+    @media (max-width: 1024px) {
         .personDescModal__container .personDescModal__wrapper {
             .personDescModal__content {
                 overflow-y: auto;
