@@ -147,6 +147,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   scrollingRef = viewChild<HTMLElement>('restoreScrollPosition');
   public allLocationsReceived = false;
   public cookiesAgreementService = inject(CookiesAgreementService);
+  private cd = inject(ChangeDetectorRef);
   private needScrollAfterRedirect = true;
   // public myBlockAboutScroll: { [key: string]: number } = {};
 
@@ -158,8 +159,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     private route: ActivatedRoute,
     public modalService: GlobalModalService,
     @Inject(DOCUMENT) private readonly myDocument: Document,
-    public vc: ViewportScroller,
-    private cd: ChangeDetectorRef
+    public vc: ViewportScroller
   ) {
     
     this.filteredLocations = this.allLocations.cityPlaceList;

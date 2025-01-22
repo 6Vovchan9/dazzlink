@@ -72,6 +72,7 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
   };
   private myLocation = inject(Location);
   public cookiesAgreementService = inject(CookiesAgreementService);
+  private cd = inject(ChangeDetectorRef);
 
   constructor(
     private route: ActivatedRoute,
@@ -79,7 +80,6 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private pagesService: PagesService,
     private router: Router,
     private tgService: TelegramService,
-    private cd: ChangeDetectorRef,
     private toastService: ToastService,
     private vc: ViewportScroller,
     @Inject(DOCUMENT) private readonly myDocument: Document

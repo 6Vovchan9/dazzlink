@@ -1,5 +1,4 @@
-import { APP_INITIALIZER, ApplicationConfig } from "@angular/core";
-import { provideClientHydration } from "@angular/platform-browser";
+import { APP_INITIALIZER, ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
 import {
     // HTTP_INTERCEPTORS,
     provideHttpClient,
@@ -38,7 +37,7 @@ const inMemoryScrollingFeature: InMemoryScrollingFeature = withInMemoryScrolling
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideClientHydration(),
+        provideZoneChangeDetection({ eventCoalescing: true }),
         provideRouter(routes, withPreloading(PreloadAllModules), inMemoryScrollingFeature),
 
         provideHttpClient(
