@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Attribute, ChangeDetectionStrategy, Component } from '@angular/core';
 import { IsActiveMatchOptions, RouterLink, RouterLinkActive } from '@angular/router';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 
@@ -12,7 +12,10 @@ import { GlobalModalService } from '@app/shared/services/global-modal.service';
 })
 export class HeaderComponent {
 
-  constructor(private modalService: GlobalModalService) { }
+  constructor(
+    private modalService: GlobalModalService,
+    @Attribute('name') public myLetName: string // если нужно передать статическое значение дочернему компоненту, то лучше сделать это таким образом, использ. этого декоратора повышает произодит-ть приложения за счет оптимизации механизма ChangeDetection. Механизм ChangeDetection проверяет эти значения только на этапе инициализации компонента. Доступ к таким значениям можно получить внутри контсруктора, а не внутри метода ЖЦ ngOnChanges()
+  ) { }
 
   public routerLinkActiveOptions: IsActiveMatchOptions = {
     matrixParams: 'ignored',
