@@ -62,11 +62,12 @@ body {
 }
 
 // 2-ой способ как перекрасить страницу для темной/светлой темы:
-// @media #{$darkTheme} {
-//     body {
-//         color: red;
-//     }
-// }
+@media #{$darkTheme} {
+    body {
+        color: var(--color-black1);
+        background-color: var(--color-white);;
+    }
+}
 
 * {
     box-sizing: border-box;
