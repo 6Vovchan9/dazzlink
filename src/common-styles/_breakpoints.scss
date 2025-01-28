@@ -1,12 +1,7 @@
-// breakpoints variables
 $mobile:    "(max-width: 767px)";
 $notMobile: "(min-width: 768px)";
 $tablet:    "(min-width: 768px)  and (max-width: 1024px)";
 $laptop:    "(min-width: 1025px) and (max-width: 1280px)";
 $desktop:   "(min-width: 1281px)";
 
-@mixin ng-deep {
-    :host ::ng-deep {
-        @content;
-    }
-}
+$darkTheme: "(prefers-color-scheme: dark)"; // 2-ой способ как перекрасить страницу для темной/светлой темы
