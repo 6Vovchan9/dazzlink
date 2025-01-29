@@ -1,10 +1,10 @@
 a {
-    color: var(--color-blue);
+    color: var(--color-blue-medium);
 }
 
 .background {
     position: fixed;
-    background-color: var(--color-black);
+    background-color: var(--color-black-extraBold);
     top: 0;
     left: 0;
     width: 100%;
@@ -76,7 +76,7 @@ a {
                         &::before {
                             content: '';
                             position: absolute;
-                            background-color: var(--color-black);
+                            background-color: var(--color-black-extraBold);
                             height: 2px;
                             width: 16px;
                             border-radius: 1px;
@@ -93,7 +93,7 @@ a {
                     font-size: 10px;
                     letter-spacing: 0.02em;
                     line-height: 16px;
-                    color: var(--color-gray);
+                    color: var(--color-gray-regular);
                     margin: 0;
                 }
                 &:last-child {
@@ -164,7 +164,7 @@ a {
                 width: 2px;
                 height: 12px;
                 border-radius: 1px;
-                background-color: var(--color-black);
+                background-color: var(--color-black-extraBold);
                 position: absolute;
                 top: 50%;
                 left: 50%;
@@ -177,7 +177,7 @@ a {
                 width: 2px;
                 height: 12px;
                 border-radius: 1px;
-                background-color: var(--color-black);
+                background-color: var(--color-black-extraBold);
                 position: absolute;
                 top: 50%;
                 left: 50%;
@@ -237,8 +237,8 @@ a {
             position: absolute;
             width: 6px;
             height: 6px;
-            border-bottom: 3px solid var(--color-black);
-            border-right: 3px solid var(--color-black);
+            border-bottom: 3px solid var(--color-black-extraBold);
+            border-right: 3px solid var(--color-black-extraBold);
             border-radius: 0 0 2px 0;
             top: 2px;
             left: 4px;

@@ -33,7 +33,7 @@
     position: relative;
     overflow: hidden;
     min-height: 300px;
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     margin-top: 48px;
     border-radius: 24px;
     z-index: 10;
@@ -193,7 +193,7 @@
     align-content: start;
 
     padding: 20px 24px;
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     border-radius: 24px;
 
     .aboutUsCard__map {
@@ -316,10 +316,10 @@
         //                 &:hover {
         //                     .personCard__data {
         //                         .personCard__firstRow {
-        //                             color: var(--color-blue1);
+        //                             color: var(--color-blue-light);
         //                             .personCard__goToPersonDesc {
         //                                 svg path {
-        //                                     fill: var(--color-blue1);
+        //                                     fill: var(--color-blue-light);
         //                                 }
         //                             }
         //                         }
@@ -366,7 +366,7 @@
 .personCard {
     font-size: 24px;
     .personCard__photo {
-        background-color: var(--color-light-gray);
+        background-color: var(--color-gray-light);
         border-radius: 24px;
         overflow: hidden;
 

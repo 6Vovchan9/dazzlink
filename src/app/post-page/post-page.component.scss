@@ -139,7 +139,7 @@ $shadowHeightInMobile: 20px;
         }
     }
     .postContent__feedback {
-        color: var(--color-gray1);
+        color: var(--color-gray-thin);
         .feedback__values {
             @include gradientEffect(#f2f3f4);
         }
@@ -158,7 +158,7 @@ $shadowHeightInMobile: 20px;
     align-items: center;
     column-gap: 20px;
     justify-content: space-between;
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     padding: 12px 26px 12px 12px;
     border-radius: 20px;
     .authorCard__cont {
@@ -232,7 +232,7 @@ $shadowHeightInMobile: 20px;
 
 .postTitle {
     .postTitle__img {
-        background-color: var(--color-gray1);
+        background-color: var(--color-gray-thin);
         min-height: 200px;
         border-radius: 32px;
         overflow: hidden;
@@ -320,7 +320,7 @@ $shadowHeightInMobile: 20px;
 .postDetails {
     display: flex;
     flex-wrap: wrap;
-    color: var(--color-text-gray);
+    color: var(--color-gray-regular);
     font-weight: bold;
     .postDetails__info {
         margin-left: 13px;
@@ -333,7 +333,7 @@ $shadowHeightInMobile: 20px;
             width: 2.5px;
             height: 2.5px;
             border-radius: 50%;
-            background-color: var(--color-text-gray);
+            background-color: var(--color-gray-regular);
             top: 50%;
             left: 0;
             transform: translate(-7px, -50%);

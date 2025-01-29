@@ -6,7 +6,7 @@
         position: relative;
         z-index: 10;
         margin-bottom: 12px;
-        background-color: var(--color-light-gray);
+        background-color: var(--color-gray-light);
         min-height: 180px;
         border-radius: 24px;
         overflow: hidden;
@@ -27,7 +27,7 @@
         // }
     }
     &:hover .placeDetails .placeDetails__main .placeDetails__title {
-        color: var(--color-blue1);
+        color: var(--color-blue-light);
     }
     &--withSkeleton {
         cursor: wait;
@@ -102,7 +102,7 @@
         }
     }
     .placeDetails__addit {
-        color: var(--color-text-gray);
+        color: var(--color-gray-regular);
         line-height: 24px;
         display: flex;
         flex-direction: column;
@@ -125,7 +125,7 @@
                     width: 2.5px;
                     height: 2.5px;
                     border-radius: 50%;
-                    background-color: var(--color-text-gray);
+                    background-color: var(--color-gray-regular);
                     top: 50%;
                     left: 0;
                     transform: translate(6px, -50%);

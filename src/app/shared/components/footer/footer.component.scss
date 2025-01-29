@@ -12,7 +12,7 @@
         align-items: center;
         padding: 24px 40px 24px 32px;
         border-radius: 24px;
-        background-color: var(--color-black2);
+        background-color: var(--color-black-medium);
         color: var(--color-white);
         row-gap: 16px;
         column-gap: 24px;
@@ -75,7 +75,7 @@
 }
 
 .company {
-    color: var(--color-text-gray);
+    color: var(--color-gray-regular);
     font-size: 14px;
 
     @media #{$notMobile} {

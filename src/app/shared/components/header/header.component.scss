@@ -49,29 +49,29 @@ $headerHeightInMobile: 64px;
                 display: block;
                 text-decoration: none;
                 padding: 4px 8px;
-                color: var(--color-black1);
+                color: var(--color-black-light);
             }
             &--active {
                 .menu__link {
-                    color: var(--color-text-gray);
+                    color: var(--color-gray-regular);
                     pointer-events: none;
                 }
             }
             // &--active {
             //     cursor: default;
-            //     background-color: var(--color-blue);
-            //     border-color: var(--color-blue);
+            //     background-color: var(--color-blue-medium);
+            //     border-color: var(--color-blue-medium);
             //     .menu__link {
             //         cursor: default;
             //         color: var(--color-white);
             //     }
             // }
             // &:hover {
-            //     border-color: var(--color-blue);
+            //     border-color: var(--color-blue-medium);
             // }
             &:not(.menu__item--active) {
                 &:hover {
-                    background-color: var(--color-black1);
+                    background-color: var(--color-black-light);
                     .menu__link {
                         cursor: pointer;
                         color: var(--color-white);
@@ -127,7 +127,7 @@ $headerHeightInMobile: 64px;
     .hamburger__line {
         margin: 8px 0;
         width: 22px;
-        background-color: var(--color-black1);
+        background-color: var(--color-black-light);
         height: 2px;
         border-radius: 2px;
         position: relative;
@@ -135,7 +135,7 @@ $headerHeightInMobile: 64px;
         &::before {
             content: '';
             width: 22px;
-            background-color: var(--color-black1);
+            background-color: var(--color-black-light);
             height: 2px;
             border-radius: 2px;
             display: block;
@@ -146,7 +146,7 @@ $headerHeightInMobile: 64px;
         &::after {
             content: '';
             width: 22px;
-            background-color: var(--color-black1);
+            background-color: var(--color-black-light);
             height: 2px;
             border-radius: 2px;
             display: block;
@@ -172,7 +172,7 @@ $headerHeightInMobile: 64px;
     .hamburger2__line {
         top: 0px;
         width: 100%;
-        background-color: var(--color-black1);
+        background-color: var(--color-black-light);
         height: 2px;
         border-radius: 2px;
         position: absolute;
@@ -181,7 +181,7 @@ $headerHeightInMobile: 64px;
     &::before {
         content: '';
         width: 100%;
-        background-color: var(--color-black1);
+        background-color: var(--color-black-light);
         height: 2px;
         border-radius: 2px;
         display: block;

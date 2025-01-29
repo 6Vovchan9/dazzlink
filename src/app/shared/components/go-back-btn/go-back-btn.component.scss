@@ -28,16 +28,16 @@
     }
 
     &:hover {
-        color: var(--color-blue1);
+        color: var(--color-blue-light);
 
         .arrowInBtn {
 
             .arrowInBtn__stick {
-                background-color: var(--color-blue1);
+                background-color: var(--color-blue-light);
             }
 
             .arrowInBtn__triangle {
-                border-color: var(--color-blue1);
+                border-color: var(--color-blue-light);
             }
         }
     }

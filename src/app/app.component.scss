@@ -113,7 +113,7 @@
             .QRCode__message {
                 font-size: 16px;
                 text-align: center;
-                color: var(--color-text-gray);
+                color: var(--color-gray-regular);
             }
         }
         &::after {
@@ -268,7 +268,7 @@
     .qrContent__message {
         font-size: 14px;
         text-align: center;
-        color: var(--color-text-gray);
+        color: var(--color-gray-regular);
     }
     @media #{$mobile} {
         padding: 32px 64px 48px;
@@ -379,12 +379,12 @@
                 text-decoration: none;
                 padding: 12px;
                 padding-left: 0px;
-                color: var(--color-black1);
+                color: var(--color-black-light);
             }
             &--active {
                 .menuInNavModal__link {
                     cursor: default;
-                    color: var(--color-text-gray);
+                    color: var(--color-gray-regular);
                     pointer-events: none;
                 }
             }

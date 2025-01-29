@@ -2,22 +2,18 @@
 @use "breakpoints" as *;
 
 :root {
-    --color-blue: #5532EB;
-    --color-blue1: #4A4AC6;
+    --color-blue-light: #4A4AC6;
+    --color-blue-medium: #5532EB;
 
-    --color-black: #000;
-    --color-black1: #333;
-    --color-black2: #111;
-    --color-black3: #0d0f2f;
+    --color-black-light: #333;
+    --color-black-medium: #111;
+    --color-black-extraBold: #000;
+
+    --color-gray-thin: #f2f3f4;
+    --color-gray-light: #eee;
+    --color-gray-regular: #a8a8a8;
 
     --color-white: #fff;
-    --color-light: #b4e7d4;
-
-    --color-gray: #807d7d;
-    --color-gray1: #f2f3f4;
-    --color-text-gray: #a8a8a8;
-    --color-light-gray: #eee;
-
     --color-red: #e40038;
     --color-green: green;
     --color-pink: #FF99EC;
@@ -68,18 +64,18 @@ html {
 
 body {
     margin: 0;
-    color: var(--color-black1);
+    color: var(--color-black-light);
 
     // 1-ый способ как перекрасить страницу для темной/светлой темы:
     // color: light-dark(
-    //     var(--color-black3),
-    //     var(--color-light)
+    //     var(--color-black-medium),
+    //     var(--color-white)
     // );
 
     // 1-ый способ как перекрасить страницу для темной/светлой темы:
     // background-color: light-dark(
-    //     var(--color-light),
-    //     var(--color-black3)
+    //     var(--color-white),
+    //     var(--color-black-medium)
     // );
 
     // background-color: var(--tg-theme-bg-color); // переменная доступная благодаря script из index.html нужна для того чтобы регулировать стили приложения в завис от темы (светлая/темная) telegram
@@ -88,7 +84,7 @@ body {
 // 2-ой способ как перекрасить страницу для темной/светлой темы:
 @media #{$darkTheme} {
     body {
-        color: var(--color-black1);
+        color: var(--color-black-light);
         background-color: var(--color-white);;
     }
 }
@@ -179,7 +175,7 @@ button {
     line-height: 24px;
 
     &--white {
-        color: var(--color-black1);
+        color: var(--color-black-light);
         background-color: var(--color-white);
     }
 
@@ -200,8 +196,8 @@ button {
 .downloadApp {
     cursor: pointer;
     padding: 24px 24px 24px 32px;
-    background-color: var(--color-gray1);
-    color: var(--color-black1);
+    background-color: var(--color-gray-thin);
+    color: var(--color-black-light);
     border-radius: 24px;
     display: flex;
     align-items: center;
@@ -350,7 +346,7 @@ button {
         width: 2px;
         height: 20px;
         border-radius: 1px;
-        background-color: var(--color-black1);
+        background-color: var(--color-black-light);
         position: absolute;
         top: 50%;
         left: 50%;
@@ -363,7 +359,7 @@ button {
         width: 2px;
         height: 20px;
         border-radius: 1px;
-        background-color: var(--color-black1);
+        background-color: var(--color-black-light);
         position: absolute;
         top: 50%;
         left: 50%;
@@ -378,7 +374,7 @@ button {
     column-gap: 24px;
     row-gap: 14px;
     align-items: center;
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     padding: 15.5px 28px;
     border-radius: 20px;
     font-weight: 700;
@@ -448,7 +444,7 @@ button {
     }
 
     .feedbackVal__amount {
-        color: var(--color-text-gray);
+        color: var(--color-gray-regular);
     }
 
     &--leftItem {
@@ -458,11 +454,11 @@ button {
     &--disabled {
         cursor: default;
         .feedbackVal__amount {
-            color: var(--color-text-gray);
+            color: var(--color-gray-regular);
         }
         .feedbackVal__icon {
             svg path {
-                fill: var(--color-text-gray);
+                fill: var(--color-gray-regular);
             }
         }
     }
@@ -503,12 +499,12 @@ button {
             .feedbackVal:hover {
                 &:not(.feedbackVal--disabled) {
                     .feedbackVal__amount {
-                        color: var(--color-blue1);
+                        color: var(--color-blue-light);
                     }
 
                     .feedbackVal__icon {
                         svg path {
-                            fill: var(--color-blue1);
+                            fill: var(--color-blue-light);
                         }
                     }
                 }
@@ -518,7 +514,7 @@ button {
 }
 
 .errorMessage {
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     border-radius: 20px;
     padding: 40px;
     display: flex;
@@ -597,7 +593,7 @@ button {
     background-color: var(--color-white);
     text-align: center;
     .connectWithUsBtn__head {
-        color: var(--color-text-gray);
+        color: var(--color-gray-regular);
     }
 
     @media #{$notMobile} {
@@ -621,8 +617,8 @@ button {
 
 .scrollProgress {
     cursor: pointer;
-    background-color: var(--color-black1);
-    box-shadow: 0px 0px 10px 0px var(--color-black1);
+    background-color: var(--color-black-light);
+    box-shadow: 0px 0px 10px 0px var(--color-black-light);
     border-radius: 50%;
 
     position: absolute;

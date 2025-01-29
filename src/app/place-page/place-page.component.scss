@@ -115,7 +115,7 @@ span {
         }
     }
     .pageContent__feedback {
-        color: var(--color-gray1);
+        color: var(--color-gray-thin);
         .feedback__values {
             @include gradientEffect(#f2f3f4);
         }
@@ -160,7 +160,7 @@ span {
         margin-top: 4px;
         display: flex;
         flex-wrap: wrap;
-        color: var(--color-text-gray);
+        color: var(--color-gray-regular);
         font-weight: 700;
         .placeMainInfo__anotherItem {
             position: relative;
@@ -175,7 +175,7 @@ span {
                 width: 2.5px;
                 height: 2.5px;
                 border-radius: 50%;
-                background-color: var(--color-text-gray);
+                background-color: var(--color-gray-regular);
                 top: 50%;
                 left: 0;
                 transform: translate(6px, -50%);
@@ -200,7 +200,7 @@ span {
         margin-top: 32px;
         .additPlaceInfo__title {
             display: flex;
-            color: var(--color-text-gray);
+            color: var(--color-gray-regular);
             .additPlaceInfo__titleLogo {
                 margin-right: 16px;
                 width: 24px;
@@ -221,7 +221,7 @@ span {
                     overflow: hidden;
                     text-overflow: ellipsis;
                     &:hover {
-                        color: var(--color-blue1);
+                        color: var(--color-blue-light);
                     }
                 }
             }
@@ -247,7 +247,7 @@ span {
     }
     @media #{$mobile} {
         padding: 24px 20px;
-        background-color: var(--color-gray1);
+        background-color: var(--color-gray-thin);
         border-radius: 20px;
     }
 }
@@ -258,7 +258,7 @@ span {
         flex-direction: column;
         margin-top: 32px;
         .descPlaceInfo__title {
-            color: var(--color-text-gray);
+            color: var(--color-gray-regular);
             overflow: hidden;
             text-overflow: ellipsis;
             margin-bottom: 4px;
@@ -271,7 +271,7 @@ span {
             //     text-overflow: ellipsis;
             //     .descPlaceInfo__link {
             //         &:hover {
-            //             color: var(--color-blue1);
+            //             color: var(--color-blue-light);
             //         }
             //     }
             // }
@@ -303,7 +303,7 @@ span {
     justify-content: center;
     align-items: center;
     position: fixed;
-    background-color: var(--color-black2);
+    background-color: var(--color-black-medium);
     width: 100%;
     height: 100%;
     z-index: 100;
@@ -311,7 +311,7 @@ span {
     top: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    color: var(--color-gray1);
+    color: var(--color-gray-thin);
     .photoGalleria__photoWrap {
         flex: 1;
         display: flex;
@@ -471,7 +471,7 @@ span {
         .locationPhotos__major {
             position: relative;
             cursor: pointer;
-            background-color: var(--color-gray1);
+            background-color: var(--color-gray-thin);
             overflow: hidden;
             border-radius: 20px;
             // max-height: 420px;
@@ -495,7 +495,7 @@ span {
             .locationPhotos__minorItem {
                 position: relative;
                 cursor: pointer;
-                background-color: var(--color-gray1);
+                background-color: var(--color-gray-thin);
                 flex: 1;
                 overflow: hidden;
                 border-radius: 20px;
@@ -521,7 +521,7 @@ span {
                 margin-right: 4px;
                 width: calc(50% - 2px);
                 overflow: hidden;
-                background-color: var(--color-gray1);
+                background-color: var(--color-gray-thin);
                 border-radius: 20px;
                 // height: 300px;
                 // или
@@ -544,7 +544,7 @@ span {
                 flex: 1;
                 border-radius: 20px;
                 overflow: hidden;
-                background-color: var(--color-gray1);
+                background-color: var(--color-gray-thin);
                 cursor: pointer;
             }
             .locationPhotos__minor {
@@ -558,7 +558,7 @@ span {
                     flex: 1;
                     overflow: hidden;
                     border-radius: 20px;
-                    background-color: var(--color-gray1);
+                    background-color: var(--color-gray-thin);
                 }
             }
         }
@@ -573,7 +573,7 @@ span {
                 position: relative;
                 cursor: pointer;
                 flex: 1;
-                background-color: var(--color-gray1);
+                background-color: var(--color-gray-thin);
                 border-radius: 20px;
                 overflow: hidden;
             }
@@ -622,7 +622,7 @@ span {
     overflow: hidden;
     height: 300px;
     border-radius: 20px;
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     // aspect-ratio: 1 / 0.5; не рабоатет на ios
 
     .locationPhotosInMobile1__imgWrap {
@@ -674,7 +674,7 @@ span {
     z-index: 10; // это нужно для thumb-hash-image
     border-radius: 20px;
     overflow: hidden;
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     .carousel__img {
         width: 100%;
         height: 100%;

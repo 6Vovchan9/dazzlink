@@ -297,7 +297,7 @@ $shadowHeightInMobile: 20px;
         column-gap: 12px;
         .categoryCodes__item {
             .categoryCodes__btn {
-                color: var(--color-black1, #000);
+                color: var(--color-black-light, #000);
                 font-size: 16px;
                 line-height: 24px;
                 font-weight: 700;
@@ -305,13 +305,13 @@ $shadowHeightInMobile: 20px;
                 border-radius: 12px;
                 border: 0px;
                 cursor: pointer;
-                background-color: var(--color-gray1, #f2f3f4);
+                background-color: var(--color-gray-thin, #f2f3f4);
                 text-wrap: nowrap;
 
                 &--active {
                     cursor: default;
-                    background-color: var(--color-black1);
-                    color: var(--color-gray1);
+                    background-color: var(--color-black-light);
+                    color: var(--color-gray-thin);
                 }
 
                 &[disabled] {
@@ -394,7 +394,7 @@ $shadowHeightInMobile: 20px;
     // background: filter(url(path/to/img.jpg), blur(5px)); // есть еще такой вариант
 
     .filterBar__length {
-        color: var(--color-text-gray);
+        color: var(--color-gray-regular);
         font-weight: 700;
         padding: 8px 0px;
         position: relative;
@@ -545,7 +545,7 @@ $shadowHeightInMobile: 20px;
 .filterOptionsBlock {
     // font-family: "Nunito";
     display: flex;
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     padding: 24px 20px;
     border-radius: 20px;
     // max-height: 100%;
@@ -575,7 +575,7 @@ $shadowHeightInMobile: 20px;
                 border: none;
                 background-color: transparent;
                 padding: unset;
-                color: var(--color-black1);
+                color: var(--color-black-light);
 
                 &::before {
                     content: "";
@@ -595,7 +595,7 @@ $shadowHeightInMobile: 20px;
                 }
 
                 &:hover {
-                    color: var(--color-blue1);
+                    color: var(--color-blue-light);
                 }
             }
 
@@ -623,11 +623,11 @@ $shadowHeightInMobile: 20px;
 
                 .filterOptionsBlock__countryName {
                     font-weight: 700;
-                    color: var(--color-text-gray);
+                    color: var(--color-gray-regular);
                     margin: 0px 16px 12px;
 
                     &--selected {
-                        color: var(--color-black1);
+                        color: var(--color-black-light);
                     }
                 }
                 .filterOptionsBlock__allCities {
@@ -806,7 +806,7 @@ $shadowHeightInMobile: 20px;
     }
 
     .cityForFilter__amountPlace {
-        color: var(--color-text-gray);
+        color: var(--color-gray-regular);
     }
 
     &.disabled {
@@ -824,7 +824,7 @@ $shadowHeightInMobile: 20px;
     font-weight: 700;
     column-gap: 20px;
     justify-content: space-between;
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     padding: 24px 28px;
     border-radius: 20px;
     cursor: pointer;

@@ -218,7 +218,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     line-height: 24px;
     margin-bottom: 20px;
     .filterBar__length {
-        color: var(--color-text-gray);
+        color: var(--color-gray-regular);
         font-weight: 700;
     }
     .filterBar__controls {
@@ -308,7 +308,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
 .filterOptionsBlock {
     display: flex;
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     padding: 24px 20px;
     border-radius: 20px;
     // max-height: 100%;
@@ -337,7 +337,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                 border: none;
                 background-color: transparent;
                 padding: unset;
-                color: var(--color-black1);
+                color: var(--color-black-light);
 
                 &::before {
                     content: "";
@@ -357,7 +357,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
                 }
 
                 &:hover {
-                    color: var(--color-blue1);
+                    color: var(--color-blue-light);
                 }
             }
 
@@ -386,11 +386,11 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
                 .filterOptionsBlock__countryName {
                     font-weight: 700;
-                    color: var(--color-text-gray);
+                    color: var(--color-gray-regular);
                     margin: 0px 16px 12px;
 
                     &--selected {
-                        color: var(--color-black1);
+                        color: var(--color-black-light);
                     }
                 }
                 .filterOptionsBlock__allCities {
@@ -516,7 +516,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     }
 
     .cityForFilter__amountPlace {
-        color: var(--color-text-gray);
+        color: var(--color-gray-regular);
     }
 
     &.disabled {
@@ -531,7 +531,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     display: flex;
     column-gap: 20px;
     justify-content: space-between;
-    background-color: var(--color-gray1);
+    background-color: var(--color-gray-thin);
     padding: 24px 28px;
     border-radius: 20px;
     cursor: pointer;

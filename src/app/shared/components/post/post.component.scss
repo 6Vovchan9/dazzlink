@@ -9,7 +9,7 @@
     .post__img {
         align-self: stretch;
         margin-bottom: 18px;
-        background-color: var(--color-light-gray);
+        background-color: var(--color-gray-light);
         min-height: 200px;
         border-radius: 32px;
         z-index: 10;
@@ -55,7 +55,7 @@
 
     &:hover {
         .post__title {
-            color: var(--color-blue1);
+            color: var(--color-blue-light);
         }
     }
 
@@ -136,7 +136,7 @@
     margin-bottom: 4px;
     display: flex;
     flex-wrap: wrap;
-    color: var(--color-text-gray);
+    color: var(--color-gray-regular);
     .postDetails__info {
         margin-left: 13px;
         position: relative;
@@ -148,7 +148,7 @@
             width: 2.5px;
             height: 2.5px;
             border-radius: 50%;
-            background-color: var(--color-text-gray);
+            background-color: var(--color-gray-regular);
             top: 50%;
             left: 0;
             transform: translate(-7px, -50%);
