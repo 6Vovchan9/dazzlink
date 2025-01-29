@@ -3,6 +3,7 @@ import { AsyncPipe, DOCUMENT, NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter, pairwise, tap } from 'rxjs/operators';
+// import { HttpClient } from '@angular/common/http';
 
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
@@ -11,10 +12,66 @@ import { PagesService } from '@app/shared/services/pages.service';
 import { ToastComponent } from '@app/shared/components/toast/toast.component';
 import { CookiesToastComponent } from '@app/shared/components/cookies-toast/cookies-toast.component';
 import { ModalComponent } from '@app/shared/components/modal/modal.component';
+// import { LocationsService } from '@app/shared/services/locations.service';
+// import { PostsService } from '@app/shared/services/posts.service';
+// import { RandomService } from '@app/shared/services/random.service';
+// import {
+//   TOKEN_FOR_USEFACTORY_1,
+//   TOKEN_FOR_USEFACTORY_2,
+//   ADMIN_RANDOM_SERVICE_TOKEN,
+//   TOKEN_FOR_USEVALUE,
+//   USER_RANDOM_SERVICE_TOKEN
+// } from '@app/shared/tokens/tokens';
 
 @Component({
   selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
   standalone: true,
+  providers: [
+    TelegramService, // регистрация зависимости таким образом позволяет использовать только класс в качестве зависимости, а если нужно внедрить в качестве зависимости примитивные типы данных или объекты то придется воспользоваться другими способами регистрации зависимостей (useClass, useValue, useFactory, useExisting)
+    // {
+    //   provide: TelegramService,
+    //   useClass: TelegramService
+    // }, // этот способ аналогичный верхнему, который под капотом использует данный способ для регистрации зависимости
+
+    // { provide: TOKEN_FOR_USEVALUE, useValue: 'Какие-то строковые данные' },
+    // {
+    //   provide: TOKEN_FOR_USEFACTORY_1,
+    //   useFactory: () => {
+    //     if (Math.random() > 0.5) {
+    //       return {
+    //         message: 'Число больше 0,5'
+    //       }
+    //     } else {
+    //       return {
+    //         message: 'Число меньше 0,5'
+    //       }
+    //     }
+    //   }
+    // },
+    // {
+    //   provide: TOKEN_FOR_USEFACTORY_2,
+    //   useFactory: (http: HttpClient, pagesService: PagesService) => {
+    //     if (Math.random() > 0.5) {
+    //       return new PostsService();
+    //     } else {
+    //       return new LocationsService(http, pagesService);
+    //     }
+    //   },
+    //   deps: [HttpClient, PagesService]
+    // },
+
+    // useExisting исп. когда нужно зарег. несколько токенов для одного и того же экземпляра сервиса, потому что если бы мы ниже регистрировали зависимости через useClass то создавались бы 2 разных экземпляра зависимости
+    // {
+    //   provide: USER_RANDOM_SERVICE_TOKEN,
+    //   useClass: RandomService
+    // },
+    // {
+    //   provide: ADMIN_RANDOM_SERVICE_TOKEN,
+    //   useExisting: USER_RANDOM_SERVICE_TOKEN
+    // }
+  ],
   imports: [
     RouterOutlet,
     RouterLink,
@@ -25,22 +82,36 @@ import { ModalComponent } from '@app/shared/components/modal/modal.component';
     ToastComponent,
     ModalComponent,
     CookiesToastComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  ]
 })
 export class AppComponent implements OnInit, OnDestroy {
 
   private tgService = inject(TelegramService);
-  public cookiesAgreementService = inject(CookiesAgreementService);
+  public  cookiesAgreementService = inject(CookiesAgreementService);
   private routerSub: Subscription;
   private router = inject(Router);
   private pagesService = inject(PagesService);
 
   constructor(
     public modalService: GlobalModalService, // typeScript детает такой синтакс сахар - можем объявлять свойства данного класса прям в конструкторе, то есть нет необх писать constructor(private/public/protected/readonly name: string) { this.name = name } можно просто constructor(private name: string) { }
+    // @Inject(GlobalModalService) public modalService: GlobalModalService, // это аналогичный верхнему способ внедрения зависимости, но на практике такой способ внедрения зависимости используется когда необх внедрить какие то данные регистрируемые через useValue
+    
     @Inject(DOCUMENT) private readonly documentRef: Document
-  ) { }
+    
+    // @Inject(TOKEN_FOR_USEVALUE) private tokenUseValue: string,
+    // @Inject(TOKEN_FOR_USEFACTORY_1) private tokenUseFactory1: string,
+    // @Inject(TOKEN_FOR_USEFACTORY_2) private tokenUseFactory2: string,
+
+    // @Inject(USER_RANDOM_SERVICE_TOKEN) private userRandomService: RandomService,
+    // @Inject(ADMIN_RANDOM_SERVICE_TOKEN) private adminRandomService: RandomService,
+  ) {
+    // console.log('tokenUseValue:', tokenUseValue);
+    // console.log('tokenUseFactory1:', tokenUseFactory1);
+    // console.log('tokenUseFactory2:', tokenUseFactory2);
+
+    // console.log('userRandomService:', userRandomService);
+    // console.log('adminRandomService:', adminRandomService);
+  }
 
   ngOnInit(): void {
     // console.log(navigator.userAgent);

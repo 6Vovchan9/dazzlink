@@ -9,7 +9,7 @@ interface IMainTgButton {
     offClick(fn: Function): void
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class TelegramService {
 
     private myWindow;
