@@ -162,7 +162,7 @@
 
 .stickyMenuWrapper {
     .updatePageInfo {
-        color: var(--color-gray-regular);
+        color: var(--color-gray-medium);
         font-weight: 700;
     }
 
@@ -203,10 +203,10 @@
 
                 .phonesBlock__source {
                     margin-top: 4px;
-                    color: var(--color-gray-regular);
+                    color: var(--color-gray-medium);
 
                     .phonesBlock__sourceLink {
-                        color: var(--color-gray-regular);
+                        color: var(--color-gray-medium);
                         text-decoration: underline;
                     }
                 }

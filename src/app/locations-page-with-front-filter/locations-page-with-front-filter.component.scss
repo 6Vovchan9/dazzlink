@@ -394,7 +394,7 @@ $shadowHeightInMobile: 20px;
     // background: filter(url(path/to/img.jpg), blur(5px)); // есть еще такой вариант
 
     .filterBar__length {
-        color: var(--color-gray-regular);
+        color: var(--color-gray-medium);
         font-weight: 700;
         padding: 8px 0px;
         position: relative;
@@ -623,7 +623,7 @@ $shadowHeightInMobile: 20px;
 
                 .filterOptionsBlock__countryName {
                     font-weight: 700;
-                    color: var(--color-gray-regular);
+                    color: var(--color-gray-medium);
                     margin: 0px 16px 12px;
 
                     &--selected {
@@ -806,7 +806,7 @@ $shadowHeightInMobile: 20px;
     }
 
     .cityForFilter__amountPlace {
-        color: var(--color-gray-regular);
+        color: var(--color-gray-medium);
     }
 
     &.disabled {

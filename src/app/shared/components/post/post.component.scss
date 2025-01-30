@@ -136,7 +136,7 @@
     margin-bottom: 4px;
     display: flex;
     flex-wrap: wrap;
-    color: var(--color-gray-regular);
+    color: var(--color-gray-medium);
     .postDetails__info {
         margin-left: 13px;
         position: relative;
@@ -148,7 +148,7 @@
             width: 2.5px;
             height: 2.5px;
             border-radius: 50%;
-            background-color: var(--color-gray-regular);
+            background-color: var(--color-gray-medium);
             top: 50%;
             left: 0;
             transform: translate(-7px, -50%);

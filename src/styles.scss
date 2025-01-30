@@ -5,13 +5,16 @@
     --color-blue-light: #4A4AC6;
     --color-blue-medium: #5532EB;
 
+    --color-black-thin: #4d4d4d;
     --color-black-light: #333;
+    --color-black-regular: #212121;
     --color-black-medium: #111;
     --color-black-extraBold: #000;
 
     --color-gray-thin: #f2f3f4;
     --color-gray-light: #eee;
-    --color-gray-regular: #a8a8a8;
+    --color-gray-regular: #efefef;
+    --color-gray-medium: #a8a8a8;
 
     --color-white: #fff;
     --color-red: #e40038;
@@ -85,7 +88,7 @@ body {
 @media #{$darkTheme} {
     body {
         color: var(--color-black-light);
-        background-color: var(--color-white);;
+        background-color: var(--color-white);
     }
 }
 
@@ -444,7 +447,7 @@ button {
     }
 
     .feedbackVal__amount {
-        color: var(--color-gray-regular);
+        color: var(--color-gray-medium);
     }
 
     &--leftItem {
@@ -454,11 +457,11 @@ button {
     &--disabled {
         cursor: default;
         .feedbackVal__amount {
-            color: var(--color-gray-regular);
+            color: var(--color-gray-medium);
         }
         .feedbackVal__icon {
             svg path {
-                fill: var(--color-gray-regular);
+                fill: var(--color-gray-medium);
             }
         }
     }
@@ -593,7 +596,7 @@ button {
     background-color: var(--color-white);
     text-align: center;
     .connectWithUsBtn__head {
-        color: var(--color-gray-regular);
+        color: var(--color-gray-medium);
     }
 
     @media #{$notMobile} {

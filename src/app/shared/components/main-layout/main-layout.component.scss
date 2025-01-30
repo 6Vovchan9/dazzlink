@@ -118,7 +118,7 @@ $headerHeightInMobile: 64px;
     .qrContent__message {
         font-size: 14px;
         text-align: center;
-        color: var(--color-gray-regular);
+        color: var(--color-gray-medium);
     }
 }
 
@@ -411,7 +411,7 @@ $headerHeightInMobile: 64px;
             }
             &--active {
                 .menu__link {
-                    color: var(--color-gray-regular);
+                    color: var(--color-gray-medium);
                 }
             }
             // &--active {

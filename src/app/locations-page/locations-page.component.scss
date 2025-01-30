@@ -218,7 +218,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     line-height: 24px;
     margin-bottom: 20px;
     .filterBar__length {
-        color: var(--color-gray-regular);
+        color: var(--color-gray-medium);
         font-weight: 700;
     }
     .filterBar__controls {
@@ -386,7 +386,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 
                 .filterOptionsBlock__countryName {
                     font-weight: 700;
-                    color: var(--color-gray-regular);
+                    color: var(--color-gray-medium);
                     margin: 0px 16px 12px;
 
                     &--selected {
@@ -516,7 +516,7 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
     }
 
     .cityForFilter__amountPlace {
-        color: var(--color-gray-regular);
+        color: var(--color-gray-medium);
     }
 
     &.disabled {
