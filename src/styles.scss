@@ -703,4 +703,12 @@ button {
         background-color: var(--color-black-light);
         color: var(--color-gray-regular);
     }
+    .iconForCloseInModal {
+        &::before {
+            background-color: var(--color-gray-regular);
+        }
+        &::after {
+            background-color: var(--color-gray-regular);
+        }
+    }
 }
