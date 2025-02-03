@@ -2,7 +2,11 @@
     <div class="container header__container">
         <div class="header__col">
             <a routerLink="/" class="logoInHeader">
-                <img src="assets/images/fullLogo.svg" class="logoInHeader__image" alt="logotip">
+                <picture>
+                    <source srcset="assets/images/fullLogo.svg" media="(prefers-color-scheme: light)">
+                    <source srcset="assets/images/fullLogoDark.svg" media="(prefers-color-scheme: dark)">
+                    <img class="logoInHeader__image" src="assets/images/fullLogo.svg" alt="logo">
+                </picture>
             </a>
         </div>
         <div class="header__col header__col--alignRight">

@@ -1,10 +1,10 @@
-@import "variables";
+@use "breakpoints" as *;
 
 $headerHeightInDesktop: 80px;
 $headerHeightInMobile: 64px;
 
 .header {
-    background-color: #fff;
+    background-color: var(--color-white);
     .header__container {
         // height: $headerHeightInMobile;
         padding: 20px;
@@ -202,5 +202,43 @@ $headerHeightInMobile: 64px;
 
     @media #{$notMobile} {
         display: none;
+    }
+}
+
+// :host-context(.clientDarkTheme) {
+//     .header {
+//         background-color: var(--color-black-regular);
+//     }
+// }
+
+// :host-context(.clientLightTheme) {
+//     .header {
+//         background-color: var(--color-white);
+//     }
+// }
+
+@media #{$darkTheme} {
+    .header {
+        background-color: var(--color-black-regular);
+    }
+    .menu .menu__list .menu__item {
+        .menu__link {
+            color: var(--color-gray-medium);
+        }
+        &--active {
+            .menu__link {
+                color: var(--color-gray-regular);
+            }
+        }
+        &:not(.menu__item--active) {
+            &:hover {
+                .menu__link {
+                    color: var(--color-gray-regular);
+                }
+            }
+        }
+    }
+    .hamburger2 .hamburger2__line, .hamburger2::before {
+        background-color: var(--color-gray-regular);
     }
 }

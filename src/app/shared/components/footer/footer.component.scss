@@ -1,4 +1,4 @@
-@import "variables";
+@use "breakpoints" as *;
 
 .footer {
     font-weight: 700;
@@ -94,4 +94,16 @@
     padding: 8px;
     text-align: center;
     font-weight: 700;
+}
+
+@media #{$darkTheme} {
+    .footer .footer__content {
+        background-color: var(--color-black-light);
+        .footer__col .footer__download {
+            background-color: var(--color-black-regular);
+        }
+    }
+    .btnInFooter {
+        color: var(--color-gray-regular);
+    }
 }

@@ -84,14 +84,6 @@ body {
     // background-color: var(--tg-theme-bg-color); // переменная доступная благодаря script из index.html нужна для того чтобы регулировать стили приложения в завис от темы (светлая/темная) telegram
 }
 
-// 2-ой способ как перекрасить страницу для темной/светлой темы:
-@media #{$darkTheme} {
-    body {
-        color: var(--color-black-light);
-        background-color: var(--color-white);
-    }
-}
-
 * {
     box-sizing: border-box;
 }
@@ -698,5 +690,17 @@ button {
     @media #{$notMobile} {
         // width: 168px;
         height: 32px;
+    }
+}
+
+// 2-ой способ как перекрасить страницу для темной/светлой темы:
+@media #{$darkTheme} {
+    body {
+        color: var(--color-gray-regular);
+        background-color: var(--color-black-regular);
+    }
+    .downloadApp {
+        background-color: var(--color-black-light);
+        color: var(--color-gray-regular);
     }
 }
