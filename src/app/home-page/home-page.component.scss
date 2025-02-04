@@ -34,7 +34,7 @@ $shadowHeightInMobile: 20px;
             position: absolute;
             height: $shadowHeightInMobile;
             width: 100%;
-            background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+            background: linear-gradient(0deg, transparent, var(--color-white));
         }
 
         &--visible {

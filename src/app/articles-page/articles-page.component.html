@@ -53,7 +53,11 @@
                                     >
                                         <div class="downloadApp__title">Скачайте<br />приложение</div>
                                         <div class="downloadApp__icon">
-                                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
+                                            <picture>
+                                                <source [srcset]="mobileDetectService?.mobileStoreIconSrc()" media="(prefers-color-scheme: light)">
+                                                <source [srcset]="mobileDetectService?.mobileStoreIconSrc(true)" media="(prefers-color-scheme: dark)">
+                                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store">
+                                            </picture>
                                         </div>
                                     </button>
                                 </div>
@@ -277,21 +281,33 @@
             target="_blank"
             class="linkToApp__item"
         >
-            <img src="assets/images/store/linkIOSShort.svg" class="linkToApp__img" alt="IOS" />
+            <picture>
+                <source srcset="assets/images/store/linkIOSShort.svg" media="(prefers-color-scheme: light)">
+                <source srcset="assets/images/store/linkIOSShortDark.svg" media="(prefers-color-scheme: dark)">
+                <img class="linkToApp__img" src="assets/images/store/linkIOSShort.svg" alt="Android">
+            </picture>
         </a> -->
         <a
             href="https://play.google.com/store/apps/details?id=asia.dazzlink.dazzlink"
             target="_blank"
             class="linkToApp__item"
         >
-            <img src="assets/images/store/linkAndroid.svg" class="linkToApp__img" alt="Android" />
+            <picture>
+                <source srcset="assets/images/store/linkAndroid.svg" media="(prefers-color-scheme: light)">
+                <source srcset="assets/images/store/linkAndroidDark.svg" media="(prefers-color-scheme: dark)">
+                <img class="linkToApp__img" src="assets/images/store/linkAndroid.svg" alt="Android">
+            </picture>
         </a>
         <a
             href="https://appgallery.cloud.huawei.com/ag/n/app/C112028837"
             target="_blank"
             class="linkToApp__item"
         >
-            <img src="assets/images/store/linkAppGallery.svg" class="linkToApp__img" alt="AppGallery" />
+            <picture>
+                <source srcset="assets/images/store/linkAppGallery.svg" media="(prefers-color-scheme: light)">
+                <source srcset="assets/images/store/linkAppGalleryDark.svg" media="(prefers-color-scheme: dark)">
+                <img class="linkToApp__img" src="assets/images/store/linkAppGallery.svg" alt="Android">
+            </picture>
         </a>
     </div>
 </ng-template>

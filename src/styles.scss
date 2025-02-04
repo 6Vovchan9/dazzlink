@@ -2,6 +2,7 @@
 @use "breakpoints" as *;
 
 :root {
+    --color-blue-thin: #7070ff;
     --color-blue-light: #4A4AC6;
     --color-blue-medium: #5532EB;
 
@@ -90,7 +91,7 @@ body {
 
 a {
     text-decoration: none;
-    color: #000;
+    color: var(--color-black-light);
 }
 
 ul, ol {
@@ -698,6 +699,9 @@ button {
     body {
         color: var(--color-gray-regular);
         background-color: var(--color-black-regular);
+    }
+    a {
+        color: var(--color-gray-regular);
     }
     .downloadApp {
         background-color: var(--color-black-light);
