@@ -17,7 +17,11 @@
                     >
                         <div class="downloadApp__title">Скачайте<br />приложение</div>
                         <div class="downloadApp__icon">
-                            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="storeIcon">
+                            <picture>
+                                <source [srcset]="mobileDetectService?.mobileStoreIconSrc()" media="(prefers-color-scheme: light)">
+                                <source [srcset]="mobileDetectService?.mobileStoreIconSrc(true)" media="(prefers-color-scheme: dark)">
+                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store">
+                            </picture>
                         </div>
                     </button>
                 }

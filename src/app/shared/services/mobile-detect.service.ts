@@ -28,17 +28,17 @@ export class MobileDetectService {
         }
     }
 
-    public mobileStoreIconSrc(): string {
+    public mobileStoreIconSrc(darkMode = false): string {
         const uAgent = this.myWindow.navigator.userAgent.toLowerCase();
         if (this.osDevice?.toLowerCase() === 'ios') {
-            return 'assets/images/store/linkIOSLite.svg';
+            return darkMode ? 'assets/images/store/linkIOSLiteDark.svg' : 'assets/images/store/linkIOSLite.svg';
         } else if (this.osDevice?.toLowerCase() === 'androidos') {
             if (/hms/.test(uAgent) && !/gms/.test(uAgent)) {
-                return 'assets/images/store/linkAppGallery.svg';
+                return darkMode ? 'assets/images/store/linkAppGalleryDark.svg' : 'assets/images/store/linkAppGallery.svg';
             }
-            return 'assets/images/store/linkAndroid.svg';
+            return darkMode ? 'assets/images/store/linkAndroidDark.svg' : 'assets/images/store/linkAndroid.svg';
         } else {
-            return 'assets/images/store/linkAppGallery.svg';
+            return darkMode ? 'assets/images/store/linkAppGalleryDark.svg' : 'assets/images/store/linkAppGallery.svg';
         }
     }
 
