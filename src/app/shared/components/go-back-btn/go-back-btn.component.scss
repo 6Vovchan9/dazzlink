@@ -89,4 +89,16 @@
             background-color: var(--color-gray-regular);
         }
     }
+    .appGoBackPage:hover {
+        color: var(--color-blue-thin);
+        .arrowInBtn {
+            .arrowInBtn__stick {
+                background-color: var(--color-blue-thin);
+            }
+
+            .arrowInBtn__triangle {
+                border-color: var(--color-blue-thin);
+            }
+        }
+    }
 }

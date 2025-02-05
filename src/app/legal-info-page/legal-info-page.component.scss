@@ -1,4 +1,4 @@
-@import "variables";
+@use "breakpoints" as *;
 
 :host {
     min-height: 100%;
@@ -74,5 +74,11 @@
     }
     @media #{$notMobile} {
         padding: 24px 48px;
+    }
+}
+
+@media #{$darkTheme} {
+    .openLegalDoc {
+        background-color: var(--color-black-light);
     }
 }
