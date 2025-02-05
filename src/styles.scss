@@ -134,7 +134,8 @@ img {
 
 button {
     font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
-    color: #000;
+    color: var(--color-black-light);
+
     &[disabled] {
         color: rgb(0 0 0 / 20%);
     }
@@ -540,8 +541,7 @@ button {
         padding: 16px 32px;
         border-radius: 16px;
         border: none;
-        background-color: white;
-
+        background-color: var(--color-white);
 
         .errorMessage__btnSpinner {
             display: none;
@@ -703,10 +703,42 @@ button {
     a {
         color: var(--color-gray-regular);
     }
+
+    .errorMessage {
+        background-color: var(--color-black-light);
+        .errorMessage__btn {
+            background-color: var(--color-black-thin);
+            color: var(--color-gray-regular);
+            &--isLoading {
+                color: transparent;
+                background-color: transparent;
+            }
+        }
+    }
+
+    .feedback {
+        background-color: var(--color-black-light);
+    }
+    .feedbackVal {
+        .feedbackVal__icon {
+            svg path {
+                fill: var(--color-gray-regular);
+            }
+        }
+        &--disabled {
+            .feedbackVal__icon {
+                svg path {
+                    fill: var(--color-gray-medium);
+                }
+            }
+        }
+    }
+
     .downloadApp {
         background-color: var(--color-black-light);
         color: var(--color-gray-regular);
     }
+
     .iconForCloseInModal {
         &::before {
             background-color: var(--color-gray-regular);

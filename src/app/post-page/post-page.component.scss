@@ -1,9 +1,10 @@
-@import "variables";
+@use "breakpoints" as *;
+@use "mixins" as *;
 
 $shadowHeightInDesktop: 34px;
 $shadowHeightInMobile: 20px;
 
-@mixin gradientEffect($bcColor: #fff) {
+@mixin gradientEffect($bcColor: var(--color-white)) {
     position: relative;
     &::before {
         content: '';
@@ -17,11 +18,20 @@ $shadowHeightInMobile: 20px;
         position: absolute;
         width: 100%;
         height: 80%;
-        background-color: #f2f3f4;
+        background-color: var(--color-gray-thin);
         left: 0;
         top: 50%;
         transform: translateY(-50%);
         border-radius: 20px;
+    }
+
+    @media #{$darkTheme} {
+        &::before {
+            background-color: var(--color-black-regular);
+        }
+        &::after {
+            background-color: var(--color-black-light);
+        }
     }
 }
 
@@ -40,7 +50,7 @@ $shadowHeightInMobile: 20px;
             position: absolute;
             height: $shadowHeightInMobile;
             width: 100%;
-            background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+            background: linear-gradient(0deg, transparent, var(--color-white));
         }
 
         &--visible {
@@ -118,6 +128,7 @@ $shadowHeightInMobile: 20px;
         flex-direction: column;
         .postContent__details {
             align-self: flex-start;
+            color: transparent;
             @include gradientEffect;
         }
         .postContent__text {
@@ -400,4 +411,23 @@ $shadowHeightInMobile: 20px;
 .loaderInPostPage {
     position: relative;
     height: 100%;
+}
+
+@media #{$darkTheme} {
+    .postPage .postPage__header::after {
+        background: linear-gradient(0deg, transparent, var(--color-black-regular));
+    }
+    .postTitle {
+        .postTitle__img {
+            background-color: var(--color-black-light);
+        }
+    }
+    .postPage .postPage__container--withGradientEffect .postContent__feedback {
+        color: var(--color-black-light);
+        .feedback__values {
+            &::before {
+                background-color: var(--color-black-light);
+            }
+        }
+    }
 }

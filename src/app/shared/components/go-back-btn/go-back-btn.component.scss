@@ -1,3 +1,5 @@
+@use "breakpoints" as *;
+
 .appGoBackPage {
     display: flex;
     align-items: center;
@@ -56,6 +58,7 @@
         border-width: 2px 2px 0 0;
         border-style: solid;
         border-radius: 0 2px 0 0;
+        border-color: var(--color-black-light);
         box-sizing: border-box;
         top: 50%;
         right: 28px;
@@ -68,11 +71,22 @@
         width: 22px;
         height: 2px;
         border-radius: 2px;
-        background-color: #000;
+        background-color: var(--color-black-light);
         position: absolute;
         top: 50%;
         right: 4px;
         transform: translate(0, -50%);
         // transition: .2s;
+    }
+}
+
+@media #{$darkTheme} {
+    .arrowInBtn {
+        .arrowInBtn__triangle {
+            border-color: var(--color-gray-regular);
+        }
+        .arrowInBtn__stick {
+            background-color: var(--color-gray-regular);
+        }
     }
 }
