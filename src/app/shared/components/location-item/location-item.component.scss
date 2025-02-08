@@ -1,3 +1,5 @@
+@use "breakpoints" as *;
+
 .locationItem {
     cursor: pointer;
     overflow: hidden;
@@ -37,30 +39,70 @@
     }
 }
 
+@mixin gradientEffect($bcColor: var(--color-white)) {
+    position: relative;
+    &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: $bcColor;
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 80%;
+        background-color: var(--color-gray-thin);
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 20px;
+    }
+
+    @media #{$darkTheme} {
+        &::before {
+            background-color: var(--color-black-regular);
+        }
+        &::after {
+            background-color: var(--color-black-light);
+        }
+    }
+}
+
 .locationItem--withSkeleton {
     .placeDetails {
-        .placeDetails__main, .placeDetails__addit {
-            .placeDetails__title, .placeDetails__rating, .placeDetails__another, .placeDetails__address {
-                position: relative;
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    background-color: #fff;
-                }
-                &::after {
-                    content: '';
-                    position: absolute;
-                    width: 100%;
-                    height: 80%;
-                    background-color: #eee;
-                    left: 0;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    border-radius: 20px;
-                }
+        // .placeDetails__main, .placeDetails__addit {
+        //     .placeDetails__title, .placeDetails__rating, .placeDetails__another, .placeDetails__address {
+        //         @include gradientEffect;
+        //     }
+        // }
+        .placeDetails__main {
+            .placeDetails__title {
+                @include gradientEffect;
+            }
+            .placeDetails__rating {
+                @include gradientEffect;
+            }
+            .placeDetails__another {
+                @include gradientEffect;
+            }
+            .placeDetails__address {
+                @include gradientEffect;
+            }
+        }
+        .placeDetails__addit {
+            .placeDetails__title {
+                @include gradientEffect;
+            }
+            .placeDetails__rating {
+                @include gradientEffect;
+            }
+            .placeDetails__another {
+                @include gradientEffect;
+            }
+            .placeDetails__address {
+                @include gradientEffect;
             }
         }
     }
@@ -71,14 +113,14 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-color: #fff;
+            background-color: var(--color-white);
         }
         &::after {
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
-            background-color: #eee;
+            background-color: var(--color-gray-thin);
             left: 0;
             top: 50%;
             transform: translateY(-50%);
@@ -151,5 +193,27 @@
     background-color: transparent;
     &::before {
         background-color: transparent;
+    }
+}
+
+@media #{$darkTheme} {
+    .locationItem {
+        .locationItem__img {
+            background-color: var(--color-black-light);
+        }
+        &:hover .placeDetails .placeDetails__main .placeDetails__title {
+            color: var(--color-blue-thin);
+        }
+    }
+
+    .locationItem--withSkeleton {
+        .locationItem__img {
+            &::before {
+                background-color: var(--color-black-regular);
+            }
+            &::after {
+                background-color: var(--color-black-light);
+            }
+        }
     }
 }

@@ -244,7 +244,7 @@ button {
         position: absolute;
         height: 80%;
         width: 100%;
-        background-color: #eee;
+        background-color: var(--color-gray-thin);
         border-radius: 20px;
         top: 50%;
         transform: translateY(-50%);
@@ -270,13 +270,13 @@ button {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff; // цвет главного background
+    background-color: var(--color-white); // цвет главного background
     &::before {
         content: '';
         position: absolute;
         height: 100%;
         width: 100%;
-        background-color: #eee;
+        background-color: var(--color-gray-thin);
         border-radius: 20px;
     }
     &::after {
@@ -749,6 +749,19 @@ button {
         }
         &::after {
             background-color: var(--color-gray-regular);
+        }
+    }
+
+    .skeletonLoader {
+        background-color: var(--color-black-regular);
+        &::before {
+            background-color: var(--color-black-light);
+        }
+    }
+
+    .withSimpleSkeleton {
+        &::before {
+            background-color: var(--color-black-light);
         }
     }
 }

@@ -1,4 +1,4 @@
-@import "variables";
+@use "breakpoints" as *;
 
 $spacingVal: 20px; // важно соблюдать эту зависимость чтоб не появился горизонт скролл изза отрицательного margin у "pageContent__locationsList"
 $shadowHeightInDesktop: 34px;
@@ -447,6 +447,7 @@ $shadowHeightInMobile: 20px;
     background-color: unset;
     // border-radius: 12px;
     cursor: pointer;
+    color: inherit;
 
     &[disabled] {
         cursor: not-allowed;
@@ -858,5 +859,36 @@ $shadowHeightInMobile: 20px;
 .withSimpleSkeleton {
     &::after {
         display: none;
+    }
+}
+
+@media #{$darkTheme} {
+    .stickyBar {
+        background-color: var(--color-black-regular);
+    }
+
+    .pageContent .pageContent__locationsBlock--haveMoreLocations::after {
+        background: linear-gradient(180deg, rgba(33, 33, 33, 0.12) -26.12%, rgba(33, 33, 33, 1) 67.95%);
+    }
+
+    .goToAnotherLocations {
+        background-color: var(--color-black-light);
+        color: var(--color-gray-regular);
+    }
+
+    .filterOptionsBlock {
+        background-color: var(--color-black-light);
+    }
+
+    .cityForFilter {
+        background-color: var(--color-black-regular);
+        .cityForFilter__checkbox {
+            .cityForFilter__box {
+                border-color: var(--color-black-thin);
+                &--selected {
+                    background-color: var(--color-black-thin);
+                }
+            }
+        }
     }
 }
