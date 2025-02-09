@@ -732,6 +732,13 @@ button {
                 }
             }
         }
+        &--active {
+            .feedbackVal__icon {
+                svg path {
+                    fill: var(--color-red);
+                }
+            }
+        }
     }
 
     .connectWithUsBtn {

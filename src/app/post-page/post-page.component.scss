@@ -150,9 +150,9 @@ $shadowHeightInMobile: 20px;
         }
     }
     .postContent__feedback {
-        color: var(--color-gray-thin);
+        color: transparent;
         .feedback__values {
-            @include gradientEffect(#f2f3f4);
+            @include gradientEffect(var(--color-gray-thin));
         }
     }
     @media #{$notMobile} {
@@ -423,7 +423,6 @@ $shadowHeightInMobile: 20px;
         }
     }
     .postPage .postPage__container--withGradientEffect .postContent__feedback {
-        color: var(--color-black-light);
         .feedback__values {
             &::before {
                 background-color: var(--color-black-light);

@@ -10,7 +10,15 @@ import {
   ViewportScroller,
   Location
 } from '@angular/common';
-import { Component, DoCheck, effect, ElementRef, inject, OnInit, viewChild, ViewChild } from '@angular/core';
+import {
+  Component,
+  effect,
+  ElementRef,
+  inject,
+  OnInit,
+  viewChild,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, firstValueFrom, fromEvent, of, pipe } from 'rxjs';
 import { auditTime, catchError, delay, distinctUntilChanged, switchMap } from 'rxjs/operators';

@@ -1,6 +1,6 @@
-@import "variables";
+@use "breakpoints" as *;
 
-@mixin gradientEffect($bcColor: #fff) {
+@mixin gradientEffect($bcColor: var(--color-white)) {
     position: relative;
     &::before {
         content: '';
@@ -14,11 +14,20 @@
         position: absolute;
         width: 100%;
         height: 80%;
-        background-color: #f2f3f4;
+        background-color: var(--color-gray-thin);
         left: 0;
         top: 50%;
         transform: translateY(-50%);
         border-radius: 20px;
+    }
+
+    @media #{$darkTheme} {
+        &::before {
+            background-color: var(--color-black-regular);
+        }
+        &::after {
+            background-color: var(--color-black-light);
+        }
     }
 }
 
@@ -115,9 +124,9 @@ span {
         }
     }
     .pageContent__feedback {
-        color: var(--color-gray-thin);
+        color: transparent;
         .feedback__values {
-            @include gradientEffect(#f2f3f4);
+            @include gradientEffect(var(--color-gray-thin));
         }
     }
     @media #{$notMobile} {
@@ -465,13 +474,84 @@ span {
 .locationPhotos {
     margin-bottom: 32px;
 
+    &--twoPhoto, &--onePhoto {
+        .locationPhotos__list {
+            display: flex;
+            column-gap: 4px;
+            aspect-ratio: 1 / 0.57;
+            .locationPhotos__item {
+                position: relative;
+                cursor: pointer;
+                flex: 1;
+                background-color: var(--color-gray-light);
+                border-radius: 20px;
+                overflow: hidden;
+            }
+        }
+    }
+
+    &--threePhoto {
+        .locationPhotos__wrap {
+            display: flex;
+            column-gap: 4px;
+            // height: 400px;
+            aspect-ratio: 1 / 0.57;
+            .locationPhotos__major {
+                position: relative;
+                flex: 1;
+                border-radius: 20px;
+                overflow: hidden;
+                background-color: var(--color-gray-light);
+                cursor: pointer;
+            }
+            .locationPhotos__minor {
+                flex: 1;
+                display: flex;
+                row-gap: 4px;
+                flex-direction: column;
+                .locationPhotos__minorItem {
+                    position: relative;
+                    cursor: pointer;
+                    flex: 1;
+                    overflow: hidden;
+                    border-radius: 20px;
+                    background-color: var(--color-gray-light);
+                }
+            }
+        }
+    }
+
+    &--fourPhoto {
+        .locationPhotos__list {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 4px;
+            aspect-ratio: 1 / 0.57;
+            .locationPhotos__item {
+                position: relative;
+                cursor: pointer;
+                margin-right: 4px;
+                width: calc(50% - 2px);
+                overflow: hidden;
+                background-color: var(--color-gray-light);
+                border-radius: 20px;
+                // height: 300px;
+                // или
+                // max-height: 300px;
+                &:nth-child(even) {
+                    margin-right: 0px;
+                }
+            }
+        }
+    }
+
     &--fivePhoto {
         display: flex;
         flex-direction: column;
         .locationPhotos__major {
             position: relative;
             cursor: pointer;
-            background-color: var(--color-gray-thin);
+            background-color: var(--color-gray-light);
             overflow: hidden;
             border-radius: 20px;
             // max-height: 420px;
@@ -495,7 +575,7 @@ span {
             .locationPhotos__minorItem {
                 position: relative;
                 cursor: pointer;
-                background-color: var(--color-gray-thin);
+                background-color: var(--color-gray-light);
                 flex: 1;
                 overflow: hidden;
                 border-radius: 20px;
@@ -505,77 +585,6 @@ span {
                     height: 100%;
                     width: 100%;
                 }
-            }
-        }
-    }
-
-    &--fourPhoto {
-        .locationPhotos__list {
-            display: flex;
-            flex-wrap: wrap;
-            row-gap: 4px;
-            aspect-ratio: 1 / 0.57;
-            .locationPhotos__item {
-                position: relative;
-                cursor: pointer;
-                margin-right: 4px;
-                width: calc(50% - 2px);
-                overflow: hidden;
-                background-color: var(--color-gray-thin);
-                border-radius: 20px;
-                // height: 300px;
-                // или
-                // max-height: 300px;
-                &:nth-child(even) {
-                    margin-right: 0px;
-                }
-            }
-        }
-    }
-
-    &--threePhoto {
-        .locationPhotos__wrap {
-            display: flex;
-            column-gap: 4px;
-            // height: 400px;
-            aspect-ratio: 1 / 0.57;
-            .locationPhotos__major {
-                position: relative;
-                flex: 1;
-                border-radius: 20px;
-                overflow: hidden;
-                background-color: var(--color-gray-thin);
-                cursor: pointer;
-            }
-            .locationPhotos__minor {
-                flex: 1;
-                display: flex;
-                row-gap: 4px;
-                flex-direction: column;
-                .locationPhotos__minorItem {
-                    position: relative;
-                    cursor: pointer;
-                    flex: 1;
-                    overflow: hidden;
-                    border-radius: 20px;
-                    background-color: var(--color-gray-thin);
-                }
-            }
-        }
-    }
-
-    &--twoPhoto, &--onePhoto {
-        .locationPhotos__list {
-            display: flex;
-            column-gap: 4px;
-            aspect-ratio: 1 / 0.57;
-            .locationPhotos__item {
-                position: relative;
-                cursor: pointer;
-                flex: 1;
-                background-color: var(--color-gray-thin);
-                border-radius: 20px;
-                overflow: hidden;
             }
         }
     }
@@ -724,5 +733,26 @@ span {
                 background-color: #fff;
             }
         }
+    }
+}
+
+@media #{$darkTheme} {
+    .locationPhotos--onePhoto {
+        .locationPhotos__list {
+            .locationPhotos__item {
+                background-color: var(--color-black-light);
+            }
+        }
+    }
+    .placePage .placePage__container--withGradientEffect .pageContent__feedback .feedback__values::before {
+        background-color: var(--color-black-light);
+    }
+    .additPlaceInfo {
+        @media #{$mobile} {
+            background-color: var(--color-black-light);
+        }
+    }
+    .locationPhotosInMobile1 {
+        background-color: var(--color-black-light);
     }
 }
