@@ -875,7 +875,12 @@ $shadowHeightInMobile: 20px;
         background-color: var(--color-black-light);
         color: var(--color-gray-regular);
     }
-
+    
+    .filterOptionsForMobile {
+        .filterOptionsForMobile__background {
+            background-color: rgba(33, 33, 33, 0.72);
+        }
+    }
     .filterOptionsBlock {
         background-color: var(--color-black-light);
     }

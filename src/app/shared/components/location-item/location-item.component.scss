@@ -92,6 +92,7 @@
             }
         }
         .placeDetails__addit {
+            color: transparent;
             .placeDetails__title {
                 @include gradientEffect;
             }
