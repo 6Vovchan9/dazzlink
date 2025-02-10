@@ -366,6 +366,17 @@
     .questionsBlock .questionsBlock__list .questionsBlock__item {
         background-color: var(--color-black-light);
     }
+    .stickyMenuWrapper {
+        @media #{$mobile} {
+            background-color: var(--color-black-regular);
+        }
+    }
+    .inlineAnchorLink--active::after {
+        background-color: var(--color-gray-regular);
+    }
+    .inlineAnchorNav::after {
+        background-color: var(--color-black-light);
+    }
     .anchorLink {
         &:hover {
             color: var(--color-blue-thin);

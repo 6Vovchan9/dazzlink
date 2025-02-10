@@ -79,6 +79,7 @@ span {
             .placePage__title, .placeMainInfo__another {
                 @include gradientEffect;
                 align-self: flex-start;
+                color: transparent;
             }
             .locationRating .locationRating__list {
                 align-items: flex-start;
