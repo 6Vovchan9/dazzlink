@@ -886,8 +886,23 @@ $shadowHeightInMobile: 20px;
         background-color: var(--color-black-light);
     }
 
-    .categoryCodes--withSkeleton .categoryCodes__list .categoryCodes__item .categoryCodes__btn {
-        background-color: var(--color-black-light);
+    .categoryCodes {
+        .categoryCodes__list {
+            .categoryCodes__item {
+                .categoryCodes__btn {
+                    color: var(--color-gray-thin);
+                    background-color: var(--color-black-light);
+                    &--active {
+                        background-color: var(--color-gray-thin);
+                        color: var(--color-black-light);
+                    }
+                }
+            }
+        }
+        &--withSkeleton .categoryCodes__list .categoryCodes__item .categoryCodes__btn {
+            color: transparent;
+            background-color: var(--color-black-light);
+        }
     }
 
     .cityForFilter {
