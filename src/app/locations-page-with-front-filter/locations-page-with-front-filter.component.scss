@@ -331,8 +331,8 @@ $shadowHeightInMobile: 20px;
         .categoryCodes__list {
             position: relative;
             .categoryCodes__item .categoryCodes__btn {
-                background-color: #eee;
-                color: #eee;
+                background-color: var(--color-gray-thin);
+                color: transparent;
                 &[disabled] {
                     opacity: 1;
                 }
@@ -879,9 +879,14 @@ $shadowHeightInMobile: 20px;
     .filterOptionsForMobile {
         .filterOptionsForMobile__background {
             background-color: rgba(33, 33, 33, 0.72);
+            backdrop-filter: blur(4px);
         }
     }
     .filterOptionsBlock {
+        background-color: var(--color-black-light);
+    }
+
+    .categoryCodes--withSkeleton .categoryCodes__list .categoryCodes__item .categoryCodes__btn {
         background-color: var(--color-black-light);
     }
 

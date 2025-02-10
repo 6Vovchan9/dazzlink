@@ -312,6 +312,7 @@ $color-main-blue: #5532EB;
     .dropdownMobileList {
         .dropdownMobileList__background {
             background-color: rgba(33, 33, 33, 0.72);
+            backdrop-filter: blur(4px);
         }
         .dropdownMobileList__listWrap {
             background-color: var(--color-black-light);
