@@ -778,7 +778,7 @@ $shadowHeightInMobile: 20px;
 
             &::before {
                 content: '';
-                display: none;
+                visibility: hidden;
                 width: 12px;
                 height: 8px;
                 position: absolute;
@@ -791,10 +791,25 @@ $shadowHeightInMobile: 20px;
                 background-image: url('/assets/icons/selectedIconForFilter.svg');
             }
 
+            &::after {
+                content: '';
+                visibility: hidden;
+                width: 12px;
+                height: 8px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center center;
+                background-image: url('/assets/icons/selectedIconForFilterDark.svg');
+            }
+
             &--selected {
                 background-color: #ddd;
                 &::before {
-                    display: block;
+                    visibility: visible;
                 }
             }
         }
@@ -884,6 +899,22 @@ $shadowHeightInMobile: 20px;
     }
     .filterOptionsBlock {
         background-color: var(--color-black-light);
+
+        .filterOptionsBlock__content {
+            .filterOptionsBlock__header .filterOptionsBlock__resetBtn {
+                color: var(--color-gray-regular);
+
+                &:hover {
+                    color: var(--color-blue-thin);
+                }
+            }
+        }
+        .filterOptionsBlock__btnBar {
+            .filterOptionsBlock__resetBtn {
+                color: var(--color-gray-regular);
+                background-color: var(--color-black-thin);
+            }
+        }
     }
 
     .categoryCodes {
@@ -912,6 +943,12 @@ $shadowHeightInMobile: 20px;
                 border-color: var(--color-black-thin);
                 &--selected {
                     background-color: var(--color-black-thin);
+                    &::before {
+                        visibility: hidden;
+                    }
+                    &::after {
+                        visibility: visible;
+                    }
                 }
             }
         }
