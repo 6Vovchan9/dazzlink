@@ -472,53 +472,79 @@ $shadowHeightInMobile: 20px;
 //     z-index: 1000;
 // }
 
+.iconForPlacesOptions {
+    width: 24px;
+    height: 24px;
+    color: var(--color-gray-medium);
+    .iconForPlacesOptions__icon {
+        width: 100%;
+        height: 100%;
+    }
+    &--opened {
+        color: var(--color-black-light);
+    }
+    &--selected {
+        position: relative;
+        color: var(--color-black-light);
+        &::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #D70015;
+            right: 0px;
+            top: 0px;
+        }
+    }
+}
+
 .headInSortDropdown {
     display: flex;
     align-items: center;
-    .headInSortDropdown__icon {
-        width: 24px;
-        height: 24px;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-        // background-image: url('/assets/icons/sortIconActive.svg');
+    // .headInSortDropdown__icon {
+    //     width: 24px;
+    //     height: 24px;
+    //     background-repeat: no-repeat;
+    //     background-size: contain;
+    //     background-position: center center;
 
-        &.filterIcon {
-            background-image: url('/assets/icons/filterIconActive.svg');
+    //     &.filterIcon {
+    //         background-image: url('/assets/icons/filterIconActive.svg');
 
-            &--selected {
-                position: relative;
-                &::after {
-                    content: '';
-                    position: absolute;
-                    width: 8px;
-                    height: 8px;
-                    border-radius: 50%;
-                    background-color: #D70015;
-                    right: 0px;
-                    top: 0px;
-                }
-            } 
-        }
+    //         &--selected {
+    //             position: relative;
+    //             &::after {
+    //                 content: '';
+    //                 position: absolute;
+    //                 width: 8px;
+    //                 height: 8px;
+    //                 border-radius: 50%;
+    //                 background-color: #D70015;
+    //                 right: 0px;
+    //                 top: 0px;
+    //             }
+    //         } 
+    //     }
 
-        &.sortIcon {
-            background-image: url('/assets/icons/sortIconActive.svg');
+    //     &.sortIcon {
+    //         background-image: url('/assets/icons/sortIconActive.svg');
 
-            &--selected {
-                position: relative;
-                &::after {
-                    content: '';
-                    position: absolute;
-                    width: 8px;
-                    height: 8px;
-                    border-radius: 50%;
-                    background-color: #D70015;
-                    right: 0px;
-                    top: 0px;
-                }
-            } 
-        }
-    }
+    //         &--selected {
+    //             position: relative;
+    //             &::after {
+    //                 content: '';
+    //                 position: absolute;
+    //                 width: 8px;
+    //                 height: 8px;
+    //                 border-radius: 50%;
+    //                 background-color: #D70015;
+    //                 right: 0px;
+    //                 top: 0px;
+    //             }
+    //         } 
+    //     }
+    // }
 
     .headInSortDropdown__text {
         display: none;
@@ -951,6 +977,15 @@ $shadowHeightInMobile: 20px;
                     }
                 }
             }
+        }
+    }
+
+    .iconForPlacesOptions {
+        &--opened {
+            color: var(--color-gray-regular);
+        }
+        &--selected {
+            color: var(--color-gray-regular);
         }
     }
 }

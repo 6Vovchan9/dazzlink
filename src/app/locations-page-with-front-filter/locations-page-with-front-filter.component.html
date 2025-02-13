@@ -94,9 +94,20 @@
                                                         >
                                                             <ng-template #headContent>
                                                                 <div class="headInSortDropdown">
-                                                                    <div class="headInSortDropdown__icon sortIcon"
+                                                                    <!-- <div class="headInSortDropdown__icon sortIcon"
                                                                         [ngClass]="{'sortIcon--selected': dropdownHeadForSortSelected}"
-                                                                    ></div>
+                                                                    ></div> -->
+                                                                    <div class="iconForPlacesOptions"
+                                                                        [ngClass]="{
+                                                                            'iconForPlacesOptions--selected': dropdownHeadForSortSelected,
+                                                                            'iconForPlacesOptions--opened': hideBecauseOpenSort
+                                                                        }"
+                                                                    >
+                                                                        <svg
+                                                                            icon="sortIconActive"
+                                                                            class="iconForPlacesOptions__icon"
+                                                                        ></svg>
+                                                                    </div>
                                                                     <div class="headInSortDropdown__text">Сортировка</div>
                                                                 </div>
                                                             </ng-template>
@@ -112,9 +123,20 @@
                                                         (click)="onShowHideFilterControls()"
                                                     >
                                                         <div class="headInSortDropdown">
-                                                            <div class="headInSortDropdown__icon filterIcon"
+                                                            <!-- <div class="headInSortDropdown__icon filterIcon"
                                                                 [ngClass]="{'filterIcon--selected': amountAllSelectedCities.length}"
-                                                            ></div>
+                                                            ></div> -->
+                                                            <div class="iconForPlacesOptions"
+                                                                [ngClass]="{
+                                                                    'iconForPlacesOptions--selected': amountAllSelectedCities.length,
+                                                                    'iconForPlacesOptions--opened': this.showFilterControls()
+                                                                }"
+                                                            >
+                                                                <svg
+                                                                    icon="filterIconActive"
+                                                                    class="iconForPlacesOptions__icon"
+                                                                ></svg>
+                                                            </div>
                                                             <div class="headInSortDropdown__text">Фильтр</div>
                                                         </div>
                                                     </button>
