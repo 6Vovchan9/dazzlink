@@ -35,7 +35,7 @@
                         {{getContent('articles-aboutPage-text')}}
                     </div>
                     @if (!appWebview) {
-                        @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios') {
+                        @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios' || 1) {
                             <button (click)="qrModalOrTelegram()" class="aboutPage__btnToTg blueBtn blueBtn--withPresentIcon">
                                 <img src="assets/icons/present.svg" alt="p">
                                 Получить подарок

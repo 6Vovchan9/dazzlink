@@ -194,7 +194,7 @@
                                                             }
                                                         </ul>
                                                         <!-- Кнопка другие локации -->
-                                                        <button class="pageContent__toAnotherPrivate goToAnotherLocations" type="button" (click)="openQRModalAdvanced()">
+                                                        <button class="pageContent__toAnotherPrivate goToAnotherLocations" type="button" (click)="qrModalOrTelegram()">
                                                             <div class="goToAnotherLocations__text">
                                                                 Еще больше локаций для этого города доступно в приложении.
                                                                 <br />
@@ -316,7 +316,7 @@
             Идеальные локации для романтических свиданий: уютные кафе, живописные парки и уникальные места, где ваши встречи станут незабываемыми
         </div>
         <!-- <button (click)="isLoading.set(!isLoading())">isLoading</button> -->
-        @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios') {
+        @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios' || 1) {
             <button (click)="qrModalOrTelegram()" class="aboutPage__btnToTg blueBtn blueBtn--withPresentIcon">
                 <img src="assets/icons/present.svg" alt="p">
                 Получить подарок
