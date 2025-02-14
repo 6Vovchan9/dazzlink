@@ -143,9 +143,9 @@
             line-height: 32px;
             font-weight: 600;
             .QRCode__link {
-                color: #4A4AC6;
+                color: var(--color-blue-light);
                 &:hover {
-                    color: #333;
+                    color: var(--color-black-light);
                 }
             }
         }
@@ -402,12 +402,24 @@
         }
     }
 
-    .QRCode .QRCode__screen::after {
-        background-color: var(--color-black-light);
+    .QRCode {
+        .QRCode__screen::after {
+            background-color: var(--color-black-light);
+        }
+        .QRCode__desc {
+            .QRCode__text {
+                .QRCode__link {
+                    color: var(--color-blue-thin);
+                    &:hover {
+                        color: var(--color-gray-regular);
+                    }
+                }
+            }
+        }
     }
 
     .modal {
-        background-color: var(--color-black-light);
+        background-color: var(--color-black-regular);
     }
 
     .menuInNavModal .menuInNavModal__list .menuInNavModal__item {

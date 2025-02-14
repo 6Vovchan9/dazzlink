@@ -71,4 +71,17 @@
             }
         }
     }
+
+    @media (prefers-color-scheme: dark) {
+        .cookiesToast__container .cookiesToast__content {
+            background-color: #333;
+            box-shadow: 0px 0px 12px 0px rgba(239, 239, 239, 0.16);
+            .cookiesToast__message {
+                color: #efefef;
+            }
+            .cookiesToast__btn {
+                color: #7070ff;
+            }
+        }
+    }
 }
