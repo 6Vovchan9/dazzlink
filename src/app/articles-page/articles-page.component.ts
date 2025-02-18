@@ -58,6 +58,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   templateUrl: './articles-page.component.html',
   styleUrls: ['./articles-page.component.scss'],
   providers: [PersistanceService],
+  // viewProviders: [PersistanceService], // Это св-во доступно только компонентам в то время как providers может быть исп в серсивах, директивах, модулях и компонентах, 2 отличие закл. в области видимости регистрируемых зависимостей.
   standalone: true,
   imports: [
     NgTemplateOutlet,
