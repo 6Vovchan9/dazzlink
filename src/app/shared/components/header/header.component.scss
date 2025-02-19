@@ -36,6 +36,26 @@ $headerHeightInMobile: 64px;
     }
 }
 
+.themeToggle {
+    display: flex;
+    gap: 10px;
+    margin-right: 10px;
+    .themeToggle__item {
+        .themeToggle__btn {
+            border-radius: 4px;
+            border-color: transparent;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            &--active {
+                cursor: default;
+                background-color: #4A4AC6;
+                color: #efefef;
+            }
+        }
+    }
+}
+
 .menu {
     .menu__list {
         display: flex;
@@ -240,5 +260,12 @@ $headerHeightInMobile: 64px;
     }
     .hamburger2 .hamburger2__line, .hamburger2::before {
         background-color: var(--color-gray-regular);
+    }
+    .themeToggle {
+        .themeToggle__item {
+            .themeToggle__btn {
+                color: var(--color-gray-regular);
+            }
+        }
     }
 }

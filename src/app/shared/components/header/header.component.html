@@ -10,6 +10,37 @@
             </a>
         </div>
         <div class="header__col header__col--alignRight">
+            @if (0) {
+                <ul class="themeToggle">
+                    <li class="themeToggle__item">
+                        <button
+                            class="themeToggle__btn"
+                            [ngClass]="{ 'themeToggle__btn--active': colorSchemeService.currentActive() === themeTypes.Light }"
+                            (click)="setColorTheme(themeTypes.Light)"
+                        >
+                            Светлая
+                        </button>
+                    </li>
+                    <li class="themeToggle__item">
+                        <button
+                            class="themeToggle__btn"
+                            [ngClass]="{ 'themeToggle__btn--active': colorSchemeService.currentActive() === themeTypes.Dark }"
+                            (click)="setColorTheme(themeTypes.Dark)"
+                        >
+                            Темная
+                        </button>
+                    </li>
+                    <li class="themeToggle__item">
+                        <button
+                            class="themeToggle__btn"
+                            [ngClass]="{ 'themeToggle__btn--active': colorSchemeService.currentActive() === themeTypes.System }"
+                            (click)="setColorTheme(themeTypes.System)"
+                        >
+                            Системная
+                        </button>
+                    </li>
+                </ul>
+            }
             <div class="header__menu">
                 <nav class="menu">
                     <ul class="menu__list">

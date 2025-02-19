@@ -1,23 +1,31 @@
+import { NgClass } from '@angular/common';
 import { Attribute, ChangeDetectionStrategy, Component, HostAttributeToken, inject } from '@angular/core';
 import { IsActiveMatchOptions, RouterLink, RouterLinkActive } from '@angular/router';
+import { ColorSchemeService, ThemeTypes } from '@app/shared/services/color-scheme.service';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, NgClass],
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
 
+  public colorSchemeService = inject(ColorSchemeService);
+  themeTypes = ThemeTypes;
   myLetName2 = inject(new HostAttributeToken('name'), { optional: true }); // смотри ниже для чего это
 
   constructor(
     private modalService: GlobalModalService,
     @Attribute('name') public myLetName1: string // если нужно передать статическое значение дочернему компоненту, то лучше сделать это таким образом, использ. этого декоратора повышает произодит-ть приложения за счет оптимизации механизма ChangeDetection. Механизм ChangeDetection проверяет эти значения только на этапе инициализации компонента. Доступ к таким значениям можно получить внутри контсруктора, а не внутри метода ЖЦ ngOnChanges(). Это же можно сделать через функцию inject (см. выше)
   ) { }
+
+  setColorTheme(theme: ThemeTypes) {
+    this.colorSchemeService.update(theme);
+  }
 
   public routerLinkActiveOptions: IsActiveMatchOptions = {
     matrixParams: 'ignored',

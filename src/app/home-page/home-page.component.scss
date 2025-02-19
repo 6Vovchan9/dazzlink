@@ -523,4 +523,13 @@ a.progressive img.preview {
     .homePage .homePage__header::after {
         background: linear-gradient(0deg, transparent, var(--color-black-regular));
     }
+    .appAdv {
+        .appAdv__list {
+            .appAdv__item {
+                .appAdv__image {
+                    filter: brightness(70%);
+                }
+            }
+        }
+    }
 }

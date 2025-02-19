@@ -12,6 +12,7 @@ import { PagesService } from '@app/shared/services/pages.service';
 import { ToastComponent } from '@app/shared/components/toast/toast.component';
 import { CookiesToastComponent } from '@app/shared/components/cookies-toast/cookies-toast.component';
 import { ModalComponent } from '@app/shared/components/modal/modal.component';
+import { ColorSchemeService } from '@app/shared/services/color-scheme.service';
 // import { LocationsService } from '@app/shared/services/locations.service';
 // import { PostsService } from '@app/shared/services/posts.service';
 // import { RandomService } from '@app/shared/services/random.service';
@@ -91,6 +92,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private routerSub: Subscription;
   private router = inject(Router);
   private pagesService = inject(PagesService);
+  private colorSchemeService = inject(ColorSchemeService);
 
   constructor(
     public modalService: GlobalModalService, // typeScript детает такой синтакс сахар - можем объявлять свойства данного класса прям в конструкторе, то есть нет необх писать constructor(private/public/protected/readonly name: string) { this.name = name } можно просто constructor(private name: string) { }
@@ -111,6 +113,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // console.log('userRandomService:', userRandomService);
     // console.log('adminRandomService:', adminRandomService);
+
+    // this.colorSchemeService.load();
   }
 
   ngOnInit(): void {
