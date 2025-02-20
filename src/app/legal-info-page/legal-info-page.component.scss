@@ -77,6 +77,32 @@
     }
 }
 
+.childSafetyStandards {
+    font-size: 20px;
+    line-height: 28px;
+    margin-top: 32px;
+    .childSafetyStandards__header {
+        display: block;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 32px;
+        margin-bottom: 24px;
+        margin-top: 24px;
+        &:first-child {
+            margin-top: 0px;
+        }
+    }
+    .childSafetyStandards__article {
+        margin-bottom: 24px;
+        &:last-child {
+            margin-bottom: 0px;
+        }
+    }
+    .childSafetyStandards__link {
+        cursor: pointer;
+    }
+}
+
 @media #{$darkTheme} {
     .openLegalDoc {
         background-color: var(--color-black-light);
