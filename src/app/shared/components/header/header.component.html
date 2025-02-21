@@ -2,7 +2,9 @@
     <div class="container header__container">
         <div class="header__col">
             <a routerLink="/" class="logoInHeader">
-                <picture>
+                <img class="logoInHeader__image forLightTheme" src="assets/images/fullLogo.svg" alt="logo">
+                <img class="logoInHeader__image forDarkTheme" src="assets/images/fullLogoDark.svg" alt="logo">
+                <picture class="forSystemTheme">
                     <source srcset="assets/images/fullLogo.svg" media="(prefers-color-scheme: light)">
                     <source srcset="assets/images/fullLogoDark.svg" media="(prefers-color-scheme: dark)">
                     <img class="logoInHeader__image" src="assets/images/fullLogo.svg" alt="logo">

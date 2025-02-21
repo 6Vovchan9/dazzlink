@@ -24,7 +24,35 @@ $headerHeightInMobile: 64px;
             }
         }
     }
-    .hamburger2 .hamburger2__line, .hamburger2::before {
+    .hamburger2 .hamburger2__line,
+    .hamburger2::before {
+        background-color: var(--color-gray-regular);
+    }
+}
+
+@mixin lightThemeColors() {
+    .header {
+        background-color: var(--color-white);
+    }
+    .menu .menu__list .menu__item {
+        .menu__link {
+            color: var(--color-black-light);
+        }
+        &--active {
+            .menu__link {
+                color: var(--color-gray-medium);
+            }
+        }
+        &:not(.menu__item--active) {
+            &:hover {
+                .menu__link {
+                    color: var(--color-white);
+                }
+            }
+        }
+    }
+    .hamburger2 .hamburger2__line,
+    .hamburger2::before {
         background-color: var(--color-gray-regular);
     }
 }
@@ -253,17 +281,38 @@ $headerHeightInMobile: 64px;
     }
 }
 
-// :host-context(.color-scheme-dark) {
-//     .header {
-//         background-color: var(--color-black-regular);
-//     }
-// }
+.forDarkTheme {
+    display: none;
+}
+.forLightTheme {
+    display: none;
+}
 
-// :host-context(.color-scheme-light) {
-//     .header {
-//         background-color: var(--color-white);
-//     }
-// }
+:host-context(.color-scheme-dark) {
+    @include darkThemeColors();
+    .forDarkTheme {
+        display: flex;
+    }
+    .forLightTheme {
+        display: none;
+    }
+    .forSystemTheme {
+        display: none;
+    }
+}
+
+:host-context(.color-scheme-light) {
+    @include lightThemeColors();
+    .forDarkTheme {
+        display: none;
+    }
+    .forLightTheme {
+        display: flex;
+    }
+    .forSystemTheme {
+        display: none;
+    }
+}
 
 @media #{$darkTheme} {
     @include darkThemeColors();

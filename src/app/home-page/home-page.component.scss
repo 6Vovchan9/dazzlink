@@ -4,6 +4,36 @@ $carousel-gap: 24;
 $shadowHeightInDesktop: 34px;
 $shadowHeightInMobile: 20px;
 
+@mixin darkThemeColors() {
+    .homePage .homePage__header::after {
+        background: linear-gradient(0deg, transparent, var(--color-black-regular));
+    }
+    .appAdv {
+        .appAdv__list {
+            .appAdv__item {
+                .appAdv__image {
+                    filter: brightness(70%);
+                }
+            }
+        }
+    }
+}
+
+@mixin lightThemeColors() {
+    .homePage .homePage__header::after {
+        background: linear-gradient(0deg, transparent, var(--color-white));
+    }
+    .appAdv {
+        .appAdv__list {
+            .appAdv__item {
+                .appAdv__image {
+                    filter: brightness(100%);
+                }
+            }
+        }
+    }
+}
+
 // .overscrollBlock {
 //     position: fixed;
 //     z-index: 100;
@@ -519,17 +549,14 @@ a.progressive img.preview {
 //     background-color: crimson;
 // }
 
+:host-context(.color-scheme-dark) {
+    @include darkThemeColors;
+}
+
+:host-context(.color-scheme-light) {
+    @include lightThemeColors;
+}
+
 @media #{$darkTheme} {
-    .homePage .homePage__header::after {
-        background: linear-gradient(0deg, transparent, var(--color-black-regular));
-    }
-    .appAdv {
-        .appAdv__list {
-            .appAdv__item {
-                .appAdv__image {
-                    filter: brightness(70%);
-                }
-            }
-        }
-    }
+    @include darkThemeColors;
 }
