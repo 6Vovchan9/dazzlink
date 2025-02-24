@@ -109,9 +109,21 @@
                                 >
                                     <div class="downloadApp__title">Скачайте<br />приложение</div>
                                     <div class="downloadApp__icon">
-                                        <picture>
-                                            <source [srcset]="mobileDetectService?.mobileStoreIconSrc()" media="(prefers-color-scheme: light)">
-                                            <source [srcset]="mobileDetectService?.mobileStoreIconSrc(true)" media="(prefers-color-scheme: dark)">
+                                        <img class="forLightTheme"
+                                            [src]="mobileDetectService?.mobileStoreIconSrc()"
+                                            alt="store"
+                                        >
+                                        <img class="forDarkTheme"
+                                            [src]="mobileDetectService?.mobileStoreIconSrc(true)"
+                                            alt="store"
+                                        >
+                                        <picture class="forSystemTheme">
+                                            <source [srcset]="mobileDetectService?.mobileStoreIconSrc()"
+                                                media="(prefers-color-scheme: light)"
+                                            >
+                                            <source [srcset]="mobileDetectService?.mobileStoreIconSrc(true)"
+                                                media="(prefers-color-scheme: dark)"
+                                            >
                                             <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store">
                                         </picture>
                                     </div>
@@ -232,7 +244,15 @@
                                             >
                                                 <div class="downloadApp__title">Скачайте<br />приложение</div>
                                                 <div class="downloadApp__icon">
-                                                    <picture>
+                                                    <img class="forLightTheme"
+                                                        [src]="mobileDetectService?.mobileStoreIconSrc()"
+                                                        alt="store"
+                                                    >
+                                                    <img class="forDarkTheme"
+                                                        [src]="mobileDetectService?.mobileStoreIconSrc(true)"
+                                                        alt="store"
+                                                    >
+                                                    <picture class="forSystemTheme">
                                                         <source [srcset]="mobileDetectService?.mobileStoreIconSrc()" media="(prefers-color-scheme: light)">
                                                         <source [srcset]="mobileDetectService?.mobileStoreIconSrc(true)" media="(prefers-color-scheme: dark)">
                                                         <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store">
@@ -256,7 +276,9 @@
                 <ul class="partners__list">
                     <li class="partners__item partner">
                         <div class="partner__logo">
-                            <picture>
+                            <img class="forLightTheme" src="assets/images/home-page/partners/itPark.svg" alt="partner">
+                            <img class="forDarkTheme" src="assets/images/home-page/partners/itParkDark.svg" alt="partner">
+                            <picture class="forSystemTheme">
                                 <source srcset="assets/images/home-page/partners/itPark.svg" media="(prefers-color-scheme: light)">
                                 <source srcset="assets/images/home-page/partners/itParkDark.svg" media="(prefers-color-scheme: dark)">
                                 <img src="assets/images/home-page/partners/itPark.svg" alt="partner">
@@ -266,7 +288,9 @@
                     </li>
                     <li class="partners__item partner">
                         <div class="partner__logo">
-                            <picture>
+                            <img class="forLightTheme" src="assets/images/home-page/partners/proData.svg" alt="partner">
+                            <img class="forDarkTheme" src="assets/images/home-page/partners/proDataDark.svg" alt="partner">
+                            <picture class="forSystemTheme">
                                 <source srcset="assets/images/home-page/partners/proData.svg" media="(prefers-color-scheme: light)">
                                 <source srcset="assets/images/home-page/partners/proDataDark.svg" media="(prefers-color-scheme: dark)">
                                 <img src="assets/images/home-page/partners/proData.svg" alt="partner">
@@ -335,10 +359,12 @@
             target="_blank"
             class="linkToApp__item"
         >
-            <picture>
+            <img class="linkToApp__img forLightTheme" src="assets/images/store/linkIOSShort.svg" alt="iOS">
+            <img class="linkToApp__img forDarkTheme" src="assets/images/store/linkIOSShortDark.svg" alt="iOS">
+            <picture class="forSystemTheme">
                 <source srcset="assets/images/store/linkIOSShort.svg" media="(prefers-color-scheme: light)">
                 <source srcset="assets/images/store/linkIOSShortDark.svg" media="(prefers-color-scheme: dark)">
-                <img class="linkToApp__img" src="assets/images/store/linkIOSShort.svg" alt="Android">
+                <img class="linkToApp__img" src="assets/images/store/linkIOSShort.svg" alt="iOS">
             </picture>
         </a> -->
         <a
@@ -346,7 +372,9 @@
             target="_blank"
             class="linkToApp__item"
         >
-            <picture>
+            <img class="linkToApp__img forLightTheme" src="assets/images/store/linkAndroid.svg" alt="Android">
+            <img class="linkToApp__img forDarkTheme" src="assets/images/store/linkAndroidDark.svg" alt="Android">
+            <picture class="forSystemTheme">
                 <source srcset="assets/images/store/linkAndroid.svg" media="(prefers-color-scheme: light)">
                 <source srcset="assets/images/store/linkAndroidDark.svg" media="(prefers-color-scheme: dark)">
                 <img class="linkToApp__img" src="assets/images/store/linkAndroid.svg" alt="Android">
@@ -357,10 +385,12 @@
             target="_blank"
             class="linkToApp__item"
         >
-            <picture>
+            <img class="linkToApp__img forLightTheme" src="assets/images/store/linkAppGallery.svg" alt="Huawei">
+            <img class="linkToApp__img forDarkTheme" src="assets/images/store/linkAppGalleryDark.svg" alt="Huawei">
+            <picture class="forSystemTheme">
                 <source srcset="assets/images/store/linkAppGallery.svg" media="(prefers-color-scheme: light)">
                 <source srcset="assets/images/store/linkAppGalleryDark.svg" media="(prefers-color-scheme: dark)">
-                <img class="linkToApp__img" src="assets/images/store/linkAppGallery.svg" alt="Android">
+                <img class="linkToApp__img" src="assets/images/store/linkAppGallery.svg" alt="Huawei">
             </picture>
         </a>
     </div>

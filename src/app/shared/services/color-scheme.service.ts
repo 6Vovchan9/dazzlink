@@ -47,24 +47,24 @@ export class ColorSchemeService {
         } else {
             // или:
             // If no prefers-color-scheme is stored in localStorage, try to detect OS default prefers-color-scheme
-            this._detectPrefersColorScheme();
+            // this._detectPrefersColorScheme();
             // или:
-            // this.colorScheme = ThemeTypes.System;
+            this.colorScheme = ThemeTypes.System;
         }
     }
 
     load() {
         this._getColorScheme();
-        this.renderer.addClass(document.body, this.colorSchemePrefix + this.colorScheme);
+        this.renderer.addClass(document.documentElement, this.colorSchemePrefix + this.colorScheme);
     }
 
     update(scheme: ThemeTypes) {
         const schemeBefore: ThemeTypes = this.currentActive();
         this._setColorScheme(scheme);
         // Remove the old color-scheme class
-        this.renderer.removeClass(document.body, this.colorSchemePrefix + schemeBefore);
+        this.renderer.removeClass(document.documentElement, this.colorSchemePrefix + schemeBefore);
         // Add the new / current color-scheme class
-        this.renderer.addClass(document.body, this.colorSchemePrefix + scheme);
+        this.renderer.addClass(document.documentElement, this.colorSchemePrefix + scheme);
     }
 
     currentActive(): ThemeTypes {

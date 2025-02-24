@@ -1,3 +1,9 @@
+@mixin darkThemeColors() {
+    .partner .partner__logo {
+        background-color: var(--color-black-light);
+    }
+}
+
 .partner {
     display: flex;
     flex-direction: column;
@@ -27,8 +33,12 @@
     }
 }
 
-@media #{$darkTheme} {
-    .partner .partner__logo {
-        background-color: var(--color-black-light);
+html.color-scheme-dark {
+    @include darkThemeColors;
+}
+
+html.color-scheme-system {
+    @media #{$darkTheme} {
+        @include darkThemeColors;
     }
 }

@@ -114,7 +114,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // console.log('userRandomService:', userRandomService);
     // console.log('adminRandomService:', adminRandomService);
 
-    // this.colorSchemeService.load();
+    this.colorSchemeService.load();
   }
 
   ngOnInit(): void {

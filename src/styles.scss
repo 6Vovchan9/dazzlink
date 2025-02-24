@@ -1,6 +1,102 @@
 /* You can add global styles to this file, and also import other style files */
 @use "breakpoints" as *;
 
+@mixin darkThemeColors() {
+    body {
+        color: var(--color-gray-regular);
+        background-color: var(--color-black-regular);
+    }
+    a {
+        color: var(--color-gray-regular);
+    }
+
+    .errorMessage {
+        background-color: var(--color-black-light);
+        .errorMessage__btn {
+            background-color: var(--color-black-thin);
+            color: var(--color-gray-regular);
+            &--isLoading {
+                color: transparent;
+                background-color: transparent;
+            }
+        }
+    }
+
+    .feedback {
+        background-color: var(--color-black-light);
+    }
+    .feedbackVal {
+        .feedbackVal__icon {
+            svg path {
+                fill: var(--color-gray-regular);
+            }
+        }
+        &--disabled {
+            .feedbackVal__icon {
+                svg path {
+                    fill: var(--color-gray-medium);
+                }
+            }
+        }
+        &--active {
+            .feedbackVal__icon {
+                svg path {
+                    fill: var(--color-red);
+                }
+            }
+        }
+    }
+    .feedbackVal--active.feedbackVal--like {
+        .feedbackVal__icon {
+            svg path {
+                fill: var(--color-green);
+            }
+        }
+    }
+
+    .connectWithUsBtn {
+        background-color: var(--color-black-regular);
+    }
+
+    .downloadApp {
+        background-color: var(--color-black-light);
+        color: var(--color-gray-regular);
+    }
+
+    .iconForCloseInModal {
+        &::before {
+            background-color: var(--color-gray-regular);
+        }
+        &::after {
+            background-color: var(--color-gray-regular);
+        }
+    }
+
+    .skeletonLoader {
+        background-color: var(--color-black-regular);
+        &::before {
+            background-color: var(--color-black-light);
+        }
+    }
+
+    .withSimpleSkeleton {
+        &::before {
+            background-color: var(--color-black-light);
+        }
+    }
+}
+
+// @mixin lightThemeColors() {
+//     body {
+//         color: var(--color-black-light);
+//         background-color: var(--color-white);
+//     }
+//     a {
+//         color: var(--color-black-light);
+//     }
+//     // ...
+// }
+
 :root {
     --color-blue-thin: #7070ff;
     --color-blue-light: #4A4AC6;
@@ -69,6 +165,7 @@ html {
 body {
     margin: 0;
     color: var(--color-black-light);
+    background-color: var(--color-white);
 
     // 1-ый способ как перекрасить страницу для темной/светлой темы:
     // color: light-dark(
@@ -694,81 +791,17 @@ button {
     }
 }
 
+html.color-scheme-dark {
+    @include darkThemeColors();
+}
+
+// html.color-scheme-light {
+//     @include lightThemeColors();
+// }
+
 // 2-ой способ как перекрасить страницу для темной/светлой темы:
-@media #{$darkTheme} {
-    body {
-        color: var(--color-gray-regular);
-        background-color: var(--color-black-regular);
-    }
-    a {
-        color: var(--color-gray-regular);
-    }
-
-    .errorMessage {
-        background-color: var(--color-black-light);
-        .errorMessage__btn {
-            background-color: var(--color-black-thin);
-            color: var(--color-gray-regular);
-            &--isLoading {
-                color: transparent;
-                background-color: transparent;
-            }
-        }
-    }
-
-    .feedback {
-        background-color: var(--color-black-light);
-    }
-    .feedbackVal {
-        .feedbackVal__icon {
-            svg path {
-                fill: var(--color-gray-regular);
-            }
-        }
-        &--disabled {
-            .feedbackVal__icon {
-                svg path {
-                    fill: var(--color-gray-medium);
-                }
-            }
-        }
-        &--active {
-            .feedbackVal__icon {
-                svg path {
-                    fill: var(--color-red);
-                }
-            }
-        }
-    }
-
-    .connectWithUsBtn {
-        background-color: var(--color-black-regular);
-    }
-
-    .downloadApp {
-        background-color: var(--color-black-light);
-        color: var(--color-gray-regular);
-    }
-
-    .iconForCloseInModal {
-        &::before {
-            background-color: var(--color-gray-regular);
-        }
-        &::after {
-            background-color: var(--color-gray-regular);
-        }
-    }
-
-    .skeletonLoader {
-        background-color: var(--color-black-regular);
-        &::before {
-            background-color: var(--color-black-light);
-        }
-    }
-
-    .withSimpleSkeleton {
-        &::before {
-            background-color: var(--color-black-light);
-        }
+html.color-scheme-system {
+    @media #{$darkTheme} {
+        @include darkThemeColors;
     }
 }
