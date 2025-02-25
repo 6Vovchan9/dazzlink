@@ -3,6 +3,12 @@
 $shadowHeightInDesktop: 34px;
 $shadowHeightInMobile: 20px;
 
+@mixin darkThemeColors() {
+    .articlesPage .articlesPage__header::after {
+        background: linear-gradient(0deg, transparent, var(--color-black-regular));
+    }
+}
+
 .articlesPage {
     display: flex;
     flex-direction: column;
@@ -194,8 +200,37 @@ $shadowHeightInMobile: 20px;
     }
 }
 
-@media #{$darkTheme} {
-    .articlesPage .articlesPage__header::after {
-        background: linear-gradient(0deg, transparent, var(--color-black-regular));
+.forDarkTheme {
+    display: none;
+}
+.forSystemTheme {
+    display: none;
+}
+
+:host-context(.color-scheme-dark) {
+    @include darkThemeColors;
+    .forDarkTheme {
+        display: flex;
+    }
+    .forLightTheme {
+        display: none;
+    }
+    .forSystemTheme {
+        display: none;
+    }
+}
+
+:host-context(.color-scheme-system) {
+    @media #{$darkTheme} {
+        @include darkThemeColors;
+    }
+    .forDarkTheme {
+        display: none;
+    }
+    .forLightTheme {
+        display: none;
+    }
+    .forSystemTheme {
+        display: flex;
     }
 }

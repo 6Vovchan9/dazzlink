@@ -118,8 +118,20 @@
     --color-green: green;
     --color-pink: #FF99EC;
 
+    // --color-gradient-after: #f2f3f4;
+
     color-scheme: light dark; // 1-ый способ как перекрасить страницу для темной/светлой темы
 }
+
+// @media #{$darkTheme} {
+//     :root.color-scheme-system {
+//         --color-gradient-after: #333;
+//     }
+// }
+
+// :root.color-scheme-dark {
+//     --color-gradient-after: #333;
+// }
 
 html, body {
     font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;

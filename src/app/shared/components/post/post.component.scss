@@ -1,5 +1,34 @@
 @use "breakpoints" as *;
 
+@mixin darkThemeColors() {
+    .post {
+        .post__img {
+            background-color: var(--color-black-light);
+        }
+        &:hover .post__title {
+            color: var(--color-blue-thin);
+        }
+    }
+    .post--withSkeleton {
+        .post__img {
+            &::before {
+                background-color: var(--color-black-regular);
+            }
+            &::after {
+                background-color: var(--color-black-light);
+            }
+        }
+        .post__details, .post__title {
+            &::before {
+                background-color: var(--color-black-regular);
+            }
+            &::after {
+                background-color: var(--color-black-light);
+            }
+        }
+    }
+}
+
 .post {
     display: flex;
     align-items: flex-start;
@@ -170,31 +199,12 @@
     }
 }
 
-@media #{$darkTheme} {
-    .post {
-        .post__img {
-            background-color: var(--color-black-light);
-        }
-        &:hover .post__title {
-            color: var(--color-blue-thin);
-        }
-    }
-    .post--withSkeleton {
-        .post__img {
-            &::before {
-                background-color: var(--color-black-regular);
-            }
-            &::after {
-                background-color: var(--color-black-light);
-            }
-        }
-        .post__details, .post__title {
-            &::before {
-                background-color: var(--color-black-regular);
-            }
-            &::after {
-                background-color: var(--color-black-light);
-            }
-        }
+:host-context(.color-scheme-dark) {
+    @include darkThemeColors;
+}
+
+:host-context(.color-scheme-system) {
+    @media #{$darkTheme} {
+        @include darkThemeColors;
     }
 }
