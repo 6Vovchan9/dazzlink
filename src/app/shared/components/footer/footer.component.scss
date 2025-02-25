@@ -1,5 +1,17 @@
 @use "breakpoints" as *;
 
+@mixin darkThemeColors() {
+    .footer .footer__content {
+        background-color: var(--color-black-light);
+        .footer__col .footer__download {
+            background-color: var(--color-black-regular);
+        }
+    }
+    .btnInFooter {
+        color: var(--color-gray-regular);
+    }
+}
+
 .footer {
     font-weight: 700;
     .footer__container {
@@ -96,14 +108,12 @@
     font-weight: 700;
 }
 
-@media #{$darkTheme} {
-    .footer .footer__content {
-        background-color: var(--color-black-light);
-        .footer__col .footer__download {
-            background-color: var(--color-black-regular);
-        }
-    }
-    .btnInFooter {
-        color: var(--color-gray-regular);
+:host-context(.color-scheme-dark) {
+    @include darkThemeColors;
+}
+
+:host-context(.color-scheme-system) {
+    @media #{$darkTheme} {
+        @include darkThemeColors;
     }
 }
