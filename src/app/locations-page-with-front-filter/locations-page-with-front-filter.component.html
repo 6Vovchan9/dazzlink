@@ -194,7 +194,7 @@
                                                             }
                                                         </ul>
                                                         <!-- Кнопка другие локации -->
-                                                        <button class="pageContent__toAnotherPrivate goToAnotherLocations" type="button" (click)="qrModalOrTelegram()">
+                                                        <button class="pageContent__toAnotherPrivate goToAnotherLocations" type="button" (click)="goToAnotherLocations()">
                                                             <div class="goToAnotherLocations__text">
                                                                 Еще больше локаций для этого города доступно в приложении.
                                                                 <br />
@@ -316,7 +316,7 @@
             Идеальные локации для романтических свиданий: уютные кафе, живописные парки и уникальные места, где ваши встречи станут незабываемыми
         </div>
         <!-- <button (click)="isLoading.set(!isLoading())">isLoading</button> -->
-        @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios' || 1) {
+        @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios') {
             <button (click)="qrModalOrTelegram()" class="aboutPage__btnToTg blueBtn blueBtn--withPresentIcon">
                 <img src="assets/icons/present.svg" alt="p">
                 Получить подарок
@@ -426,7 +426,7 @@
             <picture>
                 <source srcset="assets/images/store/linkIOSShort.svg" media="(prefers-color-scheme: light)">
                 <source srcset="assets/images/store/linkIOSShortDark.svg" media="(prefers-color-scheme: dark)">
-                <img class="linkToApp__img" src="assets/images/store/linkIOSShort.svg" alt="Android">
+                <img class="linkToApp__img" src="assets/images/store/linkIOSShort.svg" alt="iOS">
             </picture>
         </a> -->
         <a
@@ -448,7 +448,7 @@
             <picture>
                 <source srcset="assets/images/store/linkAppGallery.svg" media="(prefers-color-scheme: light)">
                 <source srcset="assets/images/store/linkAppGalleryDark.svg" media="(prefers-color-scheme: dark)">
-                <img class="linkToApp__img" src="assets/images/store/linkAppGallery.svg" alt="Android">
+                <img class="linkToApp__img" src="assets/images/store/linkAppGallery.svg" alt="Huawei">
             </picture>
         </a>
     </div>

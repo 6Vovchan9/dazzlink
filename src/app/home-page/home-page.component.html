@@ -92,7 +92,7 @@
                             Доступно в крупных городах Узбекистана
                         </div>
                     </div>
-                    @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios' || 1) {
+                    @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios') {
                         <button (click)="qrModalOrTelegram()" class="aboutAppInfo__btn blueBtn blueBtn--withPresentIcon">
                             <img src="assets/icons/present.svg" alt="p">
                             Получить подарок
@@ -212,7 +212,7 @@
                         <div class="appAdv__image">
                             <img src="assets/images/home-page/appAdv4.png" alt="appAdvantage">
                         </div>
-                        @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios' || 1) {
+                        @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios') {
                             <div class="appAdv__content">
                                 <h2 class="moduleTitle">
                                     Будьте первыми
