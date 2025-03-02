@@ -27,6 +27,12 @@ export class HeaderComponent {
     this.colorSchemeService.update(theme);
   }
 
+  goToAnotherTheme() {
+    const curThemeLight = this.colorSchemeService.currentActive() === ThemeTypes.Light;
+    const futureTheme = curThemeLight ? ThemeTypes.Dark : ThemeTypes.Light;
+    this.colorSchemeService.update(futureTheme);
+  }
+
   public routerLinkActiveOptions: IsActiveMatchOptions = {
     matrixParams: 'ignored',
     queryParams: 'ignored',

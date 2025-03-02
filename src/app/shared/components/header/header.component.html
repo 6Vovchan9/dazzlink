@@ -13,34 +13,34 @@
         </div>
         <div class="header__col header__col--alignRight">
             @if (0) {
-                <ul class="themeToggle">
-                    <li class="themeToggle__item">
+                <ul class="themeToggleOld">
+                    <li class="themeToggleOld__item">
                         <button
-                            class="themeToggle__btn"
-                            [ngClass]="{ 'themeToggle__btn--active': colorSchemeService.currentActive() === themeTypes.Light }"
+                            class="themeToggleOld__btn"
+                            [ngClass]="{ 'themeToggleOld__btn--active': colorSchemeService.currentActive() === themeTypes.Light }"
                             (click)="setColorTheme(themeTypes.Light)"
                         >
                             Светлая
                         </button>
                     </li>
-                    <li class="themeToggle__item">
+                    <li class="themeToggleOld__item">
                         <button
-                            class="themeToggle__btn"
-                            [ngClass]="{ 'themeToggle__btn--active': colorSchemeService.currentActive() === themeTypes.Dark }"
+                            class="themeToggleOld__btn"
+                            [ngClass]="{ 'themeToggleOld__btn--active': colorSchemeService.currentActive() === themeTypes.Dark }"
                             (click)="setColorTheme(themeTypes.Dark)"
                         >
                             Темная
                         </button>
                     </li>
-                    <li class="themeToggle__item">
+                    <!-- <li class="themeToggleOld__item">
                         <button
-                            class="themeToggle__btn"
-                            [ngClass]="{ 'themeToggle__btn--active': colorSchemeService.currentActive() === themeTypes.System }"
+                            class="themeToggleOld__btn"
+                            [ngClass]="{ 'themeToggleOld__btn--active': colorSchemeService.currentActive() === themeTypes.System }"
                             (click)="setColorTheme(themeTypes.System)"
                         >
                             OS
                         </button>
-                    </li>
+                    </li> -->
                 </ul>
             }
             <div class="header__menu">
@@ -75,6 +75,37 @@
                         </li> -->
                     </ul>
                 </nav>
+                <!-- <button class="themeToggle header__theme" (click)="goToAnotherTheme()">
+                    <img class="themeToggle__img"
+                        [ngClass]="{ 'themeToggle__img--active': colorSchemeService.currentActive() === themeTypes.Dark }"
+                        src="assets/icons/lightThemeIcon.svg"
+                        alt="light"
+                    >
+                    <img class="themeToggle__img"
+                        [ngClass]="{ 'themeToggle__img--active': colorSchemeService.currentActive() === themeTypes.Light }"
+                        src="assets/icons/darkThemeIcon.svg"
+                        alt="dark"
+                    >
+                </button> -->
+                <button class="themeToggleNew header__theme" (click)="goToAnotherTheme()">
+                    <div class="themeToggleNew__themeImg">
+                        <img class="themeToggleNew__img"
+                            [ngClass]="{ 'themeToggleNew__img--active': colorSchemeService.currentActive() === themeTypes.Dark }"
+                            src="assets/icons/lightThemeIcon.svg"
+                            alt="light"
+                        >
+                        <img class="themeToggleNew__img"
+                            [ngClass]="{ 'themeToggleNew__img--active': colorSchemeService.currentActive() === themeTypes.Light }"
+                            src="assets/icons/darkThemeIcon.svg"
+                            alt="dark"
+                        >
+                    </div>
+                    <span class="themeToggleNew__curThemeName">
+                        {{
+                            colorSchemeService.currentActive() === themeTypes.Dark ? 'Тёмная' : 'Светлая'
+                        }}
+                    </span>
+                </button>
             </div>
             <!-- <div class="languageInHeader">
                 <app-dropdown-field

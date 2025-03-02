@@ -28,6 +28,9 @@ $headerHeightInMobile: 64px;
     .hamburger2::before {
         background-color: var(--color-gray-regular);
     }
+    .themeToggleNew {
+        color: var(--color-gray-regular);
+    }
 }
 
 // @mixin lightThemeColors() {
@@ -77,8 +80,11 @@ $headerHeightInMobile: 64px;
             .header__menu {
                 font-size: 16px;
                 display: none;
+                .header__theme {
+                    margin-left: 24px;
+                }
                 @media #{$notMobile} {
-                    display: block;
+                    display: flex;
                 }
             }
         }
@@ -90,12 +96,12 @@ $headerHeightInMobile: 64px;
     }
 }
 
-.themeToggle {
+.themeToggleOld {
     display: flex;
     gap: 10px;
     margin-right: 10px;
-    .themeToggle__item {
-        .themeToggle__btn {
+    .themeToggleOld__item {
+        .themeToggleOld__btn {
             display: block;
             cursor: pointer;
             font-size: 10px;
@@ -109,6 +115,73 @@ $headerHeightInMobile: 64px;
                 color: #efefef;
             }
         }
+    }
+}
+
+.themeToggle {
+    height: 32px;
+    width: 38px;
+    border: none;
+    cursor: pointer;
+    // background-color: transparent;
+    background-color: tomato;
+    padding: 4px 8px;
+    .themeToggle__img {
+        display: none;
+        max-height: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        background-color: aquamarine;
+        &--active {
+            display: block;
+        }
+    }
+}
+
+.themeToggleNew {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    // background-color: tomato;
+    padding: 4px 8px;
+    .themeToggleNew__themeImg {
+        // background-color: blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 24px;
+        width: 22px;
+        .themeToggleNew__img {
+            display: none;
+            max-height: 100%;
+            max-width: 100%;
+            // background-color: aquamarine;
+            &--active {
+                display: block;
+            }
+        }
+    }
+    .themeToggleNew__curThemeName {
+        margin-left: 10px;
+        font-weight: 600;
+    }
+    @media #{$notMobile} {
+        .themeToggleNew__curThemeName {
+            display: none;
+        }
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        width: calc(100% + 16px);
+        height: calc(100% + 16px);
+        opacity: 40%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
 
