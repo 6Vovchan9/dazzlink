@@ -1,0 +1,64 @@
+@use "breakpoints" as *;
+
+@mixin darkThemeColors() {
+    .themeToggle {
+        color: var(--color-gray-regular);
+    }
+}
+
+.themeToggle {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    // background-color: tomato;
+    padding: 4px 8px;
+    .themeToggle__themeImg {
+        // background-color: blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 24px;
+        width: 22px;
+        .themeToggle__img {
+            display: none;
+            max-height: 100%;
+            max-width: 100%;
+            // background-color: aquamarine;
+            &--active {
+                display: block;
+            }
+        }
+    }
+    .themeToggle__curThemeName {
+        margin-left: 10px;
+        font-weight: 600;
+    }
+    @media #{$notMobile} {
+        .themeToggle__curThemeName {
+            display: none;
+        }
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        width: calc(100% + 16px);
+        height: calc(100% + 16px);
+        opacity: 40%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+:host-context(.color-scheme-dark) {
+    @include darkThemeColors;
+}
+
+:host-context(.color-scheme-system) {
+    @media #{$darkTheme} {
+        @include darkThemeColors;
+    }
+}

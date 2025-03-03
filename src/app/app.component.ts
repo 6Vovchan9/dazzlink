@@ -13,6 +13,7 @@ import { ToastComponent } from '@app/shared/components/toast/toast.component';
 import { CookiesToastComponent } from '@app/shared/components/cookies-toast/cookies-toast.component';
 import { ModalComponent } from '@app/shared/components/modal/modal.component';
 import { ColorSchemeService } from '@app/shared/services/color-scheme.service';
+import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-toggle.component';
 // import { LocationsService } from '@app/shared/services/locations.service';
 // import { PostsService } from '@app/shared/services/posts.service';
 // import { RandomService } from '@app/shared/services/random.service';
@@ -82,7 +83,8 @@ import { ColorSchemeService } from '@app/shared/services/color-scheme.service';
 
     ToastComponent,
     ModalComponent,
-    CookiesToastComponent
+    CookiesToastComponent,
+    ThemeToggleComponent
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {

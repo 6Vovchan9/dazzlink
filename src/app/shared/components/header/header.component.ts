@@ -1,14 +1,16 @@
 import { NgClass } from '@angular/common';
 import { Attribute, ChangeDetectionStrategy, Component, HostAttributeToken, inject } from '@angular/core';
 import { IsActiveMatchOptions, RouterLink, RouterLinkActive } from '@angular/router';
+
 import { ColorSchemeService, ThemeTypes } from '@app/shared/services/color-scheme.service';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
+import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgClass],
+  imports: [RouterLink, RouterLinkActive, NgClass, ThemeToggleComponent],
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -27,11 +29,11 @@ export class HeaderComponent {
     this.colorSchemeService.update(theme);
   }
 
-  goToAnotherTheme() {
-    const curThemeLight = this.colorSchemeService.currentActive() === ThemeTypes.Light;
-    const futureTheme = curThemeLight ? ThemeTypes.Dark : ThemeTypes.Light;
-    this.colorSchemeService.update(futureTheme);
-  }
+  // goToAnotherTheme() {
+  //   const curThemeLight = this.colorSchemeService.currentActive() === ThemeTypes.Light;
+  //   const futureTheme = curThemeLight ? ThemeTypes.Dark : ThemeTypes.Light;
+  //   this.colorSchemeService.update(futureTheme);
+  // }
 
   public routerLinkActiveOptions: IsActiveMatchOptions = {
     matrixParams: 'ignored',
