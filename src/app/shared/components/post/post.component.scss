@@ -1,34 +1,5 @@
 @use "breakpoints" as *;
 
-@mixin darkThemeColors() {
-    .post {
-        .post__img {
-            background-color: var(--color-black-light);
-        }
-        &:hover .post__title {
-            color: var(--color-blue-thin);
-        }
-    }
-    .post--withSkeleton {
-        .post__img {
-            &::before {
-                background-color: var(--color-black-regular);
-            }
-            &::after {
-                background-color: var(--color-black-light);
-            }
-        }
-        .post__details, .post__title {
-            &::before {
-                background-color: var(--color-black-regular);
-            }
-            &::after {
-                background-color: var(--color-black-light);
-            }
-        }
-    }
-}
-
 .post {
     display: flex;
     align-items: flex-start;
@@ -38,7 +9,7 @@
     .post__img {
         align-self: stretch;
         margin-bottom: 18px;
-        background-color: var(--color-gray-light);
+        background-color: var(--color-gradient-bg-after);
         min-height: 200px;
         border-radius: 32px;
         z-index: 10;
@@ -84,7 +55,7 @@
 
     &:hover {
         .post__title {
-            color: var(--color-blue-light);
+            color: var(--color-hover-blue);
         }
     }
 
@@ -114,14 +85,14 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-color: var(--color-white);
+            background-color: var(--color-gradient-bg-before);
         }
         &::after {
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
-            background-color: var(--color-gray-thin);
+            background-color: var(--color-gradient-bg-after);
             left: 0;
             top: 50%;
             transform: translateY(-50%);
@@ -137,7 +108,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-color: var(--color-white);
+            background-color: var(--color-gradient-bg-before);
         }
 
         &::after {
@@ -145,7 +116,7 @@
             position: absolute;
             width: 100%;
             height: 80%;
-            background-color: var(--color-gray-thin);
+            background-color: var(--color-gradient-bg-after);
             left: 0;
             top: 50%;
             transform: translateY(-50%);
@@ -196,15 +167,5 @@
     background-color: transparent;
     &::before {
         background-color: transparent;
-    }
-}
-
-:host-context(.color-scheme-dark) {
-    @include darkThemeColors;
-}
-
-:host-context(.color-scheme-system) {
-    @media #{$darkTheme} {
-        @include darkThemeColors;
     }
 }

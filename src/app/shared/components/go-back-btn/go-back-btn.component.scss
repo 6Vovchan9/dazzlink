@@ -30,16 +30,16 @@
     }
 
     &:hover {
-        color: var(--color-blue-light);
+        color: var(--color-hover-blue);
 
         .arrowInBtn {
 
             .arrowInBtn__stick {
-                background-color: var(--color-blue-light);
+                background-color: var(--color-hover-blue);
             }
 
             .arrowInBtn__triangle {
-                border-color: var(--color-blue-light);
+                border-color: var(--color-hover-blue);
             }
         }
     }
@@ -58,7 +58,7 @@
         border-width: 2px 2px 0 0;
         border-style: solid;
         border-radius: 0 2px 0 0;
-        border-color: var(--color-black-light);
+        border-color: var(--color-arrow-go-back-btn);
         box-sizing: border-box;
         top: 50%;
         right: 28px;
@@ -71,34 +71,11 @@
         width: 22px;
         height: 2px;
         border-radius: 2px;
-        background-color: var(--color-black-light);
+        background-color: var(--color-arrow-go-back-btn);
         position: absolute;
         top: 50%;
         right: 4px;
         transform: translate(0, -50%);
         // transition: .2s;
-    }
-}
-
-@media #{$darkTheme} {
-    .arrowInBtn {
-        .arrowInBtn__triangle {
-            border-color: var(--color-gray-regular);
-        }
-        .arrowInBtn__stick {
-            background-color: var(--color-gray-regular);
-        }
-    }
-    .appGoBackPage:hover {
-        color: var(--color-blue-thin);
-        .arrowInBtn {
-            .arrowInBtn__stick {
-                background-color: var(--color-blue-thin);
-            }
-
-            .arrowInBtn__triangle {
-                border-color: var(--color-blue-thin);
-            }
-        }
     }
 }

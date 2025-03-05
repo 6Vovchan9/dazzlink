@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use "breakpoints" as *;
+@use "themes" as *;
 
 @mixin darkThemeColors() {
     body {
@@ -118,25 +119,20 @@
     --color-green: green;
     --color-pink: #FF99EC;
 
-    // --color-gradient-after: #f2f3f4;
-
     color-scheme: light dark; // 1-ый способ как перекрасить страницу для темной/светлой темы
 }
-
-// @media #{$darkTheme} {
-//     :root.color-scheme-system {
-//         --color-gradient-after: #333;
-//     }
-// }
-
-// :root.color-scheme-dark {
-//     --color-gradient-after: #333;
-// }
 
 html, body {
     font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.forDarkTheme {
+    display: none;
+}
+.forSystemTheme {
+    display: none;
 }
 
 html {
@@ -171,6 +167,29 @@ html {
     }
     &.globalScrollBehaviorSmooth {
         scroll-behavior: smooth;
+    }
+
+    &.color-scheme-dark {
+        .forDarkTheme {
+            display: flex;
+        }
+        .forLightTheme {
+            display: none;
+        }
+        .forSystemTheme {
+            display: none;
+        }
+    }
+    &.color-scheme-system {
+        .forDarkTheme {
+            display: none;
+        }
+        .forLightTheme {
+            display: none;
+        }
+        .forSystemTheme {
+            display: flex;
+        }
     }
 }
 
@@ -605,12 +624,12 @@ button {
             .feedbackVal:hover {
                 &:not(.feedbackVal--disabled) {
                     .feedbackVal__amount {
-                        color: var(--color-blue-light);
+                        color: var(--color-hover-blue);
                     }
 
                     .feedbackVal__icon {
                         svg path {
-                            fill: var(--color-blue-light);
+                            fill: var(--color-hover-blue);
                         }
                     }
                 }

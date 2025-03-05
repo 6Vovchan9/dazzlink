@@ -6,6 +6,32 @@ $color-main-white: #fff;
 $color-main-white1: #f4f4f4;
 $color-main-blue: #5532EB;
 
+@mixin darkThemeColors() {
+    .dropdownControl .dropdownControl__newList {
+        background-color: var(--color-black-light);
+        .dropdownControl__item {
+            background-color: var(--color-black-regular);
+            &:hover:not(.dropdownControl__item--selected) {
+                color: var(--color-blue-thin);
+            }
+        }
+    }
+    .dropdownMobileList {
+        .dropdownMobileList__background {
+            background-color: rgba(33, 33, 33, 0.72);
+            backdrop-filter: blur(4px);
+        }
+        .dropdownMobileList__listWrap {
+            background-color: var(--color-black-light);
+            .dropdownMobileList__list {
+                .dropdownMobileList__item {
+                    background-color: var(--color-black-regular);
+                }
+            }
+        }
+    }
+}
+
 :host(.ng-invalid.ng-touched) {
     color: $color-main-red;
 }
@@ -299,28 +325,12 @@ $color-main-blue: #5532EB;
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    .dropdownControl .dropdownControl__newList {
-        background-color: var(--color-black-light);
-        .dropdownControl__item {
-            background-color: var(--color-black-regular);
-            &:hover:not(.dropdownControl__item--selected) {
-                color: var(--color-blue-thin);
-            }
-        }
-    }
-    .dropdownMobileList {
-        .dropdownMobileList__background {
-            background-color: rgba(33, 33, 33, 0.72);
-            backdrop-filter: blur(4px);
-        }
-        .dropdownMobileList__listWrap {
-            background-color: var(--color-black-light);
-            .dropdownMobileList__list {
-                .dropdownMobileList__item {
-                    background-color: var(--color-black-regular);
-                }
-            }
-        }
+:host-context(.color-scheme-dark) {
+    @include darkThemeColors;
+}
+
+:host-context(.color-scheme-system) {
+    @media (prefers-color-scheme: dark) {
+        @include darkThemeColors;
     }
 }

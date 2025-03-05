@@ -4,6 +4,90 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 $shadowHeightInDesktop: 34px;
 $shadowHeightInMobile: 20px;
 
+
+@mixin darkThemeColors() {
+    .pageContent .pageContent__locationsBlock--haveMoreLocations::after {
+        background: linear-gradient(180deg, rgba(33, 33, 33, 0.12) -26.12%, rgba(33, 33, 33, 1) 67.95%);
+    }
+
+    .goToAnotherLocations {
+        background-color: var(--color-black-light);
+        color: var(--color-gray-regular);
+    }
+    
+    .filterOptionsForMobile {
+        .filterOptionsForMobile__background {
+            background-color: rgba(33, 33, 33, 0.72);
+            backdrop-filter: blur(4px);
+        }
+    }
+    .filterOptionsBlock {
+        background-color: var(--color-black-light);
+
+        .filterOptionsBlock__content {
+            .filterOptionsBlock__header .filterOptionsBlock__resetBtn {
+                color: var(--color-gray-regular);
+
+                &:hover {
+                    color: var(--color-blue-thin);
+                }
+            }
+        }
+        .filterOptionsBlock__btnBar {
+            .filterOptionsBlock__resetBtn {
+                color: var(--color-gray-regular);
+                background-color: var(--color-black-thin);
+            }
+        }
+    }
+
+    .categoryCodes {
+        .categoryCodes__list {
+            .categoryCodes__item {
+                .categoryCodes__btn {
+                    color: var(--color-gray-thin);
+                    background-color: var(--color-black-light);
+                    &--active {
+                        background-color: var(--color-gray-thin);
+                        color: var(--color-black-light);
+                    }
+                }
+            }
+        }
+        &--withSkeleton .categoryCodes__list .categoryCodes__item .categoryCodes__btn {
+            color: transparent;
+            background-color: var(--color-black-light);
+        }
+    }
+
+    .cityForFilter {
+        background-color: var(--color-black-regular);
+        .cityForFilter__checkbox {
+            .cityForFilter__box {
+                border-color: var(--color-black-thin);
+                &--selected {
+                    background-color: var(--color-black-thin);
+                    &::before {
+                        visibility: hidden;
+                    }
+                    &::after {
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+    }
+
+    .iconForPlacesOptions {
+        &--opened {
+            color: var(--color-gray-regular);
+        }
+        &--selected {
+            color: var(--color-gray-regular);
+        }
+    }
+}
+
 .locationsPage {
     display: flex;
     flex-direction: column;
@@ -122,7 +206,7 @@ $shadowHeightInMobile: 20px;
         position: sticky;
         margin-top: 8px;
         top: 8px;
-        transition: .6s;
+        transition: top .6s;
         .aboutPage__links {
             &--forDesktop {
                 display: block;
@@ -352,10 +436,10 @@ $shadowHeightInMobile: 20px;
     z-index: 100;
     top: 0px;
     margin-bottom: 20px;
-    background-color: var(--color-white);
+    background-color: var(--color-main-bg);
     padding: 8px 0px 4px;
-    transition: .6s;
-    
+    transition: top .6s;
+
     &--static {
         position: static;
     }
@@ -708,7 +792,7 @@ $shadowHeightInMobile: 20px;
     @media #{$notMobile} {
         position: sticky;
         top: 8px;
-        transition: .6s;
+        transition: top .6s;
         margin-top: 8px;
         // margin-bottom: 20px;
     }
@@ -903,89 +987,12 @@ $shadowHeightInMobile: 20px;
     }
 }
 
-@media #{$darkTheme} {
-    .stickyBar {
-        background-color: var(--color-black-regular);
-    }
+:host-context(.color-scheme-dark) {
+    @include darkThemeColors;
+}
 
-    .pageContent .pageContent__locationsBlock--haveMoreLocations::after {
-        background: linear-gradient(180deg, rgba(33, 33, 33, 0.12) -26.12%, rgba(33, 33, 33, 1) 67.95%);
-    }
-
-    .goToAnotherLocations {
-        background-color: var(--color-black-light);
-        color: var(--color-gray-regular);
-    }
-    
-    .filterOptionsForMobile {
-        .filterOptionsForMobile__background {
-            background-color: rgba(33, 33, 33, 0.72);
-            backdrop-filter: blur(4px);
-        }
-    }
-    .filterOptionsBlock {
-        background-color: var(--color-black-light);
-
-        .filterOptionsBlock__content {
-            .filterOptionsBlock__header .filterOptionsBlock__resetBtn {
-                color: var(--color-gray-regular);
-
-                &:hover {
-                    color: var(--color-blue-thin);
-                }
-            }
-        }
-        .filterOptionsBlock__btnBar {
-            .filterOptionsBlock__resetBtn {
-                color: var(--color-gray-regular);
-                background-color: var(--color-black-thin);
-            }
-        }
-    }
-
-    .categoryCodes {
-        .categoryCodes__list {
-            .categoryCodes__item {
-                .categoryCodes__btn {
-                    color: var(--color-gray-thin);
-                    background-color: var(--color-black-light);
-                    &--active {
-                        background-color: var(--color-gray-thin);
-                        color: var(--color-black-light);
-                    }
-                }
-            }
-        }
-        &--withSkeleton .categoryCodes__list .categoryCodes__item .categoryCodes__btn {
-            color: transparent;
-            background-color: var(--color-black-light);
-        }
-    }
-
-    .cityForFilter {
-        background-color: var(--color-black-regular);
-        .cityForFilter__checkbox {
-            .cityForFilter__box {
-                border-color: var(--color-black-thin);
-                &--selected {
-                    background-color: var(--color-black-thin);
-                    &::before {
-                        visibility: hidden;
-                    }
-                    &::after {
-                        visibility: visible;
-                    }
-                }
-            }
-        }
-    }
-
-    .iconForPlacesOptions {
-        &--opened {
-            color: var(--color-gray-regular);
-        }
-        &--selected {
-            color: var(--color-gray-regular);
-        }
+:host-context(.color-scheme-system) {
+    @media #{$darkTheme} {
+        @include darkThemeColors;
     }
 }
