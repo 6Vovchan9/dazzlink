@@ -7,6 +7,8 @@
     --color-arrow-go-back-btn: #333;
     --color-gradient-bg-before: #fff;
     --color-gradient-bg-after: #f2f3f4;
+    --color-anchor-line: #f2f3f4;
+    --color-anchor-active-line: #333;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +21,8 @@
         --color-arrow-go-back-btn: #efefef;
         --color-gradient-bg-before: #212121;
         --color-gradient-bg-after: #333;
+        --color-anchor-line: #333;
+        --color-anchor-active-line: #efefef;
     }
 }
 
@@ -31,4 +35,6 @@
     --color-arrow-go-back-btn: #efefef;
     --color-gradient-bg-before: #212121;
     --color-gradient-bg-after: #333;
+    --color-anchor-line: #333;
+    --color-anchor-active-line: #efefef;
 }

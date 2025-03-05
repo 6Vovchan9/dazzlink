@@ -54,7 +54,7 @@
         left: 0;
         height: 2px;
         width: 100%;
-        background-color: var(--color-gray-thin);
+        background-color: var(--color-anchor-line);
         border-radius: 2px;
     }
     .inlineAnchorNav__list {
@@ -92,7 +92,7 @@
             width: 100%;
             top: 100%;
             left: 0;
-            background-color: var(--color-black-light);
+            background-color: var(--color-anchor-active-line);
             border-radius: 2px;
         }
     }
@@ -118,7 +118,7 @@
     position: relative;
 
     &:hover {
-        color: var(--color-blue-light);
+        color: var(--color-hover-blue);
     }
 
     &::before, &::after {
@@ -128,13 +128,13 @@
         height: 100%;
         left: 0;
         top: 0;
-        background-color: var(--color-gray-thin);
+        background-color: var(--color-anchor-line);
     }
 
     &::after {
         display: none;
         border-radius: 2px;
-        background-color: var(--color-black-light);
+        background-color: var(--color-anchor-active-line);
     }
 
     &--active {
@@ -170,7 +170,7 @@
         padding-top: 12px;
         position: sticky;
         top: 0;
-        background-color: var(--color-white);
+        background-color: var(--color-main-bg);
     }
 }
 
@@ -182,7 +182,7 @@
     .phonesBlock__area {
         border-radius: 32px;
         padding: 32px 20px;
-        background-color: var(--color-gray-thin);
+        background-color: var(--color-second-bg);
         margin-bottom: 12px;
 
         .phonesBlock__country {
@@ -272,7 +272,7 @@
             padding-left: 24px;
             margin-bottom: 12px;
             border-radius: 24px;
-            background-color: var(--color-gray-thin);
+            background-color: var(--color-second-bg);
             .questionsBlock__head {
                 display: flex;
                 justify-content: space-between;
@@ -356,36 +356,5 @@
         background-color: aqua;
         width: 100%;
         height: 100%;
-    }
-}
-
-@media #{$darkTheme} {
-    .phonesBlock .phonesBlock__area {
-        background-color: var(--color-black-light);
-    }
-    .questionsBlock .questionsBlock__list .questionsBlock__item {
-        background-color: var(--color-black-light);
-    }
-    .stickyMenuWrapper {
-        @media #{$mobile} {
-            background-color: var(--color-black-regular);
-        }
-    }
-    .inlineAnchorLink--active::after {
-        background-color: var(--color-gray-regular);
-    }
-    .inlineAnchorNav::after {
-        background-color: var(--color-black-light);
-    }
-    .anchorLink {
-        &:hover {
-            color: var(--color-blue-thin);
-        }
-        &::before, &::after {
-            background-color: var(--color-black-light);
-        }
-        &::after {
-            background-color: var(--color-gray-regular);
-        }
     }
 }
