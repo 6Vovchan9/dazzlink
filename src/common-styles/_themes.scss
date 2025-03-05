@@ -9,6 +9,7 @@
     --color-gradient-bg-after: #f2f3f4;
     --color-anchor-line: #f2f3f4;
     --color-anchor-active-line: #333;
+    --color-legal-doc-link: #f2f3f4;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +24,7 @@
         --color-gradient-bg-after: #333;
         --color-anchor-line: #333;
         --color-anchor-active-line: #efefef;
+        --color-legal-doc-link: #333;
     }
 }
 
@@ -37,4 +39,5 @@
     --color-gradient-bg-after: #333;
     --color-anchor-line: #333;
     --color-anchor-active-line: #efefef;
+    --color-legal-doc-link: #333;
 }

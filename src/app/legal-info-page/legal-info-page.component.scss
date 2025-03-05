@@ -53,7 +53,7 @@
     font-weight: 900;
     column-gap: 26px;
     justify-content: space-between;
-    background-color: var(--color-gray-thin);
+    background-color: var(--color-legal-doc-link);
     padding: 20px 24px;
     border-radius: 20px;
     cursor: pointer;
@@ -74,11 +74,5 @@
     }
     @media #{$notMobile} {
         padding: 24px 48px;
-    }
-}
-
-@media #{$darkTheme} {
-    .openLegalDoc {
-        background-color: var(--color-black-light);
     }
 }
