@@ -219,8 +219,11 @@
             .aboutUsCard__desc {
                 grid-area: desc;
             }
-            .aboutUsCard__map {
+            .aboutUsCard__mapGridArea {
                 grid-area: map;
+            }
+
+            .aboutUsCard__map {
                 margin-top: 0px;
             }
         }
