@@ -1,6 +1,7 @@
 :root {
     --color-main-bg: #fff;
     --color-second-bg: #f2f3f4;
+    --color-modal-bg: #fff;
     --color-feedback-block-bg: #f2f3f4;
     --color-hover-blue: #4A4AC6;
     --color-arrow-go-back-btn: #333;
@@ -12,6 +13,7 @@
     :root.color-scheme-system {
         --color-main-bg: #212121;
         --color-second-bg: #333;
+        --color-modal-bg: #212121;
         --color-feedback-block-bg: #333;
         --color-hover-blue: #7070ff;
         --color-arrow-go-back-btn: #efefef;
@@ -23,6 +25,7 @@
 :root.color-scheme-dark {
     --color-main-bg: #212121;
     --color-second-bg: #333;
+    --color-modal-bg: #212121;
     --color-feedback-block-bg: #333;
     --color-hover-blue: #7070ff;
     --color-arrow-go-back-btn: #efefef;
