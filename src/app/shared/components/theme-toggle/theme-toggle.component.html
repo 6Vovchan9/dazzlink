@@ -1,5 +1,8 @@
 <button class="themeToggle" (click)="goToAnotherTheme()">
-    <div class="themeToggle__themeImg">
+    <div
+        class="themeToggle__themeImg"
+        [ngClass]="{ 'themeToggle__themeImg--os': colorSchemeService.currentActive() === themeTypes.System }"
+    >
         <img class="themeToggle__img"
             [ngClass]="{ 'themeToggle__img--active': colorSchemeService.currentActive() === themeTypes.Dark }"
             src="assets/icons/lightThemeIcon.svg"
@@ -12,6 +15,6 @@
         >
     </div>
     <span class="themeToggle__curThemeName">
-        {{ colorSchemeService.currentActive() === themeTypes.Dark ? 'Тёмная' : 'Светлая' }}
+        {{ colorSchemeService.currentActive() === themeTypes.Dark ? 'Тёмная' : colorSchemeService.currentActive() === themeTypes.Light ? 'Светлая' : 'OS Default' }}
     </span>
 </button>

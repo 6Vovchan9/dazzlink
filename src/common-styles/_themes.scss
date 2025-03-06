@@ -10,7 +10,8 @@
     --color-anchor-line: #f2f3f4;
     --color-anchor-active-line: #333;
     --color-legal-doc-link: #f2f3f4;
-    --image-filter-brightness: none
+    --image-filter-brightness: none;
+    --color-theme-toggle: #333;
 }
 
 @mixin constForDarkTheme() {
@@ -25,7 +26,8 @@
     --color-anchor-line: #333;
     --color-anchor-active-line: #efefef;
     --color-legal-doc-link: #333;
-    --image-filter-brightness: brightness(70%)
+    --image-filter-brightness: brightness(70%);
+    --color-theme-toggle: #efefef;
 }
 
 @media (prefers-color-scheme: dark) {
