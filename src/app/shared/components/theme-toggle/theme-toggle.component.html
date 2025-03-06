@@ -15,6 +15,10 @@
         >
     </div>
     <span class="themeToggle__curThemeName">
-        {{ colorSchemeService.currentActive() === themeTypes.Dark ? 'Тёмная' : colorSchemeService.currentActive() === themeTypes.Light ? 'Светлая' : 'OS Default' }}
+        {{
+            colorSchemeService.currentActive() === themeTypes.Dark ? 'Светлая' :
+            colorSchemeService.currentActive() === themeTypes.Light ? 'Тёмная' :
+            'OS Default'
+        }}
     </span>
 </button>
