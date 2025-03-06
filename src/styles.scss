@@ -128,13 +128,6 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.forDarkTheme {
-    display: none;
-}
-.forSystemTheme {
-    display: none;
-}
-
 html {
     // scroll-behavior: smooth;
     font-size: 16px;
@@ -167,6 +160,13 @@ html {
     }
     &.globalScrollBehaviorSmooth {
         scroll-behavior: smooth;
+    }
+
+    .forDarkTheme {
+        display: none;
+    }
+    .forSystemTheme {
+        display: none;
     }
 
     &.color-scheme-dark {

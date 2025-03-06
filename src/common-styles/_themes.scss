@@ -10,25 +10,10 @@
     --color-anchor-line: #f2f3f4;
     --color-anchor-active-line: #333;
     --color-legal-doc-link: #f2f3f4;
+    --image-filter-brightness: none
 }
 
-@media (prefers-color-scheme: dark) {
-    :root.color-scheme-system {
-        --color-main-bg: #212121;
-        --color-second-bg: #333;
-        --color-modal-bg: #212121;
-        --color-feedback-block-bg: #333;
-        --color-hover-blue: #7070ff;
-        --color-arrow-go-back-btn: #efefef;
-        --color-gradient-bg-before: #212121;
-        --color-gradient-bg-after: #333;
-        --color-anchor-line: #333;
-        --color-anchor-active-line: #efefef;
-        --color-legal-doc-link: #333;
-    }
-}
-
-:root.color-scheme-dark {
+@mixin constForDarkTheme() {
     --color-main-bg: #212121;
     --color-second-bg: #333;
     --color-modal-bg: #212121;
@@ -40,4 +25,15 @@
     --color-anchor-line: #333;
     --color-anchor-active-line: #efefef;
     --color-legal-doc-link: #333;
+    --image-filter-brightness: brightness(70%)
+}
+
+@media (prefers-color-scheme: dark) {
+    :root.color-scheme-system {
+        @include constForDarkTheme;
+    }
+}
+
+:root.color-scheme-dark {
+    @include constForDarkTheme;
 }

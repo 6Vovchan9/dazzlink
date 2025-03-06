@@ -4,36 +4,6 @@ $carousel-gap: 24;
 $shadowHeightInDesktop: 34px;
 $shadowHeightInMobile: 20px;
 
-@mixin darkThemeColors() {
-    .homePage .homePage__header::after {
-        background: linear-gradient(0deg, transparent, var(--color-black-regular));
-    }
-    .appAdv {
-        .appAdv__list {
-            .appAdv__item {
-                .appAdv__image {
-                    filter: brightness(70%);
-                }
-            }
-        }
-    }
-}
-
-// @mixin lightThemeColors() {
-//     .homePage .homePage__header::after {
-//         background: linear-gradient(0deg, transparent, var(--color-white));
-//     }
-//     .appAdv {
-//         .appAdv__list {
-//             .appAdv__item {
-//                 .appAdv__image {
-//                     filter: brightness(100%);
-//                 }
-//             }
-//         }
-//     }
-// }
-
 // .overscrollBlock {
 //     position: fixed;
 //     z-index: 100;
@@ -64,7 +34,7 @@ $shadowHeightInMobile: 20px;
             position: absolute;
             height: $shadowHeightInMobile;
             width: 100%;
-            background: linear-gradient(0deg, transparent, var(--color-white));
+            background: linear-gradient(0deg, transparent, var(--color-main-bg));
         }
 
         &--visible {
@@ -317,6 +287,7 @@ $shadowHeightInMobile: 20px;
             .appAdv__image {
                 flex: 1;
                 max-width: 500px;
+                filter: var(--image-filter-brightness);
 
                 img {
                     max-width: 100%;
@@ -548,42 +519,3 @@ a.progressive img.preview {
 //     color: white;
 //     background-color: crimson;
 // }
-
-.forDarkTheme {
-    display: none;
-}
-.forSystemTheme {
-    display: none;
-}
-
-:host-context(.color-scheme-dark) {
-    @include darkThemeColors;
-    .forDarkTheme {
-        display: flex;
-    }
-    .forLightTheme {
-        display: none;
-    }
-    .forSystemTheme {
-        display: none;
-    }
-}
-
-// :host-context(.color-scheme-light) {
-//     @include lightThemeColors;
-// }
-
-:host-context(.color-scheme-system) {
-    @media #{$darkTheme} {
-        @include darkThemeColors;
-    }
-    .forDarkTheme {
-        display: none;
-    }
-    .forLightTheme {
-        display: none;
-    }
-    .forSystemTheme {
-        display: flex;
-    }
-}
