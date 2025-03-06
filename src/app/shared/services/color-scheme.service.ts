@@ -1,4 +1,4 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2, signal } from '@angular/core';
 
 export enum ThemeTypes {
     Dark = 'dark',
@@ -12,7 +12,7 @@ export enum ThemeTypes {
 export class ColorSchemeService {
 
     private renderer: Renderer2;
-    private colorScheme: ThemeTypes;
+    private colorScheme = signal<ThemeTypes>(ThemeTypes.Dark);
     // Define prefix for clearer and more readable class names in scss files
     private colorSchemePrefix = 'color-scheme-';
 
@@ -25,15 +25,15 @@ export class ColorSchemeService {
         // Detect if prefers-color-scheme is supported
         if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
             // Set colorScheme to Dark if prefers-color-scheme is dark. Otherwise, set it to Light.
-            this.colorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? ThemeTypes.Dark : ThemeTypes.Light;
+            this.colorScheme.set(window.matchMedia('(prefers-color-scheme: dark)').matches ? ThemeTypes.Dark : ThemeTypes.Light);
         } else {
             // If the browser does not support prefers-color-scheme, set the default to dark.
-            this.colorScheme = ThemeTypes.Dark;
+            this.colorScheme.set(ThemeTypes.Dark);
         }
     }
 
     private _setColorScheme(scheme: ThemeTypes) {
-        this.colorScheme = scheme;
+        this.colorScheme.set(scheme);
         // Save prefers-color-scheme to localStorage
         localStorage.setItem('prefers-color', scheme);
     }
@@ -43,19 +43,19 @@ export class ColorSchemeService {
         // Check if any prefers-color-scheme is stored in localStorage
         if (localStorageColorScheme) {
             // Save prefers-color-scheme from localStorage
-            this.colorScheme = localStorageColorScheme;
+            this.colorScheme.set(localStorageColorScheme);
         } else {
             // или:
             // If no prefers-color-scheme is stored in localStorage, try to detect OS default prefers-color-scheme
             // this._detectPrefersColorScheme();
             // или:
-            this.colorScheme = ThemeTypes.System;
+            this.colorScheme.set(ThemeTypes.System);
         }
     }
 
     load() {
         this._getColorScheme();
-        this.renderer.addClass(document.documentElement, this.colorSchemePrefix + this.colorScheme);
+        this.renderer.addClass(document.documentElement, this.colorSchemePrefix + this.colorScheme());
     }
 
     update(scheme: ThemeTypes) {
@@ -68,7 +68,7 @@ export class ColorSchemeService {
     }
 
     currentActive(): ThemeTypes {
-        return this.colorScheme;
+        return this.colorScheme();
     }
 
 }
