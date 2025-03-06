@@ -10,7 +10,13 @@ import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgClass, ThemeToggleComponent],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    NgClass,
+
+    ThemeToggleComponent
+  ],
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

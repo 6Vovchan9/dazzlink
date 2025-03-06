@@ -47,9 +47,9 @@ export class ColorSchemeService {
         } else {
             // или:
             // If no prefers-color-scheme is stored in localStorage, try to detect OS default prefers-color-scheme
-            // this._detectPrefersColorScheme();
+            this._detectPrefersColorScheme();
             // или:
-            this.colorScheme.set(ThemeTypes.System);
+            // this.colorScheme.set(ThemeTypes.System);
         }
     }
 
