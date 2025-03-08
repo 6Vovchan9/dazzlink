@@ -287,7 +287,7 @@ $shadowHeightInMobile: 20px;
             .appAdv__image {
                 flex: 1;
                 max-width: 500px;
-                filter: var(--image-filter-brightness);
+                // filter: var(--image-filter-brightness);
 
                 img {
                     max-width: 100%;

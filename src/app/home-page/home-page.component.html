@@ -169,7 +169,13 @@
                 <ul class="appAdv__list">
                     <li class="appAdv__item">
                         <div class="appAdv__image">
-                            <img src="assets/images/home-page/appAdv1.png" alt="appAdvantage">
+                            <img class="forLightTheme" src="assets/images/home-page/appAdv1.png" alt="appAdvantage">
+                            <img class="forDarkTheme" src="assets/images/home-page/appAdv1Dark.png" alt="appAdvantage">
+                            <picture class="forSystemTheme">
+                                <source srcset="assets/images/home-page/appAdv1.png" media="(prefers-color-scheme: light)">
+                                <source srcset="assets/images/home-page/appAdv1Dark.png" media="(prefers-color-scheme: dark)">
+                                <img src="assets/images/home-page/appAdv1.png" alt="appAdvantage">
+                            </picture>
                         </div>
                         <div class="appAdv__content">
                             <h2 class="moduleTitle">
@@ -184,7 +190,13 @@
                     </li>
                     <li class="appAdv__item">
                         <div class="appAdv__image">
-                            <img src="assets/images/home-page/appAdv2.png" alt="appAdvantage">
+                            <img class="forLightTheme" src="assets/images/home-page/appAdv2.png" alt="appAdvantage">
+                            <img class="forDarkTheme" src="assets/images/home-page/appAdv2Dark.png" alt="appAdvantage">
+                            <picture class="forSystemTheme">
+                                <source srcset="assets/images/home-page/appAdv2.png" media="(prefers-color-scheme: light)">
+                                <source srcset="assets/images/home-page/appAdv2Dark.png" media="(prefers-color-scheme: dark)">
+                                <img src="assets/images/home-page/appAdv2.png" alt="appAdvantage">
+                            </picture>
                         </div>
                         <div class="appAdv__content">
                             <h2 class="moduleTitle">
@@ -197,7 +209,13 @@
                     </li>
                     <li class="appAdv__item">
                         <div class="appAdv__image">
-                            <img src="assets/images/home-page/appAdv3.png" alt="appAdvantage">
+                            <img class="forLightTheme" src="assets/images/home-page/appAdv3.png" alt="appAdvantage">
+                            <img class="forDarkTheme" src="assets/images/home-page/appAdv3Dark.png" alt="appAdvantage">
+                            <picture class="forSystemTheme">
+                                <source srcset="assets/images/home-page/appAdv3.png" media="(prefers-color-scheme: light)">
+                                <source srcset="assets/images/home-page/appAdv3Dark.png" media="(prefers-color-scheme: dark)">
+                                <img src="assets/images/home-page/appAdv3.png" alt="appAdvantage">
+                            </picture>
                         </div>
                         <div class="appAdv__content">
                             <h2 class="moduleTitle">
@@ -210,7 +228,13 @@
                     </li>
                     <li class="appAdv__item">
                         <div class="appAdv__image">
-                            <img src="assets/images/home-page/appAdv4.png" alt="appAdvantage">
+                            <img class="forLightTheme" src="assets/images/home-page/appAdv4.png" alt="appAdvantage">
+                            <img class="forDarkTheme" src="assets/images/home-page/appAdv4Dark.png" alt="appAdvantage">
+                            <picture class="forSystemTheme">
+                                <source srcset="assets/images/home-page/appAdv4.png" media="(prefers-color-scheme: light)">
+                                <source srcset="assets/images/home-page/appAdv4Dark.png" media="(prefers-color-scheme: dark)">
+                                <img src="assets/images/home-page/appAdv4.png" alt="appAdvantage">
+                            </picture>
                         </div>
                         @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios') {
                             <div class="appAdv__content">
