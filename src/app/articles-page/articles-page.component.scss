@@ -141,11 +141,12 @@ $shadowHeightInMobile: 20px;
         //     background-color: red;
         // }
 
-        // .pageContent__itemOfArticle {
-        //     &--viewed {
-        //         opacity: .3;
-        //     }
-        // }
+        .pageContent__itemOfArticle {
+            overflow: hidden;
+            // &--viewed {
+            //     opacity: .3;
+            // }
+        }
 
         // .pageContent__itemOfArticle {
         //     flex-basis: calc(50% - 12px);
