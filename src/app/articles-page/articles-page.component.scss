@@ -46,9 +46,14 @@ $shadowHeightInMobile: 20px;
         }
         .articlesPage__main {
             .articlesPage__container {
-                flex-direction: row;
                 margin-top: 48px;
-                margin-bottom: 48px;
+            }
+        }
+    }
+    @media (min-width: 1025px) {
+        .articlesPage__main {
+            .articlesPage__container {
+                flex-direction: row;
             }
         }
     }
@@ -61,6 +66,10 @@ $shadowHeightInMobile: 20px;
     margin-bottom: 32px;
 
     @media #{$notMobile} {
+        margin-bottom: 48px;
+    }
+
+    @media (min-width: 1025px) {
         max-width: 360px;
         margin-right: 8%;
         margin-bottom: 0px;
@@ -82,6 +91,7 @@ $shadowHeightInMobile: 20px;
 
 .aboutPage {
     .aboutPage__text {
+        max-width: 422px;
         margin-top: 12px;
         line-height: 1.5;
     }
@@ -123,9 +133,9 @@ $shadowHeightInMobile: 20px;
     flex: 2;
 
     .pageContent__articles {
-        display: flex;
-        flex-direction: column;
-        row-gap: 48px;
+        display: grid;
+        grid-template-columns: minmax(min(100%, 300px), 500px);
+        gap: 48px 24px;
 
         // .lastPostItem {
         //     background-color: red;
@@ -156,25 +166,6 @@ $shadowHeightInMobile: 20px;
         height: 50px;
     }
 
-    @media #{$notMobile} {
-        .pageContent__articles {
-            flex-wrap: wrap;
-            flex-direction: row;
-
-            .pageContent__itemOfArticle {
-                flex-basis: calc(50% - 12px);
-
-                &:nth-child(odd) {
-                    margin-right: 24px;
-                }
-            }
-        }
-
-        .pageContent__loadMore {
-            margin-top: 48px;
-        }
-    }
-
     @media #{$mobile} {
         .pageContent__articles {
             .pageContent__itemOfArticle {
@@ -182,6 +173,20 @@ $shadowHeightInMobile: 20px;
                     display: none;
                 }
             }
+        }
+    }
+
+    @media #{$notMobile} {
+        .pageContent__articles {
+            grid-template-columns: repeat(2, minmax(200px, 360px));
+            column-gap: 48px;
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .pageContent__articles {
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 24px;
         }
     }
 }
