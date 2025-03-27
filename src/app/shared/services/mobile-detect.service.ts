@@ -49,6 +49,7 @@ export class MobileDetectService {
             if (this.osDevice?.toLowerCase() === 'ios') {
                 // this.myWindow.location.href = 'https://www.apple.com/app-store';
                 // this.myWindow.location.href = 'https://apps.apple.com';
+                this.myWindow.location.href = 'https://apps.apple.com/app/dazzlink-asia/id6477790074';
             } else if (this.osDevice?.toLowerCase() === 'androidos') {
                 if (/hms/.test(uAgent) && !/gms/.test(uAgent)) {
                     this.myWindow.location.href = 'https://appgallery.cloud.huawei.com/ag/n/app/C112028837';

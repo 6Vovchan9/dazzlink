@@ -92,7 +92,7 @@
                             Доступно в крупных городах Узбекистана
                         </div>
                     </div>
-                    @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios') {
+                    @if (0) {
                         <button (click)="qrModalOrTelegram()" class="aboutAppInfo__btn blueBtn blueBtn--withPresentIcon">
                             <img src="assets/icons/present.svg" alt="p">
                             Получить подарок
@@ -236,7 +236,7 @@
                                 <img src="assets/images/home-page/appAdv4.png" alt="appAdvantage">
                             </picture>
                         </div>
-                        @if (1 && mobileDetectService.osDevice?.toLowerCase() === 'ios') {
+                        @if (0) {
                             <div class="appAdv__content">
                                 <h2 class="moduleTitle">
                                     Будьте первыми
@@ -378,8 +378,8 @@
 
 <ng-template #linkToApp>
     <div class="linkToApp">
-        <!-- <a
-            href="https://www.apple.com/app-store"
+        <a
+            href="https://apps.apple.com/app/dazzlink-asia/id6477790074"
             target="_blank"
             class="linkToApp__item"
         >
@@ -390,7 +390,7 @@
                 <source srcset="assets/images/store/linkIOSShortDark.svg" media="(prefers-color-scheme: dark)">
                 <img class="linkToApp__img" src="assets/images/store/linkIOSShort.svg" alt="iOS">
             </picture>
-        </a> -->
+        </a>
         <a
             href="https://play.google.com/store/apps/details?id=asia.dazzlink.dazzlink"
             target="_blank"
