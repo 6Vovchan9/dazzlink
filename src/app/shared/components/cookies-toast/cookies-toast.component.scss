@@ -20,7 +20,7 @@
 
     .cookiesToast__container {
         margin: 0 auto;
-        max-width: calc(736px + 40px);
+        max-width: calc(728px + 40px);
         padding: 0 20px;
         .cookiesToast__content {
             pointer-events: all;
@@ -28,7 +28,7 @@
             flex-direction: column;
             align-items: flex-start;
             row-gap: 12px;
-            column-gap: 24px;
+            column-gap: 20px;
             background-color: #fff;
             padding: 16px 20px;
             border-radius: 12px;
