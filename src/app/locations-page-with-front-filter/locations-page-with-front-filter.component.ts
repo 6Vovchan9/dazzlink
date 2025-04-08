@@ -1416,9 +1416,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       this.setSelectedCity(linkToCountry, linkToCity);
     }
 
-    const mobileWidth = document.documentElement.clientWidth < 768;
+    const beforeLaptopWidth = document.documentElement.clientWidth < 1025;
 
-    if (!mobileWidth) {
+    if (!beforeLaptopWidth) {
       this.filterBarGroup.get('sort').disable({ emitEvent: false });
       if (this.locationsUpdating) { // Если фильтрация в данный момент идет тогда запускаем новую без задержки
         console.log('Делаем фильтрацию...');

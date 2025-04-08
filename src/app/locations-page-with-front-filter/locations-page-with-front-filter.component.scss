@@ -4,7 +4,6 @@ $spacingVal: 20px; // важно соблюдать эту зависимост�
 $shadowHeightInDesktop: 34px;
 $shadowHeightInMobile: 20px;
 
-
 @mixin darkThemeColors() {
     .pageContent .pageContent__locationsBlock--haveMoreLocations::after {
         background: linear-gradient(180deg, rgba(33, 33, 33, 0.12) -26.12%, rgba(33, 33, 33, 1) 67.95%);
@@ -101,12 +100,18 @@ $shadowHeightInMobile: 20px;
             margin-bottom: 48px;
         }
     }
+
     @media #{$notMobile} {
+        .locationsPage__main .locationsPage__container {
+            margin-top: 40px;
+        }
+    }
+
+    @media (min-width: 1025px) {
         .locationsPage__main {
             .locationsPage__container {
                 flex-direction: row;
                 padding: 0 $spacingVal;
-                margin-top: 40px;
             }
         }
     }
@@ -169,7 +174,11 @@ $shadowHeightInMobile: 20px;
         display: block;
     }
 
-    @media #{$notMobile} {
+    @media #{$tablet} {
+        margin-bottom: 40px;
+    }
+
+    @media (min-width: 1025px) {
         display: block;
         max-width: 360px;
         margin-right: 8%;
@@ -183,6 +192,7 @@ $shadowHeightInMobile: 20px;
 
 .aboutPage {
     .aboutPage__text {
+        max-width: 422px;
         margin-top: 12px;
         line-height: 1.5;
     }
@@ -290,9 +300,8 @@ $shadowHeightInMobile: 20px;
         }
 
         .pageContent__locationsList {
-            display: flex;
-            flex-direction: column;
-            row-gap: 32px;
+            display: grid;
+            gap: 32px;
         }
         &--last {
             margin-bottom: 0px;
@@ -333,33 +342,17 @@ $shadowHeightInMobile: 20px;
         margin-top: 32px;
     }
 
-    @media #{$notMobile} {
-        .pageContent__locationsBlock {
-            .pageContent__locationsList {
-                flex-wrap: wrap;
-                flex-direction: row;
-                // column-gap: 24px;
-                row-gap: 48px;
-                // justify-content: space-between;
-                margin-right: -$spacingVal;
-
-                .pageContent__locationsItem {
-                    // width: 28%;
-                    // flex-basis: calc(33% - 15px);
-                    width: 33.33%;
-                    padding-right: $spacingVal;
-
-                    // &:nth-child(3n) {
-                    //     padding-right: unset;
-                    // }
-                    // &:last-child {
-                    //     padding-right: unset;
-                    // }
-                }
-            }
+    @media #{$tablet} {
+        .pageContent__locationsBlock .pageContent__locationsList {
+            grid-template-columns: repeat(3, minmax(0px, 224px));
+            gap: 48px;
         }
-        .pageContent__toAnotherGeneral {
-            margin-top: 48px;
+    }
+
+    @media (min-width: 1025px) {
+        .pageContent__locationsBlock .pageContent__locationsList {
+            grid-template-columns: repeat(3, minmax(0px, 1fr));
+            gap: 48px 36px;
         }
     }
 
@@ -710,7 +703,7 @@ $shadowHeightInMobile: 20px;
                 }
             }
 
-            @media #{$notMobile} {
+            @media (min-width: 1025px) {
                 align-items: flex-end;
                 margin-left: 16px;
                 flex-wrap: wrap;
@@ -769,7 +762,7 @@ $shadowHeightInMobile: 20px;
         }
     }
 
-    @media #{$mobile} {
+    @media (max-width: 1024px) {
         max-height: 90svh;
         border-radius: 20px 20px 0 0;
         .filterOptionsBlock__allCountries {
@@ -789,7 +782,7 @@ $shadowHeightInMobile: 20px;
         }
     }
 
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         position: sticky;
         top: 8px;
         transition: top .6s;
@@ -822,7 +815,7 @@ $shadowHeightInMobile: 20px;
         justify-content: flex-end;
     }
 
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         display: none;
     }
 }

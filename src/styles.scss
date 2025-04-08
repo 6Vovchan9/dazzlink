@@ -138,7 +138,7 @@ html {
         overflow: hidden;
     }
     &.noScrollInMobile {
-        @media #{$mobile} {
+        @media (max-width: 1024px) {
             overflow: hidden;
         }
     }
@@ -286,6 +286,10 @@ button {
     margin: 0 auto;
     max-width: 1240px;
     padding: 0 20px;
+
+    @media (max-width: 1024px) {
+        max-width: 808px;
+    }
 }
 
 .btn {
