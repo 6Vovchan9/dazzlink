@@ -35,46 +35,9 @@
                         {{getContent('articles-aboutPage-text')}}
                     </div>
                     @if (!appWebview) {
-                        @if (0) {
-                            <button (click)="qrModalOrTelegram()" class="aboutPage__btnToTg blueBtn blueBtn--withPresentIcon">
-                                <img src="assets/icons/present.svg" alt="p">
-                                Получить подарок
-                            </button>
-                        } @else {
-                            <div class="aboutPage__links aboutPage__links--forDesktop">
-                                <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
-                            </div>
-
-                            @if (mobileDetectService.osDevice) {
-                                <div class="aboutPage__links aboutPage__links--forMobile">
-                                    <button class="downloadApp"
-                                        type="button"
-                                        (click)="mobileDetectService?.goToDeviceStore()"
-                                    >
-                                        <div class="downloadApp__title">Скачайте<br />приложение</div>
-                                        <div class="downloadApp__icon">
-                                            <img class="forLightTheme"
-                                                [src]="mobileDetectService?.mobileStoreIconSrc()"
-                                                alt="store"
-                                            >
-                                            <img class="forDarkTheme"
-                                                [src]="mobileDetectService?.mobileStoreIconSrc(true)"
-                                                alt="store"
-                                            >
-                                            <picture class="forSystemTheme">
-                                                <source [srcset]="mobileDetectService?.mobileStoreIconSrc()" media="(prefers-color-scheme: light)">
-                                                <source [srcset]="mobileDetectService?.mobileStoreIconSrc(true)" media="(prefers-color-scheme: dark)">
-                                                <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store">
-                                            </picture>
-                                        </div>
-                                    </button>
-                                </div>
-                            } @else {
-                                <div class="aboutPage__links aboutPage__links--forMobile">
-                                    <ng-container *ngTemplateOutlet="linkToApp"></ng-container>
-                                </div>
-                            }
-                        }
+                        <div class="aboutPage__links">
+                            <app-link-to-app></app-link-to-app>
+                        </div>
                     }
                     <!-- <button style="margin-top: 20px;" (click)="implementErrorInGetAllArticles = !implementErrorInGetAllArticles" class="implementError">
                         error: {{implementErrorInGetAllArticles}}
@@ -281,47 +244,4 @@
             </li>
         }
     </ul>
-</ng-template>
-<ng-template #linkToApp>
-    <div class="linkToApp">
-        <a
-            href="https://apps.apple.com/app/dazzlink-asia/id6477790074"
-            target="_blank"
-            class="linkToApp__item"
-        >
-            <img class="linkToApp__img forLightTheme" src="assets/images/store/linkIOSShort.svg" alt="iOS">
-            <img class="linkToApp__img forDarkTheme" src="assets/images/store/linkIOSShortDark.svg" alt="iOS">
-            <picture class="forSystemTheme">
-                <source srcset="assets/images/store/linkIOSShort.svg" media="(prefers-color-scheme: light)">
-                <source srcset="assets/images/store/linkIOSShortDark.svg" media="(prefers-color-scheme: dark)">
-                <img class="linkToApp__img" src="assets/images/store/linkIOSShort.svg" alt="iOS">
-            </picture>
-        </a>
-        <a
-            href="https://play.google.com/store/apps/details?id=asia.dazzlink.dazzlink"
-            target="_blank"
-            class="linkToApp__item"
-        >
-            <img class="linkToApp__img forLightTheme" src="assets/images/store/linkAndroid.svg" alt="Android">
-            <img class="linkToApp__img forDarkTheme" src="assets/images/store/linkAndroidDark.svg" alt="Android">
-            <picture class="forSystemTheme">
-                <source srcset="assets/images/store/linkAndroid.svg" media="(prefers-color-scheme: light)">
-                <source srcset="assets/images/store/linkAndroidDark.svg" media="(prefers-color-scheme: dark)">
-                <img class="linkToApp__img" src="assets/images/store/linkAndroid.svg" alt="Android">
-            </picture>
-        </a>
-        <a
-            href="https://appgallery.cloud.huawei.com/ag/n/app/C112028837"
-            target="_blank"
-            class="linkToApp__item"
-        >
-            <img class="linkToApp__img forLightTheme" src="assets/images/store/linkAppGallery.svg" alt="Huawei">
-            <img class="linkToApp__img forDarkTheme" src="assets/images/store/linkAppGalleryDark.svg" alt="Huawei">
-            <picture class="forSystemTheme">
-                <source srcset="assets/images/store/linkAppGallery.svg" media="(prefers-color-scheme: light)">
-                <source srcset="assets/images/store/linkAppGalleryDark.svg" media="(prefers-color-scheme: dark)">
-                <img class="linkToApp__img" src="assets/images/store/linkAppGallery.svg" alt="Huawei">
-            </picture>
-        </a>
-    </div>
 </ng-template>

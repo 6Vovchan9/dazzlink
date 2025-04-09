@@ -196,17 +196,8 @@ $shadowHeightInMobile: 20px;
         margin-top: 12px;
         line-height: 1.5;
     }
-    .aboutPage__btnToTg {
-        margin-top: 24px;
-    }
     .aboutPage__links {
         margin-top: 24px;
-        &--forDesktop {
-            display: none;
-        }
-        &--forMobile {
-            display: block;
-        }
     }
     .aboutPage__btn {
         margin-top: 24px;
@@ -217,14 +208,6 @@ $shadowHeightInMobile: 20px;
         margin-top: 8px;
         top: 8px;
         transition: top .6s;
-        .aboutPage__links {
-            &--forDesktop {
-                display: block;
-            }
-            &--forMobile {
-                display: none;
-            }
-        }
     }
 }
 

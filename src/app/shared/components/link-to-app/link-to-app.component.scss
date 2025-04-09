@@ -1,0 +1,16 @@
+.linkToAppComponent {
+    &--forDesktop {
+        display: none;
+    }
+    &--forMobile {
+        display: block;
+    }
+    @media (min-width: 1025px) {
+        &--forDesktop {
+            display: block;
+        }
+        &--forMobile {
+            display: none;
+        }
+    }
+}

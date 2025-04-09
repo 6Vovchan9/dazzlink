@@ -95,17 +95,8 @@ $shadowHeightInMobile: 20px;
         margin-top: 12px;
         line-height: 1.5;
     }
-    .aboutPage__btnToTg {
-        margin-top: 24px;
-    }
     .aboutPage__links {
         margin-top: 24px;
-        &--forDesktop {
-            display: none;
-        }
-        &--forMobile {
-            display: block;
-        }
     }
     .aboutPage__btn {
         margin-top: 24px;
@@ -117,14 +108,6 @@ $shadowHeightInMobile: 20px;
         transition: .6s;
         &--headerVisible {
             top: calc(80px + 48px); // 80 - высота header-а, 48 - margin у .articlesPage__container
-        }
-        .aboutPage__links {
-            &--forDesktop {
-                display: block;
-            }
-            &--forMobile {
-                display: none;
-            }
         }
     }
 }

@@ -52,6 +52,7 @@ import { FooterComponent } from '@app/shared/components/footer/footer.component'
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { openDB } from '@tempfix/idb';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { LinkToAppComponent } from '@app/shared/components/link-to-app/link-to-app.component';
 
 @Component({
   selector: 'app-articles-page',
@@ -64,9 +65,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
     NgTemplateOutlet,
     RouterLink,
     NgStyle,
+
     PostComponent,
+    LinkToAppComponent,
     HeaderComponent,
     FooterComponent,
+
     // KeyValuePipe,
     // JsonPipe
   ],

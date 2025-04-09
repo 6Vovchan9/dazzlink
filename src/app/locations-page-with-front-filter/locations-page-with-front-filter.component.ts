@@ -73,6 +73,7 @@ import { HeaderComponent } from '@app/shared/components/header/header.component'
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
 import { SvgIconComponent } from '@app/shared/components/svg-icon/svg-icon.component';
+import { LinkToAppComponent } from '@app/shared/components/link-to-app/link-to-app.component';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -89,6 +90,7 @@ import { SvgIconComponent } from '@app/shared/components/svg-icon/svg-icon.compo
     LocationItemComponent,
     DropdownFieldModule,
     SvgIconComponent,
+    LinkToAppComponent,
     HeaderComponent,
     FooterComponent
   ],
