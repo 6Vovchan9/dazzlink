@@ -84,6 +84,14 @@
             }
         }
     }
+
+    @media #{$tablet} {
+        .footer__content {
+            flex-direction: column;
+            align-items: flex-start;
+            row-gap: 12px;
+        }
+    }
 }
 
 .company {
@@ -92,6 +100,10 @@
 
     @media #{$notMobile} {
         text-align: right;
+    }
+
+    @media #{$tablet} {
+        margin-left: 8px;
     }
 }
 
