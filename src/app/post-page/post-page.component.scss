@@ -81,6 +81,13 @@ $shadowHeightInMobile: 20px;
             line-height: 40px;
         }
     }
+    @media #{$tablet} {
+        .postPage__main .postPage__container {
+            flex-direction: column;
+            margin-top: 24px;
+            margin-bottom: 48px;
+        }
+    }
 }
 
 // Стили скелетона (начало)
@@ -90,8 +97,6 @@ $shadowHeightInMobile: 20px;
         cursor: default;
     }
     .sidebar .postTitle {
-        display: flex;
-        flex-direction: column;
         .postTitle__details {
             align-self: flex-start;
             @include gradientEffect;
@@ -215,7 +220,7 @@ $shadowHeightInMobile: 20px;
         }
     }
 
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         margin-right: 0px;
         max-width: 360px;
         margin-right: 8%;
@@ -233,6 +238,8 @@ $shadowHeightInMobile: 20px;
 }
 
 .postTitle {
+    display: flex;
+    flex-direction: column;
     .postTitle__img {
         background-color: var(--color-gradient-bg-after);
         min-height: 200px;
@@ -246,15 +253,32 @@ $shadowHeightInMobile: 20px;
         }
     }
 
-    .postTitle__details {
-        margin-bottom: 12px;
+    .postTitle__header {
+        display: flex;
+        flex-direction: column;
+        .postTitle__details {
+            margin-bottom: 12px;
+        }
     }
 
-    @media #{$notMobile} {
+    @media #{$tablet} {
+        flex-direction: row;
+        column-gap: 32px;
+        .postTitle__header {
+            flex: 1;
+        }
+        .postTitle__img {
+            flex: 1;
+            max-width: 360px;
+            margin-top: 0px;
+        }
+    }
+
+    @media (min-width: 1025px) {
         .postTitle__img {
             max-width: 360px;
         }
-        .postTitle__details {
+        .postTitle__header .postTitle__details {
             display: none;
         }
     }
@@ -286,7 +310,7 @@ $shadowHeightInMobile: 20px;
         }
     }
 
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         .postContent {
             .postContent__details {
                 display: flex;

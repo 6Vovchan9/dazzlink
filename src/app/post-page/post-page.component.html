@@ -20,16 +20,18 @@
                         <app-go-back-btn (click)="goToAllArticles()" text="Все статьи"></app-go-back-btn>
                     </div>
                     <div class="postTitle">
-                        <!-- Дата публикации (мобила) -->
-                        <div class="postTitle__details postDetails">
-                            <div class="postDetails__info">27&nbsp;окт.&nbsp;2023</div>
-                            <div class="postDetails__info">2 мин</div>
-                            <div class="postDetails__info">58 просмотров</div>
-                        </div>
-                        <!-- Название статьи -->
-                        <div class="moduleTitle postPage__title">
-                            <span>Lorem.</span>
-                            <span>Lorem.</span>
+                        <div class="postTitle__header">
+                            <!-- Дата публикации (мобила) -->
+                            <div class="postTitle__details postDetails">
+                                <div class="postDetails__info">27&nbsp;окт.&nbsp;2023</div>
+                                <div class="postDetails__info">2 мин</div>
+                                <div class="postDetails__info">58 просмотров</div>
+                            </div>
+                            <!-- Название статьи -->
+                            <div class="postPage__title moduleTitle">
+                                <span>Lorem.</span>
+                                <span>Lorem.</span>
+                            </div>
                         </div>
                         <!-- Картинка -->
                         <div class="postTitle__img"></div>
@@ -102,19 +104,23 @@
                             <!-- {{templateRender}} -->
                         </div>
                         <div class="postTitle">
-                            <!-- Дата публикации (мобила) -->
-                            <div class="postTitle__details postDetails">
-                                <div class="postDetails__info">
-                                    {{postData.published | date:'dd&nbsp;MMM&nbsp;yyyy':'':'ru'}}
+                            <div class="postTitle__header">
+                                <!-- Дата публикации (мобила) -->
+                                <div class="postTitle__details postDetails">
+                                    <div class="postDetails__info">
+                                        {{postData.published | date:'dd&nbsp;MMM&nbsp;yyyy':'':'ru'}}
+                                    </div>
+                                    <div class="postDetails__info">
+                                        {{postData.readingTime}} мин
+                                    </div>
+                                    <div *ngIf="postData.viewCount" class="postDetails__info">
+                                        {{postData.viewCount}} {{buildViewCount(postData.viewCount)}}
+                                    </div>
                                 </div>
-                                <div class="postDetails__info">
-                                    {{postData.readingTime}} мин
-                                </div>
-                                <div *ngIf="postData.viewCount" class="postDetails__info">
-                                    {{postData.viewCount}} {{buildViewCount(postData.viewCount)}}
-                                </div>
+                                <!-- Название статьи -->
+                                <h1 class="postPage__title moduleTitle">{{postData.title}}</h1>
                             </div>
-                            <h1 class="moduleTitle postPage__title">{{postData.title}}</h1>
+                            <!-- Картинка -->
                             <div class="postTitle__img">
                                 <ng-container *ngIf="postData.imageUrl; else defaultPostImg">
                                     <img [src]="postData.imageUrl" alt="Картинка статьи">

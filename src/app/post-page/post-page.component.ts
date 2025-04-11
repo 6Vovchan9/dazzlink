@@ -148,8 +148,8 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
         }),
         // delay(2000)
       )
-      .subscribe(
-        (post: Post) => {
+      .subscribe({
+        next: (post: Post) => {
           if (post) {
             this.postData = post;
             this.getEvaluation();
@@ -159,10 +159,10 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.goToAllArticles(true);
           }
         },
-        () => {
+        error: () => {
           this.isLoading.set(false);
         }
-      );
+      });
   }
 
   ngAfterViewInit() {
