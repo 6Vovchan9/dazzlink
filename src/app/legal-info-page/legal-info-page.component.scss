@@ -17,8 +17,12 @@
     }
     @media #{$notMobile} {
         .page__container {
-            flex-direction: row;
             margin-top: 48px;
+        }
+    }
+    @media (min-width: 1025px) {
+        .page__container {
+            flex-direction: row;
         }
     }
 }
@@ -26,7 +30,7 @@
 .sidebar {
     flex: 1;
     margin-bottom: 32px;
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         max-width: 360px;
         margin-right: 8%;
         margin-bottom: 0px;
@@ -73,6 +77,6 @@
         background-image: url('../../assets/icons/arrowForAuthor.svg');
     }
     @media #{$notMobile} {
-        padding: 24px 48px;
+        padding: 24px 30px 24px 48px;
     }
 }
