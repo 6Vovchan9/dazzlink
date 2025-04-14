@@ -66,7 +66,7 @@ export class AuthService {
     #setToken(response: IFbAuthResponse | null): void {
         if (response){
             const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
-            localStorage.setItem('fb-token', response.idToken);
+            localStorage.setItem('fb-token', response.idToken); // P. S. Правильней access_token и refresh_token хранить в куках, для работы с куками можно воспользоваться очень маленькой библиотекой ngx-cookie-service
             localStorage.setItem('fb-token-exp', expDate.toString());
         } else {
             localStorage.clear();

@@ -33,19 +33,21 @@
     .placePage__container {
         display: flex;
         flex-direction: column;
-        margin-top: 24px;
+        margin-top: 48px;
         margin-bottom: 48px;
-    }
-    @media #{$notMobile} {
-        .placePage__container {
-            flex-direction: row;
-            margin-top: 48px;
-        }
     }
     @media #{$mobile} {
         .placePage__title {
             font-size: 24px;
             line-height: 32px;
+        }
+        .placePage__container {
+            margin-top: 24px;
+        }
+    }
+    @media (min-width: 1025px) {
+        .placePage__container {
+            flex-direction: row;
         }
     }
 }
@@ -144,7 +146,7 @@ span {
     flex: 1;
     margin-bottom: 32px;
 
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         max-width: 360px;
         margin-right: 8%;
         margin-bottom: 0px;
@@ -246,7 +248,7 @@ span {
             margin-top: 0px;
         }
     }
-    @media #{$mobile} {
+    @media (max-width: 1024px) {
         padding: 24px 20px;
         background-color: var(--color-second-bg);
         border-radius: 20px;
@@ -581,7 +583,7 @@ span {
         }
     }
 
-    @media #{$mobile} {
+    @media (max-width: 1024px) {
         display: none;
     }
 }
@@ -638,7 +640,7 @@ span {
     //     object-fit: cover;
     // }
 
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         display: none;
     }
 }
@@ -650,7 +652,7 @@ span {
     margin-top: 24px;
     border-radius: 20px;
 
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         display: none;
     }
 }
@@ -669,7 +671,7 @@ span {
 }
 
 .carousel__wrap {
-    width: calc(100vw - 40px);
+    width: calc(min(100vw, 808px) - 40px);
     height: 100%;
     position: relative; // это нужно для thumb-hash-image
     z-index: 10; // это нужно для thumb-hash-image
