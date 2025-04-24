@@ -21,7 +21,7 @@ import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-
 //   TOKEN_FOR_USEFACTORY_1,
 //   TOKEN_FOR_USEFACTORY_2,
 //   ADMIN_RANDOM_SERVICE_TOKEN,
-//   TOKEN_FOR_USEVALUE,
+//   COLOR,
 //   USER_RANDOM_SERVICE_TOKEN
 // } from '@app/shared/tokens/tokens';
 
@@ -37,7 +37,7 @@ import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-
     //   useClass: TelegramService
     // }, // этот способ аналогичный верхнему, который под капотом использует данный способ для регистрации зависимости
 
-    // { provide: TOKEN_FOR_USEVALUE, useValue: 'Какие-то строковые данные' },
+    // { provide: COLOR, useValue: 'red' },
     // {
     //   provide: TOKEN_FOR_USEFACTORY_1,
     //   useFactory: () => {
@@ -100,16 +100,16 @@ export class AppComponent implements OnInit, OnDestroy {
     public modalService: GlobalModalService, // typeScript детает такой синтакс сахар - можем объявлять свойства данного класса прям в конструкторе, то есть нет необх писать constructor(private/public/protected/readonly name: string) { this.name = name } можно просто constructor(private name: string) { }
     // @Inject(GlobalModalService) public modalService: GlobalModalService, // это аналогичный верхнему способ внедрения зависимости, но на практике такой способ внедрения зависимости используется когда необх внедрить какие то данные регистрируемые через useValue
     
-    @Inject(DOCUMENT) private readonly documentRef: Document
+    @Inject(DOCUMENT) private readonly documentRef: Document,
     
-    // @Inject(TOKEN_FOR_USEVALUE) private tokenUseValue: string,
+    // @Inject(COLOR) private tokenUseValue: string,
     // @Inject(TOKEN_FOR_USEFACTORY_1) private tokenUseFactory1: string,
     // @Inject(TOKEN_FOR_USEFACTORY_2) private tokenUseFactory2: string,
 
     // @Inject(USER_RANDOM_SERVICE_TOKEN) private userRandomService: RandomService,
     // @Inject(ADMIN_RANDOM_SERVICE_TOKEN) private adminRandomService: RandomService,
   ) {
-    // console.log('tokenUseValue:', tokenUseValue);
+    // console.log('color from tokenUseValue:', tokenUseValue);
     // console.log('tokenUseFactory1:', tokenUseFactory1);
     // console.log('tokenUseFactory2:', tokenUseFactory2);
 

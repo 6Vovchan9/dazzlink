@@ -80,6 +80,10 @@ Schema.org предоставляет общедоступный словарь,
 
 Pазметка Open Graph отвечает за привлекательный вид репостов страниц сайта в соцсетях. Подробнее про og тут https://habr.com/ru/companies/click/articles/492258/. Как обновить отображение ссылки в Telegram, Facebook, Twitter, Вконтакте? Смотри тут https://tilda.cc/ru/answers/a/links-preview-update/
 
+## Файл манифеста (manifest.json)
+
+https://web.dev/articles/add-manifest?hl=ru
+
 
 ## Google аналитика
 
