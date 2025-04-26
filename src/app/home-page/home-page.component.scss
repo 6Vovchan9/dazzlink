@@ -312,10 +312,9 @@ $shadowHeightInMobile: 20px;
             column-gap: 11.7%;
             .appAdv__image {
                 flex: 1;
-                max-width: 480px;
                 // filter: var(--image-filter-brightness);
 
-                img {
+                .appAdv__img {
                     max-width: 100%;
                 }
             }
@@ -344,19 +343,6 @@ $shadowHeightInMobile: 20px;
             &--forDesktop {
                 display: none;
             }
-
-            @media #{$notMobile} {
-                margin-top: 160px;
-                flex-direction: row;
-                align-items: center;
-                .appAdv__content {
-                    margin-top: 0px;
-                }
-
-                &:nth-child(even) {
-                    flex-direction: row-reverse;
-                }
-            }
         }
     }
 
@@ -367,6 +353,14 @@ $shadowHeightInMobile: 20px;
                 margin-top: 160px;
                 flex-direction: row;
                 align-items: center;
+
+                .appAdv__image {
+                    max-width: 480px;
+                }
+
+                .appAdv__content {
+                    margin-top: 0px;
+                }
 
                 &:nth-child(even) {
                     flex-direction: row-reverse;
