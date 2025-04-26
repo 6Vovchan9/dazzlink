@@ -12,6 +12,7 @@
     --color-legal-doc-link: #f2f3f4;
     --image-filter-brightness: none;
     --color-theme-toggle: #333;
+    --color-app-advantage-bg: #e7e8e9;
 }
 
 @mixin constForDarkTheme() {
@@ -28,6 +29,7 @@
     --color-legal-doc-link: #333;
     --image-filter-brightness: brightness(70%);
     --color-theme-toggle: #efefef;
+    --color-app-advantage-bg: #333;
 }
 
 @media (prefers-color-scheme: dark) {

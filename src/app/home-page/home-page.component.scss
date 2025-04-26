@@ -19,6 +19,32 @@ $shadowHeightInMobile: 20px;
 //     overflow-y: auto;
 // }
 
+.appAdvImage {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    aspect-ratio: 1;
+    max-height: 480px;
+    width: 100%;
+    .appAdvImage__bg {
+        background-color: var(--color-app-advantage-bg);
+        border-radius: 32px;
+        height: 84%;
+        max-height: 400px;
+        width: 100%;
+    }
+    .appAdvImage__img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        object-fit: contain;
+    }
+
+    @media #{$tablet} {
+        max-width: none;
+    }
+}
+
 .homePage {
     display: flex;
     flex-direction: column;
@@ -286,7 +312,7 @@ $shadowHeightInMobile: 20px;
             column-gap: 11.7%;
             .appAdv__image {
                 flex: 1;
-                max-width: 500px;
+                max-width: 480px;
                 // filter: var(--image-filter-brightness);
 
                 img {
