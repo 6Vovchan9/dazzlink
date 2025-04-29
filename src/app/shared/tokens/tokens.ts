@@ -12,3 +12,8 @@ export const USER_RANDOM_SERVICE_TOKEN = new InjectionToken<string>(
 export const ADMIN_RANDOM_SERVICE_TOKEN = new InjectionToken<string>(
     'ADMIN_RANDOM_SERVICE_TOKEN'
 );
+
+// token для обращения к localStorage на стороне сервера при SSR
+export const LOCAL_STORAGE = new InjectionToken<Storage>('Local Storage');
+// token для обращения к sessionStorage на стороне сервера при SSR
+export const SESSION_STORAGE = new InjectionToken<Storage>('Session Storage');

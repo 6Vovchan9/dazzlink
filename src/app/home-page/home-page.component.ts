@@ -103,7 +103,8 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     private router: Router,
     private citiesService: CitiesService,
     private modalService: GlobalModalService,
-    private vc: ViewportScroller
+    private vc: ViewportScroller,
+    @Inject(DOCUMENT) private readonly myDocument: Document
     // @Inject(DOCUMENT) private readonly documentRef: Document,
     // private cd: ChangeDetectorRef
     // private translateService: GoogleTranslationService
@@ -147,7 +148,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
 
   private addEventListenerToPage(): void {
-    this.pageScrollSub = fromEvent(window, 'scroll')
+    this.pageScrollSub = fromEvent(this.myDocument.defaultView, 'scroll')
       .pipe(
         auditTime(200)
       )
@@ -267,11 +268,11 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
 
   private aboutProgressiveImage(): void {
-    if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) {
+    if (this.myDocument.defaultView.addEventListener && this.myDocument.defaultView.requestAnimationFrame && document.getElementsByClassName) {
       if (document.readyState === 'complete') {
         this.onWindowLoaded();
       } else {
-        window.addEventListener('load', this.onWindowLoaded.bind(this), false);
+        this.myDocument.defaultView.addEventListener('load', this.onWindowLoaded.bind(this), false);
       }
     }
   }
@@ -281,7 +282,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     const pageWrapEl = document.getElementById('pageWrap');
 
     // pageWrapEl.addEventListener('scroll', scroller, false);
-    window.addEventListener('resize', scroller, false);
+    this.myDocument.defaultView.addEventListener('resize', scroller, false);
 
     this.pageWrapScrollSub = fromEvent(pageWrapEl, 'scroll').subscribe(
       (el) => {
@@ -302,7 +303,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
 
     function inView() {
 
-      let wT = pageWrapEl.scrollTop, wB = wT + window.innerHeight, cRect, pT, pB, p = 0;
+      let wT = pageWrapEl.scrollTop, wB = wT + this.myDocument.defaultView.innerHeight, cRect, pT, pB, p = 0;
       while (p < pItem.length) {
   
         cRect = pItem[p].getBoundingClientRect();

@@ -1,7 +1,10 @@
-import { Injectable, signal } from "@angular/core";
+import { inject, Injectable, signal } from "@angular/core";
+import { LocalStorageService } from "./storage/localStorage.service";
 
 @Injectable({ providedIn: 'root' })
 export class CookiesAgreementService {
+
+    private storageService = inject(LocalStorageService);
 
     private cookiesAgreementName = 'cookiesAccepted';
     public hiddenCookiesAgreement = signal(true);
@@ -19,14 +22,14 @@ export class CookiesAgreementService {
     }
 
     public removeCookiesAgreement(): boolean {
-        localStorage.removeItem(this.cookiesAgreementName);
+        this.storageService.removeItem(this.cookiesAgreementName);
         this.hiddenCookiesAgreement.set(false);
         return false;
     }
 
     private setToLS(key: string, data: any): void {
         try {
-            localStorage.setItem(key, JSON.stringify(data));
+            this.storageService.setItem(key, JSON.stringify(data));
         } catch (e) {
             console.error('Error saving to localStorage', e);
         }
@@ -34,7 +37,7 @@ export class CookiesAgreementService {
 
     private getFromLS(key: string): any {
         try {
-            return JSON.parse(localStorage.getItem(key));
+            return JSON.parse(this.storageService.getItem(key));
         } catch (e) {
             console.error('Error getting data from localStorage', e);
             return null;

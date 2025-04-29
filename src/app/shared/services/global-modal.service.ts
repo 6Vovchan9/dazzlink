@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 export interface ModalData {
@@ -51,7 +52,9 @@ export type ContentType = 'text' | 'list' | 'disclaimer' | 'ngContent' | 'accord
 })
 export class GlobalModalService {
 
-  constructor() { }
+  constructor(
+    @Inject(DOCUMENT) private readonly myDocument: Document
+  ) { }
 
   modalData$ = new BehaviorSubject<ModalData>(null);
   messToAnotherComp$ = new Subject<MessageToAnotherComp>();
@@ -71,10 +74,10 @@ export class GlobalModalService {
   }
 
   hideScroll() {
-    document.documentElement.classList.add('noScroll');
+    this.myDocument.documentElement.classList.add('noScroll');
   }
 
   showScroll() {
-    document.documentElement.classList.remove('noScroll');
+    this.myDocument.documentElement.classList.remove('noScroll');
   }
 }

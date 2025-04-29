@@ -105,6 +105,7 @@ https://habr.com/ru/companies/tbank/articles/548510/
 Для работы с IndexedDB я использую библиотеку idb. Вместо обычного пакета npm install idb использую @tempfix/idb потому что на данный момент он ругается на версию typescript (ему вроде требуется 5.2.2), а не 5.4.2 как сейчас. Будем надеяться что в след версии idb эту проблему пофиксят и можно будет установить оригинальный пакет.
 https://github.com/jakearchibald/idb/issues/311
 
+
 # Настройка proxy
 
 Это бывшая настройка теперь перенес их в angular.json
@@ -115,3 +116,11 @@ https://github.com/jakearchibald/idb/issues/311
   },
   ...
 }
+
+
+## ssr
+
+Чтобы создать новый проект с SSR: ng new --ssr.
+Чтобы добавить SSR в существующий проект: ng add @angular/ssr.
+SSR создает проблемы при работе с API специфичными для браузера, такими как localStorage, sessionStorage, window, document, location, т. к. они недоступны на сервере. В этой статье https://medium.com/@nijotigajo/handling-local-storage-in-angular-with-server-side-rendering-ssr-eaa6a0f11717 показано как управлять localStorage не вызывая ошибок на стороне сервера (в коде это решение помечено комментариями типа "для обращения к ... на стороне сервера при SSR"). А тут https://medium.com/@abampakos/a-better-angular-window-b20da0e02dd7 и https://habr.com/ru/companies/tbank/articles/548510/ можно почитатьь как преодолеть проблему при обращении на сервере к window и document.
+Хорошая практическая статья про SSR https://www.angulararchitects.io/en/blog/guide-for-ssr/

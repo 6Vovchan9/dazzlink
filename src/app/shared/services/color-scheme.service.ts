@@ -1,4 +1,6 @@
-import { Injectable, Renderer2, RendererFactory2, signal } from '@angular/core';
+import { Inject, inject, Injectable, PLATFORM_ID, Renderer2, RendererFactory2, signal } from '@angular/core';
+import { LocalStorageService } from './storage/localStorage.service';
+import { DOCUMENT, isPlatformServer } from '@angular/common';
 
 export enum ThemeTypes {
     Dark = 'dark',
@@ -16,30 +18,41 @@ export class ColorSchemeService {
     // Define prefix for clearer and more readable class names in scss files
     private colorSchemePrefix = 'color-scheme-';
 
-    constructor(rendererFactory: RendererFactory2) {
+    private storageService = inject(LocalStorageService);
+
+    constructor(
+        rendererFactory: RendererFactory2,
+        @Inject(DOCUMENT) private readonly myDocument: Document
+    ) {
         // Create new renderer from renderFactory, to make it possible to use renderer2 in a service
         this.renderer = rendererFactory.createRenderer(null, null);
     }
 
     private _detectPrefersColorScheme() {
+        // if (isPlatformServer(PLATFORM_ID)) {
+        // такая проверка нужна потому что на сервере в объекте Window не функции matchMedia()
+        const myWindow: Window = this.myDocument.defaultView as Window;
         // Detect if prefers-color-scheme is supported
-        if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
+        if (myWindow.matchMedia?.('(prefers-color-scheme)').media !== 'not all') {
             // Set colorScheme to Dark if prefers-color-scheme is dark. Otherwise, set it to Light.
-            this.colorScheme.set(window.matchMedia('(prefers-color-scheme: dark)').matches ? ThemeTypes.Dark : ThemeTypes.Light);
+            this.colorScheme.set(myWindow.matchMedia?.('(prefers-color-scheme: dark)').matches ? ThemeTypes.Dark : ThemeTypes.Light);
         } else {
             // If the browser does not support prefers-color-scheme, set the default to dark.
             this.colorScheme.set(ThemeTypes.Dark);
         }
+        // } else {
+        //     this.colorScheme.set(ThemeTypes.Light);
+        // }
     }
 
     private _setColorScheme(scheme: ThemeTypes) {
         this.colorScheme.set(scheme);
         // Save prefers-color-scheme to localStorage
-        localStorage.setItem('prefers-color', scheme);
+        this.storageService.setItem('prefers-color', scheme);
     }
 
     private _getColorScheme() {
-        const localStorageColorScheme: any = localStorage.getItem('prefers-color');
+        const localStorageColorScheme: any = this.storageService.getItem('prefers-color');
         // Check if any prefers-color-scheme is stored in localStorage
         if (localStorageColorScheme) {
             // Save prefers-color-scheme from localStorage
@@ -55,16 +68,16 @@ export class ColorSchemeService {
 
     load() {
         this._getColorScheme();
-        this.renderer.addClass(document.documentElement, this.colorSchemePrefix + this.colorScheme());
+        this.renderer.addClass(this.myDocument.documentElement, this.colorSchemePrefix + this.colorScheme());
     }
 
     update(scheme: ThemeTypes) {
         const schemeBefore: ThemeTypes = this.currentActive();
         this._setColorScheme(scheme);
         // Remove the old color-scheme class
-        this.renderer.removeClass(document.documentElement, this.colorSchemePrefix + schemeBefore);
+        this.renderer.removeClass(this.myDocument.documentElement, this.colorSchemePrefix + schemeBefore);
         // Add the new / current color-scheme class
-        this.renderer.addClass(document.documentElement, this.colorSchemePrefix + scheme);
+        this.renderer.addClass(this.myDocument.documentElement, this.colorSchemePrefix + scheme);
     }
 
     currentActive(): ThemeTypes {

@@ -1,7 +1,8 @@
-import { APP_INITIALIZER, ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
+import { APP_INITIALIZER, ApplicationConfig, PLATFORM_ID, provideZoneChangeDetection } from "@angular/core";
 import {
     // HTTP_INTERCEPTORS,
     provideHttpClient,
+    withFetch,
     // withInterceptors,
     // withInterceptorsFromDi
 } from "@angular/common/http";
@@ -16,20 +17,29 @@ import {
 
 import { routes } from "./app.routes";
 import { ToastService } from "./shared/services/toast.service";
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { LOCAL_STORAGE, SESSION_STORAGE } from "./shared/tokens/tokens";
+import { isPlatformServer } from "@angular/common";
 // import { loggingInterceptor } from "./shared/interceptors/logging.interceptor";
 // import { AuthInterceptor } from "./shared/auth.interceptor";
+
+let platformIdGlobal: string;
 
 const scrollConfig: InMemoryScrollingOptions = {
     // anchorScrolling: 'enabled',
     // scrollPositionRestoration: 'enabled',
     get scrollPositionRestoration() {
-        const params: any = new URLSearchParams(window.location.search);
-        const pathname = window.location.pathname;
-        // if (params.get('name')) {
-        if (pathname.startsWith('/company') || pathname.startsWith('/help')) {
-            return 'disabled' as const;
+        if (isPlatformServer(platformIdGlobal)) {
+            return 'disabled';
+        } else {
+            const params: any = new URLSearchParams(window.location.search);
+            const pathname = window.location.pathname;
+            // if (params.get('name')) {
+            if (pathname.startsWith('/company') || pathname.startsWith('/help')) {
+                return 'disabled' as const;
+            }
+            return 'top' as const;
         }
-        return 'top' as const;
     }
 };
 
@@ -41,6 +51,7 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes, withPreloading(PreloadAllModules), inMemoryScrollingFeature),
 
         provideHttpClient(
+            withFetch()
             // withInterceptors([loggingInterceptor]), // Interceptors: так правильно
             // withInterceptorsFromDi(), // Interceptors: или можно так но это старый вариант
         ),
@@ -73,13 +84,40 @@ export const appConfig: ApplicationConfig = {
 
         {
             provide: APP_INITIALIZER,
-            useFactory: () => {
-                console.log('%cApp start', 'color: tomato');
+            useFactory: (platformId: string) => {
+                platformIdGlobal = platformId;
+                console.log(`%cApp start in ${platformId}`, 'color: tomato');
             },
-            // deps: [],
+            deps: [PLATFORM_ID],
             // multi: true
         },
 
-        ToastService
+        // для обращения к localStorage на стороне сервера при SSR
+        {
+            provide: LOCAL_STORAGE,
+            useFactory: (platformId: string) => {
+                // console.log('ls platformId:', platformId) ;
+                if (isPlatformServer(platformId)) {
+                    return {}; // Возвращаем пустой объект на сервере
+                }
+                return localStorage; // Используем localStorage браузера
+            },
+            deps: [PLATFORM_ID],
+        },
+        // для обращения к sessionStorage на стороне сервера при SSR
+        {
+            provide: SESSION_STORAGE,
+            useFactory: (platformId: string) => {
+                // console.log('ss platformId:', platformId);
+                if (isPlatformServer(platformId)) {
+                    return {}; // Возвращаем пустой объект на сервере
+                }
+                return sessionStorage; // Используем sessionStorage браузера
+            },
+            deps: [PLATFORM_ID],
+        },
+
+        ToastService,
+        provideClientHydration()
     ],
 };

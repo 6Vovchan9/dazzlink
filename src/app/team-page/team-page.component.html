@@ -4,6 +4,7 @@
 
         <div class="teamPage__moduleTitle">Ваше семейное счастье — наш главный приоритет</div>
 
+        <!-- @defer { -->
         <div class="mainPicture" [class.mainPicture--load]="mainPicLoad()">
             <img [src]="mainPicBase64" class="mainPicture__preview" alt="preview">
             <img [src]="miniMainPicBase64" class="mainPicture__previewMini" alt="preview">
@@ -12,7 +13,13 @@
                 <img src="assets/images/team-page/mainPic.png" (load)="setMainPicLoad()" class="mainPicture__img" alt="mainPicture" />
             </picture>
         </div>
-
+        <!-- } @placeholder {
+            <div class="mainPicture">
+                <img [src]="mainPicBase64" class="mainPicture__preview" alt="preview">
+                <img [src]="miniMainPicBase64" class="mainPicture__previewMini" alt="preview">
+            </div>
+        } -->
+        
         <section class="ourPhilosophy">
             <h2 class="teamPage__sectionTitle">Философия</h2>
             <div class="ourPhilosophy__blocks">
