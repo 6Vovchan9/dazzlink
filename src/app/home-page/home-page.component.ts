@@ -6,12 +6,16 @@ import {
   ElementRef,
   HostListener,
   Inject,
+  Injector,
   OnDestroy,
   OnInit,
   Optional,
   ViewChild,
+  afterNextRender,
   effect,
-  signal
+  inject,
+  signal,
+  viewChild
 } from '@angular/core';
 import { Observable, Subscription, fromEvent, of } from 'rxjs';
 import {
@@ -68,7 +72,7 @@ type IOpportunityMenu = {
 })
 export class HomePageComponent extends ThumbHash implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('advertisingVideo') advertisingVideo: ElementRef;
+  private advertisingVideo = viewChild<ElementRef<HTMLVideoElement>>('advertisingVideo');
   // @ViewChild('thumbHashDemo') thumbHashDemoImg: ElementRef<HTMLImageElement>;
 
   public base64ForImg =
@@ -96,6 +100,8 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
       console.log("Скрываем постер");
     }
   });
+
+  private injector = inject(Injector)
 
   constructor(
     // private pagesService: PagesService,
@@ -138,8 +144,12 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
 
   ngAfterViewInit(): void {
-    this.ensureVideoPlays();
-    this.addEventListenerToPage();
+    afterNextRender(() => {
+      this.ensureVideoPlays();
+      this.addEventListenerToPage();
+    }, {
+      injector: this.injector
+    })
   }
 
   public get productName(): string {
@@ -237,15 +247,20 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   };
 
   private ensureVideoPlays(): void {
-    const video = this.advertisingVideo?.nativeElement;
+    console.log(this.advertisingVideo());
+    const video = this.advertisingVideo()?.nativeElement;
     if (video) {
       video.addEventListener("ended", this.onVideoEndedCallback);
-      video.addEventListener("loadedmetadata", this.onVideoLoadCallback);
+      if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
+        this.onVideoLoadCallback();
+      } else {
+        video.addEventListener("loadedmetadata", this.onVideoLoadCallback);
+      }
     }
   }
 
   public onVideoPlay(): void {
-    const video = this.advertisingVideo?.nativeElement;
+    const video = this.advertisingVideo()?.nativeElement;
 
     if (video) {
       // video.muted = true;
@@ -385,7 +400,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   // }
 
   private removeAllListeners(): void {
-    const video = this.advertisingVideo?.nativeElement;
+    const video = this.advertisingVideo()?.nativeElement;
     if (video) {
       // console.log('Удаляем слушатель окончания видео');
       video.removeEventListener("ended", this.onVideoEndedCallback);
