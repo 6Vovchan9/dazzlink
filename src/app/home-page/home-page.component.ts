@@ -111,7 +111,6 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     private modalService: GlobalModalService,
     private vc: ViewportScroller,
     @Inject(DOCUMENT) private readonly myDocument: Document
-    // @Inject(DOCUMENT) private readonly documentRef: Document,
     // private cd: ChangeDetectorRef
     // private translateService: GoogleTranslationService
   ) { super() }
@@ -177,7 +176,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     // this.debugPageScroll.prevScroll = this.prevScrollTop;
     // this.debugPageScroll.curScroll = curScrollTop;
 
-    // const bodyEl: HTMLBodyElement = this.documentRef.activeElement as HTMLBodyElement;
+    // const bodyEl: HTMLBodyElement = this.myDocument.activeElement as HTMLBodyElement;
     // const scrollHeight = bodyEl.scrollHeight;
     // const offsetHeight = bodyEl.offsetHeight;
     // const maxScroll = scrollHeight - offsetHeight;

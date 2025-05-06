@@ -285,6 +285,11 @@ $shadowHeightInMobile: 20px;
         .pageContent__locationsList {
             display: grid;
             gap: 32px;
+            margin: 0px;
+            padding: 0px;
+            .pageContent__locationsItem {
+                list-style: none;
+            }
         }
         &--last {
             margin-bottom: 0px;
@@ -355,7 +360,10 @@ $shadowHeightInMobile: 20px;
         overflow: hidden;
         display: inline-flex;
         column-gap: 12px;
+        margin: 0px;
+        padding: 0px;
         .categoryCodes__item {
+            list-style: none;
             .categoryCodes__btn {
                 color: var(--color-black-light, #000);
                 font-size: 16px;

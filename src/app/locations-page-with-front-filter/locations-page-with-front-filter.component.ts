@@ -1512,11 +1512,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private hideScroll(className = 'noScroll'): void {
-    document.documentElement.classList.add(className);
+    this.myDocument.documentElement.classList.add(className);
   }
 
   private showScroll(className = 'noScroll'): void {
-    document.documentElement.classList.remove(className);
+    this.myDocument.documentElement.classList.remove(className);
   }
 
   private subscriptionList(): void {
