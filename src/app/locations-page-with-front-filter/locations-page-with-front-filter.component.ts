@@ -5,10 +5,13 @@ import {
   Component,
   ElementRef,
   Inject,
+  Injector,
   OnInit,
   Optional,
+  PLATFORM_ID,
   Signal,
   ViewChild,
+  afterNextRender,
   effect,
   inject,
   signal,
@@ -40,6 +43,7 @@ import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angu
 import { ActivatedRoute, Params, Router, RouterLink, Scroll } from '@angular/router';
 import {
   DOCUMENT,
+  isPlatformServer,
   NgClass,
   NgFor,
   NgIf,
@@ -152,6 +156,8 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public allLocationsReceived = false;
   public cookiesAgreementService = inject(CookiesAgreementService);
   private cd = inject(ChangeDetectorRef);
+  private injector = inject(Injector);
+  private readonly platform = inject(PLATFORM_ID);
   private needScrollAfterRedirect = true;
   // public myBlockAboutScroll: { [key: string]: number } = {};
 
@@ -193,7 +199,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   ngAfterViewInit(): void {
-    this.addEventListenerToPage();
+    afterNextRender(() => {
+      this.addEventListenerToPage();
+    }, {
+      injector: this.injector
+    });
   }
 
   private addEventListenerToPage(): void {
@@ -579,6 +589,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   private getAllOptionsAfterCategories(): void {
     const queryParams = this.route.snapshot.queryParams;
+    if (isPlatformServer(this.platform)) {
+      this.getAllLocations();
+    } else {
     if (queryParams.sorting && queryParams.country) { // если есть сортировка и фильтрация в query params
       this.allOptionsSub = forkJoin({
         sort: this.getSortOptionsWrapper().pipe(catchError(() => of(null))),
@@ -611,6 +624,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       this.getSort();
       this.getFilters();
       this.getAllLocations();
+    }
     }
   }
 

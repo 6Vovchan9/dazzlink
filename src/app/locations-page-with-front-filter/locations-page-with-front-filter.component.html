@@ -7,9 +7,7 @@
         'locationsPage--headerVisible': !hideHeader()
     }"
 >
-    <div #headerEl
-        class="locationsPage__header"
-    >
+    <div #headerEl class="locationsPage__header">
         <app-header></app-header>
     </div>
     <div class="locationsPage__main">
@@ -84,6 +82,7 @@
                                                     <div class="filterBar__item" [class.withSkeletonLoader]="isLoading()">
                                                         <!-- Сортировка -->
                                                         <!-- (ngModelChange)="onChangeSort($event)" -->
+                                                        @defer {
                                                         <app-dropdown-field
                                                             [formControl]="filterBarGroup.get('sort')"
                                                             [options]="sortFieldOptions"
@@ -112,12 +111,22 @@
                                                                 </div>
                                                             </ng-template>
                                                         </app-dropdown-field>
+                                                        } @placeholder {
+                                                            <div class="headInSortDropdown headInSortDropdown--ssr">
+                                                                <div class="iconForPlacesOptions">
+                                                                    <svg
+                                                                        icon="sortIconActive"
+                                                                        class="iconForPlacesOptions__icon"
+                                                                    ></svg>
+                                                                </div>
+                                                                <div class="headInSortDropdown__text">Сортировка</div>
+                                                            </div>
+                                                        }
                                                         <div class="skeletonLoader skeletonLoader--shortHeight filterBar__sortSkeleton"></div>
                                                     </div>
                                                 }
                                                 <div class="filterBar__item" [class.withSkeletonLoader]="isLoading()">
                                                     <!-- Фильтрация -->
-
                                                     <button class="filterButton"
                                                         [disabled]="!filterFieldOptions?.length"
                                                         (click)="onShowHideFilterControls()"
@@ -140,14 +149,12 @@
                                                             <div class="headInSortDropdown__text">Фильтр</div>
                                                         </div>
                                                     </button>
-                                                    
                                                     <div class="skeletonLoader skeletonLoader--shortHeight filterBar__skeleton"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     }
                                 </div>
-
                                 <!-- <ng-container *ngIf="!isLoading(); else loadingTemplate"> -->
                                 <ng-container *ngIf="allLocations; else errorInGetAllLocations">
                                     <ng-container *ngIf="allLocations.placeCount; else empty">
@@ -205,6 +212,7 @@
                                                     </div>
                                                 }
                                             }
+                                            @defer {
                                             <!-- Кнопка наверх -->
                                             <div class="pageContent__scrollToTopBtn scrollProgressWrapper"
                                                 [ngClass]="{
@@ -212,7 +220,7 @@
                                                         : !cookiesAgreementService.hiddenCookiesAgreement()
                                                 }"
                                             >
-                                                <div class="scrollProgress"
+                                                <div class="scrollProgress scrollProgress--hidden"
                                                     (click)="vc.scrollToPosition([0, 0])"
                                                     [ngClass]="{
                                                         'scrollProgress--hidden': hideScrollProgress,
@@ -229,6 +237,7 @@
                                                     </svg>
                                                 </div>
                                             </div>
+                                            }
                                             <!-- Кнопка другие локации -->
                                             <!-- <div *ngIf="!isLoading()" class="pageContent__toAnotherGeneral">
                                                 @if (true) {

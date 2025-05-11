@@ -101,7 +101,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     }
   });
 
-  private injector = inject(Injector)
+  private injector = inject(Injector);
 
   constructor(
     // private pagesService: PagesService,
@@ -148,7 +148,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
       this.addEventListenerToPage();
     }, {
       injector: this.injector
-    })
+    });
   }
 
   public get productName(): string {

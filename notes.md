@@ -72,9 +72,12 @@ P.S. Для удобства можно воспользоваться библ�
 Sitemap — это файл со ссылками на страницы сайта, который сообщает поисковым системам об актуальной структуре сайта.
 robots.txt - нужен для того чтобы задать правила, которые запрещают поисковым роботам сканировать определенные разделы и страницы сайта.
 Schema.org предоставляет общедоступный словарь, с помощью которого вебмастера могут размечать страницы, так чтобы они были понятны самым распространенным поисковым системам: Яндексу, Google, Microsoft и Yahoo!.
+
 Документацию по Google Поиску https://developers.google.com/search/docs?hl=ru.
+
 Яндекс Вебмастер – сервис поисковой оптимизации https://webmaster.yandex.ru/ и https://yandex.ru/support/webmaster/indexing-options/index-now.html (про то как проталкивать изменения на сайте).
 
+Google Indexing API - https://developers.google.com/search/apis/indexing-api/v3/quickstart?hl=ru и https://kokoc.com/blog/google-indexing-api/ и https://vc.ru/id700407/788260-poshagovaya-nastroika-google-indexing-api-s-primerami-i-skrinami.
 
 
 ## Open Graph

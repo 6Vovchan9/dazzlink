@@ -474,6 +474,7 @@ $shadowHeightInMobile: 20px;
         // margin-right: -16px;
         .filterBar__item {
             position: relative;
+            font-weight: 700;
             &.withSkeletonLoader {
                 overflow: hidden;
             }
@@ -613,6 +614,11 @@ $shadowHeightInMobile: 20px;
     //         } 
     //     }
     // }
+
+    &--ssr {
+        margin: 8px 16px;
+        opacity: 0.3;
+    }
 
     .headInSortDropdown__text {
         display: none;
