@@ -35,6 +35,10 @@ export const routes: Routes = [
         loadComponent: () => import("./legal-info-page/legal-info-page.component").then(m => m.LegalInfoPageComponent)
     },
     {
+        path: 'partnership',
+        loadComponent: () => import("./business-page/business-page.component").then(m => m.BusinessPageComponent)
+    },
+    {
         path: 'app',
         loadComponent: () => import("./redirect/redirect.component").then(m => m.RedirectComponent)
     },

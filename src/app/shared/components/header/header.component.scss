@@ -80,7 +80,7 @@ $headerHeightInMobile: 64px;
                 .header__theme {
                     margin-left: 24px;
                 }
-                @media #{$notMobile} {
+                @media (min-width: 1025px) {
                     display: flex;
                 }
             }
@@ -254,7 +254,7 @@ $headerHeightInMobile: 64px;
         }
     }
 
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         display: none;
     }
 }
@@ -299,7 +299,7 @@ $headerHeightInMobile: 64px;
         transform: translate(-50%, -50%);
     }
 
-    @media #{$notMobile} {
+    @media (min-width: 1025px) {
         display: none;
     }
 }
