@@ -1,0 +1,78 @@
+<app-header></app-header>
+<div class="page">
+    <div class="container page__container">
+
+        <div class="page__title">
+            <div class="partnerTitle">
+                <h1 class="moduleTitle partnerTitle__text">
+                    Привлекайте клиентов и развивайте свой бизнес с помощью Dazzlink
+                </h1>
+                <div class="partnerTitle__desc">
+                    Помогаем выйти к вашей целевой аудитории, когда она открыта к новым предложениям.
+                    Доступно в крупнейших городах Узбекистана.
+                </div>
+                <div class="partnerTitle__btn"></div>
+                <button (click)="jumpToSection('whatNextBlock')" class="blueBtn">
+                    Стать партнером
+                </button>
+            </div>
+            <div class="partnerPic">
+                <div class="partnerPic__item">
+                    <img class="partnerPic__img" src="assets/images/business-page/ozbechka.png" alt="ozbechka">
+                </div>
+                <div class="partnerPic__item">
+                    <img class="partnerPic__img" src="assets/images/business-page/mado.png" alt="mado">
+                </div>
+            </div>
+        </div>
+
+        <div class="page__block">
+            <h2 class="page__blockTitle">
+                Кому подходит
+            </h2>
+            <div class="page__blockContent">
+                @for (block of forWhomData; track $index) {
+                    <app-for-business-block [data]="block"></app-for-business-block>
+                }
+            </div>
+        </div>
+        <div class="page__block">
+            <h2 class="page__blockTitle">
+                Что дает
+            </h2>
+            <div class="page__blockContent">
+                @for (block of whatExactly; track $index) {
+                    <app-for-business-block [data]="block"></app-for-business-block>
+                }
+            </div>
+        </div>
+        <div class="page__block">
+            <span id="whatNextBlock" class="anchoroffset"></span>
+            <h2 class="page__blockTitle">
+                Что дальше
+            </h2>
+            <div class="whatNextRules">
+                <div class="whatNext">
+                    <div class="whatNext__num">1</div>
+                    <div class="whatNext__rule">Напишите нам на почту <a href="mailto:contact@dazzlink.asia" class="whatNext__mailto">contact&#64;dazzlink.asia</a></div>
+                </div>
+                <div class="whatNext">
+                    <div class="whatNext__num">2</div>
+                    <div class="whatNext__rule">Обсудим ваши идеи</div>
+                </div>
+                <div class="whatNext">
+                    <div class="whatNext__num">3</div>
+                    <div class="whatNext__rule">Оформим ваше присутствие на сайте и в приложении Dazzlink</div>
+                </div>
+                <div class="whatNext">
+                    <div class="whatNext__num">4</div>
+                    <div class="whatNext__rule">Замерим результат</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="forWhom">
+            Что 
+        </div> -->
+    </div>
+</div>
+<app-footer></app-footer>
