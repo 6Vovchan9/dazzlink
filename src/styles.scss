@@ -329,6 +329,8 @@ button {
     color: var(--color-black-light);
     border-radius: 24px;
     display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
     align-items: center;
     justify-content: space-between;
     font-size: 16px;
@@ -344,13 +346,11 @@ button {
         font-weight: 700;
     }
 
-    .downloadApp__icon {
-        margin-left: 14px;
-
-        img {
-            max-width: 100%;
-        }
-    }
+    // .downloadApp__icon {
+    //     img {
+    //         max-width: 100%;
+    //     }
+    // }
 
     @media (min-width: 1025px) {
         padding: 24px 32px;

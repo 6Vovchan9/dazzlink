@@ -1,3 +1,11 @@
+:host.linkToAppAlignRight {
+    @media (min-width: 1025px) {
+        .linkToApp {
+            justify-content: flex-end;
+        }
+    }
+}
+
 .linkToAppComponent {
     .linkToAppComponent__downloadApp {
         max-width: 422px;
@@ -14,6 +22,23 @@
         }
         &--forMobile {
             display: none;
+        }
+    }
+}
+
+.linkToApp {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    row-gap: 16px;
+    font-size: 16px;
+    .linkToApp__item {
+        cursor: pointer;
+        padding: 0px;
+        border: unset;
+        background: unset;
+        .linkToApp__img {
+            max-height: 48px;
         }
     }
 }

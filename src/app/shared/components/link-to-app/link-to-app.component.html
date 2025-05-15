@@ -76,3 +76,44 @@
         </a>
     </div>
 </ng-template>
+
+<ng-template #linkToQRModal>
+    <div class="linkToApp">
+        <button
+            class="linkToApp__item"
+            (click)="openQRModal()"
+        >
+            <img class="linkToApp__img forLightTheme" src="assets/images/store/linkIOSShort.svg" alt="iOS">
+            <img class="linkToApp__img forDarkTheme" src="assets/images/store/linkIOSShortDark.svg" alt="iOS">
+            <picture class="forSystemTheme">
+                <source srcset="assets/images/store/linkIOSShort.svg" media="(prefers-color-scheme: light)">
+                <source srcset="assets/images/store/linkIOSShortDark.svg" media="(prefers-color-scheme: dark)">
+                <img class="linkToApp__img" src="assets/images/store/linkIOSShort.svg" alt="iOS">
+            </picture>
+        </button>
+        <button
+            class="linkToApp__item"
+            (click)="openQRModal()"
+        >
+            <img class="linkToApp__img forLightTheme" src="assets/images/store/linkAndroid.svg" alt="Android">
+            <img class="linkToApp__img forDarkTheme" src="assets/images/store/linkAndroidDark.svg" alt="Android">
+            <picture class="forSystemTheme">
+                <source srcset="assets/images/store/linkAndroid.svg" media="(prefers-color-scheme: light)">
+                <source srcset="assets/images/store/linkAndroidDark.svg" media="(prefers-color-scheme: dark)">
+                <img class="linkToApp__img" src="assets/images/store/linkAndroid.svg" alt="Android">
+            </picture>
+        </button>
+        <button
+            class="linkToApp__item"
+            (click)="openQRModal()" 
+        >
+            <img class="linkToApp__img forLightTheme" src="assets/images/store/linkAppGallery.svg" alt="Huawei">
+            <img class="linkToApp__img forDarkTheme" src="assets/images/store/linkAppGalleryDark.svg" alt="Huawei">
+            <picture class="forSystemTheme">
+                <source srcset="assets/images/store/linkAppGallery.svg" media="(prefers-color-scheme: light)">
+                <source srcset="assets/images/store/linkAppGalleryDark.svg" media="(prefers-color-scheme: dark)">
+                <img class="linkToApp__img" src="assets/images/store/linkAppGallery.svg" alt="Huawei">
+            </picture>
+        </button>
+    </div>
+</ng-template>

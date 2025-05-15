@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 
+import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 
 @Component({
@@ -15,7 +16,7 @@ import { MobileDetectService } from '@app/shared/services/mobile-detect.service'
 export class LinkToAppComponent {
 
   protected mobileDetectService = inject(MobileDetectService);
-  // protected modalService = inject(GlobalModalService);
+  protected modalService = inject(GlobalModalService);
 
   // public qrModalOrTelegram(): void {
   //   if (this.mobileDetectService?.osDevice) {
@@ -24,5 +25,9 @@ export class LinkToAppComponent {
   //     this.modalService.open({ component: 'appComponent', modalName: 'qrForTelegram' });
   //   }
   // }
+
+  openQRModal(): void {
+    this.modalService.open({ component: 'appComponent', modalName: 'qrModal' });
+  }
 
 }
