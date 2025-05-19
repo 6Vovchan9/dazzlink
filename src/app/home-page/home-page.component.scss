@@ -347,10 +347,6 @@ $shadowHeightInMobile: 20px;
             &:first-child {
                 margin-top: 0px;
             }
-
-            &--forDesktop {
-                display: none;
-            }
         }
     }
 
@@ -487,6 +483,15 @@ a.progressive img.preview {
 
     @media #{$notMobile} {
         margin-bottom: 96px;
+    }
+
+    @media (max-width: 1024px) {
+        .aboutAppInfo__infoLinks {
+            align-self: stretch;
+        }
+    }
+
+    @media (min-width: 1025px) {
         .aboutAppInfo__container {
             flex-direction: row;
             justify-content: space-between;
@@ -506,32 +511,7 @@ a.progressive img.preview {
 
         .aboutAppInfo__infoLinks {
             margin-top: 0px;
-            .linkToApp {
-                justify-content: flex-end;
-            }
         }
-    }
-
-    @media #{$mobile} {
-        .aboutAppInfo__infoLinks {
-            &--downloadApp {
-                align-self: stretch;
-            }
-        }
-    }
-}
-
-.forDesktop {
-    display: none;
-    @media #{$notMobile} {
-        display: block;
-    }
-}
-
-.forMobile {
-    display: block;
-    @media #{$notMobile} {
-        display: none;
     }
 }
 

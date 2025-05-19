@@ -47,6 +47,7 @@ import { ThumbHashImageComponent } from '@app/shared/components/thumb-hash-image
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
+import { LinkToAppComponent } from '@app/shared/components/link-to-app/link-to-app.component';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -63,10 +64,10 @@ type IOpportunityMenu = {
     FormsModule,
     NgClass,
     NgStyle,
-    NgTemplateOutlet,
     ThumbHashImageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LinkToAppComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
