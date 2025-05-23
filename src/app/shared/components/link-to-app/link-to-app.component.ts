@@ -1,14 +1,16 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { DownloadAppBtnComponent } from '@app/shared/download-app-btn/download-app-btn.component';
 
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 
 @Component({
-  selector: 'app-link-to-app',
+  selector: 'dz-link-to-app',
   standalone: true,
   imports: [
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    DownloadAppBtnComponent
   ],
   templateUrl: './link-to-app.component.html',
   styleUrl: './link-to-app.component.scss'

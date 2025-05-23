@@ -10,11 +10,8 @@
                         <svg class="surpriseIcon" icon="presentBlue"></svg>
                         <span>Получить подарок</span>
                     </button>
-                } @else {
-                    <button class="footer__download downloadApp"
-                        (click)="openQRModalAdvanced()"
-                        type="button"
-                    >
+                } @else if (mobileDetectService.osDevice || 1) {
+                    <button class="footer__download downloadApp" (click)="openQRModalAdvanced()" type="button">
                         <div class="downloadApp__title">Скачайте<br />приложение</div>
                         <div class="downloadApp__icon">
                             <img class="forLightTheme" [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
@@ -25,6 +22,10 @@
                                 <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
                             </picture>
                         </div>
+                    </button>
+                } @else {
+                    <button class="btnInFooter" (click)="openQRModalAdvanced()" type="button">
+                        Скачайте приложение
                     </button>
                 }
                 <div class="footer__links">
