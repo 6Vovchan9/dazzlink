@@ -1,5 +1,9 @@
 @use "breakpoints" as *;
 
+:host {
+    display: block;
+}
+
 @mixin darkThemeColors() {
     .downloadApp {
         background-color: var(--color-black-light);
