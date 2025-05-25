@@ -59,11 +59,6 @@
         background-color: var(--color-black-regular);
     }
 
-    .downloadApp {
-        background-color: var(--color-black-light);
-        color: var(--color-gray-regular);
-    }
-
     .iconForCloseInModal {
         &::before {
             background-color: var(--color-gray-regular);
@@ -319,44 +314,6 @@ button {
 
     @media #{$notMobile} {
         font-size: 18px;
-    }
-}
-
-.downloadApp {
-    cursor: pointer;
-    padding: 24px 24px 24px 32px;
-    background-color: var(--color-gray-thin);
-    color: var(--color-black-light);
-    border-radius: 24px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 16px;
-
-    font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
-    text-align: left;
-    border: none;
-    width: 100%;
-
-    .downloadApp__title {
-        flex: 1;
-        line-height: 24px;
-        font-weight: 700;
-    }
-
-    // .downloadApp__icon {
-    //     img {
-    //         max-width: 100%;
-    //     }
-    // }
-
-    @media (min-width: 1025px) {
-        padding: 24px 32px;
-        .downloadApp__icon {
-            display: none;
-        }
     }
 }
 

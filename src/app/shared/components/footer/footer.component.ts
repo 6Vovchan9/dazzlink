@@ -13,6 +13,7 @@ import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { SvgIconComponent } from "@app/shared/components/svg-icon/svg-icon.component";
+import { DownloadAppBtnComponent } from '@app/shared/download-app-btn/download-app-btn.component';
 
 @Component({
   selector: 'app-footer',
@@ -21,7 +22,9 @@ import { SvgIconComponent } from "@app/shared/components/svg-icon/svg-icon.compo
   standalone: true,
   imports: [
     RouterLink,
-    SvgIconComponent
+    
+    SvgIconComponent,
+    DownloadAppBtnComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
