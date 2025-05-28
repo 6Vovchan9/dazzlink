@@ -9,9 +9,11 @@ import {
   OnDestroy,
   OnInit,
   Optional,
+  Signal,
   ViewChild,
   effect,
-  signal
+  signal,
+  viewChild
 } from '@angular/core';
 import { Observable, Subscription, fromEvent, of } from 'rxjs';
 import {
@@ -70,6 +72,7 @@ type IOpportunityMenu = {
 export class HomePageComponent extends ThumbHash implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('advertisingVideo') advertisingVideo: ElementRef;
+  private videoStreamTag: Signal<ElementRef<HTMLVideoElement>> = viewChild<ElementRef<HTMLVideoElement>>('videoStreamTag'); 
   // @ViewChild('thumbHashDemo') thumbHashDemoImg: ElementRef<HTMLImageElement>;
 
   public base64ForImg =
@@ -237,6 +240,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   };
 
   private ensureVideoPlays(): void {
+    // const videoSignal = (this.videoStreamTag() as ElementRef<HTMLVideoElement>).nativeElement;
     const video = this.advertisingVideo?.nativeElement;
     if (video) {
       video.addEventListener("ended", this.onVideoEndedCallback);
