@@ -230,6 +230,9 @@ $shadowHeightInMobile: 20px;
         will-change: transform;
         animation: marquee-desktop calc(var(--card-speed, 3s) * var(--card-count, 6)) linear infinite;
         animation-delay: 1s;
+        .cityCarousel__item {
+            list-style: none;
+        }
     }
     // &::before {
     //     content: '';
@@ -308,6 +311,8 @@ $shadowHeightInMobile: 20px;
     font-size: 24px;
     margin-bottom: 48px;
     .appAdv__list {
+        margin: 0px;
+        padding: 0px;
         .appAdv__item {
             display: flex;
             margin-top: 96px;

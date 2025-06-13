@@ -6,12 +6,15 @@ import {
   ElementRef,
   HostListener,
   Inject,
+  Injector,
   OnDestroy,
   OnInit,
   Optional,
   Signal,
   ViewChild,
+  afterNextRender,
   effect,
+  inject,
   signal,
   viewChild
 } from '@angular/core';
@@ -71,8 +74,7 @@ type IOpportunityMenu = {
 })
 export class HomePageComponent extends ThumbHash implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('advertisingVideo') advertisingVideo: ElementRef;
-  private videoStreamTag: Signal<ElementRef<HTMLVideoElement>> = viewChild<ElementRef<HTMLVideoElement>>('videoStreamTag'); 
+  private advertisingVideo = viewChild<ElementRef<HTMLVideoElement>>('advertisingVideo');
   // @ViewChild('thumbHashDemo') thumbHashDemoImg: ElementRef<HTMLImageElement>;
 
   public base64ForImg =
@@ -101,14 +103,16 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     }
   });
 
+  private injector = inject(Injector);
+
   constructor(
     // private pagesService: PagesService,
     @Optional() public mobileDetectService: MobileDetectService,
     private router: Router,
     private citiesService: CitiesService,
     private modalService: GlobalModalService,
-    private vc: ViewportScroller
-    // @Inject(DOCUMENT) private readonly documentRef: Document,
+    private vc: ViewportScroller,
+    @Inject(DOCUMENT) private readonly myDocument: Document
     // private cd: ChangeDetectorRef
     // private translateService: GoogleTranslationService
   ) { super() }
@@ -141,8 +145,12 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
 
   ngAfterViewInit(): void {
-    this.ensureVideoPlays();
-    this.addEventListenerToPage();
+    afterNextRender(() => {
+      this.ensureVideoPlays();
+      this.addEventListenerToPage();
+    }, {
+      injector: this.injector
+    });
   }
 
   public get productName(): string {
@@ -151,7 +159,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
 
   private addEventListenerToPage(): void {
-    this.pageScrollSub = fromEvent(window, 'scroll')
+    this.pageScrollSub = fromEvent(this.myDocument.defaultView, 'scroll')
       .pipe(
         auditTime(200)
       )
@@ -170,7 +178,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     // this.debugPageScroll.prevScroll = this.prevScrollTop;
     // this.debugPageScroll.curScroll = curScrollTop;
 
-    // const bodyEl: HTMLBodyElement = this.documentRef.activeElement as HTMLBodyElement;
+    // const bodyEl: HTMLBodyElement = this.myDocument.activeElement as HTMLBodyElement;
     // const scrollHeight = bodyEl.scrollHeight;
     // const offsetHeight = bodyEl.offsetHeight;
     // const maxScroll = scrollHeight - offsetHeight;
@@ -240,16 +248,19 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   };
 
   private ensureVideoPlays(): void {
-    // const videoSignal = (this.videoStreamTag() as ElementRef<HTMLVideoElement>).nativeElement;
-    const video = this.advertisingVideo?.nativeElement;
+    const video = this.advertisingVideo()?.nativeElement;
     if (video) {
       video.addEventListener("ended", this.onVideoEndedCallback);
-      video.addEventListener("loadedmetadata", this.onVideoLoadCallback);
+      if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
+        this.onVideoLoadCallback();
+      } else {
+        video.addEventListener("loadedmetadata", this.onVideoLoadCallback);
+      }
     }
   }
 
   public onVideoPlay(): void {
-    const video = this.advertisingVideo?.nativeElement;
+    const video = this.advertisingVideo()?.nativeElement;
 
     if (video) {
       // video.muted = true;
@@ -272,11 +283,11 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
 
   private aboutProgressiveImage(): void {
-    if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) {
+    if (this.myDocument.defaultView.addEventListener && this.myDocument.defaultView.requestAnimationFrame && document.getElementsByClassName) {
       if (document.readyState === 'complete') {
         this.onWindowLoaded();
       } else {
-        window.addEventListener('load', this.onWindowLoaded.bind(this), false);
+        this.myDocument.defaultView.addEventListener('load', this.onWindowLoaded.bind(this), false);
       }
     }
   }
@@ -286,7 +297,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     const pageWrapEl = document.getElementById('pageWrap');
 
     // pageWrapEl.addEventListener('scroll', scroller, false);
-    window.addEventListener('resize', scroller, false);
+    this.myDocument.defaultView.addEventListener('resize', scroller, false);
 
     this.pageWrapScrollSub = fromEvent(pageWrapEl, 'scroll').subscribe(
       (el) => {
@@ -307,7 +318,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
 
     function inView() {
 
-      let wT = pageWrapEl.scrollTop, wB = wT + window.innerHeight, cRect, pT, pB, p = 0;
+      let wT = pageWrapEl.scrollTop, wB = wT + this.myDocument.defaultView.innerHeight, cRect, pT, pB, p = 0;
       while (p < pItem.length) {
   
         cRect = pItem[p].getBoundingClientRect();
@@ -389,7 +400,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   // }
 
   private removeAllListeners(): void {
-    const video = this.advertisingVideo?.nativeElement;
+    const video = this.advertisingVideo()?.nativeElement;
     if (video) {
       // console.log('Удаляем слушатель окончания видео');
       video.removeEventListener("ended", this.onVideoEndedCallback);

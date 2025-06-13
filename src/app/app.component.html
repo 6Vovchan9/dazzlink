@@ -1,8 +1,11 @@
 
 <router-outlet></router-outlet>
 
-@if (!appWebview && !cookiesAgreementService.hiddenCookiesAgreement()) {
-    <app-cookies-toast></app-cookies-toast>
+<!-- чтоб на сервере не исполнять этот код при SSR -->
+@defer {
+    @if (!appWebview && !cookiesAgreementService.hiddenCookiesAgreement()) {
+        <app-cookies-toast></app-cookies-toast>
+    }
 }
 
 <app-toast [delay]="3000"></app-toast>
