@@ -1,0 +1,12 @@
+<button class="downloadApp" (click)="openQRModalAdvanced()" type="button">
+    <div class="downloadApp__title">Скачайте<br />приложение</div>
+    <div class="downloadApp__icon">
+        <img class="forLightTheme" [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
+        <img class="forDarkTheme" [src]="mobileDetectService?.mobileStoreIconSrc(true)" alt="store" />
+        <picture class="forSystemTheme">
+            <source [srcset]="mobileDetectService?.mobileStoreIconSrc()" media="(prefers-color-scheme: light)">
+            <source [srcset]="mobileDetectService?.mobileStoreIconSrc(true)" media="(prefers-color-scheme: dark)">
+            <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
+        </picture>
+    </div>
+</button>

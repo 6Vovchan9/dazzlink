@@ -10,21 +10,9 @@
 
     @if (mobileDetectService.osDevice) {
         <div class="linkToAppComponent linkToAppComponent--forMobile">
-            <button class="linkToAppComponent__downloadApp downloadApp"
-                type="button"
-                (click)="mobileDetectService?.goToDeviceStore()"
-            >
-                <div class="downloadApp__title">Скачайте<br />приложение</div>
-                <div class="downloadApp__icon">
-                    <img class="forLightTheme" [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
-                    <img class="forDarkTheme" [src]="mobileDetectService?.mobileStoreIconSrc(true)" alt="store" />
-                    <picture class="forSystemTheme">
-                        <source [srcset]="mobileDetectService?.mobileStoreIconSrc()" media="(prefers-color-scheme: light)">
-                        <source [srcset]="mobileDetectService?.mobileStoreIconSrc(true)" media="(prefers-color-scheme: dark)">
-                        <img [src]="mobileDetectService?.mobileStoreIconSrc()" alt="store" />
-                    </picture>
-                </div>
-            </button>
+            <div class="linkToAppComponent__downloadApp">
+                <dz-download-app-btn></dz-download-app-btn>
+            </div>
         </div>
     } @else {
         <div class="linkToAppComponent linkToAppComponent--forMobile">

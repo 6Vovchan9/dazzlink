@@ -46,6 +46,13 @@
                 display: none;
             }
         }
+        .footer__downloadApp {
+            margin-bottom: 8px;
+            margin-left: -8px;
+        }
+        .footer__downloadAppPro {
+            margin-bottom: 16px;
+        }
     }
 
     @media #{$mobile} {
@@ -67,7 +74,7 @@
                 .footer__links {
                     display: flex;
                     justify-content: space-between;
-                    margin: 16px -8px 0px;
+                    margin: 0px -8px;
                     .footer__nav, .footer__socialNetworks {
                         display: flex;
                         flex-direction: column;

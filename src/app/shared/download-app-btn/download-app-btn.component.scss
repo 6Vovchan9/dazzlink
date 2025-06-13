@@ -1,0 +1,85 @@
+@use "breakpoints" as *;
+
+:host {
+    display: block;
+}
+
+@mixin darkThemeColors() {
+    .downloadApp {
+        background-color: var(--color-black-light);
+        color: var(--color-gray-regular);
+    }
+}
+
+.downloadApp {
+    cursor: pointer;
+    padding: 24px 24px 24px 32px;
+    background-color: var(--color-gray-thin);
+    color: var(--color-black-light);
+    border-radius: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+
+    font-family: "Nunito", "Inter", Arial, Helvetica, sans-serif;
+    text-align: left;
+    border: none;
+    width: 100%;
+
+    .downloadApp__title {
+        flex: 1;
+        line-height: 24px;
+        font-weight: 700;
+    }
+
+    @media (min-width: 1025px) {
+        padding: 24px 32px;
+        .downloadApp__icon {
+            display: none;
+        }
+    }
+}
+
+:host-context(.color-scheme-dark) {
+    @include darkThemeColors;
+
+    :host.downloadAppBgBlack {
+        .downloadApp {
+            background-color: var(--color-main-bg);
+        }
+    }
+    // .forDarkTheme {
+    //     display: flex;
+    // }
+    // .forLightTheme {
+    //     display: none;
+    // }
+    // .forSystemTheme {
+    //     display: none;
+    // }
+}
+
+:host-context(.color-scheme-system) {
+    @media #{$darkTheme} {
+        @include darkThemeColors;
+
+        :host.downloadAppBgBlack {
+            .downloadApp {
+                background-color: var(--color-main-bg);
+            }
+        }
+    }
+
+    // .forDarkTheme {
+    //     display: none;
+    // }
+    // .forLightTheme {
+    //     display: none;
+    // }
+    // .forSystemTheme {
+    //     display: flex;
+    // }
+}

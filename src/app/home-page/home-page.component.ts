@@ -10,6 +10,7 @@ import {
   OnDestroy,
   OnInit,
   Optional,
+  Signal,
   ViewChild,
   afterNextRender,
   effect,
@@ -247,7 +248,6 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   };
 
   private ensureVideoPlays(): void {
-    console.log(this.advertisingVideo());
     const video = this.advertisingVideo()?.nativeElement;
     if (video) {
       video.addEventListener("ended", this.onVideoEndedCallback);
