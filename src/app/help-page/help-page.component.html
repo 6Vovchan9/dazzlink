@@ -58,9 +58,15 @@
         </aside>
         <main class="pageContent">
             <div class="stickyMenuWrapper">
-                <div class="updatePageInfo">
-                    Обновлено {{updatePageInfo | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}
-                </div>
+                @defer {
+                    <div class="updatePageInfo">
+                        Обновлено {{updatePageInfo | date:'dd&nbsp;MMMM&nbsp;yyyy':'':'ru'}}
+                    </div>
+                } @placeholder {
+                    <div class="updatePageInfo">
+                        Обновлено 21 сентября 2024
+                    </div>
+                }
                 <!-- nav bar mobile -->
                 <div #inlineAnchorNav class="inlineAnchorNav">
                     <ul class="inlineAnchorNav__list">

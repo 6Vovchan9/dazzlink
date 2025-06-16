@@ -4,6 +4,7 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  PLATFORM_ID,
   QueryList,
   ViewChild,
   ViewChildren,
@@ -12,7 +13,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { DatePipe, NgClass, ViewportScroller } from '@angular/common';
+import { DatePipe, DOCUMENT, isPlatformBrowser, NgClass, ViewportScroller } from '@angular/common';
 
 import { questions } from './constants/questions.constant';
 import { IQuestions } from './types/question.types';
@@ -38,6 +39,8 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('inlineAnchorNav') inlineAnchorNav: ElementRef;
 
   private route: ActivatedRoute = inject(ActivatedRoute);
+  #document: Document = inject(DOCUMENT);
+  #platform = inject(PLATFORM_ID);
   public updatePageInfo: Date = new Date("2024-09-21");
   public rootMarginBottom: number;
   
@@ -60,22 +63,27 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
 
     this.prepareQuestions();
-    this.aboutWindowResize();
 
-    // this.route.fragment.subscribe(data => {
-    //   if (data) this.jumpToSection(data);
-    // });
+    if (isPlatformBrowser(this.#platform)) {
+      this.aboutWindowResize();
 
-    this.intersectionObserver();
+      // this.route.fragment.subscribe(data => {
+      //   if (data) this.jumpToSection(data);
+      // });
+
+      this.intersectionObserver();
+    }
   }
 
   ngAfterViewInit(): void {
-    // console.log(this.sectionsRef);
-    this.sectionsRef.forEach(el => {
-      // console.log(el.nativeElement);
-      this.observer.observe(el.nativeElement);
-    });
-    this.scrollToTop();
+    if (isPlatformBrowser(this.#platform)) {
+      // console.log(this.sectionsRef);
+      this.sectionsRef.forEach(el => {
+        // console.log(el.nativeElement);
+        this.observer.observe(el.nativeElement);
+      });
+      this.scrollToTop();
+    }
   }
 
   private scrollToTop(): void {
@@ -198,11 +206,13 @@ export class HelpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private setSmoothScroll(): void {
-    document.documentElement.classList.add('globalScrollBehaviorSmooth');
+    const myHtml: HTMLHtmlElement = this.#document.documentElement as HTMLHtmlElement;
+    myHtml.classList.add('globalScrollBehaviorSmooth');
   }
 
   private removeSmoothScroll(): void {
-    document.documentElement.classList.remove('globalScrollBehaviorSmooth');
+    const myHtml: HTMLHtmlElement = this.#document.documentElement as HTMLHtmlElement;
+    myHtml.classList.remove('globalScrollBehaviorSmooth');
   }
 
   ngOnDestroy(): void {
