@@ -3,27 +3,27 @@ import { RespArticlesData } from "@app/shared/interfaces";
 export const MOCK_ARTICLES_FOR_SKELETON: any = [
     {
         "id": "6d65891f-624f-48cb-9a1d-705og53bc9ff",
-        "title": "Статья 1",
+        "title": "Любовь",
         "viewCount": 22,
-        "published": new Date('2024-03-12T10:43:04.31')
+        "published": new Date('2024-03-11T10:43:04.31')
     },
     {
         "id": "a3f799d2-cb68-44b1-8fa6-3dkf5t554f0e",
-        "title": "Статья 2",
+        "title": "Отношения",
         "viewCount": 122,
-        "published": new Date('2024-02-11T11:08:04.31')
+        "published": new Date('2024-02-12T11:08:04.31')
     },
     {
         "id": "akf999d2-cb68-44b1-8fa6-3dkf5t554f0e",
-        "title": "Статья 3",
+        "title": "Знакомства",
         "viewCount": 2,
-        "published": new Date('2024-02-11T11:08:04.31')
+        "published": new Date('2024-02-13T11:08:04.31')
     },
     {
         "id": "a3f799d2-cb68-44b1-8fa6-3dchwt554f0e",
-        "title": "Статья 4",
+        "title": "Семья",
         "viewCount": 52,
-        "published": new Date('2024-02-11T11:08:04.31')
+        "published": new Date('2024-02-14T11:08:04.31')
     }
 ];
 

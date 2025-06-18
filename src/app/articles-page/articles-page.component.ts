@@ -4,9 +4,11 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  Injector,
   OnDestroy,
   OnInit,
   Optional,
+  PLATFORM_ID,
   QueryList,
   Self,
   Signal,
@@ -16,7 +18,7 @@ import {
   signal,
   viewChild
 } from '@angular/core';
-import { NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser, NgStyle, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 import { Router, RouterLink, Scroll } from '@angular/router';
 import {
   EMPTY,
@@ -100,6 +102,8 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public hideScrollProgress = true;
   private router = inject(Router);
+  #document: Document = inject(DOCUMENT);
+  #platform = inject(PLATFORM_ID);
   private db: any;
   scrollingRef = viewChild<HTMLElement>("restoreScrollPosition");
   private pagesService = inject(PagesService);
@@ -147,6 +151,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //     }
     //   }
     // );
+    if (isPlatformBrowser(this.#platform)) {
     if (true) {
       console.log('Пришли на "Медиа" страницу из:', this.pagesService.prevPage());
       this.aboutIDB(); // используем IndexedDB, берем статьи из БД браузера если они там есть
@@ -154,10 +159,11 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.getAllArticles(); // не используем IndexedDB, загружаем их всегда с бэка
     }
     this.intersectionObserver();
+    }
   }
 
   ngAfterViewInit() {
-
+    if (isPlatformBrowser(this.#platform)) {
     this.lastPostSub = this.lastPostList.changes.subscribe(
       d => {
         if (d.last && this.observer && !this.lastPaginationPage) {
@@ -166,6 +172,7 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
     this.addEventListenerToPage();
+    }
     // const pageWrap = document.getElementById('pageWrap');
     // fromEvent<Event>(pageWrap, 'scroll')
     //   .pipe(

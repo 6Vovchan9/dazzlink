@@ -119,6 +119,9 @@ $shadowHeightInMobile: 20px;
         display: grid;
         grid-template-columns: minmax(min(100%, 300px), 500px);
         gap: 48px 24px;
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
 
         // .lastPostItem {
         //     background-color: red;

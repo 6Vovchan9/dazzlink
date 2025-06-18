@@ -2,7 +2,9 @@
     <div class="locationItem__img">
         <ng-container *ngIf="placeData?.imageList?.length; else defaultPlaceImg">
             <!-- <img [src]="placeData.imageList[0].href" loading="lazy" alt="Фото локации"> -->
-            <app-thumb-hash-image [imageData]="placeData.imageList[0]"></app-thumb-hash-image>
+            @defer {
+                <app-thumb-hash-image [imageData]="placeData.imageList[0]"></app-thumb-hash-image>
+            }
         </ng-container>
     </div>
     <!-- <div class="locationItem__details placeDetails">
@@ -25,7 +27,7 @@
                     : '#248A3D'
                 }" -->
                 <div class="placeDetails__rating">
-                    {{(placeData?.rating || 5) | number: '.1-2'}}
+                    {{ (placeData?.rating || 5) | number: '.1-2' }}
                 </div>
             </div>
             <!-- Подробности локации -->
@@ -43,7 +45,7 @@
                     <span *ngIf="placeData?.subtitle"
                         class="placeDetails__anotherItem placeDetails__anotherItem--withEllipsis"
                     >
-                        {{placeData.subtitle.split(' ')[0]}}
+                        {{ placeData.subtitle.split(' ')[0] }}
                     </span>
                 </div>
                 <div class="placeDetails__address">{{placeData?.address}}</div>
