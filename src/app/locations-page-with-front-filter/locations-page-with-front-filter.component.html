@@ -83,34 +83,34 @@
                                                         <!-- Сортировка -->
                                                         <!-- (ngModelChange)="onChangeSort($event)" -->
                                                         @defer {
-                                                        <app-dropdown-field
-                                                            [formControl]="filterBarGroup.get('sort')"
-                                                            [options]="sortFieldOptions"
-                                                            [showArrowIcon]="false"
-                                                            [highlightHead]="false"
-                                                            optionLabel="value"
-                                                            (toggle)="sortDropdownState($event)"
-                                                        >
-                                                            <ng-template #headContent>
-                                                                <div class="headInSortDropdown">
-                                                                    <!-- <div class="headInSortDropdown__icon sortIcon"
-                                                                        [ngClass]="{'sortIcon--selected': dropdownHeadForSortSelected}"
-                                                                    ></div> -->
-                                                                    <div class="iconForPlacesOptions"
-                                                                        [ngClass]="{
-                                                                            'iconForPlacesOptions--selected': dropdownHeadForSortSelected,
-                                                                            'iconForPlacesOptions--opened': hideBecauseOpenSort
-                                                                        }"
-                                                                    >
-                                                                        <svg
-                                                                            icon="sortIconActive"
-                                                                            class="iconForPlacesOptions__icon"
-                                                                        ></svg>
+                                                            <app-dropdown-field
+                                                                [formControl]="filterBarGroup.get('sort')"
+                                                                [options]="sortFieldOptions"
+                                                                [showArrowIcon]="false"
+                                                                [highlightHead]="false"
+                                                                optionLabel="value"
+                                                                (toggle)="sortDropdownState($event)"
+                                                            >
+                                                                <ng-template #headContent>
+                                                                    <div class="headInSortDropdown">
+                                                                        <!-- <div class="headInSortDropdown__icon sortIcon"
+                                                                            [ngClass]="{'sortIcon--selected': dropdownHeadForSortSelected}"
+                                                                        ></div> -->
+                                                                        <div class="iconForPlacesOptions"
+                                                                            [ngClass]="{
+                                                                                'iconForPlacesOptions--selected': dropdownHeadForSortSelected,
+                                                                                'iconForPlacesOptions--opened': hideBecauseOpenSort
+                                                                            }"
+                                                                        >
+                                                                            <svg
+                                                                                icon="sortIconActive"
+                                                                                class="iconForPlacesOptions__icon"
+                                                                            ></svg>
+                                                                        </div>
+                                                                        <div class="headInSortDropdown__text">Сортировка</div>
                                                                     </div>
-                                                                    <div class="headInSortDropdown__text">Сортировка</div>
-                                                                </div>
-                                                            </ng-template>
-                                                        </app-dropdown-field>
+                                                                </ng-template>
+                                                            </app-dropdown-field>
                                                         } @placeholder {
                                                             <div class="headInSortDropdown headInSortDropdown--ssr">
                                                                 <div class="iconForPlacesOptions">
