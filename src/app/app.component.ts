@@ -101,16 +101,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private pagesService = inject(PagesService);
   private colorSchemeService = inject(ColorSchemeService);
   languageControl: FormControl;
-  langFieldOptions: DropdownOptions = {
-    disabled: false,
-    id: "language",
-    required: true,
-    items: [{ value: 'RU', caption: 'RU' }, { value: 'UZ', caption: 'UZ' }, { value: 'EN', caption: 'EN' }, { value: 'KZ', caption: 'KZ' }],
-    // value: ['RU', 'UZ']
-    // value: 'UZ'
-    // value: [{ value: 'UZ', caption: 'UZ' }]
-    value: 'RU'
-  };
+  langFieldOptions: DropdownOptions;
 
   constructor(
     public modalService: GlobalModalService, // typeScript детает такой синтакс сахар - можем объявлять свойства данного класса прям в конструкторе, то есть нет необх писать constructor(private/public/protected/readonly name: string) { this.name = name } можно просто constructor(private name: string) { }
@@ -133,6 +124,8 @@ export class AppComponent implements OnInit, OnDestroy {
     // console.log('adminRandomService:', adminRandomService);
 
     this.colorSchemeService.load();
+
+    this.langFieldOptions = this.pagesService.langFieldOptions;
   }
 
   ngOnInit(): void {
@@ -172,7 +165,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   #initLangControl(): void {
-    this.languageControl = new FormControl<any>(this.langFieldOptions.value);
+    const initVal = this.pagesService.currentLanguage.getValue();
+    this.languageControl = new FormControl<any>({ value: initVal, disabled: this.langFieldOptions.disabled });
   }
 
   onChangeLang(lang: string, fromModal: boolean): void {
