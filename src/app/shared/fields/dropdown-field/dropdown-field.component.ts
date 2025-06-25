@@ -1,4 +1,14 @@
-import { Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef, forwardRef } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+  forwardRef,
+  input
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type DropdownOptions = {
@@ -62,6 +72,8 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   public disabledControl = false;
   public selectedItems: any;
   public closedState = true;
+
+  spriteArrowIcon = input<string>();
 
   ngOnInit(): void { }
 

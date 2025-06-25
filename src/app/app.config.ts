@@ -1,4 +1,9 @@
-import { APP_INITIALIZER, ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
+import {
+    APP_INITIALIZER,
+    ApplicationConfig,
+    provideZoneChangeDetection,
+    isDevMode
+} from "@angular/core";
 import {
     // HTTP_INTERCEPTORS,
     provideHttpClient,
@@ -16,6 +21,8 @@ import {
 
 import { routes } from "./app.routes";
 import { ToastService } from "./shared/services/toast.service";
+import { TranslocoHttpLoader } from './transloco-loader';
+import { provideTransloco } from '@jsverse/transloco';
 // import { loggingInterceptor } from "./shared/interceptors/logging.interceptor";
 // import { AuthInterceptor } from "./shared/auth.interceptor";
 
@@ -80,6 +87,16 @@ export const appConfig: ApplicationConfig = {
             // multi: true
         },
 
-        ToastService
+        ToastService,
+        provideTransloco({
+            config: {
+                availableLangs: ['en', 'uz', 'ru'],
+                defaultLang: 'ru',
+                // Remove this option if your application doesn't support changing language in runtime.
+                reRenderOnLangChange: true,
+                prodMode: !isDevMode(),
+            },
+            loader: TranslocoHttpLoader
+        })
     ],
 };

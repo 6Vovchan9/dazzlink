@@ -46,6 +46,7 @@ import { HeaderComponent } from '@app/shared/components/header/header.component'
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { LinkToAppComponent } from '@app/shared/components/link-to-app/link-to-app.component';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -65,7 +66,8 @@ type IOpportunityMenu = {
     ThumbHashImageComponent,
     HeaderComponent,
     FooterComponent,
-    LinkToAppComponent
+    LinkToAppComponent,
+    TranslocoDirective
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

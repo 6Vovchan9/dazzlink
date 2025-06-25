@@ -84,12 +84,10 @@
 
             <div class="aboutAppInfo">
                 <div class="container aboutAppInfo__container">
-                    <div class="aboutAppInfo__text">
-                        <h1 class="moduleTitle">{{productName}}: постройте великолепные отношения </h1>
+                    <div *transloco="let t" class="aboutAppInfo__text">
+                        <h1 class="moduleTitle">{{productName}}: постройте великолепные отношения</h1>
                         <div class="aboutAppInfo__cont">
-                            Знакомства для тех, кто ищет не мимолётные встречи,
-                            а крепкие отношения на всю жизнь.
-                            Доступно в крупных городах Узбекистана
+                            {{t('aboutAppCont')}}
                         </div>
                     </div>
                     <div class="aboutAppInfo__infoLinks">

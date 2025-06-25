@@ -189,17 +189,18 @@
                                 <app-theme-toggle class="withText bigSize"></app-theme-toggle>
                             </div>
                             <div class="footerInModal__col">
-                                <!-- <div class="footerInModal__lang">
+                                <div class="footerInModal__lang">
                                     <app-dropdown-field
-                                        [formControl]="myForm.get('language')"
+                                        [formControl]="languageControl"
                                         [options]="langFieldOptions"
                                         (ngModelChange)="onChangeLang($event, true)"
                                         [multiple]="false"
                                         [listOnTop]="true"
                                         optionLabel="value"
-                                        arrowIcon="assets/icons/planetForLang.svg">
+                                        spriteArrowIcon="planetForLang"
+                                    >
                                     </app-dropdown-field>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>

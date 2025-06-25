@@ -14,6 +14,9 @@ import { CookiesToastComponent } from '@app/shared/components/cookies-toast/cook
 import { ModalComponent } from '@app/shared/components/modal/modal.component';
 import { ColorSchemeService } from '@app/shared/services/color-scheme.service';
 import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-toggle.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
+import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-field.module';
 // import { LocationsService } from '@app/shared/services/locations.service';
 // import { PostsService } from '@app/shared/services/posts.service';
 // import { RandomService } from '@app/shared/services/random.service';
@@ -78,13 +81,15 @@ import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
+    ReactiveFormsModule,
     AsyncPipe,
     NgIf,
 
     ToastComponent,
     ModalComponent,
     CookiesToastComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    DropdownFieldModule
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -95,6 +100,17 @@ export class AppComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private pagesService = inject(PagesService);
   private colorSchemeService = inject(ColorSchemeService);
+  languageControl: FormControl;
+  langFieldOptions: DropdownOptions = {
+    disabled: false,
+    id: "language",
+    required: true,
+    items: [{ value: 'RU', caption: 'RU' }, { value: 'UZ', caption: 'UZ' }, { value: 'EN', caption: 'EN' }, { value: 'KZ', caption: 'KZ' }],
+    // value: ['RU', 'UZ']
+    // value: 'UZ'
+    // value: [{ value: 'UZ', caption: 'UZ' }]
+    value: 'RU'
+  };
 
   constructor(
     public modalService: GlobalModalService, // typeScript детает такой синтакс сахар - можем объявлять свойства данного класса прям в конструкторе, то есть нет необх писать constructor(private/public/protected/readonly name: string) { this.name = name } можно просто constructor(private name: string) { }
@@ -137,6 +153,8 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.cookiesAgreementService.removeCookiesAgreement();
 
     this.checkRouterEvents();
+
+    this.#initLangControl();
   }
 
   // 2-ой способ как перекрасить страницу для темной/светлой темы:
@@ -151,6 +169,15 @@ export class AppComponent implements OnInit, OnDestroy {
     const result = myNavigator.userAgent.includes('Dazzlink');
     // return true;
     return result;
+  }
+
+  #initLangControl(): void {
+    this.languageControl = new FormControl<any>(this.langFieldOptions.value);
+  }
+
+  onChangeLang(lang: string, fromModal: boolean): void {
+    this.pagesService.currentLanguage.next(lang);
+    if (fromModal) this.clickByCloseModal();
   }
 
   private checkRouterEvents(): void {

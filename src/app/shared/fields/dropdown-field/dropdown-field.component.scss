@@ -65,6 +65,11 @@ $color-main-blue: #5532EB;
             background-size: contain;
             background-position: center center;
             margin-left: 4px;
+
+            .dropdownControl__spriteIcon {
+                width: 100%;
+                height: 100%;
+            }
         }
 
         .dropdownControl__icon {
@@ -201,9 +206,9 @@ $color-main-blue: #5532EB;
     }
 
     &--listOnTop {
-        .dropdownControl__list {
+        .dropdownControl__list, .dropdownControl__newList {
             bottom: 100%;
-            transform: translateY(-8px);
+            transform: translateY(-4px);
         }
     }
 

@@ -24,16 +24,20 @@
 
             <div class="dropdownControl__values" [innerHTML]="dropdownHead || selectedItems || 'Не выбрано'"></div>
 
-            <ng-container *ngIf="showArrowIcon">
-                <div class="dropdownControl__customIcon"
-                    *ngIf="arrowIcon; else defaultIcon"
-                    [ngStyle]="{ backgroundImage: generateIconPath(arrowIcon) }">
-                </div>
-                <ng-template #defaultIcon>
+            @if (showArrowIcon) {
+                @if (arrowIcon) {
+                    <div class="dropdownControl__customIcon"
+                        [ngStyle]="{ backgroundImage: generateIconPath(arrowIcon) }"
+                    >
+                    </div>
+                } @else if (spriteArrowIcon()) {
+                    <div class="dropdownControl__customIcon">
+                        <svg class="dropdownControl__spriteIcon" [icon]="spriteArrowIcon()"></svg>
+                    </div>
+                } @else {
                     <div class="dropdownControl__icon"></div>
-                </ng-template>
-            </ng-container>
-    
+                }
+            }
         }
 
     </div>
