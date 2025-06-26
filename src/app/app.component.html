@@ -189,18 +189,9 @@
                                 <app-theme-toggle class="withText bigSize"></app-theme-toggle>
                             </div>
                             <div class="footerInModal__col">
-                                <!-- <div class="footerInModal__lang">
-                                    <app-dropdown-field
-                                        [formControl]="languageControl"
-                                        [options]="langFieldOptions"
-                                        (ngModelChange)="onChangeLang($event, true)"
-                                        [multiple]="false"
-                                        [listOnTop]="true"
-                                        optionLabel="value"
-                                        spriteArrowIcon="planetForLang"
-                                    >
-                                    </app-dropdown-field>
-                                </div> -->
+                                <div class="footerInModal__lang">
+                                    <dz-language-switcher [inModal]="true"></dz-language-switcher>
+                                </div>
                             </div>
                         </div>
                     </div>

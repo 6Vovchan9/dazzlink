@@ -14,9 +14,8 @@ import { CookiesToastComponent } from '@app/shared/components/cookies-toast/cook
 import { ModalComponent } from '@app/shared/components/modal/modal.component';
 import { ColorSchemeService } from '@app/shared/services/color-scheme.service';
 import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-toggle.component';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
-import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-field.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LanguageSwitcherComponent } from '@app/shared/components/language-switcher/language-switcher.component';
 // import { LocationsService } from '@app/shared/services/locations.service';
 // import { PostsService } from '@app/shared/services/posts.service';
 // import { RandomService } from '@app/shared/services/random.service';
@@ -89,7 +88,7 @@ import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-
     ModalComponent,
     CookiesToastComponent,
     ThemeToggleComponent,
-    DropdownFieldModule
+    LanguageSwitcherComponent
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -100,8 +99,6 @@ export class AppComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private pagesService = inject(PagesService);
   private colorSchemeService = inject(ColorSchemeService);
-  languageControl: FormControl;
-  langFieldOptions: DropdownOptions;
 
   constructor(
     public modalService: GlobalModalService, // typeScript детает такой синтакс сахар - можем объявлять свойства данного класса прям в конструкторе, то есть нет необх писать constructor(private/public/protected/readonly name: string) { this.name = name } можно просто constructor(private name: string) { }
@@ -125,7 +122,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.colorSchemeService.load();
 
-    this.langFieldOptions = this.pagesService.langFieldOptions;
   }
 
   ngOnInit(): void {
@@ -147,7 +143,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.checkRouterEvents();
 
-    this.#initLangControl();
   }
 
   // 2-ой способ как перекрасить страницу для темной/светлой темы:
@@ -162,16 +157,6 @@ export class AppComponent implements OnInit, OnDestroy {
     const result = myNavigator.userAgent.includes('Dazzlink');
     // return true;
     return result;
-  }
-
-  #initLangControl(): void {
-    const initVal = this.pagesService.currentLanguage.getValue();
-    this.languageControl = new FormControl<any>({ value: initVal, disabled: this.langFieldOptions.disabled });
-  }
-
-  onChangeLang(lang: string, fromModal: boolean): void {
-    this.pagesService.currentLanguage.next(lang);
-    if (fromModal) this.clickByCloseModal();
   }
 
   private checkRouterEvents(): void {
@@ -199,7 +184,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this[modalDesc.methodName]();
   }
 
-  public clickByCloseModal(): void {
+  clickByCloseModal(): void {
     this.modalService.close();
   }
 

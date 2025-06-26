@@ -92,15 +92,9 @@
                 </button> -->
                 <app-theme-toggle class="header__theme"></app-theme-toggle>
             </div>
-            <!-- <div class="languageInHeader">
-                <app-dropdown-field
-                    [formControl]="languageControl"
-                    (ngModelChange)="onChangeLang($event)"
-                    [options]="langFieldOptions"
-                    [multiple]="false"
-                    optionLabel="value">
-                </app-dropdown-field>
-            </div> -->
+            <div class="languageInHeader">
+                <dz-language-switcher></dz-language-switcher>
+            </div>
             <!-- <button (click)="openNavPopup()" class="hamburger">
                 <div class="hamburger__line"></div>
             </button> -->

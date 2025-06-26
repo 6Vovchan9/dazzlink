@@ -1,0 +1,8 @@
+<app-dropdown-field
+    [formControl]="languageControl"
+    (ngModelChange)="onChangeLang($event)"
+    [options]="langFieldOptions"
+    [multiple]="false"
+    [listOnTop]="switcherInModal()"
+    optionLabel="value">
+</app-dropdown-field>
