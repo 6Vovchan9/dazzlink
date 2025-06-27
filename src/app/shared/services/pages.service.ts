@@ -19,7 +19,7 @@ export class PagesService {
         disabled: false,
         id: "language",
         required: true,
-        items: [{ value: 'ru', caption: 'RU' }, { value: 'uz', caption: 'UZ' }, { value: 'en', caption: 'EN' }, { value: 'kz', caption: 'KZ' }],
+        items: [{ value: 'RU', caption: 'RU' }, { value: 'UZ', caption: 'UZ' }, { value: 'EN', caption: 'EN' }, { value: 'KZ', caption: 'KZ' }],
         // value: ['RU', 'UZ']
         // value: 'UZ'
         // value: [{ value: 'UZ', caption: 'UZ' }]
@@ -41,12 +41,12 @@ export class PagesService {
         } else {
             // console.log('Устанавливаем дефолтный язык');
             // this.currentLanguage.next(this.#translocoService.getDefaultLang());
-            this.currentLanguage = new BehaviorSubject<string>(this.#translocoService.getDefaultLang());
+            this.currentLanguage = new BehaviorSubject<string>(this.#translocoService.getDefaultLang().toUpperCase());
         }
 
         this.currentLanguage.subscribe(value => {
             // console.log(`Устанавливаем язык «${value}» в SS`);
-            this.#translocoService.setActiveLang(value);
+            this.#translocoService.setActiveLang(value.toLowerCase());
             sessionStorage.setItem('currentLanguage', value);
         });
     }

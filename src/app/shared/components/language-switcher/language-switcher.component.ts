@@ -4,7 +4,6 @@ import { DropdownOptions } from "@app/shared/fields/dropdown-field/dropdown-fiel
 import { DropdownFieldModule } from "@app/shared/fields/dropdown-field/dropdown-field.module";
 import { GlobalModalService } from "@app/shared/services/global-modal.service";
 import { PagesService } from "@app/shared/services/pages.service";
-import { TranslocoService } from "@jsverse/transloco";
 
 @Component({
   selector: 'dz-language-switcher',
@@ -25,7 +24,6 @@ export class LanguageSwitcherComponent {
     langFieldOptions: DropdownOptions;
 
     #pagesService = inject(PagesService);
-    #translocoService = inject(TranslocoService);
     #modalService = inject(GlobalModalService);
 
     constructor() {
