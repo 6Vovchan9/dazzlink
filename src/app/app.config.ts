@@ -21,7 +21,7 @@ import {
 
 import { routes } from "./app.routes";
 import { ToastService } from "./shared/services/toast.service";
-import { TranslocoHttpLoader } from './transloco-loader';
+import { TranslocoHttpLoader } from './shared/services/transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
 // import { loggingInterceptor } from "./shared/interceptors/logging.interceptor";
 // import { AuthInterceptor } from "./shared/auth.interceptor";

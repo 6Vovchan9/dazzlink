@@ -14,6 +14,7 @@
     --color-theme-toggle: #333;
     --color-app-advantage-bg: #e7e8e9;
     --color-link: #4A4AC6;
+    --color-dropdown-head: #333;
 }
 
 @mixin constForDarkTheme() {
@@ -32,6 +33,7 @@
     --color-theme-toggle: #efefef;
     --color-app-advantage-bg: #333;
     --color-link: #7070ff;
+    --color-dropdown-head: #a8a8a8;
 }
 
 @media (prefers-color-scheme: dark) {

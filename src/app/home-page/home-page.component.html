@@ -85,9 +85,9 @@
             <div class="aboutAppInfo">
                 <div class="container aboutAppInfo__container">
                     <div *transloco="let t" class="aboutAppInfo__text">
-                        <h1 class="moduleTitle">{{productName}}: постройте великолепные отношения</h1>
+                        <h1 class="moduleTitle">{{t('home-aboutAppInfo-title')}}</h1>
                         <div class="aboutAppInfo__cont">
-                            {{t('aboutAppCont')}}
+                            {{t('home-aboutAppInfo-cont')}}
                         </div>
                     </div>
                     <div class="aboutAppInfo__infoLinks">
@@ -124,7 +124,7 @@
             }
 
             <section class="appAdv">
-                <ul class="appAdv__list">
+                <ul *transloco="let t" class="appAdv__list">
                     <li class="appAdv__item">
                         <div class="appAdv__image">
                             <div class="appAdvImage">
@@ -141,12 +141,10 @@
                         </div>
                         <div class="appAdv__content">
                             <h2 class="moduleTitle">
-                                Знакомьтесь онлайн
+                                {{t('home-appAdv-1-title')}}
                             </h2>
                             <div class="appAdv__text">
-                                Подходите к выбору собеседника осознанно.
-                                Фотографии откроются только после начала общения,
-                                до этого делайте выбор сердцем
+                                {{t('home-appAdv-1-text')}}
                             </div>
                         </div>
                     </li>
@@ -166,10 +164,10 @@
                         </div>
                         <div class="appAdv__content">
                             <h2 class="moduleTitle">
-                                Переходите от слов к делу
+                                {{t('home-appAdv-2-title')}}
                             </h2>
                             <div class="appAdv__text">
-                                Находите идеальные романтические места для свиданий и приглашайте друг друга. Сделайте каждый момент по-настоящему особенным
+                                {{t('home-appAdv-2-text')}}
                             </div>
                         </div>
                     </li>
@@ -189,10 +187,10 @@
                         </div>
                         <div class="appAdv__content">
                             <h2 class="moduleTitle">
-                                Изучайте тему отношений
+                                {{t('home-appAdv-3-title')}}
                             </h2>
                             <div class="appAdv__text">
-                                Откройте секреты счастья на долгие годы: читайте статьи о любви, отношениях, знакомствах, свиданиях и семейной жизни
+                                {{t('home-appAdv-3-text')}}
                             </div>
                         </div>
                     </li>
@@ -226,11 +224,10 @@
                         } @else {
                             <div class="appAdv__content">
                                 <h2 class="moduleTitle">
-                                    Скачайте приложение
+                                    {{t('home-appAdv-4-title')}}
                                 </h2>
                                 <div class="appAdv__text">
-                                    Сотни людей уже доверили нам свою судьбу, присоединяйтесь и вы, чтобы найти любовь
-                                    на всю жизнь и создать семью
+                                    {{t('home-appAdv-4-text')}}
                                     <div class="appAdv__infoLinks">
                                         <dz-link-to-app></dz-link-to-app>
                                     </div>
