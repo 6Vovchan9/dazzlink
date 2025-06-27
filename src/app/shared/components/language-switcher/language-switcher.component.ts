@@ -21,10 +21,6 @@ export class LanguageSwitcherComponent {
 
     switcherInModal: InputSignal<boolean> = input(false, { alias: 'inModal' });
 
-    constructor() {
-        this.langFieldOptions = this.#pagesService.langFieldOptions;
-    }
-
     languageControl: FormControl;
     langFieldOptions: DropdownOptions;
 
@@ -32,8 +28,22 @@ export class LanguageSwitcherComponent {
     #translocoService = inject(TranslocoService);
     #modalService = inject(GlobalModalService);
 
+    constructor() {
+        this.langFieldOptions = this.#pagesService.langFieldOptions;
+    }
+
     ngOnInit(): void {
         this.#initLangControl();
+        this.#subOnChangeLang();
+    }
+
+    #subOnChangeLang() {
+        // this.#pagesService.currentLanguage.subscribe({
+        //     next: newVal => {
+
+        //         console.log('newVal: ', newVal);
+        //     }
+        // })
     }
 
     #initLangControl(): void {
