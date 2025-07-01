@@ -35,7 +35,8 @@
               "src/assets",
               "src/robots.txt",
               "src/sitemap.xml",
-              "src/manifest.json"
+              "src/manifest.json",
+              "src/googled816d5e52a9d0daf.html"
             ],
             "styles": [
               "src/styles.scss",
