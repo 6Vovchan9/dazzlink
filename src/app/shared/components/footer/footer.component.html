@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer *transloco="let t" class="footer">
     <div class="container footer__container">
         <div class="footer__content">
             <div class="footer__col footer__col--forMobile">
@@ -14,13 +14,13 @@
                     <dz-download-app-btn class="footer__downloadAppPro downloadAppBgBlack"></dz-download-app-btn>
                 } @else {
                     <button class="footer__downloadApp btnInFooter" (click)="openQRModalAdvanced()" type="button">
-                        Скачайте приложение
+                        {{t('footer.download-app-btn')}}
                     </button>
                 }
                 <div class="footer__links">
                     <div class="footer__nav">
-                        <a class="btnInFooter" routerLink="/help">{{helpBtnName}}</a>
-                        <a class="btnInFooter" routerLink="/legal-info">Правовая информация</a>
+                        <a class="btnInFooter" routerLink="/help">{{t('footer.help-btn')}}</a>
+                        <a class="btnInFooter" routerLink="/legal-info">{{t('footer.legal-info-btn')}}</a>
                     </div>
                     <div class="footer__socialNetworks">
                         <a href="https://instagram.com/dazzlink.asia" target="_blank" class="btnInFooter">Instagram</a>
@@ -42,18 +42,18 @@
                             (click)="openQRModalAdvanced()"
                             type="button"
                         >
-                            Скачайте приложение
+                            {{t('footer.download-app-btn')}}
                         </button>
                     }
                     <!-- <button class="btnInFooter" type="button" (click)="showQrCodeModal.set(!showQrCodeModal())">My</button> -->
-                    <a class="btnInFooter" routerLink="/help">Помощь</a>
-                    <a class="btnInFooter" routerLink="/legal-info">Правовая информация</a>
+                    <a class="btnInFooter" routerLink="/help">{{t('footer.help-btn')}}</a>
+                    <a class="btnInFooter" routerLink="/legal-info">{{t('footer.legal-info-btn')}}</a>
                     <a href="https://instagram.com/dazzlink.asia" target="_blank" class="btnInFooter">Instagram</a>
                     <a href="https://t.me/dazzlink" target="_blank" class="btnInFooter">Telegram</a>
                 </div>
             </div>
             <div class="footer__col">
-                <div class="company" (click)="clickByCompanyBlock()">{{curYear}} ©&nbsp;DAZZLINK&nbsp;CO,&nbsp;MChJ. Все&nbsp;права&nbsp;защищены</div>
+                <div class="company" (click)="clickByCompanyBlock()">{{curYear}} ©&nbsp;DAZZLINK&nbsp;CO,&nbsp;MChJ. {{t('footer.all-rights-reserved')}}</div>
             </div>
         </div>
     </div>

@@ -14,17 +14,20 @@ import { MobileDetectService } from '@app/shared/services/mobile-detect.service'
 import { TelegramService } from '@app/shared/services/telegram.service';
 import { SvgIconComponent } from "@app/shared/components/svg-icon/svg-icon.component";
 import { DownloadAppBtnComponent } from '@app/shared/download-app-btn/download-app-btn.component';
+import { provideTranslocoScope, TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   standalone: true,
+  providers: [provideTranslocoScope('footer')],
   imports: [
     RouterLink,
     
     SvgIconComponent,
-    DownloadAppBtnComponent
+    DownloadAppBtnComponent,
+    TranslocoDirective
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

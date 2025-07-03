@@ -306,7 +306,6 @@ $shadowHeightInMobile: 20px;
 
 .appAdv {
     font-size: 24px;
-    margin-bottom: 48px;
     .appAdv__list {
         .appAdv__item {
             display: flex;
@@ -345,7 +344,6 @@ $shadowHeightInMobile: 20px;
     }
 
     @media #{$notMobile} {
-        margin-bottom: 160px;
         .appAdv__list {
             .appAdv__item {
                 column-gap: 40px;
