@@ -44,29 +44,29 @@
                 </ul>
             }
             <div class="header__menu">
-                <nav class="menu">
+                <nav *transloco="let t" class="menu">
                     <ul class="menu__list">
                         <li class="menu__item"
                             [routerLinkActiveOptions]="{ exact: true }"
                             routerLinkActive="menu__item--active"
                         >
-                            <a class="menu__link" routerLink="/">Приложение</a>
+                            <a class="menu__link" routerLink="/">{{t('header.home-link')}}</a>
                         </li>
                         <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/media">Медиа</a>
+                            <a class="menu__link" routerLink="/media">{{t('header.articles-link')}}</a>
                         </li>
                         <li class="menu__item"
                             routerLinkActive="menu__item--active"
                             [routerLinkActiveOptions]="routerLinkActiveOptions"
                             #rla="routerLinkActive"
                         >
-                            <a class="menu__link" routerLink="/locations" queryParamsHandling="merge">Локации</a>
+                            <a class="menu__link" routerLink="/locations" queryParamsHandling="merge">{{t('header.locations-link')}}</a>
                         </li>
                         <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/partnership">Для бизнеса</a>
+                            <a class="menu__link" routerLink="/partnership">{{t('header.for-business-link')}}</a>
                         </li>
                         <li class="menu__item" routerLinkActive="menu__item--active">
-                            <a class="menu__link" routerLink="/company">О нас</a>
+                            <a class="menu__link" routerLink="/company">{{t('header.about-us-link')}}</a>
                         </li>
                         <!-- <li class="menu__item">
                             <a class="menu__link" [routerLink]="['/admin', 'dashboard']">Админка</a>

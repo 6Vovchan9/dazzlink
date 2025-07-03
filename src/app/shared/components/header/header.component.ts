@@ -7,11 +7,13 @@ import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-toggle.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
+import { provideTranslocoScope, TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
+  providers: [provideTranslocoScope('header')],
   imports: [
     RouterLink,
     RouterLinkActive,
@@ -19,7 +21,8 @@ import { LanguageSwitcherComponent } from '../language-switcher/language-switche
     ReactiveFormsModule,
 
     ThemeToggleComponent,
-    LanguageSwitcherComponent
+    LanguageSwitcherComponent,
+    TranslocoDirective
   ],
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
