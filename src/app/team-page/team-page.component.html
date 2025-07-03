@@ -1,8 +1,8 @@
 <app-header></app-header>
-<main class="teamPage">
+<main class="teamPage" *transloco="let t">
     <div class="container teamPage__container">
 
-        <div class="teamPage__moduleTitle">Ваше семейное счастье — наш главный приоритет</div>
+        <div class="teamPage__moduleTitle">{{t('team.moduleTitle')}}</div>
 
         <div class="mainPicture" [class.mainPicture--load]="mainPicLoad()">
             <img [src]="mainPicBase64" class="mainPicture__preview" alt="preview">
@@ -14,7 +14,7 @@
         </div>
 
         <section class="ourPhilosophy">
-            <h2 class="teamPage__sectionTitle">Философия</h2>
+            <h2 class="teamPage__sectionTitle">{{'team.sectionTitle' | transloco}}</h2>
             <div class="ourPhilosophy__blocks">
                 <div class="aboutUsCard aboutUsCard--withCard ourPhilosophy__card ourPhilosophy__card--aboutUs">
                     <h3 class="aboutUsCard__head">Кто мы</h3>

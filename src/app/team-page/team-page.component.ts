@@ -8,6 +8,7 @@ import { IAboutPersonalData } from '@app/shared/interfaces';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
+import { provideTranslocoScope, TranslocoDirective, TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-team-page',
@@ -20,8 +21,12 @@ import { FooterComponent } from '@app/shared/components/footer/footer.component'
     RouterLink,
 
     HeaderComponent,
-    FooterComponent
-  ]
+    FooterComponent,
+    TranslocoDirective,
+    TranslocoPipe
+  ],
+  providers: [provideTranslocoScope('team')], // Или можно указать скоуп в app.routes.ts
+  
 })
 export class TeamPageComponent extends AbsractExample implements AfterViewInit {
 
