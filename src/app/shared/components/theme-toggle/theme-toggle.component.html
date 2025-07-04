@@ -14,10 +14,10 @@
             alt="dark"
         >
     </div>
-    <span class="themeToggle__curThemeName">
+    <span *transloco="let t" class="themeToggle__curThemeName">
         {{
-            colorSchemeService.currentActive() === themeTypes.Dark ? 'Светлая' :
-            colorSchemeService.currentActive() === themeTypes.Light ? 'Тёмная' :
+            colorSchemeService.currentActive() === themeTypes.Dark ? t('header.theme-toggle-light') :
+            colorSchemeService.currentActive() === themeTypes.Light ? t('header.theme-toggle-dark') :
             'OS Default'
         }}
     </span>

@@ -5,12 +5,14 @@ import {
   ColorSchemeService,
   ThemeTypes
 } from '@app/shared/services/color-scheme.service';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-theme-toggle',
   standalone: true,
   imports: [
-    NgClass
+    NgClass,
+    TranslocoDirective
   ],
   templateUrl: './theme-toggle.component.html',
   styleUrl: './theme-toggle.component.scss'

@@ -3,5 +3,8 @@
     "articles-link": "Медиа",
     "locations-link": "Локации",
     "for-business-link": "Для бизнеса",
-    "about-us-link": "О нас"
+    "about-us-link": "О нас",
+
+    "theme-toggle-light": "Светлая",
+    "theme-toggle-dark": "Тёмная"
 }
