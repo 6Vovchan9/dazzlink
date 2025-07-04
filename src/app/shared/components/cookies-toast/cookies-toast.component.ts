@@ -1,10 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
+import { provideTranslocoScope, TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-cookies-toast',
   standalone: true,
-  imports: [],
+  imports: [
+    TranslocoDirective
+  ],
+  providers: [
+    provideTranslocoScope('toast'),
+  ],
   templateUrl: './cookies-toast.component.html',
   styleUrl: './cookies-toast.component.scss'
 })

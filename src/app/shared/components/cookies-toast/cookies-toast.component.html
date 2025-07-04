@@ -1,12 +1,10 @@
-<div class="cookiesToast">
+<div *transloco="let t" class="cookiesToast">
     <div class="cookiesToast__container">
         <div class="cookiesToast__content">
             <div class="cookiesToast__message">
-                Мы используем cookie для улучшения наших сервисов.
-                Продолжая использовать сайт,
-                вы даете согласие на обработку этих файлов.
+                {{t('toast.message')}}
             </div>
-            <button (click)="onAcceptAllCookies()" class="cookiesToast__btn">Принять и закрыть</button>
+            <button (click)="onAcceptAllCookies()" class="cookiesToast__btn">{{t('toast.btn')}}</button>
         </div>
     </div>
 </div>
