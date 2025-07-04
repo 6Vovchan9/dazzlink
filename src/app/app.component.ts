@@ -16,6 +16,7 @@ import { ColorSchemeService } from '@app/shared/services/color-scheme.service';
 import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-toggle.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LanguageSwitcherComponent } from '@app/shared/components/language-switcher/language-switcher.component';
+import { provideTranslocoScope, TranslocoDirective } from '@jsverse/transloco';
 // import { LocationsService } from '@app/shared/services/locations.service';
 // import { PostsService } from '@app/shared/services/posts.service';
 // import { RandomService } from '@app/shared/services/random.service';
@@ -33,6 +34,7 @@ import { LanguageSwitcherComponent } from '@app/shared/components/language-switc
   styleUrls: ['./app.component.scss'],
   standalone: true,
   providers: [
+    provideTranslocoScope('header'),
     TelegramService, // регистрация зависимости таким образом позволяет использовать только класс в качестве зависимости, а если нужно внедрить в качестве зависимости примитивные типы данных или объекты то придется воспользоваться другими способами регистрации зависимостей (useClass, useValue, useFactory, useExisting)
     // {
     //   provide: TelegramService,
@@ -88,7 +90,8 @@ import { LanguageSwitcherComponent } from '@app/shared/components/language-switc
     ModalComponent,
     CookiesToastComponent,
     ThemeToggleComponent,
-    LanguageSwitcherComponent
+    LanguageSwitcherComponent,
+    TranslocoDirective
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {

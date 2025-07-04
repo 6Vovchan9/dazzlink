@@ -123,7 +123,7 @@
                 </div>
             } @else if (modalData.modalName === 'navigationModal') {
                 <!-- Модалка с навигацией для мобилы -->
-                <div class="navigationModal">
+                <div *transloco="let t" class="navigationModal">
                     <div class="navigationModal__header">
                         <div class="headerInModal">
                             <div class="headerInModal__col">
@@ -149,19 +149,19 @@
                             <nav class="menuInNavModal navigationModal__menu">
                                 <ul class="menuInNavModal__list">
                                     <li class="menuInNavModal__item" (click)="clickByCloseModal()" routerLinkActive="menuInNavModal__item--active" [routerLinkActiveOptions]="{ exact: true }">
-                                        <a class="menuInNavModal__link" routerLink="/">Приложение</a>
+                                        <a class="menuInNavModal__link" routerLink="/">{{t('header.home-link')}}</a>
                                     </li>
                                     <li class="menuInNavModal__item" (click)="clickByCloseModal()" routerLinkActive="menuInNavModal__item--active">
-                                        <a class="menuInNavModal__link" routerLink="/media">Медиа</a>
+                                        <a class="menuInNavModal__link" routerLink="/media">{{t('header.articles-link')}}</a>
                                     </li>
                                     <li class="menuInNavModal__item" (click)="clickByCloseModal()" routerLinkActive="menuInNavModal__item--active">
-                                        <a class="menuInNavModal__link" routerLink="/locations">Локации</a>
+                                        <a class="menuInNavModal__link" routerLink="/locations">{{t('header.locations-link')}}</a>
                                     </li>
                                     <li class="menuInNavModal__item" (click)="clickByCloseModal()" routerLinkActive="menuInNavModal__item--active">
-                                        <a class="menuInNavModal__link" routerLink="/partnership">Для бизнеса</a>
+                                        <a class="menuInNavModal__link" routerLink="/partnership">{{t('header.for-business-link')}}</a>
                                     </li>
                                     <li class="menuInNavModal__item" (click)="clickByCloseModal()" routerLinkActive="menuInNavModal__item--active">
-                                        <a class="menuInNavModal__link" routerLink="/company">О нас</a>
+                                        <a class="menuInNavModal__link" routerLink="/company">{{t('header.about-us-link')}}</a>
                                     </li>
                                     <!-- <li class="menuInNavModal__item">
                                         <a class="menuInNavModal__link" [routerLink]="['/admin', 'dashboard']">Админка</a>
