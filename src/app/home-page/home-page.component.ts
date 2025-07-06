@@ -74,6 +74,7 @@ type IOpportunityMenu = {
 export class HomePageComponent extends ThumbHash implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('advertisingVideo') advertisingVideo: ElementRef;
+  headerComponent = viewChild(HeaderComponent);
   private videoStreamTag: Signal<ElementRef<HTMLVideoElement>> = viewChild<ElementRef<HTMLVideoElement>>('videoStreamTag'); 
   // @ViewChild('thumbHashDemo') thumbHashDemoImg: ElementRef<HTMLImageElement>;
 
@@ -189,6 +190,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
       } else {
         // console.log('Скрываем header');
         this.hideHeader.set(true);
+        this.headerComponent().closeLangSwitcher();
       }
     } else {
       // console.log('Показываем header');

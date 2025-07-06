@@ -7,7 +7,8 @@ import {
   Output,
   TemplateRef,
   forwardRef,
-  input
+  input,
+  model
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -71,9 +72,10 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
 
   public disabledControl = false;
   public selectedItems: any;
-  public closedState = true;
 
   spriteArrowIcon = input<string>();
+  
+  closed = model<boolean>(true);
 
   ngOnInit(): void { }
 
@@ -114,10 +116,10 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   public setDisabledState?(isDisabled: boolean): void {
-    if (isDisabled && !this.closedState) {
+    if (isDisabled && !this.closed()) {
       // console.log('8');
       this.toggle.emit(false);
-      this.closedState = true;
+      this.closed.set(true);
     }
     this.disabledControl = isDisabled;
   }
@@ -137,7 +139,7 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
           // console.log('1', res);
           this.selectedItems = this.createSelectedItemsForScreen(res);
           this.toggle.emit(false);
-          this.closedState = true; // закрываем выпадающий список
+          this.closed.set(true); // закрываем выпадающий список
           this.onChange(res);
         }
         radioItem.selected = true;
@@ -173,10 +175,10 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   clickOutside(clickByBackground = false): void {
-    if (document.documentElement.clientWidth >= 768 && !this.closedState  || clickByBackground ) {
+    if (document.documentElement.clientWidth >= 768 && !this.closed() || clickByBackground ) {
       // console.log('6');
       this.toggle.emit(false);
-      this.closedState = true;
+      this.closed.set(true);
     }
   }
 
@@ -184,8 +186,8 @@ export class DropdownFieldComponent implements OnInit, ControlValueAccessor {
     e.stopPropagation();
     if (!this.disabledControl) {
       // console.log('7');
-      this.toggle.emit(this.closedState);
-      this.closedState = !this.closedState;
+      this.toggle.emit(this.closed());
+      this.closed.set(!this.closed());
     }
   }
 

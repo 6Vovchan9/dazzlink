@@ -12,7 +12,7 @@
 <div class="dropdownControl"
     [ngClass]="{
         'dropdownControl--listOnTop': listOnTop,
-        'dropdownControl--open': !closedState && highlightHead,
+        'dropdownControl--open': !closed() && highlightHead,
         'dropdownControl--disabled': disabledControl
     }"
 >
@@ -45,7 +45,7 @@
     <!-- <div class="dropdownControl__list"
         appClickOutside
         (clickOutside)="clickOutside()"
-        [ngClass]="{'dropdownControl__list--hidden': closedState}"
+        [ngClass]="{'dropdownControl__list--hidden': closed()}"
     >
         <div *ngFor="let item of options.items"
             [ngClass]="{'dropdownControl__item--selected': item.selected}"
@@ -59,7 +59,7 @@
     <div class="dropdownControl__newList"
         appClickOutside
         (clickOutside)="clickOutside()"
-        [ngClass]="{'dropdownControl__newList--hidden': closedState}"
+        [ngClass]="{'dropdownControl__newList--hidden': closed()}"
     >
         <div *ngFor="let item of options.items"
             [ngClass]="{'dropdownControl__item--selected': item.selected}"
@@ -74,7 +74,7 @@
         </div>
     </div>
 
-    <div class="dropdownMobileList" [ngClass]="{'dropdownMobileList--hidden': closedState}">
+    <div class="dropdownMobileList" [ngClass]="{'dropdownMobileList--hidden': closed()}">
         <div (click)="clickOutside(true)" class="dropdownMobileList__background"></div>
         <div class="dropdownMobileList__listWrap">
             <div class="dropdownMobileList__list">

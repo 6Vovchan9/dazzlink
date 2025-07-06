@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, InputSignal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, input, InputSignal, signal, viewChild, WritableSignal } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { DropdownOptions } from "@app/shared/fields/dropdown-field/dropdown-field.component";
 import { DropdownFieldModule } from "@app/shared/fields/dropdown-field/dropdown-field.module";
@@ -26,8 +26,13 @@ export class LanguageSwitcherComponent {
     #pagesService = inject(PagesService);
     #modalService = inject(GlobalModalService);
 
+    closedSwitcher: WritableSignal<boolean> = signal(true);
+
     constructor() {
         this.langFieldOptions = this.#pagesService.langFieldOptions;
+        // effect(() => {
+        //     console.log('closed:', this.closedSwitcher());
+        // });
     }
 
     ngOnInit(): void {

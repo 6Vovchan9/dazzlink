@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Attribute, ChangeDetectionStrategy, Component, HostAttributeToken, inject, OnInit } from '@angular/core';
+import { Attribute, ChangeDetectionStrategy, Component, HostAttributeToken, inject, OnInit, viewChild } from '@angular/core';
 import { IsActiveMatchOptions, RouterLink, RouterLinkActive } from '@angular/router';
 
 import { ColorSchemeService, ThemeTypes } from '@app/shared/services/color-scheme.service';
@@ -32,6 +32,7 @@ export class HeaderComponent {
   public colorSchemeService = inject(ColorSchemeService);
   themeTypes = ThemeTypes;
   myLetName2 = inject(new HostAttributeToken('name'), { optional: true }); // смотри ниже для чего это
+  langSwitcherComponent = viewChild(LanguageSwitcherComponent);
 
   constructor(
     private modalService: GlobalModalService,
@@ -58,6 +59,10 @@ export class HeaderComponent {
   public openNavPopup(): void {
     this.modalService.open({ component: 'appComponent', modalName: 'navigationModal' });
     // this.hideScroll(); // следует иметь в виду, что, когда навигация короткая (и, следовательно, не прокручивается как тут), а пользователь пытается прокрутить ее, тело страницы будет прокручиваться, даже если установлено свойство overscroll-behavior-y: contain, поэтому придется прибегнуть к такому решению
+  }
+
+  closeLangSwitcher(): void {
+    this.langSwitcherComponent().closedSwitcher.set(true);
   }
 
 }
