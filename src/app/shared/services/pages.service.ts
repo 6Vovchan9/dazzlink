@@ -19,11 +19,11 @@ export class PagesService {
         disabled: false,
         id: "language",
         required: true,
-        items: [{ value: 'RU', caption: 'RU' }, { value: 'UZ', caption: 'UZ' }, { value: 'EN', caption: 'EN' }, { value: 'KZ', caption: 'KZ' }],
+        items: [{ value: 'RU', caption: 'RU' }, { value: 'UZ', caption: 'UZ' }, { value: 'EN', caption: 'EN' }],
         // value: ['RU', 'UZ']
         // value: 'UZ'
         // value: [{ value: 'UZ', caption: 'UZ' }]
-        value: 'ru'
+        value: 'RU'
     };
 
     currentLanguage: BehaviorSubject<string>;
