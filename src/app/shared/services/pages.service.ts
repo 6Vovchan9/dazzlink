@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from "@angular/core";
+import { inject, Injectable, signal, WritableSignal } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { DropdownOptions } from "../fields/dropdown-field/dropdown-field.component";
 import { TranslocoService } from "@jsverse/transloco";
@@ -29,6 +29,7 @@ export class PagesService {
     currentLanguage: BehaviorSubject<string>;
     prevPage = signal<string>(null);
     #translocoService = inject(TranslocoService);
+    closedLangSwitcher: WritableSignal<boolean> = signal(true);
 
     constructor() {
 

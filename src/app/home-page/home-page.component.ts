@@ -12,6 +12,7 @@ import {
   Signal,
   ViewChild,
   effect,
+  inject,
   signal,
   viewChild
 } from '@angular/core';
@@ -47,6 +48,7 @@ import { FooterComponent } from '@app/shared/components/footer/footer.component'
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { LinkToAppComponent } from '@app/shared/components/link-to-app/link-to-app.component';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { PagesService } from '@app/shared/services/pages.service';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -103,6 +105,8 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
       console.log("Скрываем постер");
     }
   });
+
+  #pagesService = inject(PagesService);
 
   constructor(
     // private pagesService: PagesService,
@@ -181,20 +185,22 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
 
     // this.cd.detectChanges();
 
-    if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
-      if (curScrollTop < 100) {
-        if (curScrollTop === 0) {
+    if (this.#pagesService.closedLangSwitcher()) {
+      if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
+        if (curScrollTop < 100) {
+          if (curScrollTop === 0) {
+            // console.log('Скрываем header');
+            this.hideHeader.set(true);
+          }
+        } else {
           // console.log('Скрываем header');
           this.hideHeader.set(true);
+          // this.headerComponent().closeLangSwitcher(); // это для того чтобы закрыть дропдаун выбора языка
         }
       } else {
-        // console.log('Скрываем header');
-        this.hideHeader.set(true);
-        this.headerComponent().closeLangSwitcher();
+        // console.log('Показываем header');
+        this.hideHeader.set(false);
       }
-    } else {
-      // console.log('Показываем header');
-      this.hideHeader.set(false);
     }
     this.prevScrollTop = curScrollTop;
     // this.cd.detectChanges();

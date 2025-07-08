@@ -25,7 +25,7 @@ export class LanguageSwitcherComponent {
 
     #pagesService = inject(PagesService);
     #modalService = inject(GlobalModalService);
-
+    closedStateFromService = this.#pagesService.closedLangSwitcher;
     closedSwitcher: WritableSignal<boolean> = signal(true);
 
     constructor() {
