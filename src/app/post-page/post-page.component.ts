@@ -188,19 +188,21 @@ export class PostPageComponent implements OnInit, AfterViewInit, OnDestroy {
     const [curScrollLeft, curScrollTop] = this.vc.getScrollPosition();
     // console.log('cur:', curScrollTop);
     // console.log('prev:', this.prewScrollTop);
-    if (curScrollTop > this.prewScrollTop || curScrollTop < 100) {
-      if (curScrollTop < 100) {
-        if (curScrollTop === 0) {
+    if (this.pagesService.closedLangSwitcher()) {
+      if (curScrollTop > this.prewScrollTop || curScrollTop < 100) {
+        if (curScrollTop < 100) {
+          if (curScrollTop === 0) {
+            // console.log('Скрываем header');
+            this.hideHeader.set(true);
+          }
+        } else {
           // console.log('Скрываем header');
           this.hideHeader.set(true);
         }
       } else {
-        // console.log('Скрываем header');
-        this.hideHeader.set(true);
+        // console.log('Показываем header');
+        this.hideHeader.set(false);
       }
-    } else {
-      // console.log('Показываем header');
-      this.hideHeader.set(false);
     }
     this.prewScrollTop = curScrollTop;
     // this.cd.detectChanges();

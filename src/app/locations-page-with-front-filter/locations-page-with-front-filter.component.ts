@@ -74,6 +74,7 @@ import { FooterComponent } from '@app/shared/components/footer/footer.component'
 import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
 import { SvgIconComponent } from '@app/shared/components/svg-icon/svg-icon.component';
 import { LinkToAppComponent } from '@app/shared/components/link-to-app/link-to-app.component';
+import { PagesService } from '@app/shared/services/pages.service';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -153,6 +154,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public cookiesAgreementService = inject(CookiesAgreementService);
   private cd = inject(ChangeDetectorRef);
   private needScrollAfterRedirect = true;
+  #pagesService = inject(PagesService);
   // public myBlockAboutScroll: { [key: string]: number } = {};
 
   constructor(
@@ -216,21 +218,22 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     // console.log('cur:', curScrollTop);
     // console.log('prev:', this.prevScrollTop);
 
-    if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
-      if (curScrollTop < 100) {
-        if (curScrollTop === 0) {
+    if (this.#pagesService.closedLangSwitcher()) {
+      if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
+        if (curScrollTop < 100) {
+          if (curScrollTop === 0) {
+            // console.log('Скрываем header');
+            this.hideHeader.set(true);
+          }
+        } else {
           // console.log('Скрываем header');
           this.hideHeader.set(true);
         }
       } else {
-        // console.log('Скрываем header');
-        this.hideHeader.set(true);
+        // console.log('Показываем header');
+        this.hideHeader.set(false);
       }
-    } else {
-      // console.log('Показываем header');
-      this.hideHeader.set(false);
     }
-
     this.prevScrollTop = curScrollTop;
     // this.cd.detectChanges();
   }

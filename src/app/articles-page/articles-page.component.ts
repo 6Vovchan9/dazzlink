@@ -278,21 +278,22 @@ export class ArticlesPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // console.log('cur:', curScrollTop);
     // console.log('prev:', this.prevScrollTop);
 
-    if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
-      if (curScrollTop < 100) {
-        if (curScrollTop === 0) {
+    if (this.pagesService.closedLangSwitcher()) {
+      if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
+        if (curScrollTop < 100) {
+          if (curScrollTop === 0) {
+            // console.log('Скрываем header');
+            this.hideHeader.set(true);
+          }
+        } else {
           // console.log('Скрываем header');
           this.hideHeader.set(true);
         }
       } else {
-        // console.log('Скрываем header');
-        this.hideHeader.set(true);
+        // console.log('Показываем header');
+        this.hideHeader.set(false);
       }
-    } else {
-      // console.log('Показываем header');
-      this.hideHeader.set(false);
     }
-    
     this.prevScrollTop = curScrollTop;
     // this.cd.detectChanges();
   }
