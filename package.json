@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "docs:remove": "rimraf docs",
+    "docs:new": "npm run docs:remove && ng build --output-path docs",
 
     "i18n:extract": "transloco-keys-manager extract",
     "i18n:find": "transloco-keys-manager find"

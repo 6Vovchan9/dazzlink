@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   ElementRef,
   HostListener,
   Inject,
@@ -49,6 +50,7 @@ import { GlobalModalService } from '@app/shared/services/global-modal.service';
 import { LinkToAppComponent } from '@app/shared/components/link-to-app/link-to-app.component';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { PagesService } from '@app/shared/services/pages.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 type IOpportunityMenu = {
   active?: boolean,
@@ -88,7 +90,6 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   private curLang: string;
   private lSub: Subscription;
   private pageWrapScrollSub: Subscription;
-  private pageScrollSub: Subscription;
   public prevScrollTop = 0;
   public hideHeader = signal(true);
   #cSub: Subscription; // это аналогично typescript-вому "private", теперь такая же возможность есть в js
@@ -107,6 +108,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   });
 
   #pagesService = inject(PagesService);
+  destroyRef = inject(DestroyRef);
 
   constructor(
     // private pagesService: PagesService,
@@ -158,9 +160,10 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
   }
 
   private addEventListenerToPage(): void {
-    this.pageScrollSub = fromEvent(window, 'scroll')
+    fromEvent(window, 'scroll')
       .pipe(
-        auditTime(200)
+        auditTime(200),
+        takeUntilDestroyed(this.destroyRef) // это современный способ отписки
       )
       .subscribe({
         next: () => {
@@ -417,7 +420,6 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
 
   public ngOnDestroy(): void {
     this.pageWrapScrollSub?.unsubscribe();
-    this.pageScrollSub?.unsubscribe();
     this.lSub?.unsubscribe();
     this.#cSub?.unsubscribe();
     this.removeAllListeners();
