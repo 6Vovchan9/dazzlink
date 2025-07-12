@@ -36,7 +36,6 @@ import {
 } from '@angular/common';
 
 import { langArr } from '@app/shared/constants/languages.constants';
-// import { PagesService } from '@app/shared/services/pages.service';
 import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 // import { GoogleTranslationService } from '@app/shared/services/google-translation.service';
 // import { AccoTriggerComponent } from '@app/shared/components/acco-trigger/acco-trigger.component';
@@ -107,7 +106,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
     }
   });
 
-  #pagesService = inject(PagesService);
+  pagesService = inject(PagesService);
   destroyRef = inject(DestroyRef);
 
   constructor(
@@ -188,7 +187,7 @@ export class HomePageComponent extends ThumbHash implements OnInit, AfterViewIni
 
     // this.cd.detectChanges();
 
-    if (this.#pagesService.closedLangSwitcher()) {
+    if (this.pagesService.closedLangSwitcher()) {
       if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
         if (curScrollTop < 100) {
           if (curScrollTop === 0) {

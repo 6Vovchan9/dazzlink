@@ -3,8 +3,8 @@
         '--header-height': headerEl.clientHeight
     }"
     [ngClass]="{
-        'locationsPage--headerSticky':  !isLoading() && allLocations?.cityPlaceList?.length && 1,
-        'locationsPage--headerVisible': !hideHeader()
+        'locationsPage--headerSticky':  !isLoading() && allLocations?.cityPlaceList?.length,
+        'locationsPage--headerVisible': !hideHeader() || !pagesService.closedLangSwitcher()
     }"
 >
     <div #headerEl

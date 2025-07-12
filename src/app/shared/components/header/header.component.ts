@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Attribute, ChangeDetectionStrategy, Component, HostAttributeToken, inject, OnInit, viewChild } from '@angular/core';
+import { Attribute, ChangeDetectionStrategy, Component, HostAttributeToken, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
 import { IsActiveMatchOptions, RouterLink, RouterLinkActive } from '@angular/router';
 
 import { ColorSchemeService, ThemeTypes } from '@app/shared/services/color-scheme.service';
@@ -27,7 +27,7 @@ import { provideTranslocoScope, TranslocoDirective } from '@jsverse/transloco';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
 
   public colorSchemeService = inject(ColorSchemeService);
   themeTypes = ThemeTypes;
@@ -63,6 +63,10 @@ export class HeaderComponent {
 
   closeLangSwitcher(): void {
     this.langSwitcherComponent().closedSwitcher.set(true);
+  }
+
+  ngOnDestroy(): void {
+    console.log('header destroy');
   }
 
 }

@@ -174,6 +174,7 @@ export class AppComponent implements OnInit, OnDestroy {
         ([previous, current]: [NavigationEnd, NavigationEnd]) => {
           // console.log('appComponent:', previous.url);
           this.pagesService.prevPage.set(previous.url);
+          // this.pagesService.closedLangSwitcher.set(true);
           // console.log('appComponent:', current.url);
         }
       )

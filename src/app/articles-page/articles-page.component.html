@@ -15,7 +15,7 @@
     @if (!appWebview) {
         <div #headerEl
             class="articlesPage__header"
-            [class.articlesPage__header--visible]="!hideHeader()"
+            [class.articlesPage__header--visible]="!hideHeader() || !pagesService.closedLangSwitcher()"
             [ngStyle]="{
                 '--header-height': -(headerEl.clientHeight || 0) + 'px'
             }"

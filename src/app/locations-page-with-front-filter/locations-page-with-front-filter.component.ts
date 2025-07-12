@@ -154,7 +154,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public cookiesAgreementService = inject(CookiesAgreementService);
   private cd = inject(ChangeDetectorRef);
   private needScrollAfterRedirect = true;
-  #pagesService = inject(PagesService);
+  pagesService = inject(PagesService);
   // public myBlockAboutScroll: { [key: string]: number } = {};
 
   constructor(
@@ -218,7 +218,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     // console.log('cur:', curScrollTop);
     // console.log('prev:', this.prevScrollTop);
 
-    if (this.#pagesService.closedLangSwitcher()) {
+    if (this.pagesService.closedLangSwitcher()) {
       if (curScrollTop > this.prevScrollTop || curScrollTop < 100) {
         if (curScrollTop < 100) {
           if (curScrollTop === 0) {
