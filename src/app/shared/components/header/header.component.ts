@@ -8,6 +8,7 @@ import { ThemeToggleComponent } from '@app/shared/components/theme-toggle/theme-
 import { ReactiveFormsModule } from '@angular/forms';
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
 import { provideTranslocoScope, TranslocoDirective } from '@jsverse/transloco';
+import { PagesService } from '@app/shared/services/pages.service';
 
 @Component({
   selector: 'app-header',
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnDestroy {
   themeTypes = ThemeTypes;
   myLetName2 = inject(new HostAttributeToken('name'), { optional: true }); // смотри ниже для чего это
   langSwitcherComponent = viewChild(LanguageSwitcherComponent);
+  #pagesService = inject(PagesService);
 
   constructor(
     private modalService: GlobalModalService,
@@ -67,6 +69,7 @@ export class HeaderComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     console.log('header destroy');
+    this.#pagesService.closedLangSwitcher.set(true); // тут это нужно потому что переход по ссылке <a> не закрывает dropdown - переключатель языка
   }
 
 }

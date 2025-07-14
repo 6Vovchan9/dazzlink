@@ -1,8 +1,8 @@
-import { Component, Inject, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, HostListener, Inject, OnDestroy, OnInit, inject } from '@angular/core';
 import { AsyncPipe, DOCUMENT, NgIf } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { filter, pairwise, tap } from 'rxjs/operators';
+import { filter, map, pairwise, startWith, tap } from 'rxjs/operators';
 // import { HttpClient } from '@angular/common/http';
 
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
@@ -103,6 +103,11 @@ export class AppComponent implements OnInit, OnDestroy {
   private pagesService = inject(PagesService);
   private colorSchemeService = inject(ColorSchemeService);
 
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event) {
+  //   console.log(event.target.innerWidth);
+  // }
+
   constructor(
     public modalService: GlobalModalService, // typeScript детает такой синтакс сахар - можем объявлять свойства данного класса прям в конструкторе, то есть нет необх писать constructor(private/public/protected/readonly name: string) { this.name = name } можно просто constructor(private name: string) { }
     // @Inject(GlobalModalService) public modalService: GlobalModalService, // это аналогичный верхнему способ внедрения зависимости, но на практике такой способ внедрения зависимости используется когда необх внедрить какие то данные регистрируемые через useValue
@@ -146,6 +151,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.checkRouterEvents();
 
+    // fromEvent(window, 'resize')
+    //   .pipe(
+    //     // startWith(null), // Добавляем начальное значение, чтобы получить текущие размеры при инициализации
+    //     map(() => ({
+    //       width: window.innerWidth,
+    //       height: window.innerHeight,
+    //     })),
+    //     pairwise()
+    //   )
+    //   .subscribe(([prev, cur]) => {
+    //     console.log('prev:', prev);
+    //     console.log('cur:', cur);
+    //   });
   }
 
   // 2-ой способ как перекрасить страницу для темной/светлой темы:
