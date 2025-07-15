@@ -210,6 +210,10 @@ $color-main-blue: #5532EB;
             bottom: 100%;
             transform: translateY(-4px);
         }
+        .dropdownControl__head .dropdownControl__icon::before {
+            top: 5px;
+            transform: rotate(-135deg);
+        }
     }
 
     @media (min-width: 768px) {
