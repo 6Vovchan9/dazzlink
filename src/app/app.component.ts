@@ -28,6 +28,11 @@ import { provideTranslocoScope, TranslocoDirective } from '@jsverse/transloco';
 //   USER_RANDOM_SERVICE_TOKEN
 // } from '@app/shared/tokens/tokens';
 
+type WindowSizeData = {
+  width: number;
+  height: number;
+};
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -154,13 +159,14 @@ export class AppComponent implements OnInit, OnDestroy {
     // fromEvent(window, 'resize')
     //   .pipe(
     //     // startWith(null), // Добавляем начальное значение, чтобы получить текущие размеры при инициализации
-    //     map(() => ({
+    //     map((): WindowSizeData => ({
     //       width: window.innerWidth,
     //       height: window.innerHeight,
     //     })),
     //     pairwise()
     //   )
-    //   .subscribe(([prev, cur]) => {
+    //   .subscribe(([prev, cur]: Array<WindowSizeData>) => {
+    //     this.checkWindowInnerWidth(prev, cur);
     //     console.log('prev:', prev);
     //     console.log('cur:', cur);
     //   });
@@ -172,6 +178,8 @@ export class AppComponent implements OnInit, OnDestroy {
   //   console.log(`Цветовая схема системы обновлена на ${newScheme}.`);
   //   // Время адаптировать интерфейс 🌓
   // } // воспроизвести можно в хроме в dev tools во вкладке "Rendering"
+
+  checkWindowInnerWidth(prev: WindowSizeData, cur: WindowSizeData): void {}
 
   public get appWebview(): boolean {
     const myNavigator = this.documentRef.defaultView.navigator; // почему нежелательно просто обратиться к navigator.userAgent читай в notes.md

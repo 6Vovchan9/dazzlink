@@ -158,6 +158,11 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   pagesService = inject(PagesService);
   // public myBlockAboutScroll: { [key: string]: number } = {};
 
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event) {
+  //   console.log(event.target.innerWidth);
+  // }
+
   constructor(
     @Optional() public mobileDetectService: MobileDetectService,
     private readonly locationsService: LocationsService, // модификатор readonly, примененный к параметрам конструктора, заставляет компилятор расценивать их как поля класса (также как и модификаторы доступа private, public, protected).

@@ -88,8 +88,12 @@ $headerHeightInMobile: 64px;
 
         @media #{$notMobile} {
             // height: $headerHeightInDesktop;
-            padding: 24px 20px;
+            // padding: 24px 20px;
         }
+    }
+
+    @media #{$notMobile} {
+        min-height: 80px;
     }
 }
 
