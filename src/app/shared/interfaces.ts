@@ -58,35 +58,37 @@ export interface RespArticlesData {
 
 export interface RovraggeRespLocationsData {
     placeCount: number;
-    cityPlaceList: Array<RespCityPlaceList>
+    cityPlaceList: Array<RespCityPlaceList>;
+    featuredPlaceCount?: number;
+    featuredPlaceList?: Array<RespCityPlaceList>;
 }
 
 export interface RespCityPlaceList {
-    cityCode: string,
-    cityTitle: string,
-    placeList: Array<Place>
+    cityCode: string;
+    cityTitle: string;
+    placeList: Array<Place>;
 }
 
 export interface RovraggeRespFiltersData {
     sort: Array<{
         name: string,
         value: string
-    }>,
+    }>;
     filter: Array<{
         code: string,
         group: Array<CountryFilterItem>
-    }>
+    }>;
 }
 
 export interface CountryFilterItem {
-    countryTitle: string,
+    countryTitle: string;
     cityList: Array<{
         selected?: boolean,
         title: string,
         code: string,
         count: number
-    }>
-    selectedСities?: Array<string>
+    }>;
+    selectedСities?: Array<string>;
 }
 
 export interface ILocationCategories {

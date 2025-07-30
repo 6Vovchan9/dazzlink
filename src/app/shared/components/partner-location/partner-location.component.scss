@@ -1,0 +1,105 @@
+.partner {
+    display: flex;
+    flex-direction: row;
+    column-gap: 28px;
+    padding: 0 24px;
+    border-radius: 20px;
+    background-color: var(--color-location-partner-bg);
+    .partner__desc {
+        flex: 1;
+        margin: 48px 0 32px 8px;
+        font-weight: 700;
+        .partner__title {
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+        .partner__additInfo {
+            display: flex;
+            max-width: 100%;
+            .partner__another {
+                position: relative;
+                padding-left: 13px;
+                white-space: nowrap;
+                &--withEllipsis {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+                &::before {
+                    content: '';
+                    position: absolute;
+                    display: block;
+                    width: 2.5px;
+                    height: 2.5px;
+                    border-radius: 50%;
+                    background-color: var(--color-gray-medium);
+                    top: 50%;
+                    left: 0;
+                    transform: translate(6px, -50%);
+                }
+                &:first-child {
+                    padding-left: 0px;
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .partner__btn {
+            margin-top: 24px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 700;
+            // color: transparent;    
+            // -webkit-background-clip: text;
+            // background-clip: text;    
+            // background-image: url('src/assets/images/partnerBtn.png');
+            // background-position: 50% 50%;
+            // background-repeat: no-repeat;
+            // background-size: cover;
+            background-color: var(--color-location-partner-btn);
+        }
+    }
+    .partner__photos {
+        flex: 2;
+        max-width: 384px;
+        position: relative;
+        overflow: hidden;
+    }
+}
+
+
+
+.mansoryPhotos {
+    // background-color: blueviolet;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+    width: 100%;
+    .mansoryPhotos__column {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        row-gap: 12px;
+        .mansoryPhotos__item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 16px;
+            background-color: var(--color-gradient-bg-after);
+            .mansoryPhotos__img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}

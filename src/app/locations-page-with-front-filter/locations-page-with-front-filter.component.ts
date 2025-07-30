@@ -56,24 +56,26 @@ import {
   RespCityPlaceList,
   RovraggeRespLocationsData
 } from '@app/shared/interfaces';
-import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { langArr } from '@app/shared/constants/languages.constants';
+import { MobileDetectService } from '@app/shared/services/mobile-detect.service';
 import { LocationsService } from '@app/shared/services/locations.service';
-import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import { ToastService } from '@app/shared/services/toast.service';
 import { GlobalModalService } from '@app/shared/services/global-modal.service';
+import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
+import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-field.module';
+import { DropdownOptions } from '@app/shared/fields/dropdown-field/dropdown-field.component';
 import {
   MOCK_CATEGORIES_FOR_SKELETON,
   MOCK_LOCATIONS,
   MOCK_LOCATIONS_FOR_SKELETON
 } from '@app/shared/mock/locations';
+import { MOCK_FILTERS } from '@app/shared/mock/filters.mock';
 import { LocationItemComponent } from '@app/shared/components/location-item/location-item.component';
-import { DropdownFieldModule } from '@app/shared/fields/dropdown-field/dropdown-field.module';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
-import { CookiesAgreementService } from '@app/shared/services/cookiesAgreement.service';
 import { SvgIconComponent } from '@app/shared/components/svg-icon/svg-icon.component';
 import { LinkToAppComponent } from '@app/shared/components/link-to-app/link-to-app.component';
+import { PartnerLocationComponent } from '@app/shared/components/partner-location/partner-location.component';
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -91,6 +93,7 @@ import { LinkToAppComponent } from '@app/shared/components/link-to-app/link-to-a
     DropdownFieldModule,
     SvgIconComponent,
     LinkToAppComponent,
+    PartnerLocationComponent,
     HeaderComponent,
     FooterComponent
   ],
@@ -100,9 +103,10 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   @ViewChild('progressCircle') progressCircle: ElementRef;
 
-  public allLocations: RovraggeRespLocationsData = MOCK_LOCATIONS_FOR_SKELETON;
-  public filteredLocations: Array<RespCityPlaceList>;
-  public isLoading = signal<boolean>(true);
+  allLocations: RovraggeRespLocationsData = MOCK_LOCATIONS_FOR_SKELETON;
+  filteredLocations: Array<RespCityPlaceList>;
+  partners: Record<string, RespCityPlaceList> = {};
+  isLoading = signal<boolean>(true);
   public isSorting = signal(false);
   protected categoryCodes: { selected?: string, list: Array<ILocationCategories> } = {
     list: MOCK_CATEGORIES_FOR_SKELETON
@@ -447,7 +451,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   }
 
   private getCategories(): void {
-    if (false) {
+    if (1) {
       const stream$ = new Observable((observer: Observer<Array<ILocationCategories>>) => {
         console.warn('categorGet пошел');
         setTimeout(() => {
@@ -995,112 +999,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             // observer.next(null)
           } else {
             console.warn('filterGet ок!');
-            observer.next([
-              {
-                countryTitle: 'Узбекистан',
-                cityList: [
-                  {
-                    title: 'Ташкент',
-                    code: 'Tashkent',
-                    count: 42
-                  },
-                  {
-                    title: 'Наманган',
-                    code: 'Namangan',
-                    count: 2,
-                  },
-                  {
-                    title: 'Самарканд',
-                    code: 'Samarkand',
-                    count: 32
-                  },
-                  {
-                    title: 'Андижан',
-                    code: 'Andizhan',
-                    count: 62
-                  },
-                  {
-                    title: 'Нукус',
-                    code: 'Nukus',
-                    count: 47
-                  },
-                  {
-                    title: 'Коканд',
-                    code: 'Kokand',
-                    count: 1
-                  },
-                  {
-                    title: 'Бухара',
-                    code: 'Buhara',
-                    count: 46
-                  },
-                  {
-                    title: 'Карши',
-                    code: 'Karshi',
-                    count: 49
-                  },
-                  {
-                    title: 'Фергана',
-                    code: 'Fergana',
-                    count: 40
-                  },
-                  {
-                    title: 'Маргилан',
-                    code: 'Margilan',
-                    count: 81
-                  }
-                ]
-              },
-              {
-                countryTitle: 'Казахстан',
-                cityList: [
-                  {
-                    title: 'Алматы',
-                    code: 'Almati',
-                    count: 62
-                  },
-                  {
-                    title: 'Астана',
-                    code: 'Astana',
-                    count: 4
-                  },
-                  {
-                    title: 'Шымкент',
-                    code: 'Shimkent',
-                    count: 83
-                  },
-                  {
-                    title: 'Актобе',
-                    code: 'Aktobe',
-                    count: 44
-                  },
-                  {
-                    title: 'Караганда',
-                    code: 'Karaganda',
-                    count: 49
-                  },
-                  {
-                    title: 'Тараз',
-                    code: 'Taraz',
-                    count: 24
-                  },
-                  {
-                    title: 'Усть-Каменогорск',
-                    code: 'Kamen',
-                    count: 70
-                  },
-                  {
-                    title: 'Павлодар',
-                    code: 'Pavlodar',
-                    count: 89
-                  }
-                ]
-              },
-              {
-                countryTitle: 'Армения',
-                cityList: []
-              }
-            ]);
+            observer.next(MOCK_FILTERS);
           }
           // observer.error('Error')
         }, 3000)
@@ -1158,7 +1057,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   private getAllLocations(): void {
     this.isLoading.set(true);
     if (0) {
-      const stream$ = new Observable((observer: Observer<any>) => {
+      const stream$ = new Observable((observer: Observer<RovraggeRespLocationsData>) => {
         console.warn('locationsGet пошел');
         setTimeout(() => {
           if (this.errorInGetAllLocations) {
@@ -1181,6 +1080,9 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         // .pipe(delay(6000))
         .subscribe(
           value => {
+
+            this.allLocationsReceived = true;
+            this.#checkPartners(value);
             this.allLocations = value;
             this.filteredLocations = value?.cityPlaceList;
             this.isLoading.set(false);
@@ -1201,7 +1103,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
             // console.log(locationsForYmap);
 
             this.allLocationsReceived = true;
-
+            this.#checkPartners(value);
             this.allLocations = value;
             this.filteredLocations = value?.cityPlaceList;
             this.isLoading.set(false);
@@ -1212,6 +1114,17 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           }
         });
     }
+  }
+
+  #checkPartners(base: RovraggeRespLocationsData) {
+    const partnersMap = {};
+    base.featuredPlaceList.forEach(el => partnersMap[el.cityCode] = el);
+    // base.cityPlaceList.forEach(el => {
+    //   if (partnersMap[el.cityCode]) {
+
+    //   }
+    // });
+    this.partners = partnersMap;
   }
 
   private getAllLocationsAfterSort(sortVal?: string, filterVal?: string): void {

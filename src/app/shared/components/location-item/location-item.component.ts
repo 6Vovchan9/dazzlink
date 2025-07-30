@@ -43,7 +43,7 @@ export class LocationItemComponent extends ThumbHash implements OnInit {
     // console.log('=ngOnInit', this.placeData.displayName);
   }
 
-  public operatePriceRange(num = 1): Array<any> {
+  operatePriceRange(num = 1): Array<any> {
     return new Array(+num > 3 ? 3 : +num || 3);
   }
 

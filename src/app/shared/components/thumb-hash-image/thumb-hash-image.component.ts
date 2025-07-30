@@ -14,6 +14,6 @@ export class ThumbHashImageComponent extends ThumbHash {
 
   @Input() imageData: IImageInfo;
 
-  public mainImageLoad = signal<boolean>(false);
+  mainImageLoad = signal<boolean>(false);
 
 }

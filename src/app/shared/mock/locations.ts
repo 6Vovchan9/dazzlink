@@ -236,5 +236,50 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                 }
             ]
         },
+    ],
+    featuredPlaceCount: 1,
+    featuredPlaceList: [
+        {
+            "cityCode": "TASHKENT",
+            "cityTitle": "Самара",
+            "placeList": [
+                {
+                    "id": "-NgTNTZzxh9cr2Lqm2eEd2",
+                    "categoryCode": "RESTAURANTS",
+                    "title": "Чайхана Navat и еще очень много всего инетересного",
+                    "subtitle": "Узбекская кухня",
+                    "subcategory": "Бар",
+                    "priceRange": 23,
+                    "rating": 4.7,
+                    "address": "ул. Пушкина, 11",
+                    "imageList": [
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv1Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv2Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv3Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv4Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/mainPicForMobile.png'
+                        }
+                    ]
+                }
+            ]
+        }
     ]
 };

@@ -170,6 +170,15 @@
                                                         <div class="pageContent__locationsCity">
                                                             <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting() || isLoading()">{{block.cityTitle}}</span>
                                                         </div>
+                                                        @if (partners[block.cityCode]; as partner) {
+                                                            @if (partner.placeList.length) {
+                                                                <ul class="pageContent__partners">
+                                                                    <li class="pageContent__partner">
+                                                                        <dz-partner-location [data]="partner.placeList[0]"></dz-partner-location>
+                                                                    </li>
+                                                                </ul>
+                                                            }
+                                                        }
                                                         <ul class="pageContent__locationsList">
                                                             @for (location of block.placeList; track location.id) {
                                                                 <li class="pageContent__locationsItem">

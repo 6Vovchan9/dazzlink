@@ -1,5 +1,5 @@
 <div class="cityCarouselImage" [class.cityCarouselImage--mainImageLoad]="mainImageLoad()">
-    @if (imageData.metadata?.imageBase64) {
+    @if (imageData?.metadata?.imageBase64) {
         <img
             class="cityCarouselImage__image cityCarouselImage__image--thumbHash"
             [src]="imageData.metadata.imageBase64"
@@ -8,7 +8,7 @@
     }
     <img
         class="cityCarouselImage__image cityCarouselImage__image--main"    
-        [src]="imageData.href"
+        [src]="imageData?.href"
         (load)="mainImageLoad.set(true)"
         alt="pic"
     >

@@ -1,0 +1,74 @@
+@if (partner(); as partner) {
+    <div class="partner">
+        <div class="partner__desc">
+            <div class="partner__title">{{(partner.displayName || partner.title || 'Название заведения') | slice:0:30}}</div>
+            <div class="partner__additInfo">
+                <div class="partner__another">
+                    @for (item of operatePriceRange(partner.priceRange); track $index) {
+                        <span>$</span>
+                    }
+                </div>
+                <span class="partner__another partner__another--withEllipsis">{{partner?.subcategory || 'Кафе'}}</span>
+                @if (partner.subtitle) {
+                    <span class="partner__another partner__another--withEllipsis">{{partner.subtitle.split(' ')[0]}}</span>
+                }
+            </div>
+            <div class="partner__address">
+                {{partner?.address}}
+            </div>
+            <button type="button" class="partner__btn">
+                Смотреть оффер
+            </button>
+        </div>
+        <div class="partner__photos">
+            <div class="mansoryPhotos">
+                <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Id cum voluptatem culpa minus consectetur quas fuga quos
+                quidem velit eveniet. Beatae impedit harum dolorem, numquam vel minima officiis ab magni, soluta amet ullam illo
+                quidem ducimus, molestias doloremque repudiandae tempora consectetur dignissimos pariatur! Doloremque eaque dolores,
+                dignissimos quisquam distinctio placeat. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos repudiandae
+                doloremque voluptatibus asperiores at veritatis non natus culpa ipsum nostrum harum error provident officiis
+                laudantium consequatur impedit, exercitationem omnis libero fuga deserunt. Recusandae vero voluptate voluptas
+                consequuntur distinctio, rerum dolores aliquid animi? In dolores magni repellat dicta, debitis voluptatibus tempora. -->
+                @if (partner.imageList.length === 6) {
+                    <div class="mansoryPhotos__column" style="margin-top: 80px;">
+                        <div class="mansoryPhotos__item">
+                            <!-- <img [src]="partner.imageList[0].href" alt="Alt" class="mansoryPhotos__img"> -->
+                            <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                    <div class="mansoryPhotos__column" style="margin-top: 40px;">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[2]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[3]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                    <div class="mansoryPhotos__column">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[4]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[5]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                } @else if (partner.imageList.length === 5) {
+                    5
+                } @else if (partner.imageList.length === 4) {
+                    4
+                } @else if (partner.imageList.length === 3) {
+                    3
+                } @else if (partner.imageList.length === 2) {
+                    2
+                } @else if (partner.imageList.length === 1) {
+                    1
+                } @else {
+                    Нет фото
+                }
+            </div>
+        </div>
+    </div>
+}
