@@ -1,4 +1,28 @@
 {
-    "moduleTitle": "Sizning oilaviy baxtingiz bizning ustuvor vazifamizdir",
-    "sectionTitle": "Falsafa"
+    "moduleTitle": "Sizning oilaviy baxtingiz — bizning eng muhim ustuvorligimiz",
+    "sectionTitle": "Falsafa",
+    "philosophy": {
+        "title": {
+            "who-are-we": "Biz kimmiz",
+            "mission": "Missiya",
+            "vision": "Vizyon"
+        },
+        "desc": {
+            "who-are-we": "Dazzlink — Markaziy Osiyoda jadal rivojlanayotgan raqamli platforma bo‘lib, O‘zbekiston hududida faol. Biz odamlar o‘rtasida sog‘lom romantik munosabatlarni rivojlantirishga xizmat qiladigan servislarni yaratamiz.",
+            "mission": "Biz onlayn makonda munosabat qurish borasidagi stereotiplarni yo‘q qilishga va o‘xshash qadriyatlarga ega odamlar o‘rtasida muloqot uchun qulay muhit yaratishga intilamiz. Maqsadimiz — bu muloqotni ongli va oson tarzda rivojlantirishga yordam beradigan vosita yaratish.",
+            "vision": "Bizningcha, sevgi munosabatlarining uzoq muddatli maqsadi — bu oila. Vizyonimiz — kelajak avlodlar uchun uyg‘unlik muhitini yaratadigan ishonch va xavfsizlikni rivojlantirishga ko‘maklashish."
+        }
+    },
+    "connect": {
+        "title": "Aloqa maʼlumotlari",
+        "items": {
+            "help": "Yordam kerakmi?",
+            "proposal": "Takliflaringiz bormi?"
+        }
+    },
+    "team": {
+        "title": "Jamoa",
+        "desc-item1": "Platformaning yuragi — raqamli makonda eng yaxshi tanishuv tajribasini yaratish gʻoyasida birlashgan iqtidorli mutaxassislar.",
+        "desc-item2": "Biz innovatsion texnologiyalarni inson tabiatining chuqur tushunilishi bilan uyg‘unlashtiramiz, shunda munosabatlaringiz mazmunli va unutilmas bo‘ladi."
+    }
 }
