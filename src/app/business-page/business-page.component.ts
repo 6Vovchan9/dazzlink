@@ -4,6 +4,11 @@ import { FooterComponent } from '@app/shared/components/footer/footer.component'
 import { ForBusinessBlockComponent } from '@app/shared/components/for-business-block/for-business-block.component';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { IForBusinessBlock } from './types/partnership.types';
+import { provideTranslocoScope, TranslocoPipe } from '@jsverse/transloco';
+import { PagesService } from '@app/shared/services/pages.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FOR_WHOM_DATA_EN, FOR_WHOM_DATA_RU, FOR_WHOM_DATA_UZ } from './constants/for-whom.constant';
+import { WHAT_EXACTLY_EN, WHAT_EXACTLY_RU, WHAT_EXACTLY_UZ } from './constants/what-exactly.constant';
 
 @Component({
   selector: 'app-business-page',
@@ -13,43 +18,44 @@ import { IForBusinessBlock } from './types/partnership.types';
   imports: [
     HeaderComponent,
     FooterComponent,
-    ForBusinessBlockComponent
+    ForBusinessBlockComponent,
+    TranslocoPipe,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  providers: [provideTranslocoScope('business')],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BusinessPageComponent {
+  forWhomData: Array<IForBusinessBlock> = FOR_WHOM_DATA_RU;
+  whatExactly: IForBusinessBlock[] = WHAT_EXACTLY_RU;
 
-  readonly forWhomData: Array<IForBusinessBlock> = [
-    {
-      icon: 'assets/icons/business-page/restaurant.svg',
-      title: 'Кафе, рестораны и кондитерские',
-      text: 'Станьте местом, где начинаются истории. Мы подсказываем пользователям уютные места для первых встреч — рекомендуем ваши заведения внутри нашего сервиса.'
-    },
-    {
-      icon: 'assets/icons/business-page/barbershop.svg',
-      title: 'Салоны красоты и барбершопы',
-      text: 'Помогите выглядеть уверенно перед встречей. Перед свиданием наши пользователи ищут, где быстро привести себя в порядок — рекомендуем им именно вас.'
-    },
-    {
-      icon: 'assets/icons/business-page/flower.svg',
-      title: 'Цветочные, бутики и многие другие',
-      text: 'Станьте частью тёплых моментов. Букет, подарок, концерт или путешествие — мы подсказываем идеи, а вы помогаете сделать встречу особенной.'
-    }
-  ];
-  readonly whatExactly: IForBusinessBlock[] = [
-    {
-      icon: 'assets/icons/business-page/brand.svg',
-      title: 'Узнаваемость бренда',
-      text: 'Мы делаем ваш бренд запоминающимся благодаря точному и ненавязчивому присутствию в ключевых моментах — когда пользователи планируют встречи, выбирают место, образ или подарок. Ваш бизнес оказывается рядом в нужное время, формируя естественную ассоциацию.'
-    },
-    {
-      icon: 'assets/icons/business-page/client.svg',
-      title: 'Лояльные клиенты',
-      text: 'Мы продвигаем ваш бизнес с помощью рекламы в приложении и на сайте, напоминаем пользователям о вас после визита. При желании, собираем обратную связь и делимся статистикой, чтобы вы улучшали опыт гостей. Помогаем превращать новых клиентов в постоянных.'
-    }
-  ];
+  curGlobalLang = 'ru';
 
-  readonly #vc: ViewportScroller = inject(ViewportScroller);
+  #vc: ViewportScroller = inject(ViewportScroller);
+  #pagesService = inject(PagesService);
+
+  constructor() {
+    this.#pagesService.currentLanguage
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: val => {
+          this.#setLangData(val.toLowerCase());
+        },
+      });
+  }
+
+  #setLangData(curLang: string): void {
+    this.curGlobalLang = curLang;
+    if (curLang === 'en') {
+      this.forWhomData = FOR_WHOM_DATA_EN;
+      this.whatExactly = WHAT_EXACTLY_EN;
+    } else if (curLang === 'uz') {
+      this.forWhomData = FOR_WHOM_DATA_UZ;
+      this.whatExactly = WHAT_EXACTLY_UZ;
+    } else {
+      this.forWhomData = FOR_WHOM_DATA_RU;
+      this.whatExactly = WHAT_EXACTLY_RU;
+    }
+  }
 
   jumpToSection(section): void {
     this.#vc.scrollToAnchor(section);

@@ -5,15 +5,14 @@
         <div class="page__title">
             <div class="partnerTitle">
                 <h1 class="moduleTitle partnerTitle__text">
-                    Привлекайте клиентов и развивайте свой бизнес с помощью Dazzlink
+                    {{'business.partnerTitle.text' | transloco}}
                 </h1>
                 <div class="partnerTitle__desc">
-                    Помогаем выйти к вашей целевой аудитории, когда она открыта к новым предложениям.
-                    Доступно в крупнейших городах Узбекистана.
+                    {{'business.partnerTitle.desc' | transloco}}
                 </div>
                 <div class="partnerTitle__btn"></div>
                 <button (click)="jumpToSection('whatNextBlock')" class="blueBtn">
-                    Стать партнером
+                    {{'business.partnerTitle.btn' | transloco}}
                 </button>
             </div>
             <div class="partnerPic">
@@ -28,7 +27,7 @@
 
         <div class="page__block">
             <h2 class="page__blockTitle">
-                Кому подходит
+                {{'business.forWhom' | transloco}}
             </h2>
             <div class="page__blockContent">
                 @for (block of forWhomData; track $index) {
@@ -38,7 +37,7 @@
         </div>
         <div class="page__block">
             <h2 class="page__blockTitle">
-                Что дает
+                {{'business.whatExactly' | transloco}}
             </h2>
             <div class="page__blockContent">
                 @for (block of whatExactly; track $index) {
@@ -49,24 +48,30 @@
         <div class="page__block">
             <span id="whatNextBlock" class="anchoroffset"></span>
             <h2 class="page__blockTitle">
-                Что дальше
+                {{'business.whatNext.header' | transloco}}
             </h2>
             <div class="whatNextRules">
                 <div class="whatNext">
                     <div class="whatNext__num">1</div>
-                    <div class="whatNext__rule">Напишите нам на почту <a href="mailto:contact@dazzlink.asia" class="whatNext__mailto">contact&#64;dazzlink.asia</a></div>
+                    <div class="whatNext__rule">
+                        @if (curGlobalLang === 'uz') {
+                            Bizga <a href="mailto:contact@dazzlink.asia" class="whatNext__mailto">contact&#64;dazzlink.asia</a> manzili orqali yozing 
+                        } @else {
+                            Напишите нам на почту <a href="mailto:contact@dazzlink.asia" class="whatNext__mailto">contact&#64;dazzlink.asia</a>
+                        }
+                    </div>
                 </div>
                 <div class="whatNext">
                     <div class="whatNext__num">2</div>
-                    <div class="whatNext__rule">Обсудим ваши идеи</div>
+                    <div class="whatNext__rule">{{'business.whatNext.obsudim' | transloco}}</div>
                 </div>
                 <div class="whatNext">
                     <div class="whatNext__num">3</div>
-                    <div class="whatNext__rule">Оформим ваше присутствие на сайте и в приложении Dazzlink</div>
+                    <div class="whatNext__rule">{{'business.whatNext.oformim' | transloco}}</div>
                 </div>
                 <div class="whatNext">
                     <div class="whatNext__num">4</div>
-                    <div class="whatNext__rule">Замерим результат</div>
+                    <div class="whatNext__rule">{{'business.whatNext.zamerim' | transloco}}</div>
                 </div>
             </div>
         </div>
