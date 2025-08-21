@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject } from '@angular/core';
 
 import {
   ColorSchemeService,
@@ -7,7 +7,7 @@ import {
 } from '@app/shared/services/color-scheme.service';
 
 @Component({
-  selector: 'app-theme-toggle',
+  selector: 'dz-theme-toggle',
   standalone: true,
   imports: [
     NgClass
@@ -17,7 +17,12 @@ import {
 })
 export class ThemeToggleComponent {
   themeTypes = ThemeTypes;
-  public colorSchemeService = inject(ColorSchemeService);
+  colorSchemeService = inject(ColorSchemeService);
+  // #elRef = inject(ElementRef, { skipSelf: false }); // благодаря { skipSelf: true } получаем ссылка на родителя этого компонетна
+
+  // constructor() {
+  //   console.log(this.#elRef);
+  // }
 
   goToAnotherTheme() {
     const curThemeLight = this.colorSchemeService.currentActive() === ThemeTypes.Light;

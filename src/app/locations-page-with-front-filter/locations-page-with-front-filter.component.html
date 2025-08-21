@@ -15,7 +15,7 @@
     <div class="locationsPage__main">
         <div class="container locationsPage__container">
             <aside class="sidebar sidebar--forMobile">
-                <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
+                <ng-container *ngTemplateOutlet="aboutPageContent; context: { moduleTitle: 'Локации' }"></ng-container>
             </aside>
             <aside class="sidebar">
 
@@ -24,7 +24,7 @@
                     <ng-container *ngTemplateOutlet="aboutPageContent"></ng-container>
                 } @else {
                     <!-- Список городов для фильтрации -->
-                    <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate"></ng-container>
+                    <ng-container *ngTemplateOutlet="filterOptionsBlockTemplate; context: { $implicit: 'Сбросить' }"></ng-container>
                 }
 
                 <!-- <div class="scrollProgressWrapper">
@@ -315,11 +315,11 @@
 <ng-template #loadingTemplate>
     <p>Идет загрузка локаций...</p>
 </ng-template>
-<ng-template #aboutPageContent>
+<ng-template #aboutPageContent let-title="moduleTitle">
     <div class="aboutPage">
         <!-- <h1 appClickOutsideNew="red" #example="custom" class="moduleTitle">Локации</h1>
         <div [style]="{ backgroundColor: example.bgColor }" class="aboutPage__text">Какой-то текст</div> -->
-        <h1 class="moduleTitle">Локации</h1>
+        <h1 class="moduleTitle">{{title || 'Локации'}}</h1>
         <!-- {{getSomething}} -->
         <div class="aboutPage__text">
             Идеальные локации для романтических свиданий: уютные кафе, живописные парки и уникальные места, где ваши встречи станут незабываемыми
@@ -330,7 +330,7 @@
         </div>
     </div>
 </ng-template>
-<ng-template #filterOptionsBlockTemplate>
+<ng-template #filterOptionsBlockTemplate let-reset>
     <div (click)="clickByFilterOptions($event)"
         class="filterOptionsBlock"
     >
@@ -343,7 +343,7 @@
                     type="button"
                     (click)="onResetAllFilters()"
                 >
-                    Сбросить
+                    {{reset || 'Сбро'}}
                 </button>
                 <div (click)="onCloseFilterOptionsInMobile()" class="closeButtonInWindow">
                     <div class="iconForCloseInModal"></div>

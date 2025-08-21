@@ -11,13 +11,16 @@ import {
   Location
 } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   effect,
   ElementRef,
   inject,
   OnInit,
+  TemplateRef,
   viewChild,
-  ViewChild
+  ViewChild,
+  ViewContainerRef
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, firstValueFrom, fromEvent, of, pipe } from 'rxjs';
@@ -54,10 +57,12 @@ import { GoBackBtnComponent } from '@app/shared/components/go-back-btn/go-back-b
     FooterComponent
   ]
 })
-export class PlacePageComponent extends ThumbHash implements OnInit {
+export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewInit {
 
   @ViewChild('inputInGalleria') inputInGalleria: ElementRef;
   // @ViewChild('scrollSnappingCarousel1') carouselEl1: ElementRef;
+  exampleTempl = viewChild('exampleTempl', { read: TemplateRef });
+  exampleCont  = viewChild('exampleContainer', { read: ViewContainerRef });
 
   private lSub: Subscription;
   private carouselScrollSub: Subscription;
@@ -146,7 +151,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit {
         next: (place: PlaceDetails) => {
           this.prepareImageBase64(place.imageList);
           this.placeData = place;
-          if (place) this.getEvaluation();
+          if (place) this.#getEvaluation();
           // delete place.imageList;
           // place.imageList = null;
           // place.imageList = [];
@@ -285,10 +290,24 @@ export class PlacePageComponent extends ThumbHash implements OnInit {
         }
       });
 
-      // this.trainingForRestApi();
+      // this.#trainingForRestApi();
   }
 
-  private trainingForRestApi(): void {
+  ngAfterViewInit(): void {
+    // this.#insertDislikeIcon();
+  }
+
+  #insertDislikeIcon(): void {
+    // Императивный подход
+    const container = this.exampleCont();
+    const template = this.exampleTempl();
+
+    if (!container || !template) return;
+
+    container.createEmbeddedView(template, { $implicit: 'Hello' });
+  }
+
+  #trainingForRestApi(): void {
     firstValueFrom(this.locationsService.getCategoryOptions())
   }
 
@@ -372,7 +391,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit {
     //   + (href?.coordinates?.lat ? (href.coordinates.lon + ',' + href.coordinates.lat) : '37.617698,55.755864');
   }
 
-  private getEvaluation() {
+  #getEvaluation(): void {
     const placesRating = JSON.parse(localStorage.getItem('placeEvaluation')) || [];
     const aboutThisPlace = placesRating.find(about => about.placeId === this.placeData.id);
     if (aboutThisPlace) {

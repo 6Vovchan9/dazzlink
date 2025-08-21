@@ -451,7 +451,6 @@
                                 'feedback__values--loading': votingIsLoading
                             }"
                         >
-
                             <div (click)="onVoting('like')"
                                 class="feedbackVal feedbackVal--leftItem feedbackVal--like"
                                 [ngClass]="{
@@ -460,7 +459,11 @@
                                 }"
                             >
                                 <div class="feedbackVal__icon">
-                                    <ng-container *ngTemplateOutlet="likeFeedbackIcon"></ng-container>
+                                    <!-- Декларативный подход -->
+                                    <ng-container
+                                        [ngTemplateOutlet]="likeFeedbackIcon"
+                                        [ngTemplateOutletContext]="{ $implicit: 'var' }"
+                                    ></ng-container>
                                 </div>
                                 <div class="feedbackVal__amount">{{placeData?.likeCount}}</div>
                             </div>
@@ -485,6 +488,10 @@
         }
     </div>
 </div>
+
+<!-- Императивный подход -->
+<ng-container #exampleContainer></ng-container>
+
 <app-footer></app-footer>
 
 <div class="photoGalleria"
@@ -543,6 +550,10 @@
         </div>
     </div>
 </div>
+
+<ng-template #exampleTempl let-greeting>
+    <span>Hello</span>
+</ng-template>
 
 <ng-template #likeFeedbackIcon>
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
