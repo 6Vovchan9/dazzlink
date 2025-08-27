@@ -24,8 +24,11 @@
             <div class="partner__address">
                 {{partner?.address}}
             </div>
-            <button type="button" class="partner__btn">
-                Смотреть оффер
+            <button type="button" (click)="openPartner()" class="partner__btn">
+                {{partnerBtnText}}
+                <div class="partner__customText">
+                    {{partnerBtnText}}
+                </div>
             </button>
         </div>
         <div class="partner__photos">
@@ -217,19 +220,13 @@
                     </div>
                 } @else if (partner.imageList.length === 3) {
                     <div class="mansoryPhotos__column mansoryPhotos__column--first">
-                        <div class="mansoryPhotos__item"></div>
-                        <div class="mansoryPhotos__item"></div>
-                    </div>
-                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
                         </div>
+                    </div>
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
-                        </div>
-                    </div>
-                    <div class="mansoryPhotos__column">
-                        <div class="mansoryPhotos__item">
                         </div>
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[2]"></app-thumb-hash-image>
@@ -242,12 +239,13 @@
                         </div>
                     </div>
                     <div class="mansoryPhotos__column mansoryPhotos__column--second">
+                        <div class="mansoryPhotos__item"></div>
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
                         </div>
                     </div>
                 } @else if (partner.imageList.length === 1) {
-                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
+                    <div class="mansoryPhotos__column">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
                         </div>
