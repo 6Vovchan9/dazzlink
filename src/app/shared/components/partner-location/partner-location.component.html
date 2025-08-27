@@ -2,6 +2,8 @@
     <div
         class="partner"
         [ngClass]="{
+            'partner--four-photo': partner.imageList.length === 4,
+            'partner--three-photo': partner.imageList.length === 3,
             'partner--two-photo': partner.imageList.length === 2,
             'partner--one-photo': partner.imageList.length === 1
         }"
@@ -36,7 +38,7 @@
                 laudantium consequatur impedit, exercitationem omnis libero fuga deserunt. Recusandae vero voluptate voluptas
                 consequuntur distinctio, rerum dolores aliquid animi? In dolores magni repellat dicta, debitis voluptatibus tempora. -->
                 @if (partner.imageList.length === 6) {
-                    <div class="mansoryPhotos__column" style="margin-top: 80px;">
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
                         <div class="mansoryPhotos__item">
                             <!-- <img [src]="partner.imageList[0].href" alt="Alt" class="mansoryPhotos__img"> -->
                             <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
@@ -45,7 +47,7 @@
                             <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
                         </div>
                     </div>
-                    <div class="mansoryPhotos__column" style="margin-top: 40px;">
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[2]"></app-thumb-hash-image>
                         </div>
@@ -62,13 +64,13 @@
                         </div>
                     </div>
                 } @else if (partner.imageList.length === 5) {
-                    <div class="mansoryPhotos__column" style="margin-top: 80px;">
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
                         </div>
                         <div class="mansoryPhotos__item"></div>
                     </div>
-                    <div class="mansoryPhotos__column" style="margin-top: 40px;">
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
                         </div>
@@ -85,13 +87,13 @@
                         </div>
                     </div>
                 } @else if (partner.imageList.length === 4) {
-                    <div class="mansoryPhotos__column" style="margin-top: 80px;">
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
                         </div>
                         <div class="mansoryPhotos__item"></div>
                     </div>
-                    <div class="mansoryPhotos__column" style="margin-top: 40px;">
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
                         </div>
@@ -107,11 +109,11 @@
                         </div>
                     </div>
                 } @else if (partner.imageList.length === 3) {
-                    <div class="mansoryPhotos__column" style="margin-top: 80px;">
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
                         <div class="mansoryPhotos__item"></div>
                         <div class="mansoryPhotos__item"></div>
                     </div>
-                    <div class="mansoryPhotos__column" style="margin-top: 40px;">
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
                         </div>
@@ -127,18 +129,125 @@
                         </div>
                     </div>
                 } @else if (partner.imageList.length === 2) {
-                    <div class="mansoryPhotos__column" style="margin-top: 84px;">
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
                         </div>
                     </div>
-                    <div class="mansoryPhotos__column">
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
                         </div>
                     </div>
                 } @else if (partner.imageList.length === 1) {
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                } @else {
+                    Нет фото
+                }
+            </div>
+            <div class="mansoryPhotos mansoryPhotos--forMobile">
+                @if (partner.imageList.length === 6) {
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[2]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[3]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                    <div class="mansoryPhotos__column mansoryPhotos__column--third">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[4]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[5]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                } @else if (partner.imageList.length === 5) {
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[2]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[3]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                    <div class="mansoryPhotos__column mansoryPhotos__column--third">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[4]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item"></div>
+                    </div>
+                } @else if (partner.imageList.length === 4) {
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[2]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[3]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                } @else if (partner.imageList.length === 3) {
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
+                        <div class="mansoryPhotos__item"></div>
+                        <div class="mansoryPhotos__item"></div>
+                    </div>
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
+                        </div>
+                    </div>
                     <div class="mansoryPhotos__column">
+                        <div class="mansoryPhotos__item">
+                        </div>
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[2]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                } @else if (partner.imageList.length === 2) {
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                    <div class="mansoryPhotos__column mansoryPhotos__column--second">
+                        <div class="mansoryPhotos__item">
+                            <app-thumb-hash-image [imageData]="partner.imageList[1]"></app-thumb-hash-image>
+                        </div>
+                    </div>
+                } @else if (partner.imageList.length === 1) {
+                    <div class="mansoryPhotos__column mansoryPhotos__column--first">
                         <div class="mansoryPhotos__item">
                             <app-thumb-hash-image [imageData]="partner.imageList[0]"></app-thumb-hash-image>
                         </div>

@@ -1,8 +1,8 @@
+@use "breakpoints" as *;
+
 .partner {
     display: flex;
-    flex-direction: row;
     column-gap: 28px;
-    padding: 0 24px;
     border-radius: 20px;
     background-color: var(--color-location-partner-bg);
     .partner__desc {
@@ -64,55 +64,123 @@
             background-color: var(--color-location-partner-btn);
         }
     }
-    .partner__photos {
-        flex: 2;
-        max-width: 384px;
-        position: relative;
+    @media #{$mobile} {
         overflow: hidden;
-    }
-    &--two-photo {
-        .partner__photos {
-            max-width: 372px;
+        flex-direction: column-reverse;
+        padding: 0px;
+        .partner__desc {
+            margin: 24px 32px;
+        }
+        &--four-photo {
+            .partner__photos {
+                margin: 0px 24px;
+            }
         }
     }
-    &--one-photo {
-        padding-right: 0px;
-
+    @media #{$notMobile} {
+        flex-direction: row;
+        padding: 0 24px;
         .partner__photos {
-            max-width: 372px;
-            .mansoryPhotos {
-                height: 100%;
+            flex: 2;
+            max-width: 384px;
+            position: relative;
+            overflow: hidden;
+        }
+        &--two-photo {
+            .partner__photos {
+                max-width: 372px;
+            }
+            .mansoryPhotos .mansoryPhotos__column {
+                &--first {
+                    margin-top: 84px;
+                }
+                &--second {
+                    margin-top: 0px;
+                }
+            }
+        }
+        &--one-photo {
+            padding-right: 0px;
+            .partner__photos {
+                max-width: 372px;
+                .mansoryPhotos {
+                    height: 100%;
+                    .mansoryPhotos__column {
+                        &--first {
+                            margin-top: 0px;
+                        }
+                    }
+                }
             }
         }
     }
 }
 
 .mansoryPhotos {
-    // background-color: blueviolet;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
     display: flex;
     flex-direction: row;
     column-gap: 12px;
-    width: 100%;
-    .mansoryPhotos__column {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        row-gap: 12px;
-        .mansoryPhotos__item {
-            position: relative;
-            aspect-ratio: 1;
-            overflow: hidden;
-            border-radius: 16px;
-            // background-color: var(--color-gradient-bg-after);
-            .mansoryPhotos__img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
+    @media #{$mobile} {
+        display: none;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: fit-content;
+        margin-top: -24px;
+        .mansoryPhotos__column {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            row-gap: 12px;
+            &--first {
+                margin-top: 12px;
             }
+            &--third {
+                margin-top: 12px;
+            }
+            .mansoryPhotos__item {
+                position: relative;
+                aspect-ratio: 1;
+                overflow: hidden;
+                border-radius: 16px;
+                min-width: 120px;
+            }
+        }
+        &--forMobile {
+            display: flex;
+        }
+    }
+    @media #{$notMobile} {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        width: 100%;
+        .mansoryPhotos__column {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            row-gap: 12px;
+            &--first {
+                margin-top: 80px;
+            }
+            &--second {
+                margin-top: 40px;
+            }
+            .mansoryPhotos__item {
+                position: relative;
+                aspect-ratio: 1;
+                overflow: hidden;
+                border-radius: 16px;
+                .mansoryPhotos__img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+        &--forMobile {
+            display: none;
         }
     }
 }
