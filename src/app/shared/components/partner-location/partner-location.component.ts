@@ -1,4 +1,4 @@
-import { JsonPipe, SlicePipe } from '@angular/common';
+import { SlicePipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, InputSignal, OnInit } from '@angular/core';
 import { RespCityPlaceList } from '@app/shared/interfaces';
 import { ThumbHashImageComponent } from '../thumb-hash-image/thumb-hash-image.component';
@@ -6,7 +6,7 @@ import { ThumbHashImageComponent } from '../thumb-hash-image/thumb-hash-image.co
 @Component({
   selector: 'dz-partner-location',
   standalone: true,
-  imports: [SlicePipe, ThumbHashImageComponent],
+  imports: [SlicePipe, ThumbHashImageComponent, NgClass],
   templateUrl: './partner-location.component.html',
   styleUrl: './partner-location.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

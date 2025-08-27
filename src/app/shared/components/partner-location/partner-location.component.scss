@@ -70,9 +70,22 @@
         position: relative;
         overflow: hidden;
     }
+    &--two-photo {
+        .partner__photos {
+            max-width: 372px;
+        }
+    }
+    &--one-photo {
+        padding-right: 0px;
+
+        .partner__photos {
+            max-width: 372px;
+            .mansoryPhotos {
+                height: 100%;
+            }
+        }
+    }
 }
-
-
 
 .mansoryPhotos {
     // background-color: blueviolet;
@@ -94,7 +107,7 @@
             aspect-ratio: 1;
             overflow: hidden;
             border-radius: 16px;
-            background-color: var(--color-gradient-bg-after);
+            // background-color: var(--color-gradient-bg-after);
             .mansoryPhotos__img {
                 width: 100%;
                 height: 100%;
