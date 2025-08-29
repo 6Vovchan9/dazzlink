@@ -16,6 +16,8 @@
     --color-link: #4A4AC6;
     --color-location-partner-bg: #5353D31F;
     --color-location-partner-btn: #fff;
+    --color-partner-pagination: #ddd;
+    --color-partner-pagination-active: #333;
 }
 
 @mixin constForDarkTheme() {
@@ -36,6 +38,8 @@
     --color-link: #7070ff;
     --color-location-partner-bg: #5353D31F;
     --color-location-partner-btn: #fff;
+    --color-partner-pagination: #ddd;
+    --color-partner-pagination-active: #333;
 }
 
 @media (prefers-color-scheme: dark) {

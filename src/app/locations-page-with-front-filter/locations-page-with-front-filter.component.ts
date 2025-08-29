@@ -118,23 +118,24 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   private sSub: Subscription;
   private allOptionsSub: Subscription;
   private curLang: string;
-  public filterBarGroup: UntypedFormGroup;
+  filterBarGroup: UntypedFormGroup;
   private selectedCitiesMap: Record<string, 'chosen'> = {};
-  public amountAllSelectedCities: Array<string> = [];
-  public amountAllSelectedCitiesBefore: Array<string> = [];
+  amountAllSelectedCities: Array<string> = [];
+  amountAllSelectedCitiesBefore: Array<string> = [];
   private debounceTimeForFilter: any;
   private fakeDelayForFilter: any;
-  private fakeDelayForSort: any;
-  private aboutType: unknown;
+  #fakeDelayForSort: any;
+  #aboutType: unknown;
   private readonly readonlyExample = 'Hello'; // с помощью такого модификатора свойство экземпляра класса помечается как “только для чтения”
-  public disabledLocationCategories = signal<boolean>(true);
-  public locationCategoriesWithSkeleton = signal(true);
-  public showFilterControls = signal(false);
-  public errorInGetAllLocations = false;
+  disabledLocationCategories = signal<boolean>(true);
+  locationCategoriesWithSkeleton = signal(true);
+  showFilterControls = signal(false);
+  curPartnerActive = signal(0);
+  errorInGetAllLocations = false;
   private lastSuccessSortVal: string = null;
   private locationsUpdating = false;
   public dropdownHeadForSortSelected = false;
-  public sortFieldOptions: DropdownOptions = {
+  sortFieldOptions: DropdownOptions = {
     disabled: false,
     id: "sort",
     required: false,
@@ -144,19 +145,19 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
       // { value: 'rating_desc', details: 'По рейтингу' },
     ],
   };
-  public isEmptySortOptions = signal(false);
-  public filterFieldOptions: Array<CountryFilterItem>;
+  isEmptySortOptions = signal(false);
+  filterFieldOptions: Array<CountryFilterItem>;
   private destroy$: Subject<boolean> = new Subject<boolean>();
-  public hideScrollProgress = true;
-  public hideBecauseOpenSort = false;
+  hideScrollProgress = true;
+  hideBecauseOpenSort = false;
   private prevScrollTop = 0;
-  public hideHeader = signal(true);
+  hideHeader = signal(true);
   private pageScrollSub: Subscription;
   scrollingRef = viewChild<HTMLElement>('restoreScrollPosition');
-  public allLocationsReceived = false;
-  public cookiesAgreementService = inject(CookiesAgreementService);
+  allLocationsReceived = false;
+  cookiesAgreementService = inject(CookiesAgreementService);
   private cd = inject(ChangeDetectorRef);
-  private needScrollAfterRedirect = true;
+  #needScrollAfterRedirect = true;
   // public myBlockAboutScroll: { [key: string]: number } = {};
 
   constructor(
@@ -687,7 +688,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           if (!match) {
             console.log(`Мэтча не случилось для "${valFromQParams}" из queryParams`);
             // это значит что не случилось полного совпадения городов из queryParams и response фильтрации, точнне не все города из queryParams были найдены в респонсе
-            this.needScrollAfterRedirect = false;
+            this.#needScrollAfterRedirect = false;
           }
         });
 
@@ -823,7 +824,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
           if (!match) {
             console.log(`Мэтча не случилось для "${valFromQParams}" из queryParams`);
             // это значит что не случилось полного совпадения городов из queryParams и response фильтрации, точнне не все города из queryParams были найдены в респонсе
-            this.needScrollAfterRedirect = false;
+            this.#needScrollAfterRedirect = false;
           }
         });
 
@@ -1238,7 +1239,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   public onChangeSort(sortValue: string): void {
     this.isSorting.set(true);
     this.filterBarGroup.get('sort').disable({ emitEvent: false });
-    this.fakeDelayForSort = setTimeout(() => this.sortLocationsOnFront(), 1600);
+    this.#fakeDelayForSort = setTimeout(() => this.sortLocationsOnFront(), 1600);
   }
 
   public onCloseFilterOptionsInMobile(): void {
@@ -1441,10 +1442,14 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     this.allOptionsSub?.unsubscribe();
     clearTimeout(this.debounceTimeForFilter);
     clearTimeout(this.fakeDelayForFilter);
-    clearTimeout(this.fakeDelayForSort);
+    clearTimeout(this.#fakeDelayForSort);
   }
 
-  public ngOnDestroy(): void {
+  onSwitchPartner(): void {
+    console.log('onSwitchPartner');
+  }
+
+  ngOnDestroy(): void {
     this.subscriptionList();
 
     this.pageScrollSub?.unsubscribe();

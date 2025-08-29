@@ -182,7 +182,7 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
             "cityTitle": "Алматы",
             "placeList": [
                 {
-                    "id": "-NgVRC20Iit-rnFDKsza",
+                    "id": "-NgVRCvre20Iit-rnFDKsza",
                     "categoryCode": "RESTAURANTS",
                     "title": "Старый город",
                     "displayName": "Старичок",
@@ -219,7 +219,7 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
             "cityTitle": "Дмитров",
             "placeList": [
                 {
-                    "id": "-NgTNTZzxh9cram2eEd2",
+                    "id": "-NgTNTZzxh9crtham2eEd2",
                     "categoryCode": "PARKS",
                     "title": "Magic city",
                     // "subtitle": "Узбекская кухня",
@@ -246,7 +246,7 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                 {
                     "id": "-NgTNTZzxh9cr2Lqm2eEd2",
                     "categoryCode": "RESTAURANTS",
-                    "title": "Чайхана Navat и еще очень много всего инетересного",
+                    "title": "Чайхана Navat",
                     "subtitle": "Узбекская кухня",
                     "subcategory": "Бар",
                     "priceRange": 23,
@@ -278,8 +278,80 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                             "href": 'assets/images/home-page/mainPicForMobile.png'
                         }
                     ]
+                },
+                {
+                    "id": "-NgTNTZzxh9cr2Lqlvr2m2eEd2",
+                    "categoryCode": "RESTAURANTS",
+                    "title": "Остановка у Люси",
+                    "subtitle": "Русская кухня",
+                    "subcategory": "Ресторан",
+                    "priceRange": 23,
+                    "rating": 4.2,
+                    "address": "ул. Свердлова, 12",
+                    "imageList": [
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/mainPicForMobile.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv1Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv4Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv3Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv2Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
+                        }
+                    ]
+                },
+                {
+                    "id": "-NgTNTZvzxh9cvr2Lq2m2eEd2",
+                    "categoryCode": "RESTAURANTS",
+                    "title": "Mado",
+                    "subtitle": "Европейская кухня",
+                    "subcategory": "Кафе",
+                    "priceRange": 23,
+                    "rating": 4.6,
+                    "address": "ул. Флерова, 4а",
+                    "imageList": [
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/mainPicForMobile.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv1Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv4Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv3Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv2Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
+                        }
+                    ]
                 }
             ]
-        }
+        },
     ]
 };

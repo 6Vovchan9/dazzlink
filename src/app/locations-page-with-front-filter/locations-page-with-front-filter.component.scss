@@ -967,6 +967,80 @@ $shadowHeightInMobile: 20px;
     }
 }
 
+.partners {
+    position: relative;
+    .partners__switcher {
+        display: none;
+        position: absolute;
+        z-index: 10;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border-radius: 50%;
+        background-color: white;
+        box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.12);
+        border: none;
+        top: 50%;
+        color: red;
+        .partners__switcher-arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: calc(100% + 30px);
+            height: calc(100% + 40px);
+        }
+        &.partners__prev-btn {
+            left: 0;
+            transform: translate(-50%, -50%);
+            transition: .2s;
+            .partners__switcher-arrow {
+                transform: translate(-50%, -50%) rotate(180deg);
+            }
+            &::before {
+                left: 0;
+            }
+        }
+        &.partners__next-btn {
+            right: 0;
+            transform: translate(50%, -50%);
+            &::before {
+                right: 0;
+            }
+        }
+        @media #{$notMobile} {
+            display: block;
+        }
+    }
+    .partners__pagination {
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.partnersPagination {
+    display: flex;
+    column-gap: 8px;
+    .partnersPagination__item {
+        width: 12px;
+        height: 4px;
+        border-radius: 2px;
+        background-color: var(--color-partner-pagination);
+        &--active {
+            background-color: var(--color-partner-pagination-active);
+        }
+    }
+}
+
 :host-context(.color-scheme-dark) {
     @include darkThemeColors;
 }
