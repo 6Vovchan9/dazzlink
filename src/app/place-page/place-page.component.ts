@@ -102,7 +102,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
     effect(() => {
       if (this.carouselEl2() && !this.carouselScrollSub && !this.isLoading) {
         if (this.placeData.imageList?.length > 1) {
-          this.addEventListenerToCarousel2();
+          this.#addEventListenerToCarousel2();
         }
       }
     });
@@ -329,12 +329,12 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
   //         distinctUntilChanged()
   //       )
   //       .subscribe(
-  //         this.operateCarouselScroll.bind(this, carousel)
+  //         this.#operateCarouselScroll.bind(this, carousel)
   //       )
   //   }
   // }
 
-  private addEventListenerToCarousel2() {
+  #addEventListenerToCarousel2() {
     // console.log('Подписываемся на скролл карусели');
     const carousel = this.carouselEl2()?.nativeElement;
     if (carousel) {
@@ -344,12 +344,12 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
           distinctUntilChanged()
         )
         .subscribe(
-          this.operateCarouselScroll.bind(this, carousel)
+          this.#operateCarouselScroll.bind(this, carousel)
         )
     }
   }
 
-  private operateCarouselScroll(carousel) {
+  #operateCarouselScroll(carousel) {
     const carouselWidth = carousel.scrollWidth;
     const carouselScrollLeft = carousel.scrollLeft;
     const imageAmount = this.placeData.imageList?.length || 1;
@@ -465,7 +465,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
   //   }
   // }
 
-  public openPhotoGalleria(imgNum: number): void {
+  openPhotoGalleria(imgNum: number): void {
     this.curPhotoInGalleria = imgNum;
     this.showPhotoGalleria = true;
     this.hideScroll();
