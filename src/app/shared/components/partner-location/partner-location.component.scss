@@ -2,7 +2,7 @@
 
 .partner {
     display: flex;
-    column-gap: 28px;
+    column-gap: 10px;
     border-radius: 20px;
     background-color: var(--color-location-partner-bg);
     .partner__desc {
@@ -130,6 +130,14 @@
     @media #{$notMobile} {
         flex-direction: row;
         padding: 0 24px;
+        .partner__desc {
+            overflow: hidden;
+            .partner__title {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+        }
         .partner__photos {
             flex: 2;
             max-width: 384px;

@@ -335,9 +335,14 @@ $shadowHeightInMobile: 20px;
     }
 
     @media (min-width: 1025px) {
-        .pageContent__locationsBlock .pageContent__locationsList {
-            grid-template-columns: repeat(3, minmax(0px, 1fr));
-            gap: 48px 36px;
+        .pageContent__locationsBlock {
+            .pageContent__partners {
+                max-width: min(58vw, 744px);
+            }
+            .pageContent__locationsList {
+                grid-template-columns: repeat(3, minmax(0px, 1fr));
+                gap: 48px 36px;
+            }
         }
     }
 
@@ -969,6 +974,23 @@ $shadowHeightInMobile: 20px;
 
 .partners {
     position: relative;
+    .partners__list {
+        display: flex;
+        overflow: scroll;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        .partners__item {
+            display: block;
+            flex: 1;
+            min-width: 100%;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            margin-right: 10px;
+            &:last-child {
+                margin-right: 0px;
+            }
+        }
+    }
     .partners__switcher {
         display: none;
         position: absolute;

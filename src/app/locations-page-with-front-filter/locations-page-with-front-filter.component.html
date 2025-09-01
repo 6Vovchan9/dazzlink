@@ -172,13 +172,17 @@
                                                         </div>
                                                         @if (partners[block.cityCode]; as partner) {
                                                             @if (partner.placeList.length) {
-                                                                <ul class="pageContent__partners partners">
+                                                                <div class="pageContent__partners partners">
                                                                     <button type="button" (click)="onSwitchPartner()" class="partners__switcher partners__prev-btn">
                                                                         <img class="partners__switcher-arrow" src="assets/icons/arrowForSwitcherIcon.svg" alt="Arrow">
                                                                     </button>
-                                                                    <li class="pageContent__partner">
-                                                                        <dz-partner-location [data]="partner.placeList[0]"></dz-partner-location>
-                                                                    </li>
+                                                                    <ul class="partners__list">
+                                                                        @for (card of partner.placeList; track card.id) {
+                                                                            <li class="partners__item">
+                                                                                <dz-partner-location [data]="card"></dz-partner-location>
+                                                                            </li>
+                                                                        }
+                                                                    </ul>
                                                                     <button type="button" (click)="onSwitchPartner()" class="partners__switcher partners__next-btn">
                                                                         <img class="partners__switcher-arrow" src="assets/icons/arrowForSwitcherIcon.svg" alt="Arrow">
                                                                     </button>
@@ -192,7 +196,7 @@
                                                                             }
                                                                         </div>
                                                                     }
-                                                                </ul>
+                                                                </div>
                                                             }
                                                         }
                                                         <ul class="pageContent__locationsList">
