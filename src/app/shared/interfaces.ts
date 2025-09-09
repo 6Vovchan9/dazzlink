@@ -66,7 +66,12 @@ export interface RovraggeRespLocationsData {
 export interface RespCityPlaceList {
     cityCode: string;
     cityTitle: string;
+    visiblePartnerInCarousel?: number;
     placeList: Array<Place>;
+}
+
+export interface DataForPartnerCarousel extends RespCityPlaceList {
+    visiblePartnerInCarousel: number;
 }
 
 export interface RovraggeRespFiltersData {

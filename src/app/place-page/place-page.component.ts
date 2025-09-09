@@ -281,7 +281,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
               }
             ];
           }
-          this.prepareLocationRating();
+          this.#prepareLocationRating();
           this.prepareAdditPlaceData(place?.attributeList);
           this.isLoading = false;
         },
@@ -357,7 +357,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
     this.curPhotoInGalleria = Math.round(carouselScrollLeft / divisor);
   }
 
-  private setScrollSnappingCarousel(): void {
+  #setScrollSnappingCarousel(): void {
     // const carousel = this.carouselEl1?.nativeElement;
     const carousel = this.carouselEl2()?.nativeElement;
     const carouselWidth = carousel.scrollWidth;
@@ -472,13 +472,13 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
     setTimeout(() => this.inputInGalleria.nativeElement.focus());
   }
 
-  public closePhotoGalleria(): void {
-    this.setScrollSnappingCarousel();
+  closePhotoGalleria(): void {
+    this.#setScrollSnappingCarousel();
     this.showPhotoGalleria = false;
     this.showScroll();
   }
 
-  public keydownPhotoGalleria(e): void {
+  keydownPhotoGalleria(e): void {
     if (e.code === 'ArrowRight') {
       this.switchPhotoInGalleria('next');
     } else if (e.code === 'ArrowLeft') {
@@ -488,11 +488,11 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
     }
   }
 
-  public forStopPropagation(e): void {
+  forStopPropagation(e): void {
     e.stopPropagation();
   }
 
-  public switchPhotoInGalleria(direction: 'next' | 'prev') {
+  switchPhotoInGalleria(direction: 'next' | 'prev') {
     if (direction === 'next') {
       if (this.curPhotoInGalleria === this.placeData.imageList.length - 1) {
         this.curPhotoInGalleria = 0;
@@ -516,7 +516,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
     document.documentElement.classList.remove('noScroll');
   }
 
-  private prepareLocationRating(): void {
+  #prepareLocationRating(): void {
 
     // this.locationRatingList = [
     //   { name: 'rating2GIS', value: 4.1 },

@@ -256,26 +256,6 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                         {
                             "type": null,
                             "href": 'assets/images/home-page/linkToArticlesX2.jpg'
-                        },
-                        {
-                            "type": null,
-                            "href": 'assets/images/home-page/evo/appAdv1Evo.png'
-                        },
-                        {
-                            "type": null,
-                            "href": 'assets/images/home-page/evo/appAdv2Evo.png'
-                        },
-                        {
-                            "type": null,
-                            "href": 'assets/images/home-page/evo/appAdv3Evo.png'
-                        },
-                        {
-                            "type": null,
-                            "href": 'assets/images/home-page/evo/appAdv4Evo.png'
-                        },
-                        {
-                            "type": null,
-                            "href": 'assets/images/home-page/mainPicForMobile.png'
                         }
                     ]
                 },
@@ -296,22 +276,6 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                         {
                             "type": null,
                             "href": 'assets/images/home-page/evo/appAdv1Evo.png'
-                        },
-                        {
-                            "type": null,
-                            "href": 'assets/images/home-page/evo/appAdv4Evo.png'
-                        },
-                        {
-                            "type": null,
-                            "href": 'assets/images/home-page/evo/appAdv3Evo.png'
-                        },
-                        {
-                            "type": null,
-                            "href": 'assets/images/home-page/evo/appAdv2Evo.png'
-                        },
-                        {
-                            "type": null,
-                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
                         }
                     ]
                 },
@@ -336,6 +300,96 @@ export const MOCK_LOCATIONS: any | RovraggeRespLocationsData = {
                         {
                             "type": null,
                             "href": 'assets/images/home-page/evo/appAdv4Evo.png'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "cityCode": "DMITROV",
+            "cityTitle": "Дмитров",
+            "placeList": [
+                {
+                    "id": "-NgTNTZzkEcxh9cr2Lqm2eEd2",
+                    "categoryCode": "RESTAURANTS",
+                    "title": "Кафе Димон",
+                    "subtitle": "Узбекская кухня",
+                    "subcategory": "Бар",
+                    "priceRange": 23,
+                    "rating": 4.6,
+                    "address": "ул. Ленина, 11",
+                    "imageList": [
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv2Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv3Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv4Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/mainPicForMobile.png'
+                        }
+                    ]
+                },
+                {
+                    "id": "-NgTNTlWZzxh9cr2Lqlvr2m2eEd2",
+                    "categoryCode": "RESTAURANTS",
+                    "title": "Гурманчик",
+                    "subtitle": "Русская кухня",
+                    "subcategory": "Пиццерия",
+                    "priceRange": 23,
+                    "rating": 4.2,
+                    "address": "ул. Свердлова, 12",
+                    "imageList": [
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv4Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/mainPicForMobile.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv1Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv3Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv2Evo.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/linkToArticlesX2.jpg'
+                        }
+                    ]
+                },
+                {
+                    "id": "-NgTNTZvzxnR3h9cvr2Lq2m2eEd2",
+                    "categoryCode": "RESTAURANTS",
+                    "title": "Duna",
+                    "subtitle": "Европейская кухня",
+                    "subcategory": "Шаурмичка",
+                    "priceRange": 23,
+                    "rating": 3.9,
+                    "address": "ул. Свердлова, 4а",
+                    "imageList": [
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/mainPicForMobile.png'
+                        },
+                        {
+                            "type": null,
+                            "href": 'assets/images/home-page/evo/appAdv1Evo.png'
                         },
                         {
                             "type": null,

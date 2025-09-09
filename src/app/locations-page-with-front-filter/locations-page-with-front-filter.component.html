@@ -170,12 +170,12 @@
                                                         <div class="pageContent__locationsCity">
                                                             <span class="pageContent__city" [class.withSimpleSkeleton]="isSorting() || isLoading()">{{block.cityTitle}}</span>
                                                         </div>
-                                                        @if (partners[block.cityCode]; as partner) {
+                                                        @if (partners()[block.cityCode]; as partner) {
                                                             @if (partner.placeList.length) {
                                                                 <div class="pageContent__partners partners">
-                                                                    @if (partner.placeList.length > 1 && 0) {
+                                                                    @if (partner.placeList.length > 1) {
                                                                         <button type="button"
-                                                                            (click)="onSwitchPartner()"
+                                                                            (click)="setScrollSnappingCarousel(block.cityCode, CyberTypeEnum.Previous)"
                                                                             class="partners__switcher partners__prev-btn"
                                                                         >
                                                                             <img class="partners__switcher-arrow"
@@ -184,16 +184,16 @@
                                                                             />
                                                                         </button>
                                                                     }
-                                                                    <ul #scrollSnappingCarousel class="partners__list">
+                                                                    <ul #scrollSnappingCarousel [attr.data-city-code]="block.cityCode" [attr.data-partners-amount]="partner.placeList.length" class="partners__list">
                                                                         @for (card of partner.placeList; track card.id) {
                                                                             <li class="partners__item">
                                                                                 <dz-partner-location [data]="card"></dz-partner-location>
                                                                             </li>
                                                                         }
                                                                     </ul>
-                                                                    @if (partner.placeList.length > 1 && 0) {
+                                                                    @if (partner.placeList.length > 1) {
                                                                         <button type="button"
-                                                                            (click)="onSwitchPartner()"
+                                                                            (click)="setScrollSnappingCarousel(block.cityCode, CyberTypeEnum.Next)"
                                                                             class="partners__switcher partners__next-btn"
                                                                         >
                                                                             <img class="partners__switcher-arrow"
@@ -202,12 +202,12 @@
                                                                             />
                                                                         </button>
                                                                     }
-                                                                    @if (partner.placeList.length > 1 && 0) {
+                                                                    @if (partner.placeList.length > 1) {
                                                                         <div class="partners__pagination partnersPagination">
                                                                             @for (item of partner.placeList; let index = $index; track index) {
                                                                                 <div
                                                                                     class="partnersPagination__item"
-                                                                                    [class.partnersPagination__item--active]="index === curPartnerActive()"
+                                                                                    [class.partnersPagination__item--active]="index === partner.visiblePartnerInCarousel"
                                                                                 ></div>
                                                                             }
                                                                         </div>

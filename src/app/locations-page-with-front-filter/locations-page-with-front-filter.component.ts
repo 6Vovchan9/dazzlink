@@ -9,10 +9,12 @@ import {
   Optional,
   Signal,
   ViewChild,
+  WritableSignal,
   effect,
   inject,
   signal,
-  viewChild
+  viewChild,
+  viewChildren
 } from '@angular/core';
 import {
   Observable,
@@ -34,7 +36,8 @@ import {
   skipWhile,
   takeUntil,
   tap,
-  auditTime
+  auditTime,
+  distinctUntilChanged
 } from 'rxjs/operators';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterLink, Scroll } from '@angular/router';
@@ -51,6 +54,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 import {
   CountryFilterItem,
+  DataForPartnerCarousel,
   ILocationCategories,
   Place,
   RespCityPlaceList,
@@ -76,6 +80,11 @@ import { FooterComponent } from '@app/shared/components/footer/footer.component'
 import { SvgIconComponent } from '@app/shared/components/svg-icon/svg-icon.component';
 import { LinkToAppComponent } from '@app/shared/components/link-to-app/link-to-app.component';
 import { PartnerLocationComponent } from '@app/shared/components/partner-location/partner-location.component';
+
+enum CarouselDirection {
+  Previous,
+  Next
+}
 
 @Component({
   selector: 'app-locations-page-with-front-filter',
@@ -105,7 +114,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   allLocations: RovraggeRespLocationsData = MOCK_LOCATIONS_FOR_SKELETON;
   filteredLocations: Array<RespCityPlaceList>;
-  partners: Record<string, RespCityPlaceList> = {};
+  partners: WritableSignal<Record<string, DataForPartnerCarousel>> = signal({});
   isLoading = signal<boolean>(true);
   public isSorting = signal(false);
   protected categoryCodes: { selected?: string, list: Array<ILocationCategories> } = {
@@ -158,6 +167,10 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
   cookiesAgreementService = inject(CookiesAgreementService);
   private cd = inject(ChangeDetectorRef);
   #needScrollAfterRedirect = true;
+  partnerCarousels = viewChildren<ElementRef>('scrollSnappingCarousel');
+  #subs = new Subscription();
+  CyberTypeEnum = CarouselDirection;
+  #ignoreCarouselScroll = signal(false);
   // public myBlockAboutScroll: { [key: string]: number } = {};
 
   constructor(
@@ -185,11 +198,104 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
         this.vc.scrollToPosition(scrollingPosition()!);
       }
     });
+
+    // Когда все карусели готовы, подписываемся на их скролл и на событие окончания скролла.
+    // Благодаря фильтрующему оператору "auditTime" в слушателе события скролла,
+    // одно событие скролла все таки пробивается сквозь фильтер ниже,
+    // который включается при скролле по кнопке <-\->, оно то там как раз и нужно для того,
+    // чтобы по окончании скролла установить новое значение пагинации карусели "partnersPagination".
+    // Без "auditTime" событие "scrollend" гарантированно бы случилось после всех "scroll"
+    // UPD: Отказался от "auditTime" потому что редко но бывают кейсы когда он не дает событие "scroll" после "scrollend" как предполагалось
+    effect(() => {
+      if (this.partnerCarousels().length) {
+        this.#addEventListenerToCarousel();
+      }
+    });
+
   }
 
   ngOnInit(): void {
     this.createForm();
     this.getCategories();
+  }
+
+  #addEventListenerToCarousel(): void {
+    // console.log('Подписываемся на скролл всех каруселей');
+    // console.log(this.partnerCarousels());
+    this.partnerCarousels().forEach(itemRef => {
+      const carousel: HTMLUListElement = itemRef.nativeElement;
+      if (carousel) {
+        this.#subs.add(
+          fromEvent(carousel, 'scroll')
+            .pipe(
+              // auditTime(150),
+              filter(() => !this.#ignoreCarouselScroll()),
+              distinctUntilChanged()
+            )
+            .subscribe(this.#operateCarouselScroll.bind(this, carousel))
+        );
+        this.#subs.add(
+          fromEvent(carousel, 'scrollend')
+            .subscribe({
+              next: () => {
+                this.#ignoreCarouselScroll.set(false);
+                // console.log('Скролл end');
+              }
+            })
+        );
+      }
+    })
+  }
+
+  #operateCarouselScroll(carousel: HTMLUListElement): void {
+    // console.log('Скроллим...');
+    const key = carousel.dataset.cityCode;
+    const length = +carousel.dataset.partnersAmount;
+    const carouselWidth = carousel.scrollWidth;
+    const carouselScrollLeft = carousel.scrollLeft;
+    const imageAmount = length || 1;
+    const divisor = carouselWidth / imageAmount;
+    const curPhotoInGalleria = Math.round(carouselScrollLeft / divisor);
+    this.partners.update(currentUser => {
+      currentUser[key].visiblePartnerInCarousel = curPhotoInGalleria;
+      return {...currentUser};
+    });
+  }
+
+  setScrollSnappingCarousel(cityCode: string, direction: CarouselDirection): void {
+    
+    const curCarouselEl = this.partnerCarousels().find(carousel => carousel.nativeElement.dataset.cityCode === cityCode);
+    
+    if (!curCarouselEl) return;
+
+    const carousel = curCarouselEl.nativeElement;
+    const carouselWidth = carousel.scrollWidth;
+    const imageAmount = +carousel.dataset.partnersAmount || 1;
+    const divisor = carouselWidth / imageAmount;
+    const curPhoto = this.partners()[cityCode].visiblePartnerInCarousel;
+    const futurePhoto = this.#getFuturePhotoInCarousel(curPhoto, direction, imageAmount);
+    // console.dir(carousel);
+    // console.log(carouselWidth, imageAmount, divisor, curPhoto);
+    const carouselScrollLeft = futurePhoto * divisor;
+    // carousel.scrollLeft = carouselScrollLeft;
+    // carousel.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+    this.#ignoreCarouselScroll.set(true);
+    carousel.scrollTo({ left: carouselScrollLeft, behavior: 'smooth' });
+
+    this.partners.update(currentUser => {
+      currentUser[cityCode].visiblePartnerInCarousel = futurePhoto;
+      return {...currentUser};
+    });
+  }
+
+  #getFuturePhotoInCarousel(curPhoto: number, direction: CarouselDirection, amount: number): number {
+    if (direction === this.CyberTypeEnum.Next) {
+      if (curPhoto + 1 >= amount) return 0;
+      else return curPhoto + 1;
+    } else {
+      if (curPhoto - 1 < 0) return amount - 1;
+      else return curPhoto - 1;
+    }
   }
 
   public get getSomething(): string {
@@ -1119,13 +1225,18 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
   #checkPartners(base: RovraggeRespLocationsData) {
     const partnersMap = {};
-    base.featuredPlaceList.forEach(el => partnersMap[el.cityCode] = el);
+    base.featuredPlaceList.forEach(el => {
+      const data = {...el};
+      data.visiblePartnerInCarousel = 0;
+      partnersMap[el.cityCode] = data;
+    });
     // base.cityPlaceList.forEach(el => {
     //   if (partnersMap[el.cityCode]) {
 
     //   }
     // });
-    this.partners = partnersMap;
+    this.partners.set(partnersMap);
+    // console.log(this.partners());
   }
 
   private getAllLocationsAfterSort(sortVal?: string, filterVal?: string): void {
@@ -1445,10 +1556,6 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
     clearTimeout(this.#fakeDelayForSort);
   }
 
-  onSwitchPartner(): void {
-    console.log('onSwitchPartner');
-  }
-
   ngOnDestroy(): void {
     this.subscriptionList();
 
@@ -1456,7 +1563,7 @@ export class LocationsPageWithFrontFilterComponent implements OnInit, AfterViewI
 
     this.destroy$.next(true);
     this.destroy$.complete();
-
+    this.#subs.unsubscribe();
     this.showScroll('noScrollInMobile');
   }
 

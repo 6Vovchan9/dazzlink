@@ -59,21 +59,21 @@ export class LocationsService {
         )
     }
 
-    public getById(id: string): Observable<any> {
+    getById(id: string): Observable<any> {
         return this.http.get<Post>(`${environment.placeUrl}/place/id/${id}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
             .pipe(
                 map((resp: { [key: string]: any }) => resp.data)
             )
     }
 
-    public getByPageName(name: string): Observable<any> {
+    getByPageName(name: string): Observable<any> {
         return this.http.get<Post>(`${environment.placeUrl}/place/page-name/${name}`, { headers: { 'accept-language': this.pagesService.currentLanguage.getValue().toLowerCase() } })
             .pipe(
                 map((resp: { [key: string]: any }) => resp.data)
             )
     }
 
-    public getCategoryOptions(): Observable<Array<ILocationCategories>> {
+    getCategoryOptions(): Observable<Array<ILocationCategories>> {
         return this.http.get(
             `${environment.placeUrl}/place/category`,
             {
@@ -87,7 +87,7 @@ export class LocationsService {
         )
     }
 
-    public getFilterOptions(categoryCode = 'RESTAURANTS'): Observable<Array<CountryFilterItem>> {
+    getFilterOptions(categoryCode = 'RESTAURANTS'): Observable<Array<CountryFilterItem>> {
         
         const customQueryParams = { categoryCode };
 
@@ -104,7 +104,7 @@ export class LocationsService {
         )
     }
 
-    public getSortOptions(categoryCode = 'RESTAURANTS'): Observable<Array<{ title: string, code: string }>> {
+    getSortOptions(categoryCode = 'RESTAURANTS'): Observable<Array<{ title: string, code: string }>> {
 
         const customQueryParams = { categoryCode };
 
@@ -121,7 +121,7 @@ export class LocationsService {
         )
     }
 
-    public setPlaceVotingProd(id: string, choice: 'like' | 'dislike'): Observable<IVotingService> {
+    setPlaceVotingProd(id: string, choice: 'like' | 'dislike'): Observable<IVotingService> {
         return this.http.patch<RovraggeRespWrapper>(`${environment.placeUrl}/place/${id}/${choice}`, null)
             .pipe(
                 map((resp: { [key: string]: any }) => resp.data)
