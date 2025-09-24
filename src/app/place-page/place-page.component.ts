@@ -149,7 +149,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
       )
       .subscribe({
         next: (place: PlaceDetails) => {
-          this.prepareImageBase64(place.imageList);
+          this.#prepareImageBase64(place.imageList);
           this.placeData = place;
           if (place) this.#getEvaluation();
           // delete place.imageList;
@@ -367,7 +367,7 @@ export class PlacePageComponent extends ThumbHash implements OnInit, AfterViewIn
     carousel.scrollLeft = carouselScrollLeft;
   }
 
-  private prepareImageBase64(imageList: any) {
+  #prepareImageBase64(imageList: any): void {
     if (imageList?.length) {
       imageList.map(imgData => {
         if (imgData.metadata?.imageReference) {
