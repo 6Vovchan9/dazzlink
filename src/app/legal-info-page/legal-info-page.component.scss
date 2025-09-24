@@ -47,6 +47,47 @@
     }
 }
 
+.moduleTitle {
+    position: relative;
+}
+
+.winlineToggle {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    top: 0px;
+    right: 0px;
+    outline: none;
+    color: transparent;
+}
+
+.winlineBtns {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+    margin-top: 32px;
+    .winlineBtns__list {
+        display: flex;
+        row-gap: 12px;
+        column-gap: 12px;
+        flex-wrap: wrap;
+        .winlineBtns__item {
+            button, .winlineBtns__btn {
+                display: inline-block;
+                cursor: pointer;
+                padding: 8px 10px;
+                border-radius: 6px;
+                border: 2px solid #ff6b12;
+                color: #ff6b12;
+                background-color: transparent;
+                font-size: 12px;
+                line-height: 20px;
+            }
+        }
+    }
+}
+
 .legalInfoPage {
     flex: 2;
 

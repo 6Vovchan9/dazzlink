@@ -2,7 +2,10 @@
 <div class="page">
     <div class="container page__container">
         <aside class="sidebar">
-            <h1 class="moduleTitle">Правовая информация</h1>
+            <h1 class="moduleTitle">
+                Правовая информация
+                <button class="winlineToggle" type="button" (dblclick)="showWinlineBtns.set(!showWinlineBtns())" tabindex="-1">Winline</button>
+            </h1>
         </aside>
         <main class="legalInfoPage">
             <ul class="legalInfoPage__docs">
@@ -25,6 +28,75 @@
                     <div class="openLegalDoc__icon"></div>
                 </a>
             </ul>
+            @if (showWinlineBtns()) {
+                <div class="winlineBtns">
+                    <ul class="winlineBtns__list">
+
+                        <li class="winlineBtns__item">
+                            <button (click)="toWinlineOpenBlank()" сlass="winlineBtns__btn" type="button" tabindex="-1">open('winline', '_blank')</button>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <button (click)="toWinlineOpenSelf()" сlass="winlineBtns__btn" type="button" tabindex="-1">open('winline', '_self')</button>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <button (click)="toWinlineOpenParent()" сlass="winlineBtns__btn" type="button" tabindex="-1">open('winline', '_parent')</button>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <button (click)="toWinlineOpenTop()" сlass="winlineBtns__btn" type="button" tabindex="-1">open('winline', '_top')</button>
+                        </li>
+
+                        <li class="winlineBtns__item">
+                            <button (click)="toWinlineHref()" сlass="winlineBtns__btn" type="button" tabindex="-1">Winline href</button>
+                        </li>
+
+                        <li class="winlineBtns__item">
+                            <button (click)="toTunaOpenBlank()" сlass="winlineBtns__btn" type="button" tabindex="-1">open('tuna', '_blank')</button>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <button (click)="toTunaOpenSelf()" сlass="winlineBtns__btn" type="button" tabindex="-1">open('tuna', '_self')</button>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <button (click)="toTunaOpenParent()" сlass="winlineBtns__btn" type="button" tabindex="-1">open('tuna', '_parent')</button>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <button (click)="toTunaOpenTop()" сlass="winlineBtns__btn" type="button" tabindex="-1">open('tuna', '_top')</button>
+                        </li>
+
+                        <li class="winlineBtns__item">
+                            <button (click)="toTunaHref()" сlass="winlineBtns__btn" type="button" tabindex="-1">Tuna href</button>
+                        </li>
+                    </ul>
+                    <ul class="winlineBtns__list">
+                        <li class="winlineBtns__item">
+                            <a class="winlineBtns__btn" href="https://m.winline.ru/" target="_blank">a _blank m.winline</a>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <a class="winlineBtns__btn" href="https://m.winline.ru/" target="_self">a _self m.winline</a>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <a class="winlineBtns__btn" href="https://m.winline.ru/" target="_parent">a _parent m.winline</a>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <a class="winlineBtns__btn" href="https://m.winline.ru/" target="_top">a _top m.winline</a>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <a class="winlineBtns__btn" href="https://tuna" target="_blank">a _blank tuna</a>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <a class="winlineBtns__btn" href="https://tuna" target="_self">a _self tuna</a>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <a class="winlineBtns__btn" href="https://tuna" target="_parent">a _parent tuna</a>
+                        </li>
+                        <li class="winlineBtns__item">
+                            <a class="winlineBtns__btn" href="https://tuna" target="_top">a _top tuna</a>
+                        </li>
+                    </ul>
+                    <div class="winlineBtns__notes">
+                        * telegram: {{isTg()}};
+                    </div>
+                </div>
+            }
         </main>
     </div>
 </div>
